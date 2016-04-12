@@ -1,0 +1,2153 @@
+[
+  {
+    "iso3" : "AFG",
+    "iso" : "AF",
+    "nice_name" : "Afghanistan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/af.png",
+    "num_code" : "4",
+    "name" : "AFGHANISTAN",
+    "dial_code" : "+93"
+  },
+  {
+    "iso3" : "ALB",
+    "iso" : "AL",
+    "nice_name" : "Albania",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/al.png",
+    "num_code" : "8",
+    "name" : "ALBANIA",
+    "dial_code" : "+355"
+  },
+  {
+    "iso3" : "DZA",
+    "iso" : "DZ",
+    "nice_name" : "Algeria",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/dz.png",
+    "num_code" : "12",
+    "name" : "ALGERIA",
+    "dial_code" : "+213"
+  },
+  {
+    "iso3" : "ASM",
+    "iso" : "AS",
+    "nice_name" : "American Samoa",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/as.png",
+    "num_code" : "16",
+    "name" : "AMERICAN SAMOA",
+    "dial_code" : "+1 684"
+  },
+  {
+    "iso3" : "AND",
+    "iso" : "AD",
+    "nice_name" : "Andorra",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ad.png",
+    "num_code" : "20",
+    "name" : "ANDORRA",
+    "dial_code" : "+376"
+  },
+  {
+    "iso3" : "AGO",
+    "iso" : "AO",
+    "nice_name" : "Angola",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ao.png",
+    "num_code" : "24",
+    "name" : "ANGOLA",
+    "dial_code" : "+244"
+  },
+  {
+    "iso3" : "AIA",
+    "iso" : "AI",
+    "nice_name" : "Anguilla",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ai.png",
+    "num_code" : "660",
+    "name" : "ANGUILLA",
+    "dial_code" : "+1 264"
+  },
+  {
+    "iso3" : null,
+    "iso" : "AQ",
+    "nice_name" : "Antarctica",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/aq.png",
+    "num_code" : null,
+    "name" : "ANTARCTICA",
+    "dial_code" : null
+  },
+  {
+    "iso3" : "ATG",
+    "iso" : "AG",
+    "nice_name" : "Antigua and Barbuda",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ag.png",
+    "num_code" : "28",
+    "name" : "ANTIGUA AND BARBUDA",
+    "dial_code" : "+1268"
+  },
+  {
+    "iso3" : "ARG",
+    "iso" : "AR",
+    "nice_name" : "Argentina",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ar.png",
+    "num_code" : "32",
+    "name" : "ARGENTINA",
+    "dial_code" : "+54"
+  },
+  {
+    "iso3" : "ARM",
+    "iso" : "AM",
+    "nice_name" : "Armenia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/am.png",
+    "num_code" : "51",
+    "name" : "ARMENIA",
+    "dial_code" : "+374"
+  },
+  {
+    "iso3" : "ABW",
+    "iso" : "AW",
+    "nice_name" : "Aruba",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/aw.png",
+    "num_code" : "533",
+    "name" : "ARUBA",
+    "dial_code" : "+297"
+  },
+  {
+    "iso3" : "AUS",
+    "iso" : "AU",
+    "nice_name" : "Australia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/au.png",
+    "num_code" : "36",
+    "name" : "AUSTRALIA",
+    "dial_code" : "+61"
+  },
+  {
+    "iso3" : "AUT",
+    "iso" : "AT",
+    "nice_name" : "Austria",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/at.png",
+    "num_code" : "40",
+    "name" : "AUSTRIA",
+    "dial_code" : "+43"
+  },
+  {
+    "iso3" : "AZE",
+    "iso" : "AZ",
+    "nice_name" : "Azerbaijan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/az.png",
+    "num_code" : "31",
+    "name" : "AZERBAIJAN",
+    "dial_code" : "+994"
+  },
+  {
+    "iso3" : "BHS",
+    "iso" : "BS",
+    "nice_name" : "Bahamas",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bs.png",
+    "num_code" : "44",
+    "name" : "BAHAMAS",
+    "dial_code" : "+1 242"
+  },
+  {
+    "iso3" : "BHR",
+    "iso" : "BH",
+    "nice_name" : "Bahrain",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bh.png",
+    "num_code" : "48",
+    "name" : "BAHRAIN",
+    "dial_code" : "+973"
+  },
+  {
+    "iso3" : "BGD",
+    "iso" : "BD",
+    "nice_name" : "Bangladesh",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bd.png",
+    "num_code" : "50",
+    "name" : "BANGLADESH",
+    "dial_code" : "+880"
+  },
+  {
+    "iso3" : "BRB",
+    "iso" : "BB",
+    "nice_name" : "Barbados",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bb.png",
+    "num_code" : "52",
+    "name" : "BARBADOS",
+    "dial_code" : "+1 246"
+  },
+  {
+    "iso3" : "BLR",
+    "iso" : "BY",
+    "nice_name" : "Belarus",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/by.png",
+    "num_code" : "112",
+    "name" : "BELARUS",
+    "dial_code" : "+375"
+  },
+  {
+    "iso3" : "BEL",
+    "iso" : "BE",
+    "nice_name" : "Belgium",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/be.png",
+    "num_code" : "56",
+    "name" : "BELGIUM",
+    "dial_code" : "+32"
+  },
+  {
+    "iso3" : "BLZ",
+    "iso" : "BZ",
+    "nice_name" : "Belize",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bz.png",
+    "num_code" : "84",
+    "name" : "BELIZE",
+    "dial_code" : "+501"
+  },
+  {
+    "iso3" : "BEN",
+    "iso" : "BJ",
+    "nice_name" : "Benin",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bj.png",
+    "num_code" : "204",
+    "name" : "BENIN",
+    "dial_code" : "+229"
+  },
+  {
+    "iso3" : "BMU",
+    "iso" : "BM",
+    "nice_name" : "Bermuda",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bm.png",
+    "num_code" : "60",
+    "name" : "BERMUDA",
+    "dial_code" : "+1 441"
+  },
+  {
+    "iso3" : "BTN",
+    "iso" : "BT",
+    "nice_name" : "Bhutan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bt.png",
+    "num_code" : "64",
+    "name" : "BHUTAN",
+    "dial_code" : "+975"
+  },
+  {
+    "iso3" : "BOL",
+    "iso" : "BO",
+    "nice_name" : "Bolivia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bo.png",
+    "num_code" : "68",
+    "name" : "BOLIVIA",
+    "dial_code" : "+591"
+  },
+  {
+    "iso3" : "BIH",
+    "iso" : "BA",
+    "nice_name" : "Bosnia and Herzegovina",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ba.png",
+    "num_code" : "70",
+    "name" : "BOSNIA AND HERZEGOVINA",
+    "dial_code" : "+387"
+  },
+  {
+    "iso3" : "BWA",
+    "iso" : "BW",
+    "nice_name" : "Botswana",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bw.png",
+    "num_code" : "72",
+    "name" : "BOTSWANA",
+    "dial_code" : "+267"
+  },
+  {
+    "iso3" : null,
+    "iso" : "BV",
+    "nice_name" : "Bouvet Island",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bv.png",
+    "num_code" : null,
+    "name" : "BOUVET ISLAND",
+    "dial_code" : ""
+  },
+  {
+    "iso3" : "BRA",
+    "iso" : "BR",
+    "nice_name" : "Brazil",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/br.png",
+    "num_code" : "76",
+    "name" : "BRAZIL",
+    "dial_code" : "+55"
+  },
+  {
+    "iso3" : null,
+    "iso" : "IO",
+    "nice_name" : "British Indian Ocean Territory",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/io.png",
+    "num_code" : null,
+    "name" : "BRITISH INDIAN OCEAN TERRITORY",
+    "dial_code" : "+246"
+  },
+  {
+    "iso3" : "BRN",
+    "iso" : "BN",
+    "nice_name" : "Brunei Darussalam",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bn.png",
+    "num_code" : "96",
+    "name" : "BRUNEI DARUSSALAM",
+    "dial_code" : "+673"
+  },
+  {
+    "iso3" : "BGR",
+    "iso" : "BG",
+    "nice_name" : "Bulgaria",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bg.png",
+    "num_code" : "100",
+    "name" : "BULGARIA",
+    "dial_code" : "+359"
+  },
+  {
+    "iso3" : "BFA",
+    "iso" : "BF",
+    "nice_name" : "Burkina Faso",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bf.png",
+    "num_code" : "854",
+    "name" : "BURKINA FASO",
+    "dial_code" : "+226"
+  },
+  {
+    "iso3" : "BDI",
+    "iso" : "BI",
+    "nice_name" : "Burundi",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/bi.png",
+    "num_code" : "108",
+    "name" : "BURUNDI",
+    "dial_code" : "+257"
+  },
+  {
+    "iso3" : "KHM",
+    "iso" : "KH",
+    "nice_name" : "Cambodia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/kh.png",
+    "num_code" : "116",
+    "name" : "CAMBODIA",
+    "dial_code" : "+855"
+  },
+  {
+    "iso3" : "CMR",
+    "iso" : "CM",
+    "nice_name" : "Cameroon",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cm.png",
+    "num_code" : "120",
+    "name" : "CAMEROON",
+    "dial_code" : "+237"
+  },
+  {
+    "iso3" : "CAN",
+    "iso" : "CA",
+    "nice_name" : "Canada",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ca.png",
+    "num_code" : "124",
+    "name" : "CANADA",
+    "dial_code" : "+1"
+  },
+  {
+    "iso3" : "CPV",
+    "iso" : "CV",
+    "nice_name" : "Cape Verde",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cv.png",
+    "num_code" : "132",
+    "name" : "CAPE VERDE",
+    "dial_code" : "+238"
+  },
+  {
+    "iso3" : "CYM",
+    "iso" : "KY",
+    "nice_name" : "Cayman Islands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ky.png",
+    "num_code" : "136",
+    "name" : "CAYMAN ISLANDS",
+    "dial_code" : "+ 345"
+  },
+  {
+    "iso3" : "CAF",
+    "iso" : "CF",
+    "nice_name" : "Central African Republic",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cf.png",
+    "num_code" : "140",
+    "name" : "CENTRAL AFRICAN REPUBLIC",
+    "dial_code" : "+236"
+  },
+  {
+    "iso3" : "TCD",
+    "iso" : "TD",
+    "nice_name" : "Chad",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/td.png",
+    "num_code" : "148",
+    "name" : "CHAD",
+    "dial_code" : "+235"
+  },
+  {
+    "iso3" : "CHL",
+    "iso" : "CL",
+    "nice_name" : "Chile",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cl.png",
+    "num_code" : "152",
+    "name" : "CHILE",
+    "dial_code" : "+56"
+  },
+  {
+    "iso3" : "CHN",
+    "iso" : "CN",
+    "nice_name" : "China",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cn.png",
+    "num_code" : "156",
+    "name" : "CHINA",
+    "dial_code" : "+86"
+  },
+  {
+    "iso3" : null,
+    "iso" : "CX",
+    "nice_name" : "Christmas Island",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cx.png",
+    "num_code" : null,
+    "name" : "CHRISTMAS ISLAND",
+    "dial_code" : "+61"
+  },
+  {
+    "iso3" : null,
+    "iso" : "CC",
+    "nice_name" : "Cocos (Keeling) Islands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cc.png",
+    "num_code" : null,
+    "name" : "COCOS (KEELING) ISLANDS",
+    "dial_code" : "+61"
+  },
+  {
+    "iso3" : "COL",
+    "iso" : "CO",
+    "nice_name" : "Colombia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/co.png",
+    "num_code" : "170",
+    "name" : "COLOMBIA",
+    "dial_code" : "+57"
+  },
+  {
+    "iso3" : "COM",
+    "iso" : "KM",
+    "nice_name" : "Comoros",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/km.png",
+    "num_code" : "174",
+    "name" : "COMOROS",
+    "dial_code" : "+269"
+  },
+  {
+    "iso3" : "COG",
+    "iso" : "CG",
+    "nice_name" : "Congo",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cg.png",
+    "num_code" : "178",
+    "name" : "CONGO",
+    "dial_code" : "+242"
+  },
+  {
+    "iso3" : "COD",
+    "iso" : "CD",
+    "nice_name" : "Congo, the Democratic Republic of the",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cd.png",
+    "num_code" : "180",
+    "name" : "CONGO, THE DEMOCRATIC REPUBLIC OF THE",
+    "dial_code" : "+243"
+  },
+  {
+    "iso3" : "COK",
+    "iso" : "CK",
+    "nice_name" : "Cook Islands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ck.png",
+    "num_code" : "184",
+    "name" : "COOK ISLANDS",
+    "dial_code" : "+682"
+  },
+  {
+    "iso3" : "CRI",
+    "iso" : "CR",
+    "nice_name" : "Costa Rica",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cr.png",
+    "num_code" : "188",
+    "name" : "COSTA RICA",
+    "dial_code" : "+506"
+  },
+  {
+    "iso3" : "CIV",
+    "iso" : "CI",
+    "nice_name" : "Cote D'Ivoire",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ci.png",
+    "num_code" : "384",
+    "name" : "COTE D'IVOIRE",
+    "dial_code" : "+225"
+  },
+  {
+    "iso3" : "HRV",
+    "iso" : "HR",
+    "nice_name" : "Croatia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/hr.png",
+    "num_code" : "191",
+    "name" : "CROATIA",
+    "dial_code" : "+385"
+  },
+  {
+    "iso3" : "CUB",
+    "iso" : "CU",
+    "nice_name" : "Cuba",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cu.png",
+    "num_code" : "192",
+    "name" : "CUBA",
+    "dial_code" : "+53"
+  },
+  {
+    "iso3" : "CYP",
+    "iso" : "CY",
+    "nice_name" : "Cyprus",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cy.png",
+    "num_code" : "196",
+    "name" : "CYPRUS",
+    "dial_code" : "+537"
+  },
+  {
+    "iso3" : "CZE",
+    "iso" : "CZ",
+    "nice_name" : "Czech Republic",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cz.png",
+    "num_code" : "203",
+    "name" : "CZECH REPUBLIC",
+    "dial_code" : "+420"
+  },
+  {
+    "iso3" : "DNK",
+    "iso" : "DK",
+    "nice_name" : "Denmark",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/dk.png",
+    "num_code" : "208",
+    "name" : "DENMARK",
+    "dial_code" : "+45"
+  },
+  {
+    "iso3" : "DJI",
+    "iso" : "DJ",
+    "nice_name" : "Djibouti",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/dj.png",
+    "num_code" : "262",
+    "name" : "DJIBOUTI",
+    "dial_code" : "+253"
+  },
+  {
+    "iso3" : "DMA",
+    "iso" : "DM",
+    "nice_name" : "Dominica",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/dm.png",
+    "num_code" : "212",
+    "name" : "DOMINICA",
+    "dial_code" : "+1 767"
+  },
+  {
+    "iso3" : "DOM",
+    "iso" : "DO",
+    "nice_name" : "Dominican Republic",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/do.png",
+    "num_code" : "214",
+    "name" : "DOMINICAN REPUBLIC",
+    "dial_code" : "+1 849"
+  },
+  {
+    "iso3" : "ECU",
+    "iso" : "EC",
+    "nice_name" : "Ecuador",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ec.png",
+    "num_code" : "218",
+    "name" : "ECUADOR",
+    "dial_code" : "+593"
+  },
+  {
+    "iso3" : "EGY",
+    "iso" : "EG",
+    "nice_name" : "Egypt",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/eg.png",
+    "num_code" : "818",
+    "name" : "EGYPT",
+    "dial_code" : "+20"
+  },
+  {
+    "iso3" : "SLV",
+    "iso" : "SV",
+    "nice_name" : "El Salvador",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sv.png",
+    "num_code" : "222",
+    "name" : "EL SALVADOR",
+    "dial_code" : "+503"
+  },
+  {
+    "iso3" : "GNQ",
+    "iso" : "GQ",
+    "nice_name" : "Equatorial Guinea",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gq.png",
+    "num_code" : "226",
+    "name" : "EQUATORIAL GUINEA",
+    "dial_code" : "+240"
+  },
+  {
+    "iso3" : "ERI",
+    "iso" : "ER",
+    "nice_name" : "Eritrea",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/er.png",
+    "num_code" : "232",
+    "name" : "ERITREA",
+    "dial_code" : "+291"
+  },
+  {
+    "iso3" : "EST",
+    "iso" : "EE",
+    "nice_name" : "Estonia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ee.png",
+    "num_code" : "233",
+    "name" : "ESTONIA",
+    "dial_code" : "+372"
+  },
+  {
+    "iso3" : "ETH",
+    "iso" : "ET",
+    "nice_name" : "Ethiopia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/et.png",
+    "num_code" : "231",
+    "name" : "ETHIOPIA",
+    "dial_code" : "+251"
+  },
+  {
+    "iso3" : "FLK",
+    "iso" : "FK",
+    "nice_name" : "Falkland Islands (Malvinas)",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/fk.png",
+    "num_code" : "238",
+    "name" : "FALKLAND ISLANDS (MALVINAS)",
+    "dial_code" : "+500"
+  },
+  {
+    "iso3" : "FRO",
+    "iso" : "FO",
+    "nice_name" : "Faroe Islands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/fo.png",
+    "num_code" : "234",
+    "name" : "FAROE ISLANDS",
+    "dial_code" : "+298"
+  },
+  {
+    "iso3" : "FJI",
+    "iso" : "FJ",
+    "nice_name" : "Fiji",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/fj.png",
+    "num_code" : "242",
+    "name" : "FIJI",
+    "dial_code" : "+679"
+  },
+  {
+    "iso3" : "FIN",
+    "iso" : "FI",
+    "nice_name" : "Finland",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/fi.png",
+    "num_code" : "246",
+    "name" : "FINLAND",
+    "dial_code" : "+358"
+  },
+  {
+    "iso3" : "FRA",
+    "iso" : "FR",
+    "nice_name" : "France",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/fr.png",
+    "num_code" : "250",
+    "name" : "FRANCE",
+    "dial_code" : "+33"
+  },
+  {
+    "iso3" : "GUF",
+    "iso" : "GF",
+    "nice_name" : "French Guiana",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gf.png",
+    "num_code" : "254",
+    "name" : "FRENCH GUIANA",
+    "dial_code" : "+594"
+  },
+  {
+    "iso3" : "PYF",
+    "iso" : "PF",
+    "nice_name" : "French Polynesia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/pf.png",
+    "num_code" : "258",
+    "name" : "FRENCH POLYNESIA",
+    "dial_code" : "+689"
+  },
+  {
+    "iso3" : null,
+    "iso" : "TF",
+    "nice_name" : "French Southern Territories",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tf.png",
+    "num_code" : null,
+    "name" : "FRENCH SOUTHERN TERRITORIES",
+    "dial_code" : ""
+  },
+  {
+    "iso3" : "GAB",
+    "iso" : "GA",
+    "nice_name" : "Gabon",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ga.png",
+    "num_code" : "266",
+    "name" : "GABON",
+    "dial_code" : "+241"
+  },
+  {
+    "iso3" : "GMB",
+    "iso" : "GM",
+    "nice_name" : "Gambia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gm.png",
+    "num_code" : "270",
+    "name" : "GAMBIA",
+    "dial_code" : "+220"
+  },
+  {
+    "iso3" : "GEO",
+    "iso" : "GE",
+    "nice_name" : "Georgia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ge.png",
+    "num_code" : "268",
+    "name" : "GEORGIA",
+    "dial_code" : "+995"
+  },
+  {
+    "iso3" : "DEU",
+    "iso" : "DE",
+    "nice_name" : "Germany",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/de.png",
+    "num_code" : "276",
+    "name" : "GERMANY",
+    "dial_code" : "+49"
+  },
+  {
+    "iso3" : "GHA",
+    "iso" : "GH",
+    "nice_name" : "Ghana",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gh.png",
+    "num_code" : "288",
+    "name" : "GHANA",
+    "dial_code" : "+233"
+  },
+  {
+    "iso3" : "GIB",
+    "iso" : "GI",
+    "nice_name" : "Gibraltar",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gi.png",
+    "num_code" : "292",
+    "name" : "GIBRALTAR",
+    "dial_code" : "+350"
+  },
+  {
+    "iso3" : "GRC",
+    "iso" : "GR",
+    "nice_name" : "Greece",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gr.png",
+    "num_code" : "300",
+    "name" : "GREECE",
+    "dial_code" : "+30"
+  },
+  {
+    "iso3" : "GRL",
+    "iso" : "GL",
+    "nice_name" : "Greenland",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gl.png",
+    "num_code" : "304",
+    "name" : "GREENLAND",
+    "dial_code" : "+299"
+  },
+  {
+    "iso3" : "GRD",
+    "iso" : "GD",
+    "nice_name" : "Grenada",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gd.png",
+    "num_code" : "308",
+    "name" : "GRENADA",
+    "dial_code" : "+1 473"
+  },
+  {
+    "iso3" : "GLP",
+    "iso" : "GP",
+    "nice_name" : "Guadeloupe",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gp.png",
+    "num_code" : "312",
+    "name" : "GUADELOUPE",
+    "dial_code" : "+590"
+  },
+  {
+    "iso3" : "GUM",
+    "iso" : "GU",
+    "nice_name" : "Guam",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gu.png",
+    "num_code" : "316",
+    "name" : "GUAM",
+    "dial_code" : "+1 671"
+  },
+  {
+    "iso3" : "GTM",
+    "iso" : "GT",
+    "nice_name" : "Guatemala",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gt.png",
+    "num_code" : "320",
+    "name" : "GUATEMALA",
+    "dial_code" : "+502"
+  },
+  {
+    "iso3" : "GIN",
+    "iso" : "GN",
+    "nice_name" : "Guinea",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gn.png",
+    "num_code" : "324",
+    "name" : "GUINEA",
+    "dial_code" : "+224"
+  },
+  {
+    "iso3" : "GNB",
+    "iso" : "GW",
+    "nice_name" : "Guinea-Bissau",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gw.png",
+    "num_code" : "624",
+    "name" : "GUINEA-BISSAU",
+    "dial_code" : "+245"
+  },
+  {
+    "iso3" : "GUY",
+    "iso" : "GY",
+    "nice_name" : "Guyana",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gy.png",
+    "num_code" : "328",
+    "name" : "GUYANA",
+    "dial_code" : "+595"
+  },
+  {
+    "iso3" : "HTI",
+    "iso" : "HT",
+    "nice_name" : "Haiti",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ht.png",
+    "num_code" : "332",
+    "name" : "HAITI",
+    "dial_code" : "+509"
+  },
+  {
+    "iso3" : null,
+    "iso" : "HM",
+    "nice_name" : "Heard Island and Mcdonald Islands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/hm.png",
+    "num_code" : null,
+    "name" : "HEARD ISLAND AND MCDONALD ISLANDS",
+    "dial_code" : ""
+  },
+  {
+    "iso3" : "VAT",
+    "iso" : "VA",
+    "nice_name" : "Holy See (Vatican City State)",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/va.png",
+    "num_code" : "336",
+    "name" : "HOLY SEE (VATICAN CITY STATE)",
+    "dial_code" : "+379"
+  },
+  {
+    "iso3" : "HND",
+    "iso" : "HN",
+    "nice_name" : "Honduras",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/hn.png",
+    "num_code" : "340",
+    "name" : "HONDURAS",
+    "dial_code" : "+504"
+  },
+  {
+    "iso3" : "HKG",
+    "iso" : "HK",
+    "nice_name" : "Hong Kong",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/hk.png",
+    "num_code" : "344",
+    "name" : "HONG KONG",
+    "dial_code" : "+852"
+  },
+  {
+    "iso3" : "HUN",
+    "iso" : "HU",
+    "nice_name" : "Hungary",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/hu.png",
+    "num_code" : "348",
+    "name" : "HUNGARY",
+    "dial_code" : "+36"
+  },
+  {
+    "iso3" : "ISL",
+    "iso" : "IS",
+    "nice_name" : "Iceland",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/is.png",
+    "num_code" : "352",
+    "name" : "ICELAND",
+    "dial_code" : "+354"
+  },
+  {
+    "iso3" : "IND",
+    "iso" : "IN",
+    "nice_name" : "India",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/in.png",
+    "num_code" : "356",
+    "name" : "INDIA",
+    "dial_code" : "+91"
+  },
+  {
+    "iso3" : "IDN",
+    "iso" : "ID",
+    "nice_name" : "Indonesia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/id.png",
+    "num_code" : "360",
+    "name" : "INDONESIA",
+    "dial_code" : "+62"
+  },
+  {
+    "iso3" : "IRN",
+    "iso" : "IR",
+    "nice_name" : "Iran, Islamic Republic of",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ir.png",
+    "num_code" : "364",
+    "name" : "IRAN, ISLAMIC REPUBLIC OF",
+    "dial_code" : "+98"
+  },
+  {
+    "iso3" : "IRQ",
+    "iso" : "IQ",
+    "nice_name" : "Iraq",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/iq.png",
+    "num_code" : "368",
+    "name" : "IRAQ",
+    "dial_code" : "+964"
+  },
+  {
+    "iso3" : "IRL",
+    "iso" : "IE",
+    "nice_name" : "Ireland",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ie.png",
+    "num_code" : "372",
+    "name" : "IRELAND",
+    "dial_code" : "+353"
+  },
+  {
+    "iso3" : "ISR",
+    "iso" : "IL",
+    "nice_name" : "Israel",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/il.png",
+    "num_code" : "376",
+    "name" : "ISRAEL",
+    "dial_code" : "+972"
+  },
+  {
+    "iso3" : "ITA",
+    "iso" : "IT",
+    "nice_name" : "Italy",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/it.png",
+    "num_code" : "380",
+    "name" : "ITALY",
+    "dial_code" : "+39"
+  },
+  {
+    "iso3" : "JAM",
+    "iso" : "JM",
+    "nice_name" : "Jamaica",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/jm.png",
+    "num_code" : "388",
+    "name" : "JAMAICA",
+    "dial_code" : "+1 876"
+  },
+  {
+    "iso3" : "JPN",
+    "iso" : "JP",
+    "nice_name" : "Japan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/jp.png",
+    "num_code" : "392",
+    "name" : "JAPAN",
+    "dial_code" : "+81"
+  },
+  {
+    "iso3" : "JOR",
+    "iso" : "JO",
+    "nice_name" : "Jordan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/jo.png",
+    "num_code" : "400",
+    "name" : "JORDAN",
+    "dial_code" : "+962"
+  },
+  {
+    "iso3" : "KAZ",
+    "iso" : "KZ",
+    "nice_name" : "Kazakhstan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/kz.png",
+    "num_code" : "398",
+    "name" : "KAZAKHSTAN",
+    "dial_code" : "+7 7"
+  },
+  {
+    "iso3" : "KEN",
+    "iso" : "KE",
+    "nice_name" : "Kenya",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ke.png",
+    "num_code" : "404",
+    "name" : "KENYA",
+    "dial_code" : "+254"
+  },
+  {
+    "iso3" : "KIR",
+    "iso" : "KI",
+    "nice_name" : "Kiribati",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ki.png",
+    "num_code" : "296",
+    "name" : "KIRIBATI",
+    "dial_code" : "+686"
+  },
+  {
+    "iso3" : "PRK",
+    "iso" : "KP",
+    "nice_name" : "Korea, Democratic People's Republic of",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/kp.png",
+    "num_code" : "408",
+    "name" : "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF",
+    "dial_code" : "+850"
+  },
+  {
+    "iso3" : "KOR",
+    "iso" : "KR",
+    "nice_name" : "Korea, Republic of",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/kr.png",
+    "num_code" : "410",
+    "name" : "KOREA, REPUBLIC OF",
+    "dial_code" : "+82"
+  },
+  {
+    "iso3" : "KWT",
+    "iso" : "KW",
+    "nice_name" : "Kuwait",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/kw.png",
+    "num_code" : "414",
+    "name" : "KUWAIT",
+    "dial_code" : "+965"
+  },
+  {
+    "iso3" : "KGZ",
+    "iso" : "KG",
+    "nice_name" : "Kyrgyzstan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/kg.png",
+    "num_code" : "417",
+    "name" : "KYRGYZSTAN",
+    "dial_code" : "+996"
+  },
+  {
+    "iso3" : "LAO",
+    "iso" : "LA",
+    "nice_name" : "Lao People's Democratic Republic",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/la.png",
+    "num_code" : "418",
+    "name" : "LAO PEOPLE'S DEMOCRATIC REPUBLIC",
+    "dial_code" : "+856"
+  },
+  {
+    "iso3" : "LVA",
+    "iso" : "LV",
+    "nice_name" : "Latvia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/lv.png",
+    "num_code" : "428",
+    "name" : "LATVIA",
+    "dial_code" : "+371"
+  },
+  {
+    "iso3" : "LBN",
+    "iso" : "LB",
+    "nice_name" : "Lebanon",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/lb.png",
+    "num_code" : "422",
+    "name" : "LEBANON",
+    "dial_code" : "+961"
+  },
+  {
+    "iso3" : "LSO",
+    "iso" : "LS",
+    "nice_name" : "Lesotho",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ls.png",
+    "num_code" : "426",
+    "name" : "LESOTHO",
+    "dial_code" : "+266"
+  },
+  {
+    "iso3" : "LBR",
+    "iso" : "LR",
+    "nice_name" : "Liberia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/lr.png",
+    "num_code" : "430",
+    "name" : "LIBERIA",
+    "dial_code" : "+231"
+  },
+  {
+    "iso3" : "LBY",
+    "iso" : "LY",
+    "nice_name" : "Libyan Arab Jamahiriya",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ly.png",
+    "num_code" : "434",
+    "name" : "LIBYAN ARAB JAMAHIRIYA",
+    "dial_code" : "+218"
+  },
+  {
+    "iso3" : "LIE",
+    "iso" : "LI",
+    "nice_name" : "Liechtenstein",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/li.png",
+    "num_code" : "438",
+    "name" : "LIECHTENSTEIN",
+    "dial_code" : "+423"
+  },
+  {
+    "iso3" : "LTU",
+    "iso" : "LT",
+    "nice_name" : "Lithuania",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/lt.png",
+    "num_code" : "440",
+    "name" : "LITHUANIA",
+    "dial_code" : "+370"
+  },
+  {
+    "iso3" : "LUX",
+    "iso" : "LU",
+    "nice_name" : "Luxembourg",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/lu.png",
+    "num_code" : "442",
+    "name" : "LUXEMBOURG",
+    "dial_code" : "+352"
+  },
+  {
+    "iso3" : "MAC",
+    "iso" : "MO",
+    "nice_name" : "Macao",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mo.png",
+    "num_code" : "446",
+    "name" : "MACAO",
+    "dial_code" : "+853"
+  },
+  {
+    "iso3" : "MKD",
+    "iso" : "MK",
+    "nice_name" : "Macedonia, the Former Yugoslav Republic of",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mk.png",
+    "num_code" : "807",
+    "name" : "MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF",
+    "dial_code" : "+389"
+  },
+  {
+    "iso3" : "MDG",
+    "iso" : "MG",
+    "nice_name" : "Madagascar",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mg.png",
+    "num_code" : "450",
+    "name" : "MADAGASCAR",
+    "dial_code" : "+261"
+  },
+  {
+    "iso3" : "MWI",
+    "iso" : "MW",
+    "nice_name" : "Malawi",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mw.png",
+    "num_code" : "454",
+    "name" : "MALAWI",
+    "dial_code" : "+265"
+  },
+  {
+    "iso3" : "MYS",
+    "iso" : "MY",
+    "nice_name" : "Malaysia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/my.png",
+    "num_code" : "458",
+    "name" : "MALAYSIA",
+    "dial_code" : "+60"
+  },
+  {
+    "iso3" : "MDV",
+    "iso" : "MV",
+    "nice_name" : "Maldives",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mv.png",
+    "num_code" : "462",
+    "name" : "MALDIVES",
+    "dial_code" : "+960"
+  },
+  {
+    "iso3" : "MLI",
+    "iso" : "ML",
+    "nice_name" : "Mali",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ml.png",
+    "num_code" : "466",
+    "name" : "MALI",
+    "dial_code" : "+223"
+  },
+  {
+    "iso3" : "MLT",
+    "iso" : "MT",
+    "nice_name" : "Malta",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mt.png",
+    "num_code" : "470",
+    "name" : "MALTA",
+    "dial_code" : "+356"
+  },
+  {
+    "iso3" : "MHL",
+    "iso" : "MH",
+    "nice_name" : "Marshall Islands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mh.png",
+    "num_code" : "584",
+    "name" : "MARSHALL ISLANDS",
+    "dial_code" : "+692"
+  },
+  {
+    "iso3" : "MTQ",
+    "iso" : "MQ",
+    "nice_name" : "Martinique",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mq.png",
+    "num_code" : "474",
+    "name" : "MARTINIQUE",
+    "dial_code" : "+596"
+  },
+  {
+    "iso3" : "MRT",
+    "iso" : "MR",
+    "nice_name" : "Mauritania",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mr.png",
+    "num_code" : "478",
+    "name" : "MAURITANIA",
+    "dial_code" : "+222"
+  },
+  {
+    "iso3" : "MUS",
+    "iso" : "MU",
+    "nice_name" : "Mauritius",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mu.png",
+    "num_code" : "480",
+    "name" : "MAURITIUS",
+    "dial_code" : "+230"
+  },
+  {
+    "iso3" : null,
+    "iso" : "YT",
+    "nice_name" : "Mayotte",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/yt.png",
+    "num_code" : null,
+    "name" : "MAYOTTE",
+    "dial_code" : "+262"
+  },
+  {
+    "iso3" : "MEX",
+    "iso" : "MX",
+    "nice_name" : "Mexico",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mx.png",
+    "num_code" : "484",
+    "name" : "MEXICO",
+    "dial_code" : "+52"
+  },
+  {
+    "iso3" : "FSM",
+    "iso" : "FM",
+    "nice_name" : "Micronesia, Federated States of",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/fm.png",
+    "num_code" : "583",
+    "name" : "MICRONESIA, FEDERATED STATES OF",
+    "dial_code" : "+691"
+  },
+  {
+    "iso3" : "MDA",
+    "iso" : "MD",
+    "nice_name" : "Moldova, Republic of",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/md.png",
+    "num_code" : "498",
+    "name" : "MOLDOVA, REPUBLIC OF",
+    "dial_code" : "+373"
+  },
+  {
+    "iso3" : "MCO",
+    "iso" : "MC",
+    "nice_name" : "Monaco",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mc.png",
+    "num_code" : "492",
+    "name" : "MONACO",
+    "dial_code" : "+377"
+  },
+  {
+    "iso3" : "MNG",
+    "iso" : "MN",
+    "nice_name" : "Mongolia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mn.png",
+    "num_code" : "496",
+    "name" : "MONGOLIA",
+    "dial_code" : "+976"
+  },
+  {
+    "iso3" : "MSR",
+    "iso" : "MS",
+    "nice_name" : "Montserrat",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ms.png",
+    "num_code" : "500",
+    "name" : "MONTSERRAT",
+    "dial_code" : "+1664"
+  },
+  {
+    "iso3" : "MAR",
+    "iso" : "MA",
+    "nice_name" : "Morocco",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ma.png",
+    "num_code" : "504",
+    "name" : "MOROCCO",
+    "dial_code" : "+212"
+  },
+  {
+    "iso3" : "MOZ",
+    "iso" : "MZ",
+    "nice_name" : "Mozambique",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mz.png",
+    "num_code" : "508",
+    "name" : "MOZAMBIQUE",
+    "dial_code" : "+258"
+  },
+  {
+    "iso3" : "MMR",
+    "iso" : "MM",
+    "nice_name" : "Myanmar",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mm.png",
+    "num_code" : "104",
+    "name" : "MYANMAR",
+    "dial_code" : "+95"
+  },
+  {
+    "iso3" : "NAM",
+    "iso" : "NA",
+    "nice_name" : "Namibia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/na.png",
+    "num_code" : "516",
+    "name" : "NAMIBIA",
+    "dial_code" : "+264"
+  },
+  {
+    "iso3" : "NRU",
+    "iso" : "NR",
+    "nice_name" : "Nauru",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/nr.png",
+    "num_code" : "520",
+    "name" : "NAURU",
+    "dial_code" : "+674"
+  },
+  {
+    "iso3" : "NPL",
+    "iso" : "NP",
+    "nice_name" : "Nepal",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/np.png",
+    "num_code" : "524",
+    "name" : "NEPAL",
+    "dial_code" : "+977"
+  },
+  {
+    "iso3" : "NLD",
+    "iso" : "NL",
+    "nice_name" : "Netherlands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/nl.png",
+    "num_code" : "528",
+    "name" : "NETHERLANDS",
+    "dial_code" : "+31"
+  },
+  {
+    "iso3" : "ANT",
+    "iso" : "AN",
+    "nice_name" : "Netherlands Antilles",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/an.png",
+    "num_code" : "530",
+    "name" : "NETHERLANDS ANTILLES",
+    "dial_code" : "+599"
+  },
+  {
+    "iso3" : "NCL",
+    "iso" : "NC",
+    "nice_name" : "New Caledonia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/nc.png",
+    "num_code" : "540",
+    "name" : "NEW CALEDONIA",
+    "dial_code" : "+687"
+  },
+  {
+    "iso3" : "NZL",
+    "iso" : "NZ",
+    "nice_name" : "New Zealand",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/nz.png",
+    "num_code" : "554",
+    "name" : "NEW ZEALAND",
+    "dial_code" : "+64"
+  },
+  {
+    "iso3" : "NIC",
+    "iso" : "NI",
+    "nice_name" : "Nicaragua",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ni.png",
+    "num_code" : "558",
+    "name" : "NICARAGUA",
+    "dial_code" : "+505"
+  },
+  {
+    "iso3" : "NER",
+    "iso" : "NE",
+    "nice_name" : "Niger",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ne.png",
+    "num_code" : "562",
+    "name" : "NIGER",
+    "dial_code" : "+227"
+  },
+  {
+    "iso3" : "NGA",
+    "iso" : "NG",
+    "nice_name" : "Nigeria",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ng.png",
+    "num_code" : "566",
+    "name" : "NIGERIA",
+    "dial_code" : "+234"
+  },
+  {
+    "iso3" : "NIU",
+    "iso" : "NU",
+    "nice_name" : "Niue",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/nu.png",
+    "num_code" : "570",
+    "name" : "NIUE",
+    "dial_code" : "+683"
+  },
+  {
+    "iso3" : "NFK",
+    "iso" : "NF",
+    "nice_name" : "Norfolk Island",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/nf.png",
+    "num_code" : "574",
+    "name" : "NORFOLK ISLAND",
+    "dial_code" : "+672"
+  },
+  {
+    "iso3" : "MNP",
+    "iso" : "MP",
+    "nice_name" : "Northern Mariana Islands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/mp.png",
+    "num_code" : "580",
+    "name" : "NORTHERN MARIANA ISLANDS",
+    "dial_code" : "+1 670"
+  },
+  {
+    "iso3" : "NOR",
+    "iso" : "NO",
+    "nice_name" : "Norway",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/no.png",
+    "num_code" : "578",
+    "name" : "NORWAY",
+    "dial_code" : "+47"
+  },
+  {
+    "iso3" : "OMN",
+    "iso" : "OM",
+    "nice_name" : "Oman",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/om.png",
+    "num_code" : "512",
+    "name" : "OMAN",
+    "dial_code" : "+968"
+  },
+  {
+    "iso3" : "PAK",
+    "iso" : "PK",
+    "nice_name" : "Pakistan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/pk.png",
+    "num_code" : "586",
+    "name" : "PAKISTAN",
+    "dial_code" : "+92"
+  },
+  {
+    "iso3" : "PLW",
+    "iso" : "PW",
+    "nice_name" : "Palau",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/pw.png",
+    "num_code" : "585",
+    "name" : "PALAU",
+    "dial_code" : "+680"
+  },
+  {
+    "iso3" : null,
+    "iso" : "PS",
+    "nice_name" : "Palestinian Territory, Occupied",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ps.png",
+    "num_code" : null,
+    "name" : "PALESTINIAN TERRITORY, OCCUPIED",
+    "dial_code" : "+970"
+  },
+  {
+    "iso3" : "PAN",
+    "iso" : "PA",
+    "nice_name" : "Panama",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/pa.png",
+    "num_code" : "591",
+    "name" : "PANAMA",
+    "dial_code" : "+507"
+  },
+  {
+    "iso3" : "PNG",
+    "iso" : "PG",
+    "nice_name" : "Papua New Guinea",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/pg.png",
+    "num_code" : "598",
+    "name" : "PAPUA NEW GUINEA",
+    "dial_code" : "+675"
+  },
+  {
+    "iso3" : "PRY",
+    "iso" : "PY",
+    "nice_name" : "Paraguay",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/py.png",
+    "num_code" : "600",
+    "name" : "PARAGUAY",
+    "dial_code" : "+595"
+  },
+  {
+    "iso3" : "PER",
+    "iso" : "PE",
+    "nice_name" : "Peru",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/pe.png",
+    "num_code" : "604",
+    "name" : "PERU",
+    "dial_code" : "+51"
+  },
+  {
+    "iso3" : "PHL",
+    "iso" : "PH",
+    "nice_name" : "Philippines",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ph.png",
+    "num_code" : "608",
+    "name" : "PHILIPPINES",
+    "dial_code" : "+63"
+  },
+  {
+    "iso3" : "PCN",
+    "iso" : "PN",
+    "nice_name" : "Pitcairn",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/pn.png",
+    "num_code" : "612",
+    "name" : "PITCAIRN",
+    "dial_code" : "+872"
+  },
+  {
+    "iso3" : "POL",
+    "iso" : "PL",
+    "nice_name" : "Poland",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/pl.png",
+    "num_code" : "616",
+    "name" : "POLAND",
+    "dial_code" : "+48"
+  },
+  {
+    "iso3" : "PRT",
+    "iso" : "PT",
+    "nice_name" : "Portugal",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/pt.png",
+    "num_code" : "620",
+    "name" : "PORTUGAL",
+    "dial_code" : "+351"
+  },
+  {
+    "iso3" : "PRI",
+    "iso" : "PR",
+    "nice_name" : "Puerto Rico",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/pr.png",
+    "num_code" : "630",
+    "name" : "PUERTO RICO",
+    "dial_code" : "+1 939"
+  },
+  {
+    "iso3" : "QAT",
+    "iso" : "QA",
+    "nice_name" : "Qatar",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/qa.png",
+    "num_code" : "634",
+    "name" : "QATAR",
+    "dial_code" : "+974"
+  },
+  {
+    "iso3" : "REU",
+    "iso" : "RE",
+    "nice_name" : "Reunion",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/re.png",
+    "num_code" : "638",
+    "name" : "REUNION",
+    "dial_code" : "+262"
+  },
+  {
+    "iso3" : "ROM",
+    "iso" : "RO",
+    "nice_name" : "Romania",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ro.png",
+    "num_code" : "642",
+    "name" : "ROMANIA",
+    "dial_code" : "+40"
+  },
+  {
+    "iso3" : "RUS",
+    "iso" : "RU",
+    "nice_name" : "Russian Federation",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ru.png",
+    "num_code" : "643",
+    "name" : "RUSSIAN FEDERATION",
+    "dial_code" : "+7"
+  },
+  {
+    "iso3" : "RWA",
+    "iso" : "RW",
+    "nice_name" : "Rwanda",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/rw.png",
+    "num_code" : "646",
+    "name" : "RWANDA",
+    "dial_code" : "+250"
+  },
+  {
+    "iso3" : "SHN",
+    "iso" : "SH",
+    "nice_name" : "Saint Helena",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sh.png",
+    "num_code" : "654",
+    "name" : "SAINT HELENA",
+    "dial_code" : "+290"
+  },
+  {
+    "iso3" : "KNA",
+    "iso" : "KN",
+    "nice_name" : "Saint Kitts and Nevis",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/kn.png",
+    "num_code" : "659",
+    "name" : "SAINT KITTS AND NEVIS",
+    "dial_code" : "+1 869"
+  },
+  {
+    "iso3" : "LCA",
+    "iso" : "LC",
+    "nice_name" : "Saint Lucia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/lc.png",
+    "num_code" : "662",
+    "name" : "SAINT LUCIA",
+    "dial_code" : "+1 758"
+  },
+  {
+    "iso3" : "SPM",
+    "iso" : "PM",
+    "nice_name" : "Saint Pierre and Miquelon",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/pm.png",
+    "num_code" : "666",
+    "name" : "SAINT PIERRE AND MIQUELON",
+    "dial_code" : "+508"
+  },
+  {
+    "iso3" : "VCT",
+    "iso" : "VC",
+    "nice_name" : "Saint Vincent and the Grenadines",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/vc.png",
+    "num_code" : "670",
+    "name" : "SAINT VINCENT AND THE GRENADINES",
+    "dial_code" : "+1 784"
+  },
+  {
+    "iso3" : "WSM",
+    "iso" : "WS",
+    "nice_name" : "Samoa",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ws.png",
+    "num_code" : "882",
+    "name" : "SAMOA",
+    "dial_code" : "+685"
+  },
+  {
+    "iso3" : "SMR",
+    "iso" : "SM",
+    "nice_name" : "San Marino",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sm.png",
+    "num_code" : "674",
+    "name" : "SAN MARINO",
+    "dial_code" : "+378"
+  },
+  {
+    "iso3" : "STP",
+    "iso" : "ST",
+    "nice_name" : "Sao Tome and Principe",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/st.png",
+    "num_code" : "678",
+    "name" : "SAO TOME AND PRINCIPE",
+    "dial_code" : "+239"
+  },
+  {
+    "iso3" : "SAU",
+    "iso" : "SA",
+    "nice_name" : "Saudi Arabia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sa.png",
+    "num_code" : "682",
+    "name" : "SAUDI ARABIA",
+    "dial_code" : "+966"
+  },
+  {
+    "iso3" : "SEN",
+    "iso" : "SN",
+    "nice_name" : "Senegal",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sn.png",
+    "num_code" : "686",
+    "name" : "SENEGAL",
+    "dial_code" : "+221"
+  },
+  {
+    "iso3" : null,
+    "iso" : "CS",
+    "nice_name" : "Serbia and Montenegro",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/cs.png",
+    "num_code" : null,
+    "name" : "SERBIA AND MONTENEGRO",
+    "dial_code" : ""
+  },
+  {
+    "iso3" : "SYC",
+    "iso" : "SC",
+    "nice_name" : "Seychelles",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sc.png",
+    "num_code" : "690",
+    "name" : "SEYCHELLES",
+    "dial_code" : "+248"
+  },
+  {
+    "iso3" : "SLE",
+    "iso" : "SL",
+    "nice_name" : "Sierra Leone",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sl.png",
+    "num_code" : "694",
+    "name" : "SIERRA LEONE",
+    "dial_code" : "+232"
+  },
+  {
+    "iso3" : "SGP",
+    "iso" : "SG",
+    "nice_name" : "Singapore",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sg.png",
+    "num_code" : "702",
+    "name" : "SINGAPORE",
+    "dial_code" : "+65"
+  },
+  {
+    "iso3" : "SVK",
+    "iso" : "SK",
+    "nice_name" : "Slovakia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sk.png",
+    "num_code" : "703",
+    "name" : "SLOVAKIA",
+    "dial_code" : "+421"
+  },
+  {
+    "iso3" : "SVN",
+    "iso" : "SI",
+    "nice_name" : "Slovenia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/si.png",
+    "num_code" : "705",
+    "name" : "SLOVENIA",
+    "dial_code" : "+386"
+  },
+  {
+    "iso3" : "SLB",
+    "iso" : "SB",
+    "nice_name" : "Solomon Islands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sb.png",
+    "num_code" : "90",
+    "name" : "SOLOMON ISLANDS",
+    "dial_code" : "+677"
+  },
+  {
+    "iso3" : "SOM",
+    "iso" : "SO",
+    "nice_name" : "Somalia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/so.png",
+    "num_code" : "706",
+    "name" : "SOMALIA",
+    "dial_code" : "+252"
+  },
+  {
+    "iso3" : "ZAF",
+    "iso" : "ZA",
+    "nice_name" : "South Africa",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/za.png",
+    "num_code" : "710",
+    "name" : "SOUTH AFRICA",
+    "dial_code" : "+27"
+  },
+  {
+    "iso3" : null,
+    "iso" : "GS",
+    "nice_name" : "South Georgia and the South Sandwich Islands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gs.png",
+    "num_code" : null,
+    "name" : "SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS",
+    "dial_code" : "+500"
+  },
+  {
+    "iso3" : "ESP",
+    "iso" : "ES",
+    "nice_name" : "Spain",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/es.png",
+    "num_code" : "724",
+    "name" : "SPAIN",
+    "dial_code" : "+34"
+  },
+  {
+    "iso3" : "LKA",
+    "iso" : "LK",
+    "nice_name" : "Sri Lanka",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/lk.png",
+    "num_code" : "144",
+    "name" : "SRI LANKA",
+    "dial_code" : "+94"
+  },
+  {
+    "iso3" : "SDN",
+    "iso" : "SD",
+    "nice_name" : "Sudan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sd.png",
+    "num_code" : "736",
+    "name" : "SUDAN",
+    "dial_code" : "+249"
+  },
+  {
+    "iso3" : "SUR",
+    "iso" : "SR",
+    "nice_name" : "Suriname",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sr.png",
+    "num_code" : "740",
+    "name" : "SURINAME",
+    "dial_code" : "+597"
+  },
+  {
+    "iso3" : "SJM",
+    "iso" : "SJ",
+    "nice_name" : "Svalbard and Jan Mayen",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sj.png",
+    "num_code" : "744",
+    "name" : "SVALBARD AND JAN MAYEN",
+    "dial_code" : "+47"
+  },
+  {
+    "iso3" : "SWZ",
+    "iso" : "SZ",
+    "nice_name" : "Swaziland",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sz.png",
+    "num_code" : "748",
+    "name" : "SWAZILAND",
+    "dial_code" : "+268"
+  },
+  {
+    "iso3" : "SWE",
+    "iso" : "SE",
+    "nice_name" : "Sweden",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/se.png",
+    "num_code" : "752",
+    "name" : "SWEDEN",
+    "dial_code" : "+46"
+  },
+  {
+    "iso3" : "CHE",
+    "iso" : "CH",
+    "nice_name" : "Switzerland",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ch.png",
+    "num_code" : "756",
+    "name" : "SWITZERLAND",
+    "dial_code" : "+41"
+  },
+  {
+    "iso3" : "SYR",
+    "iso" : "SY",
+    "nice_name" : "Syrian Arab Republic",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/sy.png",
+    "num_code" : "760",
+    "name" : "SYRIAN ARAB REPUBLIC",
+    "dial_code" : "+963"
+  },
+  {
+    "iso3" : "TWN",
+    "iso" : "TW",
+    "nice_name" : "Taiwan, Province of China",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tw.png",
+    "num_code" : "158",
+    "name" : "TAIWAN, PROVINCE OF CHINA",
+    "dial_code" : "+886"
+  },
+  {
+    "iso3" : "TJK",
+    "iso" : "TJ",
+    "nice_name" : "Tajikistan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tj.png",
+    "num_code" : "762",
+    "name" : "TAJIKISTAN",
+    "dial_code" : "+992"
+  },
+  {
+    "iso3" : "TZA",
+    "iso" : "TZ",
+    "nice_name" : "Tanzania, United Republic of",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tz.png",
+    "num_code" : "834",
+    "name" : "TANZANIA, UNITED REPUBLIC OF",
+    "dial_code" : "+255"
+  },
+  {
+    "iso3" : "THA",
+    "iso" : "TH",
+    "nice_name" : "Thailand",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/th.png",
+    "num_code" : "764",
+    "name" : "THAILAND",
+    "dial_code" : "+66"
+  },
+  {
+    "iso3" : null,
+    "iso" : "TL",
+    "nice_name" : "Timor-Leste",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tl.png",
+    "num_code" : null,
+    "name" : "TIMOR-LESTE",
+    "dial_code" : "+670"
+  },
+  {
+    "iso3" : "TGO",
+    "iso" : "TG",
+    "nice_name" : "Togo",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tg.png",
+    "num_code" : "768",
+    "name" : "TOGO",
+    "dial_code" : "+228"
+  },
+  {
+    "iso3" : "TKL",
+    "iso" : "TK",
+    "nice_name" : "Tokelau",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tk.png",
+    "num_code" : "772",
+    "name" : "TOKELAU",
+    "dial_code" : "+690"
+  },
+  {
+    "iso3" : "TON",
+    "iso" : "TO",
+    "nice_name" : "Tonga",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/to.png",
+    "num_code" : "776",
+    "name" : "TONGA",
+    "dial_code" : "+676"
+  },
+  {
+    "iso3" : "TTO",
+    "iso" : "TT",
+    "nice_name" : "Trinidad and Tobago",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tt.png",
+    "num_code" : "780",
+    "name" : "TRINIDAD AND TOBAGO",
+    "dial_code" : "+1 868"
+  },
+  {
+    "iso3" : "TUN",
+    "iso" : "TN",
+    "nice_name" : "Tunisia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tn.png",
+    "num_code" : "788",
+    "name" : "TUNISIA",
+    "dial_code" : "+216"
+  },
+  {
+    "iso3" : "TUR",
+    "iso" : "TR",
+    "nice_name" : "Turkey",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tr.png",
+    "num_code" : "792",
+    "name" : "TURKEY",
+    "dial_code" : "+90"
+  },
+  {
+    "iso3" : "TKM",
+    "iso" : "TM",
+    "nice_name" : "Turkmenistan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tm.png",
+    "num_code" : "795",
+    "name" : "TURKMENISTAN",
+    "dial_code" : "+993"
+  },
+  {
+    "iso3" : "TCA",
+    "iso" : "TC",
+    "nice_name" : "Turks and Caicos Islands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tc.png",
+    "num_code" : "796",
+    "name" : "TURKS AND CAICOS ISLANDS",
+    "dial_code" : "+1 649"
+  },
+  {
+    "iso3" : "TUV",
+    "iso" : "TV",
+    "nice_name" : "Tuvalu",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/tv.png",
+    "num_code" : "798",
+    "name" : "TUVALU",
+    "dial_code" : "+688"
+  },
+  {
+    "iso3" : "UGA",
+    "iso" : "UG",
+    "nice_name" : "Uganda",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ug.png",
+    "num_code" : "800",
+    "name" : "UGANDA",
+    "dial_code" : "+256"
+  },
+  {
+    "iso3" : "UKR",
+    "iso" : "UA",
+    "nice_name" : "Ukraine",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ua.png",
+    "num_code" : "804",
+    "name" : "UKRAINE",
+    "dial_code" : "+380"
+  },
+  {
+    "iso3" : "ARE",
+    "iso" : "AE",
+    "nice_name" : "United Arab Emirates",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ae.png",
+    "num_code" : "784",
+    "name" : "UNITED ARAB EMIRATES",
+    "dial_code" : "+971"
+  },
+  {
+    "iso3" : "GBR",
+    "iso" : "GB",
+    "nice_name" : "United Kingdom",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/gb.png",
+    "num_code" : "826",
+    "name" : "UNITED KINGDOM",
+    "dial_code" : "+44"
+  },
+  {
+    "iso3" : "USA",
+    "iso" : "US",
+    "nice_name" : "United States",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/us.png",
+    "num_code" : "840",
+    "name" : "UNITED STATES",
+    "dial_code" : "+1"
+  },
+  {
+    "iso3" : null,
+    "iso" : "UM",
+    "nice_name" : "United States Minor Outlying Islands",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/um.png",
+    "num_code" : null,
+    "name" : "UNITED STATES MINOR OUTLYING ISLANDS",
+    "dial_code" : ""
+  },
+  {
+    "iso3" : "URY",
+    "iso" : "UY",
+    "nice_name" : "Uruguay",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/uy.png",
+    "num_code" : "858",
+    "name" : "URUGUAY",
+    "dial_code" : "+598"
+  },
+  {
+    "iso3" : "UZB",
+    "iso" : "UZ",
+    "nice_name" : "Uzbekistan",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/uz.png",
+    "num_code" : "860",
+    "name" : "UZBEKISTAN",
+    "dial_code" : "+998"
+  },
+  {
+    "iso3" : "VUT",
+    "iso" : "VU",
+    "nice_name" : "Vanuatu",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/vu.png",
+    "num_code" : "548",
+    "name" : "VANUATU",
+    "dial_code" : "+678"
+  },
+  {
+    "iso3" : "VEN",
+    "iso" : "VE",
+    "nice_name" : "Venezuela",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ve.png",
+    "num_code" : "862",
+    "name" : "VENEZUELA",
+    "dial_code" : "+58"
+  },
+  {
+    "iso3" : "VNM",
+    "iso" : "VN",
+    "nice_name" : "Viet Nam",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/vn.png",
+    "num_code" : "704",
+    "name" : "VIET NAM",
+    "dial_code" : "+84"
+  },
+  {
+    "iso3" : "VGB",
+    "iso" : "VG",
+    "nice_name" : "Virgin Islands, British",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/vg.png",
+    "num_code" : "92",
+    "name" : "VIRGIN ISLANDS, BRITISH",
+    "dial_code" : "+1 284"
+  },
+  {
+    "iso3" : "VIR",
+    "iso" : "VI",
+    "nice_name" : "Virgin Islands, U.s.",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/vi.png",
+    "num_code" : "850",
+    "name" : "VIRGIN ISLANDS, U.S.",
+    "dial_code" : "+1 340"
+  },
+  {
+    "iso3" : "WLF",
+    "iso" : "WF",
+    "nice_name" : "Wallis and Futuna",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/wf.png",
+    "num_code" : "876",
+    "name" : "WALLIS AND FUTUNA",
+    "dial_code" : "+681"
+  },
+  {
+    "iso3" : "ESH",
+    "iso" : "EH",
+    "nice_name" : "Western Sahara",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/eh.png",
+    "num_code" : "732",
+    "name" : "WESTERN SAHARA",
+    "dial_code" : ""
+  },
+  {
+    "iso3" : "YEM",
+    "iso" : "YE",
+    "nice_name" : "Yemen",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/ye.png",
+    "num_code" : "887",
+    "name" : "YEMEN",
+    "dial_code" : "+967"
+  },
+  {
+    "iso3" : "ZMB",
+    "iso" : "ZM",
+    "nice_name" : "Zambia",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/zm.png",
+    "num_code" : "894",
+    "name" : "ZAMBIA",
+    "dial_code" : "+260"
+  },
+  {
+    "iso3" : "ZWE",
+    "iso" : "ZW",
+    "nice_name" : "Zimbabwe",
+    "flag" : "http:\/\/68.169.44.163\/images\/flags\/flags_iso\/48\/zw.png",
+    "num_code" : "716",
+    "name" : "ZIMBABWE",
+    "dial_code" : "+263"
+  }
+]
