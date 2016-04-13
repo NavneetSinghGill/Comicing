@@ -272,6 +272,9 @@ NSTimer* timerObject;
 
 -(NSMutableDictionary*)createSendParams :(NSMutableArray*)slideArray{
     
+    if (slideArray == nil && [slideArray count] > 0)
+        return nil;
+
     NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
     NSMutableDictionary* comicMakeDic = [[NSMutableDictionary alloc] init];
     
@@ -354,7 +357,7 @@ NSTimer* timerObject;
         NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         NSData *imageData = UIImageJPEGRepresentation([AppHelper getImageFile:cmPage.printScreenPath], 1);
-        
+
         [dataDic setObject:imageData forKey:@"SlideImage"];
         
         NSData* slideTypeData = [@"slideImage" dataUsingEncoding:NSUTF8StringEncoding];
@@ -363,14 +366,17 @@ NSTimer* timerObject;
         
         [paramArray addObject:dataDic];
     }
-    
+    NSLog(@"Start uploading");
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     [cmNetWorking UploadComicImage:paramArray completeBlock:^(id json, id jsonResponse) {
-        
-        [cmNetWorking postComicCreation:[self createSendParams:[jsonResponse objectForKey:@"slides"]]
+    
+        NSLog(@"Finish Uploading");
+        NSLog(@"Start Comic Creation");
+        [cmNetWorking postComicCreation:[self createSendParams:[json objectForKey:@"slides"]]
                                      Id:nil
                              completion:^(id json,id jsonResposeHeader) {
                                  
+                                 NSLog(@"Finish Comic Creation");
                                  [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
                                  NSLog(@"END");
                                  //Desable the image view intactin
@@ -388,7 +394,7 @@ NSTimer* timerObject;
                              }];
         
     } ErrorBlock:^(JSONModelError *error) {
-        
+        [self.view setUserInteractionEnabled:YES];
     }];
 //    NSLog(@"Start");
 }

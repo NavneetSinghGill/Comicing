@@ -168,6 +168,17 @@ static ComicNetworking *_sharedComicNetworking = nil;
 
 -(void)UploadComicImage:(NSMutableArray*)comicImageArray
           completeBlock:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock) errorBlock{
+    
+    
+//    [BaseAPIManager postPublicRequestWith:IMAGE_UPLOADER
+//                            withParameter:comicImageArray
+//                              withSuccess:^(id object, AFHTTPRequestOperation *operationObjet) {
+//                                completeBlock(object,nil);
+//                            } andFail:^(id errorObj) {
+//                                errorBlock((JSONModelError*)errorObj);
+//                            } showIndicator:YES];
+    
+    
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:SERVER_URL]];
     manager.responseSerializer = [AFJSONResponseSerializer
                                   serializerWithReadingOptions:NSJSONReadingAllowFragments];
@@ -178,12 +189,12 @@ static ComicNetworking *_sharedComicNetworking = nil;
 
     manager.responseSerializer = responseSerializer;
 
-    NSDictionary *parameters = @{@"submit": @"true"};
-    AFHTTPRequestOperation *op = [manager POST:IMAGE_UPLOADER parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//    NSDictionary *parameters = @{@"submit": @"true"};
+    AFHTTPRequestOperation *op = [manager POST:IMAGE_UPLOADER parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
-        for (int i = 1; i< [comicImageArray count]; i++) {
+        for (int i = 1; i<= [comicImageArray count]; i++) {
             
-            NSDictionary* imgDic = [comicImageArray objectAtIndex:i];
+            NSDictionary* imgDic = [comicImageArray objectAtIndex:(i-1)];
             if ([imgDic objectForKey:@"SlideImage"]) {
                 //do not put image inside parameters dictionary as I did, but append it!
                 [formData appendPartWithFileData:[imgDic objectForKey:@"SlideImage"]
@@ -191,18 +202,49 @@ static ComicNetworking *_sharedComicNetworking = nil;
                                         fileName:[NSString stringWithFormat:@"SlideImage%i.jpeg",i]
                                         mimeType:@"image/jpeg"];
                 
+                
+//                [formData appendPartWithFormData:[imgDic objectForKey:@"SlideImage"]
+//                                            name:[NSString stringWithFormat:@"slide%i",i]];
+                
                 //do not put image inside parameters dictionary as I did, but append it!
                 [formData appendPartWithFormData:[imgDic objectForKey:@"SlideImageType"]
-                                            name:[NSString stringWithFormat:@"type_slide1%i",i]];
+                                            name:[NSString stringWithFormat:@"type_slide%i",i]];
             }
         }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [AppHelper showHUDLoader:NO];
         completeBlock(responseObject,nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AppHelper showHUDLoader:NO];
         errorBlock((JSONModelError*)error);
     }];
-    
+    [AppHelper showHUDLoader:YES];
     [op start];
+    
+    
+//    NSMutableDictionary *parameters_new = [[NSMutableDictionary alloc] init];
+//    for (int i = 1; i<= [comicImageArray count]; i++) {
+//        
+//        NSDictionary* imgDic = [comicImageArray objectAtIndex:(i-1)];
+//        if ([imgDic objectForKey:@"SlideImage"]) {
+//            //do not put image inside parameters dictionary as I did, but append it!
+//            
+//            [parameters_new setObject:[imgDic objectForKey:@"SlideImage"] forKey:[NSString stringWithFormat:@"slide%i",i]];
+//            [parameters_new setObject:@"slideImage" forKey:[NSString stringWithFormat:@"type_slide%i",i]];
+//        }
+//    }
+//    [parameters_new setObject:@"true" forKey:@"submit"];
+    
+    
+//            [BaseAPIManager postPublicRequestWith:@"http://162.244.67.15/imageUploader.php"
+//                                    withParameter:parameters_new
+//                                      withSuccess:^(id object, AFHTTPRequestOperation *operationObjet) {
+//                                        completeBlock(object,nil);
+//                                    } andFail:^(id errorObj) {
+//                                        errorBlock((JSONModelError*)errorObj);
+//                                    } showIndicator:YES];
+
+    
 }
 #pragma mark Common
 

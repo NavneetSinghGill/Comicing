@@ -2909,6 +2909,60 @@ static CGRect CaptionTextViewMinRect;
     
     //Desable the image view intactin
     [self.view setUserInteractionEnabled:NO];
+    NSMutableArray* comicSlides = [self getDataFromFile];
+    NSMutableArray* paramArray = [[NSMutableArray alloc] init];
+    for (NSData* data in comicSlides) {
+        
+        NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
+        ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSData *imageData = UIImageJPEGRepresentation([AppHelper getImageFile:cmPage.printScreenPath], 1);
+        
+        [dataDic setObject:imageData forKey:@"SlideImage"];
+        
+        NSData* slideTypeData = [@"slideImage" dataUsingEncoding:NSUTF8StringEncoding];
+        
+        [dataDic setObject:slideTypeData forKey:@"SlideImageType"];
+        
+        [paramArray addObject:dataDic];
+    }
+    NSLog(@"Start uploading");
+    ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
+    [cmNetWorking UploadComicImage:paramArray completeBlock:^(id json, id jsonResponse) {
+        
+        NSLog(@"Finish Uploading");
+        NSLog(@"Start Comic Creation");
+        [cmNetWorking postComicCreation:[self createSendParams:[json objectForKey:@"slides"] comicSlides:comicSlides]
+                                     Id:nil completion:^(id json,id jsonResposeHeader) {
+            
+            [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
+            
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+            SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
+            [self.navigationController pushViewController:controller animated:YES];
+            
+            //Removing current View
+            NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
+            [navigationArray removeObjectAtIndex: navigationArray.count - 2 ];
+            self.navigationController.viewControllers = navigationArray;
+            navigationArray =nil;
+            
+        } ErrorBlock:^(JSONModelError *error) {
+            NSLog(@"completion %@",error);
+            [self.view setUserInteractionEnabled:YES];
+        }];
+        
+    } ErrorBlock:^(JSONModelError *error) {
+        [self.view setUserInteractionEnabled:YES];
+    }];
+    
+//    [AppHelper showWarningDropDownMessage:@"" mesage:@"Please wait .. Creating your comic"];
+    
+}
+
+-(NSMutableDictionary*)createSendParams :(NSMutableArray*)slideArray comicSlides :(NSMutableArray*) comicSlides{
+    
+    if (slideArray == nil && [slideArray count] > 0)
+        return nil;
     
     NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
     NSMutableDictionary* comicMakeDic = [[NSMutableDictionary alloc] init];
@@ -2923,15 +2977,26 @@ static CGRect CaptionTextViewMinRect;
     NSMutableArray* slides = [[NSMutableArray alloc] init];
     
     
-    NSMutableArray* comicSlides = [self getDataFromFile]; //[[[NSUserDefaults standardUserDefaults] objectForKey:@"comicSlides"] mutableCopy];
-    for (NSData* data in comicSlides) {
+//    NSMutableArray* comicSlides = [self getDataFromFile]; //[[[NSUserDefaults standardUserDefaults] objectForKey:@"comicSlides"] mutableCopy];
+    for (int i=0; i< [comicSlides count]; i++) {
+//    for (NSData* data in comicSlides) {
+        NSData* data = [comicSlides objectAtIndex:i];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
         //ComicSlides Object
         NSMutableDictionary* cmSlide = [[NSMutableDictionary alloc] init];
-        [cmSlide setObject:[AppHelper encodeToBase64String:[AppHelper getImageFile:cmPage.printScreenPath]] forKey:@"slide_image"];
+//        [cmSlide setObject:[AppHelper encodeToBase64String:[AppHelper getImageFile:cmPage.printScreenPath]] forKey:@"slide_image"];
+//        [cmSlide setObject:@"" forKey:@"slide_text"];
+        
+        //Comic Slide image url obj
+        NSDictionary* urlSlides = [slideArray objectAtIndex:i];
+        
+        //ComicSlides Object
+        [cmSlide setObject:[urlSlides valueForKeyPath:@"url.slide_image"] forKey:@"slide_image"];
+        [cmSlide setObject:[urlSlides valueForKeyPath:@"url.slide_thumb"] forKey:@"slide_thumb"];
         [cmSlide setObject:@"" forKey:@"slide_text"];
-         
+        [cmSlide setObject:@"url" forKey:@"slide_image_type"];
+        
         NSMutableArray* enhancements = [[NSMutableArray alloc] init];
         //Check is AUD is avalilabe
         
@@ -2970,26 +3035,7 @@ static CGRect CaptionTextViewMinRect;
     [comicMakeDic setObject:slides forKey:@"slides"];
     [dataDic setObject:comicMakeDic forKey:@"data"];
     
-//    [AppHelper showWarningDropDownMessage:@"" mesage:@"Please wait .. Creating your comic"];
-    ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
-    [cmNetWorking postComicCreation:dataDic Id:nil completion:^(id json,id jsonResposeHeader) {
-        
-        [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
-
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-        SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
-        [self.navigationController pushViewController:controller animated:YES];
-
-        //Removing current View
-        NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
-        [navigationArray removeObjectAtIndex: navigationArray.count - 2 ];
-        self.navigationController.viewControllers = navigationArray;
-        navigationArray =nil;
-        
-    } ErrorBlock:^(JSONModelError *error) {
-        NSLog(@"completion %@",error);
-        [self.view setUserInteractionEnabled:YES];
-    }];
+    return dataDic;
 }
 
 #pragma mark ComicItem methods
