@@ -2907,6 +2907,18 @@ static CGRect CaptionTextViewMinRect;
                                                withNewSlide:isNewSlide
                                                 withPopView:NO];
     
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+//    SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
+//    [self.navigationController pushViewController:controller animated:NO];
+//    
+//    
+//    //Removing current View
+//        NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
+//        [navigationArray removeObjectAtIndex: navigationArray.count - 2 ];
+//        self.navigationController.viewControllers = navigationArray;
+//        navigationArray =nil;
+//
+//    return;
     //Desable the image view intactin
     [self.view setUserInteractionEnabled:NO];
     NSMutableArray* comicSlides = [self getDataFromFile];
@@ -2936,15 +2948,17 @@ static CGRect CaptionTextViewMinRect;
             
             [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
             
-            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-            SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
-            [self.navigationController pushViewController:controller animated:YES];
+                                         [self.navigationController popViewControllerAnimated:NO];
+                                         
+                                         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+                                         SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
+                                         [self.navigationController pushViewController:controller animated:YES];
             
             //Removing current View
-            NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
-            [navigationArray removeObjectAtIndex: navigationArray.count - 2 ];
-            self.navigationController.viewControllers = navigationArray;
-            navigationArray =nil;
+//            NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
+//            [navigationArray removeObjectAtIndex: navigationArray.count - 2 ];
+//            self.navigationController.viewControllers = navigationArray;
+//            navigationArray =nil;
             
         } ErrorBlock:^(JSONModelError *error) {
             NSLog(@"completion %@",error);

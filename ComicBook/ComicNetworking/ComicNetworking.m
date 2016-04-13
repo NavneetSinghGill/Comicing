@@ -180,14 +180,15 @@ static ComicNetworking *_sharedComicNetworking = nil;
     
     
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:SERVER_URL]];
-    manager.responseSerializer = [AFJSONResponseSerializer
-                                  serializerWithReadingOptions:NSJSONReadingAllowFragments];
+//    manager.responseSerializer = [AFJSONResponseSerializer
+//                                  serializerWithReadingOptions:NSJSONReadingAllowFragments];
     
 
-    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-    responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"charset=UTF-8", nil];
+//    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+//    responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"charset=UTF-8", nil];
 
-    manager.responseSerializer = responseSerializer;
+//    manager.responseSerializer = responseSerializer;
+    manager.responseSerializer = [AFHTTPResponseSerializer  serializer];
 
 //    NSDictionary *parameters = @{@"submit": @"true"};
     AFHTTPRequestOperation *op = [manager POST:IMAGE_UPLOADER parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -212,10 +213,24 @@ static ComicNetworking *_sharedComicNetworking = nil;
             }
         }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSString * jsonString = [[NSString alloc] initWithData: responseObject encoding: NSUTF8StringEncoding];
+        
+        NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+//        NSDictionary* responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        
         [AppHelper showHUDLoader:NO];
-        completeBlock(responseObject,nil);
+        if (json) {
+            completeBlock(json,nil);
+        }else{
+            [AppHelper showErrorDropDownMessage:@"Something went wrong!" mesage:@""];
+            errorBlock(nil);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AppHelper showHUDLoader:NO];
+        [AppHelper showErrorDropDownMessage:@"Something went wrong!" mesage:@""];
         errorBlock((JSONModelError*)error);
     }];
     [AppHelper showHUDLoader:YES];
