@@ -11,7 +11,7 @@
 @implementation ComicPage
 
 //@synthesize containerImage, subviews, subviewData, printScreen,timelineString;
-@synthesize containerImagePath, subviews, subviewData,timelineString,printScreenPath;
+@synthesize containerImagePath, subviews, subviewData,timelineString,printScreenPath,subviewTranformData;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -20,10 +20,9 @@
     {
         containerImagePath = [aDecoder decodeObjectForKey:@"containerImagePath"];
         printScreenPath = [aDecoder decodeObjectForKey:@"printScreenImagePath"];
-//        containerImage = [aDecoder decodeObjectForKey:@"image"];
         subviews = [aDecoder decodeObjectForKey:@"subviews"];
         subviewData = [aDecoder decodeObjectForKey:@"subviewData"];
-//        printScreen = [aDecoder decodeObjectForKey:@"printScreen"];
+        subviewTranformData = [aDecoder decodeObjectForKey:@"subviewTranformData"];
         timelineString = [aDecoder decodeObjectForKey:@"timelineString"];
     }
     
@@ -34,10 +33,9 @@
 {
     [aCoder encodeObject:printScreenPath forKey:@"printScreenImagePath"];
     [aCoder encodeObject:containerImagePath forKey:@"containerImagePath"];
-//    [aCoder encodeObject:containerImage forKey:@"image"];
     [aCoder encodeObject:subviews forKey:@"subviews"];
     [aCoder encodeObject:subviewData forKey:@"subviewData"];
-//    [aCoder encodeObject:printScreen forKey:@"printScreen"];
+    [aCoder encodeObject:subviewTranformData forKey:@"subviewTranformData"];
     [aCoder encodeObject:timelineString forKey:@"timelineString"];
 }
 

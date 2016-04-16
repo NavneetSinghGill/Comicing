@@ -303,7 +303,13 @@ static CGRect CaptionTextViewMinRect;
         {
             id imageView = comicPage.subviews[i];
             CGRect myRect = [comicPage.subviewData[i] CGRectValue];
-            [self addComicItem:imageView ItemImage:nil rectValue:myRect];
+            CGAffineTransform tt;
+            NSString* strTrasformValue = nil;
+            if ([comicPage.subviewTranformData count] > i) {
+                strTrasformValue = comicPage.subviewTranformData[i];
+                tt = [comicPage.subviewTranformData[i] CGAffineTransformValue];
+            }
+            [self addComicItem:imageView ItemImage:nil rectValue:myRect TranformData:tt];
         }
     }
 }
@@ -2624,22 +2630,30 @@ static CGRect CaptionTextViewMinRect;
 //    [imgvComic addSubview:imageView];
 //}
 
-- (void)addStickerWithImageView:(UIImageView *)imageView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect
+- (void)addStickerWithImageView:(UIImageView *)imageView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect Tranform:(CGAffineTransform)tranformData
 {
     if (!CGRectEqualToRect(rect,CGRectZero)) {
-//        imageView.transform =  CGAffineTransformFromString(@"[0.40253136, -3.3354547, 3.3354547, 0.40253136, 0, 0]");
+//        if (tranformData != nil) {
         imageView.frame = rect;
+//            NSLog(@"Transform value %@",tranformData);
+//            CGFloat angle = atan2f(CGAffineTransformFromString(tranformData).b, CGAffineTransformFromString(tranformData).a);
+//            CGFloat degrees = angle * (180 / M_PI);
+//            imageView.transform = CGAffineTransformRotate(CGAffineTransformFromString(tranformData), angle);
+            imageView.transform =  tranformData;//CGAffineTransformFromString(tranformData);
+        
+        NSLog(@"After value set %@",[NSValue valueWithCGAffineTransform:imageView.transform]);
+//        }
+    }else{
+        imageView.image = imageView.image;
     }
+//    NSLog(@"addStickerWithImageView %f",(imageView.contentScaleFactor));
     
-//    NSLog(@"addStickerWithImageView %@",NSStringFromCGRect(imageView.frame));
-    imageView.image = imageView.image;
     imageView.userInteractionEnabled = YES;
     
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.userInteractionEnabled = YES;
     imageView.clipsToBounds = NO;
     [imageView setBackgroundColor:[UIColor clearColor]];
-//    imageView.transform = imageView.transform;
     
     UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotatePiece:)];
     [imageView addGestureRecognizer:rotationGesture];
@@ -2673,15 +2687,15 @@ static CGRect CaptionTextViewMinRect;
 //    float imageHeight = scale * imgWithOutAlpha.size.height;
     
 //    imageView.frame = CGRectMake(CGRectGetMinX(imageView.frame), CGRectGetMinY(imageView.frame), imageWidth, imageHeight);
-    CGAffineTransform tt_1 = imageView.transform;
-    
-    NSString * nn =  @"[1, 0, 0, 1, 0, 0]";
-    CGAffineTransform tt= CGAffineTransformFromString(nn);
-    imageView.transform = tt;
+//    CGAffineTransform tt_1 = imageView.transform;
+//    
+//    NSString * nn =  @"[1, 0, 0, 1, 0, 0]";
+//    CGAffineTransform tt= CGAffineTransformFromString(nn);
+//    imageView.transform = tt;
     
     [imgvComic addSubview:imageView];
     
-    imageView.transform = tt_1;
+//    imageView.transform = tt_1;
     
 }
 
@@ -3114,12 +3128,12 @@ static CGRect CaptionTextViewMinRect;
     [self doPrintScreen];
 }
 
-- (void)addComicItem:(id)comicItemView ItemImage:(UIImage*)itemImage rectValue:(CGRect)rect
+- (void)addComicItem:(id)comicItemView ItemImage:(UIImage*)itemImage rectValue:(CGRect)rect TranformData:(CGAffineTransform)tranformData
 {
     if ([comicItemView isKindOfClass:[ComicItemSticker class]] ||
         [comicItemView isKindOfClass:[ComicItemExclamation class]])
     {
-        [self addStickerWithImageView:comicItemView ComicItemImage:itemImage rectValue:rect];
+        [self addStickerWithImageView:comicItemView ComicItemImage:itemImage rectValue:rect Tranform:tranformData];
     }else if([comicItemView isKindOfClass:[ComicItemBubble class]])
     {
         [self addBubbleWithImage:comicItemView ComicItemImage:itemImage rectValue:rect];
@@ -3131,7 +3145,7 @@ static CGRect CaptionTextViewMinRect;
 }
 - (void)addComicItem:(id)comicItemView ItemImage:(UIImage*)itemImage
 {
-    [self addComicItem:comicItemView ItemImage:itemImage rectValue:CGRectZero];
+    [self addComicItem:comicItemView ItemImage:itemImage rectValue:CGRectZero TranformData:CGAffineTransformMake(0, 0, 0, 0, 0, 0)];
 }
 
 - (id)getComicItems:(ComicItemType)type
