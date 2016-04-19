@@ -32,6 +32,11 @@
 
     [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRegisterNotificationSucess:) name:RegisterNotification_Sucess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRegisterNotificationFailed:) name:RegisterNotification_Failed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveRemoteNotification:) name:RegisterNotification_Receive object:nil];
+    
+    [self setPushNotification];
     // Do any additional setup after loading the view.
 }
 
@@ -204,6 +209,34 @@
             [AppHelper showSuccessDropDownMessage:@"Something went wrong" mesage:@""];
         }];
     }
+}
+
+
+#pragma mark Pushnotification
+
+-(void)setPushNotification{
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings
+                                                                         settingsForTypes:(UIUserNotificationTypeSound |
+                                                                                           UIUserNotificationTypeAlert |
+                                                                                           UIUserNotificationTypeBadge)
+                                                                         categories:nil]];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+}
+
+-(void)doRegisterNotificationSucess:(NSNotification *)notification
+{
+    
+}
+
+-(void)doRegisterNotificationFailed:(NSNotification *)notification
+{
+    [AppHelper showErrorDropDownMessage:@"Oops ... veryfication failed" mesage:@""];
+}
+-(void)receiveRemoteNotification:(NSNotification *)notification
+{
+    
 }
 
 /*

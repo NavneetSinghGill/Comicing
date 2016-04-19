@@ -216,9 +216,11 @@ NSTimer* timerObject;
         return;
     
     self.comicPageComicItems = nil;
+    self.dirtysubviewData = nil;
+    self.dirtySubviews = nil;
+    
     // add new slide
     transitionView = view;
-    
     newSlideIndex = index;
     editSlideIndex = index;
     
@@ -246,8 +248,6 @@ NSTimer* timerObject;
     if (index >= 0) {
         [comicSlides removeObjectAtIndex:index];
         [self saveDataToFile:comicSlides];
-//        [[NSUserDefaults standardUserDefaults] setObject:comicSlides forKey:@"comicSlides"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     [self setComicSendButton];
 }

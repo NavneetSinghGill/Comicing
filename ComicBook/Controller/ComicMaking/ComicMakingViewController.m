@@ -1239,6 +1239,15 @@ static CGRect CaptionTextViewMinRect;
     imageView.frame = CGRectMake(15, 15, 150, 150);
     imageView.image = exclamationImage;
     
+    float widthRatio = imageView.bounds.size.width / imageView.image.size.width;
+    float heightRatio = imageView.bounds.size.height / imageView.image.size.height;
+    float scale = MIN(widthRatio, heightRatio);
+    float imageWidth = scale * imageView.image.size.width;
+    float imageHeight = scale * imageView.image.size.height;
+    
+    imageView.frame = CGRectMake(0, 0, imageWidth, imageHeight);
+//    imageView.center = imgvComic.center;
+    
     [self addComicItem:imageView ItemImage:exclamationImage];
     
     imageView.center = imageView.center;
@@ -2639,7 +2648,7 @@ static CGRect CaptionTextViewMinRect;
 //            CGFloat angle = atan2f(CGAffineTransformFromString(tranformData).b, CGAffineTransformFromString(tranformData).a);
 //            CGFloat degrees = angle * (180 / M_PI);
 //            imageView.transform = CGAffineTransformRotate(CGAffineTransformFromString(tranformData), angle);
-            imageView.transform =  tranformData;//CGAffineTransformFromString(tranformData);
+            imageView.transform =  tranformData;
         
         NSLog(@"After value set %@",[NSValue valueWithCGAffineTransform:imageView.transform]);
 //        }
@@ -2962,7 +2971,8 @@ static CGRect CaptionTextViewMinRect;
             
             [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
             
-                                         [self.navigationController popViewControllerAnimated:NO];
+                                          [self.view setUserInteractionEnabled:YES];
+//                                         [self.navigationController popViewControllerAnimated:NO];
                                          
                                          UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                          SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
