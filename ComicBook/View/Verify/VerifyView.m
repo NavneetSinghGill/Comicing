@@ -54,6 +54,12 @@
     self.imgProfilePic.center = CGPointMake(self.frame.size.width  / 2,self.imgProfilePic.center.y);
     CGRect temRect = CGRectZero;
     
+    [_txtVerifyCode1 addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [_txtVerifyCode2 addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [_txtVerifyCode3 addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [_txtVerifyCode4 addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    
     if (IS_IPHONE_6) {
         
         //Config button
@@ -183,6 +189,10 @@
 //        }];
 //    }
 }
+
+
+
+
 -(void)setTextFont{
     
     [self.captionText setFont:[UIFont fontWithName:@"Myriad Roman" size:IS_IPHONE_5?20:28]];
@@ -256,18 +266,7 @@
 {
     
 }
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if ([string isEqualToString:@""])
-        return YES;
-    
-    
-    if (![textField.text isEqualToString:@""] &&
-        [textField.text length] >= MAXLENGTH) {
 
-        return NO;
-    }
-    return YES;
-}
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     if (textField == self.txtVerifyCode1) {
@@ -281,6 +280,65 @@
     }
     return YES;
 }
+
+-(void)textFieldDidChange :(UITextField *)textField
+{
+    NSLog( @"text changed: %@", textField.text);
+    
+    if (textField.text.length >= 1)
+    {
+        if (textField == self.txtVerifyCode1)
+        {
+            [textField resignFirstResponder];
+            [self.txtVerifyCode2 becomeFirstResponder];
+        }
+        else if (textField == self.txtVerifyCode2)
+        {
+            [textField resignFirstResponder];
+            [self.txtVerifyCode3 becomeFirstResponder];
+        }
+        else if (textField == self.txtVerifyCode3)
+        {
+            [textField resignFirstResponder];
+            [self.txtVerifyCode4 becomeFirstResponder];
+        }
+    }
+    else
+    {
+        if (textField == self.txtVerifyCode4)
+        {
+            [textField resignFirstResponder];
+            [self.txtVerifyCode3 becomeFirstResponder];
+        }
+        else if (textField == self.txtVerifyCode3)
+        {
+            [textField resignFirstResponder];
+            [self.txtVerifyCode2 becomeFirstResponder];
+        }
+        else if (textField == self.txtVerifyCode2)
+        {
+            [textField resignFirstResponder];
+            [self.txtVerifyCode1    becomeFirstResponder];
+        }
+    }
+}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSUInteger newLength = (textField.text.length - range.length) + string.length;
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (newString.length > 1)
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
+
 
 -(void)autoFillVeryficationCode:(NSString*)fourDigitCode{
 //    [self.txtVerifyCode1 becomeFirstResponder];
