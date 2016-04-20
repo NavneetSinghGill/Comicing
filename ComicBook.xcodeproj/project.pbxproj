@@ -345,6 +345,13 @@
 		0CBF90B51CA313A5004007DF /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B31CA313A5004007DF /* UIImage+ColorAtPixel.m */; };
 		0CBF90B81CA3143D004007DF /* UIImage+ImageCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */; };
 		0CDD9A821C99B30B00D942D3 /* TermsServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */; };
+		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
+		8466E7F21CB169320075727A /* InviteFriendsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466E7F11CB169320075727A /* InviteFriendsView.m */; };
+		8466E7F41CB169500075727A /* InviteFriendsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8466E7F31CB169500075727A /* InviteFriendsView.xib */; };
+		84ECE6491CB57772007AF54E /* searchFriendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ECE6481CB57772007AF54E /* searchFriendView.m */; };
+		84ECE64B1CB5778B007AF54E /* searchFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84ECE64A1CB5778B007AF54E /* searchFriendView.xib */; };
+		84F1B4411CB2E41A0096F79C /* InviteFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */; };
+		84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -928,7 +935,18 @@
 		0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageCompress.m"; sourceTree = "<group>"; };
 		0CDD9A801C99B30B00D942D3 /* TermsServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsServiceViewController.h; sourceTree = "<group>"; };
 		0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsServiceViewController.m; sourceTree = "<group>"; };
+		8433BC921CC135D20073DE2A /* UIImage+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Trim.h"; sourceTree = "<group>"; };
+		8433BC931CC135D20073DE2A /* UIImage+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Trim.m"; sourceTree = "<group>"; };
 		845090751C2B1343004DAE99 /* Comicing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Comicing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8466E7F01CB169320075727A /* InviteFriendsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsView.h; sourceTree = "<group>"; };
+		8466E7F11CB169320075727A /* InviteFriendsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsView.m; sourceTree = "<group>"; };
+		8466E7F31CB169500075727A /* InviteFriendsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsView.xib; sourceTree = "<group>"; };
+		84ECE6471CB57772007AF54E /* searchFriendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = searchFriendView.h; sourceTree = "<group>"; };
+		84ECE6481CB57772007AF54E /* searchFriendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = searchFriendView.m; sourceTree = "<group>"; };
+		84ECE64A1CB5778B007AF54E /* searchFriendView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = searchFriendView.xib; sourceTree = "<group>"; };
+		84F1B43E1CB2E41A0096F79C /* InviteFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendCell.h; sourceTree = "<group>"; };
+		84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendCell.m; sourceTree = "<group>"; };
+		84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -941,6 +959,8 @@
 				0C6667BE1C84358600FEB11F /* FBSDKLoginKit.framework in Frameworks */,
 				0C6667BF1C84358600FEB11F /* FBSDKMessengerShareKit.framework in Frameworks */,
 				0C4EEB9E1CB2E5470011CAAB /* Crashlytics.framework in Frameworks */,
+				0C6667BE1C84358600FEB11F /* FBSDKLoginKit.framework in Frameworks */,
+				0C6667BF1C84358600FEB11F /* FBSDKMessengerShareKit.framework in Frameworks */,
 				0C6667BD1C84358600FEB11F /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1718,6 +1738,7 @@
 		0C6665E11C84358500FEB11F /* SendPage */ = {
 			isa = PBXGroup;
 			children = (
+				8466E7EF1CB166970075727A /* Invite Friends */,
 				0C6665E21C84358500FEB11F /* ComicImageList */,
 				0C6665E91C84358500FEB11F /* SendPageViewController.h */,
 				0C6665EA1C84358500FEB11F /* SendPageViewController.m */,
@@ -1883,6 +1904,8 @@
 		0C6666331C84358600FEB11F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8433BC921CC135D20073DE2A /* UIImage+Trim.h */,
+				8433BC931CC135D20073DE2A /* UIImage+Trim.m */,
 				0CBF90B61CA3143D004007DF /* UIImage+ImageCompress.h */,
 				0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */,
 				0CBF90B01CA313A5004007DF /* UIImage+Alpha.h */,
@@ -2519,6 +2542,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8466E7EF1CB166970075727A /* Invite Friends */ = {
+			isa = PBXGroup;
+			children = (
+				8466E7F01CB169320075727A /* InviteFriendsView.h */,
+				8466E7F11CB169320075727A /* InviteFriendsView.m */,
+				8466E7F31CB169500075727A /* InviteFriendsView.xib */,
+				84F1B43E1CB2E41A0096F79C /* InviteFriendCell.h */,
+				84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */,
+				84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */,
+				84ECE6471CB57772007AF54E /* searchFriendView.h */,
+				84ECE6481CB57772007AF54E /* searchFriendView.m */,
+				84ECE64A1CB5778B007AF54E /* searchFriendView.xib */,
+			);
+			name = "Invite Friends";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2611,6 +2650,7 @@
 				0C6667F81C84358600FEB11F /* GroupCell.xib in Resources */,
 				0C6667751C84358600FEB11F /* MYRIADPRO-BOLDCOND.OTF in Resources */,
 				0C6667961C84358600FEB11F /* flagImage.png in Resources */,
+				8466E7F41CB169500075727A /* InviteFriendsView.xib in Resources */,
 				0C66676F1C84358600FEB11F /* american-typewriter-medium-bt.ttf in Resources */,
 				0C6667731C84358600FEB11F /* Myriad Roman.ttf in Resources */,
 				0C6667841C84358600FEB11F /* backbutton.png in Resources */,
@@ -2647,6 +2687,7 @@
 				0C6667861C84358600FEB11F /* meButton.png in Resources */,
 				0C66677F1C84358600FEB11F /* arrow.png in Resources */,
 				0C6668AE1C84358600FEB11F /* GroupSectionCell.xib in Resources */,
+				84ECE64B1CB5778B007AF54E /* searchFriendView.xib in Resources */,
 				0C6667911C84358600FEB11F /* accountId.png in Resources */,
 				0C66679E1C84358600FEB11F /* selectedImage.png in Resources */,
 				0C6668071C84358600FEB11F /* MeCell.xib in Resources */,
@@ -2661,6 +2702,7 @@
 				0C6667A11C84358600FEB11F /* 02.png in Resources */,
 				0C6667931C84358600FEB11F /* faceSignUp.png in Resources */,
 				0C6667811C84358600FEB11F /* arrow@3x.png in Resources */,
+				84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */,
 				0C6667711C84358600FEB11F /* Avenir Next LT W01 Ultra Light.ttf in Resources */,
 				0C66679F1C84358600FEB11F /* Search.png in Resources */,
 				0C66679D1C84358600FEB11F /* searchFriends.png in Resources */,
@@ -2791,6 +2833,7 @@
 				0C66686A1C84358600FEB11F /* NSArray+MTLManipulationAdditions.m in Sources */,
 				0C6667E21C84358600FEB11F /* ExclamationList.m in Sources */,
 				0C6668001C84358600FEB11F /* FriendsCollectionViewCell.m in Sources */,
+				84F1B4411CB2E41A0096F79C /* InviteFriendCell.m in Sources */,
 				0C6667D91C84358600FEB11F /* FindFriendsViewController.m in Sources */,
 				0C6668A21C84358600FEB11F /* FooterView.m in Sources */,
 				0C66682C1C84358600FEB11F /* Pagination.m in Sources */,
@@ -2820,6 +2863,7 @@
 				0C6667C71C84358600FEB11F /* WhatsAppHelper.m in Sources */,
 				0C6667F31C84358600FEB11F /* CMCComicCell.m in Sources */,
 				0C6667B41C84358600FEB11F /* BubbleViewItem.m in Sources */,
+				84ECE6491CB57772007AF54E /* searchFriendView.m in Sources */,
 				0C66685B1C84358600FEB11F /* JSONModelError.m in Sources */,
 				0C6668321C84358600FEB11F /* UserDetail.m in Sources */,
 				0C66685A1C84358600FEB11F /* JSONModelClassProperty.m in Sources */,
@@ -2831,6 +2875,7 @@
 				0C6668291C84358600FEB11F /* GroupUserAddRemove.m in Sources */,
 				0C6668331C84358600FEB11F /* UserSearch.m in Sources */,
 				0C6668B31C84358600FEB11F /* KeyboardView.m in Sources */,
+				8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */,
 				0C6667CA1C84358600FEB11F /* ZOZolaZoomTransition.m in Sources */,
 				0C6667F41C84358600FEB11F /* CMCUserCell.m in Sources */,
 				0C6668521C84358600FEB11F /* AFNetworkReachabilityManager.m in Sources */,
@@ -2844,6 +2889,7 @@
 				0C6667DB1C84358600FEB11F /* MainViewController.m in Sources */,
 				0C6667B21C84358600FEB11F /* AppHelper.m in Sources */,
 				0C66686B1C84358600FEB11F /* NSDictionary+MTLJSONKeyPath.m in Sources */,
+				8466E7F21CB169320075727A /* InviteFriendsView.m in Sources */,
 				0C6668A81C84358600FEB11F /* FriendsListView.m in Sources */,
 				0C66682E1C84358600FEB11F /* TOC.m in Sources */,
 				0C6667C41C84358600FEB11F /* ShareHelper.m in Sources */,

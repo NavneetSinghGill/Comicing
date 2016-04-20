@@ -1,3 +1,4 @@
+
 //
 //  FriendsListView.m
 //  ComicApp
@@ -12,6 +13,9 @@
 #import <AddressBookUI/AddressBookUI.h>
 
 @implementation FriendsListView
+
+@synthesize isOnlyInviteFriends;
+#define InviteTagValue 300
 
 #define Selected_Action     @[@"AddToGroup",@"AddToFriends"]
 
@@ -30,6 +34,9 @@
         //Load from xib
         [[NSBundle mainBundle] loadNibNamed:@"FriendsListView" owner:self options:nil];
         [self addSubview:self.view];
+        self.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+
+        selectedFriends = [[NSMutableArray alloc] init];
         [self configView];
     }
     return self;
@@ -61,35 +68,45 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(self.enableSectionTitles)
+ //   if(self.enableSectionTitles)
         return [alphabetsSectionTitles count];
-    return 1;
+ //   return 1;
 }
 
 // This will tell your UITableView how many rows you wish to have in each section.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(self.enableSectionTitles){
+//    if(self.enableSectionTitles){
         // Return the number of rows in the section.
         NSString *sectionTitle = [alphabetsSectionTitles objectAtIndex:section];
         NSArray *sectionAnimals = [friendsDictWithAlpabets objectForKey:sectionTitle];
         return [sectionAnimals count];
-    }
-    return [self.friendsArray count];
+//    }
+ //   return [self.friendsArray count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(self.enableSectionTitles)
+  //  if(self.enableSectionTitles)
         return [alphabetsSectionTitles objectAtIndex:section];
-    else
-        return nil;
+//    else
+ //       return nil;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
+    
     if(self.enableSectionTitles)
-        return @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", @"#"];
+    {
+        NSMutableArray *keys = [[friendsDictWithAlpabets allKeys] sortedArrayUsingSelector:@selector(localizedStandardCompare:)].mutableCopy;
+        
+        return keys;
+
+        
+        
+      //  return @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", @"#"];
+
+    }
     else
         return nil;
 }
@@ -103,10 +120,17 @@
 // This will tell your UITableView what data to put in which cells in your table.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if (isOnlyInviteFriends)
+    {
+        
+    }
+    
     static NSString *CellIdentifer = @"FriendsList";
     FriendsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifer];
     
-    if (cell == nil) {
+    if (cell == nil)
+    {
         [[NSBundle mainBundle] loadNibNamed:@"FriendsListTableViewCell" owner:self options:nil];
         cell = self.tabCell;
         self.tabCell = nil;
@@ -115,13 +139,19 @@
     
     User* us = nil;
     
-    if(self.enableSectionTitles){
-        NSString* currentAlphaBets = [alphabetsSectionTitles objectAtIndex:indexPath.section];
-        us =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
-    }
-    else{
-        us = (User*)[self.friendsArray objectAtIndex:indexPath.row];
-    }
+    NSString* currentAlphaBets = [alphabetsSectionTitles objectAtIndex:indexPath.section];
+    
+    us =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
+    
+//    if(self.enableSectionTitles)
+//    {
+//        
+//    }
+//    else
+//    {
+//        us = (User*)[self.friendsArray objectAtIndex:indexPath.row];
+//    }
+    
     cell.lblUerName.text = us.first_name;
     
     [cell.userImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
@@ -146,57 +176,106 @@
     {
         [cell.selectedTickImage setHidden:NO];
         [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
-    }else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
+    }
+    else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
     {
         [cell.selectedTickImage setHidden:NO];
         [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
     }
     
+    
+    
+    
+    if ([selectedFriends containsObject:us])
+    {
+        [cell.selectedTickImage setHidden:NO];
+
+    }
+    else
+    {
+        [cell.selectedTickImage setHidden:YES];
+
+    }
+    
+    
     //Config Invite Button
     if ([us isKindOfClass:[UserFriends class]] &&
-        us.friend_id) {
+        us.friend_id)
+    {
         if (us.status == UNFRIEND &&
-            [us.friend_id isEqualToString:@"-1"]) {
+            [us.friend_id isEqualToString:@"-1"])
+        {
             [cell.btnInvite setHidden:NO];
             [cell.btnInvite addTarget:self
-                               action:@selector(inviteButtonClick)
+                               action:@selector(inviteButtonClick:)
                      forControlEvents:UIControlEventTouchUpInside];
             
             [cell.userImage setHidden:YES];
         }
-    }else{
-    if (self.enableInvite && us.status == UNFRIEND) {
-        [cell.btnInvite setHidden:NO];
-        [cell.btnInvite addTarget:self
-                   action:@selector(inviteButtonClick)
-         forControlEvents:UIControlEventTouchUpInside];
-        
-        [cell.userImage setHidden:YES];
     }
+    else
+    {
+        if (self.enableInvite && us.status == UNFRIEND)
+        {
+            [cell.btnInvite setHidden:NO];
+            [cell.btnInvite addTarget:self
+                               action:@selector(inviteButtonClick:)
+                     forControlEvents:UIControlEventTouchUpInside];
+            
+            [cell.userImage setHidden:YES];
+        }
     }
+    
+    cell.btnInvite.tag = InviteTagValue + indexPath.row;
+    cell.btnInvite.selected = NO;
+
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.enableSelection) {
-        FriendsListTableViewCell *cell = (FriendsListTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-        if(cell)
+    if (self.enableSelection)
+    {
+        
+        NSString* currentAlphaBets = [alphabetsSectionTitles objectAtIndex:indexPath.section];
+        
+        User* usSelection =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
+        
+        if (usSelection.status != UNFRIEND )
         {
-            [cell.selectedTickImage setHidden:!cell.selectedTickImage.hidden];
-            if (cell.selectedTickImage.hidden) {
-                [[cell.userImage layer] setBorderColor:[UIColor clearColor].CGColor];
-            }else{
-                [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
+            FriendsListTableViewCell *cell = (FriendsListTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+            
+            if(cell)
+            {
+                [cell.selectedTickImage setHidden:!cell.selectedTickImage.hidden];
+                
+                if (cell.selectedTickImage.hidden)
+                {
+                    [[cell.userImage layer] setBorderColor:[UIColor clearColor].CGColor];
+                }
+                else
+                {
+                    [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
+                }
             }
-        }
-        if (self.enableSectionTitles) {
-            NSString* currentAlphaBets = [alphabetsSectionTitles objectAtIndex:indexPath.section];
-           User* usSelection =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
+
+            
+            if ([selectedFriends containsObject:usSelection])
+            {
+                //remove if already exist
+                [selectedFriends removeObject:usSelection];
+                
+            }
+            else
+            {
+                // add if friend selected
+                [selectedFriends addObject:usSelection];
+                
+            }
+
             [self doSelectedAction:usSelection];
-        }else{
-            [self doSelectedAction:[self.friendsArray objectAtIndex:indexPath.row]];
+
         }
     }
 }
@@ -223,12 +302,142 @@
 }
 
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [ self.delegate scrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
+                     withVelocity:(CGPoint)velocity
+              targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    
+    
+    [self.delegate scrollViewWillEndDragging:scrollView withVelocity:velocity targetContentOffset:targetContentOffset];
+}
+
+- (void)searchFriendByString:(NSString *)searchString
+{
+    searchArray = [[NSMutableArray alloc] init];
+    
+    if ([searchString isEqualToString:@""])
+    {
+        friendsDictWithAlpabets = [[NSMutableDictionary alloc] init];
+        
+        friendsDictWithAlpabets = saveFriendsDictWithAlpabets;
+         alphabetsSectionTitles = saveAlphabetsSectionTitles;
+
+    }
+    else
+    {
+        searchUsers = [[NSMutableDictionary alloc]init];
+        
+        for (NSString *key in saveFriendsDictWithAlpabets)
+        {
+            NSArray *arr = saveFriendsDictWithAlpabets[key];
+            
+            for (User *user in arr)
+            {
+                if ([[user.first_name lowercaseString] containsString:[searchString lowercaseString]])
+                {
+                    NSMutableArray *arr1 = searchUsers[key];
+                    
+                    if (arr1 == nil || arr1.count == 0)
+                    {
+                        arr1 = [[NSMutableArray alloc] init];
+                    }
+                    
+                    [arr1 addObject:user];
+                    
+                    if (arr1.count > 0)
+                    {
+                        [searchUsers setValue:arr1 forKey:key];
+
+                    }
+                }
+            }
+        }
+        
+        
+        
+        friendsDictWithAlpabets = searchUsers;
+        alphabetsSectionTitles = [[friendsDictWithAlpabets allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+//        NSString* filter = @"%K CONTAINS[cd] %@";
+//        NSPredicate* predicate = [NSPredicate predicateWithFormat:filter, @"first_name", searchString];
+//        
+//        NSArray* filteredData = [_friendsArray filteredArrayUsingPredicate:predicate];
+//        
+//        
+//        [searchArray addObjectsFromArray:filteredData];
+//        _friendsArray = [[NSMutableArray alloc] init];
+//        _friendsArray = searchArray;
+    }
+    
+    [self.friendsListTableView reloadData];
+    
+}
+
+
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    [self.delegate friendlistDidScrollwithScrollView:scrollView];
+//}
+
 #pragma mark Methods
 
--(void)inviteButtonClick{
+-(void)inviteButtonClick:(UIButton *)sender
+{
     if (self.delegate && [self.delegate respondsToSelector:@selector(openMessageComposer:messageText:)])
     {
-        [self.delegate openMessageComposer:nil messageText:INVITE_TEXT];
+        
+        CGPoint center= sender.center;
+        CGPoint rootViewPoint = [sender.superview convertPoint:center toView:self.friendsListTableView];
+        NSIndexPath *indexPath = [self.friendsListTableView indexPathForRowAtPoint:rootViewPoint];
+        
+        NSString* currentAlphaBets = [alphabetsSectionTitles objectAtIndex:indexPath.section];
+        
+        User* usSelection =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
+        sender.selected = YES;
+        [sender setImage:[UIImage imageNamed:@"selected-invite"] forState:UIControlStateSelected];
+        
+        NSString *loginID = [NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].login_id];
+        
+        NSString *inviteString = [NSString stringWithFormat:INVITE_TEXT,loginID];
+        
+        [self.delegate openMessageComposer:@[usSelection.mobile] messageText:inviteString];
+        
+        
+        
+        
+//        if (self.enableSectionTitles)
+//        {
+//            
+//
+//        }
+//        else
+//        {
+//            UIButton* btn =(UIButton*)sender;
+//            NSInteger indexValue = btn.tag - InviteTagValue ;
+//            
+//            User  *us = (User*)[self.friendsArray objectAtIndex:indexValue];
+//            
+//            if (us.mobile == nil)
+//            {
+//                [self.delegate openMessageComposer:nil messageText:INVITE_TEXT];
+//
+//            }
+//            else
+//            {
+//                [self.delegate openMessageComposer:@[us.mobile] messageText:INVITE_TEXT];
+//
+//            }
+//            
+//            
+//        }
+        
+        
+        
     }
 }
 
@@ -251,16 +460,20 @@
     
 }
 
--(void)doSelectedAction:(id)obj{
-    if ([self.selectedActionName isEqualToString:[Selected_Action objectAtIndex:0]]) {
+-(void)doSelectedAction:(id)obj
+{
+    if ([self.selectedActionName isEqualToString:[Selected_Action objectAtIndex:0]])
+    {
         //Do Add to Group
         [self addToGroup:obj];
-    }else if([self.selectedActionName isEqualToString:[Selected_Action objectAtIndex:1]])
+    }
+    else if([self.selectedActionName isEqualToString:[Selected_Action objectAtIndex:1]])
     {
         //Do Add to Friends
         [self addToFriends:obj];
     }
-    else{
+    else
+    {
         [self addToItems:obj];
     }
 }
@@ -273,7 +486,8 @@
     }
 }
 
--(void)addToGroup:(id)usObject{ 
+-(void)addToGroup:(id)usObject
+{
     if (self.delegate && [self.delegate respondsToSelector:@selector(selectedRow:param:)])
     {
         if ([usObject isKindOfClass:[FriendSearchResult class]]) {
@@ -336,13 +550,21 @@
     
     //initialize the models
     self.friendsArray  = [UserFriends arrayOfModelsFromDictionaries:response[@"data"]];
-    if (self.enableSectionTitles) {
+  //  if (self.enableSectionTitles)
+  //  {
         NSMutableArray* phoneContact = [self getPhoneContact];
-        if (phoneContact != nil) {
+    
+        if (phoneContact != nil)
+        {
             [self.friendsArray addObjectsFromArray:phoneContact];
         }
+        
         [self setSectionAlphbets:self.friendsArray];
-    }
+   // }
+    
+    saveContactList = [[NSMutableArray alloc] init];
+    saveContactList = _friendsArray;
+    
     [self.friendsListTableView reloadData];
 }
 
@@ -352,37 +574,51 @@
         return;
     }
     self.friendsArray  = list;
-    if (self.enableSectionTitles) {
+  //  if (self.enableSectionTitles) {
         [self setSectionAlphbets:self.friendsArray];
-    }
+  //  }
     [self.friendsListTableView reloadData];
 }
 
--(void)setSectionAlphbets:(NSMutableArray*)resultArray{
+-(void)setSectionAlphbets:(NSMutableArray*)resultArray
+{
 
     NSMutableSet *set = [NSMutableSet set];
     
     for (UserFriends * ufs in self.friendsArray)
     {
         NSString* str = ufs.first_name;
-        if (str.length > 0){
-            if (![set containsObject:[str substringToIndex:1]]){
+        
+        if (str.length > 0)
+        {
+            if (![set containsObject:[str substringToIndex:1]])
+            {
                 NSString* alph = [[str substringToIndex:1] uppercaseString];
-                NSPredicate *pred =[NSPredicate predicateWithFormat:@"first_name beginswith[c] %@", alph];
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"first_name beginswith[c] %@", alph];
                 NSArray *filteredArr = [self.friendsArray filteredArrayUsingPredicate:pred];
+            
                 if(friendsDictWithAlpabets == nil)
                 {
                     friendsDictWithAlpabets = [[NSMutableDictionary alloc] init];
                 }
+                
                 [friendsDictWithAlpabets setObject:filteredArr forKey:alph];
             }
+            
             [set addObject:[str substringToIndex:1]];
         }
     }
-    if (alphabetsSectionTitles == nil) {
+    
+    saveFriendsDictWithAlpabets = friendsDictWithAlpabets;
+    
+    if (alphabetsSectionTitles == nil)
+    {
         alphabetsSectionTitles = [[NSMutableArray alloc] init];
     }
+    
     alphabetsSectionTitles = [[friendsDictWithAlpabets allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
+    saveAlphabetsSectionTitles = alphabetsSectionTitles;
 }
 
 #pragma mark Adddressbook
@@ -452,13 +688,14 @@
         //For Phone number
         NSString* mobileLabel;
         
-        for(CFIndex j = 0; j < ABMultiValueGetCount(phones); j++) {
+        for(CFIndex j = 0; j < ABMultiValueGetCount(phones); j++)
+        {
             mobileLabel = (__bridge NSString*)ABMultiValueCopyLabelAtIndex(phones, j);
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
             {
                 [contactNumber addObject:[self removeSpecialChara:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, j)]];
                 userObj.mobile = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, j);
-//                [dOfPerson setObject:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, j) forKey:@"mobile"];
+         //       [dOfPerson setObject:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, j) forKey:@"mobile"];
             }
             else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
             {

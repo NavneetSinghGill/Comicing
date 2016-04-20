@@ -30,12 +30,12 @@ ComicMakingViewControllerDelegate>
 @property (nonatomic) NSInteger newSlideIndex;
 
 @property (nonatomic) NSInteger totalSlide;
-
 @end
 
 @implementation GlideViewController
 
-@synthesize transition,clvGlide,selectedIndexPath, allComicPages,editSlideIndex,newSlideIndex,totalSlide;
+@synthesize transition,clvGlide,selectedIndexPath, allComicPages,editSlideIndex,newSlideIndex,totalSlide,isComeFromGroupPage,isComeFromFriendPage,groupOrFriendID;
+
 
 #pragma mark - UIViewController Methods
 - (void)viewDidLoad
@@ -54,9 +54,24 @@ ComicMakingViewControllerDelegate>
     transition = [[ZoomInteractiveTransition alloc] initWithNavigationController:self.navigationController];
     
     allComicPages = [[NSMutableArray alloc] init];
-    
-    allComicPages = [AppHelper getDataFromFile:@"ComicSlide"]; //[[[NSUserDefaults standardUserDefaults] objectForKey:@"comicPages"] mutableCopy];
-    
+        //   Friends Reply Comic - > @"comicSlides_Friends_Reply_{FriendId}”
+    //   Group Reply Comic - > @"comicSlides_Group_Reply_{GroupId}”
+    if (isComeFromGroupPage)
+    {
+        NSString *groupKey = [NSString stringWithFormat:@"comicSlides_Group_Reply_{%@}",groupOrFriendID];
+        
+        allComicPages = [[[NSUserDefaults standardUserDefaults] objectForKey:groupKey] mutableCopy];
+    }
+    else if (isComeFromFriendPage)
+    {
+        NSString *friendKey = [NSString stringWithFormat:@"comicSlides_Group_Reply_{%@}",groupOrFriendID];
+        
+        allComicPages = [[[NSUserDefaults standardUserDefaults] objectForKey:friendKey] mutableCopy];
+    }
+    else
+    {
+         allComicPages = [[[NSUserDefaults standardUserDefaults] objectForKey:@"comicPages"] mutableCopy];
+    }
     totalSlide = allComicPages.count + 1;
     
 //    if (allComicPages.count == 0)

@@ -28,6 +28,8 @@
 #import "UserDetail.h"
 #import "Slides.h"
 #import "GroupCell.h"
+#import "GlideScrollViewController.h"
+
 
 @interface MainPageGroupViewController ()
 <UITableViewDataSource,
@@ -363,7 +365,17 @@ UICollectionViewDelegate>
      {
          viewPen.layer.transform = CATransform3DIdentity;
      }
-                     completion:nil];
+                     completion:^(BOOL finished) {
+                         
+//                         //send to main page
+//                         
+//                         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
+//                         GlideScrollViewController *controller = (GlideScrollViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"glidenavigation"];
+//                         controller.
+//                         
+//                         [self presentViewController:controller animated:YES completion:nil];
+                         
+                     }];
 }
 
 #pragma mark - BookChangeDelegate Methods

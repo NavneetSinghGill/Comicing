@@ -1,4 +1,3 @@
-
 //  AppHelper.m
 //  ComicApp
 //
@@ -124,27 +123,47 @@ static AppHelper *_appHelper = nil;
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:emailText];
 }
-+(UIImage*)getImageFile:(NSString*)fileName{
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
-    UIImage* imgFinal = [UIImage imageWithContentsOfFile:filePath];
-    
-    return imgFinal;
-}
-///Just harded value
-+ (BOOL)IsNetworkAvailable{
-    Reachability* reachability = [Reachability  reachabilityForInternetConnection];
-    [reachability startNotifier];
-    BOOL inetReachable = ![reachability currentReachabilityStatus] == NotReachable;
-    [reachability stopNotifier];
-    
-    reachability = nil;
-    return inetReachable;
-}
+//+(UIImage*)getImageFile:(NSString*)fileName{
+//    
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+//    UIImage* imgFinal = [UIImage imageWithContentsOfFile:filePath];
+//    
+//    return imgFinal;
+//}
+/////Just harded value
+//+ (BOOL)IsNetworkAvailable{
+//    Reachability* reachability = [Reachability  reachabilityForInternetConnection];
+//    [reachability startNotifier];
+//    BOOL inetReachable = ![reachability currentReachabilityStatus] == NotReachable;
+//    [reachability stopNotifier];
+//    
+//    reachability = nil;
+//    return inetReachable;
+//}
 
 #pragma mark DropDown Messsage
+
+//+(NSString*)getDeviceToken{
+//    if([[NSUserDefaults standardUserDefaults] objectForKey:@"deivetoken"])
+//        return [[NSUserDefaults standardUserDefaults] objectForKey:@"deivetoken"];
+//    
+//    return @"";
+//}
+//+(void)setDeviceToken:(NSString*)deviceToken{
+//    [[NSUserDefaults standardUserDefaults] setValue:deviceToken forKey:@"deivetoken"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//+(NSString*)getDeviceId{
+//    return @"1";
+//}
+//+(NSString*)getDeviceCountry{
+//    NSLocale *countryLocale = [NSLocale currentLocale];
+//    NSString *countryCode = [countryLocale objectForKey:NSLocaleCountryCode];
+//    NSString *country = [countryLocale displayNameForKey:NSLocaleCountryCode value:countryCode];
+//    return country;
+//}
 
 +(NSString*)MD5encryption:(NSString*)stringValue{
     // Create pointer to the string as UTF8
@@ -231,6 +250,27 @@ static AppHelper *_appHelper = nil;
     NSString *country = [countryLocale displayNameForKey:NSLocaleCountryCode value:countryCode];
     return country;
 }
+
++(UIImage*)getImageFile:(NSString*)fileName{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    UIImage* imgFinal = [UIImage imageWithContentsOfFile:filePath];
+    
+    return imgFinal;
+}
+///Just harded value
++ (BOOL)IsNetworkAvailable{
+    Reachability* reachability = [Reachability  reachabilityForInternetConnection];
+    [reachability startNotifier];
+    BOOL inetReachable = ![reachability currentReachabilityStatus] == NotReachable;
+    [reachability stopNotifier];
+    
+    reachability = nil;
+    return inetReachable;
+}
+
 +(void)setCurrentcomicId:(NSString*)comicId{
     [[NSUserDefaults standardUserDefaults] setValue:comicId forKey:@"CurrentcomicId"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -253,6 +293,7 @@ static AppHelper *_appHelper = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 //    [self getCurrentUser];
 }
+
 -(CurrentUser*)getCurrentUser{
     if([[NSUserDefaults standardUserDefaults] objectForKey:@"currentUser"])
     {
@@ -269,6 +310,7 @@ static AppHelper *_appHelper = nil;
     }
     return nil;
 }
+
 +(NSString*)getCurrentUserEmail{
     if([[NSUserDefaults standardUserDefaults] objectForKey:@"emailId"])
         return [[NSUserDefaults standardUserDefaults] objectForKey:@"emailId"];
@@ -366,7 +408,8 @@ static AppHelper *_appHelper = nil;
 
 #pragma mark showHUDLoader
 
-+ (void)showHUDLoader:(BOOL)show{
++ (void)showHUDLoader:(BOOL)show
+{
     if (HUD == nil) {
         HUD = [[MBProgressHUD alloc]initWithWindow:[[[UIApplication sharedApplication] delegate] window]];
     }

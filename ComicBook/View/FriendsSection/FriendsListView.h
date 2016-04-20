@@ -19,18 +19,33 @@
 -(void)selectedRow:(id)object;
 -(void)selectedRow:(id)object param:(id)objectList;
 -(void)openMessageComposer:(NSArray*)sendNumbers messageText:(NSString*)messageTextValue;
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
+                     withVelocity:(CGPoint)velocity
+              targetContentOffset:(inout CGPoint *)targetContentOffset;
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+
 @end
 
 @interface FriendsListView : UIView<UITableViewDataSource,UITableViewDelegate,ComicNetworkingDelegate>
 {
 //    NSMutableArray* friendsArray;
     NSArray *alphabetsSectionTitles;
+    NSArray *saveAlphabetsSectionTitles;
+
     NSArray* groupMembersList;
     NSMutableDictionary* friendsDictWithAlpabets;
     
     NSMutableArray* contactList;
     NSMutableArray* contactNumber;
     NSArray* temContactList;
+    NSMutableArray *searchArray;
+    NSMutableArray *saveContactList;
+    NSMutableArray *selectedFriends;
+    
+    
+    NSMutableDictionary *searchUsers;
+    NSMutableDictionary *saveFriendsDictWithAlpabets;
 }
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet UITableView *friendsListTableView;
@@ -45,7 +60,14 @@
 @property (weak, nonatomic) IBOutlet UIView *tableHolderView;
 
 
+@property (nonatomic) BOOL isOnlyInviteFriends;
+
+
 -(void)getFriendsByUserId;
 -(void)searchFriendsById:(NSMutableArray*)list;
 -(void)getFriendsByUserId:(NSArray*)groupMembers;
+
+- (void)searchFriendByString:(NSString *)searchString;
+- (void)reloadAllData;
+
 @end

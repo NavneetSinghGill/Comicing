@@ -4,9 +4,7 @@
 //
 
 /* API Calles */
-
 #define SERVER_URL @"http://68.169.44.163/"
-//#define SERVER_URL @"http://162.244.67.15/"
 #define BASE_URL [SERVER_URL stringByAppendingFormat:@"api/"]
 
 #define USER_BY_LOGINID  [BASE_URL stringByAppendingFormat:@"users/id/"]
@@ -30,7 +28,11 @@
 #define IMAGE_UPLOADER @"imageUploader.php"
 /* */
 
-#define INVITE_TEXT @"Please join with us!"
+#define COUNTRIES_ALL  [BASE_URL stringByAppendingFormat:@"countries"]
+/* */
+
+#define INVITE_TEXT @"Add me to Comicing  Username:%@ www.AreYouComicing.com"
+
 #define ImagePlaceHolder_COLOUR @[@"ffffff",@"ff3300",@"3399ff",@"ffcc33",@"33cc66",@"9966cc",@"ff3366",@"99cc00",@"3333cc",@"996633",@"000000"]
 
 /*  */

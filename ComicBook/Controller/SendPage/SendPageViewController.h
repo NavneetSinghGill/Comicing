@@ -14,8 +14,9 @@
 #import "ShareHelper.h"
 #import "ComicShareView.h"
 #import "UIImage+resize.h"
+#import "InviteFriendsView.h"
 
-@interface SendPageViewController : UIViewController<ComicNetworkingDelegate,GroupDelegate,FriendListDelegate>
+@interface SendPageViewController : UIViewController<ComicNetworkingDelegate,GroupDelegate,FriendListDelegate,InviteFriendsViewDelegate,MFMessageComposeViewControllerDelegate>
 {
     NSMutableArray* shareGroupsArray;
     NSMutableArray* shareFriendsArray;
@@ -28,6 +29,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblGroup;
 @property (weak, nonatomic) IBOutlet GroupsSection *groupsView;
 @property (weak, nonatomic) IBOutlet UILabel *lblFriends;
+@property (weak, nonatomic) IBOutlet UIView *viewShare;
+@property (weak, nonatomic) IBOutlet UIView *viewPublic;
+@property (weak, nonatomic) IBOutlet UIView *viewSearch;
+@property (weak, nonatomic) IBOutlet UIView *viewPrivateTop;
+
+@property (weak, nonatomic) IBOutlet InviteFriendsView *viewInvite;
+@property (weak, nonatomic) IBOutlet UIView *viewInviteSuper;
 
 //@property (weak, nonatomic) NSString HeaderView *headerView;
 

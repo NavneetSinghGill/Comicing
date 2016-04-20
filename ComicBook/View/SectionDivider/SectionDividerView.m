@@ -37,7 +37,7 @@
 //    viewRect.size.width = [[UIScreen mainScreen] bounds].size.width;
 //    self.view.frame = viewRect;
     
-    [self.view setBackgroundColor:[UIColor colorWithHexStr:@"29abe2"]];
+    [self.view setBackgroundColor:[UIColor colorWithHexStr:@"B4E4F5"]];
 }
 
 
