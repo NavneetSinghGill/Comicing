@@ -46,6 +46,24 @@
     return [UIColor colorWithRed:0/255.0f green:148.0/255.0f blue:68/255.0f alpha:1];
 }
 
++ (UIColor *)drawingColorPink
+{
+    return [UIColor colorWithRed:0.93 green:0.50 blue:0.49 alpha:1.00];
+}
++ (UIColor *)drawingColorCyan
+{
+    return [UIColor colorWithRed:0.50 green:0.82 blue:0.91 alpha:1.00];
+}
++ (UIColor *)drawingColorPurple
+{
+    return [UIColor colorWithRed:0.52 green:0.37 blue:0.64 alpha:1.00];
+}
++ (UIColor *)drawingColorOrange
+{
+    return [UIColor colorWithRed:0.95 green:0.42 blue:0.22 alpha:1.00];
+}
+
+
 + (UIColor *)pinkColor
 {
     return [UIColor colorWithRed:0.85 green:0.11 blue:0.36 alpha:1];
@@ -59,4 +77,9 @@
 {
     return [UIColor colorWithRed:0.94 green:0.93 blue:0.39 alpha:1];
 }
+
+
+
+
+
 @end

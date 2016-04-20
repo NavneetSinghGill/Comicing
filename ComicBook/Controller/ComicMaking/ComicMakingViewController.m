@@ -86,7 +86,7 @@ static CGRect CaptionTextViewMinRect;
 
 @property (weak, nonatomic) IBOutlet UIView *viewBlackBoard;
 @property CGRect frameBlackboardView;
-
+@property (strong, nonatomic) UIPinchGestureRecognizer *pinchGesture;
 
 @property (strong, nonatomic) UIImage *printScreen;
 
@@ -141,7 +141,7 @@ static CGRect CaptionTextViewMinRect;
 
 @synthesize viewCameraPreview, viewCamera, imgvComic, uploadIcon, viewStickerList, viewRowButtons;
 @synthesize drawingColor,viewDrawing,frameDrawingView, drawView, centerImgvComic,lastScale, btnClose,bubbleListView,exclamationListView,shrinkHeight,viewFrame, shrinkCount, previousTimestamp, isNewSlide,viewBlackBoard,frameBlackboardView;
-@synthesize comicPage,printScreen, isSlideShrink,frameImgvComic;
+@synthesize comicPage,printScreen, isSlideShrink,frameImgvComic,pinchGesture;
 
 #pragma mark - UIViewController Methods
 - (void)viewDidLoad
@@ -229,6 +229,13 @@ static CGRect CaptionTextViewMinRect;
     }];
     
     [self.rowButton viewDidLoad];
+}
+
+- (void)addPinchGesture
+{
+    pinchGesture = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchDone:)];
+    viewCameraPreview.userInteractionEnabled = YES;
+    [viewCameraPreview addGestureRecognizer:pinchGesture];
 }
 
 -(void)prepareForSlide{
@@ -427,10 +434,12 @@ static CGRect CaptionTextViewMinRect;
     
 }
 //End
-
 - (void)prepareCameraView
 {
     // Create the AVCaptureSession
+    
+    [self addPinchGesture];
+    
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
     [self setSession:session];
     
@@ -724,6 +733,38 @@ static CGRect CaptionTextViewMinRect;
 
 
 #pragma mark - Camera UI
+- (IBAction)pinchDone:(UIPinchGestureRecognizer *)gestureRecognizer
+{
+    if([gestureRecognizer state] == UIGestureRecognizerStateBegan)
+    {
+        // Reset the last scale, necessary if there are multiple objects with different scales
+        lastScale = [gestureRecognizer scale];
+    }
+    
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan ||
+        
+        [gestureRecognizer state] == UIGestureRecognizerStateChanged)
+    {
+        
+        CGFloat currentScale = [[[gestureRecognizer view].layer valueForKeyPath:@"transform.scale"] floatValue];
+        
+        // Constants to adjust the max/min values of zoom
+        const CGFloat kMaxScale = 2.0;
+        const CGFloat kMinScale = 1.0;
+        
+        CGFloat newScale = 1 -  (lastScale - [gestureRecognizer scale]);
+        
+        newScale = MIN(newScale, kMaxScale / currentScale);
+        newScale = MAX(newScale, kMinScale / currentScale);
+        
+        CGAffineTransform transform = CGAffineTransformScale([[gestureRecognizer view] transform], newScale, newScale);
+        
+        [gestureRecognizer view].transform = transform;
+        
+        lastScale = [gestureRecognizer scale];  // Store the previous scale factor for the next pinch gesture call
+    }
+}
+
 - (void)runStillImageCaptureAnimation
 {
     dispatch_async(dispatch_get_main_queue(), ^
@@ -773,24 +814,105 @@ static CGRect CaptionTextViewMinRect;
     
     [alertView addButtonWithTitle:@"OK" style:JTAlertViewStyleDestructive action:^(JTAlertView *alertView)
      {
-         RowButtonsViewController *rowButtonsController;
+         [alertView hideWithCompletion:^{
+             
+             CABasicAnimation *rotate =
+             [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+             rotate.byValue = @(M_PI); // Change to - angle for counter clockwise rotation
+             rotate.duration = 0.5;
+             
+             [btnClose.layer addAnimation:rotate
+                                   forKey:@"myRotationAnimation"];
+             
+             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                 [self closeCamera];
+                 
+                 RowButtonsViewController *rowButtonsController;
+                 
+                 for (UIViewController *controller in self.childViewControllers)
+                 {
+                     if ([controller isKindOfClass:[RowButtonsViewController class]])
+                     {
+                         rowButtonsController = (RowButtonsViewController *)controller;
+                     }
+                 }
+                 
+                 rowButtonsController.btnCamera.selected = NO;
+                 
+                 [rowButtonsController allButtonsFadeOut:rowButtonsController.btnCamera];
+                 
+                 
+                 [self doRemoveAllItem:nil];
+             });
+             
+             
+             
+             //             imgvComic.hidden=NO;
+             //             [UIView transitionWithView:btnClose
+             //                               duration:0.5
+             //                                options:UIViewAnimationOptionTransitionFlipFromTop
+             //                             animations:^{
+             //
+             //                             } completion:^(BOOL finished) {
+             //                                 [self closeCamera];
+             //
+             //                                 RowButtonsViewController *rowButtonsController;
+             //
+             //                                 for (UIViewController *controller in self.childViewControllers)
+             //                                 {
+             //                                     if ([controller isKindOfClass:[RowButtonsViewController class]])
+             //                                     {
+             //                                         rowButtonsController = (RowButtonsViewController *)controller;
+             //                                     }
+             //                                 }
+             //
+             //                                 rowButtonsController.btnCamera.selected = NO;
+             //
+             //                                 [rowButtonsController allButtonsFadeOut:rowButtonsController.btnCamera];
+             //
+             //
+             //                                 [self doRemoveAllItem:nil];
+             //                             }];
+             //
+             
+             
+             //             viewCamera.hidden=YES;
+             //             [UIView transitionWithView:viewCamera
+             //                               duration:0.5
+             //                                options:UIViewAnimationOptionTransitionFlipFromLeft
+             //                             animations:^{
+             //                                 viewCamera.hidden=NO;
+             //                             } completion:^(BOOL finished) {
+             //                                 [self closeCamera];
+             //
+             //                                 RowButtonsViewController *rowButtonsController;
+             //
+             //                                 for (UIViewController *controller in self.childViewControllers)
+             //                                 {
+             //                                     if ([controller isKindOfClass:[RowButtonsViewController class]])
+             //                                     {
+             //                                         rowButtonsController = (RowButtonsViewController *)controller;
+             //                                     }
+             //                                 }
+             //
+             //                                 rowButtonsController.btnCamera.selected = NO;
+             //                                 
+             //                                 [rowButtonsController allButtonsFadeOut:rowButtonsController.btnCamera];
+             //                                 
+             //                                 
+             //                                 [self doRemoveAllItem:nil];
+             //                             }];
+             
+             
+             
+             
+             
+             
+             
+         } animated:NO];
          
-         for (UIViewController *controller in self.childViewControllers)
-         {
-             if ([controller isKindOfClass:[RowButtonsViewController class]])
-             {
-                 rowButtonsController = (RowButtonsViewController *)controller;
-             }
-         }
          
-         rowButtonsController.btnCamera.selected = NO;
          
-         [rowButtonsController allButtonsFadeOut:rowButtonsController.btnCamera];
-         
-         [self closeCamera];
-         [self doRemoveAllItem:nil];
-         
-         [alertView hide];
      }];
     
     [alertView show];
@@ -870,7 +992,7 @@ static CGRect CaptionTextViewMinRect;
 - (void)btnCameraTap:(UIButton *)sender
 {
     
-    #if TARGET_OS_SIMULATOR
+#if TARGET_OS_SIMULATOR
     NSLog(@"camera tap");
     viewCamera.hidden = YES;
     [imgvComic setImage:[UIImage imageNamed:@"cat-demo"]];
@@ -879,12 +1001,12 @@ static CGRect CaptionTextViewMinRect;
     btnClose.hidden = NO;
     [self setComicImageViewSize];
     [self doAutoSave:nil];
-//
-    #else
+    
+#else
     dispatch_async([self sessionQueue], ^{
         // Update the orientation on the still image output video connection before capturing.
         [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[viewCameraPreview layer] connection] videoOrientation]];
-
+        
         // Flash set to Auto for Still Capture
         [ComicMakingViewController setFlashMode:AVCaptureFlashModeAuto forDevice:[[self videoDeviceInput] device]];
         
@@ -898,19 +1020,31 @@ static CGRect CaptionTextViewMinRect;
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                 
                 UIImage *image = [[UIImage alloc] initWithData:imageData];
-//                  UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-                imgvComic.image = image;
+                
+                CGRect cropRects = [imgvComic convertRect:imgvComic.frame toView:viewCameraPreview];
+                
+                CGFloat factor = (image.size.width * image.scale) / CGRectGetWidth(self.view.frame);
+                
+                cropRects.origin.x *= factor;
+                cropRects.origin.y *= factor;
+                
+                cropRects.size.width  *= factor;
+                cropRects.size.height *= factor;
+                
+                UIImage *cropedImage = [image cropedImagewithCropRect:cropRects];
+                
+                imgvComic.image = cropedImage;
                 imgvComic.hidden = NO;
-
+                
                 GlobalObject.isTakePhoto = YES;
-
+                
                 btnClose.hidden = NO;
                 [self setComicImageViewSize];
                 [self doAutoSave:nil];
             }
         }];
     });
-    #endif
+#endif
 }
 
 - (void)setComicImageViewSize
@@ -1375,7 +1509,9 @@ static CGRect CaptionTextViewMinRect;
     
     //Adding bubble Text
 //    bubbleHolderView.txtBuble = [[UITextView alloc] initWithFrame:CGRectMake(0, 20, bubbleImage.size.width - 20, bubbleImage.size.height - 20)];
-        bubbleHolderView.txtBuble = [[UITextView alloc] initWithFrame:textViewSize];
+    bubbleHolderView.txtBuble = [[UITextView alloc] initWithFrame:textViewSize];
+    //adnan
+    bubbleHolderView.txtBuble.textAlignment = NSTextAlignmentCenter;
     //End bubble Text
     
     //Add Bubble audio
@@ -2232,6 +2368,30 @@ static CGRect CaptionTextViewMinRect;
         
         drawView.lineColor = [UIColor drawingColorGreen];
     }
+    else if ([colorName isEqualToString:@"pink"])
+    {
+        [rowController.btnPen setImage:[UIImage imageNamed:@"pen-icon-pink"] forState:UIControlStateSelected];
+        
+        drawView.lineColor = [UIColor drawingColorPink];
+    }
+    else if ([colorName isEqualToString:@"purple"])
+    {
+        [rowController.btnPen setImage:[UIImage imageNamed:@"pen-icon-purple"] forState:UIControlStateSelected];
+        
+        drawView.lineColor = [UIColor drawingColorPurple];
+    }
+    else if ([colorName isEqualToString:@"orange"])
+    {
+        [rowController.btnPen setImage:[UIImage imageNamed:@"pen-icon-orange"] forState:UIControlStateSelected];
+        
+        drawView.lineColor = [UIColor drawingColorOrange];
+    }
+    else if ([colorName isEqualToString:@"cyan"])
+    {
+        [rowController.btnPen setImage:[UIImage imageNamed:@"pen-icon-cyan"] forState:UIControlStateSelected];
+        
+        drawView.lineColor = [UIColor drawingColorCyan];
+    }
 }
 
 #pragma mark - ACEDrawingViewDelegate Methods
@@ -2279,42 +2439,103 @@ static CGRect CaptionTextViewMinRect;
     
     ComicItemCaption* captionHolder = [self getComicItems:ComicCaption];
     
-//    UIView* captionHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 111, 301, 60)];
-    captionHolder.frame = IS_IPHONE_5?CGRectMake(10, 111, 301, 60):CGRectMake(10, 111, 367, 60);
-//    captionHolder.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    CGRect frameCaptionHolder;
+    CGRect frameBGImageView;
+    CGRect frameTxtCaption;
+    CGRect framePlusButton;
+    
+    CGFloat fontsize;
+    
+    if (IS_IPHONE_5)
+    {
+        frameCaptionHolder = CGRectMake(10, 111, 310, 60);
+        frameBGImageView = CGRectMake(0, 0, 300, 33);
+        frameTxtCaption = CGRectMake(0, -2, 270, 30);
+        framePlusButton = CGRectMake(265, -4, 30, 30);
+        fontsize = 17;
+        
+    }
+    else if (IS_IPHONE_6)
+    {
+        frameCaptionHolder = CGRectMake(10, 111, 367, 60);
+        frameBGImageView = CGRectMake(0, 0, 345, 40);
+        frameTxtCaption = CGRectMake(0, -2, 320, 35);
+        framePlusButton = CGRectMake(310, 2, 30, 30);
+        
+        fontsize = 20;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        frameCaptionHolder = CGRectMake(10, 111, 410, 60);
+        frameBGImageView = CGRectMake(0, 0, 380, 40);
+        frameTxtCaption = CGRectMake(0, -2, 340, 35);
+        framePlusButton = CGRectMake(340, 2, 30, 30);
+        
+        fontsize = 22;
+    }
+    else
+    {
+        frameCaptionHolder = CGRectMake(10, 111, 301, 60);
+        frameBGImageView = CGRectMake(0, 0, 280, 33);
+        frameTxtCaption = CGRectMake(0, -2, 270, 30);
+        framePlusButton = CGRectMake(272, 2, 30, 30);
+        
+        fontsize = 18;
+    }
+    
+    //    UIView* captionHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 111, 301, 60)];
+    //    captionHolder.frame = IS_IPHONE_5?CGRectMake(10, 111, 301, 60):CGRectMake(10, 111, 367, 60);
+    captionHolder.frame = frameCaptionHolder;
+    
+    
+    //    captionHolder.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [captionHolder setBackgroundColor:[UIColor clearColor]];
     [captionHolder setDraggable:YES];
     captionHolder.tag = 1232;
     captionHolder.userInteractionEnabled = YES;
     
     //Create Caption BG View
-    captionHolder.bgImageView = [[UIImageView alloc] initWithFrame:IS_IPHONE_5?CGRectMake(0, 0, 280, 33):CGRectMake(0, 0, 345, 40)];
+    //    captionHolder.bgImageView = [[UIImageView alloc] initWithFrame:IS_IPHONE_5?CGRectMake(0, 0, 280, 33):CGRectMake(0, 0, 345, 40)];
+    
+    captionHolder.bgImageView = [[UIImageView alloc] initWithFrame:frameBGImageView];
+    
     captionHolder.bgImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth;
     [captionHolder setBackgroundColor:[UIColor clearColor]];
     [captionHolder.bgImageView setImage:[UIImage imageNamed:@"CaptionBgImage"]];
     captionHolder.bgImageView.tag = 1234;
     
     //Create TextView
-    captionHolder.txtCaption = [[UITextView alloc] initWithFrame:IS_IPHONE_5?CGRectMake(0, -2, 270, 30) :CGRectMake(0, -2, 300, 35) ];
-//    captionHolder.txtCaption = [[CaptionTextField alloc] initWithFrame:IS_IPHONE_5?CGRectMake(0, 0, 270, 30) :CGRectMake(0, -2, 280, 35) ];
-//    captionHolder.txtCaption.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth;
-    captionHolder.txtCaption.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:22];
-//    captionHolder.txtCaption.delegate = self;
+    //   captionHolder.txtCaption = [[UITextView alloc] initWithFrame:IS_IPHONE_5?CGRectMake(0, -2, 270, 30) :CGRectMake(0, -2, 300, 35) ];
+    
+    captionHolder.txtCaption = [[UITextView alloc] initWithFrame:frameTxtCaption];
+    
+    //    captionHolder.txtCaption = [[CaptionTextField alloc] initWithFrame:IS_IPHONE_5?CGRectMake(0, 0, 270, 30) :CGRectMake(0, -2, 280, 35) ];
+    //    captionHolder.txtCaption.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth;
+    
+    
+    
+    captionHolder.txtCaption.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:fontsize];
+    //    captionHolder.txtCaption.delegate = self;
     [captionHolder.txtCaption setBackgroundColor:[UIColor clearColor]];
     captionHolder.txtCaption.textAlignment = NSTextAlignmentCenter;
     [captionHolder.txtCaption becomeFirstResponder];
     captionHolder.txtCaption.text = @"";
     captionHolder.txtCaption.textColor = [UIColor whiteColor];
     captionHolder.txtCaption.tag = CaptionViewTextViewTag;
-//    [captionHolder addSubview:captionHolder.txtCaption];
+    captionHolder.txtCaption.tintColor = [UIColor whiteColor];
+    //    [captionHolder addSubview:captionHolder.txtCaption];
     
     //Create + Button
-    captionHolder.plusButton = [[UIButton alloc] initWithFrame:IS_IPHONE_5?CGRectMake(249, 2, 30, 30):CGRectMake(300, 2, 30, 30)];
-    captionHolder.plusButton.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth;
+    //  captionHolder.plusButton = [[UIButton alloc] initWithFrame:IS_IPHONE_5?CGRectMake(249, 2, 30, 30):CGRectMake(300, 2, 30, 30)];
+    
+    captionHolder.plusButton = [[UIButton alloc] initWithFrame:framePlusButton];
+    
+    
+    //  captionHolder.plusButton.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth;
     [captionHolder.plusButton setImage:[UIImage imageNamed:@"addColour"] forState:UIControlStateNormal];
     [captionHolder.plusButton addTarget:self action:@selector(colourListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     captionHolder.plusButton.tag = 1235;
-//    [captionHolder addSubview:captionHolder.plusButton];
+    //    [captionHolder addSubview:captionHolder.plusButton];
     
     //Create Dots Holder
     captionHolder.dotHolder = [[UIView alloc] initWithFrame:CGRectMake(19, 34, 239, 26)];
@@ -2454,15 +2675,22 @@ static CGRect CaptionTextViewMinRect;
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
-    if (textView.tag == CaptionViewTextViewTag) {
-        int limit = 48;
+    if (textView.tag == CaptionViewTextViewTag)
+    {
+        int limit = 60;
         
-        if (textView.text.length == 24) {
+        //  NSUInteger newLength = (textView.text.length - range.length) + text.length;
+        
+        NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+        
+        if (textView.text.length == 29)
+        {
+            textView.text = [[NSString alloc] initWithFormat:@"%@\n",newString];
+            [textView becomeFirstResponder];
             [self handleCaptionHeight:textView];
         }
         
-        if([text isEqualToString:@"\n"]) {
-            [self doPrintScreen];
+        if([text isEqualToString:@"\n"] && textView.text.length != 29) {
             [textView resignFirstResponder];
             return NO;
         }
@@ -2473,27 +2701,28 @@ static CGRect CaptionTextViewMinRect;
                                              target:self selector:@selector(colourListButtonClick:) userInfo:nil repeats:NO];
         }
         
-        [self doPrintScreen];
         return !([textView.text length]>= limit && [text length] >= range.length);
         
-    }else{
+    }
+    else
+    {
         //disable Long presss
-        for (UIGestureRecognizer *recognizer in textView.gestureRecognizers) {
+        for (UIGestureRecognizer *recognizer in textView.gestureRecognizers)
+        {
             if ([recognizer isKindOfClass:[UILongPressGestureRecognizer class]]){
                 recognizer.enabled = NO;
             }
         }
         [self handleBubbleText:textView];
         if([text isEqualToString:@"\n"]) {
-            [self doPrintScreen];
             [textView resignFirstResponder];
             return NO;
         }
         
         int limit = 30;
-        [self doPrintScreen];
         return !([textView.text length]>= limit && [text length] >= range.length);
     }
+    
     return YES;
 }
 
@@ -2836,7 +3065,53 @@ static CGRect CaptionTextViewMinRect;
     
     [captionHolder addSubview:captionHolder.bgImageView];
 
-    captionHolder.txtCaption.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:IS_IPHONE_5?18:22];
+    
+    CGRect frameCaptionHolder;
+    CGRect frameBGImageView;
+    CGRect frameTxtCaption;
+    CGRect framePlusButton;
+    
+    CGFloat fontsize;
+    
+    if (IS_IPHONE_5)
+    {
+        frameCaptionHolder = CGRectMake(10, 111, 310, 60);
+        frameBGImageView = CGRectMake(0, 0, 300, 33);
+        frameTxtCaption = CGRectMake(0, -2, 270, 30);
+        framePlusButton = CGRectMake(265, 0, 30, 30);
+        fontsize = 17;
+    }
+    else if (IS_IPHONE_6)
+    {
+        frameCaptionHolder = CGRectMake(10, 111, 367, 60);
+        frameBGImageView = CGRectMake(0, 0, 345, 40);
+        frameTxtCaption = CGRectMake(0, -2, 320, 35);
+        framePlusButton = CGRectMake(310, 2, 30, 30);
+        
+        fontsize = 20;
+        
+    }
+    else if (IS_IPHONE_6P)
+    {
+        frameCaptionHolder = CGRectMake(10, 111, 410, 60);
+        frameBGImageView = CGRectMake(0, 0, 380, 40);
+        frameTxtCaption = CGRectMake(0, -2, 340, 35);
+        framePlusButton = CGRectMake(340, 2, 30, 30);
+        
+        fontsize = 22;
+    }
+    else
+    {
+        frameCaptionHolder = CGRectMake(10, 111, 301, 60);
+        frameBGImageView = CGRectMake(0, 0, 280, 33);
+        frameTxtCaption = CGRectMake(0, -2, 270, 30);
+        framePlusButton = CGRectMake(272, 2, 30, 30);
+        
+        fontsize = 18;
+    }
+    
+    captionHolder.txtCaption.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:fontsize];
+    
     captionHolder.txtCaption.delegate = self;
 //    captionHolder.txtCaption.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth;
     [captionHolder.txtCaption setBackgroundColor:[UIColor clearColor]];
@@ -2856,7 +3131,7 @@ static CGRect CaptionTextViewMinRect;
     [captionHolder addSubview:captionHolder.txtCaption];
     
     //Create + Button
-    captionHolder.plusButton.frame = IS_IPHONE_5?CGRectMake(249, 2, 30, 30):CGRectMake(300, 2, 30, 30);
+    captionHolder.plusButton.frame = framePlusButton;
     captionHolder.plusButton.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth;
     [captionHolder.plusButton setImage:[UIImage imageNamed:@"addColour"] forState:UIControlStateNormal];
     [captionHolder.plusButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];

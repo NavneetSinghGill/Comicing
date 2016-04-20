@@ -2,17 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "T-white.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "T-white@2x.png",
+      "filename" : "T button-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "T-white@3x.png",
+      "filename" : "T button.png",
       "scale" : "3x"
     }
   ],
