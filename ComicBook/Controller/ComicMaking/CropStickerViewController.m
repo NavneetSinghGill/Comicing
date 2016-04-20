@@ -81,6 +81,10 @@ UINavigationControllerDelegate>
 @property (nonatomic) BOOL isTakePicture;
 @property (nonatomic) CGRect frameImgvCrop;
 
+@property (strong, nonatomic) UIPinchGestureRecognizer *pinchGesture;
+@property (nonatomic) CGFloat lastScale;
+
+
 @end
 
 @implementation CropStickerViewController
@@ -98,7 +102,8 @@ UINavigationControllerDelegate>
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if (self.parentViewController) {
+    if (self.parentViewController)
+    {
     #if TARGET_OS_SIMULATOR
         self.isRegView = NO;
     #else
@@ -144,6 +149,8 @@ UINavigationControllerDelegate>
     });
 }
 
+
+
 #pragma mark - UIView Methods
 - (void)preparView
 {
@@ -153,41 +160,89 @@ UINavigationControllerDelegate>
     btnCrop.enabled = NO;
     btnDoneCroping.enabled = NO;
     
-    cameraPreview.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.18, 1.0);
+    //   cameraPreview.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.8, 1.0);
     if (!self.isRegView)
     {
-            if (IS_IPHONE_5)
-            {
-                imgvCrop.frame = CGRectMake(6, 41, 307, 458);
-                viewBlackBackground.layer.cornerRadius = 21;
-            }
-            else if (IS_IPHONE_6)
-            {
-                imgvCrop.frame = CGRectMake(6, 48, 362, 538);
-                viewBlackBackground.layer.cornerRadius = 26;
-            }
-            else if (IS_IPHONE_6P)
-            {
-                imgvCrop.frame = CGRectMake(7.5, 52.95, 398.5, 593);
-                viewBlackBackground.layer.cornerRadius = 28;
-            }
+        if (IS_IPHONE_5)
+        {
+            imgvCrop.frame = CGRectMake(6, 41, 307, 458);
+            viewBlackBackground.layer.cornerRadius = 21;
+        }
+        else if (IS_IPHONE_6)
+        {
+            imgvCrop.frame = CGRectMake(6, 48, 362, 538);
+            viewBlackBackground.layer.cornerRadius = 26;
+        }
+        else if (IS_IPHONE_6P)
+        {
+            imgvCrop.frame = CGRectMake(7.5, 52.95, 398.5, 593);
+            viewBlackBackground.layer.cornerRadius = 28;
+        }
         
-            viewBlackBackground.frame = imgvCrop.frame;
-            cameraPreview.frame = imgvCrop.frame;
-            [self prepareCameraView];
-    }else{
-            [self prepareCameraView];
-            #if !(TARGET_OS_SIMULATOR)
-                [self btnCameraReverseTap:nil];
-            #endif
+        self.frameImgvCrop = imgvCrop.frame;
+        viewBlackBackground.frame = imgvCrop.frame;
+        cameraPreview.frame = imgvCrop.frame;
+        [self prepareCameraView];
+    }
+    else
+    {
+        self.frameImgvCrop = imgvCrop.frame;
+
+        [self prepareCameraView];
+    #if !(TARGET_OS_SIMULATOR)
+        [self btnCameraReverseTap:nil];
+    #endif
+    }
+}
+
+
+
+- (void)addPinchGesture
+{
+    self.pinchGesture = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchDone:)];
+    cameraPreview.userInteractionEnabled = YES;
+    [cameraPreview addGestureRecognizer:self.pinchGesture];
+}
+
+- (IBAction)pinchDone:(UIPinchGestureRecognizer *)gestureRecognizer
+{
+    if([gestureRecognizer state] == UIGestureRecognizerStateBegan)
+    {
+        // Reset the last scale, necessary if there are multiple objects with different scales
+        _lastScale = [gestureRecognizer scale];
+    }
+    
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan ||
+        
+        [gestureRecognizer state] == UIGestureRecognizerStateChanged)
+    {
+        
+        CGFloat currentScale = [[[gestureRecognizer view].layer valueForKeyPath:@"transform.scale"] floatValue];
+        
+        // Constants to adjust the max/min values of zoom
+        const CGFloat kMaxScale = 2.0;
+        const CGFloat kMinScale = 1.0;
+        
+        CGFloat newScale = 1 -  (_lastScale - [gestureRecognizer scale]);
+        
+        newScale = MIN(newScale, kMaxScale / currentScale);
+        newScale = MAX(newScale, kMinScale / currentScale);
+        
+        CGAffineTransform transform = CGAffineTransformScale([[gestureRecognizer view] transform], newScale, newScale);
+        
+        [gestureRecognizer view].transform = transform;
+        
+        _lastScale = [gestureRecognizer scale];  // Store the previous scale factor for the next pinch gesture call
     }
 }
 
 - (void)prepareCameraView
 {
+    [self addPinchGesture];
+    
     // Create the AVCaptureSession
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
-//    session.sessionPreset = AVCaptureSessionPresetiFrame960x540;
+    //    session.sessionPreset = AVCaptureSessionPresetiFrame960x540;
     [self setSession:session];
     
     // Setup the preview view
@@ -199,7 +254,7 @@ UINavigationControllerDelegate>
     dispatch_queue_t sessionQueue1 = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
     [self setSessionQueue:sessionQueue1];
     
-//    [session setSessionPreset:AVCaptureSessionPresetMedium];
+    //    [session setSessionPreset:AVCaptureSessionPresetMedium];
     
     dispatch_async(sessionQueue1, ^{
         [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
@@ -225,10 +280,10 @@ UINavigationControllerDelegate>
                 // Because AVCaptureVideoPreviewLayer is the backing layer for AVCamPreviewView and UIView can only be manipulated on main thread.
                 // Note: As an exception to the above rule, it is not necessary to serialize video orientation changes on the AVCaptureVideoPreviewLayer’s connection with other session manipulation.
                 
-                [[(AVCaptureVideoPreviewLayer *)[cameraPreview layer] connection] setVideoOrientation:(AVCaptureVideoOrientation)[self interfaceOrientation]];
+                //   [[(AVCaptureVideoPreviewLayer *)[cameraPreview layer] connection] setVideoOrientation:(AVCaptureVideoOrientation)[self interfaceOrientation]];
                 
-//                [(AVCaptureVideoPreviewLayer *)[cameraPreview layer] setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-//                [captureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+                [(AVCaptureVideoPreviewLayer *)[cameraPreview layer] setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+                //                [captureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
             });
         }
         
@@ -253,7 +308,7 @@ UINavigationControllerDelegate>
             
             AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
             if ([connection isVideoStabilizationSupported])
-                [connection setEnablesVideoStabilizationWhenAvailable:YES];
+                connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeStandard;
             
             [self setMovieFileOutput:movieFileOutput];
         }
@@ -615,30 +670,30 @@ UINavigationControllerDelegate>
 
 - (IBAction)btnCameraTap:(id)sender
 {
-    #if TARGET_OS_SIMULATOR
-    UIImage* image = [UIImage imageNamed:@"cat-demo"];
-    cameraPreview.hidden = YES;
-    btnCrop.enabled = YES;
-    btnCameraReverse.hidden = YES;
-    
-    if (self.isRegView) {
-        imgvCrop.image = [UIImage ScaletoFill:image toSize:imgvCrop.frame.size];
-    }else if (isFrontCameraOn)
-    {
-        UIImage * flippedImage = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationLeftMirrored];
-        
-        imgvCrop.image = flippedImage;
-        imgvCrop.contentMode = UIViewContentModeScaleToFill;
-        imgvCrop.clipsToBounds = YES;
-    }
-    else
-    {
-        imgvCrop.image = image;
-        imgvCrop.contentMode = UIViewContentModeScaleToFill;
-        imgvCrop.clipsToBounds = YES;
-    }
-     return;
-    #endif
+//    #if TARGET_OS_SIMULATOR
+//    UIImage* image = [UIImage imageNamed:@"cat-demo"];
+//    cameraPreview.hidden = YES;
+//    btnCrop.enabled = YES;
+//    btnCameraReverse.hidden = YES;
+//    
+//    if (self.isRegView) {
+//        imgvCrop.image = [UIImage ScaletoFill:image toSize:imgvCrop.frame.size];
+//    }else if (isFrontCameraOn)
+//    {
+//        UIImage * flippedImage = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationLeftMirrored];
+//        
+//        imgvCrop.image = flippedImage;
+//        imgvCrop.contentMode = UIViewContentModeScaleToFill;
+//        imgvCrop.clipsToBounds = YES;
+//    }
+//    else
+//    {
+//        imgvCrop.image = image;
+//        imgvCrop.contentMode = UIViewContentModeScaleToFill;
+//        imgvCrop.clipsToBounds = YES;
+//    }
+//     return;
+//    #endif
 
     
     if (btnCamera.isSelected)
@@ -651,6 +706,10 @@ UINavigationControllerDelegate>
         
         imgvCrop.frame = self.frameImgvCrop;
         
+        
+        cameraPreview.transform = CGAffineTransformIdentity;
+        cameraPreview.frame = imgvCrop.frame;
+        
         [mzCroppableView removeFromSuperview];
         
         btnUndo.enabled = NO;
@@ -661,7 +720,8 @@ UINavigationControllerDelegate>
     {
         btnCamera.selected = YES;
         btnDoneCroping.enabled = self.isRegView?YES:NO;
-        [btnCamera setUserInteractionEnabled:NO];
+     //   [btnCamera setUserInteractionEnabled:NO];
+       
         dispatch_async([self sessionQueue], ^{
             // Update the orientation on the still image output video connection before capturing.
             [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[cameraPreview layer] connection] videoOrientation]];
@@ -682,46 +742,167 @@ UINavigationControllerDelegate>
                     
                     UIImage *image = [[UIImage alloc] initWithData:imageData];
                     
-                    if (self.isRegView) {
-                        imgvCrop.image = [UIImage ScaletoFill:image toSize:imgvCrop.frame.size];
-                    }else if (isFrontCameraOn)
+                    if (self.isRegView)
                     {
-                        UIImage * flippedImage = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationLeftMirrored];
+                       CGRect cropRects = [imgvCrop convertRect:CGRectMake(0, 40, CGRectGetWidth(imgvCrop.frame), CGRectGetHeight(imgvCrop.frame)) toView:cameraPreview];
                         
-                        imgvCrop.image = flippedImage;
-                        imgvCrop.contentMode = UIViewContentModeScaleToFill;
-                        imgvCrop.clipsToBounds = YES;
+                        CGFloat factor = (image.size.width * image.scale) / CGRectGetWidth(self.view.frame);
+                        
+                        cropRects.origin.x *= factor;
+                        cropRects.origin.y *= factor;
+                        
+                        cropRects.size.width  *= factor;
+                        cropRects.size.height *= factor;
+                        
+                        UIImage *cropedImage = [image cropedImagewithCropRect:cropRects];
+                        
+                        NSLog(@"%ld",(long)cropedImage.imageOrientation);
+                        
+                        if (isFrontCameraOn)
+                        {
+                            UIImage *flippedImage = [UIImage imageWithCGImage:cropedImage.CGImage
+                                                                        scale:cropedImage.scale
+                                                                  orientation:UIImageOrientationUpMirrored];
+                            
+                            imgvCrop.image =  flippedImage;
+                            
+                        }
+                        else
+                        {
+                            imgvCrop.image = cropedImage;
+
+
+                        }
+                        
+                        
+                        
+                        
+                      //  imgvCrop.image = [UIImage ScaletoFill:image toSize:imgvCrop.frame.size];
+                      
+                        imgvCrop.contentMode = UIViewContentModeScaleAspectFit;
+                        
                     }
                     else
                     {
-                        imgvCrop.image = image;
-                        imgvCrop.contentMode = UIViewContentModeScaleToFill;
-                        imgvCrop.clipsToBounds = YES;
+                        if (isFrontCameraOn)
+                        {
+                            
+                            
+                            
+                           CGRect cropRects = [imgvCrop convertRect:imgvCrop.frame toView:cameraPreview];
+                            
+                            CGFloat factor = (image.size.width * image.scale) / CGRectGetWidth(self.view.frame);
+                            
+                            cropRects.origin.x *= factor;
+                            cropRects.origin.y *= factor;
+                            
+                            cropRects.size.width  *= factor;
+                            cropRects.size.height *= factor;
+                            
+                            UIImage *cropedImage = [image cropedImagewithCropRect:cropRects];
+                            
+                            
+                            UIImage *flippedImage = [UIImage imageWithCGImage:cropedImage.CGImage
+                                                                scale:cropedImage.scale
+                                                          orientation:mirroredImageOrientation(image.imageOrientation)];
+                            
+                            imgvCrop.image =  flippedImage;
+                            imgvCrop.contentMode = UIViewContentModeScaleToFill;
+                        }
+                        else
+                        {
+                            CGRect cropRects = [imgvCrop convertRect:imgvCrop.frame toView:cameraPreview];
+                            
+                            CGFloat factor = (image.size.width * image.scale) / CGRectGetWidth(self.view.frame);
+                            
+                            cropRects.origin.x *= factor;
+                            cropRects.origin.y *= factor;
+                            
+                            cropRects.size.width  *= factor;
+                            cropRects.size.height *= factor;
+                            
+                            UIImage *cropedImage = [image cropedImagewithCropRect:cropRects];
+                            
+                            imgvCrop.image = cropedImage;
+                            imgvCrop.contentMode = UIViewContentModeScaleAspectFill;
+                            imgvCrop.clipsToBounds = YES;
+
+                          
+                        }
                     }
                     
-                    ////                    CGFloat compression = 0.9f;
-                    ////                    CGFloat maxCompression = 0.1f;
-                    ////                    int maxFileSize = 250*1024;
-                    ////
-                    //                    NSData *compressionImageData = UIImageJPEGRepresentation(image, 0.2);
-                    ////
-                    ////                    while ([imageData length] > maxFileSize && compression > maxCompression)
-                    ////                    {
-                    ////                        compression -= 0.1;
-                    ////                        compressionImageData = UIImageJPEGRepresentation(image, compression);
-                    ////                    }
-                    ////
-                    //                    UIImage *compressedimage = [[UIImage alloc] initWithData:compressionImageData];
-                    ////                   
-                    //                    imgvCrop.image = compressedimage;
                     
-                    //    [self setImageViewSize];
+                    
+                    
+//                    if (self.isRegView)
+//                    {
+//                        imgvCrop.image = [UIImage ScaletoFill:image toSize:imgvCrop.frame.size];
+//                    }
+//                     if (isFrontCameraOn)
+//                    {
+//                        UIImage * flippedImage = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationLeftMirrored];
+//                        
+//                        imgvCrop.image = flippedImage;
+//                        imgvCrop.contentMode = UIViewContentModeScaleToFill;
+//                        imgvCrop.clipsToBounds = YES;
+//                    }
+//                    else
+//                    {
+//                        imgvCrop.image = image;
+//                        imgvCrop.contentMode = UIViewContentModeScaleToFill;
+//                        imgvCrop.clipsToBounds = YES;
+//                    }
+                    
+                   
                 }
             }];
             
         });
     }
 }
+
+UIImageOrientation mirroredImageOrientation(UIImageOrientation orientation) {
+    switch(orientation) {
+        case UIImageOrientationUp: return UIImageOrientationUpMirrored;
+        case UIImageOrientationDown: return UIImageOrientationDownMirrored;
+        case UIImageOrientationLeft: return UIImageOrientationLeftMirrored;
+        case UIImageOrientationRight: return UIImageOrientationRightMirrored;
+        case UIImageOrientationUpMirrored: return UIImageOrientationUp;
+        case UIImageOrientationDownMirrored: return UIImageOrientationDown;
+        case UIImageOrientationLeftMirrored: return UIImageOrientationLeft;
+        case UIImageOrientationRightMirrored: return UIImageOrientationRight;
+        default: return orientation;
+    }
+}
+
+-(CGRect)frameForImage:(UIImage*)image inImageViewAspectFit:(UIView*)imageView
+{
+    float imageRatio = image.size.width / image.size.height;
+    
+    float viewRatio = imageView.frame.size.width / imageView.frame.size.height;
+    
+    if(imageRatio < viewRatio)
+    {
+        float scale = imageView.frame.size.height / image.size.height;
+        
+        float width = scale * image.size.width;
+        
+        float topLeftX = (imageView.frame.size.width - width) * 0.5;
+        
+        return CGRectMake(topLeftX, 0, width, imageView.frame.size.height);
+    }
+    else
+    {
+        float scale = imageView.frame.size.width / image.size.width;
+        
+        float height = scale * image.size.height;
+        
+        float topLeftY = (imageView.frame.size.height - height) * 0.5;
+        
+        return CGRectMake(0, topLeftY, imageView.frame.size.width, height);
+    }
+}
+
 
 - (IBAction)btnCameraReverseTap:(id)sender
 {
@@ -797,11 +978,18 @@ UINavigationControllerDelegate>
 {
     //[self dismissViewControllerAnimated:NO completion:nil];
     
-    [self.delegate cropStickerViewControllerWithCropCancel:nil];
-    
-    if (self.delegate == nil && btnCamera.isSelected) {
-        if (self.parentViewController != nil) {
-            [self btnCameraTap:nil];
+    if (self.isRegView)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self.delegate cropStickerViewControllerWithCropCancel:nil];
+        
+        if (self.delegate == nil && btnCamera.isSelected) {
+            if (self.parentViewController != nil) {
+                [self btnCameraTap:nil];
+            }
         }
     }
 }
@@ -904,7 +1092,9 @@ UINavigationControllerDelegate>
                 }
             });
         });
-    }else if(self.isRegView){
+    }
+    else if(self.isRegView)
+    {
         UIImage* reSizeImage = [UIImage ScaletoFill:imgvCrop.image toSize:CGSizeMake(112, 112)];
         UIImage* imgRounded = [UIImage makeRoundedImage:reSizeImage radius:112/2];
         UIImageView *imageView = [[UIImageView alloc] init];
@@ -1200,5 +1390,83 @@ UINavigationControllerDelegate>
     return [UIImage imageWithData:imageData];
 }
 
-
+-(UIImage*)rotateUIImage:(UIImage*)src {
+    
+    // No-op if the orientation is already correct
+    if (src.imageOrientation == UIImageOrientationUp) return src ;
+    
+    // We need to calculate the proper transformation to make the image upright.
+    // We do it in 2 steps: Rotate if Left/Right/Down, and then flip if Mirrored.
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    
+    switch (src.imageOrientation) {
+        case UIImageOrientationDown:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, src.size.width, src.size.height);
+            transform = CGAffineTransformRotate(transform, M_PI);
+            break;
+            
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+            transform = CGAffineTransformTranslate(transform, src.size.width, 0);
+            transform = CGAffineTransformRotate(transform, M_PI_2);
+            break;
+            
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, 0, src.size.height);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+        case UIImageOrientationUp:
+        case UIImageOrientationUpMirrored:
+            break;
+    }
+    
+    switch (src.imageOrientation) {
+        case UIImageOrientationUpMirrored:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, src.size.width, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+            
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, src.size.height, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+        case UIImageOrientationUp:
+        case UIImageOrientationDown:
+        case UIImageOrientationLeft:
+        case UIImageOrientationRight:
+            break;
+    }
+    
+    // Now we draw the underlying CGImage into a new context, applying the transform
+    // calculated above.
+    CGContextRef ctx = CGBitmapContextCreate(NULL, src.size.width, src.size.height,
+                                             CGImageGetBitsPerComponent(src.CGImage), 0,
+                                             CGImageGetColorSpace(src.CGImage),
+                                             CGImageGetBitmapInfo(src.CGImage));
+    CGContextConcatCTM(ctx, transform);
+    switch (src.imageOrientation) {
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            // Grr...
+            CGContextDrawImage(ctx, CGRectMake(0,0,src.size.height,src.size.width), src.CGImage);
+            break;
+            
+        default:
+            CGContextDrawImage(ctx, CGRectMake(0,0,src.size.width,src.size.height), src.CGImage);
+            break;
+    }
+    
+    // And now we just create a new UIImage from the drawing context
+    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
+    UIImage *img = [UIImage imageWithCGImage:cgimg];
+    CGContextRelease(ctx);
+    CGImageRelease(cgimg);
+    return img;
+}
 @end

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0730"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "845090741C2B1343004DAE99"
-               BuildableName = "ComicMakingPage.app"
-               BlueprintName = "ComicMakingPage"
-               ReferencedContainer = "container:ComicMakingPage.xcodeproj">
+               BuildableName = "Comicing.app"
+               BlueprintName = "ComicBook"
+               ReferencedContainer = "container:ComicBook.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,34 +28,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8450908D1C2B1343004DAE99"
-               BuildableName = "ComicMakingPageTests.xctest"
-               BlueprintName = "ComicMakingPageTests"
-               ReferencedContainer = "container:ComicMakingPage.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "845090981C2B1343004DAE99"
-               BuildableName = "ComicMakingPageUITests.xctest"
-               BlueprintName = "ComicMakingPageUITests"
-               ReferencedContainer = "container:ComicMakingPage.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "845090741C2B1343004DAE99"
-            BuildableName = "ComicMakingPage.app"
-            BlueprintName = "ComicMakingPage"
-            ReferencedContainer = "container:ComicMakingPage.xcodeproj">
+            BuildableName = "Comicing.app"
+            BlueprintName = "ComicBook"
+            ReferencedContainer = "container:ComicBook.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "845090741C2B1343004DAE99"
-            BuildableName = "ComicMakingPage.app"
-            BlueprintName = "ComicMakingPage"
-            ReferencedContainer = "container:ComicMakingPage.xcodeproj">
+            BuildableName = "Comicing.app"
+            BlueprintName = "ComicBook"
+            ReferencedContainer = "container:ComicBook.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "845090741C2B1343004DAE99"
-            BuildableName = "ComicMakingPage.app"
-            BlueprintName = "ComicMakingPage"
-            ReferencedContainer = "container:ComicMakingPage.xcodeproj">
+            BuildableName = "Comicing.app"
+            BlueprintName = "ComicBook"
+            ReferencedContainer = "container:ComicBook.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
