@@ -11,6 +11,7 @@
 #import "ComicMakingViewController.h"
 #import "ZoomInteractiveTransition.h"
 #import "ZoomTransitionProtocol.h"
+#import "Utilities.h"
 
 @interface GlideScrollViewController : UIViewController<SlidesScrollViewDelegate,ZoomTransitionProtocol>
 
@@ -30,6 +31,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
 
 @property (strong, nonatomic) UINavigationController *navigation;
+
+@property (nonatomic) ComicType comicType;
+@property (nonatomic) ReplyType replyType;
+@property (nonatomic) NSString *friendOrGroupId;
+@property (nonatomic) NSString *shareId;
+
 //@end
 
 

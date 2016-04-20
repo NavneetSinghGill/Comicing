@@ -17,7 +17,8 @@
     return @{
              @"books": @"Books",
              @"pagination": @"pagination",
-             @"dateLabels": @"date_labels"
+             @"dateLabels": @"date_labels",
+             @"shareId": @"lastShareId"
              };
 }
 

@@ -11,6 +11,7 @@
 #import "ComicPage.h"
 #import "BaseModel.h"
 #import "AppHelper.h"
+#import "Utilities.h"
 
 @class ComicMakingViewController;
 @class GlideScrollViewController;
@@ -92,6 +93,12 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgvComic;
 @property (nonatomic, weak) id<ComicMakingViewControllerDelegate> delegate;
 @property (strong,nonatomic) GlideScrollViewController *glideScrollView;
+
+@property (nonatomic) ComicType comicType;
+@property (nonatomic) ReplyType replyType;
+@property (nonatomic) NSString *friendOrGroupId;
+@property (nonatomic) NSString *shareId;
+@property (strong, nonatomic) NSString *fileNameToSave;
 
 @end
 

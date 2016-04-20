@@ -9,6 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "Friend.h"
 
+typedef enum {
+    NormalComic,
+    ReplyComic
+} ComicType;
+
+typedef enum {
+    FriendReply,
+    GroupReply
+} ReplyType;
+
 @interface Utilities : NSObject
 
 + (NSDictionary *) dictionaryWithPropertiesOfObject:(id)obj;

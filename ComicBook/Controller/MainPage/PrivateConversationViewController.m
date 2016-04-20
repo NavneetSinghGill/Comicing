@@ -36,6 +36,7 @@
 #import "PrivateConversationAPIManager.h"
 #import "AppHelper.h"
 #import "UIButton+WebCache.h"
+#import "GlideScrollViewController.h"
 
 @interface PrivateConversationViewController () {
     int TagRecord;
@@ -51,6 +52,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgvPinkDots;
 
 @property (strong, nonatomic) NSMutableArray *comics;
+@property (strong, nonatomic) NSString *shareId;
 @property CGRect saveTableViewFrame;
 
 @end
@@ -628,11 +630,25 @@
 - (IBAction)btnPenTouchUpInside:(id)sender
 {
     [self restoreTransformWithBounceForView:viewPen];
+    [self navigateToGlideScrollView];
 }
 
 - (IBAction)btnPenTouchUpOutside:(id)sender
 {
+    [self navigateToGlideScrollView];
     [self restoreTransformWithBounceForView:viewPen];
+}
+
+- (void)navigateToGlideScrollView {
+//    [AppHelper closeMainPageviewController:self];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
+    UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"glidenavigation"];
+    GlideScrollViewController *controller = (GlideScrollViewController *)[navigationController.childViewControllers firstObject];
+    controller.comicType = ReplyComic;
+    controller.replyType = FriendReply;
+    controller.friendOrGroupId = self.friendObj.friendId;
+    controller.shareId = self.shareId;
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (IBAction)tappedBackButton:(id)sender {
@@ -713,6 +729,7 @@
                                                              NSError *error;
                                                              ComicsModel *comicsModel = [MTLJSONAdapter modelOfClass:ComicsModel.class fromJSONDictionary:[object valueForKey:@"data"] error:&error];
                                                              NSLog(@"%@", comicsModel);
+                                                             self.shareId = comicsModel.shareId;
                                                              comicsArray = comicsModel.books;
                                                              [self.tblvComics reloadData];
                                                          } andFail:^(NSError *errorMessage) {

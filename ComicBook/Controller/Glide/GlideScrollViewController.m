@@ -30,6 +30,7 @@
 //
 @property (strong, nonatomic) NSMutableArray *dirtySubviews;
 @property (strong, nonatomic) NSMutableArray *dirtysubviewData;
+@property (strong, nonatomic) NSString *fileNameToSave;
 
 @end
 
@@ -49,6 +50,15 @@ NSTimer* timerObject;
 //    [super viewDidLoad];
 
     [self prepareView];
+    
+    // set up the filename to save based on the friend/group id.
+    if(self.comicType == ReplyComic && self.replyType == FriendReply) {
+        self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_F%@", self.friendOrGroupId];
+    } else if(self.comicType == ReplyComic && self.replyType == GroupReply) {
+        self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_G%@", self.friendOrGroupId];
+    } else {
+        self.fileNameToSave = @"ComicSlide";
+    }
     
     if (comicSlides == nil || comicSlides.count == 0) {
         [scrvComicSlide pushAddSlideTap:scrvComicSlide.btnAddSlide animation:NO];
@@ -228,6 +238,12 @@ NSTimer* timerObject;
     
     ComicMakingViewController *cmv = [self.storyboard instantiateViewControllerWithIdentifier:@"ComicMakingViewController"];
     cmv.isNewSlide = YES;
+    
+    cmv.comicType = self.comicType;
+    cmv.replyType = self.replyType;
+    cmv.friendOrGroupId = self.friendOrGroupId;
+    cmv.shareId = self.shareId;
+    
     [cmv setDelegate:self];
     if (self.navigationController == nil) {
         
@@ -280,7 +296,15 @@ NSTimer* timerObject;
     
     [comicMakeDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"]; // Hardcoded now
     [comicMakeDic setObject:@"" forKey:@"comic_title"];
-    [comicMakeDic setObject:@"CM" forKey:@"comic_type"]; // COMIC MAKING yes it is hardcoded now
+    
+    if(self.comicType == ReplyComic) {
+        [comicMakeDic setObject:@"CS" forKey:@"comic_type"];
+        [comicMakeDic setObject:self.shareId forKey:@"share_id"];
+    } else {
+        [comicMakeDic setObject:@"CM" forKey:@"comic_type"]; // COMIC MAKING yes it is hardcoded now
+    }
+    
+    
     [comicMakeDic setObject:@"0" forKey:@"conversation_id"]; //it is hardcoded now
     [comicMakeDic setObject:[NSString stringWithFormat:@"%lu", (unsigned long)[comicSlides count]]
                      forKey:@"slide_count"];
@@ -345,7 +369,8 @@ NSTimer* timerObject;
     
     return dataDic;
 }
--(void)sendComic{
+
+-(void)sendComic {
     
     //Desable the image view intactin
     [self.view setUserInteractionEnabled:NO];
@@ -357,7 +382,7 @@ NSTimer* timerObject;
         NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         NSData *imageData = UIImageJPEGRepresentation([AppHelper getImageFile:cmPage.printScreenPath], 1);
-
+        
         [dataDic setObject:imageData forKey:@"SlideImage"];
         
         NSData* slideTypeData = [@"slideImage" dataUsingEncoding:NSUTF8StringEncoding];
@@ -366,10 +391,11 @@ NSTimer* timerObject;
         
         [paramArray addObject:dataDic];
     }
+    
     NSLog(@"Start uploading");
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     [cmNetWorking UploadComicImage:paramArray completeBlock:^(id json, id jsonResponse) {
-    
+        
         NSLog(@"Finish Uploading");
         NSLog(@"Start Comic Creation");
         [cmNetWorking postComicCreation:[self createSendParams:[json objectForKey:@"slides"]]
@@ -382,11 +408,11 @@ NSTimer* timerObject;
                                  //Desable the image view intactin
                                  [self.view setUserInteractionEnabled:YES];
                                  
-                                 UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-                                 SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
-                                 [self.navigationController pushViewController:controller animated:YES];
-                                 
-                                 
+                                 if(self.comicType != ReplyComic) {
+                                     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+                                     SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
+                                     [self.navigationController pushViewController:controller animated:YES];
+                                 }
                              } ErrorBlock:^(JSONModelError *error) {
                                  NSLog(@"completion %@",error);
                                  //Desable the image view intactin
@@ -396,7 +422,6 @@ NSTimer* timerObject;
     } ErrorBlock:^(JSONModelError *error) {
         [self.view setUserInteractionEnabled:YES];
     }];
-//    NSLog(@"Start");
 }
 
 #pragma mark - ComicMakingViewControllerDelegate
@@ -614,12 +639,12 @@ NSTimer* timerObject;
 
 -(void)saveDataToFile:(NSMutableArray*)slideObj
 {
-    [AppHelper saveDataToFile:slideObj fileName:@"ComicSlide"];
+    [AppHelper saveDataToFile:slideObj fileName:self.fileNameToSave];
 //    NSLog(@"****** saveDataToFile ******");
 }
 
 -(NSMutableArray*)getDataFromFile{    
-    return [AppHelper getDataFromFile:@"ComicSlide"];
+    return [AppHelper getDataFromFile:self.fileNameToSave];
 }
 
 

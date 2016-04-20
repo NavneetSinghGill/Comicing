@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSArray *books;
 @property (nonatomic, strong) NSArray *dateLabels;
 @property (nonatomic, strong) Pagination *pagination;
+@property (nonatomic, strong) NSString *shareId;
 
 @end

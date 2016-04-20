@@ -156,6 +156,15 @@ static CGRect CaptionTextViewMinRect;
     viewRowButtons.alpha = 0;
 //    isNewSlide = YES;
     
+    // set up the filename to save based on the friend/group id.
+    if(self.comicType == ReplyComic && self.replyType == FriendReply) {
+        self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_F%@", self.friendOrGroupId];
+    } else if(self.comicType == ReplyComic && self.replyType == GroupReply) {
+        self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_G%@", self.friendOrGroupId];
+    } else {
+        self.fileNameToSave = @"ComicSlide";
+    }
+    
     [self prepareGlideView];
     
 //    [self.glideViewHolder setHidden:YES];
@@ -2974,9 +2983,11 @@ static CGRect CaptionTextViewMinRect;
                                           [self.view setUserInteractionEnabled:YES];
 //                                         [self.navigationController popViewControllerAnimated:NO];
                                          
-                                         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-                                         SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
-                                         [self.navigationController pushViewController:controller animated:YES];
+                                         if(self.comicType != ReplyComic) {
+                                             UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+                                             SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
+                                             [self.navigationController pushViewController:controller animated:YES];
+                                         }
             
             //Removing current View
 //            NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
@@ -3007,7 +3018,14 @@ static CGRect CaptionTextViewMinRect;
     
     [comicMakeDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"]; // Hardcoded now
     [comicMakeDic setObject:@"" forKey:@"comic_title"];
-    [comicMakeDic setObject:@"CM" forKey:@"comic_type"]; // COMIC MAKING
+    
+    if(self.comicType == ReplyComic) {
+        [comicMakeDic setObject:@"CS" forKey:@"comic_type"];
+        [comicMakeDic setObject:self.shareId forKey:@"share_id"];
+    } else {
+        [comicMakeDic setObject:@"CM" forKey:@"comic_type"]; // COMIC MAKING
+    }
+    
     [comicMakeDic setObject:@"0" forKey:@"conversation_id"];
     [comicMakeDic setObject:@"1" forKey:@"status"];
     [comicMakeDic setObject:@"1" forKey:@"is_public"];
@@ -3229,7 +3247,7 @@ static CGRect CaptionTextViewMinRect;
 -(void)saveDataToFile:(NSMutableArray*)slideObj
 {
     
-    [AppHelper saveDataToFile:slideObj fileName:@"ComicSlide"];
+    [AppHelper saveDataToFile:slideObj fileName:self.fileNameToSave];
     //
     //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //    NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -3239,7 +3257,7 @@ static CGRect CaptionTextViewMinRect;
 
 -(NSMutableArray*)getDataFromFile{
     
-    return [AppHelper getDataFromFile:@"ComicSlide"];
+    return [AppHelper getDataFromFile:self.fileNameToSave];
     
     //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //    NSString *documentsDirectory = [paths objectAtIndex:0];
