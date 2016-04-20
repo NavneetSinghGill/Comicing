@@ -1,0 +1,64 @@
+//
+//  AppConstants.h
+//
+//
+
+/* API Calles */
+#define BASE_URL @"http://68.169.44.163/api/"
+
+#define USER_BY_LOGINID  [BASE_URL stringByAppendingFormat:@"users/id/"]
+#define GROUP_BY_USERID  [BASE_URL stringByAppendingFormat:@"groups/userId/"]
+#define GROUPDETAILS_BY_USERID  [BASE_URL stringByAppendingFormat:@"groups/groupId/"]
+#define GROUP_ADD_REMOVE_USER  [BASE_URL stringByAppendingFormat:@"groups/groupId/"]
+#define GROUP_CREATE [BASE_URL stringByAppendingFormat:@"groups/"]
+#define GROUP_UPDATE [BASE_URL stringByAppendingFormat:@"groups/groupId/"]
+#define FRIENDS_BY_USERID  [BASE_URL stringByAppendingFormat:@"friends/id/"]
+#define FRIENDS_ADD_USERID  [BASE_URL stringByAppendingFormat:@"friends/"]
+#define SEARCH_BY_ID  [BASE_URL stringByAppendingFormat:@"users/loginId/"]
+#define SEARCH_BY_EMAIL  [BASE_URL stringByAppendingFormat:@"users/email/"]
+#define SEARCH_BY_MOBILE  [BASE_URL stringByAppendingFormat:@"users/mobile/"]
+#define SHARE_COMIC [BASE_URL stringByAppendingFormat:@"comics/id/"]
+#define REGISTER [BASE_URL stringByAppendingFormat:@"users"]
+#define USER_UPDATE [BASE_URL stringByAppendingFormat:@"users/id/"]
+#define LOGIN [BASE_URL stringByAppendingFormat:@"auth/"]
+#define REGISTER_PHONECONTACT [BASE_URL stringByAppendingFormat:@"contacts/"]
+#define COMIC_CREATE [BASE_URL stringByAppendingFormat:@"comics/"]
+#define COUNTRIES_ALL  [BASE_URL stringByAppendingFormat:@"countries"]
+/* */
+
+#define INVITE_TEXT @"Add me to Comicing  Username:%@ www.AreYouComicing.com"
+
+
+
+#define ImagePlaceHolder_COLOUR @[@"ffffff",@"ff3300",@"3399ff",@"ffcc33",@"33cc66",@"9966cc",@"ff3366",@"99cc00",@"3333cc",@"996633",@"000000"]
+
+/*  */
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+
+#define DOCUMENTS_FOLDER [NSTemporaryDirectory() stringByAppendingPathComponent:@"voiceRecorded"]
+
+#define SKeySticker @"Sticker"
+
+#define RegisterNotification_Sucess @"didRegisterNotification_Sucess"
+#define RegisterNotification_Failed @"didRegisterNotification_Failes"
+#define RegisterNotification_Receive @"receiveRemoteNotification"
+
+#define TermsAndServiceURL  @"http://www.google.com/"
+
+/* Comic makeing */
+/* Bubble tail Post nmae*/
+
+#define TOPLEFT  @"TL"
+#define TOPRIGHT @"TR"
+#define BOTTOMLEFT  @"BL"
+#define BOTTOMRIGHT  @""
+
+/* */
+#define SLIDE_MAXCOUNT  8

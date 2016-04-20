@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="KGk-i7-Jjw" customClass="MeCell">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="475"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="474.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3d-YU-Y3L">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="475"/>
+                        <subviews>
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dia-wN-KoL">
+                                <rect key="frame" x="127" y="0.0" width="405" height="415"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QxL-XP-9yB">
+                                <rect key="frame" x="112" y="410" width="420" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="G4H-eN-8qO"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dia-wN-KoL" firstAttribute="top" secondItem="I3d-YU-Y3L" secondAttribute="top" id="8QN-D9-akA"/>
+                            <constraint firstAttribute="bottom" secondItem="QxL-XP-9yB" secondAttribute="bottom" constant="5" id="FTd-aa-Cpm"/>
+                            <constraint firstAttribute="trailing" secondItem="dia-wN-KoL" secondAttribute="trailing" constant="8" id="GKP-yg-BzA"/>
+                            <constraint firstAttribute="trailing" secondItem="QxL-XP-9yB" secondAttribute="trailing" constant="8" id="S5G-Ce-GoE"/>
+                            <constraint firstItem="dia-wN-KoL" firstAttribute="width" secondItem="I3d-YU-Y3L" secondAttribute="width" multiplier="3:4" identifier="curlwidthAdjustment" id="V4Y-N0-bb4"/>
+                            <constraint firstItem="QxL-XP-9yB" firstAttribute="top" secondItem="dia-wN-KoL" secondAttribute="bottom" constant="-5" id="Z5a-Ix-Sov"/>
+                            <constraint firstItem="dia-wN-KoL" firstAttribute="width" secondItem="QxL-XP-9yB" secondAttribute="width" constant="-15" id="j1r-Nf-iF7"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="I3d-YU-Y3L" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="I87-5T-9IE"/>
+                    <constraint firstItem="I3d-YU-Y3L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="L7s-zf-EeJ"/>
+                    <constraint firstAttribute="bottom" secondItem="I3d-YU-Y3L" secondAttribute="bottom" constant="-1" id="nLU-VS-dpS"/>
+                    <constraint firstAttribute="trailing" secondItem="I3d-YU-Y3L" secondAttribute="trailing" id="z4t-UN-DZ7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="widthconstraint" destination="V4Y-N0-bb4" id="fSX-y8-UTd"/>
+            </connections>
+            <point key="canvasLocation" x="307" y="320.5"/>
+        </tableViewCell>
+    </objects>
+</document>
