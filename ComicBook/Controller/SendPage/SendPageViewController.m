@@ -358,26 +358,25 @@
     }
 }
 
--(void)bindComicImages
-{
+-(void)bindComicImages{
     imageArray = [[NSMutableArray alloc] init];
     
-    NSMutableArray* comicSlides = [[[NSUserDefaults standardUserDefaults] objectForKey:@"comicSlides"] mutableCopy];
-    
-    for (NSData* data in comicSlides)
-    {
+    NSMutableArray* comicSlides = [AppHelper getDataFromFile:@"ComicSlide"];
+    //[[[NSUserDefaults standardUserDefaults] objectForKey:@"comicSlides"] mutableCopy];
+    for (NSData* data in comicSlides) {
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
         //ComicSlides Object
         [imageArray  addObject:[AppHelper getImageFile:cmPage.printScreenPath]];
     }
-//    [imageArray addObject:@"01.png"];
-//    [imageArray addObject:@"02.png"];
-//    [imageArray addObject:@"03.png"];
-//    [imageArray addObject:@"04.png"];
+    //    [imageArray addObject:@"01.png"];
+    //    [imageArray addObject:@"02.png"];
+    //    [imageArray addObject:@"03.png"];
+    //    [imageArray addObject:@"04.png"];
     
     [self.comicImageList refeshList:imageArray];
     comicSlides = nil;
-//    imageArray = nil;
+    //    imageArray = nil;
 }
 
 #pragma mark GroupList Delegate

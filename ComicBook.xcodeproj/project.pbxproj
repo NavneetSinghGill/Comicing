@@ -301,7 +301,6 @@
 		0C6668991C84358600FEB11F /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6667201C84358600FEB11F /* AccountView.m */; };
 		0C66689A1C84358600FEB11F /* AccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C6667211C84358600FEB11F /* AccountView.xib */; };
 		0C66689B1C84358600FEB11F /* AvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6667241C84358600FEB11F /* AvatarView.m */; };
-		0C66689C1C84358600FEB11F /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C6667251C84358600FEB11F /* AvatarView.xib */; };
 		0C66689D1C84358600FEB11F /* AVCamPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6667281C84358600FEB11F /* AVCamPreviewView.m */; };
 		0C66689F1C84358600FEB11F /* ComicShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C66672C1C84358600FEB11F /* ComicShareView.m */; };
 		0C6668A01C84358600FEB11F /* ComicShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C66672D1C84358600FEB11F /* ComicShareView.xib */; };
@@ -322,7 +321,6 @@
 		0C6668AF1C84358600FEB11F /* GroupsSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C66674A1C84358600FEB11F /* GroupsSection.m */; };
 		0C6668B01C84358600FEB11F /* GroupsSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C66674B1C84358600FEB11F /* GroupsSection.xib */; };
 		0C6668B11C84358600FEB11F /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C66674E1C84358600FEB11F /* HeaderView.m */; };
-		0C6668B21C84358600FEB11F /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C66674F1C84358600FEB11F /* HeaderView.xib */; };
 		0C6668B31C84358600FEB11F /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6667521C84358600FEB11F /* KeyboardView.m */; };
 		0C6668B41C84358600FEB11F /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C6667531C84358600FEB11F /* KeyboardView.xib */; };
 		0C6668B51C84358600FEB11F /* ProfilePicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6667561C84358600FEB11F /* ProfilePicView.m */; };
@@ -346,6 +344,8 @@
 		0CBF90B81CA3143D004007DF /* UIImage+ImageCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */; };
 		0CDD9A821C99B30B00D942D3 /* TermsServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */; };
 		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
+		84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D661CC94E1200C52C06 /* AvatarView.xib */; };
+		84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D681CC94E2B00C52C06 /* HeaderView.xib */; };
 		8466E7F21CB169320075727A /* InviteFriendsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466E7F11CB169320075727A /* InviteFriendsView.m */; };
 		8466E7F41CB169500075727A /* InviteFriendsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8466E7F31CB169500075727A /* InviteFriendsView.xib */; };
 		84ECE6491CB57772007AF54E /* searchFriendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ECE6481CB57772007AF54E /* searchFriendView.m */; };
@@ -865,7 +865,6 @@
 		0C6667211C84358600FEB11F /* AccountView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountView.xib; sourceTree = "<group>"; };
 		0C6667231C84358600FEB11F /* AvatarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarView.h; sourceTree = "<group>"; };
 		0C6667241C84358600FEB11F /* AvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarView.m; sourceTree = "<group>"; };
-		0C6667251C84358600FEB11F /* AvatarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarView.xib; sourceTree = "<group>"; };
 		0C6667271C84358600FEB11F /* AVCamPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamPreviewView.h; sourceTree = "<group>"; };
 		0C6667281C84358600FEB11F /* AVCamPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamPreviewView.m; sourceTree = "<group>"; };
 		0C66672B1C84358600FEB11F /* ComicShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicShareView.h; sourceTree = "<group>"; };
@@ -897,7 +896,6 @@
 		0C66674B1C84358600FEB11F /* GroupsSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupsSection.xib; sourceTree = "<group>"; };
 		0C66674D1C84358600FEB11F /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		0C66674E1C84358600FEB11F /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
-		0C66674F1C84358600FEB11F /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		0C6667511C84358600FEB11F /* KeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardView.h; sourceTree = "<group>"; };
 		0C6667521C84358600FEB11F /* KeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardView.m; sourceTree = "<group>"; };
 		0C6667531C84358600FEB11F /* KeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardView.xib; sourceTree = "<group>"; };
@@ -938,6 +936,8 @@
 		8433BC921CC135D20073DE2A /* UIImage+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Trim.h"; sourceTree = "<group>"; };
 		8433BC931CC135D20073DE2A /* UIImage+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Trim.m"; sourceTree = "<group>"; };
 		845090751C2B1343004DAE99 /* Comicing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Comicing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84592D661CC94E1200C52C06 /* AvatarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarView.xib; sourceTree = "<group>"; };
+		84592D681CC94E2B00C52C06 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		8466E7F01CB169320075727A /* InviteFriendsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsView.h; sourceTree = "<group>"; };
 		8466E7F11CB169320075727A /* InviteFriendsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsView.m; sourceTree = "<group>"; };
 		8466E7F31CB169500075727A /* InviteFriendsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsView.xib; sourceTree = "<group>"; };
@@ -2351,7 +2351,7 @@
 			children = (
 				0C6667231C84358600FEB11F /* AvatarView.h */,
 				0C6667241C84358600FEB11F /* AvatarView.m */,
-				0C6667251C84358600FEB11F /* AvatarView.xib */,
+				84592D661CC94E1200C52C06 /* AvatarView.xib */,
 			);
 			path = AvatarSection;
 			sourceTree = "<group>";
@@ -2445,7 +2445,7 @@
 			children = (
 				0C66674D1C84358600FEB11F /* HeaderView.h */,
 				0C66674E1C84358600FEB11F /* HeaderView.m */,
-				0C66674F1C84358600FEB11F /* HeaderView.xib */,
+				84592D681CC94E2B00C52C06 /* HeaderView.xib */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -2620,7 +2620,6 @@
 				0C6667EA1C84358600FEB11F /* GroupsMembersCell.xib in Resources */,
 				0C6668AC1C84358600FEB11F /* GroupItem.xib in Resources */,
 				0C6667A41C84358600FEB11F /* CheckButton.png in Resources */,
-				0C6668B21C84358600FEB11F /* HeaderView.xib in Resources */,
 				0C6667A21C84358600FEB11F /* 03.png in Resources */,
 				0C6667941C84358600FEB11F /* findFriendsArrow.png in Resources */,
 				0C6667791C84358600FEB11F /* MYRIADPRO-CONDIT.OTF in Resources */,
@@ -2674,6 +2673,7 @@
 				0C6667851C84358600FEB11F /* cameraButton.png in Resources */,
 				0C6667EC1C84358600FEB11F /* GroupsMembersSection.xib in Resources */,
 				0C6667901C84358600FEB11F /* accountEmail.png in Resources */,
+				84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */,
 				0C6667AF1C84358600FEB11F /* LaunchScreen.storyboard in Resources */,
 				0C6668B01C84358600FEB11F /* GroupsSection.xib in Resources */,
 				0C6668171C84358600FEB11F /* Info.plist in Resources */,
@@ -2682,7 +2682,6 @@
 				0C6667701C84358600FEB11F /* american-typewriter.ttf in Resources */,
 				0C6667AA1C84358600FEB11F /* instagramlogo.png in Resources */,
 				0C66689A1C84358600FEB11F /* AccountView.xib in Resources */,
-				0C66689C1C84358600FEB11F /* AvatarView.xib in Resources */,
 				0C6667AC1C84358600FEB11F /* twitterlogo.png in Resources */,
 				0C6667861C84358600FEB11F /* meButton.png in Resources */,
 				0C66677F1C84358600FEB11F /* arrow.png in Resources */,
@@ -2709,6 +2708,7 @@
 				0C6668BF1C84358600FEB11F /* VerifyView.xib in Resources */,
 				0C66679A1C84358600FEB11F /* profilePicCut.png in Resources */,
 				0C6667821C84358600FEB11F /* searchBlueIcon.png in Resources */,
+				84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */,
 				0C6667A61C84358600FEB11F /* digup@2x.png in Resources */,
 				0C6667D81C84358600FEB11F /* FindFriendsTableCell.xib in Resources */,
 				0C6667771C84358600FEB11F /* MYRIADPRO-BOLDIT.OTF in Resources */,
