@@ -30,7 +30,6 @@
 #import "GroupCell.h"
 #import "GlideScrollViewController.h"
 
-
 @interface MainPageGroupViewController ()
 <UITableViewDataSource,
 UITableViewDelegate,
@@ -64,6 +63,8 @@ UICollectionViewDelegate>
 {
     ComicBookDict=[NSMutableDictionary new];
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callAPItoGetGroupsComics) name:@"UpdateGroupComics" object:nil];
     [self prepareView];
 }
 
@@ -140,7 +141,7 @@ UICollectionViewDelegate>
          NSError *error;
          ComicsModel *comicsModel = [MTLJSONAdapter modelOfClass:ComicsModel.class fromJSONDictionary:[object valueForKey:@"data"] error:&error];
          NSLog(@"%@", comicsModel);
-         
+         self.shareId = comicsModel.shareId;
          comics = comicsModel.books.copy;
          [tblvComics reloadData];
          
@@ -174,47 +175,35 @@ UICollectionViewDelegate>
     static NSString *simpleTableIdentifier = @"GroupCell";
     
     __block GroupCell* cell= (GroupCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    //    cell = nil;
-    
-    //    if (cell == nil)
-    //    {
-    //        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"GroupCell" owner:self options:nil];
-    //
-    //        cell = [nib objectAtIndex:0];
-    
-    if(nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
-    {
-        [ComicBookDict removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+
+    cell = nil;
+    if (cell == nil) {
+        cell= (GroupCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if(nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
+        {
+            [ComicBookDict removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+        }
+        
+        ComicBookVC *comic=[self.storyboard instantiateViewControllerWithIdentifier:@"ComicBookVC"];
+        comic.delegate=self;
+        comic.Tag=(int)indexPath.row;
+        
+        comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+        
+        ComicBook *comicBook = [comics objectAtIndex:indexPath.row];
+        [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
+        
+        cell.lblDate.text = [self dateFromString:comicBook.createdDate];
+        cell.lblTime.text = [self timeFromString:comicBook.createdDate];
+        
+        [cell.viewComicBook addSubview:comic.view];
+        [comic setSlidesArray:comicBook.slides];
+        [comic setupBook];
+        
+        [self addChildViewController:comic];
+        
+        [ComicBookDict setObject:comic forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
     }
-    
-    ComicBookVC *comic=[self.storyboard instantiateViewControllerWithIdentifier:@"ComicBookVC"];
-    comic.delegate=self;
-    comic.Tag=(int)indexPath.row;
-    
-    comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
-    
-    //        [cell.btnUser setBackgroundImage:comicInfo.creator.imgProfile forState:UIControlStateNormal];
-    //        [cell.btnUser setBackgroundImage:comicInfo.creator.imgProfile forState:UIControlStateHighlighted];
-    
-    ComicBook *comicBook = [comics objectAtIndex:indexPath.row];
-    [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
-    
-    //        cell.lblDate.text = comicInfo.date;
-    //        cell.lblTime.text = comicInfo.time;
-    
-    cell.lblDate.text = [self dateFromString:comicBook.createdDate];
-    cell.lblTime.text = [self timeFromString:comicBook.createdDate];
-    
-    
-    [cell.viewComicBook addSubview:comic.view];
-    
-    [comic setImages: [self setupImages:indexPath]];
-    [comic setupBook];
-    [self addChildViewController:comic];
-    
-    [ComicBookDict setObject:comic forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
-    //    }
     
     return cell;
 }
@@ -264,6 +253,46 @@ UICollectionViewDelegate>
     {
         self.viewTransperant.alpha = 1-value/4;
     }
+}
+
+-(void) setBoundary :(float) x :(float) y toView:(UIView*)parent addView:(UIView*)child
+{
+    
+    [parent addConstraint:[NSLayoutConstraint constraintWithItem:child
+                                                       attribute:NSLayoutAttributeWidth
+                                                       relatedBy:NSLayoutRelationEqual
+                                                          toItem:parent
+                                                       attribute:NSLayoutAttributeWidth
+                                                      multiplier:1.0
+                                                        constant:0]];
+    
+    // Height constraint, half of parent view height
+    [parent addConstraint:[NSLayoutConstraint constraintWithItem:child
+                                                       attribute:NSLayoutAttributeHeight
+                                                       relatedBy:NSLayoutRelationEqual
+                                                          toItem:parent
+                                                       attribute:NSLayoutAttributeHeight
+                                                      multiplier:1
+                                                        constant:0]];
+    
+    
+    [parent addConstraint:[NSLayoutConstraint constraintWithItem:child
+                                                       attribute:NSLayoutAttributeLeading                                                       relatedBy:NSLayoutRelationEqual
+                                                          toItem:parent
+                                                       attribute:NSLayoutAttributeLeading
+                                                      multiplier:1.0
+                                                        constant:0]];
+    
+    
+    [parent addConstraint:[NSLayoutConstraint constraintWithItem:child
+                                                       attribute:NSLayoutAttributeTop
+                                                       relatedBy:NSLayoutRelationEqual
+                                                          toItem:parent
+                                                       attribute:NSLayoutAttributeTop
+                                                      multiplier:1.0
+                                                        constant:0]];
+    [parent layoutIfNeeded];
+    
 }
 
 #pragma mark - Helper Methods
@@ -347,11 +376,13 @@ UICollectionViewDelegate>
 - (IBAction)btnPenTouchUpInside:(id)sender
 {
     [self restoreTransformWithBounceForView:viewPen];
+    [self navigateToGlideScrollView];
 }
 
 - (IBAction)btnPenTouchUpOutside:(id)sender
 {
     [self restoreTransformWithBounceForView:viewPen];
+    [self navigateToGlideScrollView];
 }
 
 - (void)restoreTransformWithBounceForView:(UIView*)view
@@ -376,6 +407,18 @@ UICollectionViewDelegate>
 //                         [self presentViewController:controller animated:YES completion:nil];
                          
                      }];
+}
+
+- (void)navigateToGlideScrollView {
+    //    [AppHelper closeMainPageviewController:self];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
+    UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"glidenavigation"];
+    GlideScrollViewController *controller = (GlideScrollViewController *)[navigationController.childViewControllers firstObject];
+    controller.comicType = ReplyComic;
+    controller.replyType = GroupReply;
+    controller.friendOrGroupId = self.groupObj.groupId;
+    controller.shareId = self.shareId;
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark - BookChangeDelegate Methods

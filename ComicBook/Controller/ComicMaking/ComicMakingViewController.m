@@ -3262,6 +3262,13 @@ static CGRect CaptionTextViewMinRect;
                                              UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                              SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
                                              [self.navigationController pushViewController:controller animated:YES];
+                                         } else {
+                                             if(self.replyType == FriendReply) {
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
+                                             } else if(self.replyType == GroupReply) {
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
+                                             }
+                                             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                                          }
             
             //Removing current View

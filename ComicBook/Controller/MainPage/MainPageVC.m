@@ -354,13 +354,19 @@ NSString * const BottomBarView = @"BottomBarView";
     //        self.modelController.imageArray=slideImages;
     //        startingViewController.imageArray=slideImages;
     //    }];
+    
     // vishnu
     NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
     [slidesArray addObjectsFromArray:comicBook.slides];
     
-    // Adding a sample slide to array to maintain the logic
-    Slides *slides = [Slides new];
-    [slidesArray insertObject:slides atIndex:1];
+    // To repeat the cover image again on index page as the first slide.
+    if(slidesArray.count > 1) {
+        [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+        
+        // Adding a sample slide to array to maintain the logic
+        Slides *slides = [Slides new];
+        [slidesArray insertObject:slides atIndex:1];
+    }
     
     self.modelController.slidesArray=slidesArray;
     startingViewController.slidesArray = slidesArray;
@@ -449,15 +455,16 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 
 - (IBAction)tappedProfilePicButton:(id)sender {
-//    [self performSegueWithIdentifier:ME_VIEW_SEGUE sender:nil];
+    //    [self performSegueWithIdentifier:ME_VIEW_SEGUE sender:nil];
     NSLog(@"%@", [Utilities getTheFriendObjForUserID:currentComicUserId]);
-//    if([Utilities getTheFriendObjForUserID:currentComicUserId] != nil) {
-        FriendPageVC *friendView = [[FriendPageVC alloc] init];
-        friendView = [self.storyboard instantiateViewControllerWithIdentifier:@"FriendPage"];
-//        friendView.friendObj = [Utilities getTheFriendObjForUserID:currentComicUserId];
-        friendView.friendObj = friendObject;
-        [self presentViewController:friendView animated:YES completion:nil];
-//    }
+    //    if([Utilities getTheFriendObjForUserID:currentComicUserId] != nil) {
+    FriendPageVC *friendView = [[FriendPageVC alloc] init];
+    friendView = [self.storyboard instantiateViewControllerWithIdentifier:@"FriendPage"];
+    //        friendView.friendObj = [Utilities getTheFriendObjForUserID:currentComicUserId];
+    //        friendView.friendObj = friendObject;
+    [AppDelegate application].dataManager.friendObject = friendObject;
+    [self presentViewController:friendView animated:YES completion:nil];
+    //    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -820,7 +827,7 @@ NSString * const BottomBarView = @"BottomBarView";
                               WithCommentDict:[MTLJSONAdapter JSONDictionaryFromModel:commentModel error:&error]
                              withSuccessBlock:^(id object) {
                                  NSLog(@"%@", object);
-                                 [self addComment:comment:[UIImage imageNamed:@"heart"]];
+                                 [self addComment:comment:self.profilePicOfComic.image];
                              } andFail:^(NSError *errorMessage) {
                                  NSLog(@"%@", errorMessage);
                              }];
@@ -988,7 +995,7 @@ NSString * const BottomBarView = @"BottomBarView";
     commentBackground.layer.cornerRadius=12;
     commentBackground.layer.masksToBounds=YES;
     UIImageView *profilePic=[[UIImageView alloc]initWithImage:image];
-    profilePic.frame=CGRectMake(5, 0, 40, 40);
+    profilePic.frame=CGRectMake(5, 3, 40, 40);
     profilePic.contentMode=UIViewContentModeScaleAspectFit;
     profilePic.layer.cornerRadius=20;
     profilePic.layer.masksToBounds=YES;

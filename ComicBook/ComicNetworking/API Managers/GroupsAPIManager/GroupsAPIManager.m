@@ -48,7 +48,7 @@
                       withSuccessBlock:(void(^)(id object))successBlock
                                andFail:(void(^)(NSError *errorMessage))failBlock
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@%@%@", BASE_URL,GET_GROUPS_COMICS , groupID];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@", BASE_URL, GET_GROUPS_COMICS, groupID];
     
     [BaseAPIManager getRequestWithURLString:urlString
                               withParameter:nil

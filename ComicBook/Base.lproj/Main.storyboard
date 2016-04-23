@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gtw-pU-Kh0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Gtw-pU-Kh0">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Avenir Next LT W01 Ultra Light.ttf">
@@ -30,7 +30,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rxT-P3-3F9">
-                                <rect key="frame" x="45" y="0.0" width="38" height="67.5"/>
+                                <rect key="frame" x="45" y="0.0" width="38" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="T-icon"/>
                                 <connections>
@@ -60,7 +60,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gm0-68-nyq">
-                                <rect key="frame" x="235" y="3.5" width="41" height="55.5"/>
+                                <rect key="frame" x="235" y="3" width="41" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="pen-icon"/>
                                 <connections>
@@ -198,7 +198,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="T9l-x1-I2M">
-                                        <rect key="frame" x="264" y="8.5" width="44" height="47"/>
+                                        <rect key="frame" x="264" y="9" width="44" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="camera-reverse"/>
                                         <connections>
@@ -209,11 +209,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="kub-pR-LyG" userLabel="Bubble List View">
-                                <rect key="frame" x="0.0" y="456" width="320" height="72"/>
+                                <rect key="frame" x="0.0" y="456" width="320" height="72.000001192092881"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" id="2yX-Va-hQT">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
+                                        <rect key="frame" x="0.0" y="1.1920928812969578e-06" width="320" height="72"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <connections>
                                             <segue destination="kWc-H2-NnP" kind="embed" id="rkw-en-rhf"/>
@@ -223,11 +223,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="Dj9-uN-iwq" userLabel="Exclamation List View">
-                                <rect key="frame" x="0.0" y="456" width="320" height="72"/>
+                                <rect key="frame" x="0.0" y="456" width="320" height="72.000001192092881"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" id="Jz7-3n-2Yi">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
+                                        <rect key="frame" x="0.0" y="1.1920928812969578e-06" width="320" height="72"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <connections>
                                             <segue destination="5Lo-xq-Wim" kind="embed" id="Ks5-WT-iej"/>
@@ -287,7 +287,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" id="W62-e4-6i3">
-                                        <rect key="frame" x="-0.5" y="0.0" width="40" height="448"/>
+                                        <rect key="frame" x="-1" y="0.0" width="40" height="448"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
@@ -447,7 +447,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oqd-xB-aLH">
-                                <rect key="frame" x="7.5" y="34" width="25" height="44"/>
+                                <rect key="frame" x="8" y="34" width="25" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="undo-drawing-icon"/>
                                 <connections>
@@ -577,7 +577,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="PIP-v3-ycX">
-                                            <rect key="frame" x="9.5" y="9.5" width="40.5" height="40.5"/>
+                                            <rect key="frame" x="9" y="9" width="41" height="41"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
@@ -741,7 +741,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="PVm-hD-DzG">
-                                <rect key="frame" x="7" y="314.5" width="30" height="30"/>
+                                <rect key="frame" x="7" y="315" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="brown-square-unselected"/>
@@ -771,7 +771,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="R7A-aA-Twd">
-                                <rect key="frame" x="7" y="89.5" width="30" height="30"/>
+                                <rect key="frame" x="7" y="89" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="white-square-unselected"/>
@@ -853,6 +853,223 @@
             </objects>
             <point key="canvasLocation" x="-307" y="1628"/>
         </scene>
+        <!--Contact Controller-->
+        <scene sceneID="KdB-9f-dXS">
+            <objects>
+                <viewController storyboardIdentifier="Contact" id="c3I-Qe-kVu" customClass="ContactController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c36-De-Buv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="fdb-De-BcD" customClass="AvatarView">
+                                <rect key="frame" x="0.0" y="22" width="414" height="185"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="C1o-4m-AMW" customClass="HeaderView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="41"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W6h-lx-Wrf">
+                                <rect key="frame" x="0.0" y="80" width="33" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="backbutton.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnBackClick:" destination="c3I-Qe-kVu" eventType="touchUpInside" id="G7J-EK-KW3"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="COj-Ir-t6V" customClass="SectionDividerView">
+                                <rect key="frame" x="0.0" y="207" width="414" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="FhB-X6-XKB" customClass="GroupsSection">
+                                <rect key="frame" x="0.0" y="237" width="414" height="128"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="RWf-Dy-lkR" customClass="SectionDividerView">
+                                <rect key="frame" x="0.0" y="365" width="414" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="WSv-N7-Zy8" customClass="FriendsListView">
+                                <rect key="frame" x="0.0" y="394" width="414" height="303"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="wW8-zS-PrC" customClass="FooterView">
+                                <rect key="frame" x="0.0" y="696" width="414" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yus-f7-sUk">
+                                <rect key="frame" x="316" y="638" width="78" height="78"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <state key="normal" image="blueCheckmark.png"/>
+                                <connections>
+                                    <action selector="btnAddButtonClick:" destination="c3I-Qe-kVu" eventType="touchUpInside" id="uPE-wI-yeY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="YvX-RJ-x1c"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="avView" destination="fdb-De-BcD" id="DNz-DR-SYW"/>
+                        <outlet property="btnAddButton" destination="yus-f7-sUk" id="pud-sU-fNM"/>
+                        <outlet property="footerView" destination="wW8-zS-PrC" id="erx-Yg-OYV"/>
+                        <outlet property="friendsList" destination="WSv-N7-Zy8" id="G9R-7m-CcA"/>
+                        <outlet property="groupSection" destination="FhB-X6-XKB" id="xvy-zB-1jY"/>
+                        <outlet property="headerView1" destination="COj-Ir-t6V" id="9jq-0W-Uh6"/>
+                        <outlet property="headerView2" destination="RWf-Dy-lkR" id="ssh-Pz-KWj"/>
+                        <outlet property="view" destination="c36-De-Buv" id="XjX-3s-cQg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CDH-Ad-9fT" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="167" y="1628"/>
+        </scene>
+        <!--Group View Controller-->
+        <scene sceneID="A1t-wH-1kk">
+            <objects>
+                <viewController storyboardIdentifier="Group" id="OXe-8n-MVb" customClass="GroupViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BU5-Wm-3YT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="14Q-en-Egd">
+                                <rect key="frame" x="0.0" y="22" width="414" height="240"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vz7-a9-eZn">
+                                        <rect key="frame" x="135" y="106" width="260" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="35"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Group Name" minimumFontSize="17" id="oRF-1i-EgO">
+                                        <rect key="frame" x="127" y="101" width="260" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="35"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="OXe-8n-MVb" id="dqm-Io-twt"/>
+                                        </connections>
+                                    </textField>
+                                    <view contentMode="scaleToFill" id="QhZ-zs-PgL" customClass="GroupsMembersSection">
+                                        <rect key="frame" x="0.0" y="186" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WIK-nG-TnY">
+                                        <rect key="frame" x="23" y="84" width="81" height="81"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="btnGroupIconClick:" destination="OXe-8n-MVb" eventType="touchUpInside" id="PIn-eO-WbO"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yxZ-Nc-KuH">
+                                        <rect key="frame" x="23" y="84" width="81" height="81"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.73333333329999995" green="0.91372549020000005" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="groupMemberSearch.png" id="8BJ-0H-xtd">
+                                <rect key="frame" x="33" y="43" width="38" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" id="cP7-4z-y53" customClass="HeaderView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="41"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vLA-E7-Llb">
+                                <rect key="frame" x="0.0" y="54" width="33" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="backbutton.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonClick:" destination="OXe-8n-MVb" eventType="touchUpInside" id="WI1-bC-46X"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="search to add friends" placeholder="search to add friends" minimumFontSize="17" id="fq7-Mf-UQd">
+                                <rect key="frame" x="87" y="43" width="201" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="OXe-8n-MVb" id="y2a-JQ-c8C"/>
+                                </connections>
+                            </textField>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BfC-7u-mcF">
+                                <rect key="frame" x="87" y="43" width="201" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
+                                <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.13725490200000001" green="0.1215686275" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnSearchFriendClick:" destination="OXe-8n-MVb" eventType="touchUpInside" id="szg-Gh-hR8"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="4Up-7m-f8O" customClass="SectionDividerView">
+                                <rect key="frame" x="0.0" y="262" width="414" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="drd-zN-etL" customClass="FriendsListView">
+                                <rect key="frame" x="0.0" y="292" width="414" height="404"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="tLG-Oa-4pu" customClass="FooterView">
+                                <rect key="frame" x="0.0" y="696" width="414" height="40"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Jnt-QQ-g3u">
+                                <rect key="frame" x="316" y="638" width="78" height="78"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <state key="normal" image="blueCheckmark.png"/>
+                                <connections>
+                                    <action selector="btnAddClick:" destination="OXe-8n-MVb" eventType="touchUpInside" id="abU-Pl-vtk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="backButton" destination="vLA-E7-Llb" id="lAs-94-fUc"/>
+                        <outlet property="btnGroupIcon" destination="WIK-nG-TnY" id="N0D-a4-MC2"/>
+                        <outlet property="friendsList" destination="drd-zN-etL" id="YHw-xb-tNU"/>
+                        <outlet property="groupImage" destination="yxZ-Nc-KuH" id="cWj-UY-F8w"/>
+                        <outlet property="groupMemberImages" destination="QhZ-zs-PgL" id="e5S-7t-tMt"/>
+                        <outlet property="groupMembers" destination="QhZ-zs-PgL" id="7a0-ro-08d"/>
+                        <outlet property="groupName" destination="vz7-a9-eZn" id="jgB-lz-alU"/>
+                        <outlet property="sectionDividerViewHolder" destination="4Up-7m-f8O" id="LNP-km-SEb"/>
+                        <outlet property="txtGroupName" destination="oRF-1i-EgO" id="6xA-AF-BZA"/>
+                        <outlet property="txtSearchFriends" destination="fq7-Mf-UQd" id="73i-lD-2DD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cOP-Mu-ntr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="884" y="320"/>
+        </scene>
         <!--Search View Controller-->
         <scene sceneID="8kn-qF-SmF">
             <objects>
@@ -914,6 +1131,163 @@
             </objects>
             <point key="canvasLocation" x="1338" y="320"/>
         </scene>
+        <!--Send Page View Controller-->
+        <scene sceneID="fUb-oH-NjT">
+            <objects>
+                <viewController storyboardIdentifier="SendPage" id="6lO-qD-pVM" customClass="SendPageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="M8Q-Mx-Ze5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="pho-M7-WRf" customClass="ComicShareView">
+                                <rect key="frame" x="87" y="304" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="QWR-o8-GBy" customClass="ComicImageListView">
+                                <rect key="frame" x="0.0" y="17" width="414" height="167"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="jwZ-h4-dS3" customClass="HeaderView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="41"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="2Q1-14-6Ki">
+                                <rect key="frame" x="0.0" y="184" width="414" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yeS-cq-H3h">
+                                        <rect key="frame" x="20" y="7" width="52" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="facebooklogo.png"/>
+                                        <connections>
+                                            <action selector="btnShareToSocialMedia:" destination="6lO-qD-pVM" eventType="touchUpInside" id="JiT-En-rb0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6HA-Dt-HUp">
+                                        <rect key="frame" x="79" y="7" width="52" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="savelogo.png"/>
+                                        <connections>
+                                            <action selector="btnShareToSocialMedia:" destination="6lO-qD-pVM" eventType="touchUpInside" id="Hto-7B-ZIE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Fu6-Yh-P46">
+                                        <rect key="frame" x="138" y="7" width="52" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="twitterlogo.png"/>
+                                        <connections>
+                                            <action selector="btnShareToSocialMedia:" destination="6lO-qD-pVM" eventType="touchUpInside" id="aEL-D0-6k4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1KJ-eW-tcJ">
+                                        <rect key="frame" x="197" y="7" width="52" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="instagramlogo.png"/>
+                                        <connections>
+                                            <action selector="btnShareToSocialMedia:" destination="6lO-qD-pVM" eventType="touchUpInside" id="8bf-1v-gdk"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" id="gT1-nt-JIQ">
+                                        <rect key="frame" x="20" y="71" width="347" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="as3-tT-pzp">
+                                <rect key="frame" x="48" y="264" width="268" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
+                                <inset key="titleEdgeInsets" minX="1" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="-50" minY="5" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="dig up friends by name" image="digup.png">
+                                    <color key="titleColor" red="0.13725490200000001" green="0.1215686275" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hnJ-Zt-fKZ">
+                                <rect key="frame" x="20" y="317" width="174" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
+                                <inset key="titleEdgeInsets" minX="11" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Everyone" image="everyone.png">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnEveryOnceClick:" destination="6lO-qD-pVM" eventType="touchUpInside" id="z5J-Mq-obD"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="2zx-rZ-A5s" customClass="GroupsSection">
+                                <rect key="frame" x="0.0" y="372" width="414" height="87"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Groups" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jYh-hb-OrT">
+                                <rect key="frame" x="20" y="354" width="215" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rsr-Ld-Og1">
+                                <rect key="frame" x="20" y="463" width="215" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" id="QAe-cP-Fcp" customClass="FriendsListView">
+                                <rect key="frame" x="0.0" y="484" width="414" height="205"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="FjM-oO-h2m">
+                                <rect key="frame" x="0.0" y="686" width="414" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.13725490200000001" green="0.1215686275" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1P9-iV-UU6">
+                                <rect key="frame" x="12" y="665" width="42" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" image="GobackButton.png"/>
+                                <connections>
+                                    <action selector="backButtonClick:" destination="6lO-qD-pVM" eventType="touchUpInside" id="PEO-S8-DLl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G8o-Hf-pPv">
+                                <rect key="frame" x="360" y="665" width="42" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <state key="normal" image="CheckButton.png"/>
+                                <connections>
+                                    <action selector="btnShareComic:" destination="6lO-qD-pVM" eventType="touchUpInside" id="6N1-FD-sgY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="comicImageList" destination="QWR-o8-GBy" id="U9d-zl-SeI"/>
+                        <outlet property="comicShareViewView" destination="pho-M7-WRf" id="xBJ-4d-woE"/>
+                        <outlet property="friendsListView" destination="QAe-cP-Fcp" id="cMh-EF-QHe"/>
+                        <outlet property="groupsView" destination="2zx-rZ-A5s" id="JSU-iS-qTg"/>
+                        <outlet property="headerView" destination="jwZ-h4-dS3" id="kYB-uF-7JV"/>
+                        <outlet property="lblFriends" destination="rsr-Ld-Og1" id="ssc-K3-G1C"/>
+                        <outlet property="lblGroup" destination="jYh-hb-OrT" id="UcG-Rr-Ues"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="msz-vX-IPB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1795" y="320"/>
+        </scene>
         <!--Crop Register View Controller-->
         <scene sceneID="eNo-YO-hEI">
             <objects>
@@ -949,7 +1323,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="faceSignUp.png" id="vSL-J6-ZJX">
-                                <rect key="frame" x="116.5" y="93.5" width="87" height="86.5"/>
+                                <rect key="frame" x="117" y="94" width="87" height="87"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -1084,7 +1458,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Friends" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="t4X-Oz-lqv">
-                                        <rect key="frame" x="0.0" y="-0.5" width="320" height="79"/>
+                                        <rect key="frame" x="0.0" y="-1" width="320" height="79"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1094,11 +1468,11 @@
                                 <color key="backgroundColor" red="0.027450980390000001" green="0.031372549020000001" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="SbV-qR-vig">
-                                <rect key="frame" x="45" y="104" width="243.5" height="39"/>
+                                <rect key="frame" x="45" y="104" width="244" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dig up friends by name" minimumFontSize="17" clearButtonMode="whileEditing" id="Ldi-g5-MlO">
-                                        <rect key="frame" x="46" y="0.0" width="197.5" height="38.5"/>
+                                        <rect key="frame" x="46" y="0.0" width="198" height="38"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="25"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
@@ -1110,7 +1484,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchFriends.png" id="qR5-5h-Xoh">
-                                <rect key="frame" x="52" y="106.5" width="34" height="63"/>
+                                <rect key="frame" x="52" y="106" width="34" height="63"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Commies from my address book" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c14-OP-6B4">
@@ -1121,7 +1495,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tab their face to add or invite" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iSk-dq-bDN">
-                                <rect key="frame" x="79" y="189" width="221.5" height="36"/>
+                                <rect key="frame" x="79" y="189" width="221" height="36"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="23"/>
                                 <color key="textColor" red="0.14901960780000001" green="0.24313725489999999" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
@@ -1132,7 +1506,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" id="My2-qP-4rm">
-                                <rect key="frame" x="31" y="247.5" width="274" height="275.5"/>
+                                <rect key="frame" x="31" y="247" width="274" height="275"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1194,7 +1568,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainPageLogo" id="vQF-lP-3aU">
-                                <rect key="frame" x="40" y="71" width="240" height="128"/>
+                                <rect key="frame" x="40.000000397364303" y="71" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainPageLogo_Text" id="YaR-Hk-Cxi">
@@ -1353,7 +1727,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField autoresizesSubviews="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="My ID" minimumFontSize="17" id="ZGe-8M-n2m">
-                                        <rect key="frame" x="47" y="0.5" width="209" height="30.5"/>
+                                        <rect key="frame" x="47" y="1" width="209" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.14901960780000001" green="0.23921568630000001" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
@@ -1361,7 +1735,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                     </textField>
                                     <textField autoresizesSubviews="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="O9J-Nl-eJ1">
-                                        <rect key="frame" x="47" y="52.5" width="209" height="32"/>
+                                        <rect key="frame" x="47" y="53" width="209" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1369,7 +1743,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
                                     </textField>
                                     <textField autoresizesSubviews="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" id="3Oa-DR-rxu">
-                                        <rect key="frame" x="47" y="106.5" width="209" height="31"/>
+                                        <rect key="frame" x="47" y="107" width="209" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1377,7 +1751,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                     </textField>
                                     <textField autoresizesSubviews="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age" minimumFontSize="17" id="S6V-36-GhW">
-                                        <rect key="frame" x="47" y="159.5" width="209" height="48"/>
+                                        <rect key="frame" x="47" y="159" width="209" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1439,7 +1813,7 @@ Comicing </string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QNk-xm-g9Q" userLabel="crop button">
-                                <rect key="frame" x="124" y="484.5" width="72" height="80.5"/>
+                                <rect key="frame" x="124" y="484" width="72" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="scissors-icon-white">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1449,7 +1823,7 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nTI-fM-YIK" userLabel="ok button">
-                                <rect key="frame" x="259" y="502.5" width="50" height="45.5"/>
+                                <rect key="frame" x="259" y="502" width="50" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crop-right-icon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1471,7 +1845,7 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3cs-sS-Slw">
-                                <rect key="frame" x="206" y="502.5" width="44" height="44.5"/>
+                                <rect key="frame" x="206" y="502" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -1491,7 +1865,7 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VQw-y2-psW">
-                                <rect key="frame" x="-1" y="506.5" width="40" height="36.5"/>
+                                <rect key="frame" x="-1" y="507" width="40" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crop-undo-icon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1559,14 +1933,14 @@ Comicing </string>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell1" id="dr5-RS-Mql">
-                                <rect key="frame" x="0.0" y="2.5" width="60" height="67.5"/>
+                                <rect key="frame" x="0.0" y="2" width="60" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="67.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="68"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oOI-2o-o74">
-                                            <rect key="frame" x="20" y="51" width="20" height="19"/>
+                                            <rect key="frame" x="20" y="51" width="20" height="20"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                             <state key="normal" image="xbutton"/>
                                             <connections>
@@ -1890,448 +2264,6 @@ Comicing </string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="02L-aW-lF7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="842" y="3714"/>
-        </scene>
-        <!--Contact Controller-->
-        <scene sceneID="kRv-hV-sAb">
-            <objects>
-                <viewController storyboardIdentifier="Contact" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8ug-HN-pAt" customClass="ContactController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="YvV-zt-PkX">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" id="gcq-xv-jZ9" customClass="AvatarView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="iMJ-2i-nU7" customClass="HeaderView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YjO-cj-oFh">
-                                <rect key="frame" x="0.0" y="80" width="33" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="backbutton.png">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnBackClick:" destination="8ug-HN-pAt" eventType="touchUpInside" id="IeF-jd-szX"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" id="rpy-rp-yy8" customClass="SectionDividerView">
-                                <rect key="frame" x="0.0" y="220" width="320" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="kVM-Qe-9SU" customClass="GroupsSection">
-                                <rect key="frame" x="0.0" y="240" width="320" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="Z7T-2c-Vug" customClass="SectionDividerView">
-                                <rect key="frame" x="0.0" y="325" width="320" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.51372549020000002" green="0.81568627449999997" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="Hek-RP-wZw" customClass="FriendsListView">
-                                <rect key="frame" x="0.0" y="345" width="320" height="193"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="Cge-U3-J9W" customClass="FooterView">
-                                <rect key="frame" x="0.0" y="538" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zHS-Z9-bP2">
-                                <rect key="frame" x="250" y="498" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                <state key="normal" image="blueCheckmark.png"/>
-                                <connections>
-                                    <action selector="btnAddButtonClick:" destination="8ug-HN-pAt" eventType="touchUpInside" id="9O6-gk-NqQ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="OAf-vo-6Dw"/>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="avView" destination="gcq-xv-jZ9" id="3ty-Xv-zha"/>
-                        <outlet property="btnAddButton" destination="zHS-Z9-bP2" id="Of8-V5-8So"/>
-                        <outlet property="footerView" destination="Cge-U3-J9W" id="t0K-5d-bB1"/>
-                        <outlet property="friendsList" destination="Hek-RP-wZw" id="hHd-qh-6G1"/>
-                        <outlet property="groupSection" destination="kVM-Qe-9SU" id="P3c-4u-0AI"/>
-                        <outlet property="headerView1" destination="rpy-rp-yy8" id="cmO-lS-MjT"/>
-                        <outlet property="headerView2" destination="Z7T-2c-Vug" id="1Nz-JV-cL1"/>
-                        <outlet property="view" destination="YvV-zt-PkX" id="MRQ-nv-p59"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ybc-Uv-aa8" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1236" y="415"/>
-        </scene>
-        <!--Group View Controller-->
-        <scene sceneID="hFF-ge-gDD">
-            <objects>
-                <viewController storyboardIdentifier="Group" id="rvj-eq-7Lb" customClass="GroupViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TnE-or-zYE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" id="aLC-X2-HfW">
-                                <rect key="frame" x="0.0" y="20" width="320" height="240"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QkZ-wm-RfD">
-                                        <rect key="frame" x="112" y="104" width="195" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="35"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" id="GJH-bS-PyK" customClass="GroupsMembersSection">
-                                        <rect key="frame" x="0.0" y="181" width="320" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yZg-JM-fCe">
-                                        <rect key="frame" x="14" y="84" width="81" height="81"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="btnGroupIconClick:" destination="rvj-eq-7Lb" eventType="touchUpInside" id="9jD-9Z-qqw"/>
-                                        </connections>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="59q-I0-Zem">
-                                        <rect key="frame" x="14" y="84" width="81" height="81"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Group Name" minimumFontSize="17" id="hYv-3I-Mmm">
-                                        <rect key="frame" x="112" y="104" width="195" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="30"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="rvj-eq-7Lb" id="VLK-oh-rZT"/>
-                                        </connections>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" red="0.13725490200000001" green="0.60784313729999995" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="f35-Nr-1xu" customClass="HeaderView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="groupMemberSearch.png" id="3F4-Rs-4kc">
-                                <rect key="frame" x="33" y="43" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8hL-EE-qnL">
-                                <rect key="frame" x="0.0" y="54" width="33" height="31"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="backbutton.png">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="backButtonClick:" destination="rvj-eq-7Lb" eventType="touchUpInside" id="kqr-NG-OVj"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="search to add friends" placeholder="search to add friends" minimumFontSize="17" id="gJc-As-jLD">
-                                <rect key="frame" x="77" y="33" width="201" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
-                                <connections>
-                                    <outlet property="delegate" destination="rvj-eq-7Lb" id="prC-of-BeS"/>
-                                </connections>
-                            </textField>
-                            <view contentMode="scaleToFill" id="Ikv-Kc-iA4" customClass="SectionDividerView">
-                                <rect key="frame" x="0.0" y="260" width="320" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.65490196079999996" green="0.86666666670000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="Sqw-j3-ihP" customClass="FriendsListView">
-                                <rect key="frame" x="0.0" y="280" width="320" height="259"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="sVA-f5-o9B" customClass="FooterView">
-                                <rect key="frame" x="0.0" y="538" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dMA-K9-KgE">
-                                <rect key="frame" x="250" y="498" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                <state key="normal" image="blueCheckmark.png"/>
-                                <connections>
-                                    <action selector="btnAddClick:" destination="rvj-eq-7Lb" eventType="touchUpInside" id="g9o-Wm-nVq"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FXb-py-6vO">
-                                <rect key="frame" x="77" y="33" width="201" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
-                                <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.13725490200000001" green="0.1215686275" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnSearchFriendClick:" destination="rvj-eq-7Lb" eventType="touchUpInside" id="Ytl-kC-eVn"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="backButton" destination="8hL-EE-qnL" id="o2J-iH-84g"/>
-                        <outlet property="btnGroupIcon" destination="yZg-JM-fCe" id="yjZ-dw-40A"/>
-                        <outlet property="friendsList" destination="Sqw-j3-ihP" id="sai-1e-q7f"/>
-                        <outlet property="groupImage" destination="59q-I0-Zem" id="D2q-sK-h8e"/>
-                        <outlet property="groupMemberImages" destination="GJH-bS-PyK" id="frj-11-gC1"/>
-                        <outlet property="groupMembers" destination="GJH-bS-PyK" id="zRC-le-v0s"/>
-                        <outlet property="groupName" destination="QkZ-wm-RfD" id="YfC-eZ-NiJ"/>
-                        <outlet property="sectionDividerViewHolder" destination="Ikv-Kc-iA4" id="859-Zr-rQP"/>
-                        <outlet property="txtGroupName" destination="hYv-3I-Mmm" id="LrK-E5-fSW"/>
-                        <outlet property="txtSearchFriends" destination="gJc-As-jLD" id="LjB-Fa-aFA"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JWM-zo-5U4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1526" y="1291"/>
-        </scene>
-        <!--Send Page View Controller-->
-        <scene sceneID="det-hl-wuJ">
-            <objects>
-                <viewController storyboardIdentifier="SendPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NbM-Po-tfM" customClass="SendPageViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="NxC-Yh-vI7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" id="4Zp-Wy-8b0" customClass="ComicShareView">
-                                <rect key="frame" x="40" y="220" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="xtI-OX-ZjO" userLabel="publicView">
-                                <rect key="frame" x="0.0" y="225" width="320" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WpX-pB-Wot">
-                                        <rect key="frame" x="15" y="18.5" width="116" height="22.5"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="13"/>
-                                        <inset key="titleEdgeInsets" minX="11" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="POST" image="everyone.png">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="rPI-mM-VcN">
-                                        <rect key="frame" x="194" y="17" width="118" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                                        <state key="normal" title="Invite more friends to see your comic">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="btnInviteFriendsTap:" destination="NbM-Po-tfM" eventType="touchUpInside" id="Kmg-EH-BQw"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" id="4cs-lc-VZ0">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="17.5"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public" textAlignment="natural" lineBreakMode="tailTruncation" minimumFontSize="7" id="sRO-Ck-64h">
-                                                <rect key="frame" x="15" y="1.5" width="305" height="15"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.1647058824" green="0.65490196079999996" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="G9V-SO-1sV" userLabel="shareView">
-                                <rect key="frame" x="0.0" y="150" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pak-Us-0B2">
-                                        <rect key="frame" x="178" y="4" width="35" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="instagramlogo.png"/>
-                                    </button>
-                                    <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Mh-2T-JiX">
-                                        <rect key="frame" x="123" y="4" width="35" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="twitterlogo.png"/>
-                                    </button>
-                                    <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uxs-dK-gEa">
-                                        <rect key="frame" x="69" y="4" width="35" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="savelogo.png"/>
-                                    </button>
-                                    <view contentMode="scaleToFill" id="gAO-Bn-pAC">
-                                        <rect key="frame" x="22" y="43" width="245" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yZq-g6-EGO">
-                                        <rect key="frame" x="16" y="4" width="35" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="facebooklogo.png"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="92i-u6-xyi" userLabel="searchView">
-                                <rect key="frame" x="0.0" y="194" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dig up friends by name" textAlignment="natural" minimumFontSize="17" id="wmk-LF-xOy">
-                                        <rect key="frame" x="47" y="0.0" width="269" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="digup.png" id="wjA-MV-3dP">
-                                        <rect key="frame" x="15" y="5" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="4z4-me-8fs">
-                                <rect key="frame" x="0.0" y="548" width="320" height="278"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" id="Zko-z3-IF9" userLabel="invite friends" customClass="InviteFriendsView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="278"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8tp-R9-I4U">
-                                        <rect key="frame" x="267" y="5" width="40" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
-                                        <state key="normal" image="up-arrow-icon"/>
-                                        <connections>
-                                            <action selector="btnCloseInviteView:" destination="NbM-Po-tfM" eventType="touchUpInside" id="xQz-x4-TVl"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" id="7Pb-2M-i9Q" userLabel="privateView">
-                                <rect key="frame" x="0.0" y="270" width="320" height="279"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Groups" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mmH-k5-2vr">
-                                        <rect key="frame" x="15" y="24" width="215" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" id="bd1-oW-jSi" customClass="GroupsSection">
-                                        <rect key="frame" x="0.0" y="40" width="320" height="85"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W81-tR-PVM">
-                                        <rect key="frame" x="15" y="132" width="215" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" id="agF-BQ-ygy">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="neR-De-JnV">
-                                                <rect key="frame" x="15" y="0.5" width="73" height="17"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.1647058824" green="0.65490196079999996" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="yin-Dd-spQ" customClass="FriendsListView">
-                                        <rect key="frame" x="0.0" y="148" width="320" height="131"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="Xff-3V-Pk4" customClass="ComicImageListView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.51372549020000002" green="0.81568627449999997" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="4f3-Nj-04u">
-                                <rect key="frame" x="0.0" y="548" width="320" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.13725490200000001" green="0.1215686275" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="M09-eP-NQU">
-                                <rect key="frame" x="265" y="526" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="CheckButton.png"/>
-                                <connections>
-                                    <action selector="btnShareComic:" destination="NbM-Po-tfM" eventType="touchUpInside" id="tln-M6-1a0"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FsF-hN-USS">
-                                <rect key="frame" x="20" y="526" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="GobackButton.png"/>
-                                <connections>
-                                    <action selector="backButtonClick:" destination="NbM-Po-tfM" eventType="touchUpInside" id="CkB-eC-WSH"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="btnInviteFrnd" destination="rPI-mM-VcN" id="UFf-QL-Kra"/>
-                        <outlet property="comicImageList" destination="Xff-3V-Pk4" id="rXD-UP-bLO"/>
-                        <outlet property="comicShareViewView" destination="4Zp-Wy-8b0" id="lU8-Cr-c2J"/>
-                        <outlet property="friendsListView" destination="yin-Dd-spQ" id="lw0-3F-IqU"/>
-                        <outlet property="groupsView" destination="bd1-oW-jSi" id="b9d-KJ-Bu9"/>
-                        <outlet property="lblFriends" destination="W81-tR-PVM" id="lEK-i4-QtT"/>
-                        <outlet property="lblGroup" destination="mmH-k5-2vr" id="eWo-cg-R0g"/>
-                        <outlet property="txtSearch" destination="wmk-LF-xOy" id="xRC-Rr-68C"/>
-                        <outlet property="viewInvite" destination="Zko-z3-IF9" id="er7-mI-V88"/>
-                        <outlet property="viewInviteSuper" destination="4z4-me-8fs" id="6oV-re-SfC"/>
-                        <outlet property="viewPrivate" destination="7Pb-2M-i9Q" id="MKZ-ku-bER"/>
-                        <outlet property="viewPrivateTop" destination="agF-BQ-ygy" id="Dht-2Z-DQY"/>
-                        <outlet property="viewPublic" destination="xtI-OX-ZjO" id="KHk-QV-aY3"/>
-                        <outlet property="viewSearch" destination="92i-u6-xyi" id="8h7-9b-uN6"/>
-                        <outlet property="viewShare" destination="G9V-SO-1sV" id="OWL-XY-a8Y"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zae-dR-JOn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1696" y="-545"/>
         </scene>
     </scenes>
     <resources>
