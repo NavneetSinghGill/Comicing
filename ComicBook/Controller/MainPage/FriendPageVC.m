@@ -23,6 +23,7 @@
 #import "Utilities.h"
 #import "TopSearchVC.h"
 #import "AppHelper.h"
+#import "AppDelegate.h"
 
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -70,8 +71,8 @@
     //    self.profilePicButton.backgroundColor = [UIColor grayColor];
     self.profileImageView.layer.cornerRadius = CGRectGetHeight(self.profileImageView.frame) / 2;
     self.profileImageView.clipsToBounds = YES;
-    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:self.friendObj.profilePic]];
-    [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@", self.friendObj.firstName, self.friendObj.lastName]];
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:[AppDelegate application].dataManager.friendObject.profilePic]];
+    [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@", [AppDelegate application].dataManager.friendObject.firstName, [AppDelegate application].dataManager.friendObject.lastName]];
     
     [self addUIRefreshControl];
     currentPageDownScroll = 0;
@@ -434,7 +435,7 @@
 
 - (IBAction)tappedUserPic:(id)sender {
     if([Utilities isReachable]) {
-        if ([self.friendObj.status intValue] == 0) {
+        if ([[AppDelegate application].dataManager.friendObject.status intValue] == 0) {
             // friend API
             [self callFriendUnfriendAPIWithStatus:@"1"];
             self.profileImageView.backgroundColor = [UIColor grayColor];
@@ -508,7 +509,7 @@
     [MeAPIManager getTimelineWithPageNumber:page
                              timelinePeriod:period
                                   direction:direction
-                              currentUserId:[AppHelper getCurrentLoginId]
+                              currentUserId:[AppDelegate application].dataManager.friendObject.userId
                                SuccessBlock:^(id object) {
                                    NSLog(@"%@", object);
                                    NSError *error;
@@ -673,10 +674,18 @@
 }
 
 - (void)callFriendUnfriendAPIWithStatus:(NSString *)status {
-    [FriendsAPIManager makeFirendOrUnfriendForUserId:self.friendObj.userId
+    [FriendsAPIManager makeFirendOrUnfriendForUserId:[AppDelegate application].dataManager.friendObject.userId
                                           WithStatus:status
                                     withSuccessBlock:^(id object) {
                                         NSLog(@"%@", object);
+                                        // logic to set the status from API.
+                                        NSMutableArray *friends = [[MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil] mutableCopy];
+                                        NSPredicate *pred = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"friendId == \"%@\"", [AppDelegate application].dataManager.friendObject.userId]];
+                                        NSArray *result = [friends filteredArrayUsingPredicate:pred];
+                                        if(result.count > 0) {
+                                            Friend *friend = [result firstObject];
+                                            [AppDelegate application].dataManager.friendObject.status = friend.status;
+                                        }
                                     } andFail:^(NSError *errorMessage) {
                                         NSLog(@"%@", errorMessage);
                                     }];

@@ -69,6 +69,7 @@
     [self animation];
     [self prepareView];
     [self addTopBarView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callAPIToGetTheComics) name:@"UpdateFriendComics" object:nil];
     [self callAPIToGetTheComics];
 }
 
@@ -648,7 +649,7 @@
     controller.replyType = FriendReply;
     controller.friendOrGroupId = self.friendObj.friendId;
     controller.shareId = self.shareId;
-    [self presentViewController:controller animated:YES completion:nil];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (IBAction)tappedBackButton:(id)sender {

@@ -18,6 +18,7 @@
 #import "MainPageVC.h"
 #import "AppHelper.h"
 #import "FriendPageVC.h"
+#import "AppDelegate.h"
 
 const int blurViewTag = 1010;
 
@@ -172,6 +173,7 @@ const int blurViewTag = 1010;
     self.friendSearchObject = self.searchResultArray[indexPath.row];
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     //Profile Pic
     UIImageView*imageView=(UIImageView*)[cell viewWithTag:1];
@@ -193,9 +195,25 @@ const int blurViewTag = 1010;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    self.friendSearchObject = self.searchResultArray[indexPath.row];
     
-    __block typeof(self) weakSelf = self;
-    FriendPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:FRIEND_PAGE_VIEW];
-    [weakSelf.navigationController pushViewController:contactsView animated:YES];
+    Friend *friend = [[Friend alloc] init];
+    friend.country = self.friendSearchObject.country;
+    friend.dob = self.friendSearchObject.dob;
+    friend.email = self.friendSearchObject.email;
+    friend.firstName = self.friendSearchObject.firstName;
+    friend.lastName = self.friendSearchObject.lastName;
+    friend.mobile = self.friendSearchObject.mobile;
+    friend.profilePic = self.friendSearchObject.profilePic;
+    friend.status = self.friendSearchObject.status;
+    friend.userId = self.friendSearchObject.userId;
+    friend.userType = self.friendSearchObject.userTypeId;
+    friend.loginId = self.friendSearchObject.loginId;
+    [AppDelegate application].dataManager.friendObject = friend;
+    
+    [self performSegueWithIdentifier:@"FriendPageSegue" sender:indexPath];
+    
+//    __block typeof(self) weakSelf = self;
+//    FriendPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:FRIEND_PAGE_VIEW];
+//    [weakSelf.navigationController pushViewController:contactsView animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

@@ -23,7 +23,8 @@ NSString * const DIRECTION_UP = @"up";
 NSString * const SEARCH_USER_Id = @"users/loginId/";
 NSString * const INBOXAPI = @"inbox/ownerId/";
 NSString * const GET_GROUPS_MEMBER = @"groups/id/";
-NSString * const GET_GROUPS_COMICS = @"comics/groupId/";
+//NSString * const GET_GROUPS_COMICS = @"comics/groupId/";
+NSString * const GET_GROUPS_COMICS = @"conversations/groupId/";
 
 #pragma mark - Titles and Messages
 

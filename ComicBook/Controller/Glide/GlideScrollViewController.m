@@ -11,6 +11,7 @@
 #import "ComicNetworking.h"
 #import "SendPageViewController.h"
 #import "AppDelegate.h"
+#import "Constants.h"
 
 @interface GlideScrollViewController () <SlidesScrollViewDelegate,ZoomTransitionProtocol>
 //
@@ -48,8 +49,6 @@ NSTimer* timerObject;
 - (void)viewDidLoad
 {
 //    [super viewDidLoad];
-
-    [self prepareView];
     
     // set up the filename to save based on the friend/group id.
     if(self.comicType == ReplyComic && self.replyType == FriendReply) {
@@ -59,6 +58,8 @@ NSTimer* timerObject;
     } else {
         self.fileNameToSave = @"ComicSlide";
     }
+    
+    [self prepareView];
     
     if (comicSlides == nil || comicSlides.count == 0) {
         [scrvComicSlide pushAddSlideTap:scrvComicSlide.btnAddSlide animation:NO];
@@ -401,7 +402,6 @@ NSTimer* timerObject;
         [cmNetWorking postComicCreation:[self createSendParams:[json objectForKey:@"slides"]]
                                      Id:nil
                              completion:^(id json,id jsonResposeHeader) {
-                                 
                                  NSLog(@"Finish Comic Creation");
                                  [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
                                  NSLog(@"END");
@@ -412,6 +412,13 @@ NSTimer* timerObject;
                                      UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                      SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
                                      [self.navigationController pushViewController:controller animated:YES];
+                                 } else {
+                                     if(self.replyType == FriendReply) {
+                                         [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
+                                     } else if(self.replyType == GroupReply) {
+                                         [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
+                                     }
+                                     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                                  }
                              } ErrorBlock:^(JSONModelError *error) {
                                  NSLog(@"completion %@",error);
