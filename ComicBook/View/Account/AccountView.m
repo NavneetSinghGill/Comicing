@@ -426,22 +426,10 @@ CGRect firstFrame;
 
 #pragma Events
 
--(void)datePickerValueChanged:(UIDatePicker *)sender
-{
+-(void)datePickerValueChanged:(UIDatePicker *)sender{
     NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
     [outputFormatter setDateFormat:@"YYYY-MM-d"];
-    
-    NSDate* now = [NSDate date];
-    
-    
-    NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
-                                       components:NSCalendarUnitYear
-                                       fromDate:sender.date
-                                       toDate:now
-                                       options:0];
-    NSInteger age = [ageComponents year];
-    
-    self.txtAge.text = [NSString stringWithFormat:@"%ld",(long)age];
+    self.txtAge.text = [outputFormatter stringFromDate:sender.date];
 }
 
 -(void)btnDoneClick:(id)sender{
@@ -476,14 +464,9 @@ CGRect firstFrame;
         [cmNetWorking updateUserInfo:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json,id jsonResposeHeader) {
             
             [AppHelper showSuccessDropDownMessage:@"Thank you for the registration." mesage:@""];
-            
-            if ([json objectForKey:@"data"] && ![[json objectForKey:@"data"] objectForKey:@"login_id"]) {
-                NSMutableDictionary* userDic = [[json objectForKey:@"data"] mutableCopy];
-                [userDic setObject:self.txtId.text forKey:@"login_id"];
-                [AppHelper setCurrentUser:userDic];
-            }else
-            {
-                [AppHelper setCurrentUser:[json objectForKey:@"data"]];
+            if ([json objectForKey:@"data"] &&
+                [[json objectForKey:@"data"] objectForKey:@"user_id"]) {
+                [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];
             }
             
             [AppHelper setCurrentUserEmail:self.txtEmail.text];

@@ -17,6 +17,7 @@
 @property (strong, nonatomic) UINavigationController *navigation;
 @property (strong, nonatomic) DataManager *dataManager;
 
+
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;

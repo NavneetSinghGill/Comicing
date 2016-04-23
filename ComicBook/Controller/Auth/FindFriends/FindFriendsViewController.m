@@ -82,8 +82,10 @@
     
 }
 
--(void)bindData{
-    if (contactNumber) {
+-(void)bindData
+{
+    if (contactNumber)
+    {
         [contactNumber removeAllObjects];
         contactNumber = nil;
     }
@@ -254,7 +256,13 @@
         if ([dict objectForKey:@"Phone"]) {
             phoneNumber = [dict objectForKey:@"Phone"];
         }
-        [self openMessageComposer:[NSArray arrayWithObjects:phoneNumber, nil] messageText:INVITE_TEXT];
+        
+        NSString *loginID = [NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].login_id];
+        
+        NSString *inviteString = [NSString stringWithFormat:INVITE_TEXT,loginID];
+
+        
+        [self openMessageComposer:[NSArray arrayWithObjects:phoneNumber, nil] messageText:inviteString];
     }
     
 }

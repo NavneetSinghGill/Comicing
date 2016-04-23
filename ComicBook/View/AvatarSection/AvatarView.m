@@ -37,7 +37,7 @@
 -(void)configView{
     self.txtSearchById.clearButtonMode = UITextFieldViewModeWhileEditing;
 
-    [self.view setBackgroundColor:[UIColor colorWithHexStr:@"bbe9f7"]];
+    [self.view setBackgroundColor:[UIColor colorWithHexStr:@"31ADE0"]];
     [self.myFriendButton.titleLabel setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:38]];
     [self getGroupsByUserId];
 }

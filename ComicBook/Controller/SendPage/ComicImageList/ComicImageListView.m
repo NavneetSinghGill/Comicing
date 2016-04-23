@@ -8,6 +8,7 @@
 
 #import "ComicImageListView.h"
 #import "UIColor+colorWithHexString.h"
+#import "AppConstants.h"
 
 @implementation ComicImageListView
 
@@ -15,6 +16,7 @@
     self = [super initWithFrame:frame];
     if(self)
     {
+        
     }
     return self;
 }
@@ -31,12 +33,16 @@
     }
     return self;
 }
--(void)configSection{
+-(void)configSection
+{
     
     [self.view setBackgroundColor:[UIColor colorWithHexStr:@"231f20"]];
     
     [self.comicImageCollectionView registerClass:[ComicImageCollectionCell class] forCellWithReuseIdentifier:@"tabCell"];
     self.comicImageCollectionView.delegate = self;
+    
+    self.comicImageCollectionView.frame = self.bounds;
+    
 }
 
 -(void)refeshList:(NSMutableArray*)array{
@@ -63,6 +69,39 @@
     
     return cell;
     
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Adjust cell size for orientation
+//    if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+//        return CGSizeMake(170.f, 170.f);
+//    }
+//    return CGSizeMake(192.f, 192.f);
+
+
+    if (IS_IPHONE_5)
+    {
+        return CGSizeMake(82, 141);
+    }
+    else if(IS_IPHONE_6)
+    {
+        return CGSizeMake(92, 154);
+
+    }
+    else if(IS_IPHONE_6P)
+    {
+        return CGSizeMake(102, 164);
+
+    }
+    else
+    {
+        return CGSizeMake(82, 141);
+
+    }
+
 }
 
 

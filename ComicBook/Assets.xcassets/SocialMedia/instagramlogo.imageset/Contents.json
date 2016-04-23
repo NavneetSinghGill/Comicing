@@ -7,11 +7,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "instagramlogo@2x.png",
+      "filename" : "instagram icon-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "instagram icon.png",
       "scale" : "3x"
     }
   ],

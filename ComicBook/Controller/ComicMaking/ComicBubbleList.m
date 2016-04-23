@@ -44,14 +44,17 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     
 //    bubbleListArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"Regular_Large_01"],[UIImage imageNamed:@"02 Eh"],[UIImage imageNamed:@"03 Thinking"],[UIImage imageNamed:@"04 Love"],[UIImage imageNamed:@"05 Scared"],[UIImage imageNamed:@"06 Angry_yelling"],[UIImage imageNamed:@"07 Great_Awesome"],[UIImage imageNamed:@"08 Strong_Powerful"],[UIImage imageNamed:@"09 Angry"],[UIImage imageNamed:@"10 Ohno"], nil];
 
-    bubbleListArray = [[NSMutableArray alloc] initWithObjects:@"Regular_Large_01",@"Eh_Large_1",@"Thinking_Large_01",@"Love_Large_01",@"Scared_Large_01",@"Angry_yelling_Large_01",@"Great_Awesome_Large_01",@"Strong_Powerful_Large_01",@"Angry_Large_01",@"Oh no_Large_01", nil];
     
-    bubbleLargeListArray = [[NSMutableArray alloc] initWithObjects:@"Regular_Large_01",@"Eh_Large_1",@"Thinking_Large_01",@"Love_Large_01",@"Scared_Large_01",@"Angry_yelling_Large_01",@"Great_Awesome_Large_01",@"Strong_Powerful_Large_01",@"Angry_Large_01",@"Oh no_Large_01", nil];
+    bubbleListArray = [[NSMutableArray alloc] initWithObjects:@"firstBubble",@"Regular_Large_01",@"Eh_Large_1",@"Thinking_Large_01",@"Love_Large_01",@"Scared_Large_01",@"Angry_yelling_Large_01",@"Great_Awesome_Large_01",@"Strong_Powerful_Large_01",@"Angry_Large_01",@"Oh no_Large_01", nil];
+    
+    bubbleLargeListArray = [[NSMutableArray alloc] initWithObjects:@"firstBubble",@"Regular_Large_01",@"Eh_Large_1",@"Thinking_Large_01",@"Love_Large_01",@"Scared_Large_01",@"Angry_yelling_Large_01",@"Great_Awesome_Large_01",@"Strong_Powerful_Large_01",@"Angry_Large_01",@"Oh no_Large_01", nil];
     
     //May be this is bad idea, but i d't have any option right now sorry.
     self.bubbleLargeListTextFieldArray = [[NSMutableArray alloc] initWithObjects:
+                                          [NSValue valueWithCGRect:CGRectMake(30,14,80,85)],
                                           [NSValue valueWithCGRect:CGRectMake(10,40,135,65)],
-                                          [NSValue valueWithCGRect:CGRectMake(30,45,90,65)],[NSValue valueWithCGRect:CGRectMake(30,40,100,75)],[NSValue valueWithCGRect:CGRectMake(10,50,120,65)],[NSValue valueWithCGRect:CGRectMake(10,30,120,65)],[NSValue valueWithCGRect:CGRectMake(10,50,130,65)],[NSValue valueWithCGRect:CGRectMake(10,30,130,75)],[NSValue valueWithCGRect:CGRectMake(10,40,130,75)],[NSValue valueWithCGRect:CGRectMake(10,40,130,75)],[NSValue valueWithCGRect:CGRectMake(10,40,130,75)], nil];
+                                          [NSValue valueWithCGRect:CGRectMake(30,45,90,65)],[NSValue valueWithCGRect:CGRectMake(30,40,100,75)],[NSValue valueWithCGRect:CGRectMake(10,50,120,65)],[NSValue valueWithCGRect:CGRectMake(10,30,120,65)],[NSValue valueWithCGRect:CGRectMake(10,50,130,65)],[NSValue valueWithCGRect:CGRectMake(10,30,130,75)],[NSValue valueWithCGRect:CGRectMake(10,40,130,75)],[NSValue valueWithCGRect:CGRectMake(10,40,130,75)],[NSValue valueWithCGRect:CGRectMake(30,40,110,85)], nil];
+    
     
     [self.collectionView reloadData];
 }

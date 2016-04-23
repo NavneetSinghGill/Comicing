@@ -301,7 +301,6 @@
 		0C6668991C84358600FEB11F /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6667201C84358600FEB11F /* AccountView.m */; };
 		0C66689A1C84358600FEB11F /* AccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C6667211C84358600FEB11F /* AccountView.xib */; };
 		0C66689B1C84358600FEB11F /* AvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6667241C84358600FEB11F /* AvatarView.m */; };
-		0C66689C1C84358600FEB11F /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C6667251C84358600FEB11F /* AvatarView.xib */; };
 		0C66689D1C84358600FEB11F /* AVCamPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6667281C84358600FEB11F /* AVCamPreviewView.m */; };
 		0C66689F1C84358600FEB11F /* ComicShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C66672C1C84358600FEB11F /* ComicShareView.m */; };
 		0C6668A01C84358600FEB11F /* ComicShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C66672D1C84358600FEB11F /* ComicShareView.xib */; };
@@ -322,7 +321,6 @@
 		0C6668AF1C84358600FEB11F /* GroupsSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C66674A1C84358600FEB11F /* GroupsSection.m */; };
 		0C6668B01C84358600FEB11F /* GroupsSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C66674B1C84358600FEB11F /* GroupsSection.xib */; };
 		0C6668B11C84358600FEB11F /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C66674E1C84358600FEB11F /* HeaderView.m */; };
-		0C6668B21C84358600FEB11F /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C66674F1C84358600FEB11F /* HeaderView.xib */; };
 		0C6668B31C84358600FEB11F /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6667521C84358600FEB11F /* KeyboardView.m */; };
 		0C6668B41C84358600FEB11F /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C6667531C84358600FEB11F /* KeyboardView.xib */; };
 		0C6668B51C84358600FEB11F /* ProfilePicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6667561C84358600FEB11F /* ProfilePicView.m */; };
@@ -345,6 +343,15 @@
 		0CBF90B51CA313A5004007DF /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B31CA313A5004007DF /* UIImage+ColorAtPixel.m */; };
 		0CBF90B81CA3143D004007DF /* UIImage+ImageCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */; };
 		0CDD9A821C99B30B00D942D3 /* TermsServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */; };
+		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
+		84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D661CC94E1200C52C06 /* AvatarView.xib */; };
+		84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D681CC94E2B00C52C06 /* HeaderView.xib */; };
+		8466E7F21CB169320075727A /* InviteFriendsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466E7F11CB169320075727A /* InviteFriendsView.m */; };
+		8466E7F41CB169500075727A /* InviteFriendsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8466E7F31CB169500075727A /* InviteFriendsView.xib */; };
+		84ECE6491CB57772007AF54E /* searchFriendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ECE6481CB57772007AF54E /* searchFriendView.m */; };
+		84ECE64B1CB5778B007AF54E /* searchFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84ECE64A1CB5778B007AF54E /* searchFriendView.xib */; };
+		84F1B4411CB2E41A0096F79C /* InviteFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */; };
+		84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -858,7 +865,6 @@
 		0C6667211C84358600FEB11F /* AccountView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountView.xib; sourceTree = "<group>"; };
 		0C6667231C84358600FEB11F /* AvatarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarView.h; sourceTree = "<group>"; };
 		0C6667241C84358600FEB11F /* AvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarView.m; sourceTree = "<group>"; };
-		0C6667251C84358600FEB11F /* AvatarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarView.xib; sourceTree = "<group>"; };
 		0C6667271C84358600FEB11F /* AVCamPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamPreviewView.h; sourceTree = "<group>"; };
 		0C6667281C84358600FEB11F /* AVCamPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamPreviewView.m; sourceTree = "<group>"; };
 		0C66672B1C84358600FEB11F /* ComicShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicShareView.h; sourceTree = "<group>"; };
@@ -890,7 +896,6 @@
 		0C66674B1C84358600FEB11F /* GroupsSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupsSection.xib; sourceTree = "<group>"; };
 		0C66674D1C84358600FEB11F /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		0C66674E1C84358600FEB11F /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
-		0C66674F1C84358600FEB11F /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		0C6667511C84358600FEB11F /* KeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardView.h; sourceTree = "<group>"; };
 		0C6667521C84358600FEB11F /* KeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardView.m; sourceTree = "<group>"; };
 		0C6667531C84358600FEB11F /* KeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardView.xib; sourceTree = "<group>"; };
@@ -928,7 +933,20 @@
 		0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageCompress.m"; sourceTree = "<group>"; };
 		0CDD9A801C99B30B00D942D3 /* TermsServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsServiceViewController.h; sourceTree = "<group>"; };
 		0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsServiceViewController.m; sourceTree = "<group>"; };
+		8433BC921CC135D20073DE2A /* UIImage+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Trim.h"; sourceTree = "<group>"; };
+		8433BC931CC135D20073DE2A /* UIImage+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Trim.m"; sourceTree = "<group>"; };
 		845090751C2B1343004DAE99 /* Comicing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Comicing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84592D661CC94E1200C52C06 /* AvatarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarView.xib; sourceTree = "<group>"; };
+		84592D681CC94E2B00C52C06 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		8466E7F01CB169320075727A /* InviteFriendsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsView.h; sourceTree = "<group>"; };
+		8466E7F11CB169320075727A /* InviteFriendsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsView.m; sourceTree = "<group>"; };
+		8466E7F31CB169500075727A /* InviteFriendsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsView.xib; sourceTree = "<group>"; };
+		84ECE6471CB57772007AF54E /* searchFriendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = searchFriendView.h; sourceTree = "<group>"; };
+		84ECE6481CB57772007AF54E /* searchFriendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = searchFriendView.m; sourceTree = "<group>"; };
+		84ECE64A1CB5778B007AF54E /* searchFriendView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = searchFriendView.xib; sourceTree = "<group>"; };
+		84F1B43E1CB2E41A0096F79C /* InviteFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendCell.h; sourceTree = "<group>"; };
+		84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendCell.m; sourceTree = "<group>"; };
+		84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -941,6 +959,8 @@
 				0C6667BE1C84358600FEB11F /* FBSDKLoginKit.framework in Frameworks */,
 				0C6667BF1C84358600FEB11F /* FBSDKMessengerShareKit.framework in Frameworks */,
 				0C4EEB9E1CB2E5470011CAAB /* Crashlytics.framework in Frameworks */,
+				0C6667BE1C84358600FEB11F /* FBSDKLoginKit.framework in Frameworks */,
+				0C6667BF1C84358600FEB11F /* FBSDKMessengerShareKit.framework in Frameworks */,
 				0C6667BD1C84358600FEB11F /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1718,6 +1738,7 @@
 		0C6665E11C84358500FEB11F /* SendPage */ = {
 			isa = PBXGroup;
 			children = (
+				8466E7EF1CB166970075727A /* Invite Friends */,
 				0C6665E21C84358500FEB11F /* ComicImageList */,
 				0C6665E91C84358500FEB11F /* SendPageViewController.h */,
 				0C6665EA1C84358500FEB11F /* SendPageViewController.m */,
@@ -1883,6 +1904,8 @@
 		0C6666331C84358600FEB11F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8433BC921CC135D20073DE2A /* UIImage+Trim.h */,
+				8433BC931CC135D20073DE2A /* UIImage+Trim.m */,
 				0CBF90B61CA3143D004007DF /* UIImage+ImageCompress.h */,
 				0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */,
 				0CBF90B01CA313A5004007DF /* UIImage+Alpha.h */,
@@ -2328,7 +2351,7 @@
 			children = (
 				0C6667231C84358600FEB11F /* AvatarView.h */,
 				0C6667241C84358600FEB11F /* AvatarView.m */,
-				0C6667251C84358600FEB11F /* AvatarView.xib */,
+				84592D661CC94E1200C52C06 /* AvatarView.xib */,
 			);
 			path = AvatarSection;
 			sourceTree = "<group>";
@@ -2422,7 +2445,7 @@
 			children = (
 				0C66674D1C84358600FEB11F /* HeaderView.h */,
 				0C66674E1C84358600FEB11F /* HeaderView.m */,
-				0C66674F1C84358600FEB11F /* HeaderView.xib */,
+				84592D681CC94E2B00C52C06 /* HeaderView.xib */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -2519,6 +2542,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8466E7EF1CB166970075727A /* Invite Friends */ = {
+			isa = PBXGroup;
+			children = (
+				8466E7F01CB169320075727A /* InviteFriendsView.h */,
+				8466E7F11CB169320075727A /* InviteFriendsView.m */,
+				8466E7F31CB169500075727A /* InviteFriendsView.xib */,
+				84F1B43E1CB2E41A0096F79C /* InviteFriendCell.h */,
+				84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */,
+				84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */,
+				84ECE6471CB57772007AF54E /* searchFriendView.h */,
+				84ECE6481CB57772007AF54E /* searchFriendView.m */,
+				84ECE64A1CB5778B007AF54E /* searchFriendView.xib */,
+			);
+			name = "Invite Friends";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2581,7 +2620,6 @@
 				0C6667EA1C84358600FEB11F /* GroupsMembersCell.xib in Resources */,
 				0C6668AC1C84358600FEB11F /* GroupItem.xib in Resources */,
 				0C6667A41C84358600FEB11F /* CheckButton.png in Resources */,
-				0C6668B21C84358600FEB11F /* HeaderView.xib in Resources */,
 				0C6667A21C84358600FEB11F /* 03.png in Resources */,
 				0C6667941C84358600FEB11F /* findFriendsArrow.png in Resources */,
 				0C6667791C84358600FEB11F /* MYRIADPRO-CONDIT.OTF in Resources */,
@@ -2611,6 +2649,7 @@
 				0C6667F81C84358600FEB11F /* GroupCell.xib in Resources */,
 				0C6667751C84358600FEB11F /* MYRIADPRO-BOLDCOND.OTF in Resources */,
 				0C6667961C84358600FEB11F /* flagImage.png in Resources */,
+				8466E7F41CB169500075727A /* InviteFriendsView.xib in Resources */,
 				0C66676F1C84358600FEB11F /* american-typewriter-medium-bt.ttf in Resources */,
 				0C6667731C84358600FEB11F /* Myriad Roman.ttf in Resources */,
 				0C6667841C84358600FEB11F /* backbutton.png in Resources */,
@@ -2634,6 +2673,7 @@
 				0C6667851C84358600FEB11F /* cameraButton.png in Resources */,
 				0C6667EC1C84358600FEB11F /* GroupsMembersSection.xib in Resources */,
 				0C6667901C84358600FEB11F /* accountEmail.png in Resources */,
+				84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */,
 				0C6667AF1C84358600FEB11F /* LaunchScreen.storyboard in Resources */,
 				0C6668B01C84358600FEB11F /* GroupsSection.xib in Resources */,
 				0C6668171C84358600FEB11F /* Info.plist in Resources */,
@@ -2642,11 +2682,11 @@
 				0C6667701C84358600FEB11F /* american-typewriter.ttf in Resources */,
 				0C6667AA1C84358600FEB11F /* instagramlogo.png in Resources */,
 				0C66689A1C84358600FEB11F /* AccountView.xib in Resources */,
-				0C66689C1C84358600FEB11F /* AvatarView.xib in Resources */,
 				0C6667AC1C84358600FEB11F /* twitterlogo.png in Resources */,
 				0C6667861C84358600FEB11F /* meButton.png in Resources */,
 				0C66677F1C84358600FEB11F /* arrow.png in Resources */,
 				0C6668AE1C84358600FEB11F /* GroupSectionCell.xib in Resources */,
+				84ECE64B1CB5778B007AF54E /* searchFriendView.xib in Resources */,
 				0C6667911C84358600FEB11F /* accountId.png in Resources */,
 				0C66679E1C84358600FEB11F /* selectedImage.png in Resources */,
 				0C6668071C84358600FEB11F /* MeCell.xib in Resources */,
@@ -2661,12 +2701,14 @@
 				0C6667A11C84358600FEB11F /* 02.png in Resources */,
 				0C6667931C84358600FEB11F /* faceSignUp.png in Resources */,
 				0C6667811C84358600FEB11F /* arrow@3x.png in Resources */,
+				84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */,
 				0C6667711C84358600FEB11F /* Avenir Next LT W01 Ultra Light.ttf in Resources */,
 				0C66679F1C84358600FEB11F /* Search.png in Resources */,
 				0C66679D1C84358600FEB11F /* searchFriends.png in Resources */,
 				0C6668BF1C84358600FEB11F /* VerifyView.xib in Resources */,
 				0C66679A1C84358600FEB11F /* profilePicCut.png in Resources */,
 				0C6667821C84358600FEB11F /* searchBlueIcon.png in Resources */,
+				84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */,
 				0C6667A61C84358600FEB11F /* digup@2x.png in Resources */,
 				0C6667D81C84358600FEB11F /* FindFriendsTableCell.xib in Resources */,
 				0C6667771C84358600FEB11F /* MYRIADPRO-BOLDIT.OTF in Resources */,
@@ -2791,6 +2833,7 @@
 				0C66686A1C84358600FEB11F /* NSArray+MTLManipulationAdditions.m in Sources */,
 				0C6667E21C84358600FEB11F /* ExclamationList.m in Sources */,
 				0C6668001C84358600FEB11F /* FriendsCollectionViewCell.m in Sources */,
+				84F1B4411CB2E41A0096F79C /* InviteFriendCell.m in Sources */,
 				0C6667D91C84358600FEB11F /* FindFriendsViewController.m in Sources */,
 				0C6668A21C84358600FEB11F /* FooterView.m in Sources */,
 				0C66682C1C84358600FEB11F /* Pagination.m in Sources */,
@@ -2820,6 +2863,7 @@
 				0C6667C71C84358600FEB11F /* WhatsAppHelper.m in Sources */,
 				0C6667F31C84358600FEB11F /* CMCComicCell.m in Sources */,
 				0C6667B41C84358600FEB11F /* BubbleViewItem.m in Sources */,
+				84ECE6491CB57772007AF54E /* searchFriendView.m in Sources */,
 				0C66685B1C84358600FEB11F /* JSONModelError.m in Sources */,
 				0C6668321C84358600FEB11F /* UserDetail.m in Sources */,
 				0C66685A1C84358600FEB11F /* JSONModelClassProperty.m in Sources */,
@@ -2831,6 +2875,7 @@
 				0C6668291C84358600FEB11F /* GroupUserAddRemove.m in Sources */,
 				0C6668331C84358600FEB11F /* UserSearch.m in Sources */,
 				0C6668B31C84358600FEB11F /* KeyboardView.m in Sources */,
+				8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */,
 				0C6667CA1C84358600FEB11F /* ZOZolaZoomTransition.m in Sources */,
 				0C6667F41C84358600FEB11F /* CMCUserCell.m in Sources */,
 				0C6668521C84358600FEB11F /* AFNetworkReachabilityManager.m in Sources */,
@@ -2844,6 +2889,7 @@
 				0C6667DB1C84358600FEB11F /* MainViewController.m in Sources */,
 				0C6667B21C84358600FEB11F /* AppHelper.m in Sources */,
 				0C66686B1C84358600FEB11F /* NSDictionary+MTLJSONKeyPath.m in Sources */,
+				8466E7F21CB169320075727A /* InviteFriendsView.m in Sources */,
 				0C6668A81C84358600FEB11F /* FriendsListView.m in Sources */,
 				0C66682E1C84358600FEB11F /* TOC.m in Sources */,
 				0C6667C41C84358600FEB11F /* ShareHelper.m in Sources */,

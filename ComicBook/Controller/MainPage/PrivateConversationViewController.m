@@ -53,6 +53,7 @@
 
 @property (strong, nonatomic) NSMutableArray *comics;
 @property (strong, nonatomic) NSString *shareId;
+
 @property CGRect saveTableViewFrame;
 
 @end
@@ -651,6 +652,7 @@
     controller.shareId = self.shareId;
     [self presentViewController:navigationController animated:YES completion:nil];
 }
+
 
 - (IBAction)tappedBackButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

@@ -216,7 +216,9 @@
     [self.groupImage setImage:image];
 }
 
--(void)doCreateNewGroup{
+
+-(void)doCreateNewGroup
+{
     if(self.groupImage.image == nil)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
@@ -365,13 +367,17 @@
     
 }
 
-- (IBAction)btnAddClick:(id)sender {
+
+- (IBAction)btnAddClick:(id)sender
+{
     if(self.group_id < 0)
     {
         //do Create Group
         [self doCreateNewGroup];
         return;
-    }else{
+    }
+    else
+    {
         [self doUpdateGroup];
     }
 }
@@ -558,6 +564,17 @@
 //    
 //    [self addFriendsToGroup:objectList];
 //}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
+                     withVelocity:(CGPoint)velocity
+              targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+}
 
 #pragma mark Api Delegate
 

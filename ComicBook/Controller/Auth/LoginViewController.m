@@ -31,12 +31,12 @@
     [super viewDidLoad];
 
     [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRegisterNotificationSucess:) name:RegisterNotification_Sucess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRegisterNotificationFailed:) name:RegisterNotification_Failed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveRemoteNotification:) name:RegisterNotification_Receive object:nil];
     
     [self setPushNotification];
+
     // Do any additional setup after loading the view.
 }
 
@@ -182,7 +182,7 @@
             if ([[[json objectForKey:@"result"] lowercaseString] isEqualToString:@"failed"]) {
                 [self showAlertMessage:[json objectForKey:@"message"]];
             }else if ([[[json objectForKey:@"result"] lowercaseString] isEqualToString:@"sucess"]) {
-                
+
                 if ([json objectForKey:@"data"] && ![[json objectForKey:@"data"] objectForKey:@"login_id"]) {
                     NSMutableDictionary* userDic = [[json objectForKey:@"data"] mutableCopy];
                     [userDic setObject:self.txtLoginId.text forKey:@"login_id"];
@@ -191,7 +191,6 @@
                 {
                     [AppHelper setCurrentUser:[json objectForKey:@"data"]];
                 }
-                
                 [AppHelper setCurrentUserEmail:[[json objectForKey:@"data"] objectForKey:@"email"]];
                 [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];
                 
@@ -210,7 +209,6 @@
         }];
     }
 }
-
 
 #pragma mark Pushnotification
 

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface GlideViewController : UIViewController
-
+@property BOOL isComeFromGroupPage;
+@property BOOL isComeFromFriendPage;
+@property NSString* groupOrFriendID;
 
 @end

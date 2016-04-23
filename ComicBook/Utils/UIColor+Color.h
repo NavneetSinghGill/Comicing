@@ -17,6 +17,12 @@
 + (UIColor *)drawingColorYellow;
 + (UIColor *)drawingColorBrown;
 + (UIColor *)drawingColorGreen;
++ (UIColor *)drawingColorPink;
++ (UIColor *)drawingColorCyan;
++ (UIColor *)drawingColorPurple;
++ (UIColor *)drawingColorOrange;
+
+
 
 + (UIColor *)blackboardColorYellow;
 

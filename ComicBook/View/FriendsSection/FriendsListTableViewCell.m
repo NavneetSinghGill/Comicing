@@ -7,6 +7,7 @@
 //
 
 #import "FriendsListTableViewCell.h"
+#import "UIColor+colorWithHexString.h"
 
 @implementation FriendsListTableViewCell
 
@@ -23,7 +24,7 @@
     self.btnInvite.layer.cornerRadius= 15;
     self.btnInvite.layer.borderWidth= 1.0;
     self.btnInvite.layer.masksToBounds = YES;
-    self.btnInvite.layer.borderColor=[[UIColor blackColor] CGColor];
+    self.btnInvite.layer.borderColor = [[UIColor colorWithHexStr:@"263E8E"] CGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

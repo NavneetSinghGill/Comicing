@@ -754,7 +754,7 @@
 
 - (IBAction)btnContactClick:(id)sender {
     
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle: nil];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     ContactController* cVc = (ContactController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"Contact"];
     mainStoryboard = nil;
     [self.navigationController pushViewController:cVc animated:YES];

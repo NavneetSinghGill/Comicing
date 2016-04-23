@@ -8,34 +8,108 @@
 
 #import "SendPageViewController.h"
 #import "ComicPage.h"
+#import "searchFriendView.h"
 
-@interface SendPageViewController ()
+@interface SendPageViewController ()<UITextFieldDelegate>
+@property (nonatomic, assign) CGFloat lastContentOffset;
+@property (weak, nonatomic) IBOutlet UIView *viewPrivate;
+@property (weak, nonatomic) IBOutlet UIButton *btnInviteFrnd;
+@property (weak, nonatomic) IBOutlet UITextField *txtSearch;
+@property (weak, nonatomic) IBOutlet searchFriendView *viewSearchList;
 
+@property CGRect frameFriendListView;
+@property CGRect frameSearchView;
+@property CGRect frameViewPublic;
+@property CGRect frameViewShare;
+@property CGRect frameViewPrivate;
+@property CGRect frameLblFriend;
+@property CGRect frameViewSearchFriendList;
+
+@property CGFloat heightOfFriendlist;
+@property CGFloat heightOfViewPrivate;
+@property CGFloat positionYoflblFriends;
+
+@property BOOL isSearchEnable;
+@property BOOL isInvitefriendListOpen;
 @end
 
 @implementation SendPageViewController
+
+@synthesize viewPrivate,viewInviteSuper,lastContentOffset,frameFriendListView,frameViewShare,frameSearchView,frameViewPublic,frameLblFriend,heightOfViewPrivate,heightOfFriendlist,positionYoflblFriends,txtSearch,frameViewSearchFriendList,isInvitefriendListOpen;
 
 #define FB 10
 #define IM 11
 #define TW 12
 #define IN 13
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     
-    [self configViews];
+   // [self configViews];
     [self configText];
     [super viewDidLoad];
+    
+    frameViewShare = _viewShare.frame;
+    frameViewPublic = _viewPublic.frame;
+    frameSearchView = _viewSearch.frame;
+    frameFriendListView = _friendsListView.frame;
+    _frameViewPrivate = viewPrivate.frame;
+    frameLblFriend = _lblFriends.frame;
+    frameViewSearchFriendList = _viewSearchList.frame;
+    
+    txtSearch.delegate = self;
+    
+    heightOfViewPrivate = viewPrivate.frame.size.height + _viewShare.frame.size.height+_viewPublic.frame.size.height;
+    
+    heightOfFriendlist = heightOfViewPrivate - 50;
+    
+    positionYoflblFriends = _viewPrivateTop.frame.size.height + 20;
+    
     // Do any additional setup after loading the view from its nib.
-}
+    [self hideInviteView];
 
--(void)viewWillAppear:(BOOL)animated{
-    self.friendsListView.enableSectionTitles = YES;
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
+    
+    self.friendsListView.enableSectionTitles = NO;
     self.friendsListView.enableSelection = YES;
     self.friendsListView.delegate = self;
     self.groupsView.delegate = self;
+    self.viewInvite.delegate = self;
     self.groupsView.enableSelection= YES;
+    
+   
+    
     [self.friendsListView getFriendsByUserId];
     [self bindComicImages];
+    
+}
+
+
+//
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
+
+- (void)hideInviteView
+{
+    CGRect frame = viewInviteSuper.frame;
+    
+    frame.origin.y = viewPrivate.frame.origin.y + viewPrivate.frame.size.height;
+    
+    viewInviteSuper.frame = frame;
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
     [super viewWillAppear:animated];
 }
 
@@ -190,7 +264,39 @@
     
 }
 
-#pragma Events
+#pragma mark : Events
+- (IBAction)btnInviteFriendsTap:(id)sender
+{
+    CGRect frame =   viewInviteSuper.frame;
+    
+    frame.origin.y = viewPrivate.frame.origin.y;
+     viewInviteSuper.frame = frame;
+    
+    frame = viewPrivate.frame;
+    frame.origin.y = self.view.frame.size.height;
+    
+    [UIView animateWithDuration:0.6 animations:^
+    {
+        viewPrivate.frame = frame;
+    }
+    completion:^(BOOL finished)
+    {
+        _btnInviteFrnd.userInteractionEnabled = NO;
+    }];
+}
+
+- (IBAction)btnCloseInviteView:(id)sender
+{
+    [UIView animateWithDuration:0.6 animations:^
+     {
+        // [self hideInviteView];
+         viewPrivate.frame = _frameViewPrivate;
+     }
+                     completion:^(BOOL finished)
+     {
+         _btnInviteFrnd.userInteractionEnabled = YES;
+     }];
+}
 
 - (IBAction)backButtonClick:(id)sender {
     
@@ -263,18 +369,17 @@
         //ComicSlides Object
         [imageArray  addObject:[AppHelper getImageFile:cmPage.printScreenPath]];
     }
-//    [imageArray addObject:@"01.png"];
-//    [imageArray addObject:@"02.png"];
-//    [imageArray addObject:@"03.png"];
-//    [imageArray addObject:@"04.png"];
+    //    [imageArray addObject:@"01.png"];
+    //    [imageArray addObject:@"02.png"];
+    //    [imageArray addObject:@"03.png"];
+    //    [imageArray addObject:@"04.png"];
     
     [self.comicImageList refeshList:imageArray];
     comicSlides = nil;
-//    imageArray = nil;
+    //    imageArray = nil;
 }
 
 #pragma mark GroupList Delegate
-
 -(void)selectGroupItems:(id)object
 {
     UserGroup* ug = (UserGroup*)object;
@@ -286,11 +391,147 @@
 
 -(void)selectedRow:(id)object
 {
-    
     UserFriends* uf = (UserFriends*)object;
     if(uf)
         [self generateFriendShareArray:uf];
 }
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"%f",scrollView.contentOffset.y);
+
+    if (_isSearchEnable == NO)
+    {
+        if (isInvitefriendListOpen)
+        {
+            if (scrollView.contentOffset.y < 100)
+            {
+                [UIView animateWithDuration:0.6 animations:^{
+                    
+                    _viewSearch.frame = frameSearchView;
+                    _viewShare.frame = frameViewShare;
+                    viewPrivate.frame = _frameViewPrivate;
+                    _lblFriends.frame = frameLblFriend;
+                    _friendsListView.frame = frameFriendListView;
+                    
+                    
+                    
+                }completion:^(BOOL finished) {
+                    _lblGroup.hidden = NO;
+                     isInvitefriendListOpen = NO;
+                    _friendsListView.enableSectionTitles = NO;
+                    [_friendsListView.friendsListTableView reloadData];
+                }];
+                
+            }
+            
+        }
+
+    }
+    
+    
+    }
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    
+    if (!_isSearchEnable)
+    {
+        if (velocity.y > 0)
+        {
+            // NSLog(@"up");
+            NSLog(@"%f",velocity.y);
+           
+            
+            // _viewShare
+            // _viewSearch
+            
+            [UIView animateWithDuration:0.6 animations:^
+             {
+                 CGRect frame = _friendsListView.frame;
+                 
+                 frame = _viewSearch.frame;
+                 frame.origin.y = _comicImageList.frame.size.height;
+                 _viewSearch.frame = frame;
+                 
+                 frame = _viewShare.frame;
+                 frame.origin.y = frame.origin.y - _viewShare.frame.size.height;
+                 _viewShare.frame = frame;
+                 
+                 frame = viewPrivate.frame;
+                 frame.origin.y = _comicImageList.frame.size.height + _viewSearch.frame.size.height;
+                 frame.size.height = heightOfViewPrivate;
+                 viewPrivate.frame = frame;
+                 
+                 frame = _lblFriends.frame;
+                 frame.origin.y = positionYoflblFriends;
+                 _lblFriends.frame = frame;
+                 
+                 frame =  _friendsListView.frame;
+                 frame.origin.y = _lblFriends.frame.origin.y + _lblFriends.frame.size.height;
+                 frame.size.height = heightOfFriendlist;
+                 _friendsListView.frame = frame;
+                 
+                 _lblGroup.hidden = YES;
+                 isInvitefriendListOpen = YES;
+                 
+                 _friendsListView.enableSectionTitles = YES;
+             }completion:^(BOOL finished) {
+                 [_friendsListView.friendsListTableView reloadData];
+             }];
+        }
+
+        
+    }
+    else
+    {
+        
+    }
+}
+
+
+
+#pragma mark : InviteFriendsViewDelegate Methods
+
+-(void)openMessageComposer:(NSArray*)sendNumbers messageText:(NSString*)messageTextValue
+{
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    if([MFMessageComposeViewController canSendText])
+    {
+        controller.body = messageTextValue;
+        controller.recipients = sendNumbers;
+        controller.messageComposeDelegate = self;
+        [self presentViewController:controller animated:YES completion:^{
+            
+        }];
+    }
+
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    switch (result)
+    {
+        case MessageComposeResultCancelled:
+            NSLog(@"Cancelled");
+            _btnInviteFrnd.userInteractionEnabled = YES;
+
+            
+            [self searchButtonAnimationStop];
+
+            break;
+        case MessageComposeResultSent:
+            _btnInviteFrnd.userInteractionEnabled = YES;
+
+            [self searchButtonAnimationStop];
+            break;
+        default:
+            break;
+    }
+    
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+}
+
 
 #pragma mark Api Delegate
 
@@ -300,6 +541,107 @@
 -(void)comicNetworking:(id)sender postShareComicResponse:(NSDictionary *)response
 {
     NSLog(@"Share Sucess");
+}
+
+#pragma mark : UITextFieldDelegate methods
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+        //animation
+}
+
+-(void)keyboardOnScreen:(NSNotification *)notification
+{
+    NSDictionary *info  = notification.userInfo;
+    NSValue      *value = info[UIKeyboardFrameEndUserInfoKey];
+    
+    CGRect rawFrame      = [value CGRectValue];
+    CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
+    
+    NSLog(@"keyboardFrame: %@", NSStringFromCGRect(keyboardFrame));
+    
+    _friendsListView.enableSectionTitles = NO;
+    _isSearchEnable = YES;
+    
+    [UIView animateWithDuration:0.6 animations:^
+     {
+         CGRect frame = _friendsListView.frame;
+         
+         frame = _viewSearch.frame;
+         frame.origin.y = _comicImageList.frame.size.height + 5;
+         _viewSearch.frame = frame;
+         
+         frame = _viewShare.frame;
+         frame.origin.y = frame.origin.y - _viewShare.frame.size.height;
+         _viewShare.frame = frame;
+         
+         frame = viewPrivate.frame;
+         frame.origin.y = _comicImageList.frame.size.height + _viewSearch.frame.size.height;
+         frame.size.height = heightOfViewPrivate;
+         viewPrivate.frame = frame;
+         
+         frame = _lblFriends.frame;
+         frame.origin.y = positionYoflblFriends;
+         _lblFriends.frame = frame;
+         
+         frame =  _friendsListView.frame;
+         frame.origin.y = 0;
+         frame.size.height = heightOfFriendlist - CGRectGetHeight(keyboardFrame) + 70;
+         _friendsListView.frame = frame;
+         
+         _lblGroup.hidden = YES;
+         _lblFriends.hidden = YES;
+         
+     }];
+
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    [self searchButtonAnimationStop];
+    
+    return YES;
+}
+
+- (void)searchButtonAnimationStop
+{
+    _friendsListView.enableSectionTitles = YES;
+    
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        _viewSearch.frame = frameSearchView;
+        _viewShare.frame = frameViewShare;
+        viewPrivate.frame = _frameViewPrivate;
+        _lblFriends.frame = frameLblFriend;
+        _friendsListView.frame = frameFriendListView;
+        
+        
+        
+    }completion:^(BOOL finished) {
+        _lblGroup.hidden = NO;
+        _lblFriends.hidden = NO;
+        txtSearch.text = @"";
+        [_friendsListView.friendsListTableView reloadData];
+        [_viewInvite.tblvInviteFriends reloadData];
+    }];
+    
+    
+    
+    _isSearchEnable = NO;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    //NSUInteger newLength = (textField.text.length - range.length) + string.length;
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    
+    [_friendsListView searchFriendByString:newString];
+    [_friendsListView.friendsListTableView reloadData];
+    return YES;
 }
 
 @end

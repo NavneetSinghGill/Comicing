@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgProfilePic;
 @property (weak, nonatomic) IBOutlet UILabel *lblUserName;
 @property (weak, nonatomic) IBOutlet UILabel *lblMobileNumber;
+@property (weak, nonatomic) IBOutlet UIImageView *imgvSelectCell;
+
 
 @end
