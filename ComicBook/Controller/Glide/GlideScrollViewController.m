@@ -470,10 +470,10 @@ NSTimer* timerObject;
                                if ([self.comicPageComicItems.subviews containsObject:comicItemData]) {
                                    
                                    NSInteger anIndex = [self.comicPageComicItems.subviews indexOfObject:comicItemData];
-                                   if ([self.comicPageComicItems.subviewData count] > anIndex) {
+                                   if (anIndex >= 0 && [self.comicPageComicItems.subviewData count] > anIndex) {
                                        [self.comicPageComicItems.subviewData removeObjectAtIndex:anIndex];
                                    }
-                                   if ([self.comicPageComicItems.subviewTranformData count] > anIndex) {
+                                   if (anIndex >= 0 && [self.comicPageComicItems.subviewTranformData count] > anIndex) {
                                        [self.comicPageComicItems.subviewTranformData removeObjectAtIndex:anIndex];
                                    }
                                    [self.comicPageComicItems.subviews removeObject:comicItemData];
@@ -483,10 +483,10 @@ NSTimer* timerObject;
                                if ([self.comicPageComicItems.subviews containsObject:comicItemData]) {
                                    
                                    NSInteger anIndex = [self.comicPageComicItems.subviews indexOfObject:comicItemData];
-                                   if ([self.comicPageComicItems.subviewData count] > anIndex) {
+                                   if (anIndex >= 0 && [self.comicPageComicItems.subviewData count] > anIndex) {
                                        [self.comicPageComicItems.subviewData removeObjectAtIndex:anIndex];
                                    }
-                                   if ([self.comicPageComicItems.subviewTranformData count] > anIndex) {
+                                   if (anIndex >= 0 && [self.comicPageComicItems.subviewTranformData count] > anIndex) {
                                        [self.comicPageComicItems.subviewTranformData removeObjectAtIndex:anIndex];
                                    }
                                    
@@ -496,9 +496,7 @@ NSTimer* timerObject;
                                [self.comicPageComicItems.subviews addObject:comicItemData];
                                [self.comicPageComicItems.subviewData addObject:[NSValue valueWithCGRect:((UIView*)comicItemData).frame]];
                                [self.comicPageComicItems.subviewTranformData addObject:[NSValue valueWithCGAffineTransform:((UIView*)comicItemData).transform]];
-//                               [self.comicPageComicItems.subviewTranformData addObject:(NSStringFromCGAffineTransform(((UIView*)comicItemData).transform))];
                                
-                               NSLog(@"Auto Save  %@",[NSValue valueWithCGAffineTransform:((UIView*)comicItemData).transform]);
                                self.dirtysubviewData  =  self.comicPageComicItems.subviewData;
                                self.dirtySubviews = self.comicPageComicItems.subviews;
                                

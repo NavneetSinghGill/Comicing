@@ -197,7 +197,7 @@ const NSInteger spaceFromTop = 75;
         //Add time line
         NSDate *now = [NSDate date];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"h.mm a";
+        dateFormatter.dateFormat = @"h:mm a";
         [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         lblTimeText.text = [dateFormatter stringFromDate:now];
         dateFormatter = nil;

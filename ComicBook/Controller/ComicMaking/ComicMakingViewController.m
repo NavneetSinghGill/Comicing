@@ -3387,12 +3387,13 @@ static CGRect CaptionTextViewMinRect;
 }
 
 -(void)doPrintScreen{
+    [imgvComic setFrame:temImagFrame];
+    
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
     
     dispatch_group_async(group, queue, ^{
         @try {
-            [imgvComic setFrame:temImagFrame];
             printScreen = [UIImage imageWithView:imgvComic paque:YES];
         } @catch (NSException *exception) {
             
