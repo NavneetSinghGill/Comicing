@@ -12,11 +12,41 @@
 
 #define InviteTagValue 300
 
+@interface FindFriendsViewController()<FriendListDelegate>
+{
+    NSArray *alphabetsSectionTitles;
+
+}
+
+@property (strong,nonatomic) NSMutableDictionary *contactListWithAlphabets;
+@property (strong, nonatomic) NSMutableDictionary *saveContactListWithAlphabets;
+@property BOOL isScrollup;
+@property BOOL isSearchON;
+@end
+
+
 @implementation FindFriendsViewController
+
+@synthesize contactListWithAlphabets, saveContactListWithAlphabets;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.frameContactListTableView = _contactListTableView.frame;
+    self.frameSearchTextHolderView = _searchTextHolderView.frame;
+    self.frameViewHeader = _viewHeader.frame;
+    self.frameViewFriendList = _viewFriendList.frame;
+    
+    self.viewFriendList.isTitleLabelHide = YES;
+
+    [self.viewFriendList getFriendsByUserId];
+    self.viewFriendList.enableSectionTitles = YES;
+    self.viewFriendList.enableSelection = YES;
+    self.viewFriendList.delegate = self;
+    self.viewFriendList.selectedActionName = @"AddToFriends";
+    self.viewFriendList.enableInvite = NO;
+    self.viewFriendList.isOnlyInviteFriends = YES;
     [self configView];
     [self bindData];
 }
@@ -33,12 +63,12 @@
 
 -(void)configView{
     
-    self.searchTextHolderView.layer.borderColor = [[UIColor colorWithHexStr:@"416DB5"] CGColor];
-    self.searchTextHolderView.layer.cornerRadius = 15;
-    self.searchTextHolderView.layer.masksToBounds = YES;
-    self.searchTextHolderView.layer.borderWidth = 2.0f;
+//    self.searchTextHolderView.layer.borderColor = [[UIColor colorWithHexStr:@"416DB5"] CGColor];
+//    self.searchTextHolderView.layer.cornerRadius = 15;
+//    self.searchTextHolderView.layer.masksToBounds = YES;
+//    self.searchTextHolderView.layer.borderWidth = 2.0f;
     
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"dig up friends by name" attributes:@{ NSForegroundColorAttributeName : [UIColor blackColor] }];
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"Search" attributes:@{ NSForegroundColorAttributeName : [UIColor blackColor] }];
     self.txtSearch.attributedPlaceholder = str;
     
     [self setTextFont];
@@ -47,38 +77,38 @@
 
 -(void)setTextFont{
 
-    [self.lblHeadText setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
+    [self.lblHeadText setFont:[UIFont  fontWithName:@"Myriad Roman" size:18]];
     self.lblHeadText.text = @"Find \n Friends";
-    [self.btnSkip.titleLabel setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
+    [self.btnSkip.titleLabel setFont:[UIFont  fontWithName:@"Myriad Roman" size:22]];
 
-    [UIFont fontWithName:@"Arial-BoldMT" size:17];
+//    [UIFont fontWithName:@"Arial-BoldMT" size:17];
 
     
     // Create the attributes
-    NSDictionary *attrs = @{
-                            NSFontAttributeName:[UIFont fontWithName:@"Avenir-Light" size:23],
-                            };
-    NSDictionary *subAttrs = @{
-                               NSFontAttributeName:[UIFont fontWithName:@"Arial-BoldMT" size:23]
-                               };
-    
-    const NSRange range = NSMakeRange(10,4);
+//    NSDictionary *attrs = @{
+//                            NSFontAttributeName:[UIFont fontWithName:@"Avenir-Light" size:23],
+//                            };
+//    NSDictionary *subAttrs = @{
+//                               NSFontAttributeName:[UIFont fontWithName:@"Arial-BoldMT" size:23]
+//                               };
+//    
+//    const NSRange range = NSMakeRange(10,4);
     
     // Create the attributed string (text + attributes)
-    NSMutableAttributedString *attributedText =
-    [[NSMutableAttributedString alloc] initWithString:self.lblCaptionText2.text
-                                           attributes:attrs];
-    
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    
-    [attributedText setAttributes:subAttrs range:range];
-    [attributedText addAttribute:NSParagraphStyleAttributeName value:paragraphStyle
-                           range:NSMakeRange(0, [self.lblCaptionText2.text length])];
-    
-    // Set it in our UILabel and we are done!
-    [self.lblCaptionText2 setAttributedText:attributedText];
-    paragraphStyle = nil;
-    attributedText = nil;
+//    NSMutableAttributedString *attributedText =
+//    [[NSMutableAttributedString alloc] initWithString:self.lblCaptionText2.text
+//                                           attributes:attrs];
+//    
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    
+//    [attributedText setAttributes:subAttrs range:range];
+//    [attributedText addAttribute:NSParagraphStyleAttributeName value:paragraphStyle
+//                           range:NSMakeRange(0, [self.lblCaptionText2.text length])];
+//    
+//    // Set it in our UILabel and we are done!
+//    [self.lblCaptionText2 setAttributedText:attributedText];
+//    paragraphStyle = nil;
+//    attributedText = nil;
     
 }
 
@@ -128,11 +158,14 @@
 }
 
 // Get the contacts.
-- (void)getContactsWithAddressBook:(ABAddressBookRef )addressBook {
-    if (contactList) {
+- (void)getContactsWithAddressBook:(ABAddressBookRef )addressBook
+{
+    if (contactList)
+    {
         [contactList removeAllObjects];
         contactList = nil;
     }
+    
     contactList = [[NSMutableArray alloc] init];
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
     CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
@@ -152,7 +185,9 @@
         
         //For Email ids
         ABMutableMultiValueRef eMail  = ABRecordCopyValue(ref, kABPersonEmailProperty);
-        if(ABMultiValueGetCount(eMail) > 0) {
+        
+        if(ABMultiValueGetCount(eMail) > 0)
+        {
             [dOfPerson setObject:(__bridge NSString *)ABMultiValueCopyValueAtIndex(eMail, 0) forKey:@"email"];
             
         }
@@ -160,7 +195,8 @@
         //For Phone number
         NSString* mobileLabel;
         
-        for(CFIndex j = 0; j < ABMultiValueGetCount(phones); j++) {
+        for(CFIndex j = 0; j < ABMultiValueGetCount(phones); j++)
+        {
             mobileLabel = (__bridge NSString*)ABMultiValueCopyLabelAtIndex(phones, j);
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
             {
@@ -175,14 +211,27 @@
             }
             
         }
+        
         [contactList addObject:dOfPerson];
     }
+    
     temContactList = contactList;
     
     [self.contactListTableView reloadData];
 }
 
 #pragma TextField Delegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    // begin animation
+    self.isScrollup = YES;
+    self.isSearchON = YES;
+    
+    [self scrollUpAnimation];
+    
+    return YES;
+}
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     return YES;
@@ -191,11 +240,14 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self.txtSearch resignFirstResponder];
     
-    NSArray* searchArray = [contactList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@)", textField.text]];
+//    NSArray* searchArray = [contactList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@)", textField.text]];
+//    
+//    contactList= nil;
+//    contactList = [searchArray mutableCopy];
+//    [self.contactListTableView reloadData];
     
-    contactList= nil;
-    contactList = [searchArray mutableCopy];
-    [self.contactListTableView reloadData];
+   [self scrollDownAnimation];
+    self.isSearchON = NO;
     return YES;
 }
 
@@ -205,8 +257,25 @@
     contactList= nil;
     contactList = [temContactList mutableCopy];
     [self.contactListTableView reloadData];
+    
+    [_viewFriendList searchFriendByString:@""];
+    [_viewFriendList.friendsListTableView reloadData];
+    
     return NO;
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    //NSUInteger newLength = (textField.text.length - range.length) + string.length;
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    
+    [_viewFriendList searchFriendByString:newString];
+    [_viewFriendList.friendsListTableView reloadData];
+    return YES;
+}
+
 
 #pragma mark UITableViewDelegate
 
@@ -244,7 +313,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+   
 }
 
 -(void)inviteButtonClick:(id)sender{
@@ -267,6 +336,64 @@
     
 }
 
+#pragma mark - Helper Method
+- (void)scrollUpAnimation
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.lblCaptionText2.alpha = 0;
+        self.lblCaptionText.alpha = 0;
+        self.imgvUser.alpha = 0;
+        self.lblCaptionText.alpha = 0;
+        
+        CGRect frame = _searchTextHolderView.frame;
+        frame.origin.y = _frameViewHeader.size.height;
+        
+        _searchTextHolderView.frame = frame;
+        
+        frame = _contactListTableView.frame;
+        frame.origin.y = _searchTextHolderView.frame.origin.y + _searchTextHolderView.frame.size.height;
+        frame.size.height = frame.size.height + _frameSearchTextHolderView.origin.y - _frameViewHeader.size.height;
+        _contactListTableView.frame = frame;
+        
+        
+        _viewFriendList.frame = frame;
+        
+        
+    } completion:^(BOOL finished) {
+        self.isScrollup = YES;
+    }];
+
+}
+
+- (void)scrollDownAnimation
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.lblCaptionText2.alpha = 1;
+        self.lblCaptionText.alpha = 1;
+        self.imgvUser.alpha = 1;
+        self.lblCaptionText.alpha = 1;
+        
+        _searchTextHolderView.frame = _frameSearchTextHolderView;
+        _contactListTableView.frame = _frameContactListTableView;
+        _viewFriendList.frame = _frameViewFriendList;
+        
+    } completion:^(BOOL finished) {
+        self.isScrollup = NO;
+    }];
+
+}
+
+#pragma mark - FriendListDelegate Methods
+
+-(void)selectedRow:(id)object
+{
+    
+}
+-(void)selectedRow:(id)object param:(id)objectList
+{
+    
+}
+
 -(void)openMessageComposer:(NSArray*)sendNumbers messageText:(NSString*)messageTextValue{
     
     MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
@@ -278,12 +405,43 @@
         [self presentViewController:controller animated:YES completion:^{
             
         }];
+    }}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
+                     withVelocity:(CGPoint)velocity
+              targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    
+    if (velocity.y > 0)
+    {
+        // NSLog(@"up");
+        NSLog(@"%f",velocity.y);
+        
+        if (self.isScrollup == NO)
+        {
+            [self scrollUpAnimation];
+        }
     }
 }
 
-#pragma MessageDelegate
 
-- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.isSearchON == NO)
+    {
+        if (scrollView.contentOffset.y < 100)
+        {
+            [self scrollDownAnimation];
+        }
+    }
+}
+
+
+
+
+#pragma MessageDelegate
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
     switch (result) {
         case MessageComposeResultCancelled:
             NSLog(@"Cancelled");
@@ -303,23 +461,41 @@
 
 -(void)getContactListFromServer{
     
-    NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
+//    NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
+//    NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
+//    
+//    [userDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"];
+//    [userDic setObject:contactList forKey:@"contacts"];
+//    [dataDic setObject:userDic forKey:@"data"];
+//    
+//    userDic = nil;
+//    
+//    ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
+//    
     
-    [userDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"];
-    [userDic setObject:contactList forKey:@"contacts"];
-    [dataDic setObject:userDic forKey:@"data"];
     
-    userDic = nil;
+    // temp
+//    [cmNetWorking postPhoneContactList:dataDic Id:@"659"
+//                            completion:^(id json,id jsonResposeHeader) {
+//                                
+//                                NSLog(@"jsonResposeHeader");
+//                                
+//                            } ErrorBlock:^(JSONModelError *error) {
+//                                
+//                            }];
     
-    ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
-    [cmNetWorking postPhoneContactList:dataDic Id:[AppHelper getCurrentLoginId]
-                            completion:^(id json,id jsonResposeHeader) {
-        
-    } ErrorBlock:^(JSONModelError *error) {
-        
-    }];
-    dataDic = nil;
+    
+//    [cmNetWorking postPhoneContactList:dataDic Id:[AppHelper getCurrentLoginId]
+//                            completion:^(id json,id jsonResposeHeader) {
+//    
+//                                NSLog(@"jsonResposeHeader");
+//                                
+//    } ErrorBlock:^(JSONModelError *error) {
+//        
+//    }];
+//    
+    
+ //   dataDic = nil;
 }
 
 - (IBAction)btnSkipAction:(id)sender {

@@ -27,7 +27,10 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.cropHolder.isRegView = YES;
+
+    
+    
+    //    self.cropHolder.isRegView = YES;
     [self setTextFont:@"Take a Selfie and \n Cut out your Profile Pic"];
     [self preparView];
     self.signUpMobileNumber.delegate = self;
@@ -246,9 +249,13 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
                      }];
 }
 
--(void)getAccountRequest{
+-(void)getAccountRequest
+{
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     FindFriendsViewController *controller = (FindFriendsViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"FindFriendsViewController"];
+    
+    controller.imgvUser.image = _imgFinalCopedFace.image;
+    
     [self.navigationController pushViewController:controller animated:YES];
     mainStoryboard = nil;
 }

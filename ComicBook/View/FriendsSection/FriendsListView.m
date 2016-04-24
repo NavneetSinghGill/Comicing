@@ -11,6 +11,7 @@
 #import <objc/message.h>
 #import <AddressBook/ABAddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import "InviteFriendCell.h"
 
 @implementation FriendsListView
 
@@ -35,23 +36,37 @@
         [[NSBundle mainBundle] loadNibNamed:@"FriendsListView" owner:self options:nil];
         [self addSubview:self.view];
         self.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
-
+        _friendsArray = [[NSMutableArray alloc] init];
         selectedFriends = [[NSMutableArray alloc] init];
+
+      
+        
         [self configView];
     }
     return self;
 }
 
-- (void)layoutSubviews{
+- (void)layoutSubviews
+{
     [super layoutSubviews];
     [self setNeedsDisplay];
 }
+
+- (void)setIsTitleLabelHide:(BOOL)isTitleLabelHide
+{
+    _headerName.hidden = YES;
+    _tableHolderView.frame = self.view.bounds;
+    _friendsListTableView.frame = _tableHolderView.bounds;
+
+}
+
 
 -(void)configView{
     
     self.friendsListTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.friendsListTableView.sectionIndexColor = [UIColor blackColor];
-
+    self.friendsListTableView.sectionIndexTrackingBackgroundColor = [UIColor clearColor];
+    self.friendsListTableView.sectionIndexBackgroundColor = [UIColor clearColor];
     self.enableInvite = YES;
 }
 
@@ -121,116 +136,207 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    
+    
+    
+    
     if (isOnlyInviteFriends)
     {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendCell" owner:self options:nil];
+        // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+        InviteFriendCell *cell = [topLevelObjects objectAtIndex:0];
         
-    }
-    
-    static NSString *CellIdentifer = @"FriendsList";
-    FriendsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifer];
-    
-    if (cell == nil)
-    {
-        [[NSBundle mainBundle] loadNibNamed:@"FriendsListTableViewCell" owner:self options:nil];
-        cell = self.tabCell;
-        self.tabCell = nil;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    
-    User* us = nil;
-    
-    NSString* currentAlphaBets = [alphabetsSectionTitles objectAtIndex:indexPath.section];
-    
-    us =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
-    
-//    if(self.enableSectionTitles)
-//    {
-//        
-//    }
-//    else
-//    {
-//        us = (User*)[self.friendsArray objectAtIndex:indexPath.row];
-//    }
-    
-    cell.lblUerName.text = us.first_name;
-    
-    [cell.userImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
-                        placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
-                         completionBlock:^(BOOL succeeded, UIImage *image) {
-                             cell.userImage.image = image;
-                         }];
-    
-//    [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic]
-//                         placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
-//                                completed:^(UIImage *image, NSError *error,
-//                                            SDImageCacheType cacheType, NSURL *imageURL) {
-//                                }];
-    
-    //Config image border
-    [[cell.userImage layer] setBorderWidth:4.0f];
-    
-    //Config tickMark in Group
-    if(groupMembersList && [us isKindOfClass:[UserFriends class]] &&
-                            us.friend_id &&
-                            [self findUserInsideTheGroup:us.friend_id])
-    {
-        [cell.selectedTickImage setHidden:NO];
-        [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
-    }
-    else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
-    {
-        [cell.selectedTickImage setHidden:NO];
-        [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
-    }
-    
-    
-    
-    
-    if ([selectedFriends containsObject:us])
-    {
-        [cell.selectedTickImage setHidden:NO];
+        User* us = nil;
+        
+        NSString* currentAlphaBets = [alphabetsSectionTitles objectAtIndex:indexPath.section];
+        
+        us =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
+
+        
+        cell.lblUserName.text = us.first_name;
+        cell.lblMobileNumber.text = us.mobile;
+        
+        [cell.userImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
+                            placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
+                             completionBlock:^(BOOL succeeded, UIImage *image) {
+                                 cell.userImage.image = image;
+                             }];
+        
+        
+        [[cell.userImage layer] setBorderWidth:4.0f];
+        
+        //Config tickMark in Group
+        if(groupMembersList && [us isKindOfClass:[UserFriends class]] &&
+           us.friend_id &&
+           [self findUserInsideTheGroup:us.friend_id])
+        {
+            [cell.selectedTickImage setHidden:NO];
+            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
+        }
+        else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
+        {
+            [cell.selectedTickImage setHidden:NO];
+            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
+        }
+        
+        
+        
+        
+        if ([selectedFriends containsObject:us])
+        {
+            [cell.selectedTickImage setHidden:NO];
+            
+        }
+        else
+        {
+            [cell.selectedTickImage setHidden:YES];
+            
+        }
+        
+        
+        //Config Invite Button
+        if ([us isKindOfClass:[UserFriends class]] &&
+            us.friend_id)
+        {
+            if (us.status == UNFRIEND &&
+                [us.friend_id isEqualToString:@"-1"])
+            {
+                [cell.btnInvite setHidden:NO];
+                [cell.btnInvite addTarget:self
+                                   action:@selector(inviteButtonClick:)
+                         forControlEvents:UIControlEventTouchUpInside];
+                
+                [cell.userImage setHidden:YES];
+            }
+        }
+        else
+        {
+            if (self.enableInvite && us.status == UNFRIEND)
+            {
+                [cell.btnInvite setHidden:NO];
+                [cell.btnInvite addTarget:self
+                                   action:@selector(inviteButtonClick:)
+                         forControlEvents:UIControlEventTouchUpInside];
+                
+                [cell.userImage setHidden:YES];
+            }
+        }
+        
+        cell.btnInvite.tag = InviteTagValue + indexPath.row;
+        cell.btnInvite.selected = NO;
+
+        return cell;
 
     }
     else
     {
-        [cell.selectedTickImage setHidden:YES];
+        static NSString *CellIdentifer = @"FriendsList";
+        FriendsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifer];
+        
+        if (cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"FriendsListTableViewCell" owner:self options:nil];
+            cell = self.tabCell;
+            self.tabCell = nil;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        User* us = nil;
+        
+        NSString* currentAlphaBets = [alphabetsSectionTitles objectAtIndex:indexPath.section];
+        
+        us =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
+        
+        //    if(self.enableSectionTitles)
+        //    {
+        //
+        //    }
+        //    else
+        //    {
+        //        us = (User*)[self.friendsArray objectAtIndex:indexPath.row];
+        //    }
+        
+        cell.lblUerName.text = us.first_name;
+        
+        [cell.userImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
+                            placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
+                             completionBlock:^(BOOL succeeded, UIImage *image) {
+                                 cell.userImage.image = image;
+                             }];
+        
+        //    [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic]
+        //                         placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
+        //                                completed:^(UIImage *image, NSError *error,
+        //                                            SDImageCacheType cacheType, NSURL *imageURL) {
+        //                                }];
+        
+        //Config image border
+        [[cell.userImage layer] setBorderWidth:4.0f];
+        
+        //Config tickMark in Group
+        if(groupMembersList && [us isKindOfClass:[UserFriends class]] &&
+           us.friend_id &&
+           [self findUserInsideTheGroup:us.friend_id])
+        {
+            [cell.selectedTickImage setHidden:NO];
+            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
+        }
+        else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
+        {
+            [cell.selectedTickImage setHidden:NO];
+            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
+        }
+        
+        
+        
+        
+        if ([selectedFriends containsObject:us])
+        {
+            [cell.selectedTickImage setHidden:NO];
+            
+        }
+        else
+        {
+            [cell.selectedTickImage setHidden:YES];
+            
+        }
+        
+        
+        //Config Invite Button
+        if ([us isKindOfClass:[UserFriends class]] &&
+            us.friend_id)
+        {
+            if (us.status == UNFRIEND &&
+                [us.friend_id isEqualToString:@"-1"])
+            {
+                [cell.btnInvite setHidden:NO];
+                [cell.btnInvite addTarget:self
+                                   action:@selector(inviteButtonClick:)
+                         forControlEvents:UIControlEventTouchUpInside];
+                
+                [cell.userImage setHidden:YES];
+            }
+        }
+        else
+        {
+            if (self.enableInvite && us.status == UNFRIEND)
+            {
+                [cell.btnInvite setHidden:NO];
+                [cell.btnInvite addTarget:self
+                                   action:@selector(inviteButtonClick:)
+                         forControlEvents:UIControlEventTouchUpInside];
+                
+                [cell.userImage setHidden:YES];
+            }
+        }
+        
+        cell.btnInvite.tag = InviteTagValue + indexPath.row;
+        cell.btnInvite.selected = NO;
+        
+        return cell;
 
     }
     
-    
-    //Config Invite Button
-    if ([us isKindOfClass:[UserFriends class]] &&
-        us.friend_id)
-    {
-        if (us.status == UNFRIEND &&
-            [us.friend_id isEqualToString:@"-1"])
-        {
-            [cell.btnInvite setHidden:NO];
-            [cell.btnInvite addTarget:self
-                               action:@selector(inviteButtonClick:)
-                     forControlEvents:UIControlEventTouchUpInside];
-            
-            [cell.userImage setHidden:YES];
-        }
-    }
-    else
-    {
-        if (self.enableInvite && us.status == UNFRIEND)
-        {
-            [cell.btnInvite setHidden:NO];
-            [cell.btnInvite addTarget:self
-                               action:@selector(inviteButtonClick:)
-                     forControlEvents:UIControlEventTouchUpInside];
-            
-            [cell.userImage setHidden:YES];
-        }
-    }
-    
-    cell.btnInvite.tag = InviteTagValue + indexPath.row;
-    cell.btnInvite.selected = NO;
-
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -549,7 +655,14 @@
 -(void)friendslistResponse:(NSDictionary *)response{
     
     //initialize the models
-    self.friendsArray  = [UserFriends arrayOfModelsFromDictionaries:response[@"data"]];
+    
+    if (![response[@"data"] isEqualToString:@""])
+    {
+        self.friendsArray  = [UserFriends arrayOfModelsFromDictionaries:response[@"data"]];
+
+    }
+    
+    
   //  if (self.enableSectionTitles)
   //  {
         NSMutableArray* phoneContact = [self getPhoneContact];
@@ -568,7 +681,8 @@
     [self.friendsListTableView reloadData];
 }
 
--(void)searchFriendsById:(NSMutableArray*)list{
+-(void)searchFriendsById:(NSMutableArray*)list
+{
     if ([list count] == 0) {
         [AppHelper showWarningDropDownMessage:@"" mesage:@"No search result found"];
         return;
@@ -619,6 +733,9 @@
     alphabetsSectionTitles = [[friendsDictWithAlpabets allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     saveAlphabetsSectionTitles = alphabetsSectionTitles;
+    
+    [self.friendsListTableView reloadData];
+
 }
 
 #pragma mark Adddressbook

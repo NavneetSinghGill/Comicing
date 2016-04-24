@@ -60,6 +60,8 @@
 @property (weak, nonatomic) IBOutlet UIView *tableHolderView;
 
 
+@property (nonatomic) BOOL isTitleLabelHide;
+
 @property (nonatomic) BOOL isOnlyInviteFriends;
 
 

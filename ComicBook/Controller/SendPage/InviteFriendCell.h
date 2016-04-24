@@ -11,9 +11,11 @@
 @interface InviteFriendCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIButton *btnInvite;
-@property (weak, nonatomic) IBOutlet UIImageView *imgProfilePic;
 @property (weak, nonatomic) IBOutlet UILabel *lblUserName;
 @property (weak, nonatomic) IBOutlet UILabel *lblMobileNumber;
 @property (weak, nonatomic) IBOutlet UIImageView *imgvSelectCell;
+@property (weak, nonatomic) IBOutlet UIImageView *userImage;
+@property (weak, nonatomic) IBOutlet UIImageView *selectedTickImage;
+
 
 @end

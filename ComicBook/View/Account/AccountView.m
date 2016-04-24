@@ -426,10 +426,23 @@ CGRect firstFrame;
 
 #pragma Events
 
--(void)datePickerValueChanged:(UIDatePicker *)sender{
+-(void)datePickerValueChanged:(UIDatePicker *)sender
+{
+    
     NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
     [outputFormatter setDateFormat:@"YYYY-MM-d"];
-    self.txtAge.text = [outputFormatter stringFromDate:sender.date];
+    
+    NSDate* now = [NSDate date];
+    
+    
+    NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
+                                       components:NSCalendarUnitYear
+                                       fromDate:sender.date
+                                       toDate:now
+                                       options:0];
+    NSInteger age = [ageComponents year];
+    
+    self.txtAge.text = [NSString stringWithFormat:@"%ld",(long)age];
 }
 
 -(void)btnDoneClick:(id)sender{

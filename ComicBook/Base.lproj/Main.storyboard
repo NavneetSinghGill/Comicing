@@ -1080,12 +1080,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="Rkh-KG-oX2">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Friends" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="t4X-Oz-lqv">
-                                        <rect key="frame" x="0.0" y="-0.5" width="320" height="79"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Friends" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="t4X-Oz-lqv">
+                                        <rect key="frame" x="0.0" y="15" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1093,47 +1093,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.027450980390000001" green="0.031372549020000001" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" id="SbV-qR-vig">
-                                <rect key="frame" x="45" y="104" width="243.5" height="39"/>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" id="My2-qP-4rm">
+                                <rect key="frame" x="8" y="215" width="305" height="304"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dig up friends by name" minimumFontSize="17" clearButtonMode="whileEditing" id="Ldi-g5-MlO">
-                                        <rect key="frame" x="46" y="0.0" width="197.5" height="38.5"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="25"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="wue-JI-DHw" id="PhS-OX-SdK"/>
-                                        </connections>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchFriends.png" id="qR5-5h-Xoh">
-                                <rect key="frame" x="52" y="106.5" width="34" height="63"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Commies from my address book" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c14-OP-6B4">
-                                <rect key="frame" x="15" y="162" width="292" height="33"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="23"/>
-                                <color key="textColor" red="0.14901960780000001" green="0.24313725489999999" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tab their face to add or invite" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iSk-dq-bDN">
-                                <rect key="frame" x="79" y="189" width="221.5" height="36"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="23"/>
-                                <color key="textColor" red="0.14901960780000001" green="0.24313725489999999" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="findFriendsArrow.png" id="HCE-xe-AfZ">
-                                <rect key="frame" x="31" y="203" width="25" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" id="My2-qP-4rm">
-                                <rect key="frame" x="31" y="247.5" width="274" height="275.5"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -1142,13 +1104,56 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eb9-Xr-CGg">
-                                <rect key="frame" x="244" y="519" width="64" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="231" y="532" width="80" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="skip"/>
                                 <connections>
                                     <action selector="btnSkipAction:" destination="wue-JI-DHw" eventType="touchUpInside" id="OC0-yh-U9z"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="SbV-qR-vig">
+                                <rect key="frame" x="8" y="176" width="305" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchFriends.png" id="qR5-5h-Xoh">
+                                        <rect key="frame" x="8" y="5" width="20" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dig up friends by name" minimumFontSize="14" clearButtonMode="whileEditing" id="Ldi-g5-MlO">
+                                        <rect key="frame" x="46" y="0.0" width="259" height="38.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="wue-JI-DHw" id="PhS-OX-SdK"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite your 6 best friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="54S-tU-YX5">
+                                <rect key="frame" x="8" y="65" width="305" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.1176470588" green="0.31764705879999999" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="S7T-O0-7SF">
+                                <rect key="frame" x="130" y="115" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" id="Ims-Fx-kVn" customClass="FriendsListView">
+                                <rect key="frame" x="8" y="215" width="305" height="304"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to show your photo comics" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OxL-bc-4iS">
+                                <rect key="frame" x="8" y="87" width="305" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.11764705882352941" green="0.31764705882352939" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.1647058824" green="0.67450980390000004" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -1158,16 +1163,19 @@
                         <outlet property="btnSkip" destination="eb9-Xr-CGg" id="e0f-uA-J45"/>
                         <outlet property="contactListTableView" destination="My2-qP-4rm" id="9tZ-HN-1tV"/>
                         <outlet property="imgSearch" destination="qR5-5h-Xoh" id="6Vh-N5-Whc"/>
-                        <outlet property="lblCaptionText" destination="c14-OP-6B4" id="oFu-Ot-Xi6"/>
-                        <outlet property="lblCaptionText2" destination="iSk-dq-bDN" id="BBG-kN-l8c"/>
+                        <outlet property="imgvUser" destination="S7T-O0-7SF" id="Erc-Av-CxV"/>
+                        <outlet property="lblCaptionText" destination="54S-tU-YX5" id="c7J-Cj-PNn"/>
+                        <outlet property="lblCaptionText2" destination="OxL-bc-4iS" id="Yc0-AW-Pz3"/>
                         <outlet property="lblHeadText" destination="t4X-Oz-lqv" id="sqR-Fx-tah"/>
                         <outlet property="searchTextHolderView" destination="SbV-qR-vig" id="gJL-r7-OzS"/>
                         <outlet property="txtSearch" destination="Ldi-g5-MlO" id="qnl-bp-LIS"/>
+                        <outlet property="viewFriendList" destination="Ims-Fx-kVn" id="hQd-uQ-Qxv"/>
+                        <outlet property="viewHeader" destination="Rkh-KG-oX2" id="y9V-QP-RJl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZh-5U-RFQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1846" y="1215"/>
+            <point key="canvasLocation" x="1788" y="1209"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3fu-be-5b5">
@@ -2370,7 +2378,6 @@ Comicing </string>
         <image name="faceSignUp.png" width="133" height="131"/>
         <image name="facebooklogo.png" width="63" height="67"/>
         <image name="fb_icon" width="107" height="104"/>
-        <image name="findFriendsArrow.png" width="25" height="28"/>
         <image name="forward" width="17" height="29"/>
         <image name="green-square-selected" width="30" height="30"/>
         <image name="green-square-unselected" width="16" height="16"/>

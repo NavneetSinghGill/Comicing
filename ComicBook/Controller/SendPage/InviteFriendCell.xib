@@ -30,6 +30,11 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="eQY-Rk-WVk">
+                        <rect key="frame" x="10" y="0.0" width="55" height="55"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="Efw-3c-eyH">
                         <rect key="frame" x="76" y="30" width="244" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -37,17 +42,26 @@
                         <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkMark.png" id="MZM-K1-mPT">
+                        <rect key="frame" x="281" y="15" width="31" height="27"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="btnInvite" destination="TA5-z3-Nq2" id="ZcZ-ZD-awu"/>
                 <outlet property="lblMobileNumber" destination="Efw-3c-eyH" id="7EJ-Uq-iCg"/>
                 <outlet property="lblUserName" destination="2Jq-Rh-Naf" id="asS-9J-F9B"/>
+                <outlet property="selectedTickImage" destination="MZM-K1-mPT" id="eqf-Ye-i2r"/>
+                <outlet property="userImage" destination="eQY-Rk-WVk" id="dGs-wD-9Pa"/>
             </connections>
             <point key="canvasLocation" x="215" y="310.5"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="checkMark.png" width="31" height="27"/>
         <image name="selected-invite" width="158" height="85"/>
     </resources>
 </document>

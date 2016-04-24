@@ -3115,9 +3115,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.comicapp.www;
+				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "c763e3f0-1c13-41a9-8702-adb15ca3c904";
+				PROVISIONING_PROFILE = "5c2450a5-6df7-472a-9b15-0467926102a8";
 			};
 			name = Debug;
 		};
@@ -3141,9 +3141,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.comicapp.www;
+				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "1051b7bf-153f-49e7-a55b-4729f4093bb7";
+				PROVISIONING_PROFILE = "eea0fd05-1bde-48e3-a4f5-d9d24801d28e";
 			};
 			name = Release;
 		};
