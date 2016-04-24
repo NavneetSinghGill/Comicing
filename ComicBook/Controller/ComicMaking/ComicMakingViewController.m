@@ -3262,6 +3262,13 @@ static CGRect CaptionTextViewMinRect;
                                              UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                              SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
                                              [self.navigationController pushViewController:controller animated:YES];
+                                         } else {
+                                             if(self.replyType == FriendReply) {
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
+                                             } else if(self.replyType == GroupReply) {
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
+                                             }
+                                             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                                          }
             
             //Removing current View
@@ -3387,12 +3394,13 @@ static CGRect CaptionTextViewMinRect;
 }
 
 -(void)doPrintScreen{
+    [imgvComic setFrame:temImagFrame];
+    
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
     
     dispatch_group_async(group, queue, ^{
         @try {
-            [imgvComic setFrame:temImagFrame];
             printScreen = [UIImage imageWithView:imgvComic paque:YES];
         } @catch (NSException *exception) {
             

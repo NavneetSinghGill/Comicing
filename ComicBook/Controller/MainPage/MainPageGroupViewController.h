@@ -14,4 +14,6 @@
 
 @property (nonatomic,strong) NSMutableDictionary *ComicBookDict;
 @property (nonatomic,strong) Group *groupObj;
+@property (nonatomic,strong) NSString *shareId;
+
 @end
