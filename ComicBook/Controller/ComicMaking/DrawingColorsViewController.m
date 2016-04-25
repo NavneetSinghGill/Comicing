@@ -22,13 +22,18 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnYellow;
 @property (weak, nonatomic) IBOutlet UIButton *btnWhite;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnOrange;
+@property (weak, nonatomic) IBOutlet UIButton *btnCyan;
+@property (weak, nonatomic) IBOutlet UIButton *btnPink;
+@property (weak, nonatomic) IBOutlet UIButton *btnPurple;
+
 @property (nonatomic, strong) ComicMakingViewController *parentViewController;
 
 @end
 
 @implementation DrawingColorsViewController
 
-@synthesize btnBlack,btnBlue,btnBrown,btnGreen,btnRed,btnUndo,btnWhite,btnYellow;
+@synthesize btnBlack,btnBlue,btnBrown,btnGreen,btnRed,btnUndo,btnWhite,btnYellow,btnCyan,btnOrange,btnPink,btnPurple;
 @synthesize parentViewController;
 
 #pragma mark - UIViewController Methods
@@ -46,18 +51,18 @@
     
     if (IS_IPHONE_5)
     {
-         dx = 15;
-         dy = 15;
+        dx = 14;
+        dy = 14;
     }
     else if (IS_IPHONE_6)
     {
-        dx = 15;
-        dy = 15;
+        dx = 14;
+        dy = 14;
     }
     else if (IS_IPHONE_6P)
     {
-         dx = 15;
-         dy = 15;
+        dx = 14;
+        dy = 14;
     }
     
     CALayer *subblack = [CALayer new];
@@ -128,6 +133,47 @@
     btnYellow.backgroundColor = [UIColor clearColor];
     subyellow.backgroundColor = [UIColor drawingColorYellow].CGColor;
     [btnYellow.layer addSublayer:subyellow];
+    
+    CALayer *subbtnCyan = [CALayer new];
+    subbtnCyan.frame = CGRectInset(btnBlack.bounds, dx, dy);
+    subbtnCyan.cornerRadius = CGRectGetHeight(subbtnCyan.frame) / 2;
+    
+    btnCyan.layer.cornerRadius = CGRectGetHeight(btnBlack.frame) / 2;
+    btnCyan.clipsToBounds = YES;
+    btnCyan.backgroundColor = [UIColor clearColor];
+    subbtnCyan.backgroundColor = [UIColor drawingColorCyan].CGColor;
+    [btnCyan.layer addSublayer:subbtnCyan];
+    
+    CALayer *subbtnOrange = [CALayer new];
+    subbtnOrange.frame = CGRectInset(btnBlack.bounds, dx, dy);
+    subbtnOrange.cornerRadius = CGRectGetHeight(subbtnOrange.frame) / 2;
+    
+    btnOrange.layer.cornerRadius = CGRectGetHeight(btnBlack.frame) / 2;
+    btnOrange.clipsToBounds = YES;
+    btnOrange.backgroundColor = [UIColor clearColor];
+    subbtnOrange.backgroundColor = [UIColor drawingColorOrange].CGColor;
+    [btnOrange.layer addSublayer:subbtnOrange];
+    
+    CALayer *subbtnPink = [CALayer new];
+    subbtnPink.frame = CGRectInset(btnBlack.bounds, dx, dy);
+    subbtnPink.cornerRadius = CGRectGetHeight(subbtnPink.frame) / 2;
+    
+    btnPink.layer.cornerRadius = CGRectGetHeight(btnBlack.frame) / 2;
+    btnPink.clipsToBounds = YES;
+    btnPink.backgroundColor = [UIColor clearColor];
+    subbtnPink.backgroundColor = [UIColor drawingColorPink].CGColor;
+    [btnPink.layer addSublayer:subbtnPink];
+    
+    CALayer *subbtnPurple = [CALayer new];
+    subbtnPurple.frame = CGRectInset(btnBlack.bounds, dx, dy);
+    subbtnPurple.cornerRadius = CGRectGetHeight(subbtnPurple.frame) / 2;
+    
+    btnPurple.layer.cornerRadius = CGRectGetHeight(btnBlack.frame) / 2;
+    btnPurple.clipsToBounds = YES;
+    btnPurple.backgroundColor = [UIColor clearColor];
+    subbtnPurple.backgroundColor = [UIColor drawingColorPurple].CGColor;
+    [btnPurple.layer addSublayer:subbtnPurple];
+
 
 }
 
@@ -142,11 +188,15 @@
     btnRed.transform = CGAffineTransformMakeScale(1,1);
     btnWhite.transform = CGAffineTransformMakeScale(1,1);
     btnYellow.transform = CGAffineTransformMakeScale(1,1);
+    btnCyan.transform = CGAffineTransformMakeScale(1,1);
+    btnPink.transform = CGAffineTransformMakeScale(1,1);
+    btnPurple.transform = CGAffineTransformMakeScale(1,1);
+    btnOrange.transform = CGAffineTransformMakeScale(1,1);
     [UIView commitAnimations];
     
     [UIView beginAnimations:@"ScaleButton" context:NULL];
     [UIView setAnimationDuration: 0.2f];
-    sender.transform = CGAffineTransformMakeScale(2.5,2.5);
+    sender.transform = CGAffineTransformMakeScale(2,2);
     [UIView commitAnimations];
     
     if (sender == btnWhite)
@@ -177,6 +227,23 @@
     {
         [parentViewController drawingColorTapEventWithColor:@"yellow"];
     }
+    else if (sender == btnPink)
+    {
+        [parentViewController drawingColorTapEventWithColor:@"pink"];
+    }
+    else if (sender == btnPurple)
+    {
+        [parentViewController drawingColorTapEventWithColor:@"purple"];
+    }
+    else if (sender == btnOrange)
+    {
+        [parentViewController drawingColorTapEventWithColor:@"orange"];
+    }
+    else if (sender == btnCyan)
+    {
+        [parentViewController drawingColorTapEventWithColor:@"cyan"];
+    }
+
 }
 
 - (IBAction)btnUndoTap:(id)sender

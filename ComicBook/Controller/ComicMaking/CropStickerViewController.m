@@ -672,10 +672,6 @@ UINavigationControllerDelegate>
                 
                 if (imageDataSampleBuffer)
                 {
-                    cameraPreview.hidden = YES;
-                    btnCrop.enabled = YES;
-                    btnCameraReverse.hidden = YES;
-                    
                     NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                     
                     UIImage *image = [[UIImage alloc] initWithData:imageData];
@@ -710,9 +706,6 @@ UINavigationControllerDelegate>
 
                         }
                         
-                        
-                        
-                        
                       //  imgvCrop.image = [UIImage ScaletoFill:image toSize:imgvCrop.frame.size];
                       
                         imgvCrop.contentMode = UIViewContentModeScaleAspectFit;
@@ -722,9 +715,6 @@ UINavigationControllerDelegate>
                     {
                         if (isFrontCameraOn)
                         {
-                            
-                            
-                            
                            CGRect cropRects = [imgvCrop convertRect:imgvCrop.frame toView:cameraPreview];
                             
                             CGFloat factor = (image.size.width * image.scale) / CGRectGetWidth(self.view.frame);
@@ -740,7 +730,7 @@ UINavigationControllerDelegate>
                             
                             UIImage *flippedImage = [UIImage imageWithCGImage:cropedImage.CGImage
                                                                 scale:cropedImage.scale
-                                                          orientation:mirroredImageOrientation(image.imageOrientation)];
+                                                          orientation:UIImageOrientationUpMirrored];
                             
                             imgvCrop.image =  flippedImage;
                             imgvCrop.contentMode = UIViewContentModeScaleToFill;
@@ -766,6 +756,11 @@ UINavigationControllerDelegate>
                           
                         }
                     }
+                    
+                    
+                    cameraPreview.hidden = YES;
+                    btnCrop.enabled = YES;
+                    btnCameraReverse.hidden = YES;
                 }
             }];
             

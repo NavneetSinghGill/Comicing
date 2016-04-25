@@ -2239,7 +2239,7 @@ static CGRect CaptionTextViewMinRect;
     
     [UIView beginAnimations:@"ScaleButton" context:NULL];
     [UIView setAnimationDuration: 0.2f];
-    drawingController.btnRed.transform = CGAffineTransformMakeScale(1.5,1.5);
+    drawingController.btnRed.transform = CGAffineTransformMakeScale(2,2);
     [UIView commitAnimations];
     
     [self drawingColorTapEventWithColor:@"red"];
@@ -2659,7 +2659,8 @@ static CGRect CaptionTextViewMinRect;
 
 #pragma mark - Bubble TextView Events
 
-- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
     if (textView.tag == CaptionViewTextViewTag)
     {
         [textView resignFirstResponder];
@@ -2683,6 +2684,7 @@ static CGRect CaptionTextViewMinRect;
         
         NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
         
+        
         if (textView.text.length == 29)
         {
             textView.text = [[NSString alloc] initWithFormat:@"%@\n",newString];
@@ -2690,7 +2692,8 @@ static CGRect CaptionTextViewMinRect;
             [self handleCaptionHeight:textView];
         }
         
-        if([text isEqualToString:@"\n"] && textView.text.length != 29) {
+        if([text isEqualToString:@"\n"] && textView.text.length != 29)
+        {
             [textView resignFirstResponder];
             return NO;
         }
