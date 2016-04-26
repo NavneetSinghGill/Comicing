@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XO4-2R-B3p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XO4-2R-B3p">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -199,25 +199,6 @@
                                     <constraint firstItem="Qxc-3A-SLy" firstAttribute="width" secondItem="DfM-w7-Lqm" secondAttribute="width" constant="2" id="wTc-j4-HBF"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GfS-Sn-gkB">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="4pU-u2-Wo2"/>
-                                    <constraint firstAttribute="width" constant="60" id="fhx-gh-SUw"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="4pU-u2-Wo2"/>
-                                        <exclude reference="fhx-gh-SUw"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="4pU-u2-Wo2"/>
-                                        <include reference="fhx-gh-SUw"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PN4-fv-TuS">
                                 <rect key="frame" x="20" y="45" width="60" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -229,6 +210,13 @@
                                     <action selector="tappedProfilePicButton:" destination="5Zu-G6-daT" eventType="touchUpInside" id="S6y-wg-ELf"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GW0-Os-mgo">
+                                <rect key="frame" x="20" y="45" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="ahv-Qg-Tzu"/>
+                                    <constraint firstAttribute="width" constant="60" id="r6M-tC-U2v"/>
+                                </constraints>
+                            </imageView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndM-3A-bDI">
                                 <rect key="frame" x="0.0" y="570" width="600" height="310"/>
                                 <subviews>
@@ -362,19 +350,19 @@
                             <constraint firstItem="ubP-jO-VEm" firstAttribute="top" secondItem="DfM-w7-Lqm" secondAttribute="bottom" constant="-8" id="BHp-0i-SOe"/>
                             <constraint firstItem="EzW-gH-JrY" firstAttribute="top" secondItem="DfM-w7-Lqm" secondAttribute="bottom" constant="-8" id="ExC-Qh-R0Q"/>
                             <constraint firstItem="PN4-fv-TuS" firstAttribute="leading" secondItem="uTd-L6-x7T" secondAttribute="leading" constant="20" id="G6F-LG-Yfz"/>
-                            <constraint firstItem="GfS-Sn-gkB" firstAttribute="leading" secondItem="uTd-L6-x7T" secondAttribute="leading" constant="20" id="IqJ-8w-Gbr"/>
                             <constraint firstItem="ndM-3A-bDI" firstAttribute="leading" secondItem="uTd-L6-x7T" secondAttribute="leading" id="Kfj-Ny-iFP"/>
                             <constraint firstItem="DfM-w7-Lqm" firstAttribute="top" secondItem="xCm-Kd-GE3" secondAttribute="bottom" constant="35" id="MGk-h4-w7P"/>
-                            <constraint firstItem="GfS-Sn-gkB" firstAttribute="top" secondItem="xCm-Kd-GE3" secondAttribute="bottom" constant="25" id="PAQ-Ei-DEG"/>
                             <constraint firstItem="G5K-5O-DqU" firstAttribute="leading" secondItem="uTd-L6-x7T" secondAttribute="leading" constant="1" id="R9A-Zd-OtU"/>
                             <constraint firstItem="EzW-gH-JrY" firstAttribute="leading" secondItem="Fel-2s-F8j" secondAttribute="trailing" constant="1" id="RGn-XW-fhf"/>
                             <constraint firstAttribute="trailing" secondItem="EfF-kV-BXc" secondAttribute="trailing" id="TjL-6K-ywY"/>
+                            <constraint firstItem="GW0-Os-mgo" firstAttribute="top" secondItem="uTd-L6-x7T" secondAttribute="top" constant="45" id="ZAp-te-HX1"/>
                             <constraint firstItem="eb1-FZ-E8M" firstAttribute="top" secondItem="DfM-w7-Lqm" secondAttribute="bottom" constant="70" id="Zfq-Ja-Phx"/>
                             <constraint firstItem="ndM-3A-bDI" firstAttribute="top" secondItem="ubP-jO-VEm" secondAttribute="bottom" constant="15" id="aAL-V5-kvB"/>
                             <constraint firstItem="EfF-kV-BXc" firstAttribute="leading" secondItem="uTd-L6-x7T" secondAttribute="leading" id="bkw-iX-Y2K"/>
                             <constraint firstItem="DfM-w7-Lqm" firstAttribute="leading" secondItem="uTd-L6-x7T" secondAttribute="leading" constant="35" id="dTN-6t-rp0"/>
                             <constraint firstItem="ndM-3A-bDI" firstAttribute="top" secondItem="Fel-2s-F8j" secondAttribute="bottom" constant="15" id="eow-4s-vmQ"/>
                             <constraint firstItem="43b-xb-zrp" firstAttribute="leading" secondItem="uTd-L6-x7T" secondAttribute="leading" constant="5" id="fmP-Ns-riL"/>
+                            <constraint firstItem="GW0-Os-mgo" firstAttribute="leading" secondItem="uTd-L6-x7T" secondAttribute="leading" constant="20" id="ham-yi-jeC"/>
                             <constraint firstItem="DfM-w7-Lqm" firstAttribute="leading" secondItem="GCa-v8-Cog" secondAttribute="trailing" constant="5" id="l1h-Mv-iqL"/>
                             <constraint firstItem="EzW-gH-JrY" firstAttribute="leading" secondItem="Fel-2s-F8j" secondAttribute="trailing" constant="1" id="la0-Ao-typ"/>
                             <constraint firstAttribute="trailing" secondItem="DfM-w7-Lqm" secondAttribute="trailing" constant="5" id="mbu-hI-EVp"/>
@@ -389,14 +377,11 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="7qW-w3-InN"/>
-                                <exclude reference="GfS-Sn-gkB"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="0v4-kN-oDb"/>
                                 <exclude reference="4xg-Xq-Bpm"/>
                                 <exclude reference="6Nl-UC-0td"/>
-                                <exclude reference="IqJ-8w-Gbr"/>
-                                <exclude reference="PAQ-Ei-DEG"/>
                                 <exclude reference="6HI-pA-Drb"/>
                                 <exclude reference="oaL-AH-fwl"/>
                             </mask>
@@ -404,14 +389,11 @@
                         <variation key="heightClass=regular">
                             <mask key="subviews">
                                 <include reference="7qW-w3-InN"/>
-                                <include reference="GfS-Sn-gkB"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="0v4-kN-oDb"/>
                                 <include reference="4xg-Xq-Bpm"/>
                                 <include reference="6Nl-UC-0td"/>
-                                <include reference="IqJ-8w-Gbr"/>
-                                <include reference="PAQ-Ei-DEG"/>
                             </mask>
                         </variation>
                     </view>
@@ -424,7 +406,7 @@
                         <outlet property="containerView" destination="Qxc-3A-SLy" id="ykD-6a-Ykx"/>
                         <outlet property="coverTemp" destination="e9l-ya-qD1" id="XJW-cT-ej4"/>
                         <outlet property="profilePic" destination="PN4-fv-TuS" id="i15-re-6oe"/>
-                        <outlet property="profilePicOfComic" destination="GfS-Sn-gkB" id="ZzH-S6-dcb"/>
+                        <outlet property="profilePicOfComic" destination="GW0-Os-mgo" id="Awj-Uh-ygd"/>
                         <outlet property="refreshComic" destination="QRE-Ts-5Vv" id="8JU-Ur-VA0"/>
                         <outlet property="scrollView" destination="EfF-kV-BXc" id="7eC-kb-cSz"/>
                         <outlet property="shadowImage" destination="iZ7-M1-1RV" id="aMT-Gi-D08"/>
@@ -435,7 +417,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOR-Ol-XcB" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="74" y="81"/>
+            <point key="canvasLocation" x="69" y="11"/>
         </scene>
         <!--Data View Controller-->
         <scene sceneID="WIU-ce-3GT">
@@ -1004,7 +986,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="540" height="90"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="102 Comics" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qax-xH-EY5">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0 Comics" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qax-xH-EY5">
                                         <rect key="frame" x="454" y="59" width="80" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="gRP-wZ-dKr"/>
@@ -1257,6 +1239,7 @@
                         <outlet property="profileImageView" destination="hgj-5e-set" id="81q-QT-x1I"/>
                         <outlet property="profilePicButton" destination="VlM-Cb-wC6" id="Koh-8i-Mg4"/>
                         <outlet property="tableview" destination="b3Q-TL-QrG" id="862-jN-oLP"/>
+                        <outlet property="totalComicCountLabel" destination="qax-xH-EY5" id="W9o-iw-puF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UgX-zA-dJg" userLabel="First Responder" sceneMemberID="firstResponder"/>

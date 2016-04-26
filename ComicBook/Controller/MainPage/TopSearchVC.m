@@ -105,7 +105,7 @@ const int blurViewTag = 1010;
         [AppHelper closeMainPageviewController:self];
     };
     topBarView.meAction = ^(void) {
-        MePageVC *meView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:ME_VIEW];
+        MePageVC *meView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:ME_VIEW_SEGUE];
 //        [weakSelf presentViewController:meView animated:YES completion:nil];
         [weakSelf.navigationController pushViewController:meView animated:YES];
     };
