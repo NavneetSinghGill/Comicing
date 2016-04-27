@@ -13,7 +13,7 @@
 @end
 
 @implementation ExclamationList
-@synthesize parentViewController,exclamationLargeListArray;
+@synthesize parentViewController,exclamationLargeListArray,exclamationSmallListArray;
 
 static NSString * const reuseIdentifier = @"Cell";
 static NSString * const reuseIdentifier1 = @"Cell1";
@@ -41,7 +41,57 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     
 //    exclamationListArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"01 Regular"],[UIImage imageNamed:@"02 Eh"],[UIImage imageNamed:@"03 Thinking"],[UIImage imageNamed:@"04 Love"],[UIImage imageNamed:@"05 Scared"],[UIImage imageNamed:@"06 Angry_yelling"],[UIImage imageNamed:@"07 Great_Awesome"],[UIImage imageNamed:@"08 Strong_Powerful"],[UIImage imageNamed:@"09 Angry"],[UIImage imageNamed:@"10 Ohno"], nil];
 
-    exclamationLargeListArray = [[NSMutableArray alloc] initWithObjects:@"-.. bubble",@"A$AP",@"BOOOM",@"BoOoOoOo!!",@"DKM",@"GOOD VIBE",@"HUH",@"JKS",@"LOL",@"NoOoOoOo!!",@"OH",@"OMG!",@"SLAAYY",@"thumbs down",@"thumbs up",@"WoOoOoOo!!",@"WOW",@"WTF coloured",@"WTF",@"XO",@"YAAS",@"YOLO",@"YOO",nil];
+    exclamationLargeListArray = [[NSMutableArray alloc] initWithObjects:
+                                 @"-.. bubble",
+                                 @"A$AP",@"BOOOM",
+                                 @"BoOoOoOo!!",
+                                 @"DKM",
+                                 @"GOOD VIBE",
+                                 
+                                 @"HUH",
+                                 @"JKS",
+                                 @"LOL",
+                                 @"NoOoOoOo!!",
+                                 @"OH",
+                                 @"OMG!",
+                                 @"SLAAYY",
+                                 @"thumbs down",
+                                 @"thumbs up",
+                                 @"WoOoOoOo!!",
+                                 @"WOW",
+                                 @"WTF coloured",
+                                 @"WTF",
+                                 @"XO",
+                                 @"YAAS",
+                                 @"YOLO",
+                                 @"YOO",nil];
+    
+    
+    exclamationSmallListArray = [[NSMutableArray alloc] initWithObjects:
+                                 @"-.. bubble_low",
+                                 @"A$AP_low",
+                                 @"BOOOM_low",
+                                 @"BoOoOoOo!!_low",
+                                 @"DKM_low",
+                                 @"GOOD VIBE_low",
+                                 
+                                 @"HUH_low",
+                                 @"JKS_low",
+                                 @"LOL_low",
+                                 @"NoOoOoOo!!_low",
+                                 @"OH_low",
+                                 @"OMG!_low",
+                                 @"SLAAYY_low",
+                                 @"thumbs down_low",
+                                 @"thumbs up_low",
+                                 @"WoOoOoOo!!_low",
+                                 @"WOW_low",
+                                 @"WTF coloured_low",
+                                 @"WTF_low",
+                                 @"XO_low",
+                                 @"YAAS_low",
+                                 @"YOLO_low",
+                                 @"YOO_low",nil];
     
     
     
@@ -94,7 +144,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return exclamationLargeListArray.count + 1;
+    return exclamationSmallListArray.count + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,7 +159,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
         
         // Configure the cell
         UIImageView *img = (UIImageView*)[cell viewWithTag:1];
-        img.image = [UIImage imageNamed:exclamationLargeListArray[indexPath.row -1]];
+        img.image = [UIImage imageNamed:exclamationSmallListArray[indexPath.row -1]];
         
         return cell;
     }

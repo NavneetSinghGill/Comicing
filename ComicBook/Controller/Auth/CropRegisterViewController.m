@@ -254,7 +254,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     FindFriendsViewController *controller = (FindFriendsViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"FindFriendsViewController"];
     
-    controller.imgvUser.image = _imgFinalCopedFace.image;
+    controller.imgUser = _imgFinalCopedFace.image;
     
     [self.navigationController pushViewController:controller animated:YES];
     mainStoryboard = nil;
