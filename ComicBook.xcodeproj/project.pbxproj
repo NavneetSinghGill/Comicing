@@ -2591,6 +2591,11 @@
 					845090741C2B1343004DAE99 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = PV7F3V653B;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -3117,7 +3122,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "5c2450a5-6df7-472a-9b15-0467926102a8";
+				PROVISIONING_PROFILE = "47836a94-9a55-428d-8499-04cda266c580";
 			};
 			name = Debug;
 		};
@@ -3143,7 +3148,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "eea0fd05-1bde-48e3-a4f5-d9d24801d28e";
+				PROVISIONING_PROFILE = "ca2d499a-e06e-46f3-98a9-d7e5a0fa459c";
 			};
 			name = Release;
 		};
