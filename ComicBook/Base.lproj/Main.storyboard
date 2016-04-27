@@ -383,96 +383,6 @@
             </objects>
             <point key="canvasLocation" x="196" y="224"/>
         </scene>
-        <!--Drawing Colors View Controller-->
-        <scene sceneID="75m-Y8-fQQ">
-            <objects>
-                <viewController storyboardIdentifier="DrawingColorsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iQx-Dz-nQE" customClass="DrawingColorsViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="fJZ-f3-5dT">
-                        <rect key="frame" x="0.0" y="0.0" width="41" height="448"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8ak-zx-3ar">
-                                <rect key="frame" x="2" y="193" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.066666666666666666" green="0.52156862745098043" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="btnDrawingTap:" destination="iQx-Dz-nQE" eventType="touchUpInside" id="Rnc-Hs-Svv"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5vj-nD-wOQ">
-                                <rect key="frame" x="2" y="233" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.89803921568627454" green="0.0" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="btnDrawingTap:" destination="iQx-Dz-nQE" eventType="touchUpInside" id="qa5-JB-UfI"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QVY-dR-gEe">
-                                <rect key="frame" x="2" y="273" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.13333333333333333" green="0.12156862745098039" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="btnDrawingTap:" destination="iQx-Dz-nQE" eventType="touchUpInside" id="NXM-sR-0LH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0jS-Pp-I2C">
-                                <rect key="frame" x="2" y="313" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.38039215686274508" green="0.23137254901960785" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="btnDrawingTap:" destination="iQx-Dz-nQE" eventType="touchUpInside" id="HgH-Dm-WlG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UDF-Pk-0KH">
-                                <rect key="frame" x="2" y="353" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="btnDrawingTap:" destination="iQx-Dz-nQE" eventType="touchUpInside" id="zFX-uy-Nxl"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YHr-Ho-ms8">
-                                <rect key="frame" x="2" y="114" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="btnDrawingTap:" destination="iQx-Dz-nQE" eventType="touchUpInside" id="I2z-40-Dma"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XFt-qz-fvt">
-                                <rect key="frame" x="2" y="154" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.99607843137254903" green="0.76470588235294112" blue="0.039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="btnDrawingTap:" destination="iQx-Dz-nQE" eventType="touchUpInside" id="v7z-A3-84B"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oqd-xB-aLH">
-                                <rect key="frame" x="8" y="34" width="25" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="undo-drawing-icon"/>
-                                <connections>
-                                    <action selector="btnUndoTap:" destination="iQx-Dz-nQE" eventType="touchUpInside" id="H5a-my-wHQ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="btnBlack" destination="UDF-Pk-0KH" id="scg-q2-4A0"/>
-                        <outlet property="btnBlue" destination="QVY-dR-gEe" id="OKX-0B-42v"/>
-                        <outlet property="btnBrown" destination="0jS-Pp-I2C" id="H6U-h6-hPm"/>
-                        <outlet property="btnGreen" destination="8ak-zx-3ar" id="5tG-Sw-Jux"/>
-                        <outlet property="btnRed" destination="5vj-nD-wOQ" id="boQ-Od-TeU"/>
-                        <outlet property="btnUndo" destination="oqd-xB-aLH" id="KYh-Jn-ISb"/>
-                        <outlet property="btnWhite" destination="YHr-Ho-ms8" id="M8v-Kc-xV1"/>
-                        <outlet property="btnYellow" destination="XFt-qz-fvt" id="xcB-EI-ZMx"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ms2-0q-4VY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="461" y="180"/>
-        </scene>
         <!--Comic Bubble List-->
         <scene sceneID="2P3-ix-rD6">
             <objects>
@@ -1568,7 +1478,7 @@ Comicing </string>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell1" id="dr5-RS-Mql">
-                                <rect key="frame" x="0.0" y="2" width="60" height="68"/>
+                                <rect key="frame" x="0.0" y="2" width="60" height="67.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="68"/>
@@ -2347,7 +2257,7 @@ Comicing </string>
             <objects>
                 <viewController storyboardIdentifier="DrawingColorsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zsQ-ev-VoL" customClass="DrawingColorsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CYY-cS-3H1">
-                        <rect key="frame" x="0.0" y="0.0" width="40" height="448"/>
+                        <rect key="frame" x="0.0" y="0.0" width="41" height="448"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="q5U-Gs-yBO">
@@ -2359,7 +2269,7 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="O65-RI-Zkm">
-                                <rect key="frame" x="3" y="262.5" width="35" height="35"/>
+                                <rect key="frame" x="3" y="262" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8980392157" green="0.0" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -2375,7 +2285,7 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pKI-dH-Qn1">
-                                <rect key="frame" x="3" y="374.5" width="35" height="35"/>
+                                <rect key="frame" x="3" y="374" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.3803921569" green="0.23137254900000001" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -2391,7 +2301,7 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Vd-RT-im9">
-                                <rect key="frame" x="3" y="38.5" width="35" height="35"/>
+                                <rect key="frame" x="3" y="38" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -2399,7 +2309,7 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pXq-zJ-nJg">
-                                <rect key="frame" x="3" y="76.5" width="35" height="35"/>
+                                <rect key="frame" x="3" y="76" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.76470588240000004" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -2407,7 +2317,7 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QW2-fo-fea">
-                                <rect key="frame" x="8" y="-9" width="25" height="43.5"/>
+                                <rect key="frame" x="8" y="-9" width="25" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="undo-drawing-icon"/>
                                 <connections>
@@ -2415,7 +2325,7 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hYG-F0-hUy">
-                                <rect key="frame" x="3" y="114.5" width="35" height="35"/>
+                                <rect key="frame" x="3" y="114" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.51372549020000002" green="0.81568627449999997" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -2423,7 +2333,7 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dER-yF-5CZ">
-                                <rect key="frame" x="3" y="188.5" width="35" height="35"/>
+                                <rect key="frame" x="3" y="188" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.52156862749999999" green="0.37254901959999998" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
