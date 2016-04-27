@@ -3205,6 +3205,10 @@ static CGRect CaptionTextViewMinRect;
     
     //Create Dots Holder
     captionHolder.dotHolder.tag = 1236;
+    for (UIView *subView in [captionHolder.dotHolder subviews])
+    {
+        [subView removeFromSuperview];
+    }
     
     // Create UIbutton Dots
     float padding = 31;
@@ -3254,9 +3258,10 @@ static CGRect CaptionTextViewMinRect;
     [captionHolder addGestureRecognizer:panGestureRecognizer];
     
     [captionHolder setUserInteractionEnabled:YES];
+    
+    captionHolder.clipsToBounds = NO;
     [imgvComic addSubview:captionHolder];
     
-    captionHolder.clipsToBounds =NO;
     imgvComic.userInteractionEnabled = YES;
     imgvComic.clipsToBounds = YES;
 //    [captionHolder setBackgroundColor:[UIColor redColor]];
