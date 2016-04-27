@@ -37,6 +37,9 @@
     self.frameSearchTextHolderView = _searchTextHolderView.frame;
     self.frameViewHeader = _viewHeader.frame;
     self.frameViewFriendList = _viewFriendList.frame;
+    _imgvUser.image = _imgUser;
+    
+    
     
     self.viewFriendList.isTitleLabelHide = YES;
 

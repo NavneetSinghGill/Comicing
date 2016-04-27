@@ -112,7 +112,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 - (void)cropStickerViewController_:(CropStickerViewController *)controll didSelectDoneWithImage:(UIImageView *)stickerImageView{
     UIImage *cropedImage  = stickerImageView.image;
-    cropedImage = [UIImage resizeImage:cropedImage newSize:CGSizeMake(150, 150)];
+    cropedImage = [UIImage resizeImage:cropedImage newSize:CGSizeMake(130, 130)];
     [imgvCrop setImage:cropedImage];
     stickerImageView.frame = imgvCrop.frame;
     [self.view addSubview:stickerImageView];
@@ -253,7 +253,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     FindFriendsViewController *controller = (FindFriendsViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"FindFriendsViewController"];
     
-    controller.imgvUser.image = _imgFinalCopedFace.image;
+    controller.imgUser = _imgFinalCopedFace.image;
     
     [self.navigationController pushViewController:controller animated:YES];
     mainStoryboard = nil;

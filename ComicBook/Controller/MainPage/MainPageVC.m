@@ -773,6 +773,7 @@ NSString * const BottomBarView = @"BottomBarView";
     textView.layer.masksToBounds=YES;
     [textView setTextColor:[UIColor whiteColor]];
     [self.view addSubview:commentContainerView];
+
     
     commentContainerView.layer.zPosition = 0;
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;

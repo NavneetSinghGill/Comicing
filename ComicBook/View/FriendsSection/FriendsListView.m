@@ -656,7 +656,7 @@
     
     //initialize the models
     
-    if (![response[@"data"] isEqualToString:@""])
+    if (response[@"data"] != nil)
     {
         self.friendsArray  = [UserFriends arrayOfModelsFromDictionaries:response[@"data"]];
 

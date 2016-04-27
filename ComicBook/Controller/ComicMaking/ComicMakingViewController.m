@@ -136,6 +136,9 @@ static CGRect CaptionTextViewMinRect;
 @property (nonatomic, strong) id<ComicItem> comicItem;
 @property (nonatomic,strong) NSMutableArray* comicItemArray;
 @property (nonatomic,strong) RowButtonsViewController *rowButton;
+
+@property BOOL captionHeightSmall;
+
 @end
 
 @implementation ComicMakingViewController
@@ -148,7 +151,8 @@ static CGRect CaptionTextViewMinRect;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    _captionHeightSmall = YES;
+
     frameImgvComic = imgvComic.frame;
     frameBlackboardView = viewBlackBoard.frame;
     
@@ -308,6 +312,7 @@ static CGRect CaptionTextViewMinRect;
         imgvComic.hidden = NO;
         btnClose.hidden = NO;
         viewCamera.hidden = YES;
+        [self.mSendComicButton setHidden:NO];//dinesh
         self.rowButton.isNewSlide = NO;
         
         imgvComic.image = [AppHelper getImageFile:comicPage.containerImagePath]; //[UIImage imageWithData:comicPage.containerImage];
@@ -454,6 +459,8 @@ static CGRect CaptionTextViewMinRect;
     [self setSessionQueue:sessionQueue];
     
     dispatch_async(sessionQueue, ^{
+
+        
         [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
         
         NSError *error = nil;
@@ -504,7 +511,7 @@ static CGRect CaptionTextViewMinRect;
             [session addInput:audioDeviceInput];
         }
         
-        AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+        /*AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
         
         if ([session canAddOutput:movieFileOutput])
         {
@@ -515,7 +522,7 @@ static CGRect CaptionTextViewMinRect;
                 [connection setEnablesVideoStabilizationWhenAvailable:YES];
             
             [self setMovieFileOutput:movieFileOutput];
-        }
+        }*/
         
         AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
         if ([session canAddOutput:stillImageOutput])
@@ -928,6 +935,7 @@ static CGRect CaptionTextViewMinRect;
     imgvComic.hidden = YES;
     imgvComic.frame =  frameImgvComic;
     viewCamera.hidden = NO;
+    [self.mSendComicButton setHidden:YES];//dinesh
     btnClose.hidden = YES;
     
     GlobalObject.isTakePhoto = NO;
@@ -998,6 +1006,7 @@ static CGRect CaptionTextViewMinRect;
 #if TARGET_OS_SIMULATOR
     NSLog(@"camera tap");
     viewCamera.hidden = YES;
+    [self.mSendComicButton setHidden:NO];//dinesh
     [imgvComic setImage:[UIImage imageNamed:@"cat-demo"]];
     imgvComic.hidden = NO;
     GlobalObject.isTakePhoto = YES;
@@ -1019,6 +1028,7 @@ static CGRect CaptionTextViewMinRect;
             if (imageDataSampleBuffer)
             {
                 viewCamera.hidden = YES;
+                [self.mSendComicButton setHidden:NO];//dinesh
                 
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                 
@@ -1082,6 +1092,8 @@ static CGRect CaptionTextViewMinRect;
          [self.btnSend setEnabled:YES];
          UIImage *selectedImage = info[UIImagePickerControllerOriginalImage];
          viewCamera.hidden = YES;
+         [self.mSendComicButton setHidden:NO];//dinesh
+         
          imgvComic.image = selectedImage;
          imgvComic.hidden = NO;
          
@@ -1103,11 +1115,16 @@ static CGRect CaptionTextViewMinRect;
          rowButtonsController.btnCamera.selected = YES;
          [rowButtonsController allButtonsFadeIn:rowButtonsController.btnCamera];
          
+         //dinesh
+         [self.mSendComicButton setHidden:NO];
      }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    //dinesh
+    [self.mSendComicButton setHidden:NO];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -2081,6 +2098,7 @@ static CGRect CaptionTextViewMinRect;
 {
     viewBlackBoard.alpha = 0;
     viewCamera.hidden = YES;
+    [self.mSendComicButton setHidden:NO];//dinesh
     btnClose.hidden = YES;
     
     imgvComic.hidden = NO;
@@ -2189,6 +2207,7 @@ static CGRect CaptionTextViewMinRect;
 {
     viewDrawing.alpha = 0;
     viewCamera.hidden = YES;
+    [self.mSendComicButton setHidden:NO];//dinesh
     btnClose.hidden = YES;
     
     drawView = [[ACEDrawingView alloc] init];
@@ -2639,14 +2658,19 @@ static CGRect CaptionTextViewMinRect;
     
     UIView* vw = [textView  superview];
     
-    if ([vw viewWithTag:1234]) {
+    if ([vw viewWithTag:1234])
+    {
         CGRect txtRect_Image = [vw viewWithTag:1234].frame;
         txtRect_Image.size.height = isDouble?txtRect_Image.size.height*2:txtRect_Image.size.height/2;
+        
         [UIView animateWithDuration:0.5 delay:0.5
                             options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{
+                         animations:^
+        {
                              [vw viewWithTag:1234].frame = txtRect_Image;
-                         } completion:^(BOOL finished) {
+        
+        } completion:^(BOOL finished)
+        {
                              if ([vw viewWithTag:1236]) {
                                  CGRect rect_dots = [vw viewWithTag:1236].frame;
                                  rect_dots.origin.y = isDouble? rect_dots.origin.y *2:rect_dots.origin.y /2 ;
@@ -2694,11 +2718,34 @@ static CGRect CaptionTextViewMinRect;
         NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
         
         
+        if (textView.text.length > 29)
+        {
+            if (_captionHeightSmall == YES)
+            {
+                _captionHeightSmall = NO;
+                [self handleCaptionHeight:textView];
+            }
+//            else
+//            {
+//                _captionHeightSmall = YES;
+//            }
+        }
+        else if (textView.text.length > 0 || textView.text.length <= 28)
+        {
+            if (_captionHeightSmall == NO)
+            {
+                [self handleCaptionHeight:textView];
+
+                _captionHeightSmall = YES;
+            }
+        }
+        
+        
+        
         if (textView.text.length == 29)
         {
             textView.text = [[NSString alloc] initWithFormat:@"%@\n",newString];
             [textView becomeFirstResponder];
-            [self handleCaptionHeight:textView];
         }
         
         if([text isEqualToString:@"\n"] && textView.text.length != 29)

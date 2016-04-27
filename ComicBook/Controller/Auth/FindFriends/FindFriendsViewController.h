@@ -37,6 +37,8 @@
 
 @property (strong, nonatomic) IBOutlet FindFriendsTableCell *tabCell;
 
+@property (strong, nonatomic) UIImage *imgUser;
+
 @property CGRect frameSearchTextHolderView;
 @property CGRect frameContactListTableView;
 @property CGRect frameViewHeader;
