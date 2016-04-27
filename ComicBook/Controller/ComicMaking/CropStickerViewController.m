@@ -295,7 +295,7 @@ UINavigationControllerDelegate>
             [session addInput:audioDeviceInput];
         }
         
-        AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+        /*AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
         
         if ([session canAddOutput:movieFileOutput])
         {
@@ -306,7 +306,7 @@ UINavigationControllerDelegate>
                 connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeStandard;
             
             [self setMovieFileOutput:movieFileOutput];
-        }
+        }*/
         
         AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
         if ([session canAddOutput:stillImageOutput])

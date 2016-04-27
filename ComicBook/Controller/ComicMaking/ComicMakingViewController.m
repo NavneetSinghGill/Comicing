@@ -301,12 +301,14 @@ static CGRect CaptionTextViewMinRect;
         btnClose.hidden = YES;
         
         self.rowButton.isNewSlide = YES;
+        [self.mSendComicButton setHidden:YES];//dinesh
     }
     else
     {
         imgvComic.hidden = NO;
         btnClose.hidden = NO;
         viewCamera.hidden = YES;
+        [self.mSendComicButton setHidden:NO];//dinesh
         self.rowButton.isNewSlide = NO;
         
         imgvComic.image = [AppHelper getImageFile:comicPage.containerImagePath]; //[UIImage imageWithData:comicPage.containerImage];
@@ -453,6 +455,8 @@ static CGRect CaptionTextViewMinRect;
     [self setSessionQueue:sessionQueue];
     
     dispatch_async(sessionQueue, ^{
+
+        
         [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
         
         NSError *error = nil;
@@ -503,7 +507,7 @@ static CGRect CaptionTextViewMinRect;
             [session addInput:audioDeviceInput];
         }
         
-        AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+        /*AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
         
         if ([session canAddOutput:movieFileOutput])
         {
@@ -514,7 +518,7 @@ static CGRect CaptionTextViewMinRect;
                 [connection setEnablesVideoStabilizationWhenAvailable:YES];
             
             [self setMovieFileOutput:movieFileOutput];
-        }
+        }*/
         
         AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
         if ([session canAddOutput:stillImageOutput])
@@ -926,6 +930,7 @@ static CGRect CaptionTextViewMinRect;
     imgvComic.hidden = YES;
     imgvComic.frame =  frameImgvComic;
     viewCamera.hidden = NO;
+    [self.mSendComicButton setHidden:YES];//dinesh
     btnClose.hidden = YES;
     
     GlobalObject.isTakePhoto = NO;
@@ -995,6 +1000,7 @@ static CGRect CaptionTextViewMinRect;
 #if TARGET_OS_SIMULATOR
     NSLog(@"camera tap");
     viewCamera.hidden = YES;
+    [self.mSendComicButton setHidden:NO];//dinesh
     [imgvComic setImage:[UIImage imageNamed:@"cat-demo"]];
     imgvComic.hidden = NO;
     GlobalObject.isTakePhoto = YES;
@@ -1016,6 +1022,7 @@ static CGRect CaptionTextViewMinRect;
             if (imageDataSampleBuffer)
             {
                 viewCamera.hidden = YES;
+                [self.mSendComicButton setHidden:NO];//dinesh
                 
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                 
@@ -1078,6 +1085,8 @@ static CGRect CaptionTextViewMinRect;
      {
          UIImage *selectedImage = info[UIImagePickerControllerOriginalImage];
          viewCamera.hidden = YES;
+         [self.mSendComicButton setHidden:NO];//dinesh
+         
          imgvComic.image = selectedImage;
          imgvComic.hidden = NO;
          
@@ -1099,11 +1108,16 @@ static CGRect CaptionTextViewMinRect;
          rowButtonsController.btnCamera.selected = YES;
          [rowButtonsController allButtonsFadeIn:rowButtonsController.btnCamera];
          
+         //dinesh
+         [self.mSendComicButton setHidden:NO];
      }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    //dinesh
+    [self.mSendComicButton setHidden:NO];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -2077,6 +2091,7 @@ static CGRect CaptionTextViewMinRect;
 {
     viewBlackBoard.alpha = 0;
     viewCamera.hidden = YES;
+    [self.mSendComicButton setHidden:NO];//dinesh
     btnClose.hidden = YES;
     
     imgvComic.hidden = NO;
@@ -2185,6 +2200,7 @@ static CGRect CaptionTextViewMinRect;
 {
     viewDrawing.alpha = 0;
     viewCamera.hidden = YES;
+    [self.mSendComicButton setHidden:NO];//dinesh
     btnClose.hidden = YES;
     
     drawView = [[ACEDrawingView alloc] init];

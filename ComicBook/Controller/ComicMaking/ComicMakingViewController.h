@@ -93,6 +93,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgvComic;
 @property (nonatomic, weak) id<ComicMakingViewControllerDelegate> delegate;
 @property (strong,nonatomic) GlideScrollViewController *glideScrollView;
+@property (strong, nonatomic) IBOutlet UIButton *mSendComicButton;
+
 
 @property (nonatomic) ComicType comicType;
 @property (nonatomic) ReplyType replyType;

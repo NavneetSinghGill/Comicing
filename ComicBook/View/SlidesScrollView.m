@@ -183,13 +183,23 @@ const NSInteger spaceFromTop = 75;
                                                                  view.frame.origin.y - 50, 27, 27)];
     viewRound.layer.cornerRadius = viewRound.frame.size.width/2;
     viewRound.layer.masksToBounds = YES;
-    [viewRound setBackgroundColor:[UIColor colorWithHexStr:@"26aae1"]];
+    //[viewRound setBackgroundColor:[UIColor colorWithHexStr:@"26aae1"]];//Dinesh : Ref : Bug list : line 307
     viewRound.tag = timlineViewTag * index;
     
+    //dinesh
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"h.mm a"];
+    NSDate *orignalDate   =  [dateFormatter dateFromString:comicSlide.timelineString];
+    
+    [dateFormatter setDateFormat:@"h:mm a"];
+    NSString *finalString = [dateFormatter stringFromDate:orignalDate];
+    
+    
     //Add time line text
-    UILabel* lblTimeText = [[UILabel alloc] initWithFrame:CGRectMake(viewRound.frame.origin.x - 27, viewRound.frame.origin.y - 20, 80, 20)];
-    lblTimeText.text = comicSlide.timelineString;
-    lblTimeText.textColor = [UIColor whiteColor];
+    //UILabel* lblTimeText = [[UILabel alloc] initWithFrame:CGRectMake(viewRound.frame.origin.x - 27, viewRound.frame.origin.y - 20, 80, 20)];
+    UILabel* lblTimeText = [[UILabel alloc] initWithFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y - 30, view.frame.size.width, 20)];
+    lblTimeText.text = finalString;
+    lblTimeText.textColor = [UIColor colorWithHexStr:@"26aae1"];//Dinesh : Ref : Bug list : line 307
     lblTimeText.textAlignment = NSTextAlignmentCenter;
     lblTimeText.tag = timlineTextTag * index;
     if (comicSlide.timelineString == nil ||
@@ -200,6 +210,7 @@ const NSInteger spaceFromTop = 75;
         dateFormatter.dateFormat = @"h:mm a";
         [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         lblTimeText.text = [dateFormatter stringFromDate:now];
+        lblTimeText.textColor = [UIColor colorWithHexStr:@"26aae1"];//Dinesh : Ref : Bug list : line 307
         dateFormatter = nil;
     }
     
@@ -320,7 +331,8 @@ const NSInteger spaceFromTop = 75;
                                              (self.contentSize.width - (spaceBetweenSlide + removeWidth)), 2);
         
         
-        [self.timelineView setBackgroundColor:[UIColor colorWithHexStr:@"26aae1"]];
+        //Dinesh : Ref : Bug list : line 307
+        //[self.timelineView setBackgroundColor:[UIColor colorWithHexStr:@"26aae1"]];
         [self addSubview:self.timelineView];
     }else{
         if (self.timelineView == nil) {
