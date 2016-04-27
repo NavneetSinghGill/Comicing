@@ -89,6 +89,7 @@ static CGRect CaptionTextViewMinRect;
 @property (strong, nonatomic) UIPinchGestureRecognizer *pinchGesture;
 
 @property (strong, nonatomic) UIImage *printScreen;
+@property (weak, nonatomic) IBOutlet UIButton *btnSend;
 
 @property (nonatomic) BOOL isSlideShrink;
 
@@ -299,8 +300,8 @@ static CGRect CaptionTextViewMinRect;
     {
         imgvComic.hidden = YES;
         btnClose.hidden = YES;
-        
         self.rowButton.isNewSlide = YES;
+        [self.btnSend setEnabled:NO];
     }
     else
     {
@@ -843,6 +844,7 @@ static CGRect CaptionTextViewMinRect;
                  
                  
                  [self doRemoveAllItem:nil];
+                 [self.btnSend setEnabled:NO];
              });
              
              
@@ -991,7 +993,8 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)btnCameraTap:(UIButton *)sender
 {
-    
+ 
+    [self.btnSend setEnabled:YES];
 #if TARGET_OS_SIMULATOR
     NSLog(@"camera tap");
     viewCamera.hidden = YES;
@@ -1076,6 +1079,7 @@ static CGRect CaptionTextViewMinRect;
 {
     [self dismissViewControllerAnimated:YES completion:^
      {
+         [self.btnSend setEnabled:YES];
          UIImage *selectedImage = info[UIImagePickerControllerOriginalImage];
          viewCamera.hidden = YES;
          imgvComic.image = selectedImage;
@@ -2658,7 +2662,12 @@ static CGRect CaptionTextViewMinRect;
 }
 
 #pragma mark - Bubble TextView Events
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    textView.textContainerInset = UIEdgeInsetsZero;
+    textView.textContainer.lineFragmentPadding = 0;
 
+}
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
     if (textView.tag == CaptionViewTextViewTag)
@@ -2989,7 +2998,10 @@ static CGRect CaptionTextViewMinRect;
     bubbleHolderView.txtBuble.opaque = YES;
 //    [bubbleHolderView.txtBuble addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
     bubbleHolderView.txtBuble.textAlignment = NSTextAlignmentCenter;
-    bubbleHolderView.txtBuble.contentInset = UIEdgeInsetsMake(50.0,50.0,0,0.0);
+    CGFloat centerLeftValue = bubbleHolderView.txtBuble.frame.size.width/2;
+    CGFloat centerTopValue = bubbleHolderView.txtBuble.frame.size.height/2;
+    
+    bubbleHolderView.txtBuble.contentInset = UIEdgeInsetsMake(centerTopValue - 10,centerLeftValue,0,0.0);
     bubbleHolderView.txtBuble.scrollEnabled = NO;
     bubbleHolderView.txtBuble.autocorrectionType = UITextAutocorrectionTypeNo;
     if (![bubbleHolderView.txtBuble.text isEqualToString:@""]) {

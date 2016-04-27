@@ -7,7 +7,7 @@
 //
 
 #import "ComicItem.h"
-
+#import "AppConstants.h"
 
 @implementation ComicItemSticker
 
@@ -270,10 +270,15 @@
 }
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        self.imageView.image = [decoder decodeObjectForKey:@"bubbleimage"];
+        self.imageView = [decoder decodeObjectForKey:@"imageView"];
+        
+        if (SYSTEM_VERSION_LESSER_THAN_OR_EQUAL_TO(@"9")) {
+            self.imageView.image = [UIImage imageWithData:[decoder decodeObjectForKey:@"bubbleimage"]];
+        }else{
+            self.imageView.image = [decoder decodeObjectForKey:@"bubbleimage"];
+        }
         self.recorderFilePath = [decoder decodeObjectForKey:@"recorderFilePath"];
         self.audioImageButton = [decoder decodeObjectForKey:@"audioImageButton"];
-        self.imageView = [decoder decodeObjectForKey:@"imageView"];
         self.txtBuble = [decoder decodeObjectForKey:@"txtBuble"];
         self.imagebtn = [decoder decodeObjectForKey:@"imagebtn"];
         self.bubbleString = [decoder decodeObjectForKey:@"bubbleString"];
@@ -282,7 +287,11 @@
     return self;
 }
 -(void)encodeWithCoder:(NSCoder *)aCoder{
-    [aCoder encodeObject:self.imageView.image forKey:@"bubbleimage"];
+    if (SYSTEM_VERSION_LESSER_THAN_OR_EQUAL_TO(@"9")) {
+        [aCoder encodeObject:UIImagePNGRepresentation(self.imageView.image) forKey:@"bubbleimage"];
+    }else{
+        [aCoder encodeObject:self.imageView.image forKey:@"bubbleimage"];
+    }
     [aCoder encodeObject:self.recorderFilePath forKey:@"recorderFilePath"];
     [aCoder encodeObject:self.audioImageButton forKey:@"audioImageButton"];
     [aCoder encodeObject:self.imageView forKey:@"imageView"];

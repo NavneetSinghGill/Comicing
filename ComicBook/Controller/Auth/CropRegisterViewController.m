@@ -112,9 +112,8 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 - (void)cropStickerViewController_:(CropStickerViewController *)controll didSelectDoneWithImage:(UIImageView *)stickerImageView{
     UIImage *cropedImage  = stickerImageView.image;
+    cropedImage = [UIImage resizeImage:cropedImage newSize:CGSizeMake(150, 150)];
     [imgvCrop setImage:cropedImage];
-    cropedImage = [UIImage resizeImage:cropedImage newSize:CGSizeMake(112, 112)];
-    
     stickerImageView.frame = imgvCrop.frame;
     [self.view addSubview:stickerImageView];
     
@@ -268,8 +267,8 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
     
 //    [userDic setObject:imagProfilePic?[AppHelper encodeToBase64String:imagProfilePic]:[AppHelper encodeToBase64String:[UIImage imageNamed:@"flagImage.png"]] forKey:@"profile_pic"];
-    [userDic setObject:mNumber forKey:@"mobile"];
     [userDic setObject:[AppHelper getDeviceToken] forKey:@"device_token"];
+    [userDic setObject:mNumber forKey:@"mobile"];
     
     [dataDic setObject:userDic forKey:@"data"];
     
