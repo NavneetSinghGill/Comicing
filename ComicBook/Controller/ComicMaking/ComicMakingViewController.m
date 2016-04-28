@@ -159,7 +159,8 @@ static CGRect CaptionTextViewMinRect;
     frameDrawingView = viewDrawing.frame;
     centerImgvComic = imgvComic.center;
     viewRowButtons.alpha = 0;
-//    isNewSlide = YES;
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"ComicMaking" Attributes:nil];
     
     // set up the filename to save based on the friend/group id.
     if(self.comicType == ReplyComic && self.replyType == FriendReply) {
@@ -172,8 +173,6 @@ static CGRect CaptionTextViewMinRect;
     
     [self prepareGlideView];
     
-//    [self.glideViewHolder setHidden:YES];
-
     [self prepareCaptionView];
     [self prepareView];
     [self prepareVoiceView];

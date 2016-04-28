@@ -29,6 +29,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     [super viewDidLoad];
 
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"Register" Attributes:nil];
     
     //    self.cropHolder.isRegView = YES;
     [self setTextFont:@"Take a Selfie and \n Cut out your Profile Pic"];

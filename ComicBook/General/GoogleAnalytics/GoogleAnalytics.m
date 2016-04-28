@@ -66,13 +66,13 @@ static GoogleAnalytics *sharedGoogleAnalytics = nil;
            value:nil];
 }
 
--(void)setcustomDimension:(NSInteger)index{
-    
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    
-    NSString *dimensionValue = [AppHelper getCurrentLoginId];
-    [tracker set:[GAIFields customDimensionForIndex:1] value:dimensionValue];
-}
+//-(void)setcustomDimension:(NSInteger)index{
+//    
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    
+//    NSString *dimensionValue = [AppHelper getCurrentLoginId];
+//    [tracker set:[GAIFields customDimensionForIndex:1] value:dimensionValue];
+//}
 
 -(void)logEvent:(NSString*)category Action:(NSString*)action Label:(NSString*)label{
     // May return nil if a tracker has not already been initialized with a property
@@ -81,7 +81,6 @@ static GoogleAnalytics *sharedGoogleAnalytics = nil;
     //Set UserId
     [self setUserId];
     //Set customDimension
-    [self setcustomDimension:1];
     
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     
@@ -96,11 +95,11 @@ static GoogleAnalytics *sharedGoogleAnalytics = nil;
     //Set UserId
     [self setUserId];
     //Set customDimension
-    [self setcustomDimension:1];
     
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:screeName];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    
 }
 
 
@@ -114,7 +113,6 @@ static GoogleAnalytics *sharedGoogleAnalytics = nil;
     //Set UserId
     [self setUserId];
     //Set customDimension
-    [self setcustomDimension:1];
     
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     

@@ -37,6 +37,7 @@
     
     [self setPushNotification];
 
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"LoginScreen" Attributes:nil];
     // Do any additional setup after loading the view.
 }
 

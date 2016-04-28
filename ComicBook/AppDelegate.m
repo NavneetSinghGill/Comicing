@@ -12,7 +12,6 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "FabricAnalytics.h"
-#import "GoogleAnalytics.h"
 
 @interface AppDelegate ()
 
@@ -40,8 +39,7 @@
     
     NSString* Identifier = @"MainViewController";
     
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-                                                             bundle: nil];
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     
     if (![AppHelper isActiveUser]) {
         self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
@@ -55,8 +53,8 @@
         [self.window makeKeyAndVisible];
     }
     self.dataManager = [[DataManager alloc] init];
-//    [self updateSettingValue];
-    
+
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"AppStart" Attributes:nil];
     return YES;
 }
 
