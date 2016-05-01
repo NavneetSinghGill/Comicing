@@ -2491,7 +2491,6 @@ static CGRect CaptionTextViewMinRect;
     //    captionHolder.frame = IS_IPHONE_5?CGRectMake(10, 111, 301, 60):CGRectMake(10, 111, 367, 60);
     captionHolder.frame = frameCaptionHolder;
     
-    
     //    captionHolder.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [captionHolder setBackgroundColor:[UIColor clearColor]];
     [captionHolder setDraggable:YES];
@@ -2715,8 +2714,6 @@ static CGRect CaptionTextViewMinRect;
                 _captionHeightSmall = YES;
             }
         }
-        
-        
         
         if (textView.text.length == 29)
         {

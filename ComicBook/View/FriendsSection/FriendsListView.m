@@ -505,13 +505,30 @@
         
         User* usSelection =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
         sender.selected = YES;
-        [sender setImage:[UIImage imageNamed:@"selected-invite"] forState:UIControlStateSelected];
+        
+        sender.layer.backgroundColor=[[UIColor clearColor] CGColor];
+        sender.layer.borderColor = [[UIColor clearColor] CGColor];
+        
+        sender.layer.cornerRadius= 0;
+
+        [sender setImage:[UIImage imageNamed:@"selected-invite"] forState:UIControlStateNormal];
         
         NSString *loginID = [NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].login_id];
         
         NSString *inviteString = [NSString stringWithFormat:INVITE_TEXT,loginID];
         
-        [self.delegate openMessageComposer:@[usSelection.mobile] messageText:inviteString];
+        
+        if (usSelection.mobile != nil)
+        {
+            [self.delegate openMessageComposer:@[usSelection.mobile] messageText:inviteString];
+
+        }
+        else
+        {
+            [self.delegate openMessageComposer:nil messageText:inviteString];
+
+        }
+        
         
         
         

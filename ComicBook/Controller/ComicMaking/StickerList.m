@@ -78,7 +78,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 
 - (NSArray *)getDefaultStickers
 {
-    NSArray *imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",@"st10",@"st11"];
+    NSArray *imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"];
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     

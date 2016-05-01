@@ -139,11 +139,19 @@
     switch (result) {
         case MessageComposeResultCancelled:
             NSLog(@"Cancelled");
+            
+            [_friendsList.friendsListTableView reloadData];
+            
             break;
         case MessageComposeResultSent:
             
+            [_friendsList.friendsListTableView reloadData];
+
+            
             break;
         default:
+            [_friendsList.friendsListTableView reloadData];
+
             break;
     }
     

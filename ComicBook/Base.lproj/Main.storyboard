@@ -1014,9 +1014,9 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eb9-Xr-CGg">
-                                <rect key="frame" x="231" y="532" width="80" height="30"/>
+                                <rect key="frame" x="208" y="531" width="100" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="skip"/>
+                                <state key="normal" image="done-button"/>
                                 <connections>
                                     <action selector="btnSkipAction:" destination="wue-JI-DHw" eventType="touchUpInside" id="OC0-yh-U9z"/>
                                 </connections>
@@ -1820,7 +1820,7 @@ Comicing </string>
                             <view contentMode="scaleToFill" id="gcq-xv-jZ9" customClass="AvatarView">
                                 <rect key="frame" x="0.0" y="20" width="320" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="iMJ-2i-nU7" customClass="HeaderView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
@@ -1855,7 +1855,7 @@ Comicing </string>
                             <view contentMode="scaleToFill" id="Hek-RP-wZw" customClass="FriendsListView">
                                 <rect key="frame" x="0.0" y="345" width="320" height="193"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="Cge-U3-J9W" customClass="FooterView">
                                 <rect key="frame" x="0.0" y="538" width="320" height="30"/>
@@ -1977,7 +1977,7 @@ Comicing </string>
                             <view contentMode="scaleToFill" id="Sqw-j3-ihP" customClass="FriendsListView">
                                 <rect key="frame" x="0.0" y="280" width="320" height="259"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="sVA-f5-o9B" customClass="FooterView">
                                 <rect key="frame" x="0.0" y="538" width="320" height="30"/>
@@ -2007,6 +2007,7 @@ Comicing </string>
                                 </connections>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -2168,7 +2169,7 @@ Comicing </string>
                                     <view contentMode="scaleToFill" id="bd1-oW-jSi" customClass="GroupsSection">
                                         <rect key="frame" x="0.0" y="40" width="320" height="85"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W81-tR-PVM">
                                         <rect key="frame" x="15" y="132" width="215" height="20"/>
@@ -2195,7 +2196,7 @@ Comicing </string>
                                     <view contentMode="scaleToFill" id="yin-Dd-spQ" customClass="FriendsListView">
                                         <rect key="frame" x="0.0" y="148" width="320" height="131"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2410,6 +2411,7 @@ Comicing </string>
         <image name="crop-undo-icon" width="16" height="18"/>
         <image name="crop-upload-icon" width="22" height="21"/>
         <image name="digup.png" width="12" height="16"/>
+        <image name="done-button" width="100" height="29"/>
         <image name="everyone.png" width="21" height="21"/>
         <image name="faceSignUp.png" width="133" height="131"/>
         <image name="facebooklogo.png" width="63" height="67"/>
