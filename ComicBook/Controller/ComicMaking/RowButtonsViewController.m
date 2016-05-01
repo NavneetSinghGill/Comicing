@@ -147,6 +147,8 @@
              
              [self allButtonsFadeOut:btnCamera];
              
+             [parentViewController doRemoveAllItem:nil];
+             
              [alertView hide];
          }];
         

@@ -22,7 +22,7 @@
 
 const int blurViewTag = 1010;
 
-@interface TopSearchVC ()
+@interface TopSearchVC () <UIGestureRecognizerDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -37,7 +37,16 @@ const int blurViewTag = 1010;
     [self addBlurEffectOverImageView];
     self.tableview.delegate = self;
     
+    //dinesh
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewSingleTap:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.delegate = self;
+    tapGesture.accessibilityValue = @"temp";
+    [self.tableview addGestureRecognizer:tapGesture];
+    //------
+    
     [super viewDidLoad];
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"SearchView" Attributes:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -82,6 +91,31 @@ const int blurViewTag = 1010;
 
 - (IBAction)tappedBackButton:(id)sender {
     [self hideContentController];
+}
+
+#pragma mrak - user events
+
+- (void)tableViewSingleTap: (UITapGestureRecognizer *)gesture
+{
+    [self.parentViewController.view endEditing:YES];
+    [self hideContentController];
+    
+//    for (id view in topBarView.mSearchBarHolderView.subviews)
+//    {
+//        if ([view isKindOfClass:[UITextField class]] && [(UITextField *)view isEditing])
+//        {
+//            [self.parentViewController.view endEditing:YES];
+//            [self hideContentController];
+//            
+//            return;
+//        }
+//    }
+    
+//    if (topBarView.isEditing)
+//    {
+//        [self.parentViewController.view endEditing:YES];
+//        [self hideContentController];
+//    }
 }
 
 #pragma mark Methods
@@ -144,6 +178,8 @@ const int blurViewTag = 1010;
 
 -(void)doSearchUser:(NSString*)txtSearch{
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"UserSearch" Action:txtSearch Label:@""];
+    
     [FriendsAPIManager getTheListOfFriendsByID:txtSearch withSuccessBlock:^(id object) {
         self.searchResultArray = [MTLJSONAdapter modelsOfClass:[UserSearch class] fromJSONArray:[object valueForKey:@"data"] error:nil];
         [self.tableview reloadData];
@@ -165,7 +201,55 @@ const int blurViewTag = 1010;
 //}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+//    if (self.searchResultArray.count > 0)
+//    {
+//        UITapGestureRecognizer *_tapGesture = nil;
+//        for (UIGestureRecognizer *gesture in self.tableview.gestureRecognizers)
+//        {
+//            if ([gesture isKindOfClass:[UITapGestureRecognizer class]] && [gesture.accessibilityValue isEqualToString:@"temp"])
+//            {
+//                _tapGesture = (UITapGestureRecognizer *)gesture;
+//            }
+//        }
+//        
+//        [tableView removeGestureRecognizer:_tapGesture];
+//    }
+//    else
+//    {
+//        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewSingleTap:)];
+//        tapGesture.numberOfTapsRequired = 1;
+//        tapGesture.delegate = self;
+//        tapGesture.accessibilityValue = @"temp";
+//        [self.tableview addGestureRecognizer:tapGesture];
+//    }
+    
     return [self.searchResultArray count];
+}
+
+#pragma mark UIGestureRecognizerDelegate methods
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    for (id view in topBarView.mSearchBarHolderView.subviews)
+    {
+        if ([view isKindOfClass:[UITextField class]] && [(UITextField *)view isEditing] && self.searchResultArray.count == 0)
+        {
+            return YES;
+        }
+    }
+    
+    return NO;
+
+    
+//    if ([touch.view isDescendantOfView:self.tableview]) {
+//        
+//        // Don't let selections of auto-complete entries fire the
+//        // gesture recognizer
+//        return NO;
+//    }
+    
+    //return NO;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -193,6 +277,9 @@ const int blurViewTag = 1010;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SearchResult" Action:@"ResultFaceClick" Label:@""];
+    
    self.friendSearchObject = self.searchResultArray[indexPath.row];
     
     Friend *friend = [[Friend alloc] init];

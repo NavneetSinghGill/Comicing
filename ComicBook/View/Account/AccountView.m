@@ -476,7 +476,22 @@ CGRect firstFrame;
         ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
         [cmNetWorking updateUserInfo:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json,id jsonResposeHeader) {
             
+            if ([[json objectForKey:@"result"] isEqualToString:@"failed" ]) {
+                NSString* strMessage = [NSString stringWithFormat:@"user with login id %@ already exist", self.txtId.text ];
+                [AppHelper showErrorDropDownMessage:@"Failed" mesage:strMessage];
+                [self.txtId becomeFirstResponder];
+                return;
+            }
+            
             [AppHelper showSuccessDropDownMessage:@"Thank you for the registration." mesage:@""];
+            if ([json objectForKey:@"data"] && ![[json objectForKey:@"data"] objectForKey:@"login_id"]) {
+                NSMutableDictionary* userDic = [[json objectForKey:@"data"] mutableCopy];
+                [userDic setObject:self.txtId.text forKey:@"login_id"];
+                [AppHelper setCurrentUser:userDic];
+            }else
+            {
+                [AppHelper setCurrentUser:[json objectForKey:@"data"]];
+            }
             if ([json objectForKey:@"data"] &&
                 [[json objectForKey:@"data"] objectForKey:@"user_id"]) {
                 [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];

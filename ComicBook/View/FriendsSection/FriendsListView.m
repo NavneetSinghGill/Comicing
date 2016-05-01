@@ -494,6 +494,8 @@
 
 -(void)inviteButtonClick:(UIButton *)sender
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"FriendsInvite" Action:@"Invite" Label:@""];
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(openMessageComposer:messageText:)])
     {
         

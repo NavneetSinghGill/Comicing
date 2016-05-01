@@ -77,6 +77,9 @@
 - (void)addExclamationListImage:(NSString *)exclamationImageString;
 //END
 
+/* Comic slide handle : Ramesh */
+-(void)doRemoveAllItem :(id)comicItemObj;
+//END
 - (JTAlertView *)showAlertView:(NSString*)message image:(UIImage *)image height:(CGFloat)height;
 
 //Ramesh
@@ -93,6 +96,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgvComic;
 @property (nonatomic, weak) id<ComicMakingViewControllerDelegate> delegate;
 @property (strong,nonatomic) GlideScrollViewController *glideScrollView;
+@property (strong, nonatomic) IBOutlet UIButton *mSendComicButton;
+
 
 @property (nonatomic) ComicType comicType;
 @property (nonatomic) ReplyType replyType;

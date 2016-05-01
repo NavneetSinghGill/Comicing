@@ -194,24 +194,43 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 #pragma mark <UICollectionViewDataSource>
 - (CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*if (IS_IPHONE_5)
+     {
+     return CGSizeMake(60, 60);
+     }
+     else if (IS_IPHONE_6)
+     {
+     return CGSizeMake(68, 68);
+     }
+     else if (IS_IPHONE_6P)
+     {
+     return CGSizeMake(76, 76);
+     }
+     else
+     {
+     return CGSizeMake(72, 72);
+     }
+     
+     return CGSizeMake(72, 72);*/
+    
     if (IS_IPHONE_5)
     {
-        return CGSizeMake(60, 60);
+        return CGSizeMake(51, 51);
     }
     else if (IS_IPHONE_6)
     {
-        return CGSizeMake(68, 68);
+        return CGSizeMake(57, 57);
     }
     else if (IS_IPHONE_6P)
     {
-        return CGSizeMake(76, 76);
+        return CGSizeMake(65, 65);
     }
     else
     {
-        return CGSizeMake(72, 72);
+        return CGSizeMake(60, 60);
     }
     
-    return CGSizeMake(72, 72);
+    return CGSizeMake(60, 60);
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -278,6 +297,8 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 - (void)deleteSticker:(UIButton *)sender
 {
     NSLog(@"sender tag = %ld",(long)sender.tag);
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Sticker" Action:@"Delete" Label:@""];
     
     stickerCell *cell = (stickerCell *)[[sender superview] superview];;
     

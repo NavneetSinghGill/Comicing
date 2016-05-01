@@ -363,10 +363,10 @@
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     [cmNetWorking updateUserInfo:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json,id jsonResposeHeader) {
         
-//        if ([json objectForKey:@"result"] &&
-//            [[json objectForKey:@"result"] isEqualToString:@"failed"]) {
-//            [AppHelper showSuccessDropDownMessage:@"Invalid verification code" mesage:@""];
-//        }else{
+        if ([json objectForKey:@"result"] &&
+            [[json objectForKey:@"result"] isEqualToString:@"failed"]) {
+            [AppHelper showSuccessDropDownMessage:@"Invalid verification code" mesage:@""];
+        }else{
             if (self.delegate && [self.delegate respondsToSelector:@selector(getVerifyRequest)])
             {
                 [AppHelper hideAllDropMessages];
@@ -376,7 +376,7 @@
                 [self.txtVerifyCode4 resignFirstResponder];
                 [self.delegate getVerifyRequest];
             }
-//        }
+        }
         
     } ErrorBlock:^(JSONModelError *error) {
         

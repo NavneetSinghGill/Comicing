@@ -217,7 +217,7 @@ static AppHelper *_appHelper = nil;
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@.sav",FileName]];
     [slideObj writeToFile:filePath atomically:YES];
-//    [[NSUserDefaults standardUserDefaults] setObject:slideObj forKey:@"comicSlides"];
+//    [[NSUserDefaults standardUserDefaults] setObject:slideObj forKey:FileName];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -226,7 +226,7 @@ static AppHelper *_appHelper = nil;
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@.sav",FileName]];
     return [NSMutableArray arrayWithContentsOfFile:filePath];
-//    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"comicSlides"] mutableCopy];
+//    return [[[NSUserDefaults standardUserDefaults] objectForKey:FileName] mutableCopy];
 }
 
 #pragma mark get & set

@@ -23,6 +23,7 @@ typedef void (^ SearchUser) (NSString* txtSearch);
 @property (nonatomic, strong) MeAction meAction;
 @property (nonatomic, strong) SearchAction searchAction;
 @property (nonatomic, strong) SearchUser searchUser;
+@property (nonatomic, strong) IBOutlet UIView *mSearchBarHolderView;
 
 -(void)handleSearchControl:(BOOL)isActiveSearch;
 @end

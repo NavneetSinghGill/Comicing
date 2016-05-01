@@ -82,7 +82,8 @@
     
     [self.friendsListView getFriendsByUserId];
     [self bindComicImages];
-    
+
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"SendPage" Attributes:nil];
 }
 
 
@@ -332,17 +333,20 @@
 //                                                                                             [UIImage imageNamed:@"Glide-2"],
 //                                                                                             [UIImage imageNamed:@"Glide-3"]]]];
             
+            [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage-ShareToSocialMedia" Action:@"FACEBOOK" Label:@""];
             [self doShareTo:FACEBOOK ShareImage:[self.comicShareViewView getComicShareImage:imageArray]];
         }
             break;
         case IM:
         {
+            [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage-ShareToSocialMedia" Action:@"MESSAGE" Label:@""];
             [self doShareTo:MESSAGE ShareImage:[self.comicShareViewView getComicShareImage:imageArray]];
         
             break;
         }
         case TW:
         {
+            [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage-ShareToSocialMedia" Action:@"TWITTER" Label:@""];
             [self doShareTo:TWITTER ShareImage:[self.comicShareViewView getComicShareImage:imageArray]];
         }
             break;
@@ -350,6 +354,7 @@
         {
 //            [self doShareTo:INSTAGRAM ShareImage:[self.comicShareViewView getComicShareImage:@[[UIImage imageNamed:@"Image_Slide1"]]]];
             
+            [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage-ShareToSocialMedia" Action:@"INSTAGRAM" Label:@""];
             [self doShareTo:INSTAGRAM ShareImage:[self.comicShareViewView getComicShareImage:imageArray]];
                         break;
         }
@@ -382,6 +387,7 @@
 #pragma mark GroupList Delegate
 -(void)selectGroupItems:(id)object
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage" Action:@"GroupShare" Label:@""];
     UserGroup* ug = (UserGroup*)object;
     if(ug)
         [self generateGroupShareArray:ug];
@@ -391,6 +397,7 @@
 
 -(void)selectedRow:(id)object
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage" Action:@"FriendsShare" Label:@""];
     UserFriends* uf = (UserFriends*)object;
     if(uf)
         [self generateFriendShareArray:uf];

@@ -8,6 +8,7 @@
 
 #import "StickerShareViewController.h"
 #import "UIImage+Trim.h"
+#import "AppHelper.h"
 
 @interface StickerShareViewController ()
 
@@ -16,6 +17,9 @@
 @implementation StickerShareViewController
 
 - (void)viewDidLoad {
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"StickerShare" Attributes:nil];
+    
     [self prepareView];
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -164,12 +168,15 @@
     if(!self.imgSelectedSticker)
         return;
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"StickerShare" Action:@"iMessage" Label:@""];
+    
     [self doShareTo:MESSAGE ShareImage:self.imgSelectedSticker];
 }
 - (IBAction)btnWhatsAppClick:(id)sender {
     if(!self.imgSelectedSticker)
         return;
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"StickerShare" Action:@"WHATSAPP" Label:@""];
     [self doShareTo:WHATSAPP ShareImage:self.imgSelectedSticker];
     
 }
@@ -177,6 +184,7 @@
     if(!self.imgSelectedSticker)
         return;
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"StickerShare" Action:@"FACEBOOKMESSANGER" Label:@""];
     [self doShareTo:FACEBOOKMESSANGER ShareImage:self.imgSelectedSticker];
 }
 

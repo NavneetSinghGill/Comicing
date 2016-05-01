@@ -71,6 +71,8 @@
 @synthesize ComicBookDict;
 - (void)viewDidLoad {
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"MePage" Attributes:nil];
+
     [super viewDidLoad];
     [self addTopBarView];
     [self addUIRefreshControl];

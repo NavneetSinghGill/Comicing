@@ -26,10 +26,20 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [Fabric with:@[[Crashlytics class]]];
+    
+    ///**************** Loging FabricAnalytics ******************
+    NSString* event_Key = [NSString stringWithFormat:@"AppStart"];
+    [[FabricAnalytics sharedFabricAnalytics] logEvent:event_Key Attributes:nil];
+    ///**************** End Loging FabricAnalytics ******************
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] initTracking];
+    
+    
+    
     NSString* Identifier = @"MainViewController";
     
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-                                                             bundle: nil];
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     
     if (![AppHelper isActiveUser]) {
         self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
@@ -43,15 +53,8 @@
         [self.window makeKeyAndVisible];
     }
     self.dataManager = [[DataManager alloc] init];
-    [self updateSettingValue];
-    
-    [Fabric with:@[[Crashlytics class]]];
-    
-    ///**************** Loging FabricAnalytics ******************
-    NSString* event_Key = [NSString stringWithFormat:@"AppStart"];
-    [[FabricAnalytics sharedFabricAnalytics] logEvent:event_Key Attributes:nil];
-    ///**************** End Loging FabricAnalytics ******************
-    
+
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"AppStart" Attributes:nil];
     return YES;
 }
 
@@ -67,7 +70,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    [self updateSettingValue];
+//    [self updateSettingValue];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -130,16 +133,16 @@
 + (AppDelegate *)application {
     return [[UIApplication sharedApplication] delegate];
 }
--(void)updateSettingValue{
-    BOOL isLogin = YES;
-    if ([[AppHelper getCurrentLoginId] isEqualToString:@"1"]) {
-        isLogin = NO;
-    }
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    // The user wants to cache files aggressively.
-    [defaults setBool:!isLogin forKey:@"enabled_preference"];
-    
-}
+//-(void)updateSettingValue{
+//    BOOL isLogin = YES;
+//    if ([[AppHelper getCurrentLoginId] isEqualToString:@"1"]) {
+//        isLogin = NO;
+//    }
+//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+//    // The user wants to cache files aggressively.
+//    [defaults setBool:!isLogin forKey:@"enabled_preference"];
+//    
+//}
 
 #pragma mark - Core Data stack
 

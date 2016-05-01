@@ -295,7 +295,7 @@ UINavigationControllerDelegate>
             [session addInput:audioDeviceInput];
         }
         
-        AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+        /*AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
         
         if ([session canAddOutput:movieFileOutput])
         {
@@ -306,7 +306,7 @@ UINavigationControllerDelegate>
                 connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeStandard;
             
             [self setMovieFileOutput:movieFileOutput];
-        }
+        }*/
         
         AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
         if ([session canAddOutput:stillImageOutput])
@@ -516,6 +516,8 @@ UINavigationControllerDelegate>
 #pragma mark - UIImagePickerControllerDelegate Method
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"CropSticker" Action:@"UploadPicture" Label:@""];
+    
     [self dismissViewControllerAnimated:YES completion:^
      {
          UIImage *selectedImage = info[UIImagePickerControllerOriginalImage];
@@ -637,6 +639,8 @@ UINavigationControllerDelegate>
 
 - (IBAction)btnCameraTap:(id)sender
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"CropSticker" Action:@"Camera" Label:@""];
+    
     if (btnCamera.isSelected)
     {
         btnCamera.selected = NO;

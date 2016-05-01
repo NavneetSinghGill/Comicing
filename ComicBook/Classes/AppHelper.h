@@ -20,6 +20,7 @@
 #import "MBProgressHUD.h"
 #import "BaseModel.h"
 #import <CoreData/CoreData.h>
+#import "GoogleAnalytics.h"
 
 @interface AppHelper : NSObject<UIGestureRecognizerDelegate>
 {
