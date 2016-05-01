@@ -305,6 +305,8 @@ static CGRect CaptionTextViewMinRect;
         btnClose.hidden = YES;
         self.rowButton.isNewSlide = YES;
         [self.btnSend setEnabled:NO];
+        
+        [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SlideCreate" Action:@"Create" Label:@""];
     }
     else
     {
@@ -1396,6 +1398,8 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)addExclamationListImage:(NSString *)exclamationImageString{
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Exclamation" Action:@"AddExclamation" Label:@""];
+    
     UIImage* exclamationImage = [UIImage imageNamed:exclamationImageString];
     
     ComicItemExclamation* imageView = [self getComicItems:ComicExclamation];
@@ -1512,6 +1516,7 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)addBubbleWithImage:(NSString *)bubbleImageString TextFiledRect:(CGRect)textViewSize
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"BubbleCreate" Action:@"Create" Label:@""];
     ComicItemBubble* bubbleHolderView = [self getComicItems:ComicBubble];
     
     bubbleHolderView.bubbleString = bubbleImageString;
@@ -2034,6 +2039,8 @@ static CGRect CaptionTextViewMinRect;
 #pragma mark - CropStickerViewControllerDelegate Methods
 - (void)cropStickerViewController:(CropStickerViewController *)controll didSelectDoneWithImage:(UIImageView *)stickerImageView withBorderImage:(UIImage *)imageWithBorder
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"StickerCreation" Attributes:nil];
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"StickerCreation" Action:@"Create" Label:@""];
     stickerImageView.center = self.view.center;
     
     [self.view addSubview:stickerImageView];
@@ -2276,6 +2283,8 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)stopDrawing
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Drawing" Action:@"Create" Label:@""];
+    
     [self setComicImageViewSize];
     
     NSArray *subViews = imgvComic.subviews;
@@ -2338,6 +2347,8 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)drawingColorTapEventWithColor:(NSString *)colorName
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"DrawingColour" Action:colorName Label:colorName];
+    
     RowButtonsViewController *rowController;
     
     for (UIViewController *controller in self.childViewControllers)
@@ -2459,6 +2470,8 @@ static CGRect CaptionTextViewMinRect;
     
     //Create Holder
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Caption" Action:@"Create" Label:@""];
+    
     ComicItemCaption* captionHolder = [self getComicItems:ComicCaption];
     
     CGRect frameCaptionHolder;
@@ -2568,6 +2581,8 @@ static CGRect CaptionTextViewMinRect;
 }
 
 -(void)openCaptionView{
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Caption" Action:@"AddCaption" Label:@""];
     
     ComicItemCaption* captionView = [self createCaptionView];
     captionView.clipsToBounds = NO;
@@ -2870,6 +2885,10 @@ static CGRect CaptionTextViewMinRect;
         tagValue = (int)btn.tag - 100;
         NSString* selectedColourString = [captionTextColourArray objectAtIndex:tagValue];
         UIColor* selectedColour = [UIColor colorWithHexStr:selectedColourString];
+        
+        [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"CaptionColour" Action:[selectedColour description] Label:@""];
+        [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"CaptionColourHex" Action:selectedColourString Label:@""];
+        
         if ([imgvComic viewWithTag:1232]) {
             UIImageView* tempImageView = [[imgvComic viewWithTag:1232] viewWithTag:1234];
             if (tempImageView) {

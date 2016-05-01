@@ -66,6 +66,7 @@
 #pragma mark - UIViewController
 - (void)viewDidLoad
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"PrivateConversation" Attributes:nil];
     [super viewDidLoad];
     [self animation];
     [self prepareView];
@@ -642,7 +643,7 @@
 }
 
 - (void)navigateToGlideScrollView {
-//    [AppHelper closeMainPageviewController:self];
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Private-Reply" Action:@"FriendReply" Label:@""];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
     UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"glidenavigation"];
     GlideScrollViewController *controller = (GlideScrollViewController *)[navigationController.childViewControllers firstObject];

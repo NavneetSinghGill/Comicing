@@ -298,6 +298,8 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 {
     NSLog(@"sender tag = %ld",(long)sender.tag);
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Sticker" Action:@"Delete" Label:@""];
+    
     stickerCell *cell = (stickerCell *)[[sender superview] superview];;
     
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];

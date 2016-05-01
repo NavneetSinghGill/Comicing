@@ -46,6 +46,7 @@ const int blurViewTag = 1010;
     //------
     
     [super viewDidLoad];
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"SearchView" Attributes:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -177,6 +178,8 @@ const int blurViewTag = 1010;
 
 -(void)doSearchUser:(NSString*)txtSearch{
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"UserSearch" Action:txtSearch Label:@""];
+    
     [FriendsAPIManager getTheListOfFriendsByID:txtSearch withSuccessBlock:^(id object) {
         self.searchResultArray = [MTLJSONAdapter modelsOfClass:[UserSearch class] fromJSONArray:[object valueForKey:@"data"] error:nil];
         [self.tableview reloadData];
@@ -274,6 +277,9 @@ const int blurViewTag = 1010;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SearchResult" Action:@"ResultFaceClick" Label:@""];
+    
    self.friendSearchObject = self.searchResultArray[indexPath.row];
     
     Friend *friend = [[Friend alloc] init];

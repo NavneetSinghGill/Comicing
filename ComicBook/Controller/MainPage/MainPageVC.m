@@ -136,6 +136,7 @@ NSString * const BottomBarView = @"BottomBarView";
     });
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swipeLeft:) name:@"ChangeNextPage" object:nil];
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"MainPage" Attributes:nil];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -210,6 +211,7 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 
 - (void)openInbox {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Inbox" Action:@"Open" Label:@""];
     [commentContainerView setUserInteractionEnabled:FALSE];
     [self.pageViewController.view setUserInteractionEnabled:FALSE];
     [topBarView.view setUserInteractionEnabled:FALSE];
@@ -219,6 +221,7 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 
 - (void)closeInbox {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Inbox" Action:@"Close" Label:@""];
     [commentContainerView setUserInteractionEnabled:TRUE];
     [self.pageViewController.view setUserInteractionEnabled:TRUE];
     [topBarView.view setUserInteractionEnabled:TRUE];
@@ -678,39 +681,36 @@ NSString * const BottomBarView = @"BottomBarView";
             //I do have only this option need to check with Vishu
             [imageArray addObject:[self getImageFromURL:[slideImages objectAtIndex:i]]];
         }
-//        UIImageView* shareImage = [[UIImageView alloc]init];
-//        
-//        [shareImage sd_setImageWithURL:[NSURL URLWithString:[slideImages objectAtIndex:0]]
-//                      placeholderImage:nil
-//                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-                                 switch (((UIButton*)sender).tag) {
-                                     case FB:
-                                     {
-                                         [self doShareTo:FACEBOOK ShareImage:[self.comicShareView getComicShareImage:imageArray]];
-                                         
-                                     }
-                                         break;
-                                     case IM:
-                                     {
-                                         [self doShareTo:MESSAGE ShareImage:[self.comicShareView getComicShareImage:imageArray]];
-                                         
-                                         break;
-                                     }
-                                     case TW:
-                                     {
-                                         [self doShareTo:TWITTER ShareImage:[self.comicShareView getComicShareImage:imageArray]];
-                                     }
-                                         break;
-                                     case IN:
-                                     {
-                                         [self doShareTo:INSTAGRAM ShareImage:[self.comicShareView getComicShareImage:imageArray]];
-                                         break;
-                                     }
-                                     default:
-                                         break;
-                                 }
-//                             }];
+        switch (((UIButton*)sender).tag) {
+            case FB:
+            {
+                [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"FACEBOOK" Label:@""];
+                [self doShareTo:FACEBOOK ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+                
+            }
+                break;
+            case IM:
+            {
+                [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"MESSAGE" Label:@""];
+                [self doShareTo:MESSAGE ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+                
+                break;
+            }
+            case TW:
+            {
+                [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"TWITTER" Label:@""];
+                [self doShareTo:TWITTER ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+            }
+                break;
+            case IN:
+            {
+                [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"INSTAGRAM" Label:@""];
+                [self doShareTo:INSTAGRAM ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+                break;
+            }
+            default:
+                break;
+        }
     }
 }
 
@@ -788,6 +788,9 @@ NSString * const BottomBarView = @"BottomBarView";
  *  @param comment Comment Text
  */
 - (void)addComment:(NSString*)comment :(UIImage*)image {
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"AddComment" Action:comment Label:@""];
+    
     count++;
     UIView *cell=[self Cell:comment:image];
     CGRect Rect=cell.frame;
@@ -817,6 +820,7 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 
 - (void)callAPIToPostComment:(NSString *)comment {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"PostComment" Action:comment Label:@""];
     CommentModel *commentModel = [[CommentModel alloc] init];
     commentModel.commentType = @"T";
     commentModel.commentText = comment;

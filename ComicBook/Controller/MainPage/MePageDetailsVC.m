@@ -9,6 +9,7 @@
 #import "MePageDetailsVC.h"
 #import "UIImageView+WebCache.h"
 #import "CommentModel.h"
+#import "AppHelper.h"
 
 @interface MePageDetailsVC ()
 @property (weak, nonatomic) IBOutlet UISlider *thermostat_Slider;
@@ -20,6 +21,9 @@
 @implementation MePageDetailsVC
 
 - (void)viewDidLoad {
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"MePageDetails" Attributes:nil];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     

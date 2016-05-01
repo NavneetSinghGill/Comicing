@@ -8,6 +8,7 @@
 
 #import "ComicItem.h"
 #import "AppConstants.h"
+#import "AppHelper.h"
 
 @implementation ComicItemSticker
 
@@ -116,6 +117,9 @@
 }
 
 - (void)recordAction{
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"VoiceRecord" Action:@"Create" Label:@""];
+    
     if (audioSession == nil) {
         audioSession =[AVAudioSession sharedInstance];
     }

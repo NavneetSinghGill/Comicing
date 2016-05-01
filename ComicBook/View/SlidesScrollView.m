@@ -111,8 +111,11 @@ const NSInteger spaceFromTop = 75;
 #pragma mark - make slideview methods
 - (UIView*)reloadSlideViewForIndex:(NSInteger)index mainView:(UIView*)subView
 {
+//    NSLog(@"1 subView %@", subView);
     subView.frame = [self frameForPossition:index];
     subView.tag = index;
+//    NSLog(@" subView index %ld", (long)index);
+//    NSLog(@"2 subView %@", subView);
     
     for (id objId in [subView subviews]) {
         if ([objId isKindOfClass:[UIImageView class]]) {
@@ -125,16 +128,20 @@ const NSInteger spaceFromTop = 75;
     }
     
     //Adject timeline time text
-    if ([self viewWithTag:((index + 1) * timlineViewTag)]) {
-        [self viewWithTag:((index + 1) * timlineViewTag)].frame = CGRectMake(((subView.frame.size.width/2) + subView.frame.origin.x ) - spaceBetweenSlide ,
-                                                                       subView.frame.origin.y - 50, 27, 27);
-    }
+//    if ([self viewWithTag:((index + 1) * timlineViewTag)]) {
+//        [self viewWithTag:((index + 1) * timlineViewTag)].frame = CGRectMake(((subView.frame.size.width/2) + subView.frame.origin.x ) - spaceBetweenSlide ,
+//                                                                       subView.frame.origin.y - 50, 27, 27);
+//    }
 
     if ([self viewWithTag:((index + 1) * timlineTextTag)]) {
-        UIView* viewRound = [self viewWithTag:((index + 1) * timlineViewTag)];
-        [self viewWithTag:((index + 1) * timlineTextTag)].frame = CGRectMake(viewRound.frame.origin.x - 27, viewRound.frame.origin.y - 20, 100, 20);
+//        UIView* viewRound = [self viewWithTag:((index + 1) * timlineViewTag)];
+//        [self viewWithTag:((index + 1) * timlineTextTag)].frame = CGRectMake(viewRound.frame.origin.x - 27, viewRound.frame.origin.y - 20, 100, 20);
+        
+        [self viewWithTag:((index + 1) * timlineTextTag)].frame = CGRectMake(((subView.frame.size.width/2)  + subView.frame.origin.x ) - 50,
+                                                                             subView.frame.origin.y - 30, 100, 20);
     }
-    [self viewWithTag:((index + 1) * timlineViewTag)].tag =  index * timlineViewTag;
+    
+//    [self viewWithTag:((index + 1) * timlineViewTag)].tag =  index * timlineViewTag;
     [self viewWithTag:((index + 1) * timlineTextTag)].tag =  index * timlineTextTag;
     
     return subView;
@@ -184,7 +191,7 @@ const NSInteger spaceFromTop = 75;
     viewRound.layer.cornerRadius = viewRound.frame.size.width/2;
     viewRound.layer.masksToBounds = YES;
     //[viewRound setBackgroundColor:[UIColor colorWithHexStr:@"26aae1"]];//Dinesh : Ref : Bug list : line 307
-    viewRound.tag = timlineViewTag * index;
+//    viewRound.tag = timlineViewTag * index;
     
     //dinesh
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -362,6 +369,11 @@ const NSInteger spaceFromTop = 75;
 //        [[self viewWithTag:(gestureIndex * timlineTextTag)] removeFromSuperview];
 //    }
     
+    //Adding back the Plus Button
+    if ([allSlidesView count] == (SLIDE_MAXCOUNT - 1)) {
+        [self addSubview:btnAddSlide];
+    }
+    
     if (itemToRemove != nil){
         [UIView animateWithDuration:0.3
                               delay:0.1
@@ -370,7 +382,6 @@ const NSInteger spaceFromTop = 75;
                              CGRect viewFrame = ((UIView*)itemToRemove).frame;
                              viewFrame.origin.y = - 250;
                              ((UIView*)itemToRemove).frame = viewFrame;
-                             
                              
                              //Removing time & round
                              UIView* temItemTimeTextObj = [self.timelineTimeArray objectAtIndex:gestureIndex];
@@ -399,7 +410,7 @@ const NSInteger spaceFromTop = 75;
                                                           
                                                           [allSlidesView  replaceObjectAtIndex:itemIndex
                                                                                     withObject:[self reloadSlideViewForIndex:view.tag - 1
-                                                                                                                    mainView:[allSlidesView objectAtIndex:itemIndex]]];
+                                                                                                                    mainView:[temViewArray objectAtIndex:itemIndex]]];
                                                           
                                                       } completion:^(BOOL finished) {
                                                       }];

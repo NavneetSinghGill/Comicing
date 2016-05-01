@@ -61,6 +61,8 @@ UICollectionViewDelegate>
 #pragma mark - UIViewController Methods
 - (void)viewDidLoad
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"MainPage-GroupPage" Attributes:nil];
+    
     ComicBookDict=[NSMutableDictionary new];
     [super viewDidLoad];
     
@@ -410,7 +412,9 @@ UICollectionViewDelegate>
 }
 
 - (void)navigateToGlideScrollView {
-    //    [AppHelper closeMainPageviewController:self];
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Reply" Action:@"GroupReply" Label:@""];
+    
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
     UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"glidenavigation"];
     GlideScrollViewController *controller = (GlideScrollViewController *)[navigationController.childViewControllers firstObject];
