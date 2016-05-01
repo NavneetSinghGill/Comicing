@@ -78,6 +78,8 @@ static GoogleAnalytics *sharedGoogleAnalytics = nil;
     // May return nil if a tracker has not already been initialized with a property
     // ID.
     
+#if TARGET_OS_SIMULATOR
+#else
     //Set UserId
     [self setUserId];
     //Set customDimension
@@ -88,10 +90,13 @@ static GoogleAnalytics *sharedGoogleAnalytics = nil;
                                                           action:action  // Event action (required)
                                                            label:label          // Event label
                                                            value:nil] build]];    // Event value
+#endif
 }
 
 -(void)logScreenEvent:(NSString*)screeName Attributes:(NSMutableDictionary*)attributes {
     
+#if TARGET_OS_SIMULATOR
+#else
     //Set UserId
     [self setUserId];
     //Set customDimension
@@ -99,7 +104,7 @@ static GoogleAnalytics *sharedGoogleAnalytics = nil;
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:screeName];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
-    
+#endif
 }
 
 
@@ -110,6 +115,8 @@ static GoogleAnalytics *sharedGoogleAnalytics = nil;
 
 -(void)logUserEvent:(NSString*)userID Category:(NSString*)category Action:(NSString*)action Label:(NSString*)label{
     
+#if TARGET_OS_SIMULATOR 
+#else
     //Set UserId
     [self setUserId];
     //Set customDimension
@@ -121,6 +128,7 @@ static GoogleAnalytics *sharedGoogleAnalytics = nil;
                                                           action:action             // Event action (required)
                                                            label:label              // Event label
                                                            value:nil] build]];    // Event value
+#endif
 }
 
 @end
