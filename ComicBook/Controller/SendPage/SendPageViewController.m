@@ -503,10 +503,16 @@
 -(void)openMessageComposer:(NSArray*)sendNumbers messageText:(NSString*)messageTextValue
 {
     MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    
     if([MFMessageComposeViewController canSendText])
     {
         controller.body = messageTextValue;
-        controller.recipients = sendNumbers;
+        
+        if (sendNumbers != nil)
+        {
+            controller.recipients = sendNumbers;
+        }
+        
         controller.messageComposeDelegate = self;
         [self presentViewController:controller animated:YES completion:^{
             

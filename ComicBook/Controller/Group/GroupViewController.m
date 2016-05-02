@@ -26,7 +26,7 @@
     self.friendsList.enableSectionTitles=YES;
     self.friendsList.enableInvite = NO;
     self.friendsList.selectedActionName = @"AddToGroup";
-    
+    self.friendsList.isTitleLabelHide = YES;
     [super viewDidLoad];
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;

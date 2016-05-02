@@ -163,8 +163,19 @@
             }
             
         }
+        
         [contactList addObject:dOfPerson];
     }
+    
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+                                                 ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [contactList sortedArrayUsingDescriptors:sortDescriptors];
+    
+    
+    contactList = sortedArray.mutableCopy;
+    
     temContactList = contactList;
     
     saveContactList = contactList;
@@ -222,6 +233,7 @@
     
     cell.lblMobileNumber.text = [[contactList objectAtIndex:indexPath.row] objectForKey:@"Phone"];
     cell.lblUserName.text = [[contactList objectAtIndex:indexPath.row] objectForKey:@"name"];
+   
     [cell.btnInvite addTarget:self
                        action:@selector(inviteButtonClick:)
              forControlEvents:UIControlEventTouchUpInside];
@@ -278,6 +290,11 @@
         if ([dict objectForKey:@"Phone"]) {
             phoneNumber = [dict objectForKey:@"Phone"];
         }
+        
+        btn.layer.backgroundColor=[[UIColor clearColor] CGColor];
+        btn.layer.borderColor = [[UIColor clearColor] CGColor];
+        
+        btn.layer.cornerRadius= 0;
         
         btn.selected = YES;
         [btn setImage:[UIImage imageNamed:@"selected-invite"] forState:UIControlStateSelected];

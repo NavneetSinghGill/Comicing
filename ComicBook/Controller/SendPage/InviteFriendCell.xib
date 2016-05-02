@@ -17,7 +17,7 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TA5-z3-Nq2">
                         <rect key="frame" x="8" y="12" width="53" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                         <state key="normal" title="Invite">
                             <color key="titleColor" red="0.14901960780000001" green="0.24313725489999999" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
