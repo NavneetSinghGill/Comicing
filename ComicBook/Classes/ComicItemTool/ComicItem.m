@@ -33,9 +33,10 @@
     self = [super init];
     if (self)
     {
-//        self.transform = CGAffineTransformFromString([decoder decodeObjectForKey:@"stickerTransform"]);
+        self.transform = CGAffineTransformFromString([decoder decodeObjectForKey:@"stickerTransform"]);
         self.image = [UIImage imageWithData:[decoder decodeObjectForKey:@"stickerimage"]];
         self.frame = CGRectFromString([decoder decodeObjectForKey:@"stickerFrame"]);
+//        self.center = CGPointFromString([decoder decodeObjectForKey:@"stickerCenter"]);
 //        NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(self.transform));
     }
     
@@ -45,7 +46,8 @@
     
     [aCoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"stickerimage"];
     [aCoder encodeObject:NSStringFromCGRect(self.frame) forKey:@"stickerFrame"];
-//    [aCoder encodeObject:NSStringFromCGAffineTransform(self.transform) forKey:@"stickerTransform"];
+    [aCoder encodeObject:NSStringFromCGAffineTransform(self.transform) forKey:@"stickerTransform"];
+//    [aCoder encodeObject:NSStringFromCGPoint(self.center) forKey:@"stickerCenter"];
 //    NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(self.transform));
 }
 @end

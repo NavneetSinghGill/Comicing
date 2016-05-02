@@ -2032,6 +2032,7 @@ static CGRect CaptionTextViewMinRect;
             [self.view exchangeSubviewAtIndex:1 withSubviewAtIndex:0];
             imgvComic.frame = viewFrame;
             self.ImgvComic2.frame = imgvComic.frame;
+            self.ImgvComic2.image = nil;
         }
     }
 }
@@ -2959,13 +2960,14 @@ static CGRect CaptionTextViewMinRect;
     if (!CGRectEqualToRect(rect,CGRectZero)) {
 //        if (tranformData != nil) {
         imageView.frame = rect;
+//        imageView.center = imageView.center;
 //            NSLog(@"Transform value %@",tranformData);
 //            CGFloat angle = atan2f(CGAffineTransformFromString(tranformData).b, CGAffineTransformFromString(tranformData).a);
 //            CGFloat degrees = angle * (180 / M_PI);
 //            imageView.transform = CGAffineTransformRotate(CGAffineTransformFromString(tranformData), angle);
             imageView.transform =  tranformData;
         
-        NSLog(@"After value set %@",[NSValue valueWithCGAffineTransform:imageView.transform]);
+//        NSLog(@"After value set %@",[NSValue valueWithCGAffineTransform:imageView.transform]);
 //        }
     }else{
         imageView.image = imageView.image;
