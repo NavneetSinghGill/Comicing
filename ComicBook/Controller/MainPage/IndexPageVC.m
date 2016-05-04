@@ -165,20 +165,30 @@
         [dict setObject:@"1" forKey:@"StartedPage"];
         if(4>=self.slidesArray.count)
         {
-
-             [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+2] forKey:@"SelectedPageNumber"];
+            // vishnuvardhan
+//             [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+2] forKey:@"SelectedPageNumber"];
+            if(self.slidesArray.count == 2 && indexPath.item == 3) {
+                [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item] forKey:@"SelectedPageNumber"];
+            } else {
+                [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+2] forKey:@"SelectedPageNumber"];
+            }
         }
-        else
-        {
-
-            [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+3] forKey:@"SelectedPageNumber"];
-        }
+//        else
+//        {
+//
+//            [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+3] forKey:@"SelectedPageNumber"];
+//        }
         
     }
     else if(self.pageNumber==2)
     {
         [dict setObject:@"2" forKey:@"StartedPage"];
-        [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+7] forKey:@"SelectedPageNumber"];
+//        [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+7] forKey:@"SelectedPageNumber"];
+        if(self.slidesArray.count == 2 && indexPath.item == 3) {
+            [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+4] forKey:@"SelectedPageNumber"];
+        } else {
+            [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+6] forKey:@"SelectedPageNumber"];
+        }
     }
     
     [dict setObject:[NSString stringWithFormat:@"%d",TRUE] forKey:@"IndexSelected"];

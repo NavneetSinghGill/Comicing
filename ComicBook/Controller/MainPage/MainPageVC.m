@@ -358,7 +358,7 @@ NSString * const BottomBarView = @"BottomBarView";
     //        startingViewController.imageArray=slideImages;
     //    }];
     
-    // vishnu
+    // vishnuvardhan
     NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
     [slidesArray addObjectsFromArray:comicBook.slides];
     
@@ -448,8 +448,22 @@ NSString * const BottomBarView = @"BottomBarView";
     [self.modelController.dict setObject:[dict objectForKey:@"tag"] forKey:@"tag"];
     DataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
     ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
-    self.modelController.slidesArray=comicBook.slides;
-    startingViewController.slidesArray=comicBook.slides;
+    
+    // vishnuvardhan
+    NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+    [slidesArray addObjectsFromArray:comicBook.slides];
+    
+    // To repeat the cover image again on index page as the first slide.
+    if(slidesArray.count > 1) {
+        [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+        
+        // Adding a sample slide to array to maintain the logic
+        Slides *slides = [Slides new];
+        [slidesArray insertObject:slides atIndex:1];
+    }
+    
+    self.modelController.slidesArray=slidesArray;
+    startingViewController.slidesArray=slidesArray;
     NSArray *viewControllers = @[startingViewController];
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
     
@@ -516,7 +530,21 @@ NSString * const BottomBarView = @"BottomBarView";
             
             DataViewController *currentViewController = self.pageViewController.viewControllers[0];
             ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
-            currentViewController.slidesArray=comicBook.slides;
+            
+            // vishnuvardhan
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
+            
+            // To repeat the cover image again on index page as the first slide.
+            if(slidesArray.count > 1) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+                
+                // Adding a sample slide to array to maintain the logic
+                Slides *slides = [Slides new];
+                [slidesArray insertObject:slides atIndex:1];
+            }
+            
+            currentViewController.slidesArray=slidesArray;
             NSArray *viewControllers = @[currentViewController];
             [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
             
@@ -527,7 +555,21 @@ NSString * const BottomBarView = @"BottomBarView";
         // In landscape orientation: Set set the spine location to "mid" and the page view controller's view controllers array to contain two view controllers. If the current page is even, set it to contain the current and next view controllers; if it is odd, set the array to contain the previous and current view controllers.
         DataViewController *currentViewController = self.pageViewController.viewControllers[0];
         ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
-        currentViewController.slidesArray=comicBook.slides;
+        
+        // vishnuvardhan
+        NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+        [slidesArray addObjectsFromArray:comicBook.slides];
+        
+        // To repeat the cover image again on index page as the first slide.
+        if(slidesArray.count > 1) {
+            [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+            
+            // Adding a sample slide to array to maintain the logic
+            Slides *slides = [Slides new];
+            [slidesArray insertObject:slides atIndex:1];
+        }
+        
+        currentViewController.slidesArray=slidesArray;
         
         NSArray *viewControllers = nil;
         
@@ -535,13 +577,41 @@ NSString * const BottomBarView = @"BottomBarView";
         if (indexOfCurrentViewController == 0 || indexOfCurrentViewController % 2 == 0) {
             DataViewController *nextViewController =(DataViewController*) [self.modelController pageViewController:self.pageViewController viewControllerAfterViewController:currentViewController];
             ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
-            nextViewController.slidesArray=comicBook.slides;
+            
+            // vishnuvardhan
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
+            
+            // To repeat the cover image again on index page as the first slide.
+            if(slidesArray.count > 1) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+                
+                // Adding a sample slide to array to maintain the logic
+                Slides *slides = [Slides new];
+                [slidesArray insertObject:slides atIndex:1];
+            }
+            
+            nextViewController.slidesArray=slidesArray;
             viewControllers = @[currentViewController, nextViewController];
             
         } else {
             DataViewController *previousViewController =(DataViewController*) [self.modelController pageViewController:self.pageViewController viewControllerBeforeViewController:currentViewController];
             ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
-            previousViewController.slidesArray=comicBook.slides;
+            
+            // vishnuvardhan
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
+            
+            // To repeat the cover image again on index page as the first slide.
+            if(slidesArray.count > 1) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+                
+                // Adding a sample slide to array to maintain the logic
+                Slides *slides = [Slides new];
+                [slidesArray insertObject:slides atIndex:1];
+            }
+            
+            previousViewController.slidesArray=slidesArray;
             viewControllers = @[previousViewController, currentViewController];
             
         }
