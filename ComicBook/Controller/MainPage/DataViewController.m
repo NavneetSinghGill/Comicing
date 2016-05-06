@@ -96,8 +96,17 @@
 }
 
 - (void)addAudioButton:(Slides *)slide {
+    /*
+     Enhancement *en = [[Enhancement alloc] init];
+     en.enhancementFile = @"";
+     en.xPos = @"50.0";
+     en.yPos = @"100.0";
+     NSArray *t = @[en];
+     slide.enhancements = t;
+     */
+     
     if(slide.enhancements.count > 0) {
-        Enhancement *enhancement = slide.enhancements[1];
+        Enhancement *enhancement = slide.enhancements[0];
         self.audioUrl = [NSURL URLWithString:enhancement.enhancementFile];
         [self performSelectorInBackground:@selector(getTheAudioLength) withObject:nil];
         [self configureAudioPlayer];
