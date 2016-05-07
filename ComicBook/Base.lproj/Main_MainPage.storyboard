@@ -2468,6 +2468,9 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="square picture" translatesAutoresizingMaskIntoConstraints="NO" id="ILu-9w-uPl">
                                         <rect key="frame" x="40" y="8" width="62" height="62"/>
                                     </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pinkDots" translatesAutoresizingMaskIntoConstraints="NO" id="JUf-Mx-ukf">
+                                        <rect key="frame" x="118" y="69" width="452" height="10"/>
+                                    </imageView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vzL-wM-6Nh">
                                         <rect key="frame" x="109" y="15" width="471" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2538,8 +2541,12 @@
                                     <constraint firstItem="vzL-wM-6Nh" firstAttribute="top" secondItem="2c0-gB-UCl" secondAttribute="top" constant="15" id="Mht-6g-quh"/>
                                     <constraint firstAttribute="bottom" secondItem="vzL-wM-6Nh" secondAttribute="bottom" constant="15" id="Osg-0e-e11"/>
                                     <constraint firstItem="vzL-wM-6Nh" firstAttribute="leading" secondItem="2c0-gB-UCl" secondAttribute="leading" constant="109" id="TZQ-8o-auv"/>
+                                    <constraint firstAttribute="bottom" secondItem="JUf-Mx-ukf" secondAttribute="bottom" constant="1" id="bia-H9-8t1"/>
+                                    <constraint firstItem="JUf-Mx-ukf" firstAttribute="top" secondItem="vzL-wM-6Nh" secondAttribute="bottom" constant="4" id="fSV-fP-I8o"/>
                                     <constraint firstAttribute="height" constant="80" id="gUz-mU-KrR"/>
                                     <constraint firstAttribute="trailing" secondItem="vzL-wM-6Nh" secondAttribute="trailing" id="mxk-66-ngE"/>
+                                    <constraint firstAttribute="trailing" secondItem="JUf-Mx-ukf" secondAttribute="trailing" constant="10" id="opq-Xl-JoZ"/>
+                                    <constraint firstItem="JUf-Mx-ukf" firstAttribute="leading" secondItem="2c0-gB-UCl" secondAttribute="leading" constant="118" id="waD-MY-q6S"/>
                                 </constraints>
                                 <variation key="heightClass=regular" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="20" width="600" height="80"/>
@@ -2612,6 +2619,7 @@
                     <connections>
                         <outlet property="clvUsers" destination="vzL-wM-6Nh" id="2Zp-LJ-xwB"/>
                         <outlet property="imgvGroupIcon" destination="ILu-9w-uPl" id="yol-kL-vmw"/>
+                        <outlet property="imgvPinkDots" destination="JUf-Mx-ukf" id="PGI-l0-y0z"/>
                         <outlet property="tblvComics" destination="lVS-Q0-kLF" id="EWh-2o-bdQ"/>
                         <outlet property="viewPen" destination="0JT-m9-7hb" id="aMu-fi-6tj"/>
                         <outlet property="viewTopBar" destination="2c0-gB-UCl" id="Ide-E9-mcM"/>

@@ -396,6 +396,8 @@ NSTimer* timerObject;
     NSLog(@"Start uploading");
     if(self.replyType == FriendReply) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"StartFriendReplyComicAnimation" object:nil];
+    } else if(self.replyType == GroupReply) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"StartGroupReplyComicAnimation" object:nil];
     }
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     
@@ -423,6 +425,7 @@ NSTimer* timerObject;
                                          [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
                                      } else if(self.replyType == GroupReply) {
                                          [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
+                                         [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
                                      }
                                  }
                              } ErrorBlock:^(JSONModelError *error) {
@@ -431,6 +434,8 @@ NSTimer* timerObject;
                                  [self.view setUserInteractionEnabled:YES];
                                  if(self.replyType == FriendReply) {
                                     [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+                                 } else if(self.replyType == GroupReply) {
+                                     [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
                                  }
                              }];
         
@@ -438,6 +443,8 @@ NSTimer* timerObject;
         [self.view setUserInteractionEnabled:YES];
         if(self.replyType == FriendReply) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+        } else if(self.replyType == GroupReply) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
         }
     }];
     
