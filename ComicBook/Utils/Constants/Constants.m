@@ -73,4 +73,6 @@ NSString *const UKeyName = @"v_user_name";
 //NSString *const UKeyImage = @"v_user_image";
 //NSString *const UKeyDetail = @"user";
 
+NSString *const FRIENDSFROMSERVER = @"serverFriends";
+
 @end

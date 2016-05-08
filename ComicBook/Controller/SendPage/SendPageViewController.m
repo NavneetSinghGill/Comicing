@@ -230,9 +230,13 @@
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
 //    cmNetWorking.delegate= self;
     //i d't know what is 3 .. need to confirm with Shy
-    [cmNetWorking shareComicImage:[self setPutParamets] Id:[AppHelper getCurrentcomicId] completion:^(id json,id jsonResposeHeader) {
+    [cmNetWorking shareComicImage:[self setPutParamets] Id:[AppHelper getCurrentcomicId] completion:^(id json,id jsonResposeHeader)
+    {
         NSLog(@"Share Sucess");
-    } ErrorBlock:^(JSONModelError *error) {
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } ErrorBlock:^(JSONModelError *error)
+    {
         NSLog(@"Share Error %@",error);
     }];
 
@@ -286,6 +290,25 @@
     }];
 }
 
+- (IBAction)btnPostTap:(UIButton *)sender
+{
+    if(sender.isSelected == NO)
+    {
+        sender.selected = YES;
+        
+        sender.backgroundColor = [UIColor colorWithHexStr:@"#31ADE1"];
+        sender.layer.cornerRadius = CGRectGetHeight(sender.frame) / 2 - CGRectGetHeight(sender.frame) / 4;
+        sender.layer.masksToBounds = YES;
+    
+    }
+    else
+    {
+        sender.selected = NO;
+        
+        sender.backgroundColor = [UIColor whiteColor];
+    }
+}
+
 - (IBAction)btnCloseInviteView:(id)sender
 {
     [UIView animateWithDuration:0.6 animations:^
@@ -321,9 +344,11 @@
     [self doSendData];
 }
 
-- (IBAction)btnShareComic:(id)sender {
+- (IBAction)btnShareComic:(id)sender
+{
     [self doSendData];
 }
+
 - (IBAction)btnShareToSocialMedia:(id)sender {
     switch (((UIButton*)sender).tag) {
         case FB:

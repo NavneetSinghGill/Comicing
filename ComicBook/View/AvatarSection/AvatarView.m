@@ -110,7 +110,7 @@
 -(void)UserDetailsResponse:(NSDictionary *)response{
     //initialize the models
     userObject = [[User alloc] init];
-    [userObject setValuesForKeysWithDictionary:response[@"data"]];
+ //   [userObject setValuesForKeysWithDictionary:response[@"data"]];
     [self bindData];
 }
 
