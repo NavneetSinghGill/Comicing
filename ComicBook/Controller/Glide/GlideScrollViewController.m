@@ -78,7 +78,9 @@ NSTimer* timerObject;
         
         for (UIView *subView in [scrvComicSlide subviews])
         {
-            [subView removeFromSuperview];
+            if (![subView isKindOfClass:[UIImageView class]]) {
+                [subView removeFromSuperview];
+            }
         }
         
         [self prepareView];
@@ -86,6 +88,7 @@ NSTimer* timerObject;
         if (comicSlides == nil || comicSlides.count == 0) {
             [scrvComicSlide pushAddSlideTap:scrvComicSlide.btnAddSlide animation:NO];
         }
+        self.isSendPageReload = NO;
     }
 //    [self setComicSendButton];
     [super viewWillAppear:animated];
@@ -419,7 +422,6 @@ NSTimer* timerObject;
     } else if(self.replyType == GroupReply) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"StartGroupReplyComicAnimation" object:nil];
     }
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     [cmNetWorking UploadComicImage:paramArray completeBlock:^(id json, id jsonResponse) {
@@ -438,6 +440,7 @@ NSTimer* timerObject;
                                  if(self.comicType != ReplyComic) {
                                      UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                      SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
+                                     controller.comicSlideFileName = self.fileNameToSave;
                                      [self.navigationController pushViewController:controller animated:YES];
                                  } else {
                                      if(self.replyType == FriendReply) {

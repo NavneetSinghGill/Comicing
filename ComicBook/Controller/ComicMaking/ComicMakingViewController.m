@@ -2967,7 +2967,7 @@ static CGRect CaptionTextViewMinRect;
 - (void)addStickerWithImageView:(UIImageView *)imageView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect Tranform:(CGAffineTransform)tranformData
 {
     
-    NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(imageView.transform));
+//    NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(imageView.transform));
     
     if (!CGRectEqualToRect(rect,CGRectZero)) {
         imageView.frame = rect;
@@ -3097,8 +3097,6 @@ static CGRect CaptionTextViewMinRect;
 //    imageView.transform = tt;
     
     [imgvComic addSubview:imageView];
-    
-//    imageView.transform = tt_1;
     
 }
 
@@ -3401,7 +3399,6 @@ static CGRect CaptionTextViewMinRect;
     } else if(self.replyType == GroupReply) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"StartGroupReplyComicAnimation" object:nil];
     }
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     [cmNetWorking UploadComicImage:paramArray completeBlock:^(id json, id jsonResponse) {
@@ -3415,6 +3412,8 @@ static CGRect CaptionTextViewMinRect;
                                          if(self.comicType != ReplyComic) {
                                              UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                              SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
+                                             controller.comicSlideFileName = self.fileNameToSave;
+                                             
                                              [self.navigationController pushViewController:controller animated:YES];
                                          } else {
                                              if(self.replyType == FriendReply) {
@@ -3423,6 +3422,9 @@ static CGRect CaptionTextViewMinRect;
                                              } else if(self.replyType == GroupReply) {
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+                                             }
+                                             if (self.fileNameToSave) {
+                                                 [AppHelper deleteSlideFile:self.fileNameToSave];
                                              }
                                          }
             

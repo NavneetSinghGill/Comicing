@@ -10,6 +10,7 @@
 #import "ComicPage.h"
 #import "searchFriendView.h"
 #import "ComicMakingViewController.h"
+#import "GlideScrollViewController.h"
 @interface
 SendPageViewController ()<UITextFieldDelegate>
 @property (nonatomic, assign) CGFloat lastContentOffset;
@@ -230,8 +231,7 @@ SendPageViewController ()<UITextFieldDelegate>
     //i d't know what is 3 .. need to confirm with Shy
     [cmNetWorking shareComicImage:[self setPutParamets] Id:[AppHelper getCurrentcomicId] completion:^(id json,id jsonResposeHeader)
     {
-        NSLog(@"Share Sucess");
-        [self.navigationController popViewControllerAnimated:YES];
+        [self clearNavStack];
         
     } ErrorBlock:^(JSONModelError *error)
     {
@@ -420,21 +420,40 @@ SendPageViewController ()<UITextFieldDelegate>
     //i d't know what is 3 .. need to confirm with Shy
     [cmNetWorking shareComicImage:dataDic Id:[AppHelper getCurrentcomicId]
                        completion:^(id json,id jsonResposeHeader) {
-        
-//                           [AppHelper deleteSlideFile:@"ComicSlide"];
-//                           NSArray* navArray = [self.navigationController viewControllers];
-//                           for (UIViewController* viewControll in navArray) {
-//                               if ([viewControll isKindOfClass:[ComicMakingViewController class]]) {
-//                                   [viewControll removeFromParentViewController];
-//                                   break;
-//                               }
-//                           }
-//                           
-//                           [self.navigationController popToRootViewControllerAnimated:YES];
+                           
+                           [self clearNavStack];
+                           
                            
     } ErrorBlock:^(JSONModelError *error) {
         
     }];
+}
+
+-(void)clearNavStack
+{
+    if (self.comicSlideFileName) {
+        [AppHelper deleteSlideFile:self.comicSlideFileName];
+    }
+    
+    NSArray* navArray = [self.navigationController viewControllers];
+    for (UIViewController* viewControll in navArray) {
+        if ([viewControll isKindOfClass:[ComicMakingViewController class]]) {
+            [viewControll removeFromParentViewController];
+            break;
+        }
+        if ([viewControll isKindOfClass:[GlideScrollViewController class]]) {
+            [viewControll removeFromParentViewController];
+            break;
+        }
+        if ([viewControll isKindOfClass:[SendPageViewController class]]) {
+            [viewControll removeFromParentViewController];
+            break;
+        }
+    }
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
+    GlideScrollViewController *controller = (GlideScrollViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"glidenavigation"];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 #pragma mark GroupList Delegate

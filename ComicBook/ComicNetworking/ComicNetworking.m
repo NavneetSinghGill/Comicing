@@ -235,7 +235,8 @@ static ComicNetworking *_sharedComicNetworking = nil;
         [AppHelper showErrorDropDownMessage:@"Something went wrong!" mesage:@""];
         errorBlock((JSONModelError*)error);
     }];
-    [AppHelper showHUDLoader:NO];
+    //Changed NO to YES, it should be Yes.
+    [AppHelper showHUDLoader:YES];
     [op start];
     
     
