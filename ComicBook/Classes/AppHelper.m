@@ -229,6 +229,20 @@ static AppHelper *_appHelper = nil;
 //    return [[[NSUserDefaults standardUserDefaults] objectForKey:FileName] mutableCopy];
 }
 
++(BOOL)deleteSlideFile :(NSString*)FileName{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@.sav",FileName]];
+    BOOL success = [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+    if (success) {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
 #pragma mark get & set
 
 +(NSString*)getDeviceToken{
@@ -377,6 +391,8 @@ static AppHelper *_appHelper = nil;
     
     NSDictionary *dict = [matchingDicts lastObject];
     NSString* flag = [dict objectForKey:@"flag"];
+    
+    flag = [flag stringByReplacingOccurrencesOfString:@"#SERVER_URL#" withString:SERVER_URL];
     
     if (localError != nil) {
         NSLog(@"%@", [localError userInfo]);

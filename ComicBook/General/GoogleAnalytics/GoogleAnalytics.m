@@ -55,6 +55,7 @@ static GoogleAnalytics *sharedGoogleAnalytics = nil;
     // You only need to set User ID on a tracker once. By setting it on the tracker, the ID will be
     // sent with all subsequent hits.
     [tracker set:kGAIUserId value:[AppHelper getCurrentLoginId]];
+    [tracker set:kGAIClientId value:[AppHelper getCurrentLoginId]];
 }
 -(void)clearUserId{
     

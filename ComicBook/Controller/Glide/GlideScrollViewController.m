@@ -68,7 +68,24 @@ NSTimer* timerObject;
 - (void)viewWillAppear:(BOOL)animated
 {
     if(self.isSendPageReload) {
+        if(self.comicType == ReplyComic && self.replyType == FriendReply) {
+            self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_F%@", self.friendOrGroupId];
+        } else if(self.comicType == ReplyComic && self.replyType == GroupReply) {
+            self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_G%@", self.friendOrGroupId];
+        } else {
+            self.fileNameToSave = @"ComicSlide";
+        }
+        
+        for (UIView *subView in [scrvComicSlide subviews])
+        {
+            [subView removeFromSuperview];
+        }
+        
         [self prepareView];
+        
+        if (comicSlides == nil || comicSlides.count == 0) {
+            [scrvComicSlide pushAddSlideTap:scrvComicSlide.btnAddSlide animation:NO];
+        }
     }
 //    [self setComicSendButton];
     [super viewWillAppear:animated];
@@ -311,7 +328,7 @@ NSTimer* timerObject;
                      forKey:@"slide_count"];
     
     [comicMakeDic setObject:@"1" forKey:@"status"];
-    [comicMakeDic setObject:@"1" forKey:@"is_public"];
+//    [comicMakeDic setObject:@"1" forKey:@"is_public"];
     
     //Slide Array
     NSMutableArray* slides = [[NSMutableArray alloc] init];
@@ -336,7 +353,7 @@ NSTimer* timerObject;
         
         for (int i = 0; i < cmPage.subviews.count; i ++)
         {
-            id imageView = self.comicPageComicItems.subviews[i];
+            id imageView = cmPage.subviews[i];
             //Check is ComicItemBubble
             if([imageView isKindOfClass:[ComicItemBubble class]])
             {
@@ -358,6 +375,9 @@ NSTimer* timerObject;
                     
                     [enhancements addObject:cmEng];
                 }
+            }
+            if (enhancements && [enhancements count] > 0) {
+                [cmSlide setObject:enhancements forKey:@"enhancements"];
             }
         }
         [slides addObject:cmSlide];

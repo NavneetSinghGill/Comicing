@@ -826,6 +826,7 @@ NSString * const BottomBarView = @"BottomBarView";
     commentModel.commentText = comment;
     commentModel.referenceId = @"0";
     commentModel.userId = [AppHelper getCurrentLoginId];
+    commentModel.status = @"1";
     ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
     NSError *error;
     [CommentsAPIManager postCommentForComicId:comicBook.comicId

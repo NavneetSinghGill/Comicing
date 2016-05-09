@@ -487,7 +487,7 @@
         [cell.userProfilePic sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"yyyy-mm-dd hh:mm:ss"];
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSDate *dateFromStr = [dateFormat dateFromString:comicBook.createdDate];
         [dateFormat setDateFormat:@"MMM dd, yyyy"];
         NSString *dateStr = [dateFormat stringFromDate:dateFromStr];

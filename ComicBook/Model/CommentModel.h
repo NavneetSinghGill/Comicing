@@ -19,5 +19,6 @@
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *profilePic;
+@property (nonatomic, strong) NSString *status;
 
 @end

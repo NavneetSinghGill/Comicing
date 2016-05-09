@@ -9,8 +9,9 @@
 #import "SendPageViewController.h"
 #import "ComicPage.h"
 #import "searchFriendView.h"
-
-@interface SendPageViewController ()<UITextFieldDelegate>
+#import "ComicMakingViewController.h"
+@interface
+SendPageViewController ()<UITextFieldDelegate>
 @property (nonatomic, assign) CGFloat lastContentOffset;
 @property (weak, nonatomic) IBOutlet UIView *viewPrivate;
 @property (weak, nonatomic) IBOutlet UIButton *btnInviteFrnd;
@@ -209,7 +210,6 @@
     }
 }
 -(NSMutableDictionary*)setPutParamets{
-//    @autoreleasepool {
         NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
         NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
         [userDic setObject:[AppHelper getCurrentcomicId] forKey:@"comic_id"];
@@ -222,20 +222,18 @@
         }
         [dataDic setObject:userDic forKey:@"data"];
         return dataDic;
-//    }
 }
 
 -(void)doSendData
 {
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
-//    cmNetWorking.delegate= self;
     //i d't know what is 3 .. need to confirm with Shy
     [cmNetWorking shareComicImage:[self setPutParamets] Id:[AppHelper getCurrentcomicId] completion:^(id json,id jsonResposeHeader) {
         NSLog(@"Share Sucess");
     } ErrorBlock:^(JSONModelError *error) {
         NSLog(@"Share Error %@",error);
     }];
-
+    
 }
 
 -(void)doShareTo :(ShapeType)type ShareImage:(UIImage*)imgShareto{
@@ -382,6 +380,36 @@
     [self.comicImageList refeshList:imageArray];
     comicSlides = nil;
     //    imageArray = nil;
+}
+
+- (IBAction)btnShareToPublic:(id)sender {
+
+    NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
+    [userDic setObject:[AppHelper getCurrentcomicId] forKey:@"comic_id"];
+    [userDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"];
+    [userDic setObject:@"1" forKey:@"is_public"];
+    [dataDic setObject:userDic forKey:@"data"];
+    
+    ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
+    //i d't know what is 3 .. need to confirm with Shy
+    [cmNetWorking shareComicImage:dataDic Id:[AppHelper getCurrentcomicId]
+                       completion:^(id json,id jsonResposeHeader) {
+        
+                           [AppHelper deleteSlideFile:@"ComicSlide"];
+                           NSArray* navArray = [self.navigationController viewControllers];
+                           for (UIViewController* viewControll in navArray) {
+                               if ([viewControll isKindOfClass:[ComicMakingViewController class]]) {
+                                   [viewControll removeFromParentViewController];
+                                   break;
+                               }
+                           }
+                           
+                           [self.navigationController popToRootViewControllerAnimated:YES];
+                           
+    } ErrorBlock:^(JSONModelError *error) {
+        
+    }];
 }
 
 #pragma mark GroupList Delegate
