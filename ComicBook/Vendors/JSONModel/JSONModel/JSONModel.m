@@ -1113,7 +1113,9 @@ static JSONKeyMapper* globalKeyMapper = nil;
         if ([d isKindOfClass:NSDictionary.class])
         {
 		    JSONModelError* initErr = nil;
+            
             id obj = [[self alloc] initWithDictionary:d error:&initErr];
+            
             if (obj == nil)
             {
                 // Propagate the error, including the array index as the key-path component
@@ -1126,10 +1128,13 @@ static JSONKeyMapper* globalKeyMapper = nil;
             }
 
             [list addObject: obj];
-        } else if ([d isKindOfClass:NSArray.class])
+            
+        }
+        else if ([d isKindOfClass:NSArray.class])
         {
             [list addObjectsFromArray:[self arrayOfModelsFromDictionaries:d error:err]];
-        } else
+        }
+        else
         {
             // This is very bad
         }

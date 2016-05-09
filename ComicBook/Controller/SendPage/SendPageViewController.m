@@ -228,9 +228,13 @@ SendPageViewController ()<UITextFieldDelegate>
 {
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     //i d't know what is 3 .. need to confirm with Shy
-    [cmNetWorking shareComicImage:[self setPutParamets] Id:[AppHelper getCurrentcomicId] completion:^(id json,id jsonResposeHeader) {
+    [cmNetWorking shareComicImage:[self setPutParamets] Id:[AppHelper getCurrentcomicId] completion:^(id json,id jsonResposeHeader)
+    {
         NSLog(@"Share Sucess");
-    } ErrorBlock:^(JSONModelError *error) {
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } ErrorBlock:^(JSONModelError *error)
+    {
         NSLog(@"Share Error %@",error);
     }];
     
@@ -284,6 +288,25 @@ SendPageViewController ()<UITextFieldDelegate>
     }];
 }
 
+- (IBAction)btnPostTap:(UIButton *)sender
+{
+    if(sender.isSelected == NO)
+    {
+        sender.selected = YES;
+        
+        sender.backgroundColor = [UIColor colorWithHexStr:@"#31ADE1"];
+        sender.layer.cornerRadius = CGRectGetHeight(sender.frame) / 2 - CGRectGetHeight(sender.frame) / 4;
+        sender.layer.masksToBounds = YES;
+    
+    }
+    else
+    {
+        sender.selected = NO;
+        
+        sender.backgroundColor = [UIColor whiteColor];
+    }
+}
+
 - (IBAction)btnCloseInviteView:(id)sender
 {
     [UIView animateWithDuration:0.6 animations:^
@@ -319,9 +342,11 @@ SendPageViewController ()<UITextFieldDelegate>
     [self doSendData];
 }
 
-- (IBAction)btnShareComic:(id)sender {
+- (IBAction)btnShareComic:(id)sender
+{
     [self doSendData];
 }
+
 - (IBAction)btnShareToSocialMedia:(id)sender {
     switch (((UIButton*)sender).tag) {
         case FB:
@@ -396,16 +421,16 @@ SendPageViewController ()<UITextFieldDelegate>
     [cmNetWorking shareComicImage:dataDic Id:[AppHelper getCurrentcomicId]
                        completion:^(id json,id jsonResposeHeader) {
         
-                           [AppHelper deleteSlideFile:@"ComicSlide"];
-                           NSArray* navArray = [self.navigationController viewControllers];
-                           for (UIViewController* viewControll in navArray) {
-                               if ([viewControll isKindOfClass:[ComicMakingViewController class]]) {
-                                   [viewControll removeFromParentViewController];
-                                   break;
-                               }
-                           }
-                           
-                           [self.navigationController popToRootViewControllerAnimated:YES];
+//                           [AppHelper deleteSlideFile:@"ComicSlide"];
+//                           NSArray* navArray = [self.navigationController viewControllers];
+//                           for (UIViewController* viewControll in navArray) {
+//                               if ([viewControll isKindOfClass:[ComicMakingViewController class]]) {
+//                                   [viewControll removeFromParentViewController];
+//                                   break;
+//                               }
+//                           }
+//                           
+//                           [self.navigationController popToRootViewControllerAnimated:YES];
                            
     } ErrorBlock:^(JSONModelError *error) {
         

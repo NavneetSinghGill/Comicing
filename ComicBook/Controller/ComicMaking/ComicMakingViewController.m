@@ -3396,6 +3396,13 @@ static CGRect CaptionTextViewMinRect;
         [paramArray addObject:dataDic];
     }
     NSLog(@"Start uploading");
+    if(self.replyType == FriendReply) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"StartFriendReplyComicAnimation" object:nil];
+    } else if(self.replyType == GroupReply) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"StartGroupReplyComicAnimation" object:nil];
+    }
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     [cmNetWorking UploadComicImage:paramArray completeBlock:^(id json, id jsonResponse) {
         
@@ -3412,20 +3419,32 @@ static CGRect CaptionTextViewMinRect;
                                          } else {
                                              if(self.replyType == FriendReply) {
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
                                              } else if(self.replyType == GroupReply) {
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
                                              }
-                                             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                                          }
             
         } ErrorBlock:^(JSONModelError *error) {
             NSLog(@"completion %@",error);
             [self.view setUserInteractionEnabled:YES];
+            if(self.replyType == FriendReply) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+            } else if(self.replyType == GroupReply) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+            }
         }];
         
     } ErrorBlock:^(JSONModelError *error) {
         [self.view setUserInteractionEnabled:YES];
+        if(self.replyType == FriendReply) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+        } else if(self.replyType == GroupReply) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+        }
     }];
+    
     
 //    [AppHelper showWarningDropDownMessage:@"" mesage:@"Please wait .. Creating your comic"];
     

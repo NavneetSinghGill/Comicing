@@ -46,6 +46,7 @@ UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *viewTransperant;
 @property (weak, nonatomic) IBOutlet UIImageView *imgvGroupIcon;
 @property (weak, nonatomic) IBOutlet UIView *viewPen;
+@property (weak, nonatomic) IBOutlet UIImageView *imgvPinkDots;
 
 @property (strong, nonatomic) NSMutableArray *groupMember;
 @property (strong, nonatomic) NSMutableArray *comics;
@@ -67,6 +68,8 @@ UICollectionViewDelegate>
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callAPItoGetGroupsComics) name:@"UpdateGroupComics" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyComicAnimation) name:@"StartGroupReplyComicAnimation" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyComicAnimation) name:@"StopGroupReplyComicAnimation" object:nil];
     [self prepareView];
 }
 
@@ -101,9 +104,33 @@ UICollectionViewDelegate>
     saveTableViewFrame = tblvComics.frame;
     
     [self.imgvGroupIcon sd_setImageWithURL:[NSURL URLWithString:self.groupObj.groupIcon]];
+    [self.imgvPinkDots setImage:[UIImage imageNamed:@"dots11"]];
     
     [self callAPItoGetGroupsMember];
     [self callAPItoGetGroupsComics];
+}
+
+- (void)startReplyComicAnimation {
+    self.imgvPinkDots.animationImages = [NSArray arrayWithObjects:
+                                         [UIImage imageNamed:@"dots1"],
+                                         [UIImage imageNamed:@"dots2"],
+                                         [UIImage imageNamed:@"dots3"],
+                                         [UIImage imageNamed:@"dots4"],
+                                         [UIImage imageNamed:@"dots5"],
+                                         [UIImage imageNamed:@"dots6"],
+                                         [UIImage imageNamed:@"dots7"],
+                                         [UIImage imageNamed:@"dots8"],
+                                         [UIImage imageNamed:@"dots9"],
+                                         [UIImage imageNamed:@"dots10"],
+                                         [UIImage imageNamed:@"dots11"],nil];
+    self.imgvPinkDots.animationDuration = 2.0f;
+    self.imgvPinkDots.animationRepeatCount = 0;
+    [self.imgvPinkDots startAnimating];
+}
+
+- (void)stopReplyComicAnimation {
+    [self.imgvPinkDots stopAnimating];
+    [self.imgvPinkDots setImage:[UIImage imageNamed:@"dots11"]];
 }
 
 #pragma mark - Webservice Methods

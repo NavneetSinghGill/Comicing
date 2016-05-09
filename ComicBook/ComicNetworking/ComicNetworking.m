@@ -235,7 +235,7 @@ static ComicNetworking *_sharedComicNetworking = nil;
         [AppHelper showErrorDropDownMessage:@"Something went wrong!" mesage:@""];
         errorBlock((JSONModelError*)error);
     }];
-    [AppHelper showHUDLoader:YES];
+    [AppHelper showHUDLoader:NO];
     [op start];
     
     
@@ -333,7 +333,7 @@ static ComicNetworking *_sharedComicNetworking = nil;
                                   } ErrorBlock:^(JSONModelError *error) {
                                       errorBlock(error);
                                   }];
-                              } showIndicator:YES];
+                              } showIndicator:NO];
     
     //    [JSONHTTPClient postJSONFromURLWithString:url
     //                                       params:nil

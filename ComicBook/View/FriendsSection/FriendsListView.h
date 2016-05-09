@@ -71,5 +71,6 @@
 
 - (void)searchFriendByString:(NSString *)searchString;
 - (void)reloadAllData;
+- (void)hideIndex;
 
 @end
