@@ -98,12 +98,12 @@
 - (void)addAudioButton:(Slides *)slide {
     /*
      Enhancement *en = [[Enhancement alloc] init];
-     en.enhancementFile = @"";
+     en.enhancementFile = @"http://68.169.44.163/sounds/comics/slides/56dbc70542dba";
      en.xPos = @"50.0";
-     en.yPos = @"100.0";
+     en.yPos = @"75.0";
      NSArray *t = @[en];
      slide.enhancements = t;
-     */
+    */
      
     if(slide.enhancements.count > 0) {
         Enhancement *enhancement = slide.enhancements[0];
