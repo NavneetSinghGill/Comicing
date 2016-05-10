@@ -706,8 +706,6 @@ UINavigationControllerDelegate>
                         else
                         {
                             imgvCrop.image = cropedImage;
-
-
                         }
                         
                       //  imgvCrop.image = [UIImage ScaletoFill:image toSize:imgvCrop.frame.size];

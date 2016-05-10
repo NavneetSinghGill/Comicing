@@ -406,6 +406,9 @@ static NSString * const reuseIdentifier1 = @"Cell1";
         else
         {
             NSDictionary *dict = stickersWithShadow[indexPath.row - 1];
+            
+            UIImage *image = dict[@"stickerImage"];
+            
             [parentViewController addStickerWithImage:dict[@"stickerImage"]];
 //            [parentViewController addStickerWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:dict[@"stickerPath"]]]];
 //            [parentViewController addStickerWithPath:dict[@"stickerPath"]];
@@ -547,9 +550,6 @@ static NSString * const reuseIdentifier1 = @"Cell1";
                            @"isDeleted"     : @"No",
                            @"stickerName"   : stickerFileName,
                            @"stickerPath"   : strWithoutBorderImage};
-    
-    
-    
     
     [stickers insertObject:dictSticker atIndex:0];
     
