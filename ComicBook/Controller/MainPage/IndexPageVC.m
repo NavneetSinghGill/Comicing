@@ -68,7 +68,13 @@
         int possibleNumberOfCell=2;
         CGFloat actualwidth=totalWidth/possibleNumberOfCell;
         [flowLayout setItemSize:CGSizeMake(actualwidth, possibleHeight)];
-        flowLayout.sectionInset=UIEdgeInsetsMake(1, 0, 1, 0);
+        // vishnuvardhan
+        if(self.slidesArray.count == 3) {
+            flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        } else {
+            flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        }
+//        flowLayout.sectionInset=UIEdgeInsetsMake(1, 0, 1, 0);
 //        flowLayout.sectionInset=UIEdgeInsetsMake(1, .5, 0, 1);
         flowLayout.minimumLineSpacing=2;
         flowLayout.minimumInteritemSpacing=2;
@@ -76,27 +82,38 @@
         [self.collectionView.collectionViewLayout invalidateLayout];
         
     });
-    
-    
-    
 }
-
 
 #pragma mark <UICollectionViewDataSource>
 
-
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    // vishnuvardhan
+    if(section == 0) {
+        return UIEdgeInsetsMake(1, 0, 1, 0);
+    } else {
+        return UIEdgeInsetsMake(self.collectionView.frame.size.height/50, .5, 1, 0);
+//        return UIEdgeInsetsMake(200, .5, 1, 0);
+    }
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    
+    if(self.slidesArray.count == 3) {
+        // vishnuvardhan
+        return 2;
+    }
     return 1;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
-    
+    // vishnuvardhan
+    if(self.slidesArray.count == 3) {
+        if(section == 0) {
+            return 2;
+        } else if(section == 1) {
+            return 1;
+        }
+    }
     return 4;
-    
 }
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -128,6 +145,23 @@
             [img.layer setMasksToBounds:true];
         }
         
+    } else if(self.slidesArray.count == 3) {
+        if(indexPath.section == 0) {
+            Slides *slide = [self.slidesArray objectAtIndex:indexPath.row];
+            [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            }];
+            img.layer.borderWidth=2;
+            img.layer.borderColor=[UIColor blackColor].CGColor;
+            [img.layer setMasksToBounds:true];
+        } else {
+            Slides *slide = [self.slidesArray objectAtIndex:2];
+            [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            }];
+            img.layer.borderWidth=2;
+            img.layer.borderColor=[UIColor blackColor].CGColor;
+            [img.layer setMasksToBounds:true];
+        }
+        
     } else {
         if(indexPath.row<self.slidesArray.count)
         {
@@ -151,14 +185,11 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
-    
     return cell;
 }
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-    
-    
     
     if(self.pageNumber==1)
     {
@@ -170,7 +201,11 @@
             if(self.slidesArray.count == 2 && indexPath.item == 3) {
                 [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item] forKey:@"SelectedPageNumber"];
             } else {
-                [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+2] forKey:@"SelectedPageNumber"];
+                if(self.slidesArray.count == 3 && indexPath.section == 1) {
+                    [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+4] forKey:@"SelectedPageNumber"];
+                } else {
+                    [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+2] forKey:@"SelectedPageNumber"];
+                }
             }
         }
 //        else
@@ -187,7 +222,11 @@
         if(self.slidesArray.count == 2 && indexPath.item == 3) {
             [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+4] forKey:@"SelectedPageNumber"];
         } else {
-            [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+6] forKey:@"SelectedPageNumber"];
+            if(self.slidesArray.count == 3 && indexPath.section == 1) {
+                [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+8] forKey:@"SelectedPageNumber"];
+            } else {
+                [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+6] forKey:@"SelectedPageNumber"];
+            }
         }
     }
     
