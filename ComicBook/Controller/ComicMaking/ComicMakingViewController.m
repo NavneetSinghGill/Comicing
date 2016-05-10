@@ -1750,6 +1750,7 @@ static CGRect CaptionTextViewMinRect;
     {
         [gestureRecognizer view].transform = CGAffineTransformRotate([[gestureRecognizer view] transform], [gestureRecognizer rotation]);
         [gestureRecognizer setRotation:0];
+        NSLog(@"RAMESH : rotatePiece");
     }
     
     if ([gestureRecognizer state] == UIGestureRecognizerStateEnded){
@@ -1787,7 +1788,13 @@ static CGRect CaptionTextViewMinRect;
         CGPoint translation = [recognizer translationInView:imgvComic];
         recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
                                              recognizer.view.center.y + translation.y);
+        
+//        CGAffineTransform transform = CGAffineTransformTranslate([[recognizer view] transform], 0, 0);
+//        [recognizer view].transform = transform;
+        
         [recognizer setTranslation:CGPointMake(0, 0) inView:imgvComic];
+        
+//        NSLog(@"RAMESH :: panGestureDetected");
         
     }
     
@@ -1847,6 +1854,7 @@ static CGRect CaptionTextViewMinRect;
     if([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
         // Reset the last scale, necessary if there are multiple objects with different scales
         lastScale = [gestureRecognizer scale];
+//        NSLog(@"RAMESH :: lastScale %f ",lastScale);
     }
     
     if ([gestureRecognizer state] == UIGestureRecognizerStateBegan ||
@@ -1863,12 +1871,14 @@ static CGRect CaptionTextViewMinRect;
         newScale = MAX(newScale, kMinScale / currentScale);
         CGAffineTransform transform = CGAffineTransformScale([[gestureRecognizer view] transform], newScale, newScale);
         [gestureRecognizer view].transform = transform;
-        
+//        NSLog(@"RAMESH :: scalePiece scale value X %f Y %f",transform.a , transform.b);
         lastScale = [gestureRecognizer scale];  // Store the previous scale factor for the next pinch gesture call
     }
     
     if ([gestureRecognizer state] == UIGestureRecognizerStateEnded){
         [self doAutoSave:gestureRecognizer.view];
+        
+        NSLog(@"RAMESH :: lastScale %f ",lastScale);
     }
 }
 
@@ -2110,6 +2120,8 @@ static CGRect CaptionTextViewMinRect;
     
     imgvComic.hidden = NO;
     imgvComic.frame =  frameImgvComic;
+    
+    [self.btnSend setEnabled:YES];
     
     [UIView transitionWithView:imgvComic
                       duration:0.5
@@ -2954,26 +2966,94 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)addStickerWithImageView:(UIImageView *)imageView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect Tranform:(CGAffineTransform)tranformData
 {
+    
+//    NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(imageView.transform));
+    
     if (!CGRectEqualToRect(rect,CGRectZero)) {
-//        if (tranformData != nil) {
         imageView.frame = rect;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+//        if (tranformData != nil) {
+//        imageView.transform =  imageView.transform;
 //        imageView.center = imageView.center;
 //            NSLog(@"Transform value %@",tranformData);
 //            CGFloat angle = atan2f(CGAffineTransformFromString(tranformData).b, CGAffineTransformFromString(tranformData).a);
 //            CGFloat degrees = angle * (180 / M_PI);
 //            imageView.transform = CGAffineTransformRotate(CGAffineTransformFromString(tranformData), angle);
-            imageView.transform =  tranformData;
+        if ([imageView isKindOfClass:[ComicItemSticker class]])
+        {
+            CGFloat angle = ((ComicItemSticker*)imageView).angle;
+            CGFloat scaleValueX = ((ComicItemSticker*)imageView).scaleValueX;
+            CGFloat scaleValueY = ((ComicItemSticker*)imageView).scaleValueY;
+            CGFloat tX = ((ComicItemSticker*)imageView).tX;
+            CGFloat tY = ((ComicItemSticker*)imageView).tY;
+            CGAffineTransform transform = imageView.transform;
+            
+            transform = CGAffineTransformRotate(transform, angle);
+            //       CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
+            imageView.transform =transform;
+            
+        }else if ([imageView isKindOfClass:[ComicItemExclamation class]])
+        {
+            
+            CGFloat angle = ((ComicItemExclamation*)imageView).angle;
+            CGFloat scaleValueX = ((ComicItemExclamation*)imageView).scaleValueX;
+            CGFloat scaleValueY = ((ComicItemExclamation*)imageView).scaleValueY;
+            CGFloat tX = ((ComicItemExclamation*)imageView).tX;
+            CGFloat tY = ((ComicItemExclamation*)imageView).tY;
+            
+            CGAffineTransform transform = imageView.transform;
+            
+            transform = CGAffineTransformRotate(transform, angle);
+            //       CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
+            imageView.transform =transform;
+            
+        }
+        
+//        imageView.transform = CGAffineTransformIdentity;
+
+//        CGAffineTransform transform_default = CGAffineTransformConcat(CGAffineTransformRotate(imageView.transform, 0),
+//                                                              CGAffineTransformTranslate(imageView.transform,  0, 0));
+//        imageView.transform = transform_default;
+        
+//        CGPoint translation = [imageView translationInView:imgvComic];
+//        imageView.center = CGPointMake(imageView.center.x + imgvComic.frame.origin.x,
+//                                             imageView.center.y + imgvComic.frame.origin.y);
+//        [imageView.transform setTranslation:CGPointMake(0, 0) inView:imgvComic];
+        
+//        CGAffineTransform transform = imageView.transform;
+        
+//        NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(imageView.transform));
+        
+//        CGAffineTransform transform = CGAffineTransformConcat(CGAffineTransformRotate(imageView.transform, angle),
+//                                            CGAffineTransformTranslate(imageView.transform,  scaleValueX, scaleValueY));
+        
+//        transform = CGAffineTransformScale(transform, scaleValueX, scaleValueX);
+//        transform = CGAffineTransformTranslate(transform,imageView.frame.size.width, imageView.frame.size.height);
+//        transform = CGAffineTransformRotate(transform, angle);
+//       CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
+//        imageView.transform =transform;
+        
+//        transform = CGAffineTransformScale(transform, scaleValueX, scaleValueY);
+//        imageView.transform =transform;
+        
+//        imageView.contentScaleFactor = 0;
+        
+//        imageView.transform = CGAffineTransformRotate(imageView.transform, angle);
+        
+//        CGFloat xScale = imageView.transform.a;
+//        CGFloat yScale = imageView.transform.d;
+        
+//        NSLog(@"xScale : %f , yScale : %f",xScale,yScale);
         
 //        NSLog(@"After value set %@",[NSValue valueWithCGAffineTransform:imageView.transform]);
 //        }
     }else{
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = imageView.image;
     }
 //    NSLog(@"addStickerWithImageView %f",(imageView.contentScaleFactor));
-    
+//    imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.userInteractionEnabled = YES;
-    
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.userInteractionEnabled = YES;
     imageView.clipsToBounds = NO;
     [imageView setBackgroundColor:[UIColor clearColor]];
@@ -3017,8 +3097,6 @@ static CGRect CaptionTextViewMinRect;
 //    imageView.transform = tt;
     
     [imgvComic addSubview:imageView];
-    
-//    imageView.transform = tt_1;
     
 }
 
@@ -3297,19 +3375,6 @@ static CGRect CaptionTextViewMinRect;
                                             withPrintScreen:printScreen
                                                withNewSlide:isNewSlide
                                                 withPopView:NO];
-    
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-//    SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
-//    [self.navigationController pushViewController:controller animated:NO];
-//    
-//    
-//    //Removing current View
-//        NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
-//        [navigationArray removeObjectAtIndex: navigationArray.count - 2 ];
-//        self.navigationController.viewControllers = navigationArray;
-//        navigationArray =nil;
-//
-//    return;
     //Desable the image view intactin
     [self.view setUserInteractionEnabled:NO];
     NSMutableArray* comicSlides = [self getDataFromFile];
@@ -3334,24 +3399,21 @@ static CGRect CaptionTextViewMinRect;
     } else if(self.replyType == GroupReply) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"StartGroupReplyComicAnimation" object:nil];
     }
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     [cmNetWorking UploadComicImage:paramArray completeBlock:^(id json, id jsonResponse) {
         
-        NSLog(@"Finish Uploading");
-        NSLog(@"Start Comic Creation");
         [cmNetWorking postComicCreation:[self createSendParams:[json objectForKey:@"slides"] comicSlides:comicSlides]
                                      Id:nil completion:^(id json,id jsonResposeHeader) {
             
             [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
             
                                           [self.view setUserInteractionEnabled:YES];
-//                                         [self.navigationController popViewControllerAnimated:NO];
-                                         
                                          if(self.comicType != ReplyComic) {
                                              UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                              SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
+                                             controller.comicSlideFileName = self.fileNameToSave;
+                                             
                                              [self.navigationController pushViewController:controller animated:YES];
                                          } else {
                                              if(self.replyType == FriendReply) {
@@ -3361,13 +3423,10 @@ static CGRect CaptionTextViewMinRect;
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
                                              }
+                                             if (self.fileNameToSave) {
+                                                 [AppHelper deleteSlideFile:self.fileNameToSave];
+                                             }
                                          }
-            
-            //Removing current View
-//            NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
-//            [navigationArray removeObjectAtIndex: navigationArray.count - 2 ];
-//            self.navigationController.viewControllers = navigationArray;
-//            navigationArray =nil;
             
         } ErrorBlock:^(JSONModelError *error) {
             NSLog(@"completion %@",error);
@@ -3413,12 +3472,10 @@ static CGRect CaptionTextViewMinRect;
     
     [comicMakeDic setObject:@"0" forKey:@"conversation_id"];
     [comicMakeDic setObject:@"1" forKey:@"status"];
-    [comicMakeDic setObject:@"1" forKey:@"is_public"];
+    
     //Slide Array
     NSMutableArray* slides = [[NSMutableArray alloc] init];
     
-    
-//    NSMutableArray* comicSlides = [self getDataFromFile]; //[[[NSUserDefaults standardUserDefaults] objectForKey:@"comicSlides"] mutableCopy];
     for (int i=0; i< [comicSlides count]; i++) {
 //    for (NSData* data in comicSlides) {
         NSData* data = [comicSlides objectAtIndex:i];
@@ -3443,7 +3500,7 @@ static CGRect CaptionTextViewMinRect;
         
         for (int i = 0; i < cmPage.subviews.count; i ++)
         {
-            id imageView = comicPage.subviews[i];
+            id imageView = cmPage.subviews[i];
             //Check is ComicItemBubble
             if([imageView isKindOfClass:[ComicItemBubble class]])
             {
@@ -3465,6 +3522,9 @@ static CGRect CaptionTextViewMinRect;
                     
                     [enhancements addObject:cmEng];
                 }
+            }
+            if (enhancements && [enhancements count] > 0) {
+                [cmSlide setObject:enhancements forKey:@"enhancements"];
             }
         }
         [slides addObject:cmSlide];

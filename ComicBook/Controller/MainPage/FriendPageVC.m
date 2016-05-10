@@ -436,8 +436,54 @@
 }
 
 - (IBAction)tappedUserPic:(id)sender {
-    if([Utilities isReachable]) {
-        if ([[AppDelegate application].dataManager.friendObject.status intValue] == 0) {
+    
+    //Get List of friends and check if this user is friend of current user
+    [self getFriendsList:^(id object) {
+       
+        BOOL isAlreadyFriend = NO;
+        if(![object isKindOfClass:[NSString class]])
+        for (Friend *frd in object)
+        {
+            if ([frd.friendId isEqualToString:[AppDelegate application].dataManager.friendObject.userId])
+            {
+                
+                // unfriend API
+                [self callFriendUnfriendAPIWithStatus:@"0"];
+                self.profileImageView.backgroundColor = [UIColor colorWithRed:0.21 green:0.69 blue:0.93 alpha:1];
+                self.profileImageView.userInteractionEnabled = NO;
+                
+                self.friendBubble.image = [UIImage imageNamed:@"unFriendBubble.png"];
+                
+                [UIView animateWithDuration:0.3 animations:^
+                 {
+                     self.profileImageView.transform = CGAffineTransformMakeScale(0.7, 0.7);
+                 }
+                                 completion:^(BOOL finished)
+                 {
+                     [UIView animateWithDuration:0.3 animations:^
+                      {
+                          self.profileImageView.transform = CGAffineTransformIdentity;
+                      }
+                                      completion:^(BOOL finished)
+                      {
+                          [UIView animateWithDuration:0.5 animations:^
+                           {
+                               self.friendBubble.alpha = 1;
+                           }
+                                           completion:^(BOOL finished)
+                           {
+                               NSTimeInterval delay1 = 2; //in seconds
+                               [self performSelector:@selector(hideFriendBubble) withObject:nil afterDelay:delay1];
+                           }];
+                      }];
+                 }];
+                
+                isAlreadyFriend = YES;
+                break;
+            }
+        }
+        
+        if (isAlreadyFriend == NO) {
             // friend API
             [self callFriendUnfriendAPIWithStatus:@"1"];
             self.profileImageView.backgroundColor = [UIColor grayColor];
@@ -460,39 +506,7 @@
                       [UIView animateWithDuration:0.5 animations:^
                        {
                            self.friendBubble.alpha = 1;
-                       }
-                                       completion:^(BOOL finished)
-                       {
-                           NSTimeInterval delay1 = 2; //in seconds
-                           [self performSelector:@selector(hideFriendBubble) withObject:nil afterDelay:delay1];
-                       }];
-                  }];
-             }];
-        } else {
-            // unfriend API
-            [self callFriendUnfriendAPIWithStatus:@"0"];
-            self.profileImageView.backgroundColor = [UIColor colorWithRed:0.21 green:0.69 blue:0.93 alpha:1];
-            self.profileImageView.userInteractionEnabled = NO;
-            
-            self.friendBubble.image = [UIImage imageNamed:@"unFriendBubble.png"];
-            
-            [UIView animateWithDuration:0.3 animations:^
-             {
-                 self.profileImageView.transform = CGAffineTransformMakeScale(0.7, 0.7);
-             }
-                             completion:^(BOOL finished)
-             {
-                 [UIView animateWithDuration:0.3 animations:^
-                  {
-                      self.profileImageView.transform = CGAffineTransformIdentity;
-                  }
-                                  completion:^(BOOL finished)
-                  {
-                      [UIView animateWithDuration:0.5 animations:^
-                       {
-                           self.friendBubble.alpha = 1;
-                       }
-                                       completion:^(BOOL finished)
+                       }completion:^(BOOL finished)
                        {
                            NSTimeInterval delay1 = 2; //in seconds
                            [self performSelector:@selector(hideFriendBubble) withObject:nil afterDelay:delay1];
@@ -500,11 +514,13 @@
                   }];
              }];
         }
-    }
+    }];
 }
 
 - (IBAction)tappedBackButton:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)callAPIToGetTheComicsWithPageNumber:(NSUInteger)page andTimelinePeriod:(NSString *)period andDirection:(NSString *)direction shouldClearAllData:(BOOL)clearData {
@@ -678,6 +694,7 @@
 - (void)callFriendUnfriendAPIWithStatus:(NSString *)status {
     [FriendsAPIManager makeFirendOrUnfriendForUserId:[AppDelegate application].dataManager.friendObject.userId
                                           WithStatus:status
+                                       CurrentUserId:[[AppHelper initAppHelper] getCurrentUser].user_id
                                     withSuccessBlock:^(id object) {
                                         NSLog(@"%@", object);
                                         // logic to set the status from API.
@@ -693,6 +710,22 @@
                                     }];
 }
 
+- (void)getFriendsList :(void(^)(id object))successBlock{
+    [FriendsAPIManager getTheListOfFriendsForTheUserID:[AppHelper getCurrentLoginId] withSuccessBlock:^(id object)
+     {
+         NSLog(@"%@", object);
+         NSLog(@"%@", [MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil]);
+         
+         NSMutableArray *friends = [[MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil] mutableCopy];
+         successBlock(friends);
+         
+     } andFail:^(NSError *errorMessage) {
+         if ([errorMessage isKindOfClass:[NSString class]]) {
+             successBlock(@"");
+         }
+         NSLog(@"%@", errorMessage);
+     }];
+}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"MePageDetailsVC"]) {
         MePageDetailsVC *mePageDetails = [segue destinationViewController];

@@ -78,6 +78,7 @@
 
 +(void)saveDataToFile:(NSMutableArray*)slideObj fileName:(NSString*)FileName;
 +(NSMutableArray*)getDataFromFile :(NSString*)FileName;
++(BOOL)deleteSlideFile :(NSString*)FileName;
 
 #pragma mark showHUDLoader
 + (void)showHUDLoader:(BOOL)show;

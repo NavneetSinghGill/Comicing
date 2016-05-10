@@ -39,6 +39,8 @@
 
 //@property (weak, nonatomic) NSString HeaderView *headerView;
 
+@property (nonatomic) NSString* comicSlideFileName;
+
 @property (strong, nonatomic) IBOutlet ComicShareView *comicShareViewView;
 
 - (IBAction)backButtonClick:(id)sender;

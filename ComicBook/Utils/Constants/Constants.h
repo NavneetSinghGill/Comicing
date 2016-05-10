@@ -72,4 +72,7 @@ extern NSString *const UKeyName;
 //extern NSString *const UKeyImage;
 //extern NSString *const UKeyDetail;
 
+
+extern NSString *const FRIENDSFROMSERVER;
+
 @end
