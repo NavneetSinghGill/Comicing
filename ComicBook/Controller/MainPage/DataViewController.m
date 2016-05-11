@@ -110,7 +110,7 @@
         imgHeight = 50;
     }
     
-    audioView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 80, self.view.frame.size.width, audioViewHeight)];
+    audioView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, audioViewHeight)];
     [audioView setBackgroundColor:[UIColor colorWithRed:241/255.0f green:199/255.0f blue:27/255.0f alpha:0.7]];
     img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, imgHeight, imgHeight)];
     [img setImage:[UIImage imageNamed:@"mic_play"]];
@@ -182,12 +182,20 @@
 }
 
 - (void)showAudioAnimation:(NSInteger)tag {
-    [audioView setFrame:CGRectMake(0, self.view.frame.size.height - 80, 50, audioViewHeight)];
+    CGFloat audioViewY;
+    if(IS_IPHONE_5) {
+        audioViewY = self.view.frame.size.height - 55;
+    } else if(IS_IPHONE_6) {
+        audioViewY = self.view.frame.size.height - 70;
+    } else if(IS_IPHONE_6P) {
+        audioViewY = self.view.frame.size.height - 80;
+    }
+    [audioView setFrame:CGRectMake(0, audioViewY, 50, audioViewHeight)];
     [self.view addSubview:audioView];
     audioView.alpha = 1;
     img.alpha = 1;
     [UIView animateWithDuration:[[audioDurationSecondsArray objectAtIndex:tag] floatValue] delay:.2 usingSpringWithDamping:.8 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [audioView setFrame:CGRectMake(0, self.view.frame.size.height - 80, self.view.frame.size.width, audioViewHeight)];
+        [audioView setFrame:CGRectMake(0, audioViewY, self.view.frame.size.width, audioViewHeight)];
         audioView.alpha = 1;
     } completion:^(BOOL finished) {
     }];

@@ -380,6 +380,8 @@ NSString * const BottomBarView = @"BottomBarView";
     [self.profilePicOfComic sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
     //    self.profilePicOfComic.layer.cornerRadius = self.profilePicOfComic.frame.size.width / 2;
     self.profilePicOfComic.clipsToBounds = YES;
+    
+    textView.placeholder = [NSString stringWithFormat:@"Say something to %@", comicBook.userDetail.firstName];
     currentComicUserId = comicBook.userDetail.userId;
     friendObject = [[Friend alloc] init];
     friendObject.firstName = comicBook.userDetail.firstName;
@@ -860,7 +862,6 @@ NSString * const BottomBarView = @"BottomBarView";
     textView.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 5, 0);
     //    textView.backgroundColor = [UIColor colorWithRed:(.61) green:(.93) blue:(.93) alpha:1];
     textView.backgroundColor = [UIColor colorWithRed:(0.611) green:(0.854) blue:(0.925) alpha:1];
-    textView.placeholder = @"Say something to Johnny";
     textView.layer.cornerRadius=4;
     textView.layer.masksToBounds=YES;
     [textView setTextColor:[UIColor whiteColor]];
@@ -1253,11 +1254,6 @@ NSString * const BottomBarView = @"BottomBarView";
     } andFail:^(NSError *errorMessage) {
         NSLog(@"%@", errorMessage);
     }];
-}
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    NSLog(@"HAHAHAHAHAHHAHAHAHA");
-    return YES;
 }
 
 @end
