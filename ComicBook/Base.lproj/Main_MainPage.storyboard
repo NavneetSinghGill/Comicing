@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XO4-2R-B3p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XO4-2R-B3p">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -2637,7 +2637,7 @@
         <image name="HomeButton_white" width="38" height="24"/>
         <image name="MeButton_white" width="35" height="17"/>
         <image name="Pen" width="31" height="45"/>
-        <image name="WOW" width="1082" height="426"/>
+        <image name="WOW" width="541" height="213"/>
         <image name="arrow" width="47" height="15"/>
         <image name="arrowdown" width="36" height="13"/>
         <image name="backbutton.png" width="15" height="24"/>

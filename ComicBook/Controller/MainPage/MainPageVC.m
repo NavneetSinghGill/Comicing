@@ -815,19 +815,41 @@ NSString * const BottomBarView = @"BottomBarView";
     self.scrollView.layer.zPosition = 1;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+    CGFloat textViewX;
+    CGFloat twitterLabelX;
+    CGFloat onOffX;
+    if(IS_IPHONE_5)
+    {
+        textViewX= 140;
+        twitterLabelX= 160;
+        onOffX= 125;
+    }
+    else if(IS_IPHONE_6)
+    {
+        textViewX= 145;
+        twitterLabelX= 165;
+        onOffX= 130;
+    }
+    else if(IS_IPHONE_6P)
+    {
+        textViewX= 150;
+        twitterLabelX= 170;
+        onOffX= 135;
+    }
     commentContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 93, self.view.frame.size.width, 60)]; // 95
-    onoff = [[UISwitch alloc] initWithFrame: CGRectMake(135, 0, 30, 30)];
+    onoff = [[UISwitch alloc] initWithFrame: CGRectMake(onOffX, 0, 30, 30)];
     onoff.onTintColor= [UIColor colorWithRed:(.61) green:(.93) blue:(.93) alpha:1];
     onoff.transform = CGAffineTransformMakeScale(0.30, 0.30);
     [commentContainerView addSubview:onoff];
     [onoff setOn:YES animated:YES];
     [onoff addTarget:self action:@selector(toggledTweetSwitch:) forControlEvents:UIControlEventValueChanged];
-    UILabel*twitterLabel=[[UILabel alloc]initWithFrame: CGRectMake(170, 10, 160, 10)];
+    UILabel*twitterLabel=[[UILabel alloc]initWithFrame: CGRectMake(twitterLabelX, 10, 160, 10)];
     twitterLabel.text=@"Tweet this comment";
     twitterLabel.textColor=[UIColor whiteColor];
     twitterLabel.font = [UIFont fontWithName:@"AmericanTypewriter"  size:10];
     [commentContainerView addSubview:twitterLabel];
-    textView = [[CustomTextView alloc] initWithFrame:CGRectMake(150, 22, self.view.frame.size.width-180, 25)];
+//    [commentContainerView setBackgroundColor:[UIColor redColor]];
+    textView = [[CustomTextView alloc] initWithFrame:CGRectMake(textViewX, 22, self.view.frame.size.width-170, 25)];
     textView.isScrollable = NO;
     textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
     textView.minNumberOfLines = 1;
