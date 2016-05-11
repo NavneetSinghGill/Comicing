@@ -137,10 +137,15 @@
         
         comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
         
+        ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+        [comic setSlidesArray:comicBook.slides];
+        
+        [comic setupBook];
         [cell.viewComicBook addSubview:comic.view];
         [self addChildViewController:comic];
-        [comic setImages: [self setupImages:indexPath]];
-        [comic setupBook];
+//        [self addChildViewController:comic];
+//        [comic setImages: [self setupImages:indexPath]];
+//        [comic setupBook];
         [ComicBookDict setObject:comic forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
     }
     
@@ -575,6 +580,7 @@
                                        
                                        [comicsArray addObjectsFromArray:comicsModelObj.books];
                                    }
+                                   self.totalComicCountLabel.text = [NSString stringWithFormat:@"%@ Comics", comicsModelObj.totalCount];
                                    [self.tableview reloadData];
                                } andFail:^(NSError *errorMessage) {
                                    NSLog(@"%@", errorMessage);
