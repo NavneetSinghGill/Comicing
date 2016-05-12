@@ -612,6 +612,7 @@
                                        
                                        [comicsArray addObjectsFromArray:comicsModelObj.books];
                                    }
+                                   self.lblComicCount.text = [NSString stringWithFormat:@"%@ Comics", comicsModelObj.totalCount];
                                    [self.tableview reloadData];
                                } andFail:^(NSError *errorMessage) {
                                    NSLog(@"%@", errorMessage);

@@ -18,7 +18,8 @@
              @"books": @"Books",
              @"pagination": @"pagination",
              @"dateLabels": @"date_labels",
-             @"shareId": @"lastShareId"
+             @"shareId": @"lastShareId",
+             @"totalCount": @"total_count"
              };
 }
 

@@ -17,5 +17,6 @@
 @property (nonatomic, strong) NSArray *dateLabels;
 @property (nonatomic, strong) Pagination *pagination;
 @property (nonatomic, strong) NSString *shareId;
+@property (nonatomic, strong) NSString *totalCount;
 
 @end
