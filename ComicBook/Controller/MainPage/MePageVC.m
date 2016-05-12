@@ -149,7 +149,8 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
-    /* Test code for comments.
+    /*
+    // Test code for comments.
     CommentModel *commentModel1 = [[CommentModel alloc] init];
     commentModel1.firstName = @"Test1";
     commentModel1.lastName = @"Name1";
