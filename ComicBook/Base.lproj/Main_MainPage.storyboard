@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XO4-2R-B3p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XO4-2R-B3p">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -2216,10 +2216,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Mi-FV-lLo">
-                                                    <rect key="frame" x="100" y="11" width="495" height="22"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Mi-FV-lLo">
+                                                    <rect key="frame" x="100" y="11" width="495" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="VMX-2Z-Xei"/>
+                                                        <constraint firstAttribute="height" constant="50" id="VMX-2Z-Xei"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2236,7 +2236,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="2Mi-FV-lLo" secondAttribute="trailing" constant="-3" id="14O-7r-atw"/>
                                                 <constraint firstItem="2Mi-FV-lLo" firstAttribute="leading" secondItem="Iam-8G-ljM" secondAttribute="trailing" constant="26" id="Dmm-xo-3Zr"/>
-                                                <constraint firstItem="2Mi-FV-lLo" firstAttribute="centerY" secondItem="Iam-8G-ljM" secondAttribute="centerY" id="U8Y-aQ-nRz"/>
+                                                <constraint firstItem="2Mi-FV-lLo" firstAttribute="centerY" secondItem="Iam-8G-ljM" secondAttribute="centerY" constant="14" id="U8Y-aQ-nRz"/>
                                                 <constraint firstItem="Iam-8G-ljM" firstAttribute="top" secondItem="9fL-go-Pfg" secondAttribute="top" constant="5" id="fdF-jI-5sy"/>
                                                 <constraint firstItem="Iam-8G-ljM" firstAttribute="leading" secondItem="9fL-go-Pfg" secondAttribute="leading" constant="40" id="jEo-1I-0Yr"/>
                                             </constraints>
@@ -2637,7 +2637,7 @@
         <image name="HomeButton_white" width="38" height="24"/>
         <image name="MeButton_white" width="35" height="17"/>
         <image name="Pen" width="31" height="45"/>
-        <image name="WOW" width="1082" height="426"/>
+        <image name="WOW" width="541" height="213"/>
         <image name="arrow" width="47" height="15"/>
         <image name="arrowdown" width="36" height="13"/>
         <image name="backbutton.png" width="15" height="24"/>

@@ -301,7 +301,8 @@
             [cell.selectedTickImage setHidden:NO];
             [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
         }
-        else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
+        else if([us isKindOfClass:[UserFriends class]] && us.friend_id)
+//        else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
         {
             [cell.selectedTickImage setHidden:NO];
             [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
@@ -368,8 +369,8 @@
         
         User* usSelection =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
         
-        if (usSelection.status != UNFRIEND )
-        {
+//        if (usSelection.status != UNFRIEND )
+//        {
             FriendsListTableViewCell *cell = (FriendsListTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
             
             if(cell)
@@ -402,7 +403,7 @@
 
             [self doSelectedAction:usSelection];
 
-        }
+//        }
     }
 }
 

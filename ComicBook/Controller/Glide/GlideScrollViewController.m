@@ -65,35 +65,41 @@ NSTimer* timerObject;
         [scrvComicSlide pushAddSlideTap:scrvComicSlide.btnAddSlide animation:NO];
     }
 }
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    if(self.isSendPageReload) {
+//        if(self.comicType == ReplyComic && self.replyType == FriendReply) {
+//            self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_F%@", self.friendOrGroupId];
+//        } else if(self.comicType == ReplyComic && self.replyType == GroupReply) {
+//            self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_G%@", self.friendOrGroupId];
+//        } else {
+//            self.fileNameToSave = @"ComicSlide";
+//        }
+//        
+//        for (UIView *subView in [scrvComicSlide subviews])
+//        {
+//            if (![subView isKindOfClass:[UIImageView class]]) {
+//                [subView removeFromSuperview];
+//            }
+//        }
+//        
+//        [self prepareView];
+//        
+//        if (comicSlides == nil || comicSlides.count == 0) {
+//            [scrvComicSlide pushAddSlideTap:scrvComicSlide.btnAddSlide animation:NO];
+//        }
+//        self.isSendPageReload = NO;
+//    }
+////    [self setComicSendButton];
+//    [super viewWillAppear:animated];
+//}
 - (void)viewWillAppear:(BOOL)animated
 {
     if(self.isSendPageReload) {
-        if(self.comicType == ReplyComic && self.replyType == FriendReply) {
-            self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_F%@", self.friendOrGroupId];
-        } else if(self.comicType == ReplyComic && self.replyType == GroupReply) {
-            self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_G%@", self.friendOrGroupId];
-        } else {
-            self.fileNameToSave = @"ComicSlide";
-        }
-        
-        for (UIView *subView in [scrvComicSlide subviews])
-        {
-            if (![subView isKindOfClass:[UIImageView class]]) {
-                [subView removeFromSuperview];
-            }
-        }
-        
         [self prepareView];
-        
-        if (comicSlides == nil || comicSlides.count == 0) {
-            [scrvComicSlide pushAddSlideTap:scrvComicSlide.btnAddSlide animation:NO];
-        }
-        self.isSendPageReload = NO;
     }
-//    [self setComicSendButton];
     [super viewWillAppear:animated];
 }
-
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
