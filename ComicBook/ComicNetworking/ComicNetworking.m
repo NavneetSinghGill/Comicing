@@ -334,7 +334,7 @@ static ComicNetworking *_sharedComicNetworking = nil;
                                   } ErrorBlock:^(JSONModelError *error) {
                                       errorBlock(error);
                                   }];
-                              } showIndicator:NO];
+                              } showIndicator:YES];
     
     //    [JSONHTTPClient postJSONFromURLWithString:url
     //                                       params:nil
