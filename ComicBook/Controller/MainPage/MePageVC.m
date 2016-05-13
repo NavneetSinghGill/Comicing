@@ -182,8 +182,19 @@
 //            [comic setImages: [self setupImages:indexPath]];
             
             ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
-            [comic setSlidesArray:comicBook.slides];
+            // vishnu
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
             
+            // To repeat the cover image again on index page as the first slide.
+            if(slidesArray.count > 1) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+                
+                // Adding a sample slide to array to maintain the logic
+                Slides *slides = [Slides new];
+                [slidesArray insertObject:slides atIndex:1];
+            }
+            [comic setSlidesArray:slidesArray];
             [comic setupBook];
             [self addChildViewController:comic];
             [ comic.view setTranslatesAutoresizingMaskIntoConstraints:NO];
