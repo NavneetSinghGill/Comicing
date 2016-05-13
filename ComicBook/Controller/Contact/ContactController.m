@@ -69,6 +69,7 @@
     self.friendsList.selectedActionName =@"AddToFriends";
     self.friendsList.enableInvite = NO;
     friendsFrame = self.friendsList.frame;
+    [self.groupSection getGroupsByUserId];
     [super viewWillAppear:animated];
 }
 

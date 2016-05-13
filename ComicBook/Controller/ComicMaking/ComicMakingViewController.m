@@ -3419,9 +3419,11 @@ static CGRect CaptionTextViewMinRect;
                                              if(self.replyType == FriendReply) {
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+                                                 [self dismissViewControllerAnimated:YES completion:^{}];
                                              } else if(self.replyType == GroupReply) {
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+                                                 [self dismissViewControllerAnimated:YES completion:^{}];
                                              }
                                              if (self.fileNameToSave) {
                                                  [AppHelper deleteSlideFile:self.fileNameToSave];
@@ -3433,8 +3435,10 @@ static CGRect CaptionTextViewMinRect;
             [self.view setUserInteractionEnabled:YES];
             if(self.replyType == FriendReply) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+                [self dismissViewControllerAnimated:YES completion:^{}];
             } else if(self.replyType == GroupReply) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+                [self dismissViewControllerAnimated:YES completion:^{}];
             }
         }];
         
@@ -3442,8 +3446,10 @@ static CGRect CaptionTextViewMinRect;
         [self.view setUserInteractionEnabled:YES];
         if(self.replyType == FriendReply) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+            [self dismissViewControllerAnimated:YES completion:^{}];
         } else if(self.replyType == GroupReply) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+            [self dismissViewControllerAnimated:YES completion:^{}];
         }
     }];
     

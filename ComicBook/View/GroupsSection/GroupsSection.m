@@ -113,7 +113,7 @@
 -(void)openGroup:(UIButton*)sender{
     if(self.enableSelection)
     {
-        NSInteger itemIndex = cell_button_tag - ((UIButton*)sender).tag;
+        NSInteger itemIndex = ((UIButton*)sender).tag - cell_button_tag;
         if(itemIndex >= 0 && [self.groupsArray count] > itemIndex)
         {
             NSIndexPath* tempIndexPath = [NSIndexPath indexPathForRow:itemIndex inSection:0];
