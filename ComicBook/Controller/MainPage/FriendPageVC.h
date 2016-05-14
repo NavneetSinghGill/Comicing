@@ -32,7 +32,6 @@
 }
 
 @property(nonatomic,strong)NSMutableDictionary*ComicBookDict;
-@property(nonatomic,strong)UIButton* currentButton;
 @property (weak, nonatomic) IBOutlet UIView *NameView;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (assign, nonatomic) CATransform3D initialTransformation;
@@ -47,5 +46,23 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalComicCountLabel;
+
+@property(nonatomic,strong)UILabel* currentHollowLable;
+@property(nonatomic,strong)UILabel* currentDisplayLable;
+
+//dinesh
+@property (weak, nonatomic) IBOutlet UILabel *mLineJoiningCentres;
+
+@property (weak, nonatomic) IBOutlet UILabel *mNowDisplaylabel;
+@property (weak, nonatomic) IBOutlet UILabel *mNowHollowlabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *mSecondDisplaylabel;
+@property (weak, nonatomic) IBOutlet UILabel *mSecondHollowlabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *mThirdDisplaylabel;
+@property (weak, nonatomic) IBOutlet UILabel *mThirdHollowlabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *mFourthDisplaylabel;
+@property (weak, nonatomic) IBOutlet UILabel *mFourthHollowlabel;
 
 @end

@@ -45,7 +45,9 @@
     }
     NSDate *previousDate = [calendar dateByAddingComponents:comps toDate:[NSDate date] options:0];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"MMM yyyy"];
+    //[dateFormat setDateFormat:@"MMM yyyy"];
+    [dateFormat setDateFormat:@"MMM"];
+
     NSString *monthAndYear = [dateFormat stringFromDate:previousDate];
     return monthAndYear;
 }

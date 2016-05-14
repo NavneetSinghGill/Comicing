@@ -200,6 +200,7 @@ const NSInteger spaceFromTop = 75;
     UILabel* lblTimeText = [[UILabel alloc] initWithFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y - 30, view.frame.size.width, 20)];
     lblTimeText.text = finalString;
     lblTimeText.textColor = [UIColor colorWithHexStr:@"26aae1"];//Dinesh : Ref : Bug list : line 307
+    lblTimeText.font = [UIFont fontWithName:@"Digital-7" size:15];
     lblTimeText.textAlignment = NSTextAlignmentCenter;
     lblTimeText.tag = timlineTextTag * index;
     if (comicSlide.timelineString == nil ||

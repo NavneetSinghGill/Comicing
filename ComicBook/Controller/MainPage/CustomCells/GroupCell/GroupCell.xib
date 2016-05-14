@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10089" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10072.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -25,22 +25,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="102" height="310"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7Y-8z-xlu">
-                                        <rect key="frame" x="18" y="107" width="82" height="11"/>
+                                        <rect key="frame" x="15" y="95" width="82" height="11"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWI-xd-kbD">
-                                        <rect key="frame" x="18" y="122" width="79" height="12"/>
+                                        <rect key="frame" x="15" y="110" width="79" height="12"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uqs-o1-eCJ">
-                                        <rect key="frame" x="15" y="37" width="60" height="60"/>
+                                        <rect key="frame" x="15" y="37" width="30" height="30"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isA-lA-7Pf">
-                                        <rect key="frame" x="15" y="37" width="60" height="60"/>
+                                        <rect key="frame" x="15" y="37" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,6 +51,12 @@
                                             <action selector="btnUserTouchUpOutside:" destination="1nL-kc-ri4" eventType="touchUpOutside" id="b6e-06-1Ih"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5X0-xg-LKy">
+                                        <rect key="frame" x="15" y="75" width="79" height="12"/>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -65,10 +71,11 @@
                 <outlet property="btnUser" destination="isA-lA-7Pf" id="nT0-H8-sFg"/>
                 <outlet property="lblDate" destination="u7Y-8z-xlu" id="g61-Wd-V5Q"/>
                 <outlet property="lblTime" destination="eWI-xd-kbD" id="TUJ-Fv-ldf"/>
+                <outlet property="mUserName" destination="5X0-xg-LKy" id="acQ-Fh-GgN"/>
                 <outlet property="profileImageView" destination="Uqs-o1-eCJ" id="9ez-Il-Hyu"/>
                 <outlet property="viewComicBook" destination="Opc-uC-wmH" id="pjS-91-nhK"/>
             </connections>
-            <point key="canvasLocation" x="152" y="276"/>
+            <point key="canvasLocation" x="222" y="258"/>
         </tableViewCell>
     </objects>
 </document>

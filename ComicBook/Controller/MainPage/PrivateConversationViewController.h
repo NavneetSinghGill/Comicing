@@ -14,4 +14,5 @@
 
 @property (nonatomic,strong) NSMutableDictionary *ComicBookDict;
 @property (nonatomic,strong) Friend *friendObj;
+
 @end

@@ -37,13 +37,13 @@ const int blurViewTag = 1010;
     [self addBlurEffectOverImageView];
     self.tableview.delegate = self;
     
-    //dinesh
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewSingleTap:)];
-    tapGesture.numberOfTapsRequired = 1;
-    tapGesture.delegate = self;
-    tapGesture.accessibilityValue = @"temp";
-    [self.tableview addGestureRecognizer:tapGesture];
-    //------
+        //dinesh
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewSingleTap:)];
+        tapGesture.numberOfTapsRequired = 1;
+        tapGesture.delegate = self;
+        tapGesture.accessibilityValue = @"temp";
+        [self.tableview addGestureRecognizer:tapGesture];
+        //------
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -85,7 +85,7 @@ const int blurViewTag = 1010;
         [self removeFromParentViewController];      // 3
     }];
     
-
+    
 }
 
 - (IBAction)tappedBackButton:(id)sender {
@@ -99,22 +99,22 @@ const int blurViewTag = 1010;
     [self.parentViewController.view endEditing:YES];
     [self hideContentController];
     
-//    for (id view in topBarView.mSearchBarHolderView.subviews)
-//    {
-//        if ([view isKindOfClass:[UITextField class]] && [(UITextField *)view isEditing])
-//        {
-//            [self.parentViewController.view endEditing:YES];
-//            [self hideContentController];
-//            
-//            return;
-//        }
-//    }
+    //    for (id view in topBarView.mSearchBarHolderView.subviews)
+    //    {
+    //        if ([view isKindOfClass:[UITextField class]] && [(UITextField *)view isEditing])
+    //        {
+    //            [self.parentViewController.view endEditing:YES];
+    //            [self hideContentController];
+    //
+    //            return;
+    //        }
+    //    }
     
-//    if (topBarView.isEditing)
-//    {
-//        [self.parentViewController.view endEditing:YES];
-//        [self hideContentController];
-//    }
+    //    if (topBarView.isEditing)
+    //    {
+    //        [self.parentViewController.view endEditing:YES];
+    //        [self hideContentController];
+    //    }
 }
 
 #pragma mark Methods
@@ -129,24 +129,24 @@ const int blurViewTag = 1010;
     __block typeof(self) weakSelf = self;
     topBarView.homeAction = ^(void) {
         MainPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:MAIN_PAGE_VIEW];
-//        [weakSelf presentViewController:contactsView animated:YES completion:nil];
+        //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
         [weakSelf.navigationController pushViewController:contactsView animated:YES];
     };
     topBarView.contactAction = ^(void) {
-//        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
-//        [weakSelf presentViewController:contactsView animated:YES completion:nil];
+        //        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
+        //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
         [AppHelper closeMainPageviewController:self];
     };
     topBarView.meAction = ^(void) {
         MePageVC *meView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:ME_VIEW_SEGUE];
-//        [weakSelf presentViewController:meView animated:YES completion:nil];
+        //        [weakSelf presentViewController:meView animated:YES completion:nil];
         [weakSelf.navigationController pushViewController:meView animated:YES];
     };
     topBarView.searchAction = ^(void) {
         [topBarView handleSearchControl:YES];
     };
     topBarView.searchUser = ^(NSString* searchText){
-//        [topBarView handleSearchControl:YES];
+        //        [topBarView handleSearchControl:YES];
         [self doSearchUser:searchText];
     };
     
@@ -184,9 +184,9 @@ const int blurViewTag = 1010;
         NSLog(@"%@", errorMessage);
     }];
     
-//    __block typeof(self) weakSelf = self;
-//    FriendPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:FRIEND_PAGE_VIEW];
-//    [weakSelf.navigationController pushViewController:contactsView animated:YES];
+    //    __block typeof(self) weakSelf = self;
+    //    FriendPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:FRIEND_PAGE_VIEW];
+    //    [weakSelf.navigationController pushViewController:contactsView animated:YES];
 }
 
 #pragma mark TableViewDelegate
@@ -199,27 +199,27 @@ const int blurViewTag = 1010;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-//    if (self.searchResultArray.count > 0)
-//    {
-//        UITapGestureRecognizer *_tapGesture = nil;
-//        for (UIGestureRecognizer *gesture in self.tableview.gestureRecognizers)
-//        {
-//            if ([gesture isKindOfClass:[UITapGestureRecognizer class]] && [gesture.accessibilityValue isEqualToString:@"temp"])
-//            {
-//                _tapGesture = (UITapGestureRecognizer *)gesture;
-//            }
-//        }
-//        
-//        [tableView removeGestureRecognizer:_tapGesture];
-//    }
-//    else
-//    {
-//        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewSingleTap:)];
-//        tapGesture.numberOfTapsRequired = 1;
-//        tapGesture.delegate = self;
-//        tapGesture.accessibilityValue = @"temp";
-//        [self.tableview addGestureRecognizer:tapGesture];
-//    }
+    //    if (self.searchResultArray.count > 0)
+    //    {
+    //        UITapGestureRecognizer *_tapGesture = nil;
+    //        for (UIGestureRecognizer *gesture in self.tableview.gestureRecognizers)
+    //        {
+    //            if ([gesture isKindOfClass:[UITapGestureRecognizer class]] && [gesture.accessibilityValue isEqualToString:@"temp"])
+    //            {
+    //                _tapGesture = (UITapGestureRecognizer *)gesture;
+    //            }
+    //        }
+    //
+    //        [tableView removeGestureRecognizer:_tapGesture];
+    //    }
+    //    else
+    //    {
+    //        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewSingleTap:)];
+    //        tapGesture.numberOfTapsRequired = 1;
+    //        tapGesture.delegate = self;
+    //        tapGesture.accessibilityValue = @"temp";
+    //        [self.tableview addGestureRecognizer:tapGesture];
+    //    }
     
     return [self.searchResultArray count];
 }
@@ -228,7 +228,7 @@ const int blurViewTag = 1010;
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    for (id view in topBarView.mSearchBarHolderView.subviews)
+    for (id view in topBarView.view.subviews)
     {
         if ([view isKindOfClass:[UITextField class]] && [(UITextField *)view isEditing] && self.searchResultArray.count == 0)
         {
@@ -236,15 +236,24 @@ const int blurViewTag = 1010;
         }
     }
     
-    return NO;
-
     
-//    if ([touch.view isDescendantOfView:self.tableview]) {
-//        
-//        // Don't let selections of auto-complete entries fire the
-//        // gesture recognizer
-//        return NO;
-//    }
+    CGPoint location = [touch locationInView:touch.view];
+    NSIndexPath *tappedIndexPath = [self.tableview indexPathForRowAtPoint:location];
+
+    if(!tappedIndexPath)
+    {
+        return YES;
+    }
+    
+    return NO;
+    
+    
+    //    if ([touch.view isDescendantOfView:self.tableview]) {
+    //
+    //        // Don't let selections of auto-complete entries fire the
+    //        // gesture recognizer
+    //        return NO;
+    //    }
     
     //return NO;
 }
@@ -252,7 +261,7 @@ const int blurViewTag = 1010;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.friendSearchObject = self.searchResultArray[indexPath.row];
-
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -274,7 +283,7 @@ const int blurViewTag = 1010;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-   self.friendSearchObject = self.searchResultArray[indexPath.row];
+    self.friendSearchObject = self.searchResultArray[indexPath.row];
     
     Friend *friend = [[Friend alloc] init];
     friend.country = self.friendSearchObject.country;
@@ -292,9 +301,9 @@ const int blurViewTag = 1010;
     
     [self performSegueWithIdentifier:@"FriendPageSegue" sender:indexPath];
     
-//    __block typeof(self) weakSelf = self;
-//    FriendPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:FRIEND_PAGE_VIEW];
-//    [weakSelf.navigationController pushViewController:contactsView animated:YES];
+    //    __block typeof(self) weakSelf = self;
+    //    FriendPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:FRIEND_PAGE_VIEW];
+    //    [weakSelf.navigationController pushViewController:contactsView animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -303,13 +312,13 @@ const int blurViewTag = 1010;
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

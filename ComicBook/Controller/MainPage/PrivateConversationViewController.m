@@ -50,9 +50,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnFriend;
 @property (weak, nonatomic) IBOutlet UIView *viewPen;
 @property (weak, nonatomic) IBOutlet UIImageView *imgvPinkDots;
-
 @property (strong, nonatomic) NSMutableArray *comics;
 @property (strong, nonatomic) NSString *shareId;
+@property (nonatomic,weak) IBOutlet UILabel *mFriendName;
+
 
 @property CGRect saveTableViewFrame;
 
@@ -72,6 +73,22 @@
     [self addTopBarView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callAPIToGetTheComics) name:@"UpdateFriendComics" object:nil];
     [self callAPIToGetTheComics];
+}
+
+//dinesh
+- (void)viewWillAppear:(BOOL)animated
+{
+
+    [super viewWillAppear:YES];
+    
+//    self.btnMe.layer.cornerRadius = self.btnMe.frame.size.width/2;
+//    self.btnMe.layer.masksToBounds = YES;
+//    [self.btnMe setClipsToBounds:YES];
+//    
+//    self.btnFriend.layer.cornerRadius = self.btnFriend.frame.size.width/2;
+//    self.btnFriend.layer.masksToBounds = YES;
+//    [self.btnFriend setClipsToBounds:YES];
+
 }
 
 #pragma mark - UIView Methods
@@ -128,7 +145,7 @@
     [self.btnMe sd_setImageWithURL:[NSURL URLWithString:[[AppHelper initAppHelper] getCurrentUser].profile_pic] forState:UIControlStateNormal];
     [self.btnFriend sd_setImageWithURL:[NSURL URLWithString:self.friendObj.profilePic] forState:UIControlStateNormal];
     
-
+    
     // [self setupPenAnimation];
     
     //    [self loadMoreData];
@@ -166,19 +183,19 @@
     
     __block typeof(self) weakSelf = self;
     topBarView.homeAction = ^(void) {
-//        CameraViewController *cameraView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CAMERA_VIEW];
-//        [weakSelf presentViewController:cameraView animated:YES completion:nil];
+        //        CameraViewController *cameraView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CAMERA_VIEW];
+        //        [weakSelf presentViewController:cameraView animated:YES completion:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     topBarView.contactAction = ^(void) {
-//        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
-//        [weakSelf presentViewController:contactsView animated:YES completion:nil];
+        //        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
+        //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
         [AppHelper closeMainPageviewController:self];
     };
     topBarView.meAction = ^(void) {
-//        [weakSelf performSegueWithIdentifier:ME_VIEW_SEGUE sender:nil];
+        //        [weakSelf performSegueWithIdentifier:ME_VIEW_SEGUE sender:nil];
         MePageVC *meView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:ME_VIEW_SEGUE];
-//        [weakSelf presentViewController:meView animated:YES completion:nil];
+        //        [weakSelf presentViewController:meView animated:YES completion:nil];
         [weakSelf.navigationController pushViewController:meView animated:YES];
     };
 }
@@ -485,6 +502,9 @@
         ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
         [cell.userProfilePic sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
         
+        //dinesh
+        cell.mUserName.text = comicBook.userDetail.firstName;
+        
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"yyyy-mm-dd hh:mm:ss"];
         NSDate *dateFromStr = [dateFormat dateFromString:comicBook.createdDate];
@@ -499,7 +519,7 @@
         
         [cell.viewComicBook addSubview:comic.view];
         
-//        [comic setImages: [self setupImages:indexPath]];
+        //        [comic setImages: [self setupImages:indexPath]];
         [comic setSlidesArray:comicBook.slides];
         [comic setupBook];
         [self addChildViewController:comic];
@@ -512,19 +532,36 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*int height=0;
+     if(IS_IPHONE_5)
+     {
+     height=209;
+     }
+     else if(IS_IPHONE_6)
+     {
+     height= 239;
+     }
+     else if(IS_IPHONE_6P)
+     {
+     height= 269;
+     }*/
+    
     int height=0;
     if(IS_IPHONE_5)
     {
-        height=209;
+        height=169;
     }
     else if(IS_IPHONE_6)
     {
-        height= 239;
+        height= 199;
     }
     else if(IS_IPHONE_6P)
     {
-        height= 269;
+        height= 229;
     }
+    
+    
+    
     
     return tableView.bounds.size.height-height;
 }
@@ -642,7 +679,7 @@
 }
 
 - (void)navigateToGlideScrollView {
-//    [AppHelper closeMainPageviewController:self];
+    //    [AppHelper closeMainPageviewController:self];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
     UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"glidenavigation"];
     GlideScrollViewController *controller = (GlideScrollViewController *)[navigationController.childViewControllers firstObject];
@@ -725,6 +762,8 @@
 }
 
 - (void)callAPIToGetTheComics {
+    
+    self.mFriendName.text = self.friendObj.firstName;
     [PrivateConversationAPIManager getPrivateConversationWithFriendId:self.friendObj.friendId
                                                         currentUserId:[AppHelper getCurrentLoginId]
                                                          SuccessBlock:^(id object) {
