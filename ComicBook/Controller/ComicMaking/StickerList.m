@@ -78,7 +78,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 
 - (NSArray *)getDefaultStickers
 {
-    NSArray *imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",@"st10",@"st11"];
+    NSArray *imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"];
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     
@@ -298,6 +298,8 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 {
     NSLog(@"sender tag = %ld",(long)sender.tag);
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Sticker" Action:@"Delete" Label:@""];
+    
     stickerCell *cell = (stickerCell *)[[sender superview] superview];;
     
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
@@ -404,6 +406,9 @@ static NSString * const reuseIdentifier1 = @"Cell1";
         else
         {
             NSDictionary *dict = stickersWithShadow[indexPath.row - 1];
+            
+            UIImage *image = dict[@"stickerImage"];
+            
             [parentViewController addStickerWithImage:dict[@"stickerImage"]];
 //            [parentViewController addStickerWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:dict[@"stickerPath"]]]];
 //            [parentViewController addStickerWithPath:dict[@"stickerPath"]];
@@ -545,9 +550,6 @@ static NSString * const reuseIdentifier1 = @"Cell1";
                            @"isDeleted"     : @"No",
                            @"stickerName"   : stickerFileName,
                            @"stickerPath"   : strWithoutBorderImage};
-    
-    
-    
     
     [stickers insertObject:dictSticker atIndex:0];
     

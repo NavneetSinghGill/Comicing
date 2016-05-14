@@ -43,22 +43,22 @@
 }
 
 -(void)bindData{
- if(userObject)
- {
+// if(userObject)
+// {
 //         [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:userObject.profile_pic]
 //                                    placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
 //                                           completed:^(UIImage *image, NSError *error,
 //                                                       SDImageCacheType cacheType, NSURL *imageURL) {
 //                                           }];
   
-     [self.avatarImage downloadImageWithURL:[NSURL URLWithString:userObject.profile_pic]
+     [self.avatarImage downloadImageWithURL:[NSURL URLWithString:[[AppHelper initAppHelper]getCurrentUser].profile_pic]
                          placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
                           completionBlock:^(BOOL succeeded, UIImage *image) {
                               self.avatarImage.image = image;
                           }];
 
      
- }
+// }
 }
 
 #pragma TextField Delegate
@@ -110,7 +110,7 @@
 -(void)UserDetailsResponse:(NSDictionary *)response{
     //initialize the models
     userObject = [[User alloc] init];
-    [userObject setValuesForKeysWithDictionary:response[@"data"]];
+ //   [userObject setValuesForKeysWithDictionary:response[@"data"]];
     [self bindData];
 }
 

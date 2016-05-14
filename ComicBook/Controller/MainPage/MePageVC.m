@@ -27,6 +27,7 @@
 #import "ContactController.h"
 #import "UIImageView+WebCache.h"
 #import "AppHelper.h"
+#import "CommentModel.h"
 
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -86,6 +87,8 @@
 @synthesize ComicBookDict;
 - (void)viewDidLoad {
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"MePage" Attributes:nil];
+
     [super viewDidLoad];
     [self addTopBarView];
     [self addUIRefreshControl];
@@ -285,8 +288,23 @@
     return comicsArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+    /*
+    // Test code for comments.
+    CommentModel *commentModel1 = [[CommentModel alloc] init];
+    commentModel1.firstName = @"Test1";
+    commentModel1.lastName = @"Name1";
+    commentModel1.profilePic = @"http://68.169.44.163/images/profileThumb/1.jpg";
+    commentModel1.commentText = @"Test comment 1";
+    
+    CommentModel *commentModel2 = [[CommentModel alloc] init];
+    commentModel2.firstName = @"Test2";
+    commentModel2.lastName = @"Name2";
+    commentModel2.profilePic = @"http://68.169.44.163/images/profileThumb/572a81e18cf01";
+    commentModel2.commentText = @"Test comment 2";
+    NSArray *a = @[commentModel1, commentModel2];
+    comicBook.comments = a;
+    */
     if(comicBook.comments.count > 0) {
         static NSString *simpleTableIdentifier = @"Cell";
         __block MeCell* cell= (MeCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -307,8 +325,19 @@
             //            [comic setImages: [self setupImages:indexPath]];
             
             ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
-            [comic setSlidesArray:comicBook.slides];
+            // vishnu
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
             
+            // To repeat the cover image again on index page as the first slide.
+            if(slidesArray.count > 1) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+                
+                // Adding a sample slide to array to maintain the logic
+                Slides *slides = [Slides new];
+                [slidesArray insertObject:slides atIndex:1];
+            }
+            [comic setSlidesArray:slidesArray];
             [comic setupBook];
             [self addChildViewController:comic];
             [ comic.view setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -870,6 +899,7 @@
                                        
                                        [comicsArray addObjectsFromArray:comicsModelObj.books];
                                    }
+                                   self.lblComicCount.text = [NSString stringWithFormat:@"%@ Comics", comicsModelObj.totalCount];
                                    [self.tableview reloadData];
                                    
                                    //Dinesh

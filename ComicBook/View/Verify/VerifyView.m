@@ -362,11 +362,23 @@
     
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     [cmNetWorking updateUserInfo:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json,id jsonResposeHeader) {
+#if TARGET_OS_SIMULATOR
         
-//        if ([json objectForKey:@"result"] &&
-//            [[json objectForKey:@"result"] isEqualToString:@"failed"]) {
-//            [AppHelper showSuccessDropDownMessage:@"Invalid verification code" mesage:@""];
-//        }else{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(getVerifyRequest)])
+        {
+            [AppHelper hideAllDropMessages];
+            [self.txtVerifyCode1 resignFirstResponder];
+            [self.txtVerifyCode2 resignFirstResponder];
+            [self.txtVerifyCode3 resignFirstResponder];
+            [self.txtVerifyCode4 resignFirstResponder];
+            [self.delegate getVerifyRequest];
+        }
+        
+#else
+        if ([json objectForKey:@"result"] &&
+            [[json objectForKey:@"result"] isEqualToString:@"failed"]) {
+            [AppHelper showSuccessDropDownMessage:@"Invalid verification code" mesage:@""];
+        }else{
             if (self.delegate && [self.delegate respondsToSelector:@selector(getVerifyRequest)])
             {
                 [AppHelper hideAllDropMessages];
@@ -376,8 +388,8 @@
                 [self.txtVerifyCode4 resignFirstResponder];
                 [self.delegate getVerifyRequest];
             }
-//        }
-        
+        }
+#endif
     } ErrorBlock:^(JSONModelError *error) {
         
         [AppHelper showSuccessDropDownMessage:@"Something went wrong" mesage:@""];

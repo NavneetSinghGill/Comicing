@@ -274,6 +274,8 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 {
     if(collectionView.tag == GroupCollectionViewTag)
     {
+        [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Inbox-Group" Action:@"Click" Label:@""];
+        
         GroupsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:GroupCellIdentifier forIndexPath:indexPath];
         cell.delegate = self;
         [cell populateCell:[[AppDelegate application].dataManager.groupsArray objectAtIndex:indexPath.row]];
@@ -281,6 +283,7 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     }
     else if(collectionView.tag == FriendCollectionViewTag)
     {
+        [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Inbox-Friends" Action:@"Click" Label:@""];
         FriendsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:FriendCellIdentifier forIndexPath:indexPath];
         cell.delegate = self;
         [cell populateCell:[[AppDelegate application].dataManager.friendsArray objectAtIndex:indexPath.row]];

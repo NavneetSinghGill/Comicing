@@ -2,13 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "imessageLogo.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "imessageLogo@2x.png",
-      "filename" : "imessage icon-1.png",
+      "filename" : "imessage icon-2.png",
       "scale" : "2x"
     },
     {

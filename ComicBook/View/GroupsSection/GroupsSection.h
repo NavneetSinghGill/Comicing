@@ -34,4 +34,6 @@
 @property (assign, nonatomic) BOOL enableAdd;
 @property(strong,nonatomic)   NSMutableArray* groupsArray;
 @property (assign, nonatomic) BOOL enableSelection;
+
+-(void)getGroupsByUserId;
 @end

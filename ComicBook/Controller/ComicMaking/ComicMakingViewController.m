@@ -89,6 +89,7 @@ static CGRect CaptionTextViewMinRect;
 @property (strong, nonatomic) UIPinchGestureRecognizer *pinchGesture;
 
 @property (strong, nonatomic) UIImage *printScreen;
+@property (weak, nonatomic) IBOutlet UIButton *btnSend;
 
 @property (nonatomic) BOOL isSlideShrink;
 
@@ -158,7 +159,8 @@ static CGRect CaptionTextViewMinRect;
     frameDrawingView = viewDrawing.frame;
     centerImgvComic = imgvComic.center;
     viewRowButtons.alpha = 0;
-//    isNewSlide = YES;
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"ComicMaking" Attributes:nil];
     
     // set up the filename to save based on the friend/group id.
     if(self.comicType == ReplyComic && self.replyType == FriendReply) {
@@ -171,8 +173,6 @@ static CGRect CaptionTextViewMinRect;
     
     [self prepareGlideView];
     
-//    [self.glideViewHolder setHidden:YES];
-
     [self prepareCaptionView];
     [self prepareView];
     [self prepareVoiceView];
@@ -303,9 +303,10 @@ static CGRect CaptionTextViewMinRect;
     {
         imgvComic.hidden = YES;
         btnClose.hidden = YES;
-        
         self.rowButton.isNewSlide = YES;
-        [self.mSendComicButton setHidden:YES];//dinesh
+        [self.btnSend setEnabled:NO];
+        
+        [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SlideCreate" Action:@"Create" Label:@""];
     }
     else
     {
@@ -851,6 +852,7 @@ static CGRect CaptionTextViewMinRect;
                  
                  
                  [self doRemoveAllItem:nil];
+                 [self.btnSend setEnabled:NO];
              });
              
              
@@ -1000,7 +1002,8 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)btnCameraTap:(UIButton *)sender
 {
-    
+ 
+    [self.btnSend setEnabled:YES];
 #if TARGET_OS_SIMULATOR
     NSLog(@"camera tap");
     viewCamera.hidden = YES;
@@ -1087,6 +1090,7 @@ static CGRect CaptionTextViewMinRect;
 {
     [self dismissViewControllerAnimated:YES completion:^
      {
+         [self.btnSend setEnabled:YES];
          UIImage *selectedImage = info[UIImagePickerControllerOriginalImage];
          viewCamera.hidden = YES;
          [self.mSendComicButton setHidden:NO];//dinesh
@@ -1394,6 +1398,8 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)addExclamationListImage:(NSString *)exclamationImageString{
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Exclamation" Action:@"AddExclamation" Label:@""];
+    
     UIImage* exclamationImage = [UIImage imageNamed:exclamationImageString];
     
     ComicItemExclamation* imageView = [self getComicItems:ComicExclamation];
@@ -1510,6 +1516,7 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)addBubbleWithImage:(NSString *)bubbleImageString TextFiledRect:(CGRect)textViewSize
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"BubbleCreate" Action:@"Create" Label:@""];
     ComicItemBubble* bubbleHolderView = [self getComicItems:ComicBubble];
     
     bubbleHolderView.bubbleString = bubbleImageString;
@@ -1743,6 +1750,7 @@ static CGRect CaptionTextViewMinRect;
     {
         [gestureRecognizer view].transform = CGAffineTransformRotate([[gestureRecognizer view] transform], [gestureRecognizer rotation]);
         [gestureRecognizer setRotation:0];
+        NSLog(@"RAMESH : rotatePiece");
     }
     
     if ([gestureRecognizer state] == UIGestureRecognizerStateEnded){
@@ -1780,7 +1788,13 @@ static CGRect CaptionTextViewMinRect;
         CGPoint translation = [recognizer translationInView:imgvComic];
         recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
                                              recognizer.view.center.y + translation.y);
+        
+//        CGAffineTransform transform = CGAffineTransformTranslate([[recognizer view] transform], 0, 0);
+//        [recognizer view].transform = transform;
+        
         [recognizer setTranslation:CGPointMake(0, 0) inView:imgvComic];
+        
+//        NSLog(@"RAMESH :: panGestureDetected");
         
     }
     
@@ -1840,6 +1854,7 @@ static CGRect CaptionTextViewMinRect;
     if([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
         // Reset the last scale, necessary if there are multiple objects with different scales
         lastScale = [gestureRecognizer scale];
+//        NSLog(@"RAMESH :: lastScale %f ",lastScale);
     }
     
     if ([gestureRecognizer state] == UIGestureRecognizerStateBegan ||
@@ -1856,12 +1871,14 @@ static CGRect CaptionTextViewMinRect;
         newScale = MAX(newScale, kMinScale / currentScale);
         CGAffineTransform transform = CGAffineTransformScale([[gestureRecognizer view] transform], newScale, newScale);
         [gestureRecognizer view].transform = transform;
-        
+//        NSLog(@"RAMESH :: scalePiece scale value X %f Y %f",transform.a , transform.b);
         lastScale = [gestureRecognizer scale];  // Store the previous scale factor for the next pinch gesture call
     }
     
     if ([gestureRecognizer state] == UIGestureRecognizerStateEnded){
         [self doAutoSave:gestureRecognizer.view];
+        
+        NSLog(@"RAMESH :: lastScale %f ",lastScale);
     }
 }
 
@@ -2025,6 +2042,7 @@ static CGRect CaptionTextViewMinRect;
             [self.view exchangeSubviewAtIndex:1 withSubviewAtIndex:0];
             imgvComic.frame = viewFrame;
             self.ImgvComic2.frame = imgvComic.frame;
+            self.ImgvComic2.image = nil;
         }
     }
 }
@@ -2032,6 +2050,8 @@ static CGRect CaptionTextViewMinRect;
 #pragma mark - CropStickerViewControllerDelegate Methods
 - (void)cropStickerViewController:(CropStickerViewController *)controll didSelectDoneWithImage:(UIImageView *)stickerImageView withBorderImage:(UIImage *)imageWithBorder
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"StickerCreation" Attributes:nil];
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"StickerCreation" Action:@"Create" Label:@""];
     stickerImageView.center = self.view.center;
     
     [self.view addSubview:stickerImageView];
@@ -2100,6 +2120,8 @@ static CGRect CaptionTextViewMinRect;
     
     imgvComic.hidden = NO;
     imgvComic.frame =  frameImgvComic;
+    
+    [self.btnSend setEnabled:YES];
     
     [UIView transitionWithView:imgvComic
                       duration:0.5
@@ -2274,6 +2296,8 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)stopDrawing
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Drawing" Action:@"Create" Label:@""];
+    
     [self setComicImageViewSize];
     
     NSArray *subViews = imgvComic.subviews;
@@ -2336,6 +2360,8 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)drawingColorTapEventWithColor:(NSString *)colorName
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"DrawingColour" Action:colorName Label:colorName];
+    
     RowButtonsViewController *rowController;
     
     for (UIViewController *controller in self.childViewControllers)
@@ -2457,6 +2483,8 @@ static CGRect CaptionTextViewMinRect;
     
     //Create Holder
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Caption" Action:@"Create" Label:@""];
+    
     ComicItemCaption* captionHolder = [self getComicItems:ComicCaption];
     
     CGRect frameCaptionHolder;
@@ -2506,7 +2534,6 @@ static CGRect CaptionTextViewMinRect;
     //    UIView* captionHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 111, 301, 60)];
     //    captionHolder.frame = IS_IPHONE_5?CGRectMake(10, 111, 301, 60):CGRectMake(10, 111, 367, 60);
     captionHolder.frame = frameCaptionHolder;
-    
     
     //    captionHolder.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [captionHolder setBackgroundColor:[UIColor clearColor]];
@@ -2566,6 +2593,8 @@ static CGRect CaptionTextViewMinRect;
 }
 
 -(void)openCaptionView{
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Caption" Action:@"AddCaption" Label:@""];
     
     ComicItemCaption* captionView = [self createCaptionView];
     captionView.clipsToBounds = NO;
@@ -2683,7 +2712,12 @@ static CGRect CaptionTextViewMinRect;
 }
 
 #pragma mark - Bubble TextView Events
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    textView.textContainerInset = UIEdgeInsetsZero;
+    textView.textContainer.lineFragmentPadding = 0;
 
+}
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
     if (textView.tag == CaptionViewTextViewTag)
@@ -2731,8 +2765,6 @@ static CGRect CaptionTextViewMinRect;
                 _captionHeightSmall = YES;
             }
         }
-        
-        
         
         if (textView.text.length == 29)
         {
@@ -2863,6 +2895,10 @@ static CGRect CaptionTextViewMinRect;
         tagValue = (int)btn.tag - 100;
         NSString* selectedColourString = [captionTextColourArray objectAtIndex:tagValue];
         UIColor* selectedColour = [UIColor colorWithHexStr:selectedColourString];
+        
+        [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"CaptionColour" Action:[selectedColour description] Label:@""];
+        [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"CaptionColourHex" Action:selectedColourString Label:@""];
+        
         if ([imgvComic viewWithTag:1232]) {
             UIImageView* tempImageView = [[imgvComic viewWithTag:1232] viewWithTag:1234];
             if (tempImageView) {
@@ -2930,25 +2966,94 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)addStickerWithImageView:(UIImageView *)imageView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect Tranform:(CGAffineTransform)tranformData
 {
+    
+//    NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(imageView.transform));
+    
     if (!CGRectEqualToRect(rect,CGRectZero)) {
-//        if (tranformData != nil) {
         imageView.frame = rect;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+//        if (tranformData != nil) {
+//        imageView.transform =  imageView.transform;
+//        imageView.center = imageView.center;
 //            NSLog(@"Transform value %@",tranformData);
 //            CGFloat angle = atan2f(CGAffineTransformFromString(tranformData).b, CGAffineTransformFromString(tranformData).a);
 //            CGFloat degrees = angle * (180 / M_PI);
 //            imageView.transform = CGAffineTransformRotate(CGAffineTransformFromString(tranformData), angle);
-            imageView.transform =  tranformData;
+        if ([imageView isKindOfClass:[ComicItemSticker class]])
+        {
+            CGFloat angle = ((ComicItemSticker*)imageView).angle;
+            CGFloat scaleValueX = ((ComicItemSticker*)imageView).scaleValueX;
+            CGFloat scaleValueY = ((ComicItemSticker*)imageView).scaleValueY;
+            CGFloat tX = ((ComicItemSticker*)imageView).tX;
+            CGFloat tY = ((ComicItemSticker*)imageView).tY;
+            CGAffineTransform transform = imageView.transform;
+            
+            transform = CGAffineTransformRotate(transform, angle);
+            //       CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
+            imageView.transform =transform;
+            
+        }else if ([imageView isKindOfClass:[ComicItemExclamation class]])
+        {
+            
+            CGFloat angle = ((ComicItemExclamation*)imageView).angle;
+            CGFloat scaleValueX = ((ComicItemExclamation*)imageView).scaleValueX;
+            CGFloat scaleValueY = ((ComicItemExclamation*)imageView).scaleValueY;
+            CGFloat tX = ((ComicItemExclamation*)imageView).tX;
+            CGFloat tY = ((ComicItemExclamation*)imageView).tY;
+            
+            CGAffineTransform transform = imageView.transform;
+            
+            transform = CGAffineTransformRotate(transform, angle);
+            //       CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
+            imageView.transform =transform;
+            
+        }
         
-        NSLog(@"After value set %@",[NSValue valueWithCGAffineTransform:imageView.transform]);
+//        imageView.transform = CGAffineTransformIdentity;
+
+//        CGAffineTransform transform_default = CGAffineTransformConcat(CGAffineTransformRotate(imageView.transform, 0),
+//                                                              CGAffineTransformTranslate(imageView.transform,  0, 0));
+//        imageView.transform = transform_default;
+        
+//        CGPoint translation = [imageView translationInView:imgvComic];
+//        imageView.center = CGPointMake(imageView.center.x + imgvComic.frame.origin.x,
+//                                             imageView.center.y + imgvComic.frame.origin.y);
+//        [imageView.transform setTranslation:CGPointMake(0, 0) inView:imgvComic];
+        
+//        CGAffineTransform transform = imageView.transform;
+        
+//        NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(imageView.transform));
+        
+//        CGAffineTransform transform = CGAffineTransformConcat(CGAffineTransformRotate(imageView.transform, angle),
+//                                            CGAffineTransformTranslate(imageView.transform,  scaleValueX, scaleValueY));
+        
+//        transform = CGAffineTransformScale(transform, scaleValueX, scaleValueX);
+//        transform = CGAffineTransformTranslate(transform,imageView.frame.size.width, imageView.frame.size.height);
+//        transform = CGAffineTransformRotate(transform, angle);
+//       CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
+//        imageView.transform =transform;
+        
+//        transform = CGAffineTransformScale(transform, scaleValueX, scaleValueY);
+//        imageView.transform =transform;
+        
+//        imageView.contentScaleFactor = 0;
+        
+//        imageView.transform = CGAffineTransformRotate(imageView.transform, angle);
+        
+//        CGFloat xScale = imageView.transform.a;
+//        CGFloat yScale = imageView.transform.d;
+        
+//        NSLog(@"xScale : %f , yScale : %f",xScale,yScale);
+        
+//        NSLog(@"After value set %@",[NSValue valueWithCGAffineTransform:imageView.transform]);
 //        }
     }else{
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = imageView.image;
     }
 //    NSLog(@"addStickerWithImageView %f",(imageView.contentScaleFactor));
-    
+//    imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.userInteractionEnabled = YES;
-    
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.userInteractionEnabled = YES;
     imageView.clipsToBounds = NO;
     [imageView setBackgroundColor:[UIColor clearColor]];
@@ -2993,8 +3098,6 @@ static CGRect CaptionTextViewMinRect;
     
     [imgvComic addSubview:imageView];
     
-//    imageView.transform = tt_1;
-    
 }
 
 - (void)addBubbleWithImage:(ComicItemBubble *)bubbleHolderView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect
@@ -3037,7 +3140,10 @@ static CGRect CaptionTextViewMinRect;
     bubbleHolderView.txtBuble.opaque = YES;
 //    [bubbleHolderView.txtBuble addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
     bubbleHolderView.txtBuble.textAlignment = NSTextAlignmentCenter;
-    bubbleHolderView.txtBuble.contentInset = UIEdgeInsetsMake(50.0,50.0,0,0.0);
+    CGFloat centerLeftValue = bubbleHolderView.txtBuble.frame.size.width/2;
+    CGFloat centerTopValue = bubbleHolderView.txtBuble.frame.size.height/2;
+    
+    bubbleHolderView.txtBuble.contentInset = UIEdgeInsetsMake(centerTopValue - 10,centerLeftValue,0,0.0);
     bubbleHolderView.txtBuble.scrollEnabled = NO;
     bubbleHolderView.txtBuble.autocorrectionType = UITextAutocorrectionTypeNo;
     if (![bubbleHolderView.txtBuble.text isEqualToString:@""]) {
@@ -3194,6 +3300,10 @@ static CGRect CaptionTextViewMinRect;
     
     //Create Dots Holder
     captionHolder.dotHolder.tag = 1236;
+    for (UIView *subView in [captionHolder.dotHolder subviews])
+    {
+        [subView removeFromSuperview];
+    }
     
     // Create UIbutton Dots
     float padding = 31;
@@ -3243,9 +3353,10 @@ static CGRect CaptionTextViewMinRect;
     [captionHolder addGestureRecognizer:panGestureRecognizer];
     
     [captionHolder setUserInteractionEnabled:YES];
+    
+    captionHolder.clipsToBounds = NO;
     [imgvComic addSubview:captionHolder];
     
-    captionHolder.clipsToBounds =NO;
     imgvComic.userInteractionEnabled = YES;
     imgvComic.clipsToBounds = YES;
 //    [captionHolder setBackgroundColor:[UIColor redColor]];
@@ -3264,19 +3375,6 @@ static CGRect CaptionTextViewMinRect;
                                             withPrintScreen:printScreen
                                                withNewSlide:isNewSlide
                                                 withPopView:NO];
-    
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-//    SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
-//    [self.navigationController pushViewController:controller animated:NO];
-//    
-//    
-//    //Removing current View
-//        NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
-//        [navigationArray removeObjectAtIndex: navigationArray.count - 2 ];
-//        self.navigationController.viewControllers = navigationArray;
-//        navigationArray =nil;
-//
-//    return;
     //Desable the image view intactin
     [self.view setUserInteractionEnabled:NO];
     NSMutableArray* comicSlides = [self getDataFromFile];
@@ -3296,46 +3394,65 @@ static CGRect CaptionTextViewMinRect;
         [paramArray addObject:dataDic];
     }
     NSLog(@"Start uploading");
+    if(self.replyType == FriendReply) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"StartFriendReplyComicAnimation" object:nil];
+    } else if(self.replyType == GroupReply) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"StartGroupReplyComicAnimation" object:nil];
+    }
+    
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     [cmNetWorking UploadComicImage:paramArray completeBlock:^(id json, id jsonResponse) {
         
-        NSLog(@"Finish Uploading");
-        NSLog(@"Start Comic Creation");
         [cmNetWorking postComicCreation:[self createSendParams:[json objectForKey:@"slides"] comicSlides:comicSlides]
                                      Id:nil completion:^(id json,id jsonResposeHeader) {
             
             [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
             
                                           [self.view setUserInteractionEnabled:YES];
-//                                         [self.navigationController popViewControllerAnimated:NO];
-                                         
                                          if(self.comicType != ReplyComic) {
                                              UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                              SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
+                                             controller.comicSlideFileName = self.fileNameToSave;
+                                             
                                              [self.navigationController pushViewController:controller animated:YES];
                                          } else {
                                              if(self.replyType == FriendReply) {
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+                                                 [self dismissViewControllerAnimated:YES completion:^{}];
                                              } else if(self.replyType == GroupReply) {
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+                                                 [self dismissViewControllerAnimated:YES completion:^{}];
                                              }
-                                             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                                             if (self.fileNameToSave) {
+                                                 [AppHelper deleteSlideFile:self.fileNameToSave];
+                                             }
                                          }
-            
-            //Removing current View
-//            NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
-//            [navigationArray removeObjectAtIndex: navigationArray.count - 2 ];
-//            self.navigationController.viewControllers = navigationArray;
-//            navigationArray =nil;
             
         } ErrorBlock:^(JSONModelError *error) {
             NSLog(@"completion %@",error);
             [self.view setUserInteractionEnabled:YES];
+            if(self.replyType == FriendReply) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+                [self dismissViewControllerAnimated:YES completion:^{}];
+            } else if(self.replyType == GroupReply) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+                [self dismissViewControllerAnimated:YES completion:^{}];
+            }
         }];
         
     } ErrorBlock:^(JSONModelError *error) {
         [self.view setUserInteractionEnabled:YES];
+        if(self.replyType == FriendReply) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+            [self dismissViewControllerAnimated:YES completion:^{}];
+        } else if(self.replyType == GroupReply) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+            [self dismissViewControllerAnimated:YES completion:^{}];
+        }
     }];
+    
     
 //    [AppHelper showWarningDropDownMessage:@"" mesage:@"Please wait .. Creating your comic"];
     
@@ -3361,12 +3478,10 @@ static CGRect CaptionTextViewMinRect;
     
     [comicMakeDic setObject:@"0" forKey:@"conversation_id"];
     [comicMakeDic setObject:@"1" forKey:@"status"];
-    [comicMakeDic setObject:@"1" forKey:@"is_public"];
+    
     //Slide Array
     NSMutableArray* slides = [[NSMutableArray alloc] init];
     
-    
-//    NSMutableArray* comicSlides = [self getDataFromFile]; //[[[NSUserDefaults standardUserDefaults] objectForKey:@"comicSlides"] mutableCopy];
     for (int i=0; i< [comicSlides count]; i++) {
 //    for (NSData* data in comicSlides) {
         NSData* data = [comicSlides objectAtIndex:i];
@@ -3391,7 +3506,7 @@ static CGRect CaptionTextViewMinRect;
         
         for (int i = 0; i < cmPage.subviews.count; i ++)
         {
-            id imageView = comicPage.subviews[i];
+            id imageView = cmPage.subviews[i];
             //Check is ComicItemBubble
             if([imageView isKindOfClass:[ComicItemBubble class]])
             {
@@ -3413,6 +3528,9 @@ static CGRect CaptionTextViewMinRect;
                     
                     [enhancements addObject:cmEng];
                 }
+            }
+            if (enhancements && [enhancements count] > 0) {
+                [cmSlide setObject:enhancements forKey:@"enhancements"];
             }
         }
         [slides addObject:cmSlide];

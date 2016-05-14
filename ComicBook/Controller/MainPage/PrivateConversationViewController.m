@@ -67,11 +67,14 @@
 #pragma mark - UIViewController
 - (void)viewDidLoad
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"PrivateConversation" Attributes:nil];
     [super viewDidLoad];
     [self animation];
     [self prepareView];
     [self addTopBarView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callAPIToGetTheComics) name:@"UpdateFriendComics" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyComicAnimation) name:@"StartFriendReplyComicAnimation" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyComicAnimation) name:@"StopFriendReplyComicAnimation" object:nil];
     [self callAPIToGetTheComics];
 }
 
@@ -144,11 +147,34 @@
     
     [self.btnMe sd_setImageWithURL:[NSURL URLWithString:[[AppHelper initAppHelper] getCurrentUser].profile_pic] forState:UIControlStateNormal];
     [self.btnFriend sd_setImageWithURL:[NSURL URLWithString:self.friendObj.profilePic] forState:UIControlStateNormal];
-    
-    
+    [self.imgvPinkDots setImage:[UIImage imageNamed:@"dots11"]];
+
     // [self setupPenAnimation];
     
     //    [self loadMoreData];
+}
+
+- (void)startReplyComicAnimation {
+    self.imgvPinkDots.animationImages = [NSArray arrayWithObjects:
+                                      [UIImage imageNamed:@"dots1"],
+                                      [UIImage imageNamed:@"dots2"],
+                                      [UIImage imageNamed:@"dots3"],
+                                      [UIImage imageNamed:@"dots4"],
+                                      [UIImage imageNamed:@"dots5"],
+                                      [UIImage imageNamed:@"dots6"],
+                                      [UIImage imageNamed:@"dots7"],
+                                      [UIImage imageNamed:@"dots8"],
+                                      [UIImage imageNamed:@"dots9"],
+                                      [UIImage imageNamed:@"dots10"],
+                                      [UIImage imageNamed:@"dots11"],nil];
+    self.imgvPinkDots.animationDuration = 2.0f;
+    self.imgvPinkDots.animationRepeatCount = 0;
+    [self.imgvPinkDots startAnimating];
+}
+
+- (void)stopReplyComicAnimation {
+    [self.imgvPinkDots stopAnimating];
+    [self.imgvPinkDots setImage:[UIImage imageNamed:@"dots11"]];
 }
 
 - (void)animation
@@ -506,7 +532,7 @@
         cell.mUserName.text = comicBook.userDetail.firstName;
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"yyyy-mm-dd hh:mm:ss"];
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSDate *dateFromStr = [dateFormat dateFromString:comicBook.createdDate];
         [dateFormat setDateFormat:@"MMM dd, yyyy"];
         NSString *dateStr = [dateFormat stringFromDate:dateFromStr];
@@ -679,7 +705,7 @@
 }
 
 - (void)navigateToGlideScrollView {
-    //    [AppHelper closeMainPageviewController:self];
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Private-Reply" Action:@"FriendReply" Label:@""];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
     UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"glidenavigation"];
     GlideScrollViewController *controller = (GlideScrollViewController *)[navigationController.childViewControllers firstObject];

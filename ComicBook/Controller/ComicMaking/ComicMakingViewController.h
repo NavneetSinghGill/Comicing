@@ -77,6 +77,9 @@
 - (void)addExclamationListImage:(NSString *)exclamationImageString;
 //END
 
+/* Comic slide handle : Ramesh */
+-(void)doRemoveAllItem :(id)comicItemObj;
+//END
 - (JTAlertView *)showAlertView:(NSString*)message image:(UIImage *)image height:(CGFloat)height;
 
 //Ramesh

@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "AppHelper.h"
 
 @interface MainViewController ()
 
@@ -15,6 +16,9 @@
 @implementation MainViewController
 
 - (void)viewDidLoad {
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"Registration" Attributes:nil];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }

@@ -16,6 +16,7 @@
 
 + (void)makeFirendOrUnfriendForUserId:(NSString *)friendId
                            WithStatus:(NSString *)status
+                            CurrentUserId:(NSString *)currentUserId
                      withSuccessBlock:(void(^)(id object))successBlock
                               andFail:(void(^)(NSError *errorMessage))failBlock;
 

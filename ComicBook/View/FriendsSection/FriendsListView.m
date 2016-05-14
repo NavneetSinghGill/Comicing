@@ -12,6 +12,10 @@
 #import <AddressBook/ABAddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "InviteFriendCell.h"
+#import "Constants.h"
+#import "AFNetworking.h"
+#import "SDImageCache.h"
+#import "UIImageView+WebCache.h"
 
 @implementation FriendsListView
 
@@ -103,17 +107,31 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
   //  if(self.enableSectionTitles)
-        return [alphabetsSectionTitles objectAtIndex:section];
+    
+    NSString *headerTitle = [alphabetsSectionTitles objectAtIndex:section];
+    
+    if ([headerTitle isEqualToString:@"!"])
+    {
+        return @" ";
+    }
+    
+    
+    return headerTitle;
 //    else
  //       return nil;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    
     if(self.enableSectionTitles)
     {
         NSMutableArray *keys = [[friendsDictWithAlpabets allKeys] sortedArrayUsingSelector:@selector(localizedStandardCompare:)].mutableCopy;
+        
+        if ([keys containsObject:@"!"])
+        {
+            [keys removeObject:@"!"];
+        }
+        
         
         return keys;
 
@@ -135,11 +153,7 @@
 // This will tell your UITableView what data to put in which cells in your table.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    
-    
-    
+ 
     if (isOnlyInviteFriends)
     {
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendCell" owner:self options:nil];
@@ -156,11 +170,14 @@
         cell.lblUserName.text = us.first_name;
         cell.lblMobileNumber.text = us.mobile;
         
-        [cell.userImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
-                            placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
-                             completionBlock:^(BOOL succeeded, UIImage *image) {
-                                 cell.userImage.image = image;
-                             }];
+        
+        [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
+        
+//        [cell.userImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
+//                            placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
+//                             completionBlock:^(BOOL succeeded, UIImage *image) {
+//                                 cell.userImage.image = image;
+//                             }];
         
         
         [[cell.userImage layer] setBorderWidth:4.0f];
@@ -258,17 +275,20 @@
         
         cell.lblUerName.text = us.first_name;
         
-        [cell.userImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
-                            placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
-                             completionBlock:^(BOOL succeeded, UIImage *image) {
-                                 cell.userImage.image = image;
-                             }];
+        [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
         
-        //    [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic]
-        //                         placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
-        //                                completed:^(UIImage *image, NSError *error,
-        //                                            SDImageCacheType cacheType, NSURL *imageURL) {
-        //                                }];
+//        [cell.userImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
+//                            placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
+//                             completionBlock:^(BOOL succeeded, UIImage *image)
+//        {
+//                                 cell.userImage.image = image;
+//                             }];
+        
+//            [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic]
+//                                 placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
+//                                        completed:^(UIImage *image, NSError *error,
+//                                                    SDImageCacheType cacheType, NSURL *imageURL) {
+//                                        }];
         
         //Config image border
         [[cell.userImage layer] setBorderWidth:4.0f];
@@ -281,7 +301,8 @@
             [cell.selectedTickImage setHidden:NO];
             [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
         }
-        else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
+        else if([us isKindOfClass:[UserFriends class]] && us.friend_id)
+//        else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
         {
             [cell.selectedTickImage setHidden:NO];
             [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
@@ -348,8 +369,8 @@
         
         User* usSelection =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
         
-        if (usSelection.status != UNFRIEND )
-        {
+//        if (usSelection.status != UNFRIEND )
+//        {
             FriendsListTableViewCell *cell = (FriendsListTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
             
             if(cell)
@@ -382,7 +403,7 @@
 
             [self doSelectedAction:usSelection];
 
-        }
+//        }
     }
 }
 
@@ -490,10 +511,14 @@
 //    [self.delegate friendlistDidScrollwithScrollView:scrollView];
 //}
 
+
+
 #pragma mark Methods
 
 -(void)inviteButtonClick:(UIButton *)sender
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"FriendsInvite" Action:@"Invite" Label:@""];
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(openMessageComposer:messageText:)])
     {
         
@@ -505,13 +530,30 @@
         
         User* usSelection =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
         sender.selected = YES;
-        [sender setImage:[UIImage imageNamed:@"selected-invite"] forState:UIControlStateSelected];
+        
+        sender.layer.backgroundColor=[[UIColor clearColor] CGColor];
+        sender.layer.borderColor = [[UIColor clearColor] CGColor];
+        
+        sender.layer.cornerRadius= 0;
+
+        [sender setImage:[UIImage imageNamed:@"selected-invite"] forState:UIControlStateNormal];
         
         NSString *loginID = [NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].login_id];
         
         NSString *inviteString = [NSString stringWithFormat:INVITE_TEXT,loginID];
         
-        [self.delegate openMessageComposer:@[usSelection.mobile] messageText:inviteString];
+        
+        if (usSelection.mobile != nil)
+        {
+            [self.delegate openMessageComposer:@[usSelection.mobile] messageText:inviteString];
+
+        }
+        else
+        {
+            [self.delegate openMessageComposer:nil messageText:inviteString];
+
+        }
+        
         
         
         
@@ -563,7 +605,6 @@
     }];
     
     return found;
-    
 }
 
 -(void)doSelectedAction:(id)obj
@@ -596,7 +637,8 @@
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(selectedRow:param:)])
     {
-        if ([usObject isKindOfClass:[FriendSearchResult class]]) {
+        if ([usObject isKindOfClass:[FriendSearchResult class]])
+        {
             FriendSearchResult* uf = (FriendSearchResult*)usObject;
             GroupUserItems* gui = [[GroupUserItems alloc]init];
             gui.user_id = uf.user_id;
@@ -605,15 +647,17 @@
             [self.delegate selectedRow:gui param:uf];
             uf = nil;
             gui = nil;
-        }else{
-        UserFriends* uf = (UserFriends*)usObject;
-        GroupUserItems* gui = [[GroupUserItems alloc]init];
-        gui.user_id = uf.friend_id;
-        gui.role = (uf.friend_id == [AppHelper getCurrentLoginId] ? @"2":@"1");
-        gui.status = ([self findUserInsideTheGroup:uf.friend_id] ? @"0" : @"1");
-        [self.delegate selectedRow:gui param:uf];
-        uf = nil;
-        gui = nil;
+        }
+        else
+        {
+            UserFriends* uf = (UserFriends*)usObject;
+            GroupUserItems* gui = [[GroupUserItems alloc]init];
+            gui.user_id = uf.friend_id;
+            gui.role = (uf.friend_id == [AppHelper getCurrentLoginId] ? @"2":@"1");
+            gui.status = ([self findUserInsideTheGroup:uf.friend_id] ? @"0" : @"1");
+            [self.delegate selectedRow:gui param:uf];
+            uf = nil;
+            gui = nil;
         }
     }
 }
@@ -652,14 +696,18 @@
     }];
 }
 
--(void)friendslistResponse:(NSDictionary *)response{
+-(void)friendslistResponse:(NSDictionary *)response
+{
     
     //initialize the models
     
+    NSArray *friendsFromServer;
+    
     if (response[@"data"] != nil)
     {
-        self.friendsArray  = [UserFriends arrayOfModelsFromDictionaries:response[@"data"]];
+//        self.friendsArray  = [UserFriends arrayOfModelsFromDictionaries:response[@"data"]];
 
+        friendsFromServer = [UserFriends arrayOfModelsFromDictionaries:response[@"data"]];
     }
     
     
@@ -672,7 +720,7 @@
             [self.friendsArray addObjectsFromArray:phoneContact];
         }
         
-        [self setSectionAlphbets:self.friendsArray];
+        [self setSectionAlphbets:self.friendsArray withFriendsFromServer:friendsFromServer];
    // }
     
     saveContactList = [[NSMutableArray alloc] init];
@@ -683,21 +731,33 @@
 
 -(void)searchFriendsById:(NSMutableArray*)list
 {
-    if ([list count] == 0) {
+    if ([list count] == 0)
+    {
         [AppHelper showWarningDropDownMessage:@"" mesage:@"No search result found"];
         return;
     }
+    
     self.friendsArray  = list;
   //  if (self.enableSectionTitles) {
-        [self setSectionAlphbets:self.friendsArray];
+     //   [self setSectionAlphbets:self.friendsArray];
   //  }
     [self.friendsListTableView reloadData];
 }
 
--(void)setSectionAlphbets:(NSMutableArray*)resultArray
+-(void)setSectionAlphbets:(NSMutableArray*)resultArray withFriendsFromServer:(NSArray *)friendsServer
 {
-
     NSMutableSet *set = [NSMutableSet set];
+    
+    if(friendsDictWithAlpabets == nil)
+    {
+        friendsDictWithAlpabets = [[NSMutableDictionary alloc] init];
+    }
+    
+    if (friendsServer != nil)
+    {
+        [friendsDictWithAlpabets setObject:friendsServer forKey:@"!"];
+    }
+    
     
     for (UserFriends * ufs in self.friendsArray)
     {
@@ -711,11 +771,6 @@
                 NSPredicate *pred = [NSPredicate predicateWithFormat:@"first_name beginswith[c] %@", alph];
                 NSArray *filteredArr = [self.friendsArray filteredArrayUsingPredicate:pred];
             
-                if(friendsDictWithAlpabets == nil)
-                {
-                    friendsDictWithAlpabets = [[NSMutableDictionary alloc] init];
-                }
-                
                 [friendsDictWithAlpabets setObject:filteredArr forKey:alph];
             }
             

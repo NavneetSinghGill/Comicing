@@ -65,15 +65,41 @@ NSTimer* timerObject;
         [scrvComicSlide pushAddSlideTap:scrvComicSlide.btnAddSlide animation:NO];
     }
 }
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    if(self.isSendPageReload) {
+//        if(self.comicType == ReplyComic && self.replyType == FriendReply) {
+//            self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_F%@", self.friendOrGroupId];
+//        } else if(self.comicType == ReplyComic && self.replyType == GroupReply) {
+//            self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_G%@", self.friendOrGroupId];
+//        } else {
+//            self.fileNameToSave = @"ComicSlide";
+//        }
+//        
+//        for (UIView *subView in [scrvComicSlide subviews])
+//        {
+//            if (![subView isKindOfClass:[UIImageView class]]) {
+//                [subView removeFromSuperview];
+//            }
+//        }
+//        
+//        [self prepareView];
+//        
+//        if (comicSlides == nil || comicSlides.count == 0) {
+//            [scrvComicSlide pushAddSlideTap:scrvComicSlide.btnAddSlide animation:NO];
+//        }
+//        self.isSendPageReload = NO;
+//    }
+////    [self setComicSendButton];
+//    [super viewWillAppear:animated];
+//}
 - (void)viewWillAppear:(BOOL)animated
 {
     if(self.isSendPageReload) {
         [self prepareView];
     }
-//    [self setComicSendButton];
     [super viewWillAppear:animated];
 }
-
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -311,7 +337,7 @@ NSTimer* timerObject;
                      forKey:@"slide_count"];
     
     [comicMakeDic setObject:@"1" forKey:@"status"];
-    [comicMakeDic setObject:@"1" forKey:@"is_public"];
+//    [comicMakeDic setObject:@"1" forKey:@"is_public"];
     
     //Slide Array
     NSMutableArray* slides = [[NSMutableArray alloc] init];
@@ -336,7 +362,7 @@ NSTimer* timerObject;
         
         for (int i = 0; i < cmPage.subviews.count; i ++)
         {
-            id imageView = self.comicPageComicItems.subviews[i];
+            id imageView = cmPage.subviews[i];
             //Check is ComicItemBubble
             if([imageView isKindOfClass:[ComicItemBubble class]])
             {
@@ -358,6 +384,9 @@ NSTimer* timerObject;
                     
                     [enhancements addObject:cmEng];
                 }
+            }
+            if (enhancements && [enhancements count] > 0) {
+                [cmSlide setObject:enhancements forKey:@"enhancements"];
             }
         }
         [slides addObject:cmSlide];
@@ -394,6 +423,12 @@ NSTimer* timerObject;
     }
     
     NSLog(@"Start uploading");
+    if(self.replyType == FriendReply) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"StartFriendReplyComicAnimation" object:nil];
+    } else if(self.replyType == GroupReply) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"StartGroupReplyComicAnimation" object:nil];
+    }
+    
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     [cmNetWorking UploadComicImage:paramArray completeBlock:^(id json, id jsonResponse) {
         
@@ -411,24 +446,43 @@ NSTimer* timerObject;
                                  if(self.comicType != ReplyComic) {
                                      UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                      SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
+                                     controller.comicSlideFileName = self.fileNameToSave;
                                      [self.navigationController pushViewController:controller animated:YES];
                                  } else {
                                      if(self.replyType == FriendReply) {
                                          [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
+                                         [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+                                         [self dismissViewControllerAnimated:YES completion:^{}];
                                      } else if(self.replyType == GroupReply) {
                                          [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
+                                         [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+                                         [self dismissViewControllerAnimated:YES completion:^{}];
                                      }
-                                     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                                  }
                              } ErrorBlock:^(JSONModelError *error) {
                                  NSLog(@"completion %@",error);
                                  //Desable the image view intactin
                                  [self.view setUserInteractionEnabled:YES];
+                                 if(self.replyType == FriendReply) {
+                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+                                     [self dismissViewControllerAnimated:YES completion:^{}];
+                                 } else if(self.replyType == GroupReply) {
+                                     [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+                                     [self dismissViewControllerAnimated:YES completion:^{}];
+                                 }
                              }];
         
     } ErrorBlock:^(JSONModelError *error) {
         [self.view setUserInteractionEnabled:YES];
+        if(self.replyType == FriendReply) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+            [self dismissViewControllerAnimated:YES completion:^{}];
+        } else if(self.replyType == GroupReply) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+            [self dismissViewControllerAnimated:YES completion:^{}];
+        }
     }];
+    
 }
 
 #pragma mark - ComicMakingViewControllerDelegate

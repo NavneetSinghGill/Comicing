@@ -217,7 +217,7 @@ static AppHelper *_appHelper = nil;
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@.sav",FileName]];
     [slideObj writeToFile:filePath atomically:YES];
-//    [[NSUserDefaults standardUserDefaults] setObject:slideObj forKey:@"comicSlides"];
+//    [[NSUserDefaults standardUserDefaults] setObject:slideObj forKey:FileName];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -226,7 +226,21 @@ static AppHelper *_appHelper = nil;
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@.sav",FileName]];
     return [NSMutableArray arrayWithContentsOfFile:filePath];
-//    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"comicSlides"] mutableCopy];
+//    return [[[NSUserDefaults standardUserDefaults] objectForKey:FileName] mutableCopy];
+}
+
++(BOOL)deleteSlideFile :(NSString*)FileName{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@.sav",FileName]];
+    BOOL success = [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+    if (success) {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 #pragma mark get & set
@@ -377,6 +391,8 @@ static AppHelper *_appHelper = nil;
     
     NSDictionary *dict = [matchingDicts lastObject];
     NSString* flag = [dict objectForKey:@"flag"];
+    
+    flag = [flag stringByReplacingOccurrencesOfString:@"#SERVER_URL#" withString:SERVER_URL];
     
     if (localError != nil) {
         NSLog(@"%@", [localError userInfo]);

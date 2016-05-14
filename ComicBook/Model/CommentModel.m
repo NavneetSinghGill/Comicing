@@ -15,9 +15,11 @@
     return @{
              @"commentText": @"comment_text",
              @"commentType": @"comment_type",
-             @"firstName": @"first_name",
-             @"lastName": @"last_name",
-             @"profilePic": @"profile_pic"
+             //@"firstName": @"first_name",
+             //@"lastName": @"last_name",
+             @"profilePic": @"profile_pic",
+             @"userId": @"user_id",
+             @"status": @"status"
              };
 }
 

@@ -9,8 +9,10 @@
 #import "SendPageViewController.h"
 #import "ComicPage.h"
 #import "searchFriendView.h"
-
-@interface SendPageViewController ()<UITextFieldDelegate>
+#import "ComicMakingViewController.h"
+#import "GlideScrollViewController.h"
+@interface
+SendPageViewController ()<UITextFieldDelegate>
 @property (nonatomic, assign) CGFloat lastContentOffset;
 @property (weak, nonatomic) IBOutlet UIView *viewPrivate;
 @property (weak, nonatomic) IBOutlet UIButton *btnInviteFrnd;
@@ -82,7 +84,8 @@
     
     [self.friendsListView getFriendsByUserId];
     [self bindComicImages];
-    
+
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"SendPage" Attributes:nil];
 }
 
 
@@ -208,7 +211,6 @@
     }
 }
 -(NSMutableDictionary*)setPutParamets{
-//    @autoreleasepool {
         NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
         NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
         [userDic setObject:[AppHelper getCurrentcomicId] forKey:@"comic_id"];
@@ -221,20 +223,21 @@
         }
         [dataDic setObject:userDic forKey:@"data"];
         return dataDic;
-//    }
 }
 
 -(void)doSendData
 {
     ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
-//    cmNetWorking.delegate= self;
     //i d't know what is 3 .. need to confirm with Shy
-    [cmNetWorking shareComicImage:[self setPutParamets] Id:[AppHelper getCurrentcomicId] completion:^(id json,id jsonResposeHeader) {
-        NSLog(@"Share Sucess");
-    } ErrorBlock:^(JSONModelError *error) {
+    [cmNetWorking shareComicImage:[self setPutParamets] Id:[AppHelper getCurrentcomicId] completion:^(id json,id jsonResposeHeader)
+    {
+        [self clearNavStack];
+        
+    } ErrorBlock:^(JSONModelError *error)
+    {
         NSLog(@"Share Error %@",error);
     }];
-
+    
 }
 
 -(void)doShareTo :(ShapeType)type ShareImage:(UIImage*)imgShareto{
@@ -285,6 +288,25 @@
     }];
 }
 
+- (IBAction)btnPostTap:(UIButton *)sender
+{
+    if(sender.isSelected == NO)
+    {
+        sender.selected = YES;
+        
+        sender.backgroundColor = [UIColor colorWithHexStr:@"#31ADE1"];
+        sender.layer.cornerRadius = CGRectGetHeight(sender.frame) / 2 - CGRectGetHeight(sender.frame) / 4;
+        sender.layer.masksToBounds = YES;
+    
+    }
+    else
+    {
+        sender.selected = NO;
+        
+        sender.backgroundColor = [UIColor whiteColor];
+    }
+}
+
 - (IBAction)btnCloseInviteView:(id)sender
 {
     [UIView animateWithDuration:0.6 animations:^
@@ -320,9 +342,11 @@
     [self doSendData];
 }
 
-- (IBAction)btnShareComic:(id)sender {
+- (IBAction)btnShareComic:(id)sender
+{
     [self doSendData];
 }
+
 - (IBAction)btnShareToSocialMedia:(id)sender {
     switch (((UIButton*)sender).tag) {
         case FB:
@@ -332,17 +356,20 @@
 //                                                                                             [UIImage imageNamed:@"Glide-2"],
 //                                                                                             [UIImage imageNamed:@"Glide-3"]]]];
             
+            [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage-ShareToSocialMedia" Action:@"FACEBOOK" Label:@""];
             [self doShareTo:FACEBOOK ShareImage:[self.comicShareViewView getComicShareImage:imageArray]];
         }
             break;
         case IM:
         {
+            [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage-ShareToSocialMedia" Action:@"MESSAGE" Label:@""];
             [self doShareTo:MESSAGE ShareImage:[self.comicShareViewView getComicShareImage:imageArray]];
         
             break;
         }
         case TW:
         {
+            [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage-ShareToSocialMedia" Action:@"TWITTER" Label:@""];
             [self doShareTo:TWITTER ShareImage:[self.comicShareViewView getComicShareImage:imageArray]];
         }
             break;
@@ -350,6 +377,7 @@
         {
 //            [self doShareTo:INSTAGRAM ShareImage:[self.comicShareViewView getComicShareImage:@[[UIImage imageNamed:@"Image_Slide1"]]]];
             
+            [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage-ShareToSocialMedia" Action:@"INSTAGRAM" Label:@""];
             [self doShareTo:INSTAGRAM ShareImage:[self.comicShareViewView getComicShareImage:imageArray]];
                         break;
         }
@@ -379,9 +407,59 @@
     //    imageArray = nil;
 }
 
+- (IBAction)btnShareToPublic:(id)sender {
+
+    NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
+    [userDic setObject:[AppHelper getCurrentcomicId] forKey:@"comic_id"];
+    [userDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"];
+    [userDic setObject:@"1" forKey:@"is_public"];
+    [dataDic setObject:userDic forKey:@"data"];
+    
+    ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
+    //i d't know what is 3 .. need to confirm with Shy
+    [cmNetWorking shareComicImage:dataDic Id:[AppHelper getCurrentcomicId]
+                       completion:^(id json,id jsonResposeHeader) {
+                           
+                           [self clearNavStack];
+                           
+                           
+    } ErrorBlock:^(JSONModelError *error) {
+        
+    }];
+}
+
+-(void)clearNavStack
+{
+    if (self.comicSlideFileName) {
+        [AppHelper deleteSlideFile:self.comicSlideFileName];
+    }
+    
+    NSArray* navArray = [self.navigationController viewControllers];
+    for (UIViewController* viewControll in navArray) {
+        if ([viewControll isKindOfClass:[ComicMakingViewController class]]) {
+            [viewControll removeFromParentViewController];
+            break;
+        }
+        if ([viewControll isKindOfClass:[GlideScrollViewController class]]) {
+            [viewControll removeFromParentViewController];
+            break;
+        }
+        if ([viewControll isKindOfClass:[SendPageViewController class]]) {
+            [viewControll removeFromParentViewController];
+            break;
+        }
+    }
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
+    GlideScrollViewController *controller = (GlideScrollViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"glidenavigation"];
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
 #pragma mark GroupList Delegate
 -(void)selectGroupItems:(id)object
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage" Action:@"GroupShare" Label:@""];
     UserGroup* ug = (UserGroup*)object;
     if(ug)
         [self generateGroupShareArray:ug];
@@ -391,6 +469,7 @@
 
 -(void)selectedRow:(id)object
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage" Action:@"FriendsShare" Label:@""];
     UserFriends* uf = (UserFriends*)object;
     if(uf)
         [self generateFriendShareArray:uf];
@@ -496,10 +575,16 @@
 -(void)openMessageComposer:(NSArray*)sendNumbers messageText:(NSString*)messageTextValue
 {
     MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    
     if([MFMessageComposeViewController canSendText])
     {
         controller.body = messageTextValue;
-        controller.recipients = sendNumbers;
+        
+        if (sendNumbers != nil)
+        {
+            controller.recipients = sendNumbers;
+        }
+        
         controller.messageComposeDelegate = self;
         [self presentViewController:controller animated:YES completion:^{
             

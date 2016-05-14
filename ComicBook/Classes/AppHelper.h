@@ -20,6 +20,7 @@
 #import "MBProgressHUD.h"
 #import "BaseModel.h"
 #import <CoreData/CoreData.h>
+#import "GoogleAnalytics.h"
 
 @interface AppHelper : NSObject<UIGestureRecognizerDelegate>
 {
@@ -77,6 +78,7 @@
 
 +(void)saveDataToFile:(NSMutableArray*)slideObj fileName:(NSString*)FileName;
 +(NSMutableArray*)getDataFromFile :(NSString*)FileName;
++(BOOL)deleteSlideFile :(NSString*)FileName;
 
 #pragma mark showHUDLoader
 + (void)showHUDLoader:(BOOL)show;

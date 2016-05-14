@@ -516,6 +516,8 @@ UINavigationControllerDelegate>
 #pragma mark - UIImagePickerControllerDelegate Method
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"CropSticker" Action:@"UploadPicture" Label:@""];
+    
     [self dismissViewControllerAnimated:YES completion:^
      {
          UIImage *selectedImage = info[UIImagePickerControllerOriginalImage];
@@ -637,6 +639,8 @@ UINavigationControllerDelegate>
 
 - (IBAction)btnCameraTap:(id)sender
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"CropSticker" Action:@"Camera" Label:@""];
+    
     if (btnCamera.isSelected)
     {
         btnCamera.selected = NO;
@@ -702,8 +706,6 @@ UINavigationControllerDelegate>
                         else
                         {
                             imgvCrop.image = cropedImage;
-
-
                         }
                         
                       //  imgvCrop.image = [UIImage ScaletoFill:image toSize:imgvCrop.frame.size];

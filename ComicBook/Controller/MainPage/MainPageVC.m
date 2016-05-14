@@ -136,6 +136,7 @@ NSString * const BottomBarView = @"BottomBarView";
     });
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swipeLeft:) name:@"ChangeNextPage" object:nil];
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"MainPage" Attributes:nil];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -210,6 +211,7 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 
 - (void)openInbox {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Inbox" Action:@"Open" Label:@""];
     [commentContainerView setUserInteractionEnabled:FALSE];
     [self.pageViewController.view setUserInteractionEnabled:FALSE];
     [topBarView.view setUserInteractionEnabled:FALSE];
@@ -219,6 +221,7 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 
 - (void)closeInbox {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Inbox" Action:@"Close" Label:@""];
     [commentContainerView setUserInteractionEnabled:TRUE];
     [self.pageViewController.view setUserInteractionEnabled:TRUE];
     [topBarView.view setUserInteractionEnabled:TRUE];
@@ -355,7 +358,7 @@ NSString * const BottomBarView = @"BottomBarView";
     //        startingViewController.imageArray=slideImages;
     //    }];
     
-    // vishnu
+    // vishnuvardhan
     NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
     [slidesArray addObjectsFromArray:comicBook.slides];
     
@@ -377,6 +380,8 @@ NSString * const BottomBarView = @"BottomBarView";
     [self.profilePicOfComic sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
     //    self.profilePicOfComic.layer.cornerRadius = self.profilePicOfComic.frame.size.width / 2;
     self.profilePicOfComic.clipsToBounds = YES;
+    
+    textView.placeholder = [NSString stringWithFormat:@"Say something to %@", comicBook.userDetail.firstName];
     currentComicUserId = comicBook.userDetail.userId;
     friendObject = [[Friend alloc] init];
     friendObject.firstName = comicBook.userDetail.firstName;
@@ -445,8 +450,22 @@ NSString * const BottomBarView = @"BottomBarView";
     [self.modelController.dict setObject:[dict objectForKey:@"tag"] forKey:@"tag"];
     DataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
     ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
-    self.modelController.slidesArray=comicBook.slides;
-    startingViewController.slidesArray=comicBook.slides;
+    
+    // vishnuvardhan
+    NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+    [slidesArray addObjectsFromArray:comicBook.slides];
+    
+    // To repeat the cover image again on index page as the first slide.
+    if(slidesArray.count > 1) {
+        [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+        
+        // Adding a sample slide to array to maintain the logic
+        Slides *slides = [Slides new];
+        [slidesArray insertObject:slides atIndex:1];
+    }
+    
+    self.modelController.slidesArray=slidesArray;
+    startingViewController.slidesArray=slidesArray;
     NSArray *viewControllers = @[startingViewController];
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
     
@@ -513,7 +532,21 @@ NSString * const BottomBarView = @"BottomBarView";
             
             DataViewController *currentViewController = self.pageViewController.viewControllers[0];
             ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
-            currentViewController.slidesArray=comicBook.slides;
+            
+            // vishnuvardhan
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
+            
+            // To repeat the cover image again on index page as the first slide.
+            if(slidesArray.count > 1) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+                
+                // Adding a sample slide to array to maintain the logic
+                Slides *slides = [Slides new];
+                [slidesArray insertObject:slides atIndex:1];
+            }
+            
+            currentViewController.slidesArray=slidesArray;
             NSArray *viewControllers = @[currentViewController];
             [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
             
@@ -524,7 +557,21 @@ NSString * const BottomBarView = @"BottomBarView";
         // In landscape orientation: Set set the spine location to "mid" and the page view controller's view controllers array to contain two view controllers. If the current page is even, set it to contain the current and next view controllers; if it is odd, set the array to contain the previous and current view controllers.
         DataViewController *currentViewController = self.pageViewController.viewControllers[0];
         ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
-        currentViewController.slidesArray=comicBook.slides;
+        
+        // vishnuvardhan
+        NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+        [slidesArray addObjectsFromArray:comicBook.slides];
+        
+        // To repeat the cover image again on index page as the first slide.
+        if(slidesArray.count > 1) {
+            [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+            
+            // Adding a sample slide to array to maintain the logic
+            Slides *slides = [Slides new];
+            [slidesArray insertObject:slides atIndex:1];
+        }
+        
+        currentViewController.slidesArray=slidesArray;
         
         NSArray *viewControllers = nil;
         
@@ -532,13 +579,41 @@ NSString * const BottomBarView = @"BottomBarView";
         if (indexOfCurrentViewController == 0 || indexOfCurrentViewController % 2 == 0) {
             DataViewController *nextViewController =(DataViewController*) [self.modelController pageViewController:self.pageViewController viewControllerAfterViewController:currentViewController];
             ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
-            nextViewController.slidesArray=comicBook.slides;
+            
+            // vishnuvardhan
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
+            
+            // To repeat the cover image again on index page as the first slide.
+            if(slidesArray.count > 1) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+                
+                // Adding a sample slide to array to maintain the logic
+                Slides *slides = [Slides new];
+                [slidesArray insertObject:slides atIndex:1];
+            }
+            
+            nextViewController.slidesArray=slidesArray;
             viewControllers = @[currentViewController, nextViewController];
             
         } else {
             DataViewController *previousViewController =(DataViewController*) [self.modelController pageViewController:self.pageViewController viewControllerBeforeViewController:currentViewController];
             ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
-            previousViewController.slidesArray=comicBook.slides;
+            
+            // vishnuvardhan
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
+            
+            // To repeat the cover image again on index page as the first slide.
+            if(slidesArray.count > 1) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+                
+                // Adding a sample slide to array to maintain the logic
+                Slides *slides = [Slides new];
+                [slidesArray insertObject:slides atIndex:1];
+            }
+            
+            previousViewController.slidesArray=slidesArray;
             viewControllers = @[previousViewController, currentViewController];
             
         }
@@ -678,39 +753,36 @@ NSString * const BottomBarView = @"BottomBarView";
             //I do have only this option need to check with Vishu
             [imageArray addObject:[self getImageFromURL:[slideImages objectAtIndex:i]]];
         }
-//        UIImageView* shareImage = [[UIImageView alloc]init];
-//        
-//        [shareImage sd_setImageWithURL:[NSURL URLWithString:[slideImages objectAtIndex:0]]
-//                      placeholderImage:nil
-//                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-                                 switch (((UIButton*)sender).tag) {
-                                     case FB:
-                                     {
-                                         [self doShareTo:FACEBOOK ShareImage:[self.comicShareView getComicShareImage:imageArray]];
-                                         
-                                     }
-                                         break;
-                                     case IM:
-                                     {
-                                         [self doShareTo:MESSAGE ShareImage:[self.comicShareView getComicShareImage:imageArray]];
-                                         
-                                         break;
-                                     }
-                                     case TW:
-                                     {
-                                         [self doShareTo:TWITTER ShareImage:[self.comicShareView getComicShareImage:imageArray]];
-                                     }
-                                         break;
-                                     case IN:
-                                     {
-                                         [self doShareTo:INSTAGRAM ShareImage:[self.comicShareView getComicShareImage:imageArray]];
-                                         break;
-                                     }
-                                     default:
-                                         break;
-                                 }
-//                             }];
+        switch (((UIButton*)sender).tag) {
+            case FB:
+            {
+                [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"FACEBOOK" Label:@""];
+                [self doShareTo:FACEBOOK ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+                
+            }
+                break;
+            case IM:
+            {
+                [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"MESSAGE" Label:@""];
+                [self doShareTo:MESSAGE ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+                
+                break;
+            }
+            case TW:
+            {
+                [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"TWITTER" Label:@""];
+                [self doShareTo:TWITTER ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+            }
+                break;
+            case IN:
+            {
+                [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"INSTAGRAM" Label:@""];
+                [self doShareTo:INSTAGRAM ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+                break;
+            }
+            default:
+                break;
+        }
     }
 }
 
@@ -745,19 +817,41 @@ NSString * const BottomBarView = @"BottomBarView";
     self.scrollView.layer.zPosition = 1;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+    CGFloat textViewX;
+    CGFloat twitterLabelX;
+    CGFloat onOffX;
+    if(IS_IPHONE_5)
+    {
+        textViewX= 140;
+        twitterLabelX= 160;
+        onOffX= 125;
+    }
+    else if(IS_IPHONE_6)
+    {
+        textViewX= 145;
+        twitterLabelX= 165;
+        onOffX= 130;
+    }
+    else if(IS_IPHONE_6P)
+    {
+        textViewX= 150;
+        twitterLabelX= 170;
+        onOffX= 135;
+    }
     commentContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 93, self.view.frame.size.width, 60)]; // 95
-    onoff = [[UISwitch alloc] initWithFrame: CGRectMake(135, 0, 30, 30)];
+    onoff = [[UISwitch alloc] initWithFrame: CGRectMake(onOffX, 0, 30, 30)];
     onoff.onTintColor= [UIColor colorWithRed:(.61) green:(.93) blue:(.93) alpha:1];
     onoff.transform = CGAffineTransformMakeScale(0.30, 0.30);
     [commentContainerView addSubview:onoff];
     [onoff setOn:YES animated:YES];
     [onoff addTarget:self action:@selector(toggledTweetSwitch:) forControlEvents:UIControlEventValueChanged];
-    UILabel*twitterLabel=[[UILabel alloc]initWithFrame: CGRectMake(170, 10, 160, 10)];
+    UILabel*twitterLabel=[[UILabel alloc]initWithFrame: CGRectMake(twitterLabelX, 10, 160, 10)];
     twitterLabel.text=@"Tweet this comment";
     twitterLabel.textColor=[UIColor whiteColor];
     twitterLabel.font = [UIFont fontWithName:@"AmericanTypewriter"  size:10];
     [commentContainerView addSubview:twitterLabel];
-    textView = [[CustomTextView alloc] initWithFrame:CGRectMake(150, 22, self.view.frame.size.width-180, 25)];
+//    [commentContainerView setBackgroundColor:[UIColor redColor]];
+    textView = [[CustomTextView alloc] initWithFrame:CGRectMake(textViewX, 22, self.view.frame.size.width-170, 25)];
     textView.isScrollable = NO;
     textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
     textView.minNumberOfLines = 1;
@@ -768,7 +862,6 @@ NSString * const BottomBarView = @"BottomBarView";
     textView.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 5, 0);
     //    textView.backgroundColor = [UIColor colorWithRed:(.61) green:(.93) blue:(.93) alpha:1];
     textView.backgroundColor = [UIColor colorWithRed:(0.611) green:(0.854) blue:(0.925) alpha:1];
-    textView.placeholder = @"Say something to Johnny";
     textView.layer.cornerRadius=4;
     textView.layer.masksToBounds=YES;
     [textView setTextColor:[UIColor whiteColor]];
@@ -788,6 +881,9 @@ NSString * const BottomBarView = @"BottomBarView";
  *  @param comment Comment Text
  */
 - (void)addComment:(NSString*)comment :(UIImage*)image {
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"AddComment" Action:comment Label:@""];
+    
     count++;
     UIView *cell=[self Cell:comment:image];
     CGRect Rect=cell.frame;
@@ -817,11 +913,13 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 
 - (void)callAPIToPostComment:(NSString *)comment {
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"PostComment" Action:comment Label:@""];
     CommentModel *commentModel = [[CommentModel alloc] init];
     commentModel.commentType = @"T";
     commentModel.commentText = comment;
     commentModel.referenceId = @"0";
     commentModel.userId = [AppHelper getCurrentLoginId];
+    commentModel.status = @"1";
     ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
     NSError *error;
     [CommentsAPIManager postCommentForComicId:comicBook.comicId
@@ -1156,11 +1254,6 @@ NSString * const BottomBarView = @"BottomBarView";
     } andFail:^(NSError *errorMessage) {
         NSLog(@"%@", errorMessage);
     }];
-}
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    NSLog(@"HAHAHAHAHAHHAHAHAHA");
-    return YES;
 }
 
 @end

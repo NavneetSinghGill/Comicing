@@ -28,9 +28,10 @@
 
 + (void)makeFirendOrUnfriendForUserId:(NSString *)friendId
                            WithStatus:(NSString *)status
+                        CurrentUserId:(NSString *)currentUserId
                      withSuccessBlock:(void(^)(id object))successBlock
                               andFail:(void(^)(NSError *errorMessage))failBlock {
-    NSString *urlString = [NSString stringWithFormat:@"%@%@%@", BASE_URL, GET_FRIENDS_URL,@"1"];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@", BASE_URL, GET_FRIENDS_URL,currentUserId];
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
     NSMutableDictionary *friendDict = [NSMutableDictionary dictionary];
     [friendDict setValue:friendId forKey:@"friend_id"];
@@ -38,7 +39,7 @@
     NSMutableArray *friendsArray = [[NSMutableArray alloc] init];
     [friendsArray addObject:friendDict];
     [data setValue:friendsArray forKey:@"friends"];
-    [data setValue:@"1" forKey:@"user_id"];
+    [data setValue:currentUserId forKey:@"user_id"];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setValue:data forKey:@"data"];
     [BaseAPIManager putRequestWithURLString:urlString

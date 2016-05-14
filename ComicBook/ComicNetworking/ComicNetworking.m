@@ -117,9 +117,11 @@ static ComicNetworking *_sharedComicNetworking = nil;
 }
 -(void)updateUserInfo:(NSMutableDictionary*)paramData Id:(NSString*)Id completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock)errorBlock
 {
-    [self handlingPUTRequest:USER_UPDATE singleParam:Id QueryStringParameters:paramData completion:^(id json,id jsonResponse) {
+    [self handlingPUTRequest:USER_UPDATE singleParam:Id QueryStringParameters:paramData completion:^(id json,id jsonResponse)
+    {
         completeBlock(json,jsonResponse);
-    } ErrorBlock:^(JSONModelError *error) {
+    } ErrorBlock:^(JSONModelError *error)
+    {
         errorBlock(error);
     }];
 }
@@ -233,6 +235,7 @@ static ComicNetworking *_sharedComicNetworking = nil;
         [AppHelper showErrorDropDownMessage:@"Something went wrong!" mesage:@""];
         errorBlock((JSONModelError*)error);
     }];
+    //Changed NO to YES, it should be Yes.
     [AppHelper showHUDLoader:YES];
     [op start];
     

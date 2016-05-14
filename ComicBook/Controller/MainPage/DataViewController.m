@@ -6,17 +6,19 @@
 #import "Slides.h"
 #import "Enhancement.h"
 #import "CustomView.h"
+#import "Constants.h"
 
 @interface DataViewController () <AVAudioPlayerDelegate> {
-    CustomView *audioButton;
-    NSData *downloadedAudioData;
     UIView *audioView;
     UIImageView *img;
-    float audioDurationSeconds;
+    NSMutableArray *audioUrlArray;
+    NSMutableArray *audioDurationSecondsArray;
+    NSMutableArray *downloadedAudioDataArray;
+    CGFloat audioViewHeight;
+    CGFloat imgHeight;
 }
 
 @property (strong, nonatomic) AVAudioPlayer *backgroundMusicPlayer;
-@property (strong, nonatomic) NSURL *audioUrl;
 
 @end
 
@@ -27,11 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    audioView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 80, self.view.frame.size.width, 60)];
-    [audioView setBackgroundColor:[UIColor colorWithRed:241/255.0f green:199/255.0f blue:27/255.0f alpha:0.7]];
-    img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, 50, 50)];
-    [img setImage:[UIImage imageNamed:@"mic_play"]];
-    [audioView addSubview:img];
+    [self setAudioView];
     
     /**
      *  image array contains the whole images and page number is the current pagenumber
@@ -95,20 +93,75 @@
     }
 }
 
+- (void)setAudioView {
+    if(IS_IPHONE_5)
+    {
+        audioViewHeight=40;
+        imgHeight = 30;
+    }
+    else if(IS_IPHONE_6)
+    {
+        audioViewHeight= 50;
+        imgHeight = 40;
+    }
+    else if(IS_IPHONE_6P)
+    {
+        audioViewHeight= 60;
+        imgHeight = 50;
+    }
+    
+    audioView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, audioViewHeight)];
+    [audioView setBackgroundColor:[UIColor colorWithRed:241/255.0f green:199/255.0f blue:27/255.0f alpha:0.7]];
+    img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, imgHeight, imgHeight)];
+    [img setImage:[UIImage imageNamed:@"mic_play"]];
+    [audioView addSubview:img];
+}
+
 - (void)addAudioButton:(Slides *)slide {
-    if(slide.enhancements.count > 0) {
-        Enhancement *enhancement = slide.enhancements[1];
-        self.audioUrl = [NSURL URLWithString:enhancement.enhancementFile];
-        [self performSelectorInBackground:@selector(getTheAudioLength) withObject:nil];
-        [self configureAudioPlayer];
-        audioButton = [[CustomView alloc] init];
+
+    /*
+     Enhancement *en = [[Enhancement alloc] init];
+     en.enhancementFile = @"http://68.169.44.163/sounds/comics/slides/56dbc70542dba";
+     en.xPos = @"50.0";
+     en.yPos = @"75.0";
+    
+    Enhancement *en1 = [[Enhancement alloc] init];
+    en1.enhancementFile = @"http://68.169.44.163/sounds/comics/slides/56dbc70542dba";
+    en1.xPos = @"150.0";
+    en1.yPos = @"75.0";
+    
+    Enhancement *en2 = [[Enhancement alloc] init];
+    en2.enhancementFile = @"http://www.noiseaddicts.com/samples_1w72b820/4927.mp3";
+    en2.xPos = @"250.0";
+    en2.yPos = @"75.0";
+    
+     NSArray *t = @[en, en1, en2];
+     slide.enhancements = t;
+    
+    // http://www.noiseaddicts.com/samples_1w72b820/4927.mp3
+    // http://68.169.44.163/sounds/comics/slides/56dbc70542dba
+    */
+    
+    audioUrlArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
+    audioDurationSecondsArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
+    downloadedAudioDataArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
+    for (int i = 0; i < slide.enhancements.count; i ++) {
+        [downloadedAudioDataArray addObject:[NSNull null]];
+    }
+    for(Enhancement *enhancement in slide.enhancements) {
+        [audioUrlArray addObject:[NSURL URLWithString:enhancement.enhancementFile]];
+        [self performSelectorInBackground:@selector(getTheAudioLength:) withObject:[NSNumber numberWithInteger:[slide.enhancements indexOfObject:enhancement]]];
+        [self configureAudioPlayer:[slide.enhancements indexOfObject:enhancement]];
+        CustomView *audioButton = [[CustomView alloc] init];
+        audioButton.tag = [slide.enhancements indexOfObject:enhancement];
         [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 25)];
         imageView.image = [UIImage imageNamed:@"bubbleAudioPlay"];
         [audioButton addSubview:imageView];
         __weak __typeof(self)weakSelf = self;
+        __weak __typeof(audioButton)weakAudioButton = audioButton;
         audioButton.playAudio = ^{
-            [weakSelf playAudio];
+            [weakSelf playAudio:weakAudioButton.tag];
         };
         audioButton.pauseAudio = ^{
             [weakSelf pauseAudio];
@@ -117,22 +170,32 @@
     }
 }
 
-- (void)playAudio {
-    NSError *error;
-    self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithData:downloadedAudioData error:&error];
-    [self.backgroundMusicPlayer setDelegate:self];
-    self.backgroundMusicPlayer.numberOfLoops = 0;
-    [self.backgroundMusicPlayer play];
-    [self showAudioAnimation];
+- (void)playAudio:(NSInteger)tag {
+    if(downloadedAudioDataArray.count > tag) {
+        NSError *error;
+        self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithData:[downloadedAudioDataArray objectAtIndex:tag] error:&error];
+        [self.backgroundMusicPlayer setDelegate:self];
+        self.backgroundMusicPlayer.numberOfLoops = 0;
+        [self.backgroundMusicPlayer play];
+        [self showAudioAnimation:tag];
+    }
 }
 
-- (void)showAudioAnimation {
-    [audioView setFrame:CGRectMake(0, self.view.frame.size.height - 80, 50, 60)];
+- (void)showAudioAnimation:(NSInteger)tag {
+    CGFloat audioViewY;
+    if(IS_IPHONE_5) {
+        audioViewY = self.view.frame.size.height - 55;
+    } else if(IS_IPHONE_6) {
+        audioViewY = self.view.frame.size.height - 70;
+    } else if(IS_IPHONE_6P) {
+        audioViewY = self.view.frame.size.height - 80;
+    }
+    [audioView setFrame:CGRectMake(0, audioViewY, 50, audioViewHeight)];
     [self.view addSubview:audioView];
     audioView.alpha = 1;
     img.alpha = 1;
-    [UIView animateWithDuration:audioDurationSeconds delay:.2 usingSpringWithDamping:.8 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [audioView setFrame:CGRectMake(0, self.view.frame.size.height - 80, self.view.frame.size.width, 60)];
+    [UIView animateWithDuration:[[audioDurationSecondsArray objectAtIndex:tag] floatValue] delay:.2 usingSpringWithDamping:.8 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [audioView setFrame:CGRectMake(0, audioViewY, self.view.frame.size.width, audioViewHeight)];
         audioView.alpha = 1;
     } completion:^(BOOL finished) {
     }];
@@ -158,18 +221,20 @@
     }];
 }
 
-- (void)getTheAudioLength {
-    AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:self.audioUrl options:nil];
+- (void)getTheAudioLength:(NSNumber *)index {
+    AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:[audioUrlArray objectAtIndex:[index intValue]] options:nil];
     CMTime audioDuration = audioAsset.duration;
-    audioDurationSeconds = CMTimeGetSeconds(audioDuration);
+    float audioDurationSeconds = CMTimeGetSeconds(audioDuration);
     audioDurationSeconds += 1; // add extra 1 second
+    [audioDurationSecondsArray addObject:[NSNumber numberWithFloat:audioDurationSeconds]];
 }
-- (void)configureAudioPlayer {
+- (void)configureAudioPlayer:(NSUInteger)index {
     //    NSURL *url = [NSURL URLWithString:@"http://68.169.44.163/sounds/comics/slides/56dbc70542dba"];
-    [self handleDataDownloadFromUrl:self.audioUrl withCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+    [self handleDataDownloadFromUrl:[audioUrlArray objectAtIndex:index] withCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if(connectionError == nil) {
-            downloadedAudioData = data;
-            if (!downloadedAudioData) {
+            [downloadedAudioDataArray removeObjectAtIndex:index];
+            [downloadedAudioDataArray insertObject:data atIndex:index];
+            if (!data) {
                 NSLog(@"not downloaded");
             } else {
             }

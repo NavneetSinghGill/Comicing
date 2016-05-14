@@ -29,6 +29,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     [super viewDidLoad];
 
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"Register" Attributes:nil];
     
     //    self.cropHolder.isRegView = YES;
     [self setTextFont:@"Take a Selfie and \n Cut out your Profile Pic"];
@@ -112,9 +113,8 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 - (void)cropStickerViewController_:(CropStickerViewController *)controll didSelectDoneWithImage:(UIImageView *)stickerImageView{
     UIImage *cropedImage  = stickerImageView.image;
+    cropedImage = [UIImage resizeImage:cropedImage newSize:CGSizeMake(130, 130)];
     [imgvCrop setImage:cropedImage];
-    cropedImage = [UIImage resizeImage:cropedImage newSize:CGSizeMake(112, 112)];
-    
     stickerImageView.frame = imgvCrop.frame;
     [self.view addSubview:stickerImageView];
     
@@ -268,8 +268,8 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
     
 //    [userDic setObject:imagProfilePic?[AppHelper encodeToBase64String:imagProfilePic]:[AppHelper encodeToBase64String:[UIImage imageNamed:@"flagImage.png"]] forKey:@"profile_pic"];
-    [userDic setObject:mNumber forKey:@"mobile"];
     [userDic setObject:[AppHelper getDeviceToken] forKey:@"device_token"];
+    [userDic setObject:mNumber forKey:@"mobile"];
     
     [dataDic setObject:userDic forKey:@"data"];
     

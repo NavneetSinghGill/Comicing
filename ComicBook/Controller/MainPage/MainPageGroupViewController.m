@@ -46,6 +46,7 @@ UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *viewTransperant;
 @property (weak, nonatomic) IBOutlet UIImageView *imgvGroupIcon;
 @property (weak, nonatomic) IBOutlet UIView *viewPen;
+@property (weak, nonatomic) IBOutlet UIImageView *imgvPinkDots;
 
 @property (strong, nonatomic) NSMutableArray *groupMember;
 @property (strong, nonatomic) NSMutableArray *comics;
@@ -61,10 +62,14 @@ UICollectionViewDelegate>
 #pragma mark - UIViewController Methods
 - (void)viewDidLoad
 {
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"MainPage-GroupPage" Attributes:nil];
+    
     ComicBookDict=[NSMutableDictionary new];
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callAPItoGetGroupsComics) name:@"UpdateGroupComics" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyComicAnimation) name:@"StartGroupReplyComicAnimation" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyComicAnimation) name:@"StopGroupReplyComicAnimation" object:nil];
     [self prepareView];
 }
 
@@ -99,9 +104,33 @@ UICollectionViewDelegate>
     saveTableViewFrame = tblvComics.frame;
     
     [self.imgvGroupIcon sd_setImageWithURL:[NSURL URLWithString:self.groupObj.groupIcon]];
+    [self.imgvPinkDots setImage:[UIImage imageNamed:@"dots11"]];
     
     [self callAPItoGetGroupsMember];
     [self callAPItoGetGroupsComics];
+}
+
+- (void)startReplyComicAnimation {
+    self.imgvPinkDots.animationImages = [NSArray arrayWithObjects:
+                                         [UIImage imageNamed:@"dots1"],
+                                         [UIImage imageNamed:@"dots2"],
+                                         [UIImage imageNamed:@"dots3"],
+                                         [UIImage imageNamed:@"dots4"],
+                                         [UIImage imageNamed:@"dots5"],
+                                         [UIImage imageNamed:@"dots6"],
+                                         [UIImage imageNamed:@"dots7"],
+                                         [UIImage imageNamed:@"dots8"],
+                                         [UIImage imageNamed:@"dots9"],
+                                         [UIImage imageNamed:@"dots10"],
+                                         [UIImage imageNamed:@"dots11"],nil];
+    self.imgvPinkDots.animationDuration = 2.0f;
+    self.imgvPinkDots.animationRepeatCount = 0;
+    [self.imgvPinkDots startAnimating];
+}
+
+- (void)stopReplyComicAnimation {
+    [self.imgvPinkDots stopAnimating];
+    [self.imgvPinkDots setImage:[UIImage imageNamed:@"dots11"]];
 }
 
 #pragma mark - Webservice Methods
@@ -199,7 +228,21 @@ UICollectionViewDelegate>
         cell.lblTime.text = [self timeFromString:comicBook.createdDate];
         
         [cell.viewComicBook addSubview:comic.view];
-        [comic setSlidesArray:comicBook.slides];
+        
+        // vishnu
+        NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+        [slidesArray addObjectsFromArray:comicBook.slides];
+        
+        // To repeat the cover image again on index page as the first slide.
+        if(slidesArray.count > 1) {
+            [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+            
+            // Adding a sample slide to array to maintain the logic
+            Slides *slides = [Slides new];
+            [slidesArray insertObject:slides atIndex:1];
+        }
+        
+        [comic setSlidesArray:slidesArray];
         [comic setupBook];
         
         [self addChildViewController:comic];
@@ -429,7 +472,9 @@ UICollectionViewDelegate>
 }
 
 - (void)navigateToGlideScrollView {
-    //    [AppHelper closeMainPageviewController:self];
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"Reply" Action:@"GroupReply" Label:@""];
+    
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
     UINavigationController *navigationController = [mainStoryboard instantiateViewControllerWithIdentifier:@"glidenavigation"];
     GlideScrollViewController *controller = (GlideScrollViewController *)[navigationController.childViewControllers firstObject];
