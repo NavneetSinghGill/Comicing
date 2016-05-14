@@ -880,12 +880,12 @@ NSString * const BottomBarView = @"BottomBarView";
  *
  *  @param comment Comment Text
  */
-- (void)addComment:(NSString*)comment :(UIImage*)image {
+- (void)addComment:(NSString*)comment :(NSString*)imageUrl {
     
     [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"AddComment" Action:comment Label:@""];
     
     count++;
-    UIView *cell=[self Cell:comment:image];
+    UIView *cell=[self Cell:comment:imageUrl];
     CGRect Rect=cell.frame;
     Rect.origin.y=currentPoint-keyboardHeight;
     cell.frame=Rect;
@@ -926,7 +926,8 @@ NSString * const BottomBarView = @"BottomBarView";
                               WithCommentDict:[MTLJSONAdapter JSONDictionaryFromModel:commentModel error:&error]
                              withSuccessBlock:^(id object) {
                                  NSLog(@"%@", object);
-                                 [self addComment:comment:self.profilePicOfComic.image];
+//                                 [self addComment:comment:self.profilePicOfComic.image];
+                                 [self addComment:comment :[[AppHelper initAppHelper] getCurrentUser].profile_pic];
                              } andFail:^(NSError *errorMessage) {
                                  NSLog(@"%@", errorMessage);
                              }];
@@ -1073,7 +1074,7 @@ NSString * const BottomBarView = @"BottomBarView";
  *
  *  @return view which having comment and profile picture
  */
--(UIView*)Cell:(NSString*)Text :(UIImage*)image
+-(UIView*)Cell:(NSString*)Text :(NSString*)imageUrl
 {
     UIView *view= [[UIView alloc]init];
     UIFont *font = [UIFont fontWithName:@"AmericanTypewriter"  size:15];
@@ -1093,7 +1094,9 @@ NSString * const BottomBarView = @"BottomBarView";
     commentBackground.backgroundColor=[UIColor colorWithRed:(.55) green:(.83) blue:(.91) alpha:.8];
     commentBackground.layer.cornerRadius=12;
     commentBackground.layer.masksToBounds=YES;
-    UIImageView *profilePic=[[UIImageView alloc]initWithImage:image];
+    UIImageView *profilePic=[[UIImageView alloc] init];
+    [profilePic sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+    
     profilePic.frame=CGRectMake(5, 3, 40, 40);
     profilePic.contentMode=UIViewContentModeScaleAspectFit;
     profilePic.layer.cornerRadius=20;
