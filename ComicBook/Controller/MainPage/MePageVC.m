@@ -193,6 +193,11 @@
                 // Adding a sample slide to array to maintain the logic
                 Slides *slides = [Slides new];
                 [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6<slidesArray.count) {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
             }
             [comic setSlidesArray:slidesArray];
             [comic setupBook];
@@ -240,6 +245,11 @@
                 // Adding a sample slide to array to maintain the logic
                 Slides *slides = [Slides new];
                 [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6<slidesArray.count) {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
             }
             
             [comic setSlidesArray:slidesArray];

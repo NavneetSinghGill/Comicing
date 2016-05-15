@@ -138,7 +138,26 @@
         comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
         
         ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
-        [comic setSlidesArray:comicBook.slides];
+        
+        // vishnu
+        NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+        [slidesArray addObjectsFromArray:comicBook.slides];
+        
+        // To repeat the cover image again on index page as the first slide.
+        if(slidesArray.count > 1) {
+            [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+            
+            // Adding a sample slide to array to maintain the logic
+            Slides *slides = [Slides new];
+            [slidesArray insertObject:slides atIndex:1];
+            
+            // vishnuvardhan logic for the second page
+            if(6<slidesArray.count) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+            }
+        }
+        
+        [comic setSlidesArray:slidesArray];
         
         [comic setupBook];
         [cell.viewComicBook addSubview:comic.view];
