@@ -369,6 +369,11 @@ NSString * const BottomBarView = @"BottomBarView";
         // Adding a sample slide to array to maintain the logic
         Slides *slides = [Slides new];
         [slidesArray insertObject:slides atIndex:1];
+        
+        // vishnuvardhan logic for the second page
+        if(6<slidesArray.count) {
+            [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+        }
     }
     
     self.modelController.slidesArray=slidesArray;
@@ -462,6 +467,11 @@ NSString * const BottomBarView = @"BottomBarView";
         // Adding a sample slide to array to maintain the logic
         Slides *slides = [Slides new];
         [slidesArray insertObject:slides atIndex:1];
+        
+        // vishnuvardhan logic for the second page
+        if(6<slidesArray.count) {
+            [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+        }
     }
     
     self.modelController.slidesArray=slidesArray;
@@ -544,6 +554,11 @@ NSString * const BottomBarView = @"BottomBarView";
                 // Adding a sample slide to array to maintain the logic
                 Slides *slides = [Slides new];
                 [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6<slidesArray.count) {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
             }
             
             currentViewController.slidesArray=slidesArray;
@@ -569,6 +584,11 @@ NSString * const BottomBarView = @"BottomBarView";
             // Adding a sample slide to array to maintain the logic
             Slides *slides = [Slides new];
             [slidesArray insertObject:slides atIndex:1];
+            
+            // vishnuvardhan logic for the second page
+            if(6<slidesArray.count) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+            }
         }
         
         currentViewController.slidesArray=slidesArray;
@@ -591,6 +611,11 @@ NSString * const BottomBarView = @"BottomBarView";
                 // Adding a sample slide to array to maintain the logic
                 Slides *slides = [Slides new];
                 [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6<slidesArray.count) {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
             }
             
             nextViewController.slidesArray=slidesArray;
@@ -611,6 +636,11 @@ NSString * const BottomBarView = @"BottomBarView";
                 // Adding a sample slide to array to maintain the logic
                 Slides *slides = [Slides new];
                 [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6<slidesArray.count) {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
             }
             
             previousViewController.slidesArray=slidesArray;
