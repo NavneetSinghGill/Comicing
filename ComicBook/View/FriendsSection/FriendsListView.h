@@ -56,6 +56,7 @@
 @property (assign, nonatomic) BOOL enableSectionTitles;
 @property (assign, nonatomic) BOOL enableSelection;
 @property (assign, nonatomic) BOOL enableInvite;
+@property (assign, nonatomic) BOOL hideTickByDefault;
 @property (strong,nonatomic)  NSMutableArray* friendsArray;
 @property (weak, nonatomic) IBOutlet UIView *tableHolderView;
 
@@ -72,5 +73,6 @@
 - (void)searchFriendByString:(NSString *)searchString;
 - (void)reloadAllData;
 - (void)hideIndex;
-
+-(void)friendslistResponse:(NSDictionary *)response;
+-(void)friendsSearchResponse:(NSDictionary *)response;
 @end

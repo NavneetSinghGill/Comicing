@@ -3507,6 +3507,7 @@ static CGRect CaptionTextViewMinRect;
         for (int i = 0; i < cmPage.subviews.count; i ++)
         {
             id imageView = cmPage.subviews[i];
+            CGRect myRect = [cmPage.subviewData[i] CGRectValue];
             //Check is ComicItemBubble
             if([imageView isKindOfClass:[ComicItemBubble class]])
             {
@@ -3522,8 +3523,13 @@ static CGRect CaptionTextViewMinRect;
                     [cmEng setObject:[audioData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]
                               forKey:@"enhancement_file"];
                     
-                    [cmEng setObject:[NSString stringWithFormat:@"%f",((ComicItemBubble*)imageView).frame.origin.x] forKey:@"position_top"];
-                    [cmEng setObject:[NSString stringWithFormat:@"%f",((ComicItemBubble*)imageView).frame.origin.y] forKey:@"position_left"];
+                    CGFloat midPointX = myRect.origin.x + (myRect.size.width/2);
+                    CGFloat midPointY = myRect.origin.y + (myRect.size.height/2);
+                    
+                    [cmEng setObject:[NSString stringWithFormat:@"%f",midPointY] forKey:@"position_top"];
+                    [cmEng setObject:[NSString stringWithFormat:@"%f",midPointX] forKey:@"position_left"];
+                    [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.width] forKey:@"width"];
+                    [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.height] forKey:@"height"];
                     [cmEng setObject:@"1" forKey:@"z_index"];
                     
                     [enhancements addObject:cmEng];
