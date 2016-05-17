@@ -43,22 +43,22 @@
 }
 
 -(void)bindData{
- if(userObject)
- {
+// if(userObject)
+// {
 //         [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:userObject.profile_pic]
 //                                    placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
 //                                           completed:^(UIImage *image, NSError *error,
 //                                                       SDImageCacheType cacheType, NSURL *imageURL) {
 //                                           }];
   
-     [self.avatarImage downloadImageWithURL:[NSURL URLWithString:userObject.profile_pic]
+     [self.avatarImage downloadImageWithURL:[NSURL URLWithString:[[AppHelper initAppHelper]getCurrentUser].profile_pic]
                          placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
                           completionBlock:^(BOOL succeeded, UIImage *image) {
                               self.avatarImage.image = image;
                           }];
 
      
- }
+// }
 }
 
 #pragma TextField Delegate
@@ -79,6 +79,19 @@
     [cmNetWorking searchById:textField.text completion:^(id json,id jsonResposeHeader) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(postFriendsSearchResponse:)])
         {
+            //Adding Friends id if not existing.
+//            NSMutableArray* tempArray = [json[@"data"] mutableCopy];
+//            for (int i= 0; i< [tempArray count]; i++) {
+//                if(![[tempArray objectAtIndex:i] objectForKey:@"friend_id"])
+//                {
+//                    NSMutableDictionary* tempDict = [[tempArray objectAtIndex:i] mutableCopy];
+//                    [tempDict setObject:@"-1" forKey:@"friend_id"];
+//                    
+//                    [tempArray replaceObjectAtIndex:i withObject:tempDict];
+//                }
+//            }
+//            NSMutableDictionary* objDic = [[NSMutableDictionary alloc] init];
+//            [objDic setObject:tempArray forKey:@"data"];
             [self.delegate postFriendsSearchResponse:json];
         }
     } ErrorBlock:^(JSONModelError *error) {

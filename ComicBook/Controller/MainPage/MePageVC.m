@@ -149,7 +149,8 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
-    /* Test code for comments.
+    /*
+    // Test code for comments.
     CommentModel *commentModel1 = [[CommentModel alloc] init];
     commentModel1.firstName = @"Test1";
     commentModel1.lastName = @"Name1";
@@ -181,8 +182,24 @@
 //            [comic setImages: [self setupImages:indexPath]];
             
             ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
-            [comic setSlidesArray:comicBook.slides];
+            // vishnu
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
             
+            // To repeat the cover image again on index page as the first slide.
+            if(slidesArray.count > 1) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+                
+                // Adding a sample slide to array to maintain the logic
+                Slides *slides = [Slides new];
+                [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6<slidesArray.count) {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
+            }
+            [comic setSlidesArray:slidesArray];
             [comic setupBook];
             [self addChildViewController:comic];
             [ comic.view setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -228,6 +245,11 @@
                 // Adding a sample slide to array to maintain the logic
                 Slides *slides = [Slides new];
                 [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6<slidesArray.count) {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
             }
             
             [comic setSlidesArray:slidesArray];
@@ -612,6 +634,7 @@
                                        
                                        [comicsArray addObjectsFromArray:comicsModelObj.books];
                                    }
+                                   self.lblComicCount.text = [NSString stringWithFormat:@"%@ Comics", comicsModelObj.totalCount];
                                    [self.tableview reloadData];
                                } andFail:^(NSError *errorMessage) {
                                    NSLog(@"%@", errorMessage);

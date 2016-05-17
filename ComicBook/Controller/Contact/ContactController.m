@@ -68,7 +68,9 @@
     self.friendsList.delegate = self;
     self.friendsList.selectedActionName =@"AddToFriends";
     self.friendsList.enableInvite = NO;
+    self.friendsList.hideTickByDefault = NO;
     friendsFrame = self.friendsList.frame;
+    [self.groupSection getGroupsByUserId];
     [super viewWillAppear:animated];
 }
 
@@ -188,7 +190,8 @@
 
 -(void)postFriendsSearchResponse:(NSDictionary *)response
 {
-    [self.friendsList searchFriendsById:[FriendSearchResult arrayOfModelsFromDictionaries:response[@"data"]]];
+    [self.friendsList friendsSearchResponse:response];
+//    [self.friendsList searchFriendsById:[FriendSearchResult arrayOfModelsFromDictionaries:response[@"data"]]];
 }
 
 
@@ -389,7 +392,7 @@
         [dataDic setObject:userDic forKey:@"data"];
         
         ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
-        [cmNetWorking addRemoveFriends:dataDic completion:^(id json,id jsonResposeHeader)
+        [cmNetWorking addRemoveFriends:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json,id jsonResposeHeader)
         {
             [selectedDict removeAllObjects];
             selectedDict = nil;

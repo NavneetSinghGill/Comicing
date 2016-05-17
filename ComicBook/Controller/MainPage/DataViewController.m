@@ -6,6 +6,7 @@
 #import "Slides.h"
 #import "Enhancement.h"
 #import "CustomView.h"
+#import "Constants.h"
 
 @interface DataViewController () <AVAudioPlayerDelegate> {
     UIView *audioView;
@@ -13,6 +14,8 @@
     NSMutableArray *audioUrlArray;
     NSMutableArray *audioDurationSecondsArray;
     NSMutableArray *downloadedAudioDataArray;
+    CGFloat audioViewHeight;
+    CGFloat imgHeight;
 }
 
 @property (strong, nonatomic) AVAudioPlayer *backgroundMusicPlayer;
@@ -26,11 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    audioView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 80, self.view.frame.size.width, 60)];
-    [audioView setBackgroundColor:[UIColor colorWithRed:241/255.0f green:199/255.0f blue:27/255.0f alpha:0.7]];
-    img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, 50, 50)];
-    [img setImage:[UIImage imageNamed:@"mic_play"]];
-    [audioView addSubview:img];
+    [self setAudioView];
     
     /**
      *  image array contains the whole images and page number is the current pagenumber
@@ -92,6 +91,30 @@
             }
         }
     }
+}
+
+- (void)setAudioView {
+    if(IS_IPHONE_5)
+    {
+        audioViewHeight=40;
+        imgHeight = 30;
+    }
+    else if(IS_IPHONE_6)
+    {
+        audioViewHeight= 50;
+        imgHeight = 40;
+    }
+    else if(IS_IPHONE_6P)
+    {
+        audioViewHeight= 60;
+        imgHeight = 50;
+    }
+    
+    audioView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, audioViewHeight)];
+    [audioView setBackgroundColor:[UIColor colorWithRed:241/255.0f green:199/255.0f blue:27/255.0f alpha:0.7]];
+    img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, imgHeight, imgHeight)];
+    [img setImage:[UIImage imageNamed:@"mic_play"]];
+    [audioView addSubview:img];
 }
 
 - (void)addAudioButton:(Slides *)slide {
@@ -159,12 +182,20 @@
 }
 
 - (void)showAudioAnimation:(NSInteger)tag {
-    [audioView setFrame:CGRectMake(0, self.view.frame.size.height - 80, 50, 60)];
+    CGFloat audioViewY;
+    if(IS_IPHONE_5) {
+        audioViewY = self.view.frame.size.height - 55;
+    } else if(IS_IPHONE_6) {
+        audioViewY = self.view.frame.size.height - 70;
+    } else if(IS_IPHONE_6P) {
+        audioViewY = self.view.frame.size.height - 80;
+    }
+    [audioView setFrame:CGRectMake(0, audioViewY, 50, audioViewHeight)];
     [self.view addSubview:audioView];
     audioView.alpha = 1;
     img.alpha = 1;
     [UIView animateWithDuration:[[audioDurationSecondsArray objectAtIndex:tag] floatValue] delay:.2 usingSpringWithDamping:.8 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [audioView setFrame:CGRectMake(0, self.view.frame.size.height - 80, self.view.frame.size.width, 60)];
+        [audioView setFrame:CGRectMake(0, audioViewY, self.view.frame.size.width, audioViewHeight)];
         audioView.alpha = 1;
     } completion:^(BOOL finished) {
     }];

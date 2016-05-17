@@ -76,11 +76,10 @@ SendPageViewController ()<UITextFieldDelegate>
     self.friendsListView.enableSectionTitles = NO;
     self.friendsListView.enableSelection = YES;
     self.friendsListView.delegate = self;
+    self.friendsListView.hideTickByDefault = YES;
     self.groupsView.delegate = self;
     self.viewInvite.delegate = self;
     self.groupsView.enableSelection= YES;
-    
-   
     
     [self.friendsListView getFriendsByUserId];
     [self bindComicImages];

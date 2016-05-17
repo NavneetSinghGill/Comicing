@@ -75,13 +75,13 @@
     [cell.groupImage setImage:nil];
     if ([self.groupsArray objectAtIndex:indexPath.row] &&
         [[self.groupsArray objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]) {
-            [cell.btnAddMember setHidden:NO];
+            [cell.btnAddMember setHidden:YES];
     }else{
     
     GroupMember *us = (GroupMember*)[[GroupMember alloc] initWithDictionary:[self.groupsArray objectAtIndex:indexPath.row] error:nil];
 
     if (us == nil) {
-        [cell.btnAddMember setHidden:NO];
+        [cell.btnAddMember setHidden:YES];
     }else{
         
         [cell.groupImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]

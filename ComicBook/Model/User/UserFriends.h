@@ -21,5 +21,4 @@
 @property (strong, nonatomic) NSString *profile_pic;
 @property (assign, nonatomic) NSInteger status;
 @property (strong, nonatomic) NSString *friend_id;
-
 @end
