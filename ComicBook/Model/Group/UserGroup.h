@@ -12,6 +12,9 @@
 
 @interface UserGroup : JSONModel
 
+#define GROUP_MEMBER @"1"
+#define GROUP_OWNER @"2"
+
 @property (strong, nonatomic) NSString *group_id;
 @property (strong, nonatomic) NSString *group_title;
 @property (strong, nonatomic) NSString *group_icon;

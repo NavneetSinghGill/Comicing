@@ -55,7 +55,7 @@ static NSString * const reuseIdentifier = @"Cell";
         [stickers addObject:image1];
     }
     
-    [stickers addObjectsFromArray:@[[UIImage imageNamed:@"st1"],[UIImage imageNamed:@"st2"],[UIImage imageNamed:@"st3"],[UIImage imageNamed:@"st4"],[UIImage imageNamed:@"st5"],[UIImage imageNamed:@"st6"],[UIImage imageNamed:@"st7"],[UIImage imageNamed:@"st8"],[UIImage imageNamed:@"st9"],[UIImage imageNamed:@"st10"],[UIImage imageNamed:@"st11"],]];
+    [stickers addObjectsFromArray:@[[UIImage imageNamed:@"st1"],[UIImage imageNamed:@"st2"],[UIImage imageNamed:@"st3"],[UIImage imageNamed:@"st4"],[UIImage imageNamed:@"st5"],[UIImage imageNamed:@"st6"],[UIImage imageNamed:@"st7"],[UIImage imageNamed:@"st8"],[UIImage imageNamed:@"st9"]]];
     
     [self.collectionView reloadData];
 }

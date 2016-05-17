@@ -68,7 +68,7 @@
         
         ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
 //        cmNetWorking.delegate= self;
-        [cmNetWorking addRemoveFriends:dataDic completion:^(id json,id jsonResposeHeader) {
+        [cmNetWorking addRemoveFriends:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json,id jsonResposeHeader) {
             [self addFriendsResponse:json];
         } ErrorBlock:^(JSONModelError *error) {
         }];

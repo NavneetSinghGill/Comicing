@@ -369,6 +369,11 @@ NSString * const BottomBarView = @"BottomBarView";
         // Adding a sample slide to array to maintain the logic
         Slides *slides = [Slides new];
         [slidesArray insertObject:slides atIndex:1];
+        
+        // vishnuvardhan logic for the second page
+        if(6<slidesArray.count) {
+            [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+        }
     }
     
     self.modelController.slidesArray=slidesArray;
@@ -462,6 +467,11 @@ NSString * const BottomBarView = @"BottomBarView";
         // Adding a sample slide to array to maintain the logic
         Slides *slides = [Slides new];
         [slidesArray insertObject:slides atIndex:1];
+        
+        // vishnuvardhan logic for the second page
+        if(6<slidesArray.count) {
+            [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+        }
     }
     
     self.modelController.slidesArray=slidesArray;
@@ -544,6 +554,11 @@ NSString * const BottomBarView = @"BottomBarView";
                 // Adding a sample slide to array to maintain the logic
                 Slides *slides = [Slides new];
                 [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6<slidesArray.count) {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
             }
             
             currentViewController.slidesArray=slidesArray;
@@ -569,6 +584,11 @@ NSString * const BottomBarView = @"BottomBarView";
             // Adding a sample slide to array to maintain the logic
             Slides *slides = [Slides new];
             [slidesArray insertObject:slides atIndex:1];
+            
+            // vishnuvardhan logic for the second page
+            if(6<slidesArray.count) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+            }
         }
         
         currentViewController.slidesArray=slidesArray;
@@ -591,6 +611,11 @@ NSString * const BottomBarView = @"BottomBarView";
                 // Adding a sample slide to array to maintain the logic
                 Slides *slides = [Slides new];
                 [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6<slidesArray.count) {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
             }
             
             nextViewController.slidesArray=slidesArray;
@@ -611,6 +636,11 @@ NSString * const BottomBarView = @"BottomBarView";
                 // Adding a sample slide to array to maintain the logic
                 Slides *slides = [Slides new];
                 [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6<slidesArray.count) {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
             }
             
             previousViewController.slidesArray=slidesArray;
@@ -745,13 +775,17 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 
 - (IBAction)btnShareToSocialMedia:(id)sender {
-    if (slideImages && [slideImages count] >0)
+    ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
+    if (comicBook.slides && [comicBook.slides count] >0)
     {
-        NSUInteger imageCount = [slideImages count] >= 4 ? 4 : [slideImages count];
+        NSUInteger imageCount = [comicBook.slides count] >= 4 ? 4 : [comicBook.slides count];
         NSMutableArray* imageArray = [[NSMutableArray alloc] init];
         for (int i=0; i < imageCount; i++) {
+            
+            Slides *slides = (Slides*)comicBook.slides[i];
+            [imageArray addObject:[self getImageFromURL:slides.slideImage]];
             //I do have only this option need to check with Vishu
-            [imageArray addObject:[self getImageFromURL:[slideImages objectAtIndex:i]]];
+//            [imageArray addObject:[self getImageFromURL:[slideImages objectAtIndex:i]]];
         }
         switch (((UIButton*)sender).tag) {
             case FB:
@@ -880,12 +914,12 @@ NSString * const BottomBarView = @"BottomBarView";
  *
  *  @param comment Comment Text
  */
-- (void)addComment:(NSString*)comment :(UIImage*)image {
+- (void)addComment:(NSString*)comment :(NSString*)imageUrl {
     
     [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"AddComment" Action:comment Label:@""];
     
     count++;
-    UIView *cell=[self Cell:comment:image];
+    UIView *cell=[self Cell:comment:imageUrl];
     CGRect Rect=cell.frame;
     Rect.origin.y=currentPoint-keyboardHeight;
     cell.frame=Rect;
@@ -926,7 +960,8 @@ NSString * const BottomBarView = @"BottomBarView";
                               WithCommentDict:[MTLJSONAdapter JSONDictionaryFromModel:commentModel error:&error]
                              withSuccessBlock:^(id object) {
                                  NSLog(@"%@", object);
-                                 [self addComment:comment:self.profilePicOfComic.image];
+//                                 [self addComment:comment:self.profilePicOfComic.image];
+                                 [self addComment:comment :[[AppHelper initAppHelper] getCurrentUser].profile_pic];
                              } andFail:^(NSError *errorMessage) {
                                  NSLog(@"%@", errorMessage);
                              }];
@@ -1073,7 +1108,7 @@ NSString * const BottomBarView = @"BottomBarView";
  *
  *  @return view which having comment and profile picture
  */
--(UIView*)Cell:(NSString*)Text :(UIImage*)image
+-(UIView*)Cell:(NSString*)Text :(NSString*)imageUrl
 {
     UIView *view= [[UIView alloc]init];
     UIFont *font = [UIFont fontWithName:@"AmericanTypewriter"  size:15];
@@ -1093,7 +1128,9 @@ NSString * const BottomBarView = @"BottomBarView";
     commentBackground.backgroundColor=[UIColor colorWithRed:(.55) green:(.83) blue:(.91) alpha:.8];
     commentBackground.layer.cornerRadius=12;
     commentBackground.layer.masksToBounds=YES;
-    UIImageView *profilePic=[[UIImageView alloc]initWithImage:image];
+    UIImageView *profilePic=[[UIImageView alloc] init];
+    [profilePic sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+    
     profilePic.frame=CGRectMake(5, 3, 40, 40);
     profilePic.contentMode=UIViewContentModeScaleAspectFit;
     profilePic.layer.cornerRadius=20;

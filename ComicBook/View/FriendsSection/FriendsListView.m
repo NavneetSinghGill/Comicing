@@ -181,18 +181,23 @@
         
         
         [[cell.userImage layer] setBorderWidth:4.0f];
+        [[cell.userImage layer] setBorderColor:[UIColor clearColor].CGColor];
         
         //Config tickMark in Group
         if(groupMembersList && [us isKindOfClass:[UserFriends class]] &&
            us.friend_id &&
-           [self findUserInsideTheGroup:us.friend_id])
+           [self findUserInsideTheGroup:us.friend_id] && ![us.friend_id isEqualToString:@"-1"])
         {
-            [cell.selectedTickImage setHidden:NO];
+            if (!self.hideTickByDefault) {
+                [cell.selectedTickImage setHidden:NO];
+            }
             [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
         }
         else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
         {
-            [cell.selectedTickImage setHidden:NO];
+            if (!self.hideTickByDefault) {
+                [cell.selectedTickImage setHidden:NO];
+            }
             [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
         }
         
@@ -264,64 +269,44 @@
         
         us =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
         
-        //    if(self.enableSectionTitles)
-        //    {
-        //
-        //    }
-        //    else
-        //    {
-        //        us = (User*)[self.friendsArray objectAtIndex:indexPath.row];
-        //    }
-        
         cell.lblUerName.text = us.first_name;
         
         [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
         
-//        [cell.userImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
-//                            placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
-//                             completionBlock:^(BOOL succeeded, UIImage *image)
-//        {
-//                                 cell.userImage.image = image;
-//                             }];
-        
-//            [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic]
-//                                 placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
-//                                        completed:^(UIImage *image, NSError *error,
-//                                                    SDImageCacheType cacheType, NSURL *imageURL) {
-//                                        }];
-        
         //Config image border
         [[cell.userImage layer] setBorderWidth:4.0f];
+        [[cell.userImage layer] setBorderColor:[UIColor clearColor].CGColor];
+        
+        if ([selectedFriends containsObject:us])
+        {
+            [cell.selectedTickImage setHidden:NO];
+        }
+        else
+        {
+            [cell.selectedTickImage setHidden:YES];
+        }
+
         
         //Config tickMark in Group
         if(groupMembersList && [us isKindOfClass:[UserFriends class]] &&
            us.friend_id &&
            [self findUserInsideTheGroup:us.friend_id])
         {
-            [cell.selectedTickImage setHidden:NO];
+            if (!self.hideTickByDefault) {
+             [cell.selectedTickImage setHidden:NO];
+            }
             [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
         }
-        else if([us isKindOfClass:[UserFriends class]] && us.friend_id)
+        else if((groupMembersList == nil || [groupMembersList count] == 0 ) &&
+                [us isKindOfClass:[UserFriends class]] && us.friend_id && ![us.friend_id isEqualToString:@"-1"])
 //        else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
         {
-            [cell.selectedTickImage setHidden:NO];
+            if (!self.hideTickByDefault) {
+                [cell.selectedTickImage setHidden:NO];
+            }
+            
             [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
         }
-        
-        
-        
-        
-        if ([selectedFriends containsObject:us])
-        {
-            [cell.selectedTickImage setHidden:NO];
-            
-        }
-        else
-        {
-            [cell.selectedTickImage setHidden:YES];
-            
-        }
-        
         
         //Config Invite Button
         if ([us isKindOfClass:[UserFriends class]] &&
@@ -368,42 +353,34 @@
         NSString* currentAlphaBets = [alphabetsSectionTitles objectAtIndex:indexPath.section];
         
         User* usSelection =(User*)[[friendsDictWithAlpabets objectForKey:currentAlphaBets] objectAtIndex:indexPath.row];
+        FriendsListTableViewCell *cell = (FriendsListTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         
-//        if (usSelection.status != UNFRIEND )
-//        {
-            FriendsListTableViewCell *cell = (FriendsListTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        if(cell)
+        {
+            [cell.selectedTickImage setHidden:!cell.selectedTickImage.hidden];
             
-            if(cell)
+            if (cell.selectedTickImage.hidden)
             {
-                [cell.selectedTickImage setHidden:!cell.selectedTickImage.hidden];
-                
-                if (cell.selectedTickImage.hidden)
-                {
-                    [[cell.userImage layer] setBorderColor:[UIColor clearColor].CGColor];
-                }
-                else
-                {
-                    [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
-                }
-            }
-
-            
-            if ([selectedFriends containsObject:usSelection])
-            {
-                //remove if already exist
-                [selectedFriends removeObject:usSelection];
-                
+                [[cell.userImage layer] setBorderColor:[UIColor clearColor].CGColor];
             }
             else
             {
-                // add if friend selected
-                [selectedFriends addObject:usSelection];
-                
+                [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
             }
-
-            [self doSelectedAction:usSelection];
-
-//        }
+        }
+        
+        
+        if ([selectedFriends containsObject:usSelection])
+        {
+            //remove if already exist
+            [selectedFriends removeObject:usSelection];
+        }
+        else
+        {
+            // add if friend selected
+            [selectedFriends addObject:usSelection];
+        }
+        [self doSelectedAction:usSelection];
     }
 }
 
@@ -673,7 +650,7 @@
         }else{
             [selectedUser setObject:uf.user_id forKey:@"friend_id"];
         }
-        [selectedUser setObject:(uf.status == FRIEND? @"0":@"1")  forKey:@"status"];
+        [selectedUser setObject:@"1"  forKey:@"status"];
         [self.delegate selectedRow:selectedUser];
         selectedUser = nil;
     }
@@ -704,25 +681,44 @@
     NSArray *friendsFromServer;
     
     if (response[@"data"] != nil)
-    {
-//        self.friendsArray  = [UserFriends arrayOfModelsFromDictionaries:response[@"data"]];
-
+    {   
         friendsFromServer = [UserFriends arrayOfModelsFromDictionaries:response[@"data"]];
     }
+    NSMutableArray* phoneContact = [self getPhoneContact];
     
-    
-  //  if (self.enableSectionTitles)
-  //  {
-        NSMutableArray* phoneContact = [self getPhoneContact];
-    
-        if (phoneContact != nil)
-        {
-            [self.friendsArray addObjectsFromArray:phoneContact];
-        }
+    if (phoneContact != nil)
+    {
+        [self.friendsArray removeAllObjects];
+        [self.friendsArray addObjectsFromArray:phoneContact];
+    }
         
-        [self setSectionAlphbets:self.friendsArray withFriendsFromServer:friendsFromServer];
-   // }
+    [self setSectionAlphbets:self.friendsArray withFriendsFromServer:friendsFromServer];
+    saveContactList = [[NSMutableArray alloc] init];
+    saveContactList = _friendsArray;
     
+    [self.friendsListTableView reloadData];
+}
+
+-(void)friendsSearchResponse:(NSDictionary *)response
+{
+    
+    //initialize the models
+    
+    NSArray *friendsFromServer;
+    
+    if (response[@"data"] != nil)
+    {
+        friendsFromServer = [FriendSearchResult arrayOfModelsFromDictionaries:response[@"data"]];
+    }
+    NSMutableArray* phoneContact = [self getPhoneContact];
+    
+    if (phoneContact != nil)
+    {
+        [self.friendsArray removeAllObjects];
+        [self.friendsArray addObjectsFromArray:phoneContact];
+    }
+    
+    [self setSectionAlphbets:self.friendsArray withFriendsFromServer:friendsFromServer];
     saveContactList = [[NSMutableArray alloc] init];
     saveContactList = _friendsArray;
     

@@ -27,6 +27,7 @@
     self.friendsList.enableInvite = NO;
     self.friendsList.selectedActionName = @"AddToGroup";
     self.friendsList.isTitleLabelHide = YES;
+    self.friendsList.hideTickByDefault = ![self isGroupEditing];
     [super viewDidLoad];
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
@@ -310,7 +311,8 @@
         NSMutableArray * temAttay = [[NSMutableArray alloc] init];
         for (NSDictionary* dict in self.groupMembers.groupsArray) {
             if (dict && [dict isKindOfClass:[NSDictionary class]]) {
-                NSDictionary *normalDict = [[NSDictionary alloc]initWithObjectsAndKeys: [dict objectForKey:@"user_id"],@"user_id",[dict objectForKey:@"role"],@"role",@"1",@"status",nil];
+                NSDictionary *normalDict = [[NSDictionary alloc]initWithObjectsAndKeys:
+                                            [dict objectForKey:@"user_id"],@"user_id",[dict objectForKey:@"role"],@"role",@"1",@"status",nil];
                 [temAttay addObject:normalDict];
             }
         }
@@ -510,7 +512,12 @@
         [gmp setObject:fsr.user_id forKey:@"user_id"];
         currentUserId = fsr.user_id;
         [gmp setObject:fsr.profile_pic forKey:@"profile_pic"];
-        [gmp setObject:@"1" forKey:@"role"];
+        if ([fsr.user_id isEqualToString:[[AppHelper initAppHelper] getCurrentUser].user_id]) {
+            [gmp setObject:GROUP_OWNER forKey:@"role"];
+        }else{
+            [gmp setObject:GROUP_MEMBER forKey:@"role"];
+        }
+        
         fsr = nil;
     }else{
         [gmp setObject:friendObj.first_name forKey:@"first_name"];
@@ -518,7 +525,11 @@
         [gmp setObject:friendObj.friend_id forKey:@"user_id"];
         currentUserId = friendObj.friend_id;
         [gmp setObject:friendObj.profile_pic forKey:@"profile_pic"];
-        [gmp setObject:@"1" forKey:@"role"];
+        if ([friendObj.friend_id isEqualToString:[[AppHelper initAppHelper] getCurrentUser].user_id]) {
+            [gmp setObject:GROUP_OWNER forKey:@"role"];
+        }else{
+            [gmp setObject:GROUP_MEMBER forKey:@"role"];
+        }
     }
     
     //To handle selection and deselection

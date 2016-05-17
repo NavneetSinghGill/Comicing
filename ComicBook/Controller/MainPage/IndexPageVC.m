@@ -41,12 +41,15 @@
         [self.slidesArray removeObjectAtIndex:0];
         if(4<self.slidesArray.count)
         {
+//            Slides *slides = [Slides new];
+//            [self.slidesArray insertObject:slides atIndex:0];
             [self.slidesArray removeObjectAtIndex:0];
         }
     }
     else if (self.pageNumber==2)
     {
-       
+//        Slides *slides = [Slides new];
+//        [self.slidesArray insertObject:slides atIndex:0];
         for(int i=0;i<7;i++)
         {
             [self.slidesArray removeObjectAtIndex:0];
@@ -208,11 +211,10 @@
                 }
             }
         }
-//        else
-//        {
-//
-//            [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+3] forKey:@"SelectedPageNumber"];
-//        }
+        else
+        {
+            [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+3] forKey:@"SelectedPageNumber"];
+        }
         
     }
     else if(self.pageNumber==2)
@@ -225,7 +227,7 @@
             if(self.slidesArray.count == 3 && indexPath.section == 1) {
                 [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+8] forKey:@"SelectedPageNumber"];
             } else {
-                [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+6] forKey:@"SelectedPageNumber"];
+                [dict setObject:[NSString stringWithFormat:@"%d",(int)indexPath.item+7] forKey:@"SelectedPageNumber"];
             }
         }
     }
