@@ -182,10 +182,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
                                    @"stickerPath"   : stickerPathWithBorder};
             
             [array addObject:dict];
-
         }
-        
-       
     }
 
     return array.copy;
@@ -407,8 +404,6 @@ static NSString * const reuseIdentifier1 = @"Cell1";
         {
             NSDictionary *dict = stickersWithShadow[indexPath.row - 1];
             
-            UIImage *image = dict[@"stickerImage"];
-            
             [parentViewController addStickerWithImage:dict[@"stickerImage"]];
 //            [parentViewController addStickerWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:dict[@"stickerPath"]]]];
 //            [parentViewController addStickerWithPath:dict[@"stickerPath"]];
@@ -506,14 +501,15 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     [formatter setDateFormat: @"yyyy-MM-ddHH:mm:sszzz"];
     NSString *stickerFileName = [formatter stringFromDate:[NSDate date]];
     
-    NSString *stickerFileNameWithoutBorder = [formatter stringFromDate:[NSDate date]];
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
+    
     documentsDirectory = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",Sticker_FolderName]];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:documentsDirectory])
+    {
         [[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectory withIntermediateDirectories:NO attributes:nil error:nil];
+    }
     
     NSString *str= [NSString stringWithFormat:@"%@-withBorder.png",stickerFileName];
 
@@ -540,9 +536,8 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     
     [fileManager createFileAtPath:[Image_filePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] contents:imagedata attributes:nil];
     
-    
     //save without border image
-    NSString *strWithoutBorderImage= [NSString stringWithFormat:@"%@.png",stickerFileNameWithoutBorder];
+    NSString *strWithoutBorderImage= [NSString stringWithFormat:@"%@.png",stickerFileName];
     NSString *Image_filePathWithoutBorder = [documentsDirectory stringByAppendingPathComponent:strWithoutBorderImage];
     
     NSDictionary *dictSticker = @{@"stickerImage"  : sticker,
@@ -552,7 +547,6 @@ static NSString * const reuseIdentifier1 = @"Cell1";
                            @"stickerPath"   : strWithoutBorderImage};
     
     [stickers insertObject:dictSticker atIndex:0];
-    
     
     if (stickers.count > 1)
     {
@@ -571,7 +565,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     
     [fileManager createFileAtPath:[Image_filePathWithoutBorder stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] contents:imagedataWithoutBorder attributes:nil];
     
-    [self saveStickerPath:stickerFileNameWithoutBorder];
+    [self saveStickerPath:stickerFileName];
     
 //    NSMutableArray *allStickers = [[[NSUserDefaults standardUserDefaults] objectForKey:SKeySticker] mutableCopy];
 //    
