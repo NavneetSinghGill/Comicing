@@ -73,8 +73,8 @@
     [self prepareView];
     [self addTopBarView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callAPIToGetTheComics) name:@"UpdateFriendComics" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyComicAnimation) name:@"StartFriendReplyComicAnimation" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyComicAnimation) name:@"StopFriendReplyComicAnimation" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyComicAnimation) name:@"StartFriendReplyComicAnimation" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyComicAnimation) name:@"StopFriendReplyComicAnimation" object:nil];
     [self callAPIToGetTheComics];
 }
 
@@ -147,7 +147,7 @@
     
     [self.btnMe sd_setImageWithURL:[NSURL URLWithString:[[AppHelper initAppHelper] getCurrentUser].profile_pic] forState:UIControlStateNormal];
     [self.btnFriend sd_setImageWithURL:[NSURL URLWithString:self.friendObj.profilePic] forState:UIControlStateNormal];
-    [self.imgvPinkDots setImage:[UIImage imageNamed:@"dots11"]];
+    //[self.imgvPinkDots setImage:[UIImage imageNamed:@"dots11"]];
 
     // [self setupPenAnimation];
     
