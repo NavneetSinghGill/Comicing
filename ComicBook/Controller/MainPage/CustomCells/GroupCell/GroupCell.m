@@ -28,34 +28,34 @@
     {
         btnUser.frame = CGRectMake(CGRectGetMinX(btnUser.frame),
                                    CGRectGetMinY(btnUser.frame),
-                                   60,
-                                   60);
+                                   30,
+                                   30);
         profileImageView.frame = CGRectMake(CGRectGetMinX(profileImageView.frame),
                                    CGRectGetMinY(profileImageView.frame),
-                                   60,
-                                   60);
+                                   30,
+                                   30);
     }
     else if(IS_IPHONE_6)
     {
         btnUser.frame = CGRectMake(CGRectGetMinX(btnUser.frame),
                                    CGRectGetMinY(btnUser.frame) ,
-                                   68,
-                                   68);
+                                   36,
+                                   36);
         profileImageView.frame = CGRectMake(CGRectGetMinX(profileImageView.frame),
                                    CGRectGetMinY(profileImageView.frame) ,
-                                   68,
-                                   68);
+                                   36,
+                                   36);
     }
     else if(IS_IPHONE_6P)
     {
         btnUser.frame = CGRectMake(CGRectGetMinX(btnUser.frame),
                                    CGRectGetMinY(btnUser.frame) ,
-                                   74,
-                                   74);
+                                   40,
+                                   40);
         profileImageView.frame = CGRectMake(CGRectGetMinX(profileImageView.frame),
                                    CGRectGetMinY(profileImageView.frame) ,
-                                   74,
-                                   74);
+                                   40,
+                                   40);
     }
     
     
