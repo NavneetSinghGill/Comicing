@@ -22,7 +22,7 @@
     [self configViews];
     [self getGroupDetails];
     self.friendsList.delegate = self;
-    self.friendsList.enableSelection = YES;
+    self.friendsList.enableSelection = ![self isGroupEditing];
     self.friendsList.enableSectionTitles=YES;
     self.friendsList.enableInvite = NO;
     self.friendsList.selectedActionName = @"AddToGroup";
@@ -91,6 +91,12 @@
 //    groupsDetails = [UserGroup arrayOfModelsFromDictionaries:response[@"data"]];
 //    [self getGroupDetails];
     [self BindGroupDetails:objGroup];
+    for (NSDictionary* gpMembers in objGroup.members) {
+        if ([[gpMembers objectForKey:@"user_id"] isEqualToString:[AppHelper getCurrentLoginId]]) {
+            self.friendsList.enableSelection = YES;
+            break;
+        }
+    }
 }
 
 -(void)bindEmptyGroupDetails{
@@ -312,10 +318,16 @@
         for (NSDictionary* dict in self.groupMembers.groupsArray) {
             if (dict && [dict isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *normalDict = [[NSDictionary alloc]initWithObjectsAndKeys:
-                                            [dict objectForKey:@"user_id"],@"user_id",[dict objectForKey:@"role"],@"role",@"1",@"status",nil];
+                                            [dict objectForKey:@"user_id"],@"user_id",[dict objectForKey:@"role"],@"role",[dict objectForKey:@"status"],@"status",nil];
                 [temAttay addObject:normalDict];
             }
         }
+        //Add Current user as Admin/Owner
+        NSDictionary *normalDict = [[NSDictionary alloc]initWithObjectsAndKeys:
+                                    [[AppHelper initAppHelper] getCurrentUser].user_id,@"user_id",GROUP_OWNER,@"role",@"1",@"status",nil];
+        
+        [temAttay addObject:normalDict];
+        
         [userDic setObject:temAttay forKey:@"users"];
         [dataDic setObject:userDic forKey:@"data"];
         
@@ -535,15 +547,20 @@
     //To handle selection and deselection
     if (self.groupMembers.groupsArray) {
         BOOL isAdd = NO;
+        int i =0;
         for (id dict in self.groupMembers.groupsArray) {
             if (dict && ![dict isKindOfClass:[NSString class]]) {
                 if (![currentUserId isEqualToString:@""] &&
                     [[dict objectForKey:@"user_id"] isEqualToString:currentUserId]) {
-                    [self.groupMembers.groupsArray removeObject:dict];
+                    NSMutableDictionary* mDict = [dict mutableCopy];
+                    [mDict setObject:@"0" forKey:@"status"];
+                    [self.groupMembers.groupsArray replaceObjectAtIndex:[self.groupMembers.groupsArray indexOfObject:dict] withObject:mDict];
+//                    [self.groupMembers.groupsArray removeObject:dict];
                     isAdd = YES;
                     break;
                 }
             }
+            i = i + 1;
         }
         if (!isAdd) {
             [self.groupMembers.groupsArray insertObject:gmp atIndex:0];

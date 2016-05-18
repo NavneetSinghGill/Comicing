@@ -647,10 +647,11 @@
         if([uf isKindOfClass:[UserFriends class]])
         {
             [selectedUser setObject:uf.friend_id forKey:@"friend_id"];
+            [selectedUser setObject:@"0"  forKey:@"status"];
         }else{
             [selectedUser setObject:uf.user_id forKey:@"friend_id"];
+            [selectedUser setObject:@"1"  forKey:@"status"];
         }
-        [selectedUser setObject:@"1"  forKey:@"status"];
         [self.delegate selectedRow:selectedUser];
         selectedUser = nil;
     }
