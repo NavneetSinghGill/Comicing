@@ -242,7 +242,7 @@ static AppHelper *_appHelper = nil;
     NSArray *jpgFiles = [dirFiles filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH '.jpg'"]];
     NSError *error = nil;
     for (NSString *file in jpgFiles) {
-        BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@%@", directory, file] error:&error];
+        BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", directory, file] error:&error];
         if (!success || error) {
         }
     }

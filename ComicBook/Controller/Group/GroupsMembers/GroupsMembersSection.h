@@ -20,8 +20,8 @@
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet UICollectionView *groupCollectionView;
 @property (strong, nonatomic) IBOutlet GroupsMembersCell *tabCell;
-@property (strong
-           , nonatomic) NSMutableArray *groupsArray;
+@property (strong, nonatomic) NSMutableArray *groupsArray;
+@property (strong, nonatomic) NSMutableArray *groupsTempArray;
 
 -(void)refeshList:(NSMutableArray*)array;
 -(void)refeshList;

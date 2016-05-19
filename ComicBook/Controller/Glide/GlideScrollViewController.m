@@ -378,6 +378,7 @@ NSTimer* timerObject;
                     NSData* audioData = [[NSData alloc] initWithContentsOfFile:((ComicItemBubble*)imageView).recorderFilePath];
                     [cmEng setObject:[audioData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]
                               forKey:@"enhancement_file"];
+                    [cmEng setObject:@"mp3" forKey:@"enhancement_file_type"];
                     
                     CGFloat midPointX = myRect.origin.x + (myRect.size.width/2);
                     CGFloat midPointY = myRect.origin.y + (myRect.size.height/2);
