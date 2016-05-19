@@ -17,5 +17,7 @@
 @property (nonatomic, strong) NSString *enhancementFile;
 @property (nonatomic, strong) NSString *xPos;
 @property (nonatomic, strong) NSString *yPos;
+@property (nonatomic, strong) NSString *width;
+@property (nonatomic, strong) NSString *height;
 
 @end

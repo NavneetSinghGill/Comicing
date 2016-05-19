@@ -7,6 +7,7 @@
 //
 
 #import "ComicBookVC.h"
+#import "AppDelegate.h"
 
 @interface ComicBookVC ()<UIPageViewControllerDelegate,pagechangeDelegate, UIGestureRecognizerDelegate>
 {
@@ -59,6 +60,12 @@
     DataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:[UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil]];
     self.modelController.slidesArray=slidesArray;
     //    startingViewController.imageArray=images;
+        
+        [AppDelegate application].dataManager.viewWidth = self.view.frame.size.width;
+        [AppDelegate application].dataManager.viewHeight = self.view.frame.size.height;
+//        startingViewController.viewWidth = self.view.frame.size.width;
+//        startingViewController.viewHeight = self.view.frame.size.height;
+        
     startingViewController.slidesArray = slidesArray;
     startingViewController.Tag=self.Tag;
     

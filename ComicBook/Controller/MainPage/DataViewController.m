@@ -7,18 +7,20 @@
 #import "Enhancement.h"
 #import "CustomView.h"
 #import "Constants.h"
+#import "AppDelegate.h"
 
 @interface DataViewController () <AVAudioPlayerDelegate> {
     UIView *audioView;
     UIImageView *img;
-    NSMutableArray *audioUrlArray;
-    NSMutableArray *audioDurationSecondsArray;
-    NSMutableArray *downloadedAudioDataArray;
     CGFloat audioViewHeight;
     CGFloat imgHeight;
+    AVAudioPlayer *player;
 }
 
 @property (strong, nonatomic) AVAudioPlayer *backgroundMusicPlayer;
+@property (strong, nonatomic) NSMutableArray *audioDurationSecondsArray;
+@property (strong, nonatomic) NSMutableArray *downloadedAudioDataArray;
+@property (strong, nonatomic) NSMutableArray *audioUrlArray;
 
 @end
 
@@ -142,22 +144,37 @@
     // http://68.169.44.163/sounds/comics/slides/56dbc70542dba
     */
     
-    audioUrlArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
-    audioDurationSecondsArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
-    downloadedAudioDataArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
+    self.audioUrlArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
+    self.audioDurationSecondsArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
+    self.downloadedAudioDataArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
     for (int i = 0; i < slide.enhancements.count; i ++) {
-        [downloadedAudioDataArray addObject:[NSNull null]];
+        [self.downloadedAudioDataArray addObject:[NSNull null]];
     }
     for(Enhancement *enhancement in slide.enhancements) {
-        [audioUrlArray addObject:[NSURL URLWithString:enhancement.enhancementFile]];
+        [self.audioUrlArray addObject:[NSURL URLWithString:enhancement.enhancementFile]];
         [self performSelectorInBackground:@selector(getTheAudioLength:) withObject:[NSNumber numberWithInteger:[slide.enhancements indexOfObject:enhancement]]];
         [self configureAudioPlayer:[slide.enhancements indexOfObject:enhancement]];
         CustomView *audioButton = [[CustomView alloc] init];
         audioButton.tag = [slide.enhancements indexOfObject:enhancement];
-        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 25)];
-        imageView.image = [UIImage imageNamed:@"bubbleAudioPlay"];
-        [audioButton addSubview:imageView];
+//        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
+        float xfactor = [AppDelegate application].dataManager.viewWidth/self.view.frame.size.width;
+        float yfactor = [AppDelegate application].dataManager.viewHeight/self.view.frame.size.height;
+        float originX = xfactor * [enhancement.xPos floatValue];
+        float originY = yfactor * [enhancement.yPos floatValue];
+        float sizeX = xfactor * [enhancement.width floatValue];
+        float sizeY = yfactor * [enhancement.height floatValue];
+        
+        NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
+        NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
+        // originX and originY are currently middle points. So changing it to origin.
+        originX = originX - sizeX/2;
+        originY = originY - sizeY/2;
+        [audioButton setFrame:CGRectMake(originX, originY, sizeX + sizeX/2, sizeY + sizeY/2)];
+//        [audioButton setBackgroundColor:[UIColor yellowColor]];
+//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 25)];
+//        imageView.image = [UIImage imageNamed:@"bubbleAudioPlay"];
+//        imageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
+//        [audioButton addSubview:imageView];
         __weak __typeof(self)weakSelf = self;
         __weak __typeof(audioButton)weakAudioButton = audioButton;
         audioButton.playAudio = ^{
@@ -171,13 +188,17 @@
 }
 
 - (void)playAudio:(NSInteger)tag {
-    if(downloadedAudioDataArray.count > tag) {
+    if(self.downloadedAudioDataArray.count > tag && ![[self.downloadedAudioDataArray objectAtIndex:tag] isEqual:[NSNull null]]) {
         NSError *error;
-        self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithData:[downloadedAudioDataArray objectAtIndex:tag] error:&error];
+        self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithData:[self.downloadedAudioDataArray objectAtIndex:tag] error:&error];
         [self.backgroundMusicPlayer setDelegate:self];
         self.backgroundMusicPlayer.numberOfLoops = 0;
         [self.backgroundMusicPlayer play];
         [self showAudioAnimation:tag];
+    } else {
+        [self showTemperoryAudioAnimation:tag];
+        [self performSelectorInBackground:@selector(getTheAudioLength:) withObject:[NSNumber numberWithInteger:tag]];
+        [self configureAudioPlayer:tag];
     }
 }
 
@@ -194,8 +215,28 @@
     [self.view addSubview:audioView];
     audioView.alpha = 1;
     img.alpha = 1;
-    [UIView animateWithDuration:[[audioDurationSecondsArray objectAtIndex:tag] floatValue] delay:.2 usingSpringWithDamping:.8 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:[[self.audioDurationSecondsArray objectAtIndex:tag] floatValue] delay:.2 usingSpringWithDamping:.8 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [audioView setFrame:CGRectMake(0, audioViewY, self.view.frame.size.width, audioViewHeight)];
+        audioView.alpha = 1;
+    } completion:^(BOOL finished) {
+    }];
+}
+
+- (void)showTemperoryAudioAnimation:(NSInteger)tag {
+    CGFloat audioViewY;
+    if(IS_IPHONE_5) {
+        audioViewY = self.view.frame.size.height - 55;
+    } else if(IS_IPHONE_6) {
+        audioViewY = self.view.frame.size.height - 70;
+    } else if(IS_IPHONE_6P) {
+        audioViewY = self.view.frame.size.height - 80;
+    }
+    [audioView setFrame:CGRectMake(0, audioViewY, 50, audioViewHeight)];
+    [self.view addSubview:audioView];
+    audioView.alpha = 1;
+    img.alpha = 1;
+    [UIView animateWithDuration:0 delay:.2 usingSpringWithDamping:.8 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        [audioView setFrame:CGRectMake(0, audioViewY, self.view.frame.size.width, audioViewHeight)];
         audioView.alpha = 1;
     } completion:^(BOOL finished) {
     }];
@@ -222,18 +263,18 @@
 }
 
 - (void)getTheAudioLength:(NSNumber *)index {
-    AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:[audioUrlArray objectAtIndex:[index intValue]] options:nil];
+    AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:[self.audioUrlArray objectAtIndex:[index intValue]] options:nil];
     CMTime audioDuration = audioAsset.duration;
     float audioDurationSeconds = CMTimeGetSeconds(audioDuration);
     audioDurationSeconds += 1; // add extra 1 second
-    [audioDurationSecondsArray addObject:[NSNumber numberWithFloat:audioDurationSeconds]];
+    [self.audioDurationSecondsArray addObject:[NSNumber numberWithFloat:audioDurationSeconds]];
 }
 - (void)configureAudioPlayer:(NSUInteger)index {
     //    NSURL *url = [NSURL URLWithString:@"http://68.169.44.163/sounds/comics/slides/56dbc70542dba"];
-    [self handleDataDownloadFromUrl:[audioUrlArray objectAtIndex:index] withCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+    [self handleDataDownloadFromUrl:[self.audioUrlArray objectAtIndex:index] withCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if(connectionError == nil) {
-            [downloadedAudioDataArray removeObjectAtIndex:index];
-            [downloadedAudioDataArray insertObject:data atIndex:index];
+            [self.downloadedAudioDataArray removeObjectAtIndex:index];
+            [self.downloadedAudioDataArray insertObject:data atIndex:index];
             if (!data) {
                 NSLog(@"not downloaded");
             } else {
