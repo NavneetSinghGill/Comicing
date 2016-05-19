@@ -222,6 +222,8 @@ UICollectionViewDelegate>
         ComicBook *comicBook = [comics objectAtIndex:indexPath.row];
         [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
         
+        //dinesh
+        cell.mUserName.text = comicBook.userDetail.firstName;
         cell.lblDate.text = [self dateFromString:comicBook.createdDate];
         cell.lblTime.text = [self timeFromString:comicBook.createdDate];
         
@@ -258,19 +260,36 @@ UICollectionViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*int height=0;
+     if(IS_IPHONE_5)
+     {
+     height=209;
+     }
+     else if(IS_IPHONE_6)
+     {
+     height= 239;
+     }
+     else if(IS_IPHONE_6P)
+     {
+     height= 269;
+     }*/
+    
     int height=0;
     if(IS_IPHONE_5)
     {
-        height=209;
+        height=169;
     }
     else if(IS_IPHONE_6)
     {
-        height= 239;
+        height= 199;
     }
     else if(IS_IPHONE_6P)
     {
-        height= 269;
+        height= 229;
     }
+    
+    
+    
     
     return tableView.bounds.size.height-height;
 }

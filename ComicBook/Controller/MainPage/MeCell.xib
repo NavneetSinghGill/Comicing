@@ -54,7 +54,7 @@
             <connections>
                 <outlet property="widthconstraint" destination="V4Y-N0-bb4" id="fSX-y8-UTd"/>
             </connections>
-            <point key="canvasLocation" x="307" y="320.5"/>
+            <point key="canvasLocation" x="150" y="282.5"/>
         </tableViewCell>
     </objects>
 </document>

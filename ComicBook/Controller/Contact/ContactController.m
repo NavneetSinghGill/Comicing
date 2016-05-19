@@ -68,6 +68,7 @@
     self.friendsList.delegate = self;
     self.friendsList.selectedActionName =@"AddToFriends";
     self.friendsList.enableInvite = NO;
+    self.friendsList.hideTickByDefault = NO;
     friendsFrame = self.friendsList.frame;
     [self.groupSection getGroupsByUserId];
     [super viewWillAppear:animated];
@@ -189,7 +190,8 @@
 
 -(void)postFriendsSearchResponse:(NSDictionary *)response
 {
-    [self.friendsList searchFriendsById:[FriendSearchResult arrayOfModelsFromDictionaries:response[@"data"]]];
+    [self.friendsList friendsSearchResponse:response];
+//    [self.friendsList searchFriendsById:[FriendSearchResult arrayOfModelsFromDictionaries:response[@"data"]]];
 }
 
 

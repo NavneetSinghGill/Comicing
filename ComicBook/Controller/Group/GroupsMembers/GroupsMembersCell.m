@@ -20,10 +20,10 @@
     self.groupImage.layer.borderColor=[[UIColor clearColor] CGColor];
     
     self.btnAddMember.layer.backgroundColor=[[UIColor clearColor] CGColor];
-    self.btnAddMember.layer.cornerRadius= self.btnAddMember.frame.size.width/2;
-    self.btnAddMember.layer.borderWidth= 1.5;
-    self.btnAddMember.layer.masksToBounds = YES;
-    self.btnAddMember.layer.borderColor=[[UIColor blackColor] CGColor];
+//    self.btnAddMember.layer.cornerRadius= self.btnAddMember.frame.size.width/2;
+//    self.btnAddMember.layer.borderWidth= 1.5;
+//    self.btnAddMember.layer.masksToBounds = YES;
+//    self.btnAddMember.layer.borderColor=[[UIColor blackColor] CGColor];
     
 }
 

@@ -2093,15 +2093,6 @@ Comicing </string>
                                 <rect key="frame" x="0.0" y="150" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pak-Us-0B2">
-                                        <rect key="frame" x="178" y="4" width="35" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="instagramlogo.png"/>
-                                        <connections>
-                                            <action selector="btnShareToSocialMedia:" destination="NbM-Po-tfM" eventType="touchUpInside" id="4c5-oY-94C"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Mh-2T-JiX">
                                         <rect key="frame" x="123" y="4" width="35" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -2132,6 +2123,15 @@ Comicing </string>
                                         <state key="normal" image="facebooklogo"/>
                                         <connections>
                                             <action selector="btnShareToSocialMedia:" destination="NbM-Po-tfM" eventType="touchUpInside" id="mlr-oy-7dr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pak-Us-0B2">
+                                        <rect key="frame" x="178" y="4" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="instagramlogo.png"/>
+                                        <connections>
+                                            <action selector="btnShareToSocialMedia:" destination="NbM-Po-tfM" eventType="touchUpInside" id="4c5-oY-94C"/>
                                         </connections>
                                     </button>
                                 </subviews>

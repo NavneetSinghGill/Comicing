@@ -234,6 +234,19 @@ static AppHelper *_appHelper = nil;
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@.sav",FileName]];
     BOOL success = [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+    
+    //Delete Saved jpg images
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSString *directory = [paths objectAtIndex:0];
+    NSArray *dirFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:directory error:nil];
+    NSArray *jpgFiles = [dirFiles filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH '.jpg'"]];
+    NSError *error = nil;
+    for (NSString *file in jpgFiles) {
+        BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", directory, file] error:&error];
+        if (!success || error) {
+        }
+    }
+    
     if (success) {
         return YES;
     }

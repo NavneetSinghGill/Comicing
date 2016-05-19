@@ -45,6 +45,7 @@
 }
 
 -(void)refeshList:(NSMutableArray*)array{
+    self.groupsTempArray = [array mutableCopy];
     self.groupsArray = array;
     [self.groupCollectionView reloadData];
 }
@@ -56,7 +57,7 @@
 #pragma mark - UICollectionView Datasource
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section { 
-    return self.groupsArray.count;
+    return self.groupsTempArray.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
@@ -73,15 +74,15 @@
     
     [cell.btnAddMember setHidden:YES];
     [cell.groupImage setImage:nil];
-    if ([self.groupsArray objectAtIndex:indexPath.row] &&
-        [[self.groupsArray objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]) {
-            [cell.btnAddMember setHidden:NO];
+    if ([self.groupsTempArray objectAtIndex:indexPath.row] &&
+        [[self.groupsTempArray objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]) {
+            [cell.btnAddMember setHidden:YES];
     }else{
     
-    GroupMember *us = (GroupMember*)[[GroupMember alloc] initWithDictionary:[self.groupsArray objectAtIndex:indexPath.row] error:nil];
+    GroupMember *us = (GroupMember*)[[GroupMember alloc] initWithDictionary:[self.groupsTempArray objectAtIndex:indexPath.row] error:nil];
 
     if (us == nil) {
-        [cell.btnAddMember setHidden:NO];
+        [cell.btnAddMember setHidden:YES];
     }else{
         
         [cell.groupImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]

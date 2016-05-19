@@ -79,6 +79,19 @@
     [cmNetWorking searchById:textField.text completion:^(id json,id jsonResposeHeader) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(postFriendsSearchResponse:)])
         {
+            //Adding Friends id if not existing.
+//            NSMutableArray* tempArray = [json[@"data"] mutableCopy];
+//            for (int i= 0; i< [tempArray count]; i++) {
+//                if(![[tempArray objectAtIndex:i] objectForKey:@"friend_id"])
+//                {
+//                    NSMutableDictionary* tempDict = [[tempArray objectAtIndex:i] mutableCopy];
+//                    [tempDict setObject:@"-1" forKey:@"friend_id"];
+//                    
+//                    [tempArray replaceObjectAtIndex:i withObject:tempDict];
+//                }
+//            }
+//            NSMutableDictionary* objDic = [[NSMutableDictionary alloc] init];
+//            [objDic setObject:tempArray forKey:@"data"];
             [self.delegate postFriendsSearchResponse:json];
         }
     } ErrorBlock:^(JSONModelError *error) {

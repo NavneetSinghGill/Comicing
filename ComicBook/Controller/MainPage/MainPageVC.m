@@ -775,13 +775,17 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 
 - (IBAction)btnShareToSocialMedia:(id)sender {
-    if (slideImages && [slideImages count] >0)
+    ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
+    if (comicBook.slides && [comicBook.slides count] >0)
     {
-        NSUInteger imageCount = [slideImages count] >= 4 ? 4 : [slideImages count];
+        NSUInteger imageCount = [comicBook.slides count] >= 4 ? 4 : [comicBook.slides count];
         NSMutableArray* imageArray = [[NSMutableArray alloc] init];
         for (int i=0; i < imageCount; i++) {
+            
+            Slides *slides = (Slides*)comicBook.slides[i];
+            [imageArray addObject:[self getImageFromURL:slides.slideImage]];
             //I do have only this option need to check with Vishu
-            [imageArray addObject:[self getImageFromURL:[slideImages objectAtIndex:i]]];
+//            [imageArray addObject:[self getImageFromURL:[slideImages objectAtIndex:i]]];
         }
         switch (((UIButton*)sender).tag) {
             case FB:

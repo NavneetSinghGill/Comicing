@@ -1540,13 +1540,14 @@ static CGRect CaptionTextViewMinRect;
     //End bubble Text
     
     //Add Bubble audio
-    bubbleHolderView.audioImageButton = [[UIButton alloc] initWithFrame:CGRectMake(bubbleImage.size.width - 20, bubbleImage.size.height - 20, 16, 16)];
+    bubbleHolderView.audioImageButton = [[UIButton alloc] initWithFrame:CGRectMake(bubbleHolderView.frame.size.width - 20, bubbleHolderView.frame.size.height - 20, 16, 16)];
     bubbleHolderView.audioImageButton.contentMode = UIViewContentModeScaleAspectFit;
     [bubbleHolderView.audioImageButton setImage:[UIImage imageNamed:@"bubbleAudioPlay"] forState:UIControlStateNormal];
     [bubbleHolderView.audioImageButton setAlpha:0];
     
     [self addComicItem:bubbleHolderView ItemImage:bubbleImage];
     bubbleHolderView.center = bubbleHolderView.center;
+    
     
     [self doAutoSave:bubbleHolderView];
 }
@@ -1594,7 +1595,8 @@ static CGRect CaptionTextViewMinRect;
         CGRect boundsFrame = self.voiceView.frame;
         boundsFrame.origin.x = 0;
         
-        if ([bbView isPlayVoice]) {
+        if ([bbView isPlayVoice])
+        {
             [self.btnRecord setImage:[UIImage imageNamed:@"mic_play"] forState:UIControlStateNormal];
             [self.btnRecord setAlpha:0];
             //NSLog(@"Playing sound from Path: %@",recorderFilePath);
@@ -1677,6 +1679,7 @@ static CGRect CaptionTextViewMinRect;
     if (sender.state == UIGestureRecognizerStateBegan)
     {
         [self openSpeach:((ComicItemBubble*)sender.view)];
+        
     }else if (sender.state == UIGestureRecognizerStateRecognized)
     {
         //closing speed view with animation
@@ -1907,10 +1910,12 @@ static CGRect CaptionTextViewMinRect;
 
 #pragma mark - Tocuh Events
 
--(NSInteger)getShrinkValue{
+-(NSInteger)getShrinkValue
+{
     return [self getSpeedLength];
 }
--(NSInteger)getGlideItemHight{
+-(NSInteger)getGlideItemHight
+{
     if (IS_IPHONE_5)
     {
         return 378;
@@ -2498,7 +2503,7 @@ static CGRect CaptionTextViewMinRect;
     {
         frameCaptionHolder = CGRectMake(10, 111, 310, 60);
         frameBGImageView = CGRectMake(0, 0, 300, 33);
-        frameTxtCaption = CGRectMake(0, -2, 270, 30);
+        frameTxtCaption = CGRectMake(0, 2, 270, 30);
         framePlusButton = CGRectMake(265, -4, 30, 30);
         fontsize = 17;
         
@@ -2507,7 +2512,7 @@ static CGRect CaptionTextViewMinRect;
     {
         frameCaptionHolder = CGRectMake(10, 111, 367, 60);
         frameBGImageView = CGRectMake(0, 0, 345, 40);
-        frameTxtCaption = CGRectMake(0, -2, 320, 35);
+        frameTxtCaption = CGRectMake(0, 2, 320, 35);
         framePlusButton = CGRectMake(310, 2, 30, 30);
         
         fontsize = 20;
@@ -2516,7 +2521,7 @@ static CGRect CaptionTextViewMinRect;
     {
         frameCaptionHolder = CGRectMake(10, 111, 410, 60);
         frameBGImageView = CGRectMake(0, 0, 380, 40);
-        frameTxtCaption = CGRectMake(0, -2, 340, 35);
+        frameTxtCaption = CGRectMake(0, 2, 340, 35);
         framePlusButton = CGRectMake(340, 2, 30, 30);
         
         fontsize = 22;
@@ -2525,7 +2530,7 @@ static CGRect CaptionTextViewMinRect;
     {
         frameCaptionHolder = CGRectMake(10, 111, 301, 60);
         frameBGImageView = CGRectMake(0, 0, 280, 33);
-        frameTxtCaption = CGRectMake(0, -2, 270, 30);
+        frameTxtCaption = CGRectMake(0, 2, 270, 30);
         framePlusButton = CGRectMake(272, 2, 30, 30);
         
         fontsize = 18;
@@ -3234,7 +3239,7 @@ static CGRect CaptionTextViewMinRect;
     {
         frameCaptionHolder = CGRectMake(10, 111, 310, 60);
         frameBGImageView = CGRectMake(0, 0, 300, 33);
-        frameTxtCaption = CGRectMake(0, -2, 270, 30);
+        frameTxtCaption = CGRectMake(0, 2, 270, 30);
         framePlusButton = CGRectMake(265, 0, 30, 30);
         fontsize = 17;
     }
@@ -3242,7 +3247,7 @@ static CGRect CaptionTextViewMinRect;
     {
         frameCaptionHolder = CGRectMake(10, 111, 367, 60);
         frameBGImageView = CGRectMake(0, 0, 345, 40);
-        frameTxtCaption = CGRectMake(0, -2, 320, 35);
+        frameTxtCaption = CGRectMake(0, 2, 320, 35);
         framePlusButton = CGRectMake(310, 2, 30, 30);
         
         fontsize = 20;
@@ -3252,7 +3257,7 @@ static CGRect CaptionTextViewMinRect;
     {
         frameCaptionHolder = CGRectMake(10, 111, 410, 60);
         frameBGImageView = CGRectMake(0, 0, 380, 40);
-        frameTxtCaption = CGRectMake(0, -2, 340, 35);
+        frameTxtCaption = CGRectMake(0, 2, 340, 35);
         framePlusButton = CGRectMake(340, 2, 30, 30);
         
         fontsize = 22;
@@ -3261,7 +3266,7 @@ static CGRect CaptionTextViewMinRect;
     {
         frameCaptionHolder = CGRectMake(10, 111, 301, 60);
         frameBGImageView = CGRectMake(0, 0, 280, 33);
-        frameTxtCaption = CGRectMake(0, -2, 270, 30);
+        frameTxtCaption = CGRectMake(0, 2, 270, 30);
         framePlusButton = CGRectMake(272, 2, 30, 30);
         
         fontsize = 18;
@@ -3507,6 +3512,7 @@ static CGRect CaptionTextViewMinRect;
         for (int i = 0; i < cmPage.subviews.count; i ++)
         {
             id imageView = cmPage.subviews[i];
+            CGRect myRect = [cmPage.subviewData[i] CGRectValue];
             //Check is ComicItemBubble
             if([imageView isKindOfClass:[ComicItemBubble class]])
             {
@@ -3521,9 +3527,15 @@ static CGRect CaptionTextViewMinRect;
                     NSData* audioData = [[NSData alloc] initWithContentsOfFile:((ComicItemBubble*)imageView).recorderFilePath];
                     [cmEng setObject:[audioData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]
                               forKey:@"enhancement_file"];
+                    [cmEng setObject:@"mp3" forKey:@"enhancement_file_type"];
                     
-                    [cmEng setObject:[NSString stringWithFormat:@"%f",((ComicItemBubble*)imageView).frame.origin.x] forKey:@"position_top"];
-                    [cmEng setObject:[NSString stringWithFormat:@"%f",((ComicItemBubble*)imageView).frame.origin.y] forKey:@"position_left"];
+                    CGFloat midPointX = myRect.origin.x + (myRect.size.width/2);
+                    CGFloat midPointY = myRect.origin.y + (myRect.size.height/2);
+                    
+                    [cmEng setObject:[NSString stringWithFormat:@"%f",midPointY] forKey:@"position_top"];
+                    [cmEng setObject:[NSString stringWithFormat:@"%f",midPointX] forKey:@"position_left"];
+                    [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.width] forKey:@"width"];
+                    [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.height] forKey:@"height"];
                     [cmEng setObject:@"1" forKey:@"z_index"];
                     
                     [enhancements addObject:cmEng];
