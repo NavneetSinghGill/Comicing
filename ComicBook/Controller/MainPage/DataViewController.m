@@ -189,6 +189,7 @@
 
 - (void)playAudio:(NSInteger)tag {
     if(self.downloadedAudioDataArray.count > tag && ![[self.downloadedAudioDataArray objectAtIndex:tag] isEqual:[NSNull null]]) {
+        NSLog(@"STEP: 1 : play audio");
         NSError *error;
         self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithData:[self.downloadedAudioDataArray objectAtIndex:tag] error:&error];
         [self.backgroundMusicPlayer setDelegate:self];
@@ -196,9 +197,14 @@
         [self.backgroundMusicPlayer play];
         [self showAudioAnimation:tag];
     } else {
+        NSLog(@"STEP: 2 : play audio");
         [self showTemperoryAudioAnimation:tag];
         [self performSelectorInBackground:@selector(getTheAudioLength:) withObject:[NSNumber numberWithInteger:tag]];
-        [self configureAudioPlayer:tag];
+        [self configureAudioPlayerAndPlay:tag withCompletionHandler:^(BOOL success) {
+            NSLog(@"STEP: 6 : successfully received data");
+            NSLog(@"STEP: 7 : recursion play");
+            [self playAudio:tag];
+        }];
     }
 }
 
@@ -281,8 +287,27 @@
             }
         }
     }];
-    
 }
+
+- (void)configureAudioPlayerAndPlay:(NSUInteger)index
+            withCompletionHandler:(void (^)(BOOL success)) handler {
+    NSLog(@"STEP: 3 : download data");
+    //    NSURL *url = [NSURL URLWithString:@"http://68.169.44.163/sounds/comics/slides/56dbc70542dba"];
+    [self handleDataDownloadFromUrl:[self.audioUrlArray objectAtIndex:index] withCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if(connectionError == nil) {
+            [self.downloadedAudioDataArray removeObjectAtIndex:index];
+            [self.downloadedAudioDataArray insertObject:data atIndex:index];
+            if (!data) {
+                NSLog(@"STEP: 4 : not downloaded");
+                handler(NO);
+            } else {
+                NSLog(@"STEP: 5 : downloaded");
+                handler(YES);
+            }
+        }
+    }];
+}
+
 
 - (void)handleDataDownloadFromUrl:(NSURL *)url
             withCompletionHandler:(void (^)(NSURLResponse* response, NSData* data, NSError* connectionError)) handler {
