@@ -104,7 +104,7 @@ UICollectionViewDelegate>
     saveTableViewFrame = tblvComics.frame;
     
     [self.imgvGroupIcon sd_setImageWithURL:[NSURL URLWithString:self.groupObj.groupIcon]];
-    [self.imgvPinkDots setImage:[UIImage imageNamed:@"dots11"]];
+    [self.imgvPinkDots setImage:[UIImage imageNamed:@"orangeDots11"]];
     
     [self callAPItoGetGroupsMember];
     [self callAPItoGetGroupsComics];
@@ -112,17 +112,17 @@ UICollectionViewDelegate>
 
 - (void)startReplyComicAnimation {
     self.imgvPinkDots.animationImages = [NSArray arrayWithObjects:
-                                         [UIImage imageNamed:@"dots1"],
-                                         [UIImage imageNamed:@"dots2"],
-                                         [UIImage imageNamed:@"dots3"],
-                                         [UIImage imageNamed:@"dots4"],
-                                         [UIImage imageNamed:@"dots5"],
-                                         [UIImage imageNamed:@"dots6"],
-                                         [UIImage imageNamed:@"dots7"],
-                                         [UIImage imageNamed:@"dots8"],
-                                         [UIImage imageNamed:@"dots9"],
-                                         [UIImage imageNamed:@"dots10"],
-                                         [UIImage imageNamed:@"dots11"],nil];
+                                         [UIImage imageNamed:@"orangeDots1"],
+                                         [UIImage imageNamed:@"orangeDots2"],
+                                         [UIImage imageNamed:@"orangeDots3"],
+                                         [UIImage imageNamed:@"orangeDots4"],
+                                         [UIImage imageNamed:@"orangeDots5"],
+                                         [UIImage imageNamed:@"orangeDots6"],
+                                         [UIImage imageNamed:@"orangeDots7"],
+                                         [UIImage imageNamed:@"orangeDots8"],
+                                         [UIImage imageNamed:@"orangeDots9"],
+                                         [UIImage imageNamed:@"orangeDots10"],
+                                         [UIImage imageNamed:@"orangeDots11"],nil];
     self.imgvPinkDots.animationDuration = 2.0f;
     self.imgvPinkDots.animationRepeatCount = 0;
     [self.imgvPinkDots startAnimating];
