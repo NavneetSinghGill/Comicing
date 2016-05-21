@@ -18,7 +18,9 @@
              @"enhancementType": @"enhancement_type",
              @"enhancementFile": @"enhancement_file",
              @"xPos": @"position_left",
-             @"yPos": @"position_top"
+             @"yPos": @"position_top",
+             @"width": @"width",
+             @"height": @"height"
              };
 }
 

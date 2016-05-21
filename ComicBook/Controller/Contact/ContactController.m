@@ -392,7 +392,7 @@
         [dataDic setObject:userDic forKey:@"data"];
         
         ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
-        [cmNetWorking addRemoveFriends:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json,id jsonResposeHeader)
+        [cmNetWorking addRemoveFriends:dataDic completion:^(id json,id jsonResposeHeader)
         {
             [selectedDict removeAllObjects];
             selectedDict = nil;

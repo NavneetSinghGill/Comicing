@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
 #import "Friend.h"
 
 @interface DataManager : NSObject
@@ -15,5 +16,7 @@
 @property (nonatomic, strong) NSArray *groupsArray;
 @property (nonatomic, strong) NSArray *activeInboxArray;
 @property (nonatomic, strong) Friend *friendObject;
+@property (nonatomic, assign) CGFloat viewWidth;
+@property (nonatomic, assign) CGFloat viewHeight;
 
 @end

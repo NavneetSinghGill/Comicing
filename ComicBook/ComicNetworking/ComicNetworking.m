@@ -90,9 +90,9 @@ static ComicNetworking *_sharedComicNetworking = nil;
         errorBlock(error);
     }];
 }
--(void)addRemoveFriends:(NSMutableDictionary*)paramData Id:(NSString*)Id completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock)errorBlock
+-(void)addRemoveFriends:(NSMutableDictionary*)paramData completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock)errorBlock
 {
-    [self handlingPOSTRequest:FRIENDS_ADD_USERID singleParam:Id QueryStringParameters:paramData completion:^(id json,id jsonResponse) {
+    [self handlingPOSTRequest:FRIENDS_ADD_USERID singleParam:nil QueryStringParameters:paramData completion:^(id json,id jsonResponse) {
         completeBlock(json,jsonResponse);
     } ErrorBlock:^(JSONModelError *error) {
         errorBlock(error);

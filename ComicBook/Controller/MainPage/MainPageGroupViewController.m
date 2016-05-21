@@ -104,7 +104,7 @@ UICollectionViewDelegate>
     saveTableViewFrame = tblvComics.frame;
     
     [self.imgvGroupIcon sd_setImageWithURL:[NSURL URLWithString:self.groupObj.groupIcon]];
-    [self.imgvPinkDots setImage:[UIImage imageNamed:@"dots11"]];
+    [self.imgvPinkDots setImage:[UIImage imageNamed:@"orangeDots11"]];
     
     [self callAPItoGetGroupsMember];
     [self callAPItoGetGroupsComics];
@@ -112,17 +112,17 @@ UICollectionViewDelegate>
 
 - (void)startReplyComicAnimation {
     self.imgvPinkDots.animationImages = [NSArray arrayWithObjects:
-                                         [UIImage imageNamed:@"dots1"],
-                                         [UIImage imageNamed:@"dots2"],
-                                         [UIImage imageNamed:@"dots3"],
-                                         [UIImage imageNamed:@"dots4"],
-                                         [UIImage imageNamed:@"dots5"],
-                                         [UIImage imageNamed:@"dots6"],
-                                         [UIImage imageNamed:@"dots7"],
-                                         [UIImage imageNamed:@"dots8"],
-                                         [UIImage imageNamed:@"dots9"],
-                                         [UIImage imageNamed:@"dots10"],
-                                         [UIImage imageNamed:@"dots11"],nil];
+                                         [UIImage imageNamed:@"orangeDots1"],
+                                         [UIImage imageNamed:@"orangeDots2"],
+                                         [UIImage imageNamed:@"orangeDots3"],
+                                         [UIImage imageNamed:@"orangeDots4"],
+                                         [UIImage imageNamed:@"orangeDots5"],
+                                         [UIImage imageNamed:@"orangeDots6"],
+                                         [UIImage imageNamed:@"orangeDots7"],
+                                         [UIImage imageNamed:@"orangeDots8"],
+                                         [UIImage imageNamed:@"orangeDots9"],
+                                         [UIImage imageNamed:@"orangeDots10"],
+                                         [UIImage imageNamed:@"orangeDots11"],nil];
     self.imgvPinkDots.animationDuration = 2.0f;
     self.imgvPinkDots.animationRepeatCount = 0;
     [self.imgvPinkDots startAnimating];
@@ -222,6 +222,8 @@ UICollectionViewDelegate>
         ComicBook *comicBook = [comics objectAtIndex:indexPath.row];
         [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
         
+        //dinesh
+        cell.mUserName.text = comicBook.userDetail.firstName;
         cell.lblDate.text = [self dateFromString:comicBook.createdDate];
         cell.lblTime.text = [self timeFromString:comicBook.createdDate];
         
@@ -258,19 +260,36 @@ UICollectionViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*int height=0;
+     if(IS_IPHONE_5)
+     {
+     height=209;
+     }
+     else if(IS_IPHONE_6)
+     {
+     height= 239;
+     }
+     else if(IS_IPHONE_6P)
+     {
+     height= 269;
+     }*/
+    
     int height=0;
     if(IS_IPHONE_5)
     {
-        height=209;
+        height=169;
     }
     else if(IS_IPHONE_6)
     {
-        height= 239;
+        height= 199;
     }
     else if(IS_IPHONE_6P)
     {
-        height= 269;
+        height= 229;
     }
+    
+    
+    
     
     return tableView.bounds.size.height-height;
 }

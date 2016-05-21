@@ -11,4 +11,9 @@
 @interface MePageVC : UIViewController<UITableViewDelegate, UITableViewDataSource,BookChangeDelegate>
 @property(nonatomic,strong)NSMutableDictionary*ComicBookDict;
 @property(nonatomic,strong)UIButton* currentButton;
+
+@property(nonatomic,strong)UILabel* currentHollowLable;
+@property(nonatomic,strong)UILabel* currentDisplayLable;
+
+
 @end

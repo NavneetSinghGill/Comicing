@@ -32,7 +32,7 @@ typedef void (^ComicNetworkingFailBlock)(JSONModelError* error);
 -(void)addRemoveUserFromGroup:(NSMutableDictionary*)paramData GroupId:(NSString*)Id completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock) errorBlock;
 -(void)createGroup:(NSMutableDictionary*)paramData completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock) errorBlock;
 -(void)updateGroup:(NSMutableDictionary*)paramData Id:(NSString*)Id completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock)errorBlock;
--(void)addRemoveFriends:(NSMutableDictionary*)paramData Id:(NSString*)Id completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock) errorBlock;
+-(void)addRemoveFriends:(NSMutableDictionary*)paramData completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock) errorBlock;
 -(void)shareComicImage:(NSMutableDictionary*)paramData Id:(NSString*)Id completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock) errorBlock;
 -(void)postRegister:(NSMutableDictionary*)paramData completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock)errorBlock;
 -(void)postLogin:(NSMutableDictionary*)paramData completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock)errorBlock;

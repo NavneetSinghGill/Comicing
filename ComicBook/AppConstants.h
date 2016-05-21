@@ -53,7 +53,7 @@
 #define RegisterNotification_Failed @"didRegisterNotification_Failes"
 #define RegisterNotification_Receive @"receiveRemoteNotification"
 
-#define TermsAndServiceURL  @"http://www.google.com/"
+#define TermsAndServiceURL  @"Comicing_Terms_of_Service"
 
 /* Comic makeing */
 /* Bubble tail Post nmae*/

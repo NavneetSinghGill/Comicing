@@ -171,10 +171,10 @@
         cell.lblMobileNumber.text = us.mobile;
         
         
-        [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
+        [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic] placeholderImage:[UIImage imageNamed:@"Placeholder"]];
         
 //        [cell.userImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
-//                            placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
+//                            placeHolderImage:[UIImage imageNamed:@"Placeholder"]
 //                             completionBlock:^(BOOL succeeded, UIImage *image) {
 //                                 cell.userImage.image = image;
 //                             }];
@@ -271,7 +271,7 @@
         
         cell.lblUerName.text = us.first_name;
         
-        [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic] placeholderImage:[UIImage imageNamed:@"Placeholder.png"]];
+        [cell.userImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic] placeholderImage:[UIImage imageNamed:@"Placeholder"]];
         
         //Config image border
         [[cell.userImage layer] setBorderWidth:4.0f];
@@ -647,10 +647,11 @@
         if([uf isKindOfClass:[UserFriends class]])
         {
             [selectedUser setObject:uf.friend_id forKey:@"friend_id"];
+            [selectedUser setObject:@"0"  forKey:@"status"];
         }else{
             [selectedUser setObject:uf.user_id forKey:@"friend_id"];
+            [selectedUser setObject:@"1"  forKey:@"status"];
         }
-        [selectedUser setObject:@"1"  forKey:@"status"];
         [self.delegate selectedRow:selectedUser];
         selectedUser = nil;
     }

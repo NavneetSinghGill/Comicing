@@ -66,13 +66,13 @@
         UserGroup* ug =  (UserGroup*)[self.groupsArray objectAtIndex:self.enableAdd?indexPath.row-1:indexPath.row];
         
         [cell.groupImage downloadImageWithURL:[NSURL URLWithString:ug.group_icon]
-                             placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
+                             placeHolderImage:[UIImage imageNamed:@"Placeholder"]
                               completionBlock:^(BOOL succeeded, UIImage *image) {
                                   cell.groupImage.image = [UIImage resizeImage:image newSize:CGSizeMake(40, 40)];
                               }];
         
 //        [cell.groupImage sd_setImageWithURL:[NSURL URLWithString:ug.group_icon]
-//                             placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
+//                             placeholderImage:[UIImage imageNamed:@"Placeholder"]
 //                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
 ////                                        cell.groupImage.image = [UIImage ScaletoFill:image toSize:CGSizeMake(40, 40)];
 //                                        cell.groupImage.image = [UIImage resizeImage:image newSize:CGSizeMake(40, 40)];

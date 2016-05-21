@@ -8,9 +8,15 @@
 
 #import "GroupViewController.h"
 #import "SearchViewController.h"
+#import "TopBarViewController.h"
+#import "TopSearchVC.h"
+#import "Constants.h"
+#import "MainPageVC.h"
 
 @interface GroupViewController ()
-
+{
+    TopBarViewController *topBarView;
+}
 @end
 
 #define SEARCHTEXTFILES_TAG 10
@@ -19,10 +25,11 @@
 
 - (void)viewDidLoad {
     
+    [self addTopBarView];
     [self configViews];
     [self getGroupDetails];
     self.friendsList.delegate = self;
-    self.friendsList.enableSelection = YES;
+    self.friendsList.enableSelection = ![self isGroupEditing];
     self.friendsList.enableSectionTitles=YES;
     self.friendsList.enableInvite = NO;
     self.friendsList.selectedActionName = @"AddToGroup";
@@ -53,6 +60,57 @@
 }
 
 #pragma Methods
+
+- (void)addTopBarView
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle: [NSBundle mainBundle]];
+    
+    topBarView = [mainStoryboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    [self addChildViewController:topBarView];
+    [self.view addSubview:topBarView.view];
+    [topBarView didMoveToParentViewController:self];
+    
+    __block typeof(self) weakSelf = self;
+    topBarView.homeAction = ^(void) {
+        //        currentPageDownScroll = 0;
+        //        currentPageUpScroll = 0;
+        //        [weakSelf callAPIToGetTheComicsWithPageNumber:currentPageDownScroll + 1  andTimelinePeriod:@"" andDirection:@"" shouldClearAllData:YES];
+        
+        //        MainPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:MAIN_PAGE_VIEW];
+        //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
+        
+        NSArray *viewControllers = weakSelf.navigationController.viewControllers;
+        
+        for (UIViewController *viewController in viewControllers)
+        {
+            if ([viewController isKindOfClass:[MainPageVC class]])
+            {
+                [weakSelf.navigationController popToViewController:viewController animated:YES];
+            }
+        }
+        
+        
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
+    topBarView.contactAction = ^(void) {
+        //        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
+        //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
+        [AppHelper closeMainPageviewController:weakSelf];
+    };
+    topBarView.meAction = ^(void) {
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
+    topBarView.searchAction = ^(void) {
+        
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle: [NSBundle mainBundle]];
+        
+        TopSearchVC *topSearchView = [mainStoryboard instantiateViewControllerWithIdentifier:TOP_SEARCH_VIEW];
+        [topSearchView displayContentController:weakSelf];
+        //        [weakSelf presentViewController:topSearchView animated:YES completion:nil];
+    };
+}
+
 
 -(void)configViews{
     
@@ -91,6 +149,12 @@
 //    groupsDetails = [UserGroup arrayOfModelsFromDictionaries:response[@"data"]];
 //    [self getGroupDetails];
     [self BindGroupDetails:objGroup];
+    for (NSDictionary* gpMembers in objGroup.members) {
+        if ([[gpMembers objectForKey:@"user_id"] isEqualToString:[AppHelper getCurrentLoginId]]) {
+            self.friendsList.enableSelection = YES;
+            break;
+        }
+    }
 }
 
 -(void)bindEmptyGroupDetails{
@@ -125,13 +189,13 @@
     if (ug.group_icon != nil) {
         
         [self.groupImage downloadImageWithURL:[NSURL URLWithString:ug.group_icon]
-                             placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
+                             placeHolderImage:[UIImage imageNamed:@"Placeholder"]
                               completionBlock:^(BOOL succeeded, UIImage *image) {
                                   self.groupImage.image = image;
                               }];
         
 //        [self.groupImage sd_setImageWithURL:[NSURL URLWithString:ug.group_icon]
-//                           placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
+//                           placeholderImage:[UIImage imageNamed:@"Placeholder"]
 //                                  completed:^(UIImage *image, NSError *error,
 //                                              SDImageCacheType cacheType, NSURL *imageURL) {
 //                                  }];
@@ -312,10 +376,16 @@
         for (NSDictionary* dict in self.groupMembers.groupsArray) {
             if (dict && [dict isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *normalDict = [[NSDictionary alloc]initWithObjectsAndKeys:
-                                            [dict objectForKey:@"user_id"],@"user_id",[dict objectForKey:@"role"],@"role",@"1",@"status",nil];
+                                            [dict objectForKey:@"user_id"],@"user_id",[dict objectForKey:@"role"],@"role",[dict objectForKey:@"status"],@"status",nil];
                 [temAttay addObject:normalDict];
             }
         }
+        //Add Current user as Admin/Owner
+        NSDictionary *normalDict = [[NSDictionary alloc]initWithObjectsAndKeys:
+                                    [[AppHelper initAppHelper] getCurrentUser].user_id,@"user_id",GROUP_OWNER,@"role",@"1",@"status",nil];
+        
+        [temAttay addObject:normalDict];
+        
         [userDic setObject:temAttay forKey:@"users"];
         [dataDic setObject:userDic forKey:@"data"];
         
@@ -511,6 +581,7 @@
         [gmp setObject:fsr.last_name forKey:@"last_name"];
         [gmp setObject:fsr.user_id forKey:@"user_id"];
         currentUserId = fsr.user_id;
+        [gmp setObject:@"1" forKey:@"status"];
         [gmp setObject:fsr.profile_pic forKey:@"profile_pic"];
         if ([fsr.user_id isEqualToString:[[AppHelper initAppHelper] getCurrentUser].user_id]) {
             [gmp setObject:GROUP_OWNER forKey:@"role"];
@@ -525,6 +596,7 @@
         [gmp setObject:friendObj.friend_id forKey:@"user_id"];
         currentUserId = friendObj.friend_id;
         [gmp setObject:friendObj.profile_pic forKey:@"profile_pic"];
+        [gmp setObject:@"1" forKey:@"status"];
         if ([friendObj.friend_id isEqualToString:[[AppHelper initAppHelper] getCurrentUser].user_id]) {
             [gmp setObject:GROUP_OWNER forKey:@"role"];
         }else{
@@ -534,23 +606,31 @@
     
     //To handle selection and deselection
     if (self.groupMembers.groupsArray) {
+        [self.groupMembers.groupsTempArray removeAllObjects];
+        self.groupMembers.groupsTempArray = [self.groupMembers.groupsArray mutableCopy];
         BOOL isAdd = NO;
+        int i =0;
         for (id dict in self.groupMembers.groupsArray) {
             if (dict && ![dict isKindOfClass:[NSString class]]) {
-                if (![currentUserId isEqualToString:@""] &&
-                    [[dict objectForKey:@"user_id"] isEqualToString:currentUserId]) {
-                    [self.groupMembers.groupsArray removeObject:dict];
+                if ([[dict objectForKey:@"user_id"] isEqualToString:[gmp objectForKey:@"user_id"]]) {
+                    NSMutableDictionary* mDict = [dict mutableCopy];
+                    [mDict setObject:@"0" forKey:@"status"];
+                    [self.groupMembers.groupsArray replaceObjectAtIndex:[self.groupMembers.groupsArray indexOfObject:dict] withObject:mDict];
+                    [self.groupMembers.groupsTempArray removeObjectAtIndex:[self.groupMembers.groupsArray indexOfObject:mDict]];
                     isAdd = YES;
                     break;
                 }
             }
+            i = i + 1;
         }
         if (!isAdd) {
             [self.groupMembers.groupsArray insertObject:gmp atIndex:0];
+            [self.groupMembers.groupsTempArray insertObject:gmp atIndex:0];
         }
         if ([[self.groupMembers.groupsArray
               objectAtIndex:self.groupMembers.groupsArray.count - 1] isKindOfClass:[NSString class]]) {
             [self.groupMembers.groupsArray removeLastObject];
+            [self.groupMembers.groupsTempArray removeLastObject];
         }
     }
     [self.groupMembers refeshList];

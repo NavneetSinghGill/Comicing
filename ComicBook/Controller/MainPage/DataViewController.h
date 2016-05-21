@@ -16,4 +16,7 @@
 @property int pageNumber;
 @property CGFloat myScale;
 @property(nonatomic,assign) int Tag;
+//@property CGFloat viewWidth;
+//@property CGFloat viewHeight;
+
 @end
