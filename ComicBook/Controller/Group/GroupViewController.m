@@ -131,13 +131,13 @@
     if (ug.group_icon != nil) {
         
         [self.groupImage downloadImageWithURL:[NSURL URLWithString:ug.group_icon]
-                             placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
+                             placeHolderImage:[UIImage imageNamed:@"Placeholder"]
                               completionBlock:^(BOOL succeeded, UIImage *image) {
                                   self.groupImage.image = image;
                               }];
         
 //        [self.groupImage sd_setImageWithURL:[NSURL URLWithString:ug.group_icon]
-//                           placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
+//                           placeholderImage:[UIImage imageNamed:@"Placeholder"]
 //                                  completed:^(UIImage *image, NSError *error,
 //                                              SDImageCacheType cacheType, NSURL *imageURL) {
 //                                  }];

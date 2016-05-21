@@ -46,13 +46,13 @@
 // if(userObject)
 // {
 //         [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:userObject.profile_pic]
-//                                    placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
+//                                    placeholderImage:[UIImage imageNamed:@"Placeholder"]
 //                                           completed:^(UIImage *image, NSError *error,
 //                                                       SDImageCacheType cacheType, NSURL *imageURL) {
 //                                           }];
   
      [self.avatarImage downloadImageWithURL:[NSURL URLWithString:[[AppHelper initAppHelper]getCurrentUser].profile_pic]
-                         placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
+                         placeHolderImage:[UIImage imageNamed:@"Placeholder"]
                           completionBlock:^(BOOL succeeded, UIImage *image) {
                               self.avatarImage.image = image;
                           }];

@@ -86,14 +86,14 @@
     }else{
         
         [cell.groupImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
-                              placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
+                              placeHolderImage:[UIImage imageNamed:@"Placeholder"]
                                completionBlock:^(BOOL succeeded, UIImage *image) {
                                    cell.groupImage.image = image;
                                }];
 
         
 //        [cell.groupImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic]
-//                             placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
+//                             placeholderImage:[UIImage imageNamed:@"Placeholder"]
 //                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
 //                                        
 //                                    }];
