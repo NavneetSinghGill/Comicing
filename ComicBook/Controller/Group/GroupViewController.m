@@ -8,9 +8,15 @@
 
 #import "GroupViewController.h"
 #import "SearchViewController.h"
+#import "TopBarViewController.h"
+#import "TopSearchVC.h"
+#import "Constants.h"
+#import "MainPageVC.h"
 
 @interface GroupViewController ()
-
+{
+    TopBarViewController *topBarView;
+}
 @end
 
 #define SEARCHTEXTFILES_TAG 10
@@ -19,6 +25,7 @@
 
 - (void)viewDidLoad {
     
+    [self addTopBarView];
     [self configViews];
     [self getGroupDetails];
     self.friendsList.delegate = self;
@@ -53,6 +60,57 @@
 }
 
 #pragma Methods
+
+- (void)addTopBarView
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle: [NSBundle mainBundle]];
+    
+    topBarView = [mainStoryboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    [self addChildViewController:topBarView];
+    [self.view addSubview:topBarView.view];
+    [topBarView didMoveToParentViewController:self];
+    
+    __block typeof(self) weakSelf = self;
+    topBarView.homeAction = ^(void) {
+        //        currentPageDownScroll = 0;
+        //        currentPageUpScroll = 0;
+        //        [weakSelf callAPIToGetTheComicsWithPageNumber:currentPageDownScroll + 1  andTimelinePeriod:@"" andDirection:@"" shouldClearAllData:YES];
+        
+        //        MainPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:MAIN_PAGE_VIEW];
+        //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
+        
+        NSArray *viewControllers = weakSelf.navigationController.viewControllers;
+        
+        for (UIViewController *viewController in viewControllers)
+        {
+            if ([viewController isKindOfClass:[MainPageVC class]])
+            {
+                [weakSelf.navigationController popToViewController:viewController animated:YES];
+            }
+        }
+        
+        
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
+    topBarView.contactAction = ^(void) {
+        //        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
+        //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
+        [AppHelper closeMainPageviewController:weakSelf];
+    };
+    topBarView.meAction = ^(void) {
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
+    topBarView.searchAction = ^(void) {
+        
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle: [NSBundle mainBundle]];
+        
+        TopSearchVC *topSearchView = [mainStoryboard instantiateViewControllerWithIdentifier:TOP_SEARCH_VIEW];
+        [topSearchView displayContentController:weakSelf];
+        //        [weakSelf presentViewController:topSearchView animated:YES completion:nil];
+    };
+}
+
 
 -(void)configViews{
     
@@ -131,13 +189,13 @@
     if (ug.group_icon != nil) {
         
         [self.groupImage downloadImageWithURL:[NSURL URLWithString:ug.group_icon]
-                             placeHolderImage:[UIImage imageNamed:@"Placeholder.png"]
+                             placeHolderImage:[UIImage imageNamed:@"Placeholder"]
                               completionBlock:^(BOOL succeeded, UIImage *image) {
                                   self.groupImage.image = image;
                               }];
         
 //        [self.groupImage sd_setImageWithURL:[NSURL URLWithString:ug.group_icon]
-//                           placeholderImage:[UIImage imageNamed:@"Placeholder.png"]
+//                           placeholderImage:[UIImage imageNamed:@"Placeholder"]
 //                                  completed:^(UIImage *image, NSError *error,
 //                                              SDImageCacheType cacheType, NSURL *imageURL) {
 //                                  }];

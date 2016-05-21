@@ -479,6 +479,7 @@ CGRect firstFrame;
             if ([[json objectForKey:@"result"] isEqualToString:@"failed" ]) {
                 NSString* strMessage = [NSString stringWithFormat:@"user with login id %@ already exist", self.txtId.text ];
                 [AppHelper showErrorDropDownMessage:@"Failed" mesage:strMessage];
+                isProcessing = NO;
                 [self.txtId becomeFirstResponder];
                 return;
             }

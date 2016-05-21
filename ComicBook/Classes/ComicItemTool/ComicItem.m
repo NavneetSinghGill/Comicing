@@ -288,6 +288,7 @@
         [player setDelegate:self];
         [player prepareToPlay];
     }
+    [player setVolume: 1.0];
     [player play];
     
 }
@@ -296,11 +297,13 @@
     if (audioSession == nil) {
         audioSession = [AVAudioSession sharedInstance];
     }
+    NSError *setOverrideError;
     NSError *err = nil;
     [audioSession setCategory :AVAudioSessionCategoryPlayAndRecord error:&err];
     if(err){
         return @"";
     }
+    [audioSession overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&setOverrideError];
     [audioSession setActive:YES error:&err];
     err = nil;
     if(err){

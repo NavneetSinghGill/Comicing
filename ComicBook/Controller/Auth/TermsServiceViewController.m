@@ -33,9 +33,13 @@
 
 -(void)loadHtmlContent{
     
-    NSURL *url = [NSURL URLWithString:TermsAndServiceURL];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:request];
+    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:TermsAndServiceURL ofType:@"html"];
+    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+    [self.webView loadHTMLString:htmlString baseURL:nil];
+    
+//    NSURL *url = [NSURL URLWithString:TermsAndServiceURL];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    [self.webView loadRequest:request];
 }
 
 /*

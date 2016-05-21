@@ -488,7 +488,8 @@
     
     
     [parent addConstraint:[NSLayoutConstraint constraintWithItem:child
-                                                       attribute:NSLayoutAttributeLeading                                                       relatedBy:NSLayoutRelationEqual
+                                                       attribute:NSLayoutAttributeLeading
+                                                       relatedBy:NSLayoutRelationEqual
                                                           toItem:parent
                                                        attribute:NSLayoutAttributeLeading
                                                       multiplier:1.0
@@ -713,7 +714,7 @@
                 
                 // unfriend API
                 [self callFriendUnfriendAPIWithStatus:@"0"];
-                self.profileImageView.backgroundColor = [UIColor colorWithRed:0.21 green:0.69 blue:0.93 alpha:1];
+                self.profileImageView.backgroundColor = [UIColor clearColor];
                 self.profileImageView.userInteractionEnabled = NO;
                 
                 self.friendBubble.image = [UIImage imageNamed:@"unFriendBubble.png"];
@@ -750,7 +751,7 @@
         if (isAlreadyFriend == NO) {
             // friend API
             [self callFriendUnfriendAPIWithStatus:@"1"];
-            self.profileImageView.backgroundColor = [UIColor grayColor];
+            self.profileImageView.backgroundColor = [UIColor clearColor];
             self.profileImageView.userInteractionEnabled = NO;
             
             self.friendBubble.image = [UIImage imageNamed:@"friendBubble.png"];
