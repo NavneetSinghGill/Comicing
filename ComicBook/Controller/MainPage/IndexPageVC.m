@@ -9,6 +9,7 @@
 #import "IndexPageVC.h"
 #import "UIImageView+WebCache.h"
 #import "Slides.h"
+#import "Global.h"
 
 @interface IndexPageVC ()
 
@@ -130,11 +131,11 @@
             NSLog(@"showww1");
             if(indexPath.row == 0) {
                 Slides *slide = [self.slidesArray objectAtIndex:0];
-                [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 }];
             } else if(indexPath.row == 3) {
                 Slides *slide = [self.slidesArray objectAtIndex:1];
-                [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 }];
             }
             
@@ -151,14 +152,14 @@
     } else if(self.slidesArray.count == 3) {
         if(indexPath.section == 0) {
             Slides *slide = [self.slidesArray objectAtIndex:indexPath.row];
-            [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             }];
             img.layer.borderWidth=2;
             img.layer.borderColor=[UIColor blackColor].CGColor;
             [img.layer setMasksToBounds:true];
         } else {
             Slides *slide = [self.slidesArray objectAtIndex:2];
-            [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             }];
             img.layer.borderWidth=2;
             img.layer.borderColor=[UIColor blackColor].CGColor;
@@ -169,7 +170,7 @@
         if(indexPath.row<self.slidesArray.count)
         {
             Slides *slide = [self.slidesArray objectAtIndex:indexPath.row];
-            [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             }];
             img.layer.borderWidth=2;
             img.layer.borderColor=[UIColor blackColor].CGColor;

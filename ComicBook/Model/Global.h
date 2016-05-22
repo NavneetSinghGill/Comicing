@@ -30,4 +30,6 @@ typedef NS_ENUM(NSInteger, ScreenSizeType)
 
 @property (strong, nonatomic) NSMutableArray *slides;
 
+@property (strong, nonatomic) UIImage *placeholder_comic;
+
 @end
