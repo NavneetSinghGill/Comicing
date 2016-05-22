@@ -381,6 +381,9 @@ NSString * const BottomBarView = @"BottomBarView";
         }
     }
     
+    [AppDelegate application].dataManager.viewWidth = self.view.frame.size.width;
+    [AppDelegate application].dataManager.viewHeight = self.view.frame.size.height;
+    
     self.modelController.slidesArray=slidesArray;
     startingViewController.slidesArray = slidesArray;
     
