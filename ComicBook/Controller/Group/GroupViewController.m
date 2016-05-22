@@ -606,8 +606,8 @@
     
     //To handle selection and deselection
     if (self.groupMembers.groupsArray) {
-        [self.groupMembers.groupsTempArray removeAllObjects];
-        self.groupMembers.groupsTempArray = [self.groupMembers.groupsArray mutableCopy];
+//        [self.groupMembers.groupsTempArray removeAllObjects];
+//        self.groupMembers.groupsTempArray = [self.groupMembers.groupsArray mutableCopy];
         BOOL isAdd = NO;
         int i =0;
         for (id dict in self.groupMembers.groupsArray) {

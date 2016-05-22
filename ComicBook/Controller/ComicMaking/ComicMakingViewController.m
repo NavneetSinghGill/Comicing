@@ -2969,14 +2969,27 @@ static CGRect CaptionTextViewMinRect;
 //    [imgvComic addSubview:imageView];
 //}
 
+CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
+                                CGFloat theta, CGFloat tx, CGFloat ty)
+{
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    
+    transform.a = xScale * cos(theta);
+    transform.b = yScale * sin(theta);
+    transform.c = xScale * -sin(theta);
+    transform.d = yScale * cos(theta);
+    transform.tx = tx;
+    transform.ty = ty;
+    
+    return transform;
+}
+
 - (void)addStickerWithImageView:(UIImageView *)imageView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect Tranform:(CGAffineTransform)tranformData
 {
     
 //    NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(imageView.transform));
     
     if (!CGRectEqualToRect(rect,CGRectZero)) {
-        imageView.frame = rect;
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
 //        if (tranformData != nil) {
 //        imageView.transform =  imageView.transform;
 //        imageView.center = imageView.center;
@@ -2993,8 +3006,8 @@ static CGRect CaptionTextViewMinRect;
             CGFloat tY = ((ComicItemSticker*)imageView).tY;
             CGAffineTransform transform = imageView.transform;
             
-            transform = CGAffineTransformRotate(transform, angle);
-            //       CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
+            transform = makeTransform(scaleValueX,scaleValueY,angle,tX,tY);
+            //CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
             imageView.transform =transform;
             
         }else if ([imageView isKindOfClass:[ComicItemExclamation class]])
@@ -3009,10 +3022,13 @@ static CGRect CaptionTextViewMinRect;
             CGAffineTransform transform = imageView.transform;
             
             transform = CGAffineTransformRotate(transform, angle);
-            //       CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
+            //CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
             imageView.transform =transform;
             
         }
+        
+        imageView.frame = rect;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         
 //        imageView.transform = CGAffineTransformIdentity;
 

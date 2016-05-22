@@ -227,12 +227,12 @@ static ComicNetworking *_sharedComicNetworking = nil;
         if (json) {
             completeBlock(json,nil);
         }else{
-            [AppHelper showErrorDropDownMessage:@"Something went wrong!" mesage:@""];
+            [AppHelper showErrorDropDownMessage:ERROR_MESSAGE mesage:@""];
             errorBlock(nil);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AppHelper showHUDLoader:NO];
-        [AppHelper showErrorDropDownMessage:@"Something went wrong!" mesage:@""];
+        [AppHelper showErrorDropDownMessage:ERROR_MESSAGE mesage:@""];
         errorBlock((JSONModelError*)error);
     }];
     //Changed NO to YES, it should be Yes.
@@ -273,7 +273,7 @@ static ComicNetworking *_sharedComicNetworking = nil;
              ErrorBlock:(ComicNetworkingFailBlock)errorBlock
 {
     if (err) {
-        [AppHelper showErrorDropDownMessage:@"something went wrong !" mesage:@""];
+        [AppHelper showErrorDropDownMessage:ERROR_MESSAGE mesage:@""];
         errorBlock(err);
         return;
     }else if(json && [json objectForKey:@"data"])

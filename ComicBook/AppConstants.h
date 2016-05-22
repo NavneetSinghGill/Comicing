@@ -71,3 +71,6 @@
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
 #define GOOGLE_ANALYTICS_KEY @"UA-77039293-1"
+
+/*Messages*/
+#define ERROR_MESSAGE @"Oops!  Something went wrong"

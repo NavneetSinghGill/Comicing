@@ -14,7 +14,7 @@
 
 + (void)getTheComicsWithSuccessBlock:(void(^)(id object))successBlock
                                andFail:(void(^)(NSError *errorMessage))failBlock {
-    NSString *urlString = [NSString stringWithFormat:@"%@comics/page/3/itemCount/8", BASE_URL];
+    NSString *urlString = [NSString stringWithFormat:@"%@comics/page/1/itemCount/8", BASE_URL];
     [BaseAPIManager getRequestWithURLString:urlString
                               withParameter:nil
                                 withSuccess:^(id object) {
