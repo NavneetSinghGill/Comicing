@@ -159,6 +159,10 @@
 //        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
         float xfactor = [AppDelegate application].dataManager.viewWidth/self.view.frame.size.width;
         float yfactor = [AppDelegate application].dataManager.viewHeight/self.view.frame.size.height;
+        if(xfactor == 1 && yfactor == 1) {
+            xfactor = 0.75;
+            yfactor = 0.75;
+        }
         float originX = xfactor * [enhancement.xPos floatValue];
         float originY = yfactor * [enhancement.yPos floatValue];
         float sizeX = xfactor * [enhancement.width floatValue];

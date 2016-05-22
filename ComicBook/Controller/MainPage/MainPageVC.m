@@ -88,6 +88,9 @@ NSString * const BottomBarView = @"BottomBarView";
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
 //    [self addNotifications];
+    
+    _containerView.hidden = YES;
+    
     [self addTopBarView];
     [self addBottomBarView];
     [self chooseAccount];
@@ -141,6 +144,8 @@ NSString * const BottomBarView = @"BottomBarView";
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    
     /**
      *  setup notification reciever to know table of index pressed or not
      */
@@ -376,6 +381,9 @@ NSString * const BottomBarView = @"BottomBarView";
         }
     }
     
+    [AppDelegate application].dataManager.viewWidth = self.view.frame.size.width;
+    [AppDelegate application].dataManager.viewHeight = self.view.frame.size.height;
+    
     self.modelController.slidesArray=slidesArray;
     startingViewController.slidesArray = slidesArray;
     
@@ -417,6 +425,7 @@ NSString * const BottomBarView = @"BottomBarView";
     self.pageViewController.dataSource = self.modelController;
     [ self.pageViewController.view  setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addChildViewController:self.pageViewController];
+    self.pageViewController.view.backgroundColor = [UIColor clearColor];
     [self.CurlContainer insertSubview:self.pageViewController.view belowSubview:self.refreshComic];
     
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
@@ -1281,7 +1290,11 @@ NSString * const BottomBarView = @"BottomBarView";
 #pragma mark - API
 
 - (void)callAPIToGetTheComics {
-    [ComicsAPIManager getTheComicsWithSuccessBlock:^(id object) {
+    [ComicsAPIManager getTheComicsWithSuccessBlock:^(id object)
+    {
+        
+        _containerView.hidden = NO;
+        
         NSError *error;
         ComicsModel *comicsModel = [MTLJSONAdapter modelOfClass:ComicsModel.class fromJSONDictionary:[object valueForKey:@"data"] error:&error];
         comicBookIndex = 0;
@@ -1290,6 +1303,8 @@ NSString * const BottomBarView = @"BottomBarView";
         [self SetupBook:comicBookIndex];
     } andFail:^(NSError *errorMessage) {
         NSLog(@"%@", errorMessage);
+        _containerView.hidden = NO;
+
     }];
 }
 

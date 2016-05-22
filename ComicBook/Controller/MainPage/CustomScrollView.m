@@ -4,6 +4,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIImageView+WebCache.h"
 #import "Slides.h"
+#import "Global.h"
 
 @implementation CustomScrollView
 @synthesize _CurlDemoPage;
@@ -50,7 +51,7 @@
     
     _CurlDemoPage = [[UIImageView alloc]init];
     
-    [_CurlDemoPage sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [_CurlDemoPage sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
     
     _CurlDemoPage.clipsToBounds=true;

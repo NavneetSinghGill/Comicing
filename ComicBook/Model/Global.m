@@ -10,7 +10,7 @@
 
 @implementation Global
 
-@synthesize isTakePhoto,deviceType,isBlackBoardOpen;
+@synthesize isTakePhoto,deviceType,isBlackBoardOpen,placeholder_comic;
 
 + (Global *)global
 {
@@ -31,6 +31,8 @@
     if (self = [super init])
     {
         deviceType = [self identifyDeviceType];
+        
+        placeholder_comic = [UIImage imageNamed:@"placeholder-comic"];
     }
     
     return self;
