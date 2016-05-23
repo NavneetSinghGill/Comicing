@@ -22,7 +22,6 @@
 
 -(id)addItemWithImage:(id)sticker{
     
-//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
     self.contentMode = UIViewContentModeScaleAspectFit;
     self.image = sticker;
     
@@ -33,67 +32,28 @@
     self = [super init];
     if (self)
     {
-//        self.transform = CGAffineTransformFromString([decoder decodeObjectForKey:@"stickerTransform"]);
         self.image = [UIImage imageWithData:[decoder decodeObjectForKey:@"stickerimage"]];
         self.frame = CGRectFromString([decoder decodeObjectForKey:@"stickerFrame"]);
+        self.bounds = CGRectFromString([decoder decodeObjectForKey:@"stickerBounds"]);
         self.angle = [[decoder decodeObjectForKey:@"stickerAngle"] floatValue];
         self.scaleValueX = [[decoder decodeObjectForKey:@"stickerScaleX"] floatValue];
         self.scaleValueY = [[decoder decodeObjectForKey:@"stickerScaleY"] floatValue];
         self.tX = [[decoder decodeObjectForKey:@"stickerTX"] floatValue];
         self.tY = [[decoder decodeObjectForKey:@"stickerTY"] floatValue];
-//        self.center = CGPointFromString([decoder decodeObjectForKey:@"stickerCenter"]);
-//        NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(self.transform));
     }
     
     return [self initWithFrame:[self frame]];
 }
 -(void)encodeWithCoder:(NSCoder *)aCoder{
-    
-//    NSLog(@"self.transform.a %f",self.transform.a);
-//    NSLog(@"self.transform.b %f",self.transform.b);
-    
     [aCoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"stickerimage"];
     [aCoder encodeObject:NSStringFromCGRect(self.frame) forKey:@"stickerFrame"];
-//    [aCoder encodeObject:[NSString stringWithFormat:@"%f", atan2(self.transform.b, self.transform.a)] forKey:@"stickerAngle"];
+    [aCoder encodeObject:NSStringFromCGRect(self.bounds) forKey:@"stickerBounds"];
     [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self rotation]] forKey:@"stickerAngle"];
     [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self xscale]] forKey:@"stickerScaleX"];
     [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self yscale]] forKey:@"stickerScaleY"];
     [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self tx]] forKey:@"stickerTX"];
     [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self ty]] forKey:@"stickerTY"];
-//    [aCoder encodeObject:NSStringFromCGAffineTransform(self.transform) forKey:@"stickerTransform"];
-//    [aCoder encodeObject:NSStringFromCGPoint(self.center) forKey:@"stickerCenter"];
-//    NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(self.transform));
-    
-//    NSLog(@"translationInView %@",NSStringFromCGPoint([[self superview] convertPoint:self.frame.origin toView:self]));
-    
 }
-
-//- (CGFloat)getRotationValue {
-//    
-////    CGFloat angle = [(NSNumber *)[self valueForKeyPath:@"layer.transform.rotation.z"] floatValue];
-//    CGFloat angle = atan2(self.transform.b, self.transform.a);
-////    CGFloat radians = atan2f(self.transform.b, self.transform.a);
-////    CGFloat degrees = radians * (180 / M_PI);
-//    return angle;
-//}
-
-//- (CGFloat)xscale {
-//    
-//    return self.transform.a;
-////    CGFloat scaleFactor = sqrt(fabs(self.transform.a * self.transform.d - self.transform.b * self.transform.c));
-//
-////    return scaleFactor;
-////    CGAffineTransform t = self.transform;
-////    return sqrt(t.a * t.a + t.c * t.c);
-//}
-//
-//- (CGFloat)yscale {
-//    return self.transform.b;
-////        CGFloat scaleFactor = sqrt(fabs(self.transform.b * self.transform.c - self.transform.a * self.transform.d));
-////    return scaleFactor;
-////    CGAffineTransform t = self.transform;
-////    return sqrt(t.b * t.b + t.d * t.d);
-//}
 
 - (CGFloat) xscale
 {
@@ -139,8 +99,6 @@
 }
 
 -(id)addItemWithImage:(id)sticker{
-    
-    //    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
     self.contentMode = UIViewContentModeScaleAspectFit;
     self.image = sticker;
     
@@ -153,7 +111,7 @@
     {
         self.image = [UIImage imageWithData:[decoder decodeObjectForKey:@"exclamationimage"]];
         self.frame = CGRectFromString([decoder decodeObjectForKey:@"exclamationFrame"]);
-        
+        self.bounds = CGRectFromString([decoder decodeObjectForKey:@"exclamationBounds"]);
         self.angle = [[decoder decodeObjectForKey:@"exclamationAngle"] floatValue];
         self.scaleValueX = [[decoder decodeObjectForKey:@"exclamationScaleX"] floatValue];
         self.scaleValueY = [[decoder decodeObjectForKey:@"exclamationScaleY"] floatValue];
@@ -166,8 +124,8 @@
 -(void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"exclamationimage"];
     [aCoder encodeObject:NSStringFromCGRect(self.frame) forKey:@"exclamationFrame"];
-    
-    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self getRotationValue]] forKey:@"exclamationAngle"];
+    [aCoder encodeObject:NSStringFromCGRect(self.bounds) forKey:@"exclamationBounds"];
+    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self rotation]] forKey:@"exclamationAngle"];
     [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self xscale]] forKey:@"exclamationScaleX"];
     [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self yscale]] forKey:@"exclamationScaleY"];
     [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.tx] forKey:@"exclamationTX"];
@@ -175,18 +133,35 @@
 }
 
 
-- (CGFloat)getRotationValue {
-    
-    CGFloat angle = atan2(self.transform.b, self.transform.a);
-    return angle;
+
+- (CGFloat) xscale
+{
+    CGAffineTransform t = self.transform;
+    return sqrt(t.a * t.a + t.c * t.c);
 }
 
-- (CGFloat)xscale {
-    return self.transform.a;
+- (CGFloat) yscale
+{
+    CGAffineTransform t = self.transform;
+    return sqrt(t.b * t.b + t.d * t.d);
 }
 
-- (CGFloat)yscale {
-    return self.transform.b;
+- (CGFloat) rotation
+{
+    CGAffineTransform t = self.transform;
+    return atan2f(t.b, t.a);
+}
+
+- (CGFloat) tx
+{
+    CGAffineTransform t = self.transform;
+    return t.tx;
+}
+
+- (CGFloat) ty
+{
+    CGAffineTransform t = self.transform;
+    return t.ty;
 }
 
 @end

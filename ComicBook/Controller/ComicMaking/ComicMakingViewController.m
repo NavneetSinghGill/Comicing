@@ -2986,17 +2986,8 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 
 - (void)addStickerWithImageView:(UIImageView *)imageView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect Tranform:(CGAffineTransform)tranformData
 {
-    
-//    NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(imageView.transform));
     CGAffineTransform transform ;
     if (!CGRectEqualToRect(rect,CGRectZero)) {
-//        if (tranformData != nil) {
-//        imageView.transform =  imageView.transform;
-//        imageView.center = imageView.center;
-//            NSLog(@"Transform value %@",tranformData);
-//            CGFloat angle = atan2f(CGAffineTransformFromString(tranformData).b, CGAffineTransformFromString(tranformData).a);
-//            CGFloat degrees = angle * (180 / M_PI);
-//            imageView.transform = CGAffineTransformRotate(CGAffineTransformFromString(tranformData), angle);
         if ([imageView isKindOfClass:[ComicItemSticker class]])
         {
             imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -3005,43 +2996,41 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
             CGFloat scaleValueY = ((ComicItemSticker*)imageView).scaleValueY;
             CGFloat tX = ((ComicItemSticker*)imageView).tX;
             CGFloat tY = ((ComicItemSticker*)imageView).tY;
-//            CGAffineTransform transform = imageView.transform;
-            
             transform = makeTransform(scaleValueX,scaleValueY,angle,tX,tY);
-            //CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
-//            imageView.transform =transform;
+            imageView.transform =transform;
             
         }else if ([imageView isKindOfClass:[ComicItemExclamation class]])
         {
-            
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
             CGFloat angle = ((ComicItemExclamation*)imageView).angle;
             CGFloat scaleValueX = ((ComicItemExclamation*)imageView).scaleValueX;
             CGFloat scaleValueY = ((ComicItemExclamation*)imageView).scaleValueY;
             CGFloat tX = ((ComicItemExclamation*)imageView).tX;
             CGFloat tY = ((ComicItemExclamation*)imageView).tY;
             
-            CGAffineTransform transform = imageView.transform;
-            
-            transform = CGAffineTransformRotate(transform, angle);
-            //CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
+            transform = makeTransform(scaleValueX,scaleValueY,angle,tX,tY);
             imageView.transform =transform;
-            
         }
         
-        
-        CGPoint center = imageView.center;
-        CGSize size = imageView.bounds.size;
-        
-        CGRect frameForTransformIdentity = CGRectMake(
-                                                      center.x - size.width / 2,
-                                                      center.y - size.height / 2,
-                                                      size.width,
-                                                      size.height
-                                                      );
+//        CGPoint center = imageView.center;
+//        CGSize size = imageView.bounds.size;
+//        
+//        CGRect frameForTransformIdentity = CGRectMake(
+//                                                      center.x - size.width / 2,
+//                                                      center.y - size.height / 2,
+//                                                      size.width,
+//                                                      size.height
+//                                                      );
 //        imageView.bounds = frameForTransformIdentity ;//CGRectApplyAffineTransform(frameForTransformIdentity, transform);
 //        imageView.center = self.view.center;
 //        UIImageView* imgTemp = imageView;
-        [imageView setFrame:rect];
+//        CGRect bounds = CGRectMake(0, 0, size.width/2, size.height/2);
+        
+//        [imageView setFrame:rect];
+//        imageView.bounds = bounds;
+//        center = CGPointMake(size.width / 2,size.height / 2);
+//        imageView.center = center;
+        
 //        [imageView setBounds:rect];
     
 //        CGPoint center = [self.superview convertPoint:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2) fromView:self];
