@@ -392,7 +392,7 @@
 #endif
     } ErrorBlock:^(JSONModelError *error) {
         
-        [AppHelper showSuccessDropDownMessage:@"Something went wrong" mesage:@""];
+        [AppHelper showSuccessDropDownMessage:ERROR_MESSAGE mesage:@""];
     }];
     
     

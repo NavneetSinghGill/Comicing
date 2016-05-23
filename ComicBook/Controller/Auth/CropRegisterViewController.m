@@ -280,7 +280,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
                   ([[json objectForKey:@"data"] objectForKey:@"verification_code"] ||
                    [[json objectForKey:@"data"] objectForKey:@"user_id"])) {
                       //Check is we recive the code
-                      NSString* vCode = @"";
+//                      NSString* vCode = @"";
                       [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];
 //                      if (![[json objectForKey:@"data"] objectForKey:@"verification_code"]) {
 //                          vCode = @"1234";
@@ -293,7 +293,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
                       }
                       [self setTextFont:@"Verify"];
         }else if (json && [[json objectForKey:@"error_code"] isEqualToString:@"1"]) {
-            [AppHelper showErrorDropDownMessage:@"Oops ... Something went wrong" mesage:@""];
+            [AppHelper showErrorDropDownMessage:ERROR_MESSAGE mesage:@""];
         }
     } ErrorBlock:^(JSONModelError *error) {
         
@@ -320,7 +320,14 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 -(void)doRegisterNotificationFailed:(NSNotification *)notification
 {
-    [AppHelper showErrorDropDownMessage:@"Oops ... veryfication failed" mesage:@""];
+    UIAlertView* failureAlert = [[UIAlertView alloc] initWithTitle:@""
+                                                           message:@"Enable notification for verification."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+    [failureAlert show];
+    
+//    [AppHelper showErrorDropDownMessage:@"Oops ... veryfication failed" mesage:@""];
 }
 -(void)receiveRemoteNotification:(NSNotification *)notification
 {
@@ -333,6 +340,12 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     }
     
     [AppHelper showHUDLoader:NO];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 @end

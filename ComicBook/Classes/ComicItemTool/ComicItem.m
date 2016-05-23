@@ -55,11 +55,11 @@
     [aCoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"stickerimage"];
     [aCoder encodeObject:NSStringFromCGRect(self.frame) forKey:@"stickerFrame"];
 //    [aCoder encodeObject:[NSString stringWithFormat:@"%f", atan2(self.transform.b, self.transform.a)] forKey:@"stickerAngle"];
-    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self getRotationValue]] forKey:@"stickerAngle"];
+    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self rotation]] forKey:@"stickerAngle"];
     [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self xscale]] forKey:@"stickerScaleX"];
     [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self yscale]] forKey:@"stickerScaleY"];
-    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.tx] forKey:@"stickerTX"];
-    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.ty] forKey:@"stickerTY"];
+    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self tx]] forKey:@"stickerTX"];
+    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self ty]] forKey:@"stickerTY"];
 //    [aCoder encodeObject:NSStringFromCGAffineTransform(self.transform) forKey:@"stickerTransform"];
 //    [aCoder encodeObject:NSStringFromCGPoint(self.center) forKey:@"stickerCenter"];
 //    NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(self.transform));
@@ -68,31 +68,61 @@
     
 }
 
-- (CGFloat)getRotationValue {
-    
-//    CGFloat angle = [(NSNumber *)[self valueForKeyPath:@"layer.transform.rotation.z"] floatValue];
-    CGFloat angle = atan2(self.transform.b, self.transform.a);
-//    CGFloat radians = atan2f(self.transform.b, self.transform.a);
-//    CGFloat degrees = radians * (180 / M_PI);
-    return angle;
+//- (CGFloat)getRotationValue {
+//    
+////    CGFloat angle = [(NSNumber *)[self valueForKeyPath:@"layer.transform.rotation.z"] floatValue];
+//    CGFloat angle = atan2(self.transform.b, self.transform.a);
+////    CGFloat radians = atan2f(self.transform.b, self.transform.a);
+////    CGFloat degrees = radians * (180 / M_PI);
+//    return angle;
+//}
+
+//- (CGFloat)xscale {
+//    
+//    return self.transform.a;
+////    CGFloat scaleFactor = sqrt(fabs(self.transform.a * self.transform.d - self.transform.b * self.transform.c));
+//
+////    return scaleFactor;
+////    CGAffineTransform t = self.transform;
+////    return sqrt(t.a * t.a + t.c * t.c);
+//}
+//
+//- (CGFloat)yscale {
+//    return self.transform.b;
+////        CGFloat scaleFactor = sqrt(fabs(self.transform.b * self.transform.c - self.transform.a * self.transform.d));
+////    return scaleFactor;
+////    CGAffineTransform t = self.transform;
+////    return sqrt(t.b * t.b + t.d * t.d);
+//}
+
+- (CGFloat) xscale
+{
+    CGAffineTransform t = self.transform;
+    return sqrt(t.a * t.a + t.c * t.c);
 }
 
-- (CGFloat)xscale {
-    
-    return self.transform.a;
-//    CGFloat scaleFactor = sqrt(fabs(self.transform.a * self.transform.d - self.transform.b * self.transform.c));
-
-//    return scaleFactor;
-//    CGAffineTransform t = self.transform;
-//    return sqrt(t.a * t.a + t.c * t.c);
+- (CGFloat) yscale
+{
+    CGAffineTransform t = self.transform;
+    return sqrt(t.b * t.b + t.d * t.d);
 }
 
-- (CGFloat)yscale {
-    return self.transform.b;
-//        CGFloat scaleFactor = sqrt(fabs(self.transform.b * self.transform.c - self.transform.a * self.transform.d));
-//    return scaleFactor;
-//    CGAffineTransform t = self.transform;
-//    return sqrt(t.b * t.b + t.d * t.d);
+- (CGFloat) rotation
+{
+    CGAffineTransform t = self.transform;
+    return atan2f(t.b, t.a);
+}
+
+- (CGFloat) tx
+{
+    CGAffineTransform t = self.transform;
+    return t.tx;
+}
+
+- (CGFloat) ty
+{
+    CGAffineTransform t = self.transform;
+    return t.ty;
 }
 
 @end

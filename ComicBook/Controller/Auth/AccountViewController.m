@@ -227,7 +227,7 @@
             
         } ErrorBlock:^(JSONModelError *error) {
             NSLog(@"Error %@",error);
-            [AppHelper showSuccessDropDownMessage:@"Something went wrong" mesage:@""];
+            [AppHelper showSuccessDropDownMessage:ERROR_MESSAGE mesage:@""];
             isProcessing = NO;
         }];
     }

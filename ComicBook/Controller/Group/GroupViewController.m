@@ -12,6 +12,7 @@
 #import "TopSearchVC.h"
 #import "Constants.h"
 #import "MainPageVC.h"
+#import "UIImageView+WebCache.h"
 
 @interface GroupViewController ()
 {
@@ -188,11 +189,14 @@
     
     if (ug.group_icon != nil) {
         
-        [self.groupImage downloadImageWithURL:[NSURL URLWithString:ug.group_icon]
-                             placeHolderImage:[UIImage imageNamed:@"Placeholder"]
-                              completionBlock:^(BOOL succeeded, UIImage *image) {
-                                  self.groupImage.image = image;
-                              }];
+        [self.groupImage sd_setImageWithURL:[NSURL URLWithString:ug.group_icon]
+                            placeholderImage:[UIImage imageNamed:@"Placeholder"] options:SDWebImageRetryFailed];
+        
+//        [self.groupImage downloadImageWithURL:[NSURL URLWithString:ug.group_icon]
+//                             placeHolderImage:[UIImage imageNamed:@"Placeholder"]
+//                              completionBlock:^(BOOL succeeded, UIImage *image) {
+//                                  self.groupImage.image = image;
+//                              }];
         
 //        [self.groupImage sd_setImageWithURL:[NSURL URLWithString:ug.group_icon]
 //                           placeholderImage:[UIImage imageNamed:@"Placeholder"]
@@ -606,7 +610,7 @@
     
     //To handle selection and deselection
     if (self.groupMembers.groupsArray) {
-        [self.groupMembers.groupsTempArray removeAllObjects];
+//        [self.groupMembers.groupsTempArray removeAllObjects];
         self.groupMembers.groupsTempArray = [self.groupMembers.groupsArray mutableCopy];
         BOOL isAdd = NO;
         int i =0;
@@ -614,9 +618,13 @@
             if (dict && ![dict isKindOfClass:[NSString class]]) {
                 if ([[dict objectForKey:@"user_id"] isEqualToString:[gmp objectForKey:@"user_id"]]) {
                     NSMutableDictionary* mDict = [dict mutableCopy];
-                    [mDict setObject:@"0" forKey:@"status"];
+                    if ([[dict objectForKey:@"status"] isEqualToString:@"1"]) {
+                        [mDict setObject:@"0" forKey:@"status"];
+                    }else{
+                        [mDict setObject:@"1" forKey:@"status"];
+                    }
                     [self.groupMembers.groupsArray replaceObjectAtIndex:[self.groupMembers.groupsArray indexOfObject:dict] withObject:mDict];
-                    [self.groupMembers.groupsTempArray removeObjectAtIndex:[self.groupMembers.groupsArray indexOfObject:mDict]];
+//                    [self.groupMembers.groupsTempArray removeObjectAtIndex:[self.groupMembers.groupsArray indexOfObject:mDict]];
                     isAdd = YES;
                     break;
                 }
@@ -625,12 +633,23 @@
         }
         if (!isAdd) {
             [self.groupMembers.groupsArray insertObject:gmp atIndex:0];
-            [self.groupMembers.groupsTempArray insertObject:gmp atIndex:0];
+//            [self.groupMembers.groupsTempArray insertObject:gmp atIndex:0];
         }
         if ([[self.groupMembers.groupsArray
               objectAtIndex:self.groupMembers.groupsArray.count - 1] isKindOfClass:[NSString class]]) {
             [self.groupMembers.groupsArray removeLastObject];
-            [self.groupMembers.groupsTempArray removeLastObject];
+//            [self.groupMembers.groupsTempArray removeLastObject];
+        }
+    }
+//    NSMutableArray* tempArray = [self.groupMembers.groupsTempArray copy];
+    [self.groupMembers.groupsTempArray removeAllObjects];
+    for (int i =0; i < [self.groupMembers.groupsArray count] ; i++) {
+        if ([self.groupMembers.groupsArray objectAtIndex:i] &&
+            ![[self.groupMembers.groupsArray objectAtIndex:i] isKindOfClass:[NSString class]])
+        {
+            if ([[[self.groupMembers.groupsArray objectAtIndex:i] objectForKey:@"status"] isEqualToString:@"1"]) {
+                [self.groupMembers.groupsTempArray addObject:[self.groupMembers.groupsArray objectAtIndex:i]];
+            }
         }
     }
     [self.groupMembers refeshList];

@@ -176,7 +176,9 @@
         
         [userDic setObject:self.txtLoginId.text forKey:@"login_id"];
         [userDic setObject:[AppHelper MD5encryption:self.txtPassword.text] forKey:@"password"];
+        [userDic setObject:[AppHelper getDeviceToken] forKey:@"device_token"];
         [dataDic setObject:userDic forKey:@"data"];
+        
         
         ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
         [cmNetWorking postLogin:dataDic completion:^(id json,id jsonResposeHeader) {
@@ -206,7 +208,7 @@
             NSLog(@"json %@",json);
             
         } ErrorBlock:^(id error) {
-            [AppHelper showSuccessDropDownMessage:@"Something went wrong" mesage:@""];
+            [AppHelper showSuccessDropDownMessage:ERROR_MESSAGE mesage:@""];
         }];
     }
 }

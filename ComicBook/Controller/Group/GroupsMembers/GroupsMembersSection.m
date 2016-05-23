@@ -7,6 +7,7 @@
 //
 
 #import "GroupsMembersSection.h"
+#import "UIImageView+WebCache.h"
 
 @implementation GroupsMembersSection
 //@synthesize groupsArray;
@@ -84,12 +85,12 @@
     if (us == nil) {
         [cell.btnAddMember setHidden:YES];
     }else{
-        
-        [cell.groupImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
-                              placeHolderImage:[UIImage imageNamed:@"Placeholder"]
-                               completionBlock:^(BOOL succeeded, UIImage *image) {
-                                   cell.groupImage.image = image;
-                               }];
+        [cell.groupImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic] placeholderImage:[UIImage imageNamed:@"Placeholder"] options:SDWebImageRetryFailed];
+//        [cell.groupImage downloadImageWithURL:[NSURL URLWithString:us.profile_pic]
+//                              placeHolderImage:[UIImage imageNamed:@"Placeholder"]
+//                               completionBlock:^(BOOL succeeded, UIImage *image) {
+//                                   cell.groupImage.image = image;
+//                               }];
 
         
 //        [cell.groupImage sd_setImageWithURL:[NSURL URLWithString:us.profile_pic]
