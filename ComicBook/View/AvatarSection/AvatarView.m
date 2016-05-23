@@ -7,6 +7,7 @@
 //
 
 #import "AvatarView.h"
+#import "UIImageView+WebCache.h"
 
 @interface AvatarView ()
 
@@ -51,11 +52,14 @@
 //                                                       SDImageCacheType cacheType, NSURL *imageURL) {
 //                                           }];
   
-     [self.avatarImage downloadImageWithURL:[NSURL URLWithString:[[AppHelper initAppHelper]getCurrentUser].profile_pic]
-                         placeHolderImage:[UIImage imageNamed:@"Placeholder"]
-                          completionBlock:^(BOOL succeeded, UIImage *image) {
-                              self.avatarImage.image = image;
-                          }];
+    [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:[[AppHelper initAppHelper]getCurrentUser].profile_pic]
+                        placeholderImage:[UIImage imageNamed:@"Placeholder"] options:SDWebImageRetryFailed];
+    
+//     [self.avatarImage downloadImageWithURL:[NSURL URLWithString:[[AppHelper initAppHelper]getCurrentUser].profile_pic]
+//                         placeHolderImage:[UIImage imageNamed:@"Placeholder"]
+//                          completionBlock:^(BOOL succeeded, UIImage *image) {
+//                              self.avatarImage.image = image;
+//                          }];
 
      
 // }

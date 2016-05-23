@@ -104,7 +104,12 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:RegisterNotification_Failed object:nil];
     #endif
 }
-
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    if (notificationSettings.types == UIUserNotificationTypeNone) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:RegisterNotification_Failed object:nil];
+    }
+}
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
     
 }

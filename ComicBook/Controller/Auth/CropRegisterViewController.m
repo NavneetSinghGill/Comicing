@@ -320,7 +320,14 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 -(void)doRegisterNotificationFailed:(NSNotification *)notification
 {
-    [AppHelper showErrorDropDownMessage:@"Oops ... veryfication failed" mesage:@""];
+    UIAlertView* failureAlert = [[UIAlertView alloc] initWithTitle:@""
+                                                           message:@"Enable notification for verification."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+    [failureAlert show];
+    
+//    [AppHelper showErrorDropDownMessage:@"Oops ... veryfication failed" mesage:@""];
 }
 -(void)receiveRemoteNotification:(NSNotification *)notification
 {
@@ -333,6 +340,12 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     }
     
     [AppHelper showHUDLoader:NO];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 @end

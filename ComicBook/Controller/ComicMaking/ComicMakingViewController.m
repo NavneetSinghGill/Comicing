@@ -2988,7 +2988,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 {
     
 //    NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(imageView.transform));
-    
+    CGAffineTransform transform ;
     if (!CGRectEqualToRect(rect,CGRectZero)) {
 //        if (tranformData != nil) {
 //        imageView.transform =  imageView.transform;
@@ -2999,16 +2999,17 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 //            imageView.transform = CGAffineTransformRotate(CGAffineTransformFromString(tranformData), angle);
         if ([imageView isKindOfClass:[ComicItemSticker class]])
         {
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
             CGFloat angle = ((ComicItemSticker*)imageView).angle;
             CGFloat scaleValueX = ((ComicItemSticker*)imageView).scaleValueX;
             CGFloat scaleValueY = ((ComicItemSticker*)imageView).scaleValueY;
             CGFloat tX = ((ComicItemSticker*)imageView).tX;
             CGFloat tY = ((ComicItemSticker*)imageView).tY;
-            CGAffineTransform transform = imageView.transform;
+//            CGAffineTransform transform = imageView.transform;
             
             transform = makeTransform(scaleValueX,scaleValueY,angle,tX,tY);
             //CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
-            imageView.transform =transform;
+//            imageView.transform =transform;
             
         }else if ([imageView isKindOfClass:[ComicItemExclamation class]])
         {
@@ -3027,8 +3028,32 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
             
         }
         
-        imageView.frame = rect;
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        CGPoint center = imageView.center;
+        CGSize size = imageView.bounds.size;
+        
+        CGRect frameForTransformIdentity = CGRectMake(
+                                                      center.x - size.width / 2,
+                                                      center.y - size.height / 2,
+                                                      size.width,
+                                                      size.height
+                                                      );
+//        imageView.bounds = frameForTransformIdentity ;//CGRectApplyAffineTransform(frameForTransformIdentity, transform);
+//        imageView.center = self.view.center;
+//        UIImageView* imgTemp = imageView;
+        [imageView setFrame:rect];
+//        [imageView setBounds:rect];
+    
+//        CGPoint center = [self.superview convertPoint:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2) fromView:self];
+//        self.layer.anchorPoint = CGPointMake(.5, .5);
+//        self.center = center;
+//        imageView.center
+//        imageView.frame = CGRectMake(rect.origin.x,
+//                                     rect.origin.y,
+//                                     rect.size.width,
+//                                     rect.size.height);
+//        imageView.frame = rect;
+//        imageView.contentMode = UIViewContentModeScaleAspectFit;
         
 //        imageView.transform = CGAffineTransformIdentity;
 
@@ -3066,7 +3091,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         
 //        NSLog(@"xScale : %f , yScale : %f",xScale,yScale);
         
-//        NSLog(@"After value set %@",[NSValue valueWithCGAffineTransform:imageView.transform]);
+        NSLog(@"After value set %@",[NSValue valueWithCGAffineTransform:imageView.transform]);
 //        }
     }else{
         imageView.contentMode = UIViewContentModeScaleAspectFit;

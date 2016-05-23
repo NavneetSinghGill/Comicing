@@ -9,6 +9,7 @@
 #import "GroupsSection.h"
 #import "UIButton+Property.h"
 #import "UIImage+resize.h"
+#import "UIImageView+WebCache.h"
 
 #define cell_button_tag 2020
 
@@ -65,11 +66,14 @@
     {
         UserGroup* ug =  (UserGroup*)[self.groupsArray objectAtIndex:self.enableAdd?indexPath.row-1:indexPath.row];
         
-        [cell.groupImage downloadImageWithURL:[NSURL URLWithString:ug.group_icon]
-                             placeHolderImage:[UIImage imageNamed:@"Placeholder"]
-                              completionBlock:^(BOOL succeeded, UIImage *image) {
-                                  cell.groupImage.image = [UIImage resizeImage:image newSize:CGSizeMake(40, 40)];
-                              }];
+        [cell.groupImage sd_setImageWithURL:[NSURL URLWithString:ug.group_icon]
+                            placeholderImage:[UIImage imageNamed:@"Placeholder"] options:SDWebImageRetryFailed];
+        
+//        [cell.groupImage downloadImageWithURL:[NSURL URLWithString:ug.group_icon]
+//                             placeHolderImage:[UIImage imageNamed:@"Placeholder"]
+//                              completionBlock:^(BOOL succeeded, UIImage *image) {
+//                                  cell.groupImage.image = [UIImage resizeImage:image newSize:CGSizeMake(40, 40)];
+//                              }];
         
 //        [cell.groupImage sd_setImageWithURL:[NSURL URLWithString:ug.group_icon]
 //                             placeholderImage:[UIImage imageNamed:@"Placeholder"]
