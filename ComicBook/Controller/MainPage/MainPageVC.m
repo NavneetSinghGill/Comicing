@@ -396,6 +396,7 @@ NSString * const BottomBarView = @"BottomBarView";
     
     textView.placeholder = [NSString stringWithFormat:@"Say something to %@", comicBook.userDetail.firstName];
     currentComicUserId = comicBook.userDetail.userId;
+    
     friendObject = [[Friend alloc] init];
     friendObject.firstName = comicBook.userDetail.firstName;
     friendObject.lastName = comicBook.userDetail.lastName;
@@ -854,7 +855,8 @@ NSString * const BottomBarView = @"BottomBarView";
  *  Setup comment typing textfield
  */
 
--(void)setUpComment {
+-(void)setUpComment
+{
     self.keyboardHeight=5;
     currentPoint=[[self scrollView] bounds].size.height;
     self.scrollView.layer.zPosition = 1;
@@ -863,23 +865,29 @@ NSString * const BottomBarView = @"BottomBarView";
     CGFloat textViewX;
     CGFloat twitterLabelX;
     CGFloat onOffX;
+    
+    CGFloat width;
+    
     if(IS_IPHONE_5)
     {
         textViewX= 140;
         twitterLabelX= 160;
         onOffX= 125;
+        width = 170;
     }
     else if(IS_IPHONE_6)
     {
         textViewX= 145;
         twitterLabelX= 165;
         onOffX= 130;
+        width = 180;
     }
     else if(IS_IPHONE_6P)
     {
         textViewX= 150;
         twitterLabelX= 170;
         onOffX= 135;
+        width = 190;
     }
     commentContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 93, self.view.frame.size.width, 60)]; // 95
     onoff = [[UISwitch alloc] initWithFrame: CGRectMake(onOffX, 0, 30, 30)];
@@ -894,7 +902,7 @@ NSString * const BottomBarView = @"BottomBarView";
     twitterLabel.font = [UIFont fontWithName:@"AmericanTypewriter"  size:10];
     [commentContainerView addSubview:twitterLabel];
 //    [commentContainerView setBackgroundColor:[UIColor redColor]];
-    textView = [[CustomTextView alloc] initWithFrame:CGRectMake(textViewX, 22, self.view.frame.size.width-170, 25)];
+    textView = [[CustomTextView alloc] initWithFrame:CGRectMake(textViewX, 22, self.view.frame.size.width - width, 25)];
     textView.isScrollable = NO;
     textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
     textView.minNumberOfLines = 1;
@@ -908,8 +916,17 @@ NSString * const BottomBarView = @"BottomBarView";
     textView.layer.cornerRadius=4;
     textView.layer.masksToBounds=YES;
     [textView setTextColor:[UIColor whiteColor]];
+    
+    
+    // Flag Button
+    UIButton *btnFlag = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 40 , CGRectGetMinY(textView.frame), 50, CGRectGetHeight(textView.frame))];
+    [btnFlag addTarget:self action:@selector(openFlahSheet) forControlEvents:UIControlEventTouchUpInside];
+    
+    [btnFlag setImage:[UIImage imageNamed:@"flag-button"] forState:UIControlStateNormal];
+    
+    [commentContainerView addSubview:btnFlag];
+    
     [self.view addSubview:commentContainerView];
-
     
     commentContainerView.layer.zPosition = 0;
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -918,6 +935,81 @@ NSString * const BottomBarView = @"BottomBarView";
     commentContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 }
 
+
+#pragma mark - Flag Event
+- (void)openFlahSheet
+{
+    // open actionsheet
+    
+    UIActionSheet *flagActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Violence",@"Sexual content",@"Copyrighted content",@"Other", nil];
+    
+    [flagActionSheet showInView:self.view];
+}
+
+#pragma mark - UIActionSheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    NSString *btnTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
+    if ([btnTitle isEqualToString:@"Violence"])
+    {
+        [self callAPIForFlaggingWithText:btnTitle withFlagID:@"1"];
+    }
+    else if ([btnTitle isEqualToString:@"Sexual content"])
+    {
+        [self callAPIForFlaggingWithText:btnTitle withFlagID:@"2"];
+    }
+    else if ([btnTitle isEqualToString:@"Copyrighted content"])
+    {
+        [self callAPIForFlaggingWithText:btnTitle withFlagID:@"3"];
+
+    }
+    else if ([btnTitle isEqualToString:@"Other"])
+    {
+        [self callAPIForFlaggingWithText:btnTitle withFlagID:@"4"];
+    }
+    
+}
+
+#pragma mark - API for Flagging
+- (void)callAPIForFlaggingWithText:(NSString *)text withFlagID:(NSString *)flagID
+{
+//    {"data":{
+//        "comic_id" : "37",
+//        "flag_request":
+//        {
+//            "flag_type_id":"1",
+//            "user_id":"2",
+//            "user_remarks":"Please check the comic"
+//            
+//            
+//        }
+//        
+//    }}
+    
+    ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
+    
+    NSDictionary *flagRequest = @{@"flag_type_id":flagID,
+                                  @"user_id":comicBook.userDetail.userId,
+                                  @"user_remarks":text};
+    
+    NSDictionary *flagDataDict = @{@"comic_id" : comicBook.comicId,
+                           @"flag_request":flagRequest};
+    
+    NSDictionary *flagDict = @{@"data" :flagDataDict};
+    
+    [ComicsAPIManager setFlagForComic:flagDict withSuccessBlock:^(id object) {
+        
+        NSLog(@"flag done");
+        
+    } andFail:^(NSError *errorMessage) {
+        
+    }];
+}
+
+
+#pragma mark - Add new comment to the view
 /**
  *  Add new comment to the view
  *
@@ -934,12 +1026,16 @@ NSString * const BottomBarView = @"BottomBarView";
     cell.frame=Rect;
     [self.scrollView addSubview:cell];
     [UIView animateWithDuration:1 animations:^{
+        
         currentPoint=currentPoint+Rect.size.height+5;
         self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, currentPoint);
         CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - (self.scrollView.bounds.size.height));
         [self.scrollView setContentOffset:bottomOffset animated:YES];
+    
     }];
+    
     CGFloat duration = 14 ;
+    
     [UIView animateWithDuration:duration animations:^{
         cell.alpha = 0;
     }];

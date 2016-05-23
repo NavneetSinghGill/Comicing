@@ -51,7 +51,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     
     //May be this is bad idea, but i d't have any option right now sorry.
     self.bubbleLargeListTextFieldArray = [[NSMutableArray alloc] initWithObjects:
-                                          [NSValue valueWithCGRect:CGRectMake(30,14,80,85)],
+                                          [NSValue valueWithCGRect:CGRectMake(40,30,70,70)],
                                           [NSValue valueWithCGRect:CGRectMake(10,40,135,65)],
                                           [NSValue valueWithCGRect:CGRectMake(30,45,90,65)],[NSValue valueWithCGRect:CGRectMake(30,40,100,75)],[NSValue valueWithCGRect:CGRectMake(10,50,120,65)],[NSValue valueWithCGRect:CGRectMake(10,30,120,65)],[NSValue valueWithCGRect:CGRectMake(10,50,130,65)],[NSValue valueWithCGRect:CGRectMake(10,30,130,75)],[NSValue valueWithCGRect:CGRectMake(10,40,130,75)],[NSValue valueWithCGRect:CGRectMake(10,40,130,75)],[NSValue valueWithCGRect:CGRectMake(30,40,110,85)], nil];
     

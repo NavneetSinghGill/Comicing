@@ -15,6 +15,7 @@
 + (void)getTheComicsWithSuccessBlock:(void(^)(id object))successBlock
                                andFail:(void(^)(NSError *errorMessage))failBlock {
     NSString *urlString = [NSString stringWithFormat:@"%@comics/page/1/itemCount/8", BASE_URL];
+  
     [BaseAPIManager getRequestWithURLString:urlString
                               withParameter:nil
                                 withSuccess:^(id object) {
@@ -23,5 +24,23 @@
                                     failBlock(errorObj);
                                 } showIndicator:YES];
 }
+
++ (void)setFlagForComic:(NSDictionary *)comic withSuccessBlock:(void(^)(id object))successBlock
+                andFail:(void(^)(NSError *errorMessage))failBlock
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@comics/", BASE_URL];
+
+    
+    [BaseAPIManager postPublicRequestWith:urlString withParameter:comic withSuccess:^(id object, AFHTTPRequestOperation *operationObjet) {
+        successBlock(object);
+
+    } andFail:^(id errorObj) {
+        failBlock(errorObj);
+
+    } showIndicator:YES];
+}
+
+
+
 
 @end

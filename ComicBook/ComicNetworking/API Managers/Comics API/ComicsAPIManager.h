@@ -13,4 +13,13 @@
 + (void)getTheComicsWithSuccessBlock:(void(^)(id object))successBlock
                              andFail:(void(^)(NSError *errorMessage))failBlock;
 
+
++ (void)setFlagForComic:(NSDictionary *)comic withSuccessBlock:(void(^)(id object))successBlock
+                andFail:(void(^)(NSError *errorMessage))failBlock;
+
+
+
+
+
+
 @end
