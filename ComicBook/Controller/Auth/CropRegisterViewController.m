@@ -348,4 +348,15 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     [[UIApplication sharedApplication] openURL:url];
 }
 
+#pragma mark - statusbar
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+
 @end

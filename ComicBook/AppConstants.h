@@ -55,6 +55,8 @@
 
 #define TermsAndServiceURL  @"Comicing_Terms_of_Service"
 
+#define FirstTimeSignUp @"FirstTimeSignUp"
+
 /* Comic makeing */
 /* Bubble tail Post nmae*/
 

@@ -591,6 +591,7 @@ static CGRect CaptionTextViewMinRect;
     return [NSSet setWithObjects:@"session.running", @"deviceAuthorized", nil];
 }
 
+
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
@@ -3766,4 +3767,6 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     [AppHelper openMainPageviewController:self];
     
 }
+
+
 @end

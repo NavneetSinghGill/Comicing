@@ -975,19 +975,6 @@ NSString * const BottomBarView = @"BottomBarView";
 #pragma mark - API for Flagging
 - (void)callAPIForFlaggingWithText:(NSString *)text withFlagID:(NSString *)flagID
 {
-//    {"data":{
-//        "comic_id" : "37",
-//        "flag_request":
-//        {
-//            "flag_type_id":"1",
-//            "user_id":"2",
-//            "user_remarks":"Please check the comic"
-//            
-//            
-//        }
-//        
-//    }}
-    
     ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
     
     NSDictionary *flagRequest = @{@"flag_type_id":flagID,
@@ -1001,10 +988,10 @@ NSString * const BottomBarView = @"BottomBarView";
     
     [ComicsAPIManager setFlagForComic:flagDict withSuccessBlock:^(id object) {
         
-        NSLog(@"flag done");
+        [AppHelper showSuccessDropDownMessage:@"Flag has been successfully sent." mesage:@""];
         
     } andFail:^(NSError *errorMessage) {
-        
+        [AppHelper showErrorDropDownMessage:ERROR_MESSAGE mesage:@""];
     }];
 }
 
@@ -1387,21 +1374,31 @@ NSString * const BottomBarView = @"BottomBarView";
 
 - (void)callAPIToGetTheComics {
     [ComicsAPIManager getTheComicsWithSuccessBlock:^(id object)
-    {
-        
-        _containerView.hidden = NO;
-        
-        NSError *error;
-        ComicsModel *comicsModel = [MTLJSONAdapter modelOfClass:ComicsModel.class fromJSONDictionary:[object valueForKey:@"data"] error:&error];
-        comicBookIndex = 0;
-        slideImages = [[NSMutableArray alloc] init];
-        comicsArray = comicsModel.books;
-        [self SetupBook:comicBookIndex];
-    } andFail:^(NSError *errorMessage) {
-        NSLog(@"%@", errorMessage);
-        _containerView.hidden = NO;
-
-    }];
+     {
+         _containerView.hidden = NO;
+         NSError *error;
+         ComicsModel *comicsModel = [MTLJSONAdapter modelOfClass:ComicsModel.class fromJSONDictionary:[object valueForKey:@"data"] error:&error];
+         comicBookIndex = 0;
+         slideImages = [[NSMutableArray alloc] init];
+         comicsArray = comicsModel.books;
+         [self SetupBook:comicBookIndex];
+     } andFail:^(NSError *errorMessage)
+     {
+         NSLog(@"%@", errorMessage);
+         _containerView.hidden = YES;
+         [[self Loader] stopAnimating];
+         
+     }];
 }
 
+#pragma mark - statusbar
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
 @end

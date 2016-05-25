@@ -27,7 +27,8 @@
     // Override point for customization after application launch.
     
     [Fabric with:@[[Crashlytics class]]];
-    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
     ///**************** Loging FabricAnalytics ******************
     NSString* event_Key = [NSString stringWithFormat:@"AppStart"];
     [[FabricAnalytics sharedFabricAnalytics] logEvent:event_Key Attributes:nil];

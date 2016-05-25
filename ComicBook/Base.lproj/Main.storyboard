@@ -1128,7 +1128,7 @@
                                 <fontDescription key="fontDescription" name="AvenirNextLTW01-UltraLight" family="AvenirNextLTW01-UltraLight" pointSize="45"/>
                                 <state key="normal" title="Sign up"/>
                                 <connections>
-                                    <segue destination="cgA-wt-aKJ" kind="push" id="JJP-sN-rMV"/>
+                                    <action selector="btnSignUpClick:" destination="nM6-Zl-dn5" eventType="touchUpInside" id="76z-yf-2pl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="C99-fo-C14">
@@ -1140,10 +1140,18 @@
                                     <segue destination="f6r-wx-TBI" kind="push" id="DNQ-Fl-gwP"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" id="pon-eG-QTr">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="4EG-VL-Seh"/>
+                    <connections>
+                        <outlet property="introViewHolder" destination="pon-eG-QTr" id="84B-c3-I3y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w3s-Bu-uyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
