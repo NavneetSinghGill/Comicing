@@ -48,6 +48,11 @@ ComicMakingViewControllerDelegate>
     [self prepareView];
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
 #pragma mark - UIView Methods
 - (void)prepareView
 {

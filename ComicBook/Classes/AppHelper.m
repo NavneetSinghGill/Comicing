@@ -210,9 +210,7 @@ static AppHelper *_appHelper = nil;
     return context;
 }
 
-
-+(void)saveDataToFile:(NSMutableArray*)slideObj fileName:(NSString*)FileName
-{
++(void)saveDataToFile:(NSMutableArray*)slideObj fileName:(NSString*)FileName{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@.sav",FileName]];
@@ -258,6 +256,17 @@ static AppHelper *_appHelper = nil;
 
 #pragma mark get & set
 
++(void)setFirstTimeSignUp:(NSString*)stringValue{
+    [[NSUserDefaults standardUserDefaults] setValue:stringValue forKey:FirstTimeSignUp];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
++(NSString*)getFirstTimeSignUp{
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:FirstTimeSignUp])
+        return [[NSUserDefaults standardUserDefaults] objectForKey:FirstTimeSignUp];
+    
+    return nil;
+}
 +(NSString*)getDeviceToken{
     if([[NSUserDefaults standardUserDefaults] objectForKey:@"deivetoken"])
         return [[NSUserDefaults standardUserDefaults] objectForKey:@"deivetoken"];

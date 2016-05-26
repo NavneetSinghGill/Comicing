@@ -66,6 +66,8 @@
 + (BOOL)isActiveUser;
 +(NSString*)getDialCodeByisoCode:(NSString*)isoCode;
 +(NSString*)getCountryImageByisoCode:(NSString*)isoCode;
++(void)setFirstTimeSignUp:(NSString*)stringValue;
++(NSString*)getFirstTimeSignUp;
 #pragma mark Swipeevents
 //+(void)addSwipeDownGesture:(UIViewController*)vc;
 //-(void)AddToMainView: (UIViewController*) parentViewContent;

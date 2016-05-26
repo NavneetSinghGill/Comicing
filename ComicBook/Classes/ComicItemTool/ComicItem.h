@@ -27,19 +27,16 @@ typedef enum {
 
 @protocol ComicItem <NSObject>
 
--(id)addItemWithImage:(id)sticker;
 
-//- (id)initWithCoder:(NSCoder *)decoder;
-//-(void)encodeWithCoder:(NSCoder *)aCoder;
+-(id)addItemWithImage:(id)sticker;
 
 @end
 
 
 #pragma mark - ComicItemSticker
 
-@interface ComicItemSticker : UIImageView<ComicItem> {
+@interface ComicItemSticker : UIImageView<ComicItem> {}
 
-}
 @property (assign, nonatomic) CGFloat angle;
 @property (assign, nonatomic) CGFloat scaleValueX;
 @property (assign, nonatomic) CGFloat scaleValueY;
@@ -49,14 +46,14 @@ typedef enum {
 
 #pragma mark - ComicItemExclamation
 
-@interface ComicItemExclamation : UIImageView<ComicItem> {
-    
-}
+@interface ComicItemExclamation : UIImageView<ComicItem> {}
+
 @property (assign, nonatomic) CGFloat angle;
 @property (assign, nonatomic) CGFloat scaleValueX;
 @property (assign, nonatomic) CGFloat scaleValueY;
 @property (assign, nonatomic) CGFloat tX;
 @property (assign, nonatomic) CGFloat tY;
+
 @end
 
 #pragma mark - ComicItemBubble

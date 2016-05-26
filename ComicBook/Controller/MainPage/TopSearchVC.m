@@ -327,4 +327,15 @@ const int blurViewTag = 1010;
  }
  */
 
+#pragma mark - statusbar
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+
 @end
