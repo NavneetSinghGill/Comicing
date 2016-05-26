@@ -933,12 +933,12 @@ UIImageOrientation mirroredImageOrientation(UIImageOrientation orientation) {
                 //Code here is run on the main thread
                 
                 //Not sure is correct logic.. But sorry no other option 
-                if (imgvCrop.image.size.width > 1080) {
-                    //Just just rezie it
-                    NSData* data = UIImageJPEGRepresentation(imgvCrop.image,0.2);
-                    UIImage *compressedimage = [[UIImage alloc] initWithData:data];
-                    imgvCrop.image = [UIImage ScaletoFill:compressedimage toSize:CGSizeMake(1080, 1440)];
-                }
+//                if (imgvCrop.image.size.width > 1080) {
+//                    //Just just rezie it
+//                    NSData* data = UIImageJPEGRepresentation(imgvCrop.image,0.2);
+//                    UIImage *compressedimage = [[UIImage alloc] initWithData:data];
+//                    imgvCrop.image = [UIImage ScaletoFill:compressedimage toSize:CGSizeMake(1080, 1440)];
+//                }
                 
                 UIImageView* temImageView = imgvCrop;
                 temImageView.image = [UIImage fixrotation:temImageView.image];
@@ -985,11 +985,17 @@ UIImageOrientation mirroredImageOrientation(UIImageOrientation orientation) {
 //                    imageView.frame = CGRectMake(0, 0, imageWidth, imageHeight);
                     imageView.center = self.view.center;
                     NSLog(@"==19");
-                    if (self.delegate == nil) {
-                        if (self.parentViewController != nil) {
+                    
+                    if (self.delegate == nil)
+                    {
+                        if (self.parentViewController != nil)
+                        {
+                    
                             [self.parentViewController cropStickerViewController_:nil didSelectDoneWithImage:imageView];
                         }
-                    }else{
+                    }
+                    else
+                    {
                         [self.delegate cropStickerViewController:nil didSelectDoneWithImage:imageView withBorderImage:cropedImage];
                     }
                     NSLog(@"==20");

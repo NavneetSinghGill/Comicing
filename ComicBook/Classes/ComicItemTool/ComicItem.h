@@ -90,7 +90,7 @@ typedef enum {
 
 @property (strong,nonatomic)UIImageView* bgImageView;
 @property(strong,nonatomic) UITextView* txtCaption;
-@property(strong,nonatomic)UIButton* plusButton;
+@property(strong,nonatomic) UIButton* plusButton;
 @property (strong,nonatomic) UIView* dotHolder;
 @property (strong,nonatomic) NSString* tintColourString;
 
