@@ -1522,22 +1522,29 @@ static CGRect CaptionTextViewMinRect;
     
     bubbleHolderView.bubbleString = bubbleImageString;
     UIImage* bubbleImage = [UIImage imageNamed:bubbleImageString];
-//    BubbleViewItem* bubbleHolderView =  [[BubbleViewItem alloc] initWithFrame:CGRectMake(50, 50, 150, 150)];
     bubbleHolderView.frame = CGRectMake(50, 50, 150, 150);
     bubbleHolderView.clipsToBounds = NO;
     
     //Adding Bubble image
-    bubbleHolderView.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 120, 120)];
+    CGFloat imgWidth = 120;
+    CGFloat imgHeight = 120;
+    //This is very quick & dirty solution.
+    if (bubbleImageString && ([bubbleImageString containsString:@"firstBubble"] ||
+                              [bubbleImageString containsString:@"Oh no"])) {
+        imgWidth = 150;
+        imgHeight = 150;
+    }
+    bubbleHolderView.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, imgWidth, imgHeight)];
     bubbleHolderView.imageView.image = bubbleImage;
     bubbleHolderView.imageView.contentMode = UIViewContentModeScaleAspectFit;
     bubbleHolderView.imagebtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 150, 150)];
     //End Bubble image
     
     //Adding bubble Text
-//    bubbleHolderView.txtBuble = [[UITextView alloc] initWithFrame:CGRectMake(0, 20, bubbleImage.size.width - 20, bubbleImage.size.height - 20)];
     bubbleHolderView.txtBuble = [[UITextView alloc] initWithFrame:textViewSize];
     //adnan
     bubbleHolderView.txtBuble.textAlignment = NSTextAlignmentCenter;
+    [bubbleHolderView.txtBuble setBackgroundColor:[UIColor clearColor]];
     //End bubble Text
     
     //Add Bubble audio
@@ -1650,26 +1657,63 @@ static CGRect CaptionTextViewMinRect;
     NSLog(@"%@", NSStringFromCGPoint(bubbleHolderView.center));
     CGPoint location = bubbleHolderView.frame.origin;
     if ((location.x + bubbleHolderView.frame.size.width/2) <= self.view.center.x && location.y <= (self.view.center.y - bubbleListView.frame.size.height)) {
-        NSLog(@"BOTTOMRIGHT");
+        NSLog(@"TOP LEFT");
         [self updateTailImage:bubbleHolderView imageName:[NSString stringWithFormat:@"%@%@",bubbleImageString,BOTTOMRIGHT]];
+        
+        //Very quick and dirty code, it may have to change later
+        if ([[bubbleImageString lowercaseString] containsString:@"firstbubble"]) {
+            [self handleBubbleTextFrame:bubbleHolderView frame:CGRectMake(55, 40, 80, 70)];
+        }else if ([[bubbleImageString lowercaseString] containsString:@"scared_large"]) {
+            [self handleBubbleTextFrame:bubbleHolderView frame:CGRectMake(10,30,120,65)];
+        }
     }else if ((location.x + bubbleHolderView.frame.size.width/2) >= self.view.center.x && location.y <= (self.view.center.y - bubbleListView.frame.size.height)) {
-        NSLog(@"%@", NSStringFromCGPoint(self.view.center));
-        NSLog(@"%@", NSStringFromCGPoint(location));
-        NSLog(@"BOTTOMLEFT");
+        NSLog(@"TOP RIGHT");
         [self updateTailImage:bubbleHolderView imageName:[NSString stringWithFormat:@"%@_%@",bubbleImageString,BOTTOMLEFT]];
+        //Very quick and dirty code, it may have to change later
+        if ([[bubbleImageString lowercaseString] containsString:@"firstbubble"]) {
+            [self handleBubbleTextFrame:bubbleHolderView frame:CGRectMake(55, 40, 80, 70)];
+        }else if ([[bubbleImageString lowercaseString] containsString:@"scared_large"]) {
+            [self handleBubbleTextFrame:bubbleHolderView frame:CGRectMake(20,30,120,65)];
+        }
     }else if (location.x <= self.view.center.x && location.y >= (self.view.center.y - bubbleListView.frame.size.height)) {
-        NSLog(@"TOPRIGHT");
+        NSLog(@"BOTTOM LEFT");
         [self updateTailImage:bubbleHolderView imageName:[NSString stringWithFormat:@"%@_%@",bubbleImageString,TOPRIGHT]];
+        //Very quick and dirty code, it may have to change later
+        if ([[bubbleImageString lowercaseString] containsString:@"firstbubble"]) {
+            [self handleBubbleTextFrame:bubbleHolderView frame:CGRectMake(50, 70, 80, 70)];
+        }else if ([[bubbleImageString lowercaseString] containsString:@"scared_large"]) {
+            [self handleBubbleTextFrame:bubbleHolderView frame:CGRectMake(10,50,120,65)];
+        }
     }else if (location.x >= self.view.center.x && location.y >= (self.view.center.y - bubbleListView.frame.size.height)) {
-        NSLog(@"TOPLEFT");
+        NSLog(@"BOTTOM Right");
         [self updateTailImage:bubbleHolderView imageName:[NSString stringWithFormat:@"%@_%@",bubbleImageString,TOPLEFT]];
+        //Very quick and dirty code, it may have to change later
+        if ([[bubbleImageString lowercaseString] containsString:@"firstbubble"]) {
+            [self handleBubbleTextFrame:bubbleHolderView frame:CGRectMake(50, 70, 80, 70)];
+        }else if ([[bubbleImageString lowercaseString] containsString:@"scared_large"]) {
+            [self handleBubbleTextFrame:bubbleHolderView frame:CGRectMake(20,50,120,65)];
+        }
     }
     else{
         NSLog(@"BOTTOMRIGHT");
         [self updateTailImage:bubbleHolderView imageName:[NSString stringWithFormat:@"%@%@",bubbleImageString,BOTTOMRIGHT]];
+        //Very quick and dirty code, it may have to change later
+        if ([[bubbleImageString lowercaseString] containsString:@"firstbubble"]) {
+            [self handleBubbleTextFrame:bubbleHolderView frame:CGRectMake(55, 40, 80, 70)];
+        }
     }
 }
 
+-(void)handleBubbleTextFrame:(UIView*)bubbleHolderView frame:(CGRect)rctFrame{
+    
+    //Very quick and dirty code, it may have to change later
+    for (id txtView in [bubbleHolderView subviews]) {
+        if ([txtView isKindOfClass:[UITextView class]]) {
+            ((UITextView*)txtView).frame = rctFrame;
+//            [((UITextView*)txtView) setBackgroundColor:[UIColor yellowColor]];
+        }
+    }
+}
 //END
 
 #pragma mark - UIGestureRecognizerDelegate Methods
@@ -2668,12 +2712,12 @@ static CGRect CaptionTextViewMinRect;
     [attibute addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, textView.text.length)];
     if (textView && ![textView.text isEqualToString:@""] && textView.text.length <= 7) {
         [attibute addAttribute:NSFontAttributeName
-                         value:[UIFont fontWithName:@"MYRIADPRO-BOLD" size:24.0f]
+                         value:[UIFont fontWithName:@"ArialRoundedMTBold" size:24.0f]
                          range:NSMakeRange(0, textView.text.length)];
     }else{
         
         [attibute addAttribute:NSFontAttributeName
-                         value:[UIFont fontWithName:@"MYRIADPRO-BOLD" size:16.0f]
+                         value:[UIFont fontWithName:@"ArialRoundedMTBold" size:16.0f]
                          range:NSMakeRange(0, textView.text.length)];
     }
     
@@ -3012,83 +3056,10 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
             transform = makeTransform(scaleValueX,scaleValueY,angle,tX,tY);
             imageView.transform =transform;
         }
-        
-//        CGPoint center = imageView.center;
-//        CGSize size = imageView.bounds.size;
-//        
-//        CGRect frameForTransformIdentity = CGRectMake(
-//                                                      center.x - size.width / 2,
-//                                                      center.y - size.height / 2,
-//                                                      size.width,
-//                                                      size.height
-//                                                      );
-//        imageView.bounds = frameForTransformIdentity ;//CGRectApplyAffineTransform(frameForTransformIdentity, transform);
-//        imageView.center = self.view.center;
-//        UIImageView* imgTemp = imageView;
-//        CGRect bounds = CGRectMake(0, 0, size.width/2, size.height/2);
-        
-//        [imageView setFrame:rect];
-//        imageView.bounds = bounds;
-//        center = CGPointMake(size.width / 2,size.height / 2);
-//        imageView.center = center;
-        
-//        [imageView setBounds:rect];
-    
-//        CGPoint center = [self.superview convertPoint:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2) fromView:self];
-//        self.layer.anchorPoint = CGPointMake(.5, .5);
-//        self.center = center;
-//        imageView.center
-//        imageView.frame = CGRectMake(rect.origin.x,
-//                                     rect.origin.y,
-//                                     rect.size.width,
-//                                     rect.size.height);
-//        imageView.frame = rect;
-//        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        
-//        imageView.transform = CGAffineTransformIdentity;
-
-//        CGAffineTransform transform_default = CGAffineTransformConcat(CGAffineTransformRotate(imageView.transform, 0),
-//                                                              CGAffineTransformTranslate(imageView.transform,  0, 0));
-//        imageView.transform = transform_default;
-        
-//        CGPoint translation = [imageView translationInView:imgvComic];
-//        imageView.center = CGPointMake(imageView.center.x + imgvComic.frame.origin.x,
-//                                             imageView.center.y + imgvComic.frame.origin.y);
-//        [imageView.transform setTranslation:CGPointMake(0, 0) inView:imgvComic];
-        
-//        CGAffineTransform transform = imageView.transform;
-        
-//        NSLog(@"encodeWithCoder transform %@",NSStringFromCGAffineTransform(imageView.transform));
-        
-//        CGAffineTransform transform = CGAffineTransformConcat(CGAffineTransformRotate(imageView.transform, angle),
-//                                            CGAffineTransformTranslate(imageView.transform,  scaleValueX, scaleValueY));
-        
-//        transform = CGAffineTransformScale(transform, scaleValueX, scaleValueX);
-//        transform = CGAffineTransformTranslate(transform,imageView.frame.size.width, imageView.frame.size.height);
-//        transform = CGAffineTransformRotate(transform, angle);
-//       CGAffineTransform transform_1 = CGAffineTransformConcat(transform,imageView.transform);
-//        imageView.transform =transform;
-        
-//        transform = CGAffineTransformScale(transform, scaleValueX, scaleValueY);
-//        imageView.transform =transform;
-        
-//        imageView.contentScaleFactor = 0;
-        
-//        imageView.transform = CGAffineTransformRotate(imageView.transform, angle);
-        
-//        CGFloat xScale = imageView.transform.a;
-//        CGFloat yScale = imageView.transform.d;
-        
-//        NSLog(@"xScale : %f , yScale : %f",xScale,yScale);
-        
-        NSLog(@"After value set %@",[NSValue valueWithCGAffineTransform:imageView.transform]);
-//        }
     }else{
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = imageView.image;
     }
-//    NSLog(@"addStickerWithImageView %f",(imageView.contentScaleFactor));
-//    imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.userInteractionEnabled = YES;
     imageView.userInteractionEnabled = YES;
     imageView.clipsToBounds = NO;
@@ -3104,13 +3075,6 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureDetected:)];
     [panGestureRecognizer setDelegate:self];
     [imageView addGestureRecognizer:panGestureRecognizer];
-    
-    
-//    UITapGestureRecognizer *tapImgvEdit = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleImgvEditTap:)];
-//    tapImgvEdit.cancelsTouchesInView = YES;
-//    tapImgvEdit.numberOfTapsRequired = 1;
-//    tapImgvEdit.delegate = self;
-//    [imageView addGestureRecognizer:tapImgvEdit];
     
     imgvComic.userInteractionEnabled = YES;
     imgvComic.clipsToBounds = YES;
@@ -3138,9 +3102,17 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 
 - (void)addBubbleWithImage:(ComicItemBubble *)bubbleHolderView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect
 {    
-
+    CGAffineTransform transform ;
     if (!CGRectEqualToRect(rect,CGRectZero)) {
         bubbleHolderView.frame = rect;
+        bubbleHolderView.contentMode = UIViewContentModeScaleAspectFit;
+        CGFloat angle = ((ComicItemSticker*)bubbleHolderView).angle;
+        CGFloat scaleValueX = ((ComicItemSticker*)bubbleHolderView).scaleValueX;
+        CGFloat scaleValueY = ((ComicItemSticker*)bubbleHolderView).scaleValueY;
+        CGFloat tX = ((ComicItemSticker*)bubbleHolderView).tX;
+        CGFloat tY = ((ComicItemSticker*)bubbleHolderView).tY;
+        transform = makeTransform(scaleValueX,scaleValueY,angle,tX,tY);
+        bubbleHolderView.transform =transform;
     }
     
     bubbleHolderView.clipsToBounds = NO;
@@ -3169,12 +3141,11 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     bubbleHolderView.imageView.tag = 2020;
     
     bubbleHolderView.txtBuble.delegate = self;
-    [bubbleHolderView.txtBuble setBackgroundColor:[UIColor clearColor]];
-    bubbleHolderView.txtBuble.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:20];
+//    [bubbleHolderView.txtBuble setBackgroundColor:[UIColor clearColor]];
+    bubbleHolderView.txtBuble.font = [UIFont fontWithName:@"ARLRDBD" size:20];
     bubbleHolderView.txtBuble.textColor = [UIColor blackColor];
     bubbleHolderView.txtBuble.returnKeyType = UIReturnKeyDone;
     bubbleHolderView.txtBuble.opaque = YES;
-//    [bubbleHolderView.txtBuble addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
     bubbleHolderView.txtBuble.textAlignment = NSTextAlignmentCenter;
     CGFloat centerLeftValue = bubbleHolderView.txtBuble.frame.size.width/2;
     CGFloat centerTopValue = bubbleHolderView.txtBuble.frame.size.height/2;
@@ -3185,8 +3156,6 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     if (![bubbleHolderView.txtBuble.text isEqualToString:@""]) {
         [self textViewShouldEndEditing:bubbleHolderView.txtBuble];
     }
-
-//    [bubbleHolderView.txtBuble setBackgroundColor:[UIColor yellowColor]];
     
     for (UIGestureRecognizer *recognizer in bubbleHolderView.txtBuble.gestureRecognizers) {
         if ([recognizer isKindOfClass:[UILongPressGestureRecognizer class]]){
@@ -3213,7 +3182,6 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     [bubbleHolderView addGestureRecognizer:pinchRecognizer];
     
     //Adding controller to holder
-//    [bubbleHolderView.imageView addSubview:bubbleHolderView.txtBuble];
     [bubbleHolderView addSubview:bubbleHolderView.imageView];
     [bubbleHolderView addSubview:bubbleHolderView.imagebtn];
     [bubbleHolderView addSubview:bubbleHolderView.audioImageButton];

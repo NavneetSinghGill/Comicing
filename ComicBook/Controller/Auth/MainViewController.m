@@ -66,7 +66,6 @@
     controller.view.frame=self.view.frame;
     
     // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
     
     [self addChildViewController:controller];
     [self.introViewHolder setHidden:NO];

@@ -349,6 +349,7 @@
 		0C857C171C94BEAA00F0B911 /* countries_images.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C857C161C94BEAA00F0B911 /* countries_images.json */; };
 		0C8C61ED1CB14445008073FA /* ComicSlidesData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C61EC1CB14445008073FA /* ComicSlidesData.m */; };
 		0C9A3A2E1C8DE85500D75895 /* stickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9A3A2D1C8DE85500D75895 /* stickerCell.m */; };
+		0CB7C33E1CF8DA640072E4B0 /* ARLRDBD.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0CB7C33D1CF8DA640072E4B0 /* ARLRDBD.TTF */; };
 		0CBF90B41CA313A5004007DF /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B11CA313A5004007DF /* UIImage+Alpha.m */; };
 		0CBF90B51CA313A5004007DF /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B31CA313A5004007DF /* UIImage+ColorAtPixel.m */; };
 		0CBF90B81CA3143D004007DF /* UIImage+ImageCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */; };
@@ -958,6 +959,7 @@
 		0C8C61EC1CB14445008073FA /* ComicSlidesData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicSlidesData.m; sourceTree = "<group>"; };
 		0C9A3A2C1C8DE85500D75895 /* stickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stickerCell.h; sourceTree = "<group>"; };
 		0C9A3A2D1C8DE85500D75895 /* stickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = stickerCell.m; sourceTree = "<group>"; };
+		0CB7C33D1CF8DA640072E4B0 /* ARLRDBD.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = ARLRDBD.TTF; sourceTree = "<group>"; };
 		0CBF90B01CA313A5004007DF /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		0CBF90B11CA313A5004007DF /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		0CBF90B21CA313A5004007DF /* UIImage+ColorAtPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorAtPixel.h"; sourceTree = "<group>"; };
@@ -1106,6 +1108,7 @@
 		0C6664AC1C84358500FEB11F /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				0CB7C33D1CF8DA640072E4B0 /* ARLRDBD.TTF */,
 				0CC9F3731CF653D100761F44 /* Segment7Standard.otf */,
 				0C6664AD1C84358500FEB11F /* AmericanTypeWriter */,
 				0C6664B01C84358500FEB11F /* Avenir Next LT W01 Ultra Light.ttf */,
@@ -2787,6 +2790,7 @@
 				0C6667A11C84358600FEB11F /* 02.png in Resources */,
 				0C6667931C84358600FEB11F /* faceSignUp.png in Resources */,
 				0C6667811C84358600FEB11F /* arrow@3x.png in Resources */,
+				0CB7C33E1CF8DA640072E4B0 /* ARLRDBD.TTF in Resources */,
 				0CC9F3741CF653D100761F44 /* Segment7Standard.otf in Resources */,
 				84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */,
 				0C6667711C84358600FEB11F /* Avenir Next LT W01 Ultra Light.ttf in Resources */,

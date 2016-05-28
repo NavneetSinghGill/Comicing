@@ -369,6 +369,12 @@
         self.imagebtn = [decoder decodeObjectForKey:@"imagebtn"];
         self.bubbleString = [decoder decodeObjectForKey:@"bubbleString"];
         
+        self.angle = [[decoder decodeObjectForKey:@"bubbleAngle"] floatValue];
+        self.scaleValueX = [[decoder decodeObjectForKey:@"bubbleScaleX"] floatValue];
+        self.scaleValueY = [[decoder decodeObjectForKey:@"bubbleScaleY"] floatValue];
+        self.tX = [[decoder decodeObjectForKey:@"bubbleTX"] floatValue];
+        self.tY = [[decoder decodeObjectForKey:@"bubbleTY"] floatValue];
+        
     }
     return self;
 }
@@ -384,11 +390,48 @@
     [aCoder encodeObject:self.txtBuble forKey:@"txtBuble"];
     [aCoder encodeObject:self.imagebtn forKey:@"imagebtn"];
     [aCoder encodeObject:self.bubbleString forKey:@"bubbleString"];
+    
+    [aCoder encodeObject:NSStringFromCGRect(self.bounds) forKey:@"bubbleBounds"];
+    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self rotation]] forKey:@"bubblenAngle"];
+    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self xscale]] forKey:@"bubbleScaleX"];
+    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self yscale]] forKey:@"bubbleScaleY"];
+    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.tx] forKey:@"bubbleTX"];
+    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.ty] forKey:@"bubbleTY"];
 }
 
 -(void)dealloc
 {
 //    self.txtBuble = nil;
+}
+
+- (CGFloat) xscale
+{
+    CGAffineTransform t = self.transform;
+    return sqrt(t.a * t.a + t.c * t.c);
+}
+
+- (CGFloat) yscale
+{
+    CGAffineTransform t = self.transform;
+    return sqrt(t.b * t.b + t.d * t.d);
+}
+
+- (CGFloat) rotation
+{
+    CGAffineTransform t = self.transform;
+    return atan2f(t.b, t.a);
+}
+
+- (CGFloat) tx
+{
+    CGAffineTransform t = self.transform;
+    return t.tx;
+}
+
+- (CGFloat) ty
+{
+    CGAffineTransform t = self.transform;
+    return t.ty;
 }
 
 @end

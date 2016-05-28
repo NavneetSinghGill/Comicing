@@ -70,6 +70,13 @@ typedef enum {
 @property (nonatomic,strong)UIImageView *imageView;
 @property (nonatomic,strong)UITextView* txtBuble;
 @property (nonatomic,strong)UIButton* imagebtn;
+
+@property (assign, nonatomic) CGFloat angle;
+@property (assign, nonatomic) CGFloat scaleValueX;
+@property (assign, nonatomic) CGFloat scaleValueY;
+@property (assign, nonatomic) CGFloat tX;
+@property (assign, nonatomic) CGFloat tY;
+
 -(void)recordAction;
 -(BOOL)isPlayVoice;
 -(void)playAction;
