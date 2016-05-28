@@ -177,10 +177,14 @@ static CGRect CaptionTextViewMinRect;
     [self prepareView];
     [self prepareVoiceView];
     
+    
+    viewCameraPreview.hidden = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    
     [self addNotificationCenter];
 }
 
@@ -191,6 +195,8 @@ static CGRect CaptionTextViewMinRect;
 //    [AppHelper addSwipeDownGesture:self];
     
     //Reseting Print Screen
+    viewCameraPreview.hidden = NO;
+
     [self doAutoSave:nil];
     [super viewDidAppear:animated];
 }
