@@ -63,6 +63,7 @@
     controller.view.contentMode = UIViewContentModeScaleAspectFill;
     
     [self.introViewHolder addSubview:controller.view];
+    [self addSwipeEvent:self.introViewHolder];
     controller.view.frame=self.view.frame;
     
     // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
@@ -81,13 +82,48 @@
 }
 
 
+-(void)addSwipeEvent:(UIView*)subView{
+    
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
+    recognizer.numberOfTouchesRequired = 1;
+//    recognizer.delegate = self;
+    [subView addGestureRecognizer:recognizer];
+    
+    UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
+    leftRecognizer.direction=UISwipeGestureRecognizerDirectionLeft;
+    leftRecognizer.numberOfTouchesRequired = 1;
+//    leftRecognizer.delegate = self;
+    [subView addGestureRecognizer:leftRecognizer];
+    
+    UISwipeGestureRecognizer *downRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
+    downRecognizer.direction=UISwipeGestureRecognizerDirectionDown;
+    downRecognizer.numberOfTouchesRequired = 1;
+//    donwRecognizer.delegate = self;
+    [subView addGestureRecognizer:downRecognizer];
+    
+    UISwipeGestureRecognizer *upRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
+    upRecognizer.direction=UISwipeGestureRecognizerDirectionUp;
+    upRecognizer.numberOfTouchesRequired = 1;
+//    upRecognizer.delegate = self;
+    [subView addGestureRecognizer:upRecognizer];
+}
+
+- (void) SwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    if ( sender.direction == UISwipeGestureRecognizerDirectionLeft ||
+         sender.direction == UISwipeGestureRecognizerDirectionRight ||
+         sender.direction== UISwipeGestureRecognizerDirectionUp ||
+         sender.direction == UISwipeGestureRecognizerDirectionDown){
+        [ self removeIntroVideo];
+    }
+}
+
 -(void)introVideoDoneButtonClick:(UIButton *)button {
     [self removeIntroVideo];
     // Remove playerViewController.view
 }
 -(void)removeIntroVideo{
     //fade out
-    [UIView animateWithDuration:1.0f animations:^{
+    [UIView animateWithDuration:0.5f animations:^{
         [controller.view setAlpha:0.0];
     } completion:^(BOOL finished) {
         video = nil;
