@@ -1554,7 +1554,10 @@ static CGRect CaptionTextViewMinRect;
     //End bubble Text
     
     //Add Bubble audio
-    bubbleHolderView.audioImageButton = [[UIButton alloc] initWithFrame:CGRectMake(bubbleHolderView.frame.size.width - 20, bubbleHolderView.frame.size.height - 20, 16, 16)];
+    CGFloat audioImageX = (textViewSize.origin.x + textViewSize.size.width) - 20;
+    CGFloat audioImageY = (textViewSize.origin.y + textViewSize.size.height) - 10;
+    
+    bubbleHolderView.audioImageButton = [[UIButton alloc] initWithFrame:CGRectMake(audioImageX,audioImageY, 16, 16)];
     bubbleHolderView.audioImageButton.contentMode = UIViewContentModeScaleAspectFit;
     [bubbleHolderView.audioImageButton setImage:[UIImage imageNamed:@"bubbleAudioPlay"] forState:UIControlStateNormal];
     [bubbleHolderView.audioImageButton setAlpha:0];
@@ -1658,8 +1661,6 @@ static CGRect CaptionTextViewMinRect;
     if (bubbleImageString == nil) {
         return;
     }
-    
-//    bubbleHolderView.frame.origin;
     NSLog(@"%@", NSStringFromCGPoint(bubbleHolderView.center));
     CGPoint location = bubbleHolderView.frame.origin;
     if ((location.x + bubbleHolderView.frame.size.width/2) <= self.view.center.x && location.y <= (self.view.center.y - bubbleListView.frame.size.height)) {
@@ -1716,7 +1717,14 @@ static CGRect CaptionTextViewMinRect;
     for (id txtView in [bubbleHolderView subviews]) {
         if ([txtView isKindOfClass:[UITextView class]]) {
             ((UITextView*)txtView).frame = rctFrame;
-//            [((UITextView*)txtView) setBackgroundColor:[UIColor yellowColor]];
+        }
+        if ([txtView isKindOfClass:[UIButton class]]) {
+            CGRect rectButton = rctFrame;
+            rectButton.origin.x = (rctFrame.origin.x + rctFrame.size.width) - 20;
+            rectButton.origin.y = (rctFrame.origin.y + rctFrame.size.height) - 10;
+            rectButton.size.height = 16;
+            rectButton.size.width = 16;
+            ((UIButton*)txtView).frame = rectButton;
         }
     }
 }

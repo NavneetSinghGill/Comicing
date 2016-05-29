@@ -9,15 +9,13 @@
 #import "MainViewController.h"
 #import "AppHelper.h"
 #import <MediaPlayer/MediaPlayer.h>
-#import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 #import "CropRegisterViewController.h"
 
 @interface MainViewController ()
 {
-    AVPlayer *video;
-    AVPlayerViewController *controller;
-    AVPlayerItem* playerItem;
+    MPMoviePlayerViewController* playerViewController;
 }
 @property (weak, nonatomic) IBOutlet UIView *introViewHolder;
 @end
@@ -43,78 +41,83 @@
 
 - (IBAction)btnSignUpClick:(id)sender {
     if ([AppHelper getFirstTimeSignUp] == nil) {
-        [self addIntroVideo];
+        [self playVideo:@""];
+//        [self addIntroVideo];
     }else{
         [self gotoRegisterPage];
     }
 }
 
--(void)addIntroVideo{
-    
+- (void) playVideo:(NSString *)fileName
+{
     NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]
-                                         pathForResource:@"introvideo" ofType:@"mp4"]];
+                                             pathForResource:@"introvideo" ofType:@"mp4"]];
+    
+    playerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
+    playerViewController.moviePlayer.controlStyle = MPMovieControlStyleNone;
 
-    playerItem = [AVPlayerItem playerItemWithURL:fileURL];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(movieFinishedCallback:)
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:[playerViewController moviePlayer]];
     
-    video = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+    [self.view addSubview:playerViewController.view];
+    //play movie
+    MPMoviePlayerController *player = [playerViewController moviePlayer];
 
-    controller=[[AVPlayerViewController alloc]init];
-    controller.player=video;
-    controller.view.contentMode = UIViewContentModeScaleAspectFill;
+    [self addSwipeEvent:player.view];
     
-    [self.introViewHolder addSubview:controller.view];
-    [self addSwipeEvent:self.introViewHolder];
-    controller.view.frame=self.view.frame;
-    
-    // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
-    
-    [self addChildViewController:controller];
-    [self.introViewHolder setHidden:NO];
-    [controller.view setAlpha:0];
+    [playerViewController.view setAlpha:0];
     //fade in
     [UIView animateWithDuration:2.0f animations:^{
-        
-        [controller.view setAlpha:1];
-        
+        [playerViewController.view setAlpha:1];
     } completion:^(BOOL finished) {
+        [player play];
         [AppHelper setFirstTimeSignUp:@"YES"];
     }];
 }
 
+// The call back
+- (void) movieFinishedCallback:(NSNotification*) aNotification {
+    MPMoviePlayerController *player = [aNotification object];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
+    
+    [player stop];
+    [player.view removeFromSuperview];
+    player = nil;
+    
+    //fade out
+    [UIView animateWithDuration:0.1f animations:^{
+    } completion:^(BOOL finished) {
+        [self gotoRegisterPage];
+    }];
+    
+    // call autorelease the analyzer says call too many times
+    // call release the analyzer says incorrect decrement
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    [self removeIntroVideo];
+    [playerViewController moviePlayer].view.userInteractionEnabled= NO;
+    return YES;
+}
 
 -(void)addSwipeEvent:(UIView*)subView{
     
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
-    recognizer.numberOfTouchesRequired = 1;
-//    recognizer.delegate = self;
-    [subView addGestureRecognizer:recognizer];
-    
-    UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
-    leftRecognizer.direction=UISwipeGestureRecognizerDirectionLeft;
-    leftRecognizer.numberOfTouchesRequired = 1;
-//    leftRecognizer.delegate = self;
-    [subView addGestureRecognizer:leftRecognizer];
-    
-    UISwipeGestureRecognizer *downRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
-    downRecognizer.direction=UISwipeGestureRecognizerDirectionDown;
-    downRecognizer.numberOfTouchesRequired = 1;
-//    donwRecognizer.delegate = self;
-    [subView addGestureRecognizer:downRecognizer];
-    
-    UISwipeGestureRecognizer *upRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
-    upRecognizer.direction=UISwipeGestureRecognizerDirectionUp;
-    upRecognizer.numberOfTouchesRequired = 1;
-//    upRecognizer.delegate = self;
-    [subView addGestureRecognizer:upRecognizer];
+    [subView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *recognizerSingleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(SwipeRecognizer:)];
+    recognizerSingleTap.numberOfTapsRequired = 1;
+    recognizerSingleTap.delegate = self;
+    [subView addGestureRecognizer:recognizerSingleTap];
 }
 
 - (void) SwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    if ( sender.direction == UISwipeGestureRecognizerDirectionLeft ||
-         sender.direction == UISwipeGestureRecognizerDirectionRight ||
-         sender.direction== UISwipeGestureRecognizerDirectionUp ||
-         sender.direction == UISwipeGestureRecognizerDirectionDown){
-        [ self removeIntroVideo];
-    }
 }
 
 -(void)introVideoDoneButtonClick:(UIButton *)button {
@@ -124,14 +127,15 @@
 -(void)removeIntroVideo{
     //fade out
     [UIView animateWithDuration:0.5f animations:^{
-        [controller.view setAlpha:0.0];
+        [playerViewController.view setAlpha:0.0];
     } completion:^(BOOL finished) {
-        video = nil;
-        playerItem = nil;
-        [controller.view removeFromSuperview];
-        [controller removeFromParentViewController];
-        controller = nil;
-        [self gotoRegisterPage];
+        [[playerViewController moviePlayer] stop];
+        [[[playerViewController moviePlayer] view] removeFromSuperview];
+        
+        [playerViewController removeFromParentViewController];
+        playerViewController = nil;
+        
+//        [self gotoRegisterPage];
     }];
 }
 

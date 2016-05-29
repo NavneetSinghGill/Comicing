@@ -60,7 +60,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
                                           [NSValue valueWithCGRect:CGRectMake(10,40,130,65)],
                                           [NSValue valueWithCGRect:CGRectMake(10,30,130,75)],
                                           [NSValue valueWithCGRect:CGRectMake(10,40,130,75)],
-                                          [NSValue valueWithCGRect:CGRectMake(10,40,130,75)],
+                                          [NSValue valueWithCGRect:CGRectMake(10,40,130,60)],
                                           [NSValue valueWithCGRect:CGRectMake(30,50,110,85)], nil];
     
     
