@@ -373,7 +373,7 @@ static ComicNetworking *_sharedComicNetworking = nil;
                                                                  error:nil];
         }
         [self requestCallBack:object
-                 jsonResponse:responseDataDict
+                 jsonResponse:operationObjet.response.allHeaderFields
                         Error:nil
                           url:url
                    completion:^(id json,id jsonResponse) {

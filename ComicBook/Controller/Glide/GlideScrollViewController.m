@@ -690,7 +690,7 @@ NSTimer* timerObject;
                 self.scrvComicSlide.isStillSaving = NO;
                 self.comicPageComicItems = nil;
                 data = nil;
-                self.isSendPageReload = YES;
+//                self.isSendPageReload = YES;
                 [self setComicSendButton];
             }
         }

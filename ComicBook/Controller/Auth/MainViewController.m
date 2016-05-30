@@ -16,6 +16,7 @@
 @interface MainViewController ()
 {
     MPMoviePlayerViewController* playerViewController;
+    MPMoviePlayerController *playerNotification;
 }
 @property (weak, nonatomic) IBOutlet UIView *introViewHolder;
 @end
@@ -80,20 +81,32 @@
 
 // The call back
 - (void) movieFinishedCallback:(NSNotification*) aNotification {
-    MPMoviePlayerController *player = [aNotification object];
+    playerNotification = [aNotification object];
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
      name:MPMoviePlayerPlaybackDidFinishNotification
-     object:player];
+     object:playerNotification];
     
-    [player stop];
-    [player.view removeFromSuperview];
-    player = nil;
+    [playerNotification stop];
     
+    [self.view setAlpha:0];
     //fade out
     [UIView animateWithDuration:0.1f animations:^{
     } completion:^(BOOL finished) {
         [self gotoRegisterPage];
+//        [playerNotification.view removeFromSuperview];
+//        playerNotification = nil;
+//        [playerViewController removeFromParentViewController];
+//        playerViewController = nil;
+        [UIView animateWithDuration:0.0f animations:^{
+        } completion:^(BOOL finished) {
+            [playerNotification.view removeFromSuperview];
+            playerNotification = nil;
+            
+            [playerViewController removeFromParentViewController];
+            playerViewController = nil;
+            
+        }];
     }];
     
     // call autorelease the analyzer says call too many times
@@ -127,14 +140,10 @@
 -(void)removeIntroVideo{
     //fade out
     [UIView animateWithDuration:0.5f animations:^{
-        [playerViewController.view setAlpha:0.0];
+//        [playerViewController.view setAlpha:0.0];
     } completion:^(BOOL finished) {
         [[playerViewController moviePlayer] stop];
-        [[[playerViewController moviePlayer] view] removeFromSuperview];
-        
-        [playerViewController removeFromParentViewController];
-        playerViewController = nil;
-        
+//        [[[playerViewController moviePlayer] view] removeFromSuperview];
 //        [self gotoRegisterPage];
     }];
 }

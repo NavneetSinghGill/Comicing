@@ -191,14 +191,14 @@
             if (!self.hideTickByDefault) {
                 [cell.selectedTickImage setHidden:NO];
             }
-            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
+//            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
         }
         else if([us isKindOfClass:[UserFriends class]] && us.friend_id && us.status == FRIEND)
         {
             if (!self.hideTickByDefault) {
                 [cell.selectedTickImage setHidden:NO];
             }
-            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
+//            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
         }
         
         
@@ -295,7 +295,7 @@
             if (!self.hideTickByDefault) {
              [cell.selectedTickImage setHidden:NO];
             }
-            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
+//            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
         }
         else if((groupMembersList == nil || [groupMembersList count] == 0 ) &&
                 [us isKindOfClass:[UserFriends class]] && us.friend_id && ![us.friend_id isEqualToString:@"-1"])
@@ -305,7 +305,7 @@
                 [cell.selectedTickImage setHidden:NO];
             }
             
-            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
+//            [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
         }
         
         //Config Invite Button
@@ -365,7 +365,7 @@
             }
             else
             {
-                [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
+//                [[cell.userImage layer] setBorderColor:[UIColor colorWithHexStr:@"26ace2"].CGColor];
             }
         }
         

@@ -117,16 +117,33 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
      {
          [AppHelper showHUDLoader:NO];
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-         successBlock(responseObject,responseObject);
+//         successBlock(responseObject,responseObject);
+         successBlock(responseObject,operation);
      }
          failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         NSString* strg = [self jsonString:operation.responseString];
          [AppHelper showHUDLoader:NO];
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-         failBlock(error);
+         if (strg && ![strg isEqualToString:@""]) {
+             NSData *data = [strg dataUsingEncoding:NSUTF8StringEncoding];
+             id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+             successBlock(json,operation);
+         }else{
+             failBlock(error);
+         }
      }];
 }
-
++(NSString*)jsonString:(NSString*)s{
+    NSRange r1 = [s rangeOfString:@"{"];
+    NSRange r2 = [s rangeOfString:@"}"];
+    if (r1.length == 0 ||
+        r2.length == 0 ) {
+        return @"";
+    }
+    NSRange rSub = NSMakeRange((r1.location -1 ) + r1.length, (r2.location - r1.location - r1.length) + 2);
+    return [s substringWithRange:rSub];
+}
 + (void) getRequestWithURLString:(NSString *)urlString
                    withParameter:(id)parameters
                      withSuccess:(void(^)(id object))successBlock

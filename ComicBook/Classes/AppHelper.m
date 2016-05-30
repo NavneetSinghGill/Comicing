@@ -261,7 +261,6 @@ static AppHelper *_appHelper = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 +(NSString*)getFirstTimeSignUp{
-    
     if([[NSUserDefaults standardUserDefaults] objectForKey:FirstTimeSignUp])
         return [[NSUserDefaults standardUserDefaults] objectForKey:FirstTimeSignUp];
     

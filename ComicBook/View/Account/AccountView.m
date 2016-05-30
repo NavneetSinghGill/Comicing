@@ -473,6 +473,10 @@ CGRect firstFrame;
         
         [dataDic setObject:userDic forKey:@"data"];
         
+        NSError * err;
+        NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:0 error:&err];
+        NSString * myString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
         ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
         [cmNetWorking updateUserInfo:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json,id jsonResposeHeader) {
             
@@ -485,6 +489,7 @@ CGRect firstFrame;
             }
             
             [AppHelper showSuccessDropDownMessage:@"Thank you for the registration." mesage:@""];
+            [AppHelper setAuthandNonceId:[jsonResposeHeader objectForKey:@"Authorization"] Nonce:[jsonResposeHeader objectForKey:@"Nonce"]];
             if ([json objectForKey:@"data"] && ![[json objectForKey:@"data"] objectForKey:@"login_id"]) {
                 NSMutableDictionary* userDic = [[json objectForKey:@"data"] mutableCopy];
                 [userDic setObject:self.txtId.text forKey:@"login_id"];
@@ -497,7 +502,6 @@ CGRect firstFrame;
                 [[json objectForKey:@"data"] objectForKey:@"user_id"]) {
                 [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];
             }
-            
             [AppHelper setCurrentUserEmail:self.txtEmail.text];
             if (self.delegate && [self.delegate respondsToSelector:@selector(getAccountRequest)])
             {

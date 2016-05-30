@@ -280,12 +280,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
                   ([[json objectForKey:@"data"] objectForKey:@"verification_code"] ||
                    [[json objectForKey:@"data"] objectForKey:@"user_id"])) {
                       //Check is we recive the code
-//                      NSString* vCode = @"";
                       [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];
-//                      if (![[json objectForKey:@"data"] objectForKey:@"verification_code"]) {
-//                          vCode = @"1234";
-//                      }
-//                      [self opemVerifyRequest:vCode];
                       
                       [self opemVerifyRequest:@""];
                       if (isReciveVeryfyCode) {

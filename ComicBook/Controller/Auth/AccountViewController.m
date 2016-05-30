@@ -217,7 +217,18 @@
         [cmNetWorking postRegister:dataDic completion:^(id json,id jsonResposeHeader) {
             
             [AppHelper showSuccessDropDownMessage:@"Thank you for the registration." mesage:@""];
+            if ([json objectForKey:@"data"] && ![[json objectForKey:@"data"] objectForKey:@"login_id"]) {
+                NSMutableDictionary* userDic = [[json objectForKey:@"data"] mutableCopy];
+                [userDic setObject:self.txtId.text forKey:@"login_id"];
+                [AppHelper setCurrentUser:userDic];
+            }else
+            {
+                [AppHelper setCurrentUser:[json objectForKey:@"data"]];
+            }
+            [AppHelper setCurrentUserEmail:[[json objectForKey:@"data"] objectForKey:@"email"]];
+            [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];
             
+            [AppHelper setAuthandNonceId:[jsonResposeHeader objectForKey:@"Authorization"] Nonce:[jsonResposeHeader objectForKey:@"Nonce"]];
             [[NSUserDefaults standardUserDefaults] setValue:[[json objectForKey:@"data"] objectForKey:@"user_id"] forKey:@"userId"];
             
             UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
