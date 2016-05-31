@@ -76,10 +76,6 @@
 		0C66679D1C84358600FEB11F /* searchFriends.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6664E21C84358500FEB11F /* searchFriends.png */; };
 		0C66679E1C84358600FEB11F /* selectedImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6664E31C84358500FEB11F /* selectedImage.png */; };
 		0C66679F1C84358600FEB11F /* Search.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6664E51C84358500FEB11F /* Search.png */; };
-		0C6667A01C84358600FEB11F /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6664E71C84358500FEB11F /* 01.png */; };
-		0C6667A11C84358600FEB11F /* 02.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6664E81C84358500FEB11F /* 02.png */; };
-		0C6667A21C84358600FEB11F /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6664E91C84358500FEB11F /* 03.png */; };
-		0C6667A31C84358600FEB11F /* 04.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6664EA1C84358500FEB11F /* 04.png */; };
 		0C6667A41C84358600FEB11F /* CheckButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6664EB1C84358500FEB11F /* CheckButton.png */; };
 		0C6667A51C84358600FEB11F /* digup.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6664EC1C84358500FEB11F /* digup.png */; };
 		0C6667A61C84358600FEB11F /* digup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6664ED1C84358500FEB11F /* digup@2x.png */; };
@@ -454,10 +450,6 @@
 		0C6664E21C84358500FEB11F /* searchFriends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchFriends.png; sourceTree = "<group>"; };
 		0C6664E31C84358500FEB11F /* selectedImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedImage.png; sourceTree = "<group>"; };
 		0C6664E51C84358500FEB11F /* Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Search.png; sourceTree = "<group>"; };
-		0C6664E71C84358500FEB11F /* 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01.png; sourceTree = "<group>"; };
-		0C6664E81C84358500FEB11F /* 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02.png; sourceTree = "<group>"; };
-		0C6664E91C84358500FEB11F /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
-		0C6664EA1C84358500FEB11F /* 04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04.png; sourceTree = "<group>"; };
 		0C6664EB1C84358500FEB11F /* CheckButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckButton.png; sourceTree = "<group>"; };
 		0C6664EC1C84358500FEB11F /* digup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = digup.png; sourceTree = "<group>"; };
 		0C6664ED1C84358500FEB11F /* digup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "digup@2x.png"; sourceTree = "<group>"; };
@@ -1230,10 +1222,6 @@
 		0C6664E61C84358500FEB11F /* sendPage */ = {
 			isa = PBXGroup;
 			children = (
-				0C6664E71C84358500FEB11F /* 01.png */,
-				0C6664E81C84358500FEB11F /* 02.png */,
-				0C6664E91C84358500FEB11F /* 03.png */,
-				0C6664EA1C84358500FEB11F /* 04.png */,
 				0C6664EB1C84358500FEB11F /* CheckButton.png */,
 				0C6664EC1C84358500FEB11F /* digup.png */,
 				0C6664ED1C84358500FEB11F /* digup@2x.png */,
@@ -2709,7 +2697,6 @@
 				0C6667EA1C84358600FEB11F /* GroupsMembersCell.xib in Resources */,
 				0C6668AC1C84358600FEB11F /* GroupItem.xib in Resources */,
 				0C6667A41C84358600FEB11F /* CheckButton.png in Resources */,
-				0C6667A21C84358600FEB11F /* 03.png in Resources */,
 				0C6667941C84358600FEB11F /* findFriendsArrow.png in Resources */,
 				0C6667791C84358600FEB11F /* MYRIADPRO-CONDIT.OTF in Resources */,
 				0C66677E1C84358600FEB11F /* add_small.png in Resources */,
@@ -2724,7 +2711,6 @@
 				0C6668A31C84358600FEB11F /* FooterView.xib in Resources */,
 				0C66677A1C84358600FEB11F /* MYRIADPRO-REGULAR.OTF in Resources */,
 				0C6667921C84358600FEB11F /* accountPassword.png in Resources */,
-				0C6667A01C84358600FEB11F /* 01.png in Resources */,
 				0C6668371C84358600FEB11F /* c4.jpg in Resources */,
 				0C66678B1C84358600FEB11F /* smile.png in Resources */,
 				0C66677D1C84358600FEB11F /* add.png in Resources */,
@@ -2755,7 +2741,6 @@
 				0C66679B1C84358600FEB11F /* profilePicDone.png in Resources */,
 				0C6667B01C84358600FEB11F /* Main.storyboard in Resources */,
 				0C154E1F1CEFDC7F005116A4 /* Comicing_Terms_of_Service.html in Resources */,
-				0C6667A31C84358600FEB11F /* 04.png in Resources */,
 				0C6667801C84358600FEB11F /* arrow@2x.png in Resources */,
 				0C6668A71C84358600FEB11F /* FriendsListTableViewCell.xib in Resources */,
 				0C6667871C84358600FEB11F /* parrotIcon.png in Resources */,
@@ -2787,7 +2772,6 @@
 				0C6667971C84358600FEB11F /* profilePicBack.png in Resources */,
 				0C6667A91C84358600FEB11F /* GobackButton.png in Resources */,
 				0C6667AD1C84358600FEB11F /* Default-568h@2x.png in Resources */,
-				0C6667A11C84358600FEB11F /* 02.png in Resources */,
 				0C6667931C84358600FEB11F /* faceSignUp.png in Resources */,
 				0C6667811C84358600FEB11F /* arrow@3x.png in Resources */,
 				0CB7C33E1CF8DA640072E4B0 /* ARLRDBD.TTF in Resources */,

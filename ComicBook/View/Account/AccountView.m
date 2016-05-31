@@ -488,25 +488,7 @@ CGRect firstFrame;
                 return;
             }
             
-            [AppHelper showSuccessDropDownMessage:@"Thank you for the registration." mesage:@""];
-            [AppHelper setAuthandNonceId:[jsonResposeHeader objectForKey:@"Authorization"] Nonce:[jsonResposeHeader objectForKey:@"Nonce"]];
-            if ([json objectForKey:@"data"] && ![[json objectForKey:@"data"] objectForKey:@"login_id"]) {
-                NSMutableDictionary* userDic = [[json objectForKey:@"data"] mutableCopy];
-                [userDic setObject:self.txtId.text forKey:@"login_id"];
-                [AppHelper setCurrentUser:userDic];
-            }else
-            {
-                [AppHelper setCurrentUser:[json objectForKey:@"data"]];
-            }
-            if ([json objectForKey:@"data"] &&
-                [[json objectForKey:@"data"] objectForKey:@"user_id"]) {
-                [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];
-            }
-            [AppHelper setCurrentUserEmail:self.txtEmail.text];
-            if (self.delegate && [self.delegate respondsToSelector:@selector(getAccountRequest)])
-            {
-                [self.delegate getAccountRequest];
-            }
+            [self doLogin];
             
         } ErrorBlock:^(JSONModelError *error) {
             NSLog(@"Error %@",error);
@@ -514,8 +496,51 @@ CGRect firstFrame;
             isProcessing = NO;
         }];
     }else{
-//        [self keyboardWillShow];
     }
+}
+
+-(void)doLogin{
+    //Do Validate
+        NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
+        
+        [userDic setObject:self.txtId.text forKey:@"login_id"];
+        [userDic setObject:[AppHelper MD5encryption:self.txtpassword.text] forKey:@"password"];
+        [userDic setObject:[AppHelper getDeviceToken] forKey:@"device_token"];
+        [dataDic setObject:userDic forKey:@"data"];
+        
+        
+        ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
+        [cmNetWorking postLogin:dataDic completion:^(id json,id jsonResposeHeader) {
+            if ([[[json objectForKey:@"result"] lowercaseString] isEqualToString:@"failed"]) {
+                [self showAlertMessage:[json objectForKey:@"message"]];
+            }else if ([[[json objectForKey:@"result"] lowercaseString] isEqualToString:@"sucess"]) {
+                
+                [AppHelper showSuccessDropDownMessage:@"Thank you for the registration." mesage:@""];
+                [AppHelper setAuthandNonceId:[jsonResposeHeader objectForKey:@"Authorization"] Nonce:[jsonResposeHeader objectForKey:@"Nonce"]];
+                if ([json objectForKey:@"data"] && ![[json objectForKey:@"data"] objectForKey:@"login_id"]) {
+                    NSMutableDictionary* userDic = [[json objectForKey:@"data"] mutableCopy];
+                    [userDic setObject:self.txtId.text forKey:@"login_id"];
+                    [AppHelper setCurrentUser:userDic];
+                }else
+                {
+                    [AppHelper setCurrentUser:[json objectForKey:@"data"]];
+                }
+                if ([json objectForKey:@"data"] &&
+                    [[json objectForKey:@"data"] objectForKey:@"user_id"]) {
+                    [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];
+                }
+                [AppHelper setCurrentUserEmail:self.txtEmail.text];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(getAccountRequest)])
+                {
+                    [self.delegate getAccountRequest];
+                }
+            }
+            NSLog(@"json %@",json);
+            
+        } ErrorBlock:^(id error) {
+            [AppHelper showSuccessDropDownMessage:ERROR_MESSAGE mesage:@""];
+        }];
 }
 
 - (IBAction)btnYesClick:(id)sender {
