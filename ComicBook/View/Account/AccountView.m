@@ -14,6 +14,7 @@
 
 
 CGRect firstFrame;
+NSString* AgeDOB;
 @implementation AccountView
 
 -(id)initWithFrame:(CGRect)frame{
@@ -443,6 +444,7 @@ CGRect firstFrame;
     NSInteger age = [ageComponents year];
     
     self.txtAge.text = [NSString stringWithFormat:@"%ld",(long)age];
+    AgeDOB = [outputFormatter stringFromDate:sender.date];
 }
 
 -(void)btnDoneClick:(id)sender{
@@ -467,15 +469,15 @@ CGRect firstFrame;
         [userDic setObject:@"" forKey:@"last_name"];
         [userDic setObject:[AppHelper getDeviceId] forKey:@"device_type"];
         [userDic setObject:[AppHelper getDeviceToken] forKey:@"device_token"];
-        [userDic setObject:self.txtAge.text forKey:@"dob"];
+        [userDic setObject:AgeDOB forKey:@"dob"];
         [userDic setObject:[AppHelper getDeviceCountry] forKey:@"country"];
         [userDic setObject:[AppHelper encodeToBase64String:self.imgCropedImage] forKey:@"profile_pic"];
         
         [dataDic setObject:userDic forKey:@"data"];
         
-        NSError * err;
-        NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:0 error:&err];
-        NSString * myString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//        NSError * err;
+//        NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:0 error:&err];
+//        NSString * myString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         
         ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
         [cmNetWorking updateUserInfo:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json,id jsonResposeHeader) {

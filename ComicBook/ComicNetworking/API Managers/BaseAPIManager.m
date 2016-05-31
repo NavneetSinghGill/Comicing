@@ -84,9 +84,16 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
      }
           failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         NSString* strg = [self jsonString:operation.responseString];
          [AppHelper showHUDLoader:NO];
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-         failBlock(error);
+         if (strg && ![strg isEqualToString:@""]) {
+             NSData *data = [strg dataUsingEncoding:NSUTF8StringEncoding];
+             id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+             successBlock(json,operation);
+         }else{
+             failBlock(error);
+         }
      }];
 }
 

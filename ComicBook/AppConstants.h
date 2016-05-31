@@ -4,7 +4,12 @@
 //
 
 /* API Calles */
-#define SERVER_URL @"http://68.169.44.163/"
+
+//#define SERVER_PREFERENCE @"production"
+#define SERVER_PREFERENCE @"dev"
+
+
+#define SERVER_URL ([SERVER_PREFERENCE isEqualToString:@"production"] ? @"http://162.244.67.15/" : @"http://68.169.44.163/")
 #define BASE_URL [SERVER_URL stringByAppendingFormat:@"api/"]
 
 #define USER_BY_LOGINID  [BASE_URL stringByAppendingFormat:@"users/id/"]
