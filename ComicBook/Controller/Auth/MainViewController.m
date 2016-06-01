@@ -33,6 +33,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [AppHelper hideAllDropMessages];
+    [self.view setAlpha:1];
     [super viewWillAppear:animated];
 }
 - (void)didReceiveMemoryWarning {
