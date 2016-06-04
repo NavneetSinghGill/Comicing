@@ -55,7 +55,36 @@
     //Config Caption text
     self.imgProfilePic.center = CGPointMake(self.frame.size.width  / 2,self.imgProfilePic.center.y);
     
-    if (IS_IPHONE_5) {
+    if (IS_IPHONE_3G) {
+        //Config Caption text
+        CGRect temRect = self.captionText.frame;
+        temRect.origin.y = temRect.origin.y - 13;
+        self.captionText.frame = temRect;
+        self.captionText.center = CGPointMake(self.frame.size.width  / 2,self.captionText.center.y);
+        
+        //Config Button
+        temRect = self.btnGetCode.frame;
+        temRect.size.width= self.frame.size.width;
+        temRect.origin.y = temRect.origin.y - 29;
+        self.btnGetCode.frame = temRect;
+        
+        //Config caption2
+        temRect = self.lblCaptionText2.frame;
+        temRect.origin.y = self.btnGetCode.frame.origin.y - temRect.size.height;
+        self.lblCaptionText2.frame = temRect;
+        
+        self.lblCaptionText2.center = CGPointMake(self.frame.size.width  / 2,self.lblCaptionText2.center.y);
+        
+        //Config flag
+        temRect = self.flagHolderView.frame;
+        temRect.origin.x = 20;
+        self.flagHolderView.frame = temRect;
+        //Config Mobile
+        temRect = self.txtMobileNumber.frame;
+        temRect.origin.x = temRect.origin.x - 25;
+        self.txtMobileNumber.frame = temRect;
+    }
+    else if (IS_IPHONE_5) {
         
         //Config Caption text
         CGRect temRect = self.captionText.frame;
