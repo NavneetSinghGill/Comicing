@@ -70,7 +70,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 -(void)setTextFont:(NSString*)textValue{
     
-    [self.headText setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
+    [self.headText setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_3G?14:28]];
     self.headText.text = textValue;
 }
 
@@ -167,6 +167,10 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     [self.signUpMobileNumber setHidden:YES];
     [self.verifyView setHidden:YES];
     [self.signUpMobileNumber setHidden:YES];
+    
+//    [self.signUpMobileNumber setHidden:YES];
+//    [self.verifyView setHidden:NO];
+//    [self.signUpMobileNumber setHidden:YES];
 }
 
 #pragma Signup delegate
@@ -201,7 +205,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     [self setTextFont:@"Account"];
     [self hideAllSubView];
     CGRect imgProfileRect = self.imgFinalCopedFace.frame;
-    imgProfileRect.origin.x = IS_IPHONE_5?30:45;
+    imgProfileRect.origin.x = IS_IPHONE_5?30:IS_IPHONE_3G?10:45;
     
     [self.view bringSubviewToFront:self.imgFinalCopedFace];
     
@@ -216,6 +220,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          self.accountHolderView.alpha = 0;
+                         //Ramesh Temp
                          [self.accountHolderView setHidden:NO];
                          CGRect aHolderFrame = self.accountHolderView.frame;
                          aHolderFrame.origin.x = 0;

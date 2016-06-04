@@ -62,14 +62,14 @@ NSString* AgeDOB;
     CGRect leftFrame = self.txtId.leftView.frame;
     leftFrame.size.width = 70;
     self.txtId.leftView.frame = leftFrame;
-    if (IS_IPHONE_5) {
+    if (IS_IPHONE_5 || IS_IPHONE_3G) {
         mainFrame = self.txtId.frame;
         mainFrame.origin.x = 110;
         self.txtId.frame=mainFrame;
     }
     self.txtId.textColor = [UIColor colorWithHexStr:@"F2F3F4"];
     [self.txtId setValue:[UIColor colorWithHexStr:@"F2F3F4"] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.txtId setFont:[UIFont fontWithName:@"Avenir Light" size:IS_IPHONE_5?22:32]];
+    [self.txtId setFont:[UIFont fontWithName:@"Avenir Light" size:IS_IPHONE_5?22:IS_IPHONE_3G?15:32]];
     
     self.txtpassword.leftViewMode = UITextFieldViewModeAlways;
     self.txtpassword.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Password_White"]];
@@ -77,14 +77,14 @@ NSString* AgeDOB;
     leftFrame = self.txtpassword.leftView.frame;
     leftFrame.size.width = 73;
     self.txtpassword.leftView.frame = leftFrame;
-    if (IS_IPHONE_5) {
-    mainFrame = self.txtpassword.frame;
-    mainFrame.origin.x = 110;
-    self.txtpassword.frame=mainFrame;
+    if (IS_IPHONE_5 || IS_IPHONE_3G) {
+        mainFrame = self.txtpassword.frame;
+        mainFrame.origin.x = 110;
+        self.txtpassword.frame=mainFrame;
     }
     self.txtpassword.textColor = [UIColor colorWithHexStr:@"F2F3F4"];
     [self.txtpassword setValue:[UIColor colorWithHexStr:@"F2F3F4"] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.txtpassword setFont:[UIFont fontWithName:@"Avenir Light" size:IS_IPHONE_5?22:32]];
+    [self.txtpassword setFont:[UIFont fontWithName:@"Avenir Light" size:IS_IPHONE_5?22:IS_IPHONE_3G?15:32]];
     
     self.txtEmail.leftViewMode = UITextFieldViewModeAlways;
     self.txtEmail.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Email_White"]];
@@ -92,14 +92,14 @@ NSString* AgeDOB;
     leftFrame = self.txtEmail.leftView.frame;
     leftFrame.size.width = 73;
     self.txtEmail.leftView.frame = leftFrame;
-    if (IS_IPHONE_5) {
-    mainFrame = self.txtEmail.frame;
-    mainFrame.origin.x = 110;
-    self.txtEmail.frame=mainFrame;
+    if (IS_IPHONE_5 || IS_IPHONE_3G) {
+        mainFrame = self.txtEmail.frame;
+        mainFrame.origin.x = 110;
+        self.txtEmail.frame=mainFrame;
     }
     self.txtEmail.textColor = [UIColor colorWithHexStr:@"F2F3F4"];
     [self.txtEmail setValue:[UIColor colorWithHexStr:@"F2F3F4"] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.txtEmail setFont:[UIFont fontWithName:@"Avenir Light" size:IS_IPHONE_5?22:32]];
+    [self.txtEmail setFont:[UIFont fontWithName:@"Avenir Light" size:IS_IPHONE_5?22:IS_IPHONE_3G?15:32]];
     
     self.txtAge.leftViewMode = UITextFieldViewModeAlways;
     self.txtAge.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Age_White"]];
@@ -107,14 +107,14 @@ NSString* AgeDOB;
     leftFrame = self.txtAge.leftView.frame;
     leftFrame.size.width = 75;
     self.txtAge.leftView.frame = leftFrame;
-    if (IS_IPHONE_5) {
-    mainFrame = self.txtAge.frame;
-    mainFrame.origin.x = 110;
-    self.txtAge.frame=mainFrame;
+    if (IS_IPHONE_5 || IS_IPHONE_3G) {
+        mainFrame = self.txtAge.frame;
+        mainFrame.origin.x = 110;
+        self.txtAge.frame=mainFrame;
     }
     self.txtAge.textColor = [UIColor colorWithHexStr:@"F2F3F4"];
     [self.txtAge setValue:[UIColor colorWithHexStr:@"F2F3F4"] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.txtAge setFont:[UIFont fontWithName:@"Avenir Light" size:IS_IPHONE_5?22:32]];
+    [self.txtAge setFont:[UIFont fontWithName:@"Avenir Light" size:IS_IPHONE_5?22:IS_IPHONE_3G?15:32]];
     
     if (IS_IPHONE_5) {
         mainFrame = self.btnSignUp.frame;
@@ -132,6 +132,25 @@ NSString* AgeDOB;
         self.btnTermsService.frame = mainFrame;
         
         [self.btnTermsService.titleLabel setFont:[UIFont fontWithName:@"Avenir Black" size:18]];
+    }else if (IS_IPHONE_3G) {
+        mainFrame = self.btnSignUp.frame;
+        mainFrame.size.width = 216;
+        mainFrame.size.height = 54;
+        mainFrame.origin.y = mainFrame.origin.y - 50;
+        self.btnSignUp.frame = mainFrame;
+        
+        mainFrame = self.lblCaptionText.frame;
+        mainFrame.origin.y = 300;
+        self.lblCaptionText.frame = mainFrame;
+        [self.lblCaptionText setFont:[UIFont fontWithName:@"Avenir Light" size:11]];
+        
+        mainFrame = self.btnTermsService.frame;
+        mainFrame.origin.y = 328;
+        mainFrame.origin.x = mainFrame.origin.x - 80;
+        mainFrame.size.width = 155;
+        self.btnTermsService.frame = mainFrame;
+        
+        [self.btnTermsService.titleLabel setFont:[UIFont fontWithName:@"Avenir Black" size:9]];
     }
     
     [self setTextFont];

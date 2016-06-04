@@ -208,7 +208,7 @@ const NSInteger spaceFromTop = 75;
     lblTimeText.text = finalString;
     lblTimeText.textColor = [UIColor colorWithHexStr:@"26aae1"];//Dinesh : Ref : Bug list : line 307
 //    lblTimeText.font = [UIFont fontWithName:@"digital-7" size:15];
-    lblTimeText.font = [UIFont fontWithName:@"Segment7Standard" size:18];
+    lblTimeText.font = [UIFont fontWithName:@"Arial" size:15];
     lblTimeText.textAlignment = NSTextAlignmentCenter;
     lblTimeText.tag = timlineTextTag * index;
     if (comicSlide.timelineString == nil ||

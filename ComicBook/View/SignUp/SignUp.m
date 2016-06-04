@@ -58,14 +58,14 @@
     if (IS_IPHONE_3G) {
         //Config Caption text
         CGRect temRect = self.captionText.frame;
-        temRect.origin.y = temRect.origin.y - 13;
+        temRect.origin.y = temRect.origin.y - 10;
         self.captionText.frame = temRect;
         self.captionText.center = CGPointMake(self.frame.size.width  / 2,self.captionText.center.y);
         
         //Config Button
         temRect = self.btnGetCode.frame;
         temRect.size.width= self.frame.size.width;
-        temRect.origin.y = temRect.origin.y - 29;
+        temRect.origin.y = temRect.origin.y-76;
         self.btnGetCode.frame = temRect;
         
         //Config caption2
@@ -78,11 +78,16 @@
         //Config flag
         temRect = self.flagHolderView.frame;
         temRect.origin.x = 20;
+        temRect.origin.y = self.captionText.frame.origin.y + self.captionText.frame.size.height + 5;
         self.flagHolderView.frame = temRect;
+        
         //Config Mobile
         temRect = self.txtMobileNumber.frame;
         temRect.origin.x = temRect.origin.x - 25;
+        temRect.origin.y = self.captionText.frame.origin.y + self.captionText.frame.size.height + 5;
         self.txtMobileNumber.frame = temRect;
+        
+        [self.lblCaptionText2 setHidden:YES];
     }
     else if (IS_IPHONE_5) {
         
@@ -145,11 +150,11 @@
     
     // Create the attributes
     NSDictionary *attrs = @{
-                            NSFontAttributeName:[UIFont fontWithName:@"Myriad Roman" size:IS_IPHONE_5?25:28],
+                            NSFontAttributeName:[UIFont fontWithName:@"Myriad Roman" size:IS_IPHONE_5?25:IS_IPHONE_3G?10:28],
                             NSForegroundColorAttributeName:[UIColor whiteColor]
                             };
     NSDictionary *subAttrs = @{
-                               NSFontAttributeName:[UIFont fontWithName:@"MYRIADPRO-BOLD" size:IS_IPHONE_5?23:26]
+                               NSFontAttributeName:[UIFont fontWithName:@"MYRIADPRO-BOLD" size:IS_IPHONE_5?23:IS_IPHONE_3G?8:26]
                                };
     
     const NSRange range = NSMakeRange(11,5);
@@ -160,7 +165,7 @@
                                            attributes:attrs];
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:IS_IPHONE_5?5:10];
+    [paragraphStyle setLineSpacing:IS_IPHONE_5?5:IS_IPHONE_3G?2:10];
     
     [attributedText setAttributes:subAttrs range:range];
     [attributedText addAttribute:NSParagraphStyleAttributeName value:paragraphStyle
@@ -169,9 +174,9 @@
     // Set it in our UILabel and we are done!
     [self.captionText setAttributedText:attributedText];
     
-    [self.signUpHeadText setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
+    [self.signUpHeadText setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_3G?14:28]];
 
-    [self.lblCaptionText2 setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_5?18:21]];
+    [self.lblCaptionText2 setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_5?18:IS_IPHONE_3G?10:21]];
     [self.btnGetCode.titleLabel setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
     [self.txtMobileNumber setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
     [self.lblCountryCode setFont:[UIFont  fontWithName:@"Myriad Roman" size:24]];

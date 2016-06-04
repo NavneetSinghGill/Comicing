@@ -59,8 +59,49 @@
     [_txtVerifyCode3 addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [_txtVerifyCode4 addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
-    
-    if (IS_IPHONE_6) {
+   
+    if (IS_IPHONE_3G) {
+        temRect = self.verifyCode1ViewHolder.frame;
+        temRect.origin.y = temRect.origin.y - 170;
+        temRect.origin.x = temRect.origin.x - 55;
+        self.verifyCode1ViewHolder.frame = temRect;
+        
+        temRect = self.verifyCode2ViewHolder.frame;
+        temRect.origin.y = temRect.origin.y - 170;
+        temRect.origin.x = temRect.origin.x - 55;
+        self.verifyCode2ViewHolder.frame = temRect;
+        
+        temRect = self.verifyCode3ViewHolder.frame;
+        temRect.origin.y = temRect.origin.y - 170;
+        temRect.origin.x = temRect.origin.x - 55;
+        self.verifyCode3ViewHolder.frame = temRect;
+        
+        temRect = self.verifyCode4ViewHolder.frame;
+        temRect.origin.y = temRect.origin.y - 170;
+        temRect.origin.x = temRect.origin.x - 55;
+        self.verifyCode4ViewHolder.frame = temRect;
+        
+        temRect = self.lblMobileNumber.frame;
+        temRect.origin.y = temRect.origin.y - 130;
+        temRect.origin.x = temRect.origin.x - 20;
+        self.lblMobileNumber.frame = temRect;
+        
+        temRect = self.flagHolderView.frame;
+        temRect.origin.y = temRect.origin.y - 130;
+        temRect.origin.x = temRect.origin.x - 20;
+        self.flagHolderView.frame = temRect;
+        
+        temRect = self.btnEnterCode.frame;
+        temRect.origin.y = temRect.origin.y - 230;
+        temRect.size.width = self.frame.size.width;
+        temRect.size.height = temRect.size.height - 10;
+        self.btnEnterCode.frame = temRect;
+        
+        temRect = self.captionText.frame;
+        temRect.origin.y = temRect.origin.y - 60;
+        self.captionText.frame = temRect;
+    }
+    else if (IS_IPHONE_6) {
         
         //Config button
         temRect = self.btnEnterCode.frame;
@@ -195,11 +236,11 @@
 
 -(void)setTextFont{
     
-    [self.captionText setFont:[UIFont fontWithName:@"Myriad Roman" size:IS_IPHONE_5?20:28]];
+    [self.captionText setFont:[UIFont fontWithName:@"Myriad Roman" size:IS_IPHONE_5?20:IS_IPHONE_3G?14:28]];
     [self.verifyHeadText setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
-    [self.btnEnterCode.titleLabel setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
-    [self.lblMobileNumber setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_5?20:28]];
-    [self.lblCountryCode setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_5?20:28]];
+    [self.btnEnterCode.titleLabel setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_3G?14:28]];
+    [self.lblMobileNumber setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_5?20:IS_IPHONE_3G?14:28]];
+    [self.lblCountryCode setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_5?20:IS_IPHONE_3G?14:28]];
 
     CALayer *TopBorder1 = [CALayer layer];
     TopBorder1.frame = CGRectMake(0.0f, self.verifyCode1ViewHolder.frame.size.height, self.verifyCode1ViewHolder.frame.size.width, 1.0f);
@@ -223,10 +264,10 @@
     [self.verifyCode3ViewHolder.layer addSublayer:TopBorder3];
     [self.verifyCode4ViewHolder.layer addSublayer:TopBorder4];
     
-    [self.txtVerifyCode1 setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
-    [self.txtVerifyCode2 setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
-    [self.txtVerifyCode3 setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
-    [self.txtVerifyCode4 setFont:[UIFont  fontWithName:@"Myriad Roman" size:28]];
+    [self.txtVerifyCode1 setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_3G?14:28]];
+    [self.txtVerifyCode2 setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_3G?14:28]];
+    [self.txtVerifyCode3 setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_3G?14:28]];
+    [self.txtVerifyCode4 setFont:[UIFont  fontWithName:@"Myriad Roman" size:IS_IPHONE_3G?14:28]];
 }
 
 //-(void)bindData{
