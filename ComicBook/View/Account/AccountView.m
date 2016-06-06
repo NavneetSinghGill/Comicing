@@ -192,34 +192,90 @@ NSString* AgeDOB;
     [numberToolbar sizeToFit];
     self.txtAge.inputAccessoryView = numberToolbar;
 }
+-(NSString*)getSelectedDOB:(NSString*)ageString{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+    NSInteger currentYear = [components year];
+    NSInteger myInt = [ageString intValue];
+
+    NSInteger dobYear = currentYear - myInt;
+    NSString *inStr = [NSString stringWithFormat: @"%ld", (long)dobYear];
+    
+
+    NSString* strValue = [NSString stringWithFormat:@"%@-01-01",inStr];
+    return strValue;
+}
+//-(void)openDatePicker{
+//    
+//    if (datePicker) {
+//        datePicker = nil;
+//    }
+//    
+//    datePicker = [[UIDatePicker alloc] init];
+//    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//    NSDate *currentDate = [NSDate date];
+//    NSDateComponents *comps = [[NSDateComponents alloc] init];
+//    [comps setYear:-18];
+//    NSDate *minDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+//    [comps setYear:-150];
+//    NSDate *maxDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+//    comps = nil;
+//    
+//    datePicker.datePickerMode = UIDatePickerModeDate;
+//    [datePicker addTarget:self action:@selector(datePickerValueChanged:)
+//         forControlEvents:UIControlEventValueChanged];
+//    datePicker.minimumDate = minDate;
+//    datePicker.maximumDate = maxDate;
+//    //    gregorian = nil;
+//    
+//    self.txtAge.inputView = datePicker;
+//}
+
+-(NSMutableArray*)addAgeRange{
+    if (pickerData) {
+        pickerData = nil;
+    }
+    pickerData = [[NSMutableArray alloc] init];
+    for (int i= 10; i < 99; i++) {
+        NSString *nAge = [NSString stringWithFormat: @"%ld", (long)i];
+        
+//        NSNumber* nAge = [NSNumber numberWithInt:i];
+        [pickerData addObject:nAge];
+    }
+    return pickerData;
+}
+
 -(void)openDatePicker{
     
     if (datePicker) {
         datePicker = nil;
     }
     
-    datePicker = [[UIDatePicker alloc] init];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDate *currentDate = [NSDate date];
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    [comps setYear:-18];
-    NSDate *minDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
-    [comps setYear:-150];
-    NSDate *maxDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
-    comps = nil;
+    [self addAgeRange];
+    datePicker = [[UIPickerView alloc] init];
     
-    datePicker.datePickerMode = UIDatePickerModeDate;
-    [datePicker addTarget:self action:@selector(datePickerValueChanged:)
-         forControlEvents:UIControlEventValueChanged];
-    datePicker.minimumDate = minDate;
-    datePicker.maximumDate = maxDate;
+//    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//    NSDate *currentDate = [NSDate date];
+//    NSDateComponents *comps = [[NSDateComponents alloc] init];
+//    [comps setYear:-18];
+//    NSDate *minDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+//    [comps setYear:-150];
+//    NSDate *maxDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+//    comps = nil;
+//    
+//    datePicker.datePickerMode = UIDatePickerModeDate;
+//    [datePicker addTarget:self action:@selector(datePickerValueChanged:)
+//         forControlEvents:UIControlEventValueChanged];
+//    datePicker.minimumDate = minDate;
+//    datePicker.maximumDate = maxDate;
     //    gregorian = nil;
     
+    datePicker.delegate = self;
+//    datePicker.dataSource = self;
+    datePicker.showsSelectionIndicator = YES;
+
     self.txtAge.inputView = datePicker;
 }
-
 -(BOOL)validateFileds:(BOOL)showAlert{
-    
     //Validate is any filed are empty
     if ([self isTextEmpty:self.txtId] || [self isTextEmpty:self.txtEmail] ||
         [self isTextEmpty:self.txtpassword]) {
@@ -242,23 +298,15 @@ NSString* AgeDOB;
         }
         return NO;
     }else
-        if(datePicker && datePicker.date){
+        if(datePicker && self.txtAge && self.txtAge.text.length > 0){
             
-            NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-            NSDate *currentDate = [NSDate date];
-            NSDateComponents *comps = [[NSDateComponents alloc] init];
-            [comps setYear:-17];
-            NSDate *minDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
-            NSDate *selectedDate = datePicker.date;
-            
-            NSComparisonResult result = [minDate compare:selectedDate];
-            if(result == NSOrderedAscending)
+            NSInteger intAgeValue = [self.txtAge.text intValue];
+            if(intAgeValue < 17)
             {
                 if (showAlert)
                     [self showAlertMessage:@"Age should be 17+."];
                 return NO;
             }
-            return YES;
         }
     return YES;
 }
@@ -405,6 +453,30 @@ NSString* AgeDOB;
     }
 }
 
+#pragma mark UIPicker delegate
+
+- (NSInteger)numberOfComponentsInPickerView: (UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [pickerData count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component
+{
+    return [pickerData objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    self.txtAge.text = [pickerData objectAtIndex:row];
+    AgeDOB = [self getSelectedDOB:self.txtAge.text];
+}
 
 #pragma mark UItextfiled Delegate
 
@@ -502,7 +574,7 @@ NSString* AgeDOB;
         [cmNetWorking updateUserInfo:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json,id jsonResposeHeader) {
             
             if ([[json objectForKey:@"result"] isEqualToString:@"failed" ]) {
-                NSString* strMessage = [NSString stringWithFormat:@"user with login id %@ already exist", self.txtId.text ];
+                NSString* strMessage = [NSString stringWithFormat:@"There is a user who is currently using either %@ or %@", self.txtId.text,self.txtEmail.text ];
                 [AppHelper showErrorDropDownMessage:@"Failed" mesage:strMessage];
                 isProcessing = NO;
                 [self.txtId becomeFirstResponder];

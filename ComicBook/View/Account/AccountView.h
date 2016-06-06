@@ -22,10 +22,11 @@
 
 @end
 
-@interface AccountView : UIView<UITextFieldDelegate>
+@interface AccountView : UIView<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 {
-    UIDatePicker* datePicker;
+    UIPickerView* datePicker;
     BOOL isProcessing;
+    NSMutableArray* pickerData;
 }
 @property (strong, nonatomic) IBOutlet UIView *view;
 //@property (weak, nonatomic) IBOutlet UILabel *accountHeadText;

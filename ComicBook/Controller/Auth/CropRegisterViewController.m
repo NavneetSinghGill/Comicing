@@ -220,7 +220,6 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          self.accountHolderView.alpha = 0;
-                         //Ramesh Temp
                          [self.accountHolderView setHidden:NO];
                          CGRect aHolderFrame = self.accountHolderView.frame;
                          aHolderFrame.origin.x = 0;
