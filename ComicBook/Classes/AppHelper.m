@@ -123,6 +123,8 @@ static AppHelper *_appHelper = nil;
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:emailText];
 }
+
+
 //+(UIImage*)getImageFile:(NSString*)fileName{
 //    
 //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UIView *cropHolder;
 @property (weak, nonatomic) IBOutlet VerifyView *verifyView;
 @property (weak, nonatomic) IBOutlet SignUp *signUpMobileNumber;
+@property (weak, nonatomic) IBOutlet UIButton *btnSkipVerification;
 
 @property CGPoint imgvCropCenter;
 

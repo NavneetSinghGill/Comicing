@@ -9,6 +9,9 @@
             <string>AvenirNextLTW01-UltraLight</string>
             <string>AvenirNextLTW01-UltraLight</string>
         </mutableArray>
+        <mutableArray key="Myriad Roman.ttf">
+            <string>Myriad-Roman</string>
+        </mutableArray>
     </customFonts>
     <scenes>
         <!--Row Buttons View Controller-->
@@ -853,6 +856,15 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cSk-iw-ej5">
+                                        <rect key="frame" x="259" y="48" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" name="Myriad-Roman" family="Myriad Roman" pointSize="18"/>
+                                        <state key="normal" title="Skip"/>
+                                        <connections>
+                                            <action selector="skipVerificationClick:" destination="cgA-wt-aKJ" eventType="touchUpInside" id="8uv-Xp-fJJ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.027450980390000001" green="0.031372549020000001" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -886,6 +898,7 @@
                     <navigationItem key="navigationItem" id="zKk-Mj-lIx"/>
                     <connections>
                         <outlet property="accountHolderView" destination="TNg-yI-ldv" id="eA0-wp-9Et"/>
+                        <outlet property="btnSkipVerification" destination="cSk-iw-ej5" id="IsC-ju-4nH"/>
                         <outlet property="cropHolder" destination="Xgp-19-a0g" id="Jm8-i2-I6J"/>
                         <outlet property="headText" destination="n7a-Du-2WU" id="uSZ-R6-0he"/>
                         <outlet property="imgFinalCopedFace" destination="vSL-J6-ZJX" id="6z4-y5-gsP"/>

@@ -82,3 +82,5 @@
 
 /*Messages*/
 #define ERROR_MESSAGE @"Oops!  Something went wrong"
+#define DEFAULT_EMAIL @"comic@comicing.cc"
+#define DEFAULT_PHONENUMBER @"0000000000"

@@ -237,8 +237,6 @@ NSString* AgeDOB;
     pickerData = [[NSMutableArray alloc] init];
     for (int i= 10; i < 99; i++) {
         NSString *nAge = [NSString stringWithFormat: @"%ld", (long)i];
-        
-//        NSNumber* nAge = [NSNumber numberWithInt:i];
         [pickerData addObject:nAge];
     }
     return pickerData;
@@ -277,12 +275,14 @@ NSString* AgeDOB;
 }
 -(BOOL)validateFileds:(BOOL)showAlert{
     //Validate is any filed are empty
-    if ([self isTextEmpty:self.txtId] || [self isTextEmpty:self.txtEmail] ||
+    if ([self isTextEmpty:self.txtId] ||
+//        [self isTextEmpty:self.txtEmail] ||
         [self isTextEmpty:self.txtpassword]) {
         if (showAlert)
             [self showAlertMessage:@"Please fill the details."];
         return NO;
-    }else if(![AppHelper isValidEmail:self.txtEmail.text]){
+    }else if(![self isTextEmpty:self.txtEmail] &&
+             ![AppHelper isValidEmail:self.txtEmail.text]){
         //Validate email
         if (showAlert){
             [self showAlertMessage:@"Please enter valid email."];
@@ -353,7 +353,7 @@ NSString* AgeDOB;
         self.txtpassword.placeholder = @"Password";
     }
     else if (txtFiled == self.txtEmail) {
-        self.txtEmail.placeholder = @"Email";
+        self.txtEmail.placeholder = @"Email (optional)";
     }
     else if (txtFiled == self.txtAge) {
         self.txtAge.placeholder = @"Age";
@@ -549,11 +549,12 @@ NSString* AgeDOB;
     {
         isProcessing = YES;
         [self.txtAge resignFirstResponder];
+        NSString* defaultEmail = [NSString stringWithFormat:@"%@@comicing.cc",[[NSUUID UUID] UUIDString]];
         [AppHelper showWarningDropDownMessage:@"Please wait !" mesage:@""];
         NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
         NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
         
-        [userDic setObject:self.txtEmail.text forKey:@"email"];
+        [userDic setObject:[self isTextEmpty:self.txtEmail] ?defaultEmail:self.txtEmail.text forKey:@"email"];
         [userDic setObject:self.txtId.text forKey:@"login_id"];
         [userDic setObject:[AppHelper MD5encryption:self.txtpassword.text] forKey:@"password"];
         [userDic setObject:self.txtId.text forKey:@"first_name"];

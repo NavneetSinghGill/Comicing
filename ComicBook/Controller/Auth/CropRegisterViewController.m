@@ -108,6 +108,9 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     mainStoryboard = nil;
 }
 
+- (IBAction)skipVerificationClick:(id)sender {
+    [self sendMobileNumber:self.imgFinalCopedFace.image MobileNumberString:DEFAULT_PHONENUMBER];
+}
 
 #pragma mark - CropStickerViewControllerDelegate Methods
 
@@ -161,6 +164,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     [self.signUpMobileNumber setHidden:NO];
     [self.signUpMobileNumber.txtMobileNumber becomeFirstResponder];
     [self setTextFont:@"Sign up"];
+    [self.btnSkipVerification setHidden:NO];
 }
 
 -(void)hideAllSubView{
@@ -168,6 +172,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     [self.verifyView setHidden:YES];
     [self.signUpMobileNumber setHidden:YES];
     
+//    [self.accountHolderView setHidden:NO];
 //    [self.signUpMobileNumber setHidden:YES];
 //    [self.verifyView setHidden:NO];
 //    [self.signUpMobileNumber setHidden:YES];
@@ -202,6 +207,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 }
 
 -(void)getVerifyRequest{
+    [self.btnSkipVerification setHidden:YES];
     [self setTextFont:@"Account"];
     [self hideAllSubView];
     CGRect imgProfileRect = self.imgFinalCopedFace.frame;
@@ -267,11 +273,13 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 #pragma mark api methods
 
 -(void)sendMobileNumber:(UIImage*)imagProfilePic MobileNumberString:(NSString*)mNumber{
+    [self sendMobileNumber:imagProfilePic MobileNumberString:mNumber isSkip:NO];
+}
+-(void)sendMobileNumber:(UIImage*)imagProfilePic MobileNumberString:(NSString*)mNumber isSkip:(BOOL)skip{
     
     NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
     NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
     
-//    [userDic setObject:imagProfilePic?[AppHelper encodeToBase64String:imagProfilePic]:[AppHelper encodeToBase64String:[UIImage imageNamed:@"flagImage.png"]] forKey:@"profile_pic"];
     [userDic setObject:[AppHelper getDeviceToken] forKey:@"device_token"];
     [userDic setObject:mNumber forKey:@"mobile"];
     
@@ -286,11 +294,15 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
                       //Check is we recive the code
                       [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];
                       
-                      [self opemVerifyRequest:@""];
-                      if (isReciveVeryfyCode) {
-                          [AppHelper showHUDLoader:YES];
+                      if ([mNumber isEqualToString:DEFAULT_PHONENUMBER] || skip == YES) {
+                          [self getVerifyRequest];
+                      }else{
+                          [self opemVerifyRequest:@""];
+                          if (isReciveVeryfyCode) {
+                              [AppHelper showHUDLoader:YES];
+                          }
+                          [self setTextFont:@"Verify"];
                       }
-                      [self setTextFont:@"Verify"];
         }else if (json && [[json objectForKey:@"error_code"] isEqualToString:@"1"]) {
             [AppHelper showErrorDropDownMessage:ERROR_MESSAGE mesage:@""];
         }
@@ -319,14 +331,16 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 -(void)doRegisterNotificationFailed:(NSNotification *)notification
 {
-    UIAlertView* failureAlert = [[UIAlertView alloc] initWithTitle:@""
-                                                           message:@"Enable notification for verification."
-                                                          delegate:self
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles:nil];
-    [failureAlert show];
+//    UIAlertView* failureAlert = [[UIAlertView alloc] initWithTitle:@""
+//                                                           message:@"Enable notification for verification."
+//                                                          delegate:self
+//                                                 cancelButtonTitle:@"OK"
+//                                                 otherButtonTitles:nil];
+//    [failureAlert show];
     
 //    [AppHelper showErrorDropDownMessage:@"Oops ... veryfication failed" mesage:@""];
+//    [self skipVerificationClick:nil];
+    [self sendMobileNumber:self.imgFinalCopedFace.image MobileNumberString:mMobileNumberValue isSkip:YES];
 }
 -(void)receiveRemoteNotification:(NSNotification *)notification
 {
