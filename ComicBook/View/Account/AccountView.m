@@ -272,17 +272,17 @@ NSString* AgeDOB;
     datePicker.showsSelectionIndicator = YES;
 
     self.txtAge.inputView = datePicker;
+    AgeDOB = [self getSelectedDOB:@"99"];
 }
 -(BOOL)validateFileds:(BOOL)showAlert{
     //Validate is any filed are empty
     if ([self isTextEmpty:self.txtId] ||
-//        [self isTextEmpty:self.txtEmail] ||
+        [self isTextEmpty:self.txtEmail] ||
         [self isTextEmpty:self.txtpassword]) {
         if (showAlert)
             [self showAlertMessage:@"Please fill the details."];
         return NO;
-    }else if(![self isTextEmpty:self.txtEmail] &&
-             ![AppHelper isValidEmail:self.txtEmail.text]){
+    }else if(![AppHelper isValidEmail:self.txtEmail.text]){
         //Validate email
         if (showAlert){
             [self showAlertMessage:@"Please enter valid email."];
@@ -298,16 +298,16 @@ NSString* AgeDOB;
         }
         return NO;
     }else
-        if(datePicker && self.txtAge && self.txtAge.text.length > 0){
-            
-            NSInteger intAgeValue = [self.txtAge.text intValue];
-            if(intAgeValue < 17)
-            {
-                if (showAlert)
-                    [self showAlertMessage:@"Age should be 17+."];
-                return NO;
+        if (![self isTextEmpty:self.txtAge])
+            if(datePicker && self.txtAge && self.txtAge.text.length > 0){
+                NSInteger intAgeValue = [self.txtAge.text intValue];
+                if(intAgeValue < 17)
+                {
+                    if (showAlert)
+                        [self showAlertMessage:@"Age should be 17+."];
+                    return NO;
+                }
             }
-        }
     return YES;
 }
 -(void)showAlertMessage:(NSString*)message{
@@ -353,10 +353,10 @@ NSString* AgeDOB;
         self.txtpassword.placeholder = @"Password";
     }
     else if (txtFiled == self.txtEmail) {
-        self.txtEmail.placeholder = @"Email (optional)";
+        self.txtEmail.placeholder = @"Email";
     }
     else if (txtFiled == self.txtAge) {
-        self.txtAge.placeholder = @"Age";
+        self.txtAge.placeholder = @"Age (optional)";
     }
 }
 
