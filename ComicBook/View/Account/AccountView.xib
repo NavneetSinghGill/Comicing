@@ -44,7 +44,7 @@
                         <outlet property="delegate" destination="-1" id="rNY-ka-74t"/>
                     </connections>
                 </textField>
-                <textField autoresizesSubviews="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email (optional)" minimumFontSize="10" id="MZP-RV-Hxp">
+                <textField autoresizesSubviews="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="10" id="MZP-RV-Hxp">
                     <rect key="frame" x="132" y="106" width="209" height="31"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -55,7 +55,7 @@
                         <outlet property="delegate" destination="-1" id="Y5j-xn-bbm"/>
                     </connections>
                 </textField>
-                <textField autoresizesSubviews="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age" minimumFontSize="17" id="uzh-8i-yLa">
+                <textField autoresizesSubviews="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age (optional)" minimumFontSize="17" id="uzh-8i-yLa">
                     <rect key="frame" x="132" y="159" width="209" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
