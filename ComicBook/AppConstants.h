@@ -5,8 +5,8 @@
 
 /* API Calles */
 
-//#define SERVER_PREFERENCE @"production"
-#define SERVER_PREFERENCE @"dev"
+#define SERVER_PREFERENCE @"production"
+//#define SERVER_PREFERENCE @"dev"
 
 
 #define SERVER_URL ([SERVER_PREFERENCE isEqualToString:@"production"] ? @"http://162.244.67.15/" : @"http://68.169.44.163/")

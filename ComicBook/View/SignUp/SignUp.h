@@ -17,7 +17,13 @@
 //-(void)hideKeyBoard;
 @end
 
-@interface SignUp : UIView<UITextFieldDelegate>
+@interface SignUp : UIView<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+{
+    UIPickerView* datePicker;
+    NSMutableArray* pickerData;
+    NSArray *parsedObject;
+    NSInteger currentDeviceCode;
+}
 
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet UILabel *signUpHeadText;
@@ -30,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblCountryCode;
 @property (weak, nonatomic) IBOutlet UILabel *lblCaptionText2;
 @property (nonatomic, assign) id<SignUpDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UITextField *txtFlag;
 
 -(void)bindData;
 - (IBAction)btnGetCodeClick:(id)sender;

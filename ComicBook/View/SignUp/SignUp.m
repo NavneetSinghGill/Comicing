@@ -136,6 +136,7 @@
 -(void)configView{
     
     self.txtMobileNumber.delegate = self;
+    [[self txtFlag] setTintColor:[UIColor clearColor]];
     self.flagHolderView.layer.borderColor = [[UIColor colorWithHexStr:@"5f7f94"] CGColor];
     self.flagHolderView.layer.cornerRadius = 15;
     self.flagHolderView.layer.masksToBounds = YES;
@@ -145,6 +146,9 @@
     
     [self.captionText sizeToFit];
     self.captionText.numberOfLines = 0;
+    [self bindPickerData];
+    [self setPicker];
+    
 }
 -(void)setTextFont{
     
@@ -197,7 +201,6 @@
 -(void)bindProfilePic{
 //    [self.imgProfilePic setImage:[UIImage imageNamed:@"faceSignUp.png"]];
 }
-
 -(void)showAlertMessage:(NSString*)message{
     UIAlertView* alt = [[UIAlertView alloc] initWithTitle:@""
                                                   message:message
@@ -207,6 +210,49 @@
     [alt show];
     alt = nil;
 }
+
+-(NSMutableArray*)bindPickerData{
+    if (pickerData) {
+        pickerData = nil;
+    }
+    pickerData = [[NSMutableArray alloc] init];
+    
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"countries" ofType:@"json"]];
+    NSError *localError = nil;
+    parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&localError];
+
+    NSLocale *theLocale = [NSLocale currentLocale];
+    
+    for (int i= 0; i < [parsedObject count]; i++) {
+        NSDictionary *dicObj = [parsedObject objectAtIndex:i];
+        [pickerData addObject:[dicObj objectForKey:@"name"]];
+        if ([[[dicObj objectForKey:@"iso" ] lowercaseString]
+             isEqualToString:[[theLocale
+                               objectForKey:NSLocaleCountryCode] lowercaseString]]) {
+            currentDeviceCode = i;
+        }
+    }
+    return pickerData;
+}
+-(void)setPicker{
+    
+    if (datePicker) {
+        datePicker = nil;
+    }
+    datePicker = [[UIPickerView alloc] init];
+    
+    CGRect frame = datePicker.frame;
+    frame.size.height = frame.size.height + (IS_IPHONE_6P?10:0);
+    
+    datePicker.frame = frame;
+    
+    datePicker.delegate = self;
+    datePicker.showsSelectionIndicator = YES;
+    self.txtFlag.inputView = datePicker;
+    
+    [datePicker selectRow:currentDeviceCode inComponent:0 animated:NO];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -231,6 +277,43 @@
         [self.delegate getCodeRequest:mNumber];
     }
 
+}
+
+#pragma mark UIPicker delegate
+
+- (NSInteger)numberOfComponentsInPickerView: (UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [pickerData count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component
+{
+    return [pickerData objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    NSDictionary* selectedCountry = [parsedObject objectAtIndex:row];
+    
+    NSString* flagUrl = [selectedCountry objectForKey:@"flag"];
+    flagUrl = [flagUrl stringByReplacingOccurrencesOfString:@"#SERVER_URL#" withString:SERVER_URL];
+    
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:flagUrl]]];
+    [self.imgFlag setImage:image];
+    NSString* txtCode = [selectedCountry objectForKey:@"dial_code"];
+    if (txtCode.length > 3) {
+        [self.lblCountryCode setFont:[UIFont  fontWithName:@"Myriad Roman" size:18]];
+        self.lblCountryCode.text =  txtCode;
+    }else{
+        self.lblCountryCode.text =  txtCode;
+    }
 }
 
 #pragma mark - Phone Number Field Formatting
@@ -294,27 +377,9 @@
 -(void)getCountriesFlag{
     NSLocale *theLocale = [NSLocale currentLocale];
     NSString *code = [theLocale objectForKey:NSLocaleCountryCode];
-    
-//    ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
-//    [cmNetWorking getCountries:^(id json, id jsonResponse) {
-//        if (json &&
-//            [json objectForKey:@"data"]) {
-//            
-//            NSLocale *theLocale = [NSLocale currentLocale];
-//            NSString *code = [theLocale objectForKey:NSLocaleCountryCode];
-//            
-//            NSPredicate *predicate = [NSPredicate predicateWithFormat:
-//                                      @"iso == %@", code];
-//            
-//            NSArray *matchingDicts = [[json objectForKey:@"data"] filteredArrayUsingPredicate:predicate];
-//
-//            NSDictionary *dict = [matchingDicts lastObject];
-            NSString* flagUrl = [AppHelper getCountryImageByisoCode:code];
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:flagUrl]]];
-            [self.imgFlag setImage:image];
-            self.lblCountryCode.text = [AppHelper getDialCodeByisoCode:code];
-//        }
-//    } ErrorBlock:^(JSONModelError *error) {
-//    }];
+    NSString* flagUrl = [AppHelper getCountryImageByisoCode:code];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:flagUrl]]];
+    [self.imgFlag setImage:image];
+    self.lblCountryCode.text = [AppHelper getDialCodeByisoCode:code];
 }
 @end

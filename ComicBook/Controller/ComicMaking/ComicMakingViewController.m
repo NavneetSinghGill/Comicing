@@ -3485,7 +3485,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     NSMutableDictionary* comicMakeDic = [[NSMutableDictionary alloc] init];
     
     [comicMakeDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"]; // Hardcoded now
-    [comicMakeDic setObject:@"" forKey:@"comic_title"];
+    [comicMakeDic setObject:@"Hey .. Comic title test!!" forKey:@"comic_title"];
     
     if(self.comicType == ReplyComic) {
         [comicMakeDic setObject:@"CS" forKey:@"comic_type"];
