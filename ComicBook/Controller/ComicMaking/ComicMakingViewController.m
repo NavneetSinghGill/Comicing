@@ -136,6 +136,8 @@ static CGRect CaptionTextViewMinRect;
 @property (nonatomic, strong) id<ComicItem> comicItem;
 @property (nonatomic,strong) NSMutableArray* comicItemArray;
 @property (nonatomic,strong) RowButtonsViewController *rowButton;
+@property (nonatomic) BOOL isAlreadyDoubleDrawColor;
+@property (nonatomic) UIColor *onColor;
 
 @property BOOL captionHeightSmall;
 
@@ -144,7 +146,7 @@ static CGRect CaptionTextViewMinRect;
 @implementation ComicMakingViewController
 
 @synthesize viewCameraPreview, viewCamera, imgvComic, uploadIcon, viewStickerList, viewRowButtons;
-@synthesize drawingColor,viewDrawing,frameDrawingView, drawView, centerImgvComic,lastScale, btnClose,bubbleListView,exclamationListView,shrinkHeight,viewFrame, shrinkCount, previousTimestamp, isNewSlide,viewBlackBoard,frameBlackboardView;
+@synthesize drawingColor,viewDrawing,frameDrawingView, drawView, centerImgvComic,lastScale, btnClose,bubbleListView,exclamationListView,shrinkHeight,viewFrame, shrinkCount, previousTimestamp, isNewSlide,viewBlackBoard,frameBlackboardView,onColor,isAlreadyDoubleDrawColor;
 @synthesize comicPage,printScreen, isSlideShrink,frameImgvComic,pinchGesture;
 
 #pragma mark - UIViewController Methods
@@ -2297,7 +2299,18 @@ static CGRect CaptionTextViewMinRect;
     drawView.delegate = self;
     
     drawView.frame = CGRectMake(0, 0, CGRectGetWidth(imgvComic.frame),CGRectGetHeight(imgvComic.frame));
-    
+    DrawingColorsViewController *drawingController;
+    for (UIViewController *controller in self.childViewControllers)
+    {
+        if ([controller isKindOfClass:[DrawingColorsViewController class]])
+        {
+            drawingController = (DrawingColorsViewController *)controller;
+        }
+    }
+    [UIView beginAnimations:@"ScaleButton" context:NULL];
+    [UIView setAnimationDuration: 0.0f];
+    [drawingController allScaleToNormal];
+    [UIView commitAnimations];
     [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         viewDrawing.frame = frameDrawingView;
@@ -2329,7 +2342,6 @@ static CGRect CaptionTextViewMinRect;
     //
     //        drawView.frame = CGRectMake(0, 0, CGRectGetWidth(drawView.frame),CGRectGetHeight(imgvComic.frame));
     //    }
-    
     imgvComic.userInteractionEnabled = YES;
     [imgvComic addSubview:drawView];
     
@@ -2342,12 +2354,15 @@ static CGRect CaptionTextViewMinRect;
             drawingController = (DrawingColorsViewController *)controller;
         }
     }
-    
+    [UIView beginAnimations:@"ScaleButton" context:NULL];
+    [UIView setAnimationDuration: 0.0f];
+    [drawingController allScaleToNormal];
+     [UIView commitAnimations];
     [UIView beginAnimations:@"ScaleButton" context:NULL];
     [UIView setAnimationDuration: 0.2f];
-    drawingController.btnRed.transform = CGAffineTransformMakeScale(2,2);
+    [drawingController allScaleToNormal];
+    drawingController.btnRed.transform = CGAffineTransformMakeScale(1.8f,1.8f);
     [UIView commitAnimations];
-    
     [self drawingColorTapEventWithColor:@"red"];
 }
 
@@ -2435,7 +2450,6 @@ static CGRect CaptionTextViewMinRect;
             rowController = (RowButtonsViewController *)controller;
         }
     }
-    
     if ([colorName isEqualToString:@"white"])
     {
         [rowController.btnPen setImage:[UIImage imageNamed:@"pen-icon-white"] forState:UIControlStateSelected];
@@ -2501,6 +2515,26 @@ static CGRect CaptionTextViewMinRect;
         [rowController.btnPen setImage:[UIImage imageNamed:@"pen-icon-cyan"] forState:UIControlStateSelected];
         
         drawView.lineColor = [UIColor drawingColorCyan];
+    }
+    
+    if ([onColor isEqual: drawView.lineColor])
+    {
+        if (isAlreadyDoubleDrawColor)
+        {
+            isAlreadyDoubleDrawColor = NO;
+            drawView.lineWidth = 2.8f;
+        }
+        else
+        {
+            isAlreadyDoubleDrawColor = YES;
+            drawView.lineWidth = 5.64f;
+        }
+    }
+    else
+    {
+        isAlreadyDoubleDrawColor = NO;
+        drawView.lineWidth = 2.8f;
+        onColor = drawView.lineColor;
     }
 }
 

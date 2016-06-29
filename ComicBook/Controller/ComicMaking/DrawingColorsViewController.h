@@ -11,5 +11,5 @@
 @interface DrawingColorsViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *btnRed;
-
+-(void)allScaleToNormal;
 @end
