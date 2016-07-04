@@ -1501,14 +1501,14 @@ Comicing </string>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell1" id="dr5-RS-Mql">
-                                <rect key="frame" x="0.0" y="2" width="60" height="68"/>
+                                <rect key="frame" x="0.0" y="2" width="60" height="67.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="68"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="67.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oOI-2o-o74">
-                                            <rect key="frame" x="20" y="51" width="20" height="18"/>
+                                            <rect key="frame" x="20" y="50" width="20" height="18"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                             <state key="normal" image="xbutton"/>
                                             <connections>
@@ -1516,7 +1516,7 @@ Comicing </string>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UD5-oW-TUj">
-                                            <rect key="frame" x="15" y="0.0" width="30" height="39"/>
+                                            <rect key="frame" x="15" y="0.0" width="30" height="38"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="scissors"/>
                                             <connections>

@@ -351,6 +351,17 @@
 		0CBF90B81CA3143D004007DF /* UIImage+ImageCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */; };
 		0CC9F3741CF653D100761F44 /* Segment7Standard.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0CC9F3731CF653D100761F44 /* Segment7Standard.otf */; };
 		0CDD9A821C99B30B00D942D3 /* TermsServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */; };
+		160871481D2847FC006B6ABE /* top-bar-boy-icon-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 160871461D2847FC006B6ABE /* top-bar-boy-icon-yellow.png */; };
+		160871491D2847FC006B6ABE /* top-bar-me-icon-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 160871471D2847FC006B6ABE /* top-bar-me-icon-yellow.png */; };
+		1608714B1D28482F006B6ABE /* house-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1608714A1D28482F006B6ABE /* house-icon.png */; };
+		160DEF8C1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m in Sources */ = {isa = PBXBuildFile; fileRef = 160DEF8B1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m */; };
+		161632111D26E577004A13FE /* AddUser.png in Resources */ = {isa = PBXBuildFile; fileRef = 1616320A1D26E577004A13FE /* AddUser.png */; };
+		161632121D26E577004A13FE /* Boy.png in Resources */ = {isa = PBXBuildFile; fileRef = 1616320B1D26E577004A13FE /* Boy.png */; };
+		161632131D26E577004A13FE /* BubbleWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 1616320C1D26E577004A13FE /* BubbleWhite.png */; };
+		161632141D26E577004A13FE /* BubbleYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1616320D1D26E577004A13FE /* BubbleYellow.png */; };
+		161632151D26E577004A13FE /* FaceWithBubble-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1616320E1D26E577004A13FE /* FaceWithBubble-01.png */; };
+		161632161D26E577004A13FE /* Mag Glass.png in Resources */ = {isa = PBXBuildFile; fileRef = 1616320F1D26E577004A13FE /* Mag Glass.png */; };
+		161632171D26E577004A13FE /* Me.png in Resources */ = {isa = PBXBuildFile; fileRef = 161632101D26E577004A13FE /* Me.png */; };
 		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
 		84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D661CC94E1200C52C06 /* AvatarView.xib */; };
 		84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D681CC94E2B00C52C06 /* HeaderView.xib */; };
@@ -961,6 +972,18 @@
 		0CC9F3731CF653D100761F44 /* Segment7Standard.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Segment7Standard.otf; sourceTree = "<group>"; };
 		0CDD9A801C99B30B00D942D3 /* TermsServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsServiceViewController.h; sourceTree = "<group>"; };
 		0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsServiceViewController.m; sourceTree = "<group>"; };
+		160871461D2847FC006B6ABE /* top-bar-boy-icon-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top-bar-boy-icon-yellow.png"; sourceTree = "<group>"; };
+		160871471D2847FC006B6ABE /* top-bar-me-icon-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top-bar-me-icon-yellow.png"; sourceTree = "<group>"; };
+		1608714A1D28482F006B6ABE /* house-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "house-icon.png"; sourceTree = "<group>"; };
+		160DEF8A1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Multiplier.h"; sourceTree = "<group>"; };
+		160DEF8B1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Multiplier.m"; sourceTree = "<group>"; };
+		1616320A1D26E577004A13FE /* AddUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddUser.png; sourceTree = "<group>"; };
+		1616320B1D26E577004A13FE /* Boy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Boy.png; sourceTree = "<group>"; };
+		1616320C1D26E577004A13FE /* BubbleWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BubbleWhite.png; sourceTree = "<group>"; };
+		1616320D1D26E577004A13FE /* BubbleYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BubbleYellow.png; sourceTree = "<group>"; };
+		1616320E1D26E577004A13FE /* FaceWithBubble-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FaceWithBubble-01.png"; sourceTree = "<group>"; };
+		1616320F1D26E577004A13FE /* Mag Glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mag Glass.png"; sourceTree = "<group>"; };
+		161632101D26E577004A13FE /* Me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Me.png; sourceTree = "<group>"; };
 		8433BC921CC135D20073DE2A /* UIImage+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Trim.h"; sourceTree = "<group>"; };
 		8433BC931CC135D20073DE2A /* UIImage+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Trim.m"; sourceTree = "<group>"; };
 		845090751C2B1343004DAE99 /* Comicing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Comicing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1139,6 +1162,7 @@
 		0C6664BD1C84358500FEB11F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				161632091D26E56A004A13FE /* TopBar */,
 				0C6664BE1C84358500FEB11F /* contactPage */,
 				0C6664C61C84358500FEB11F /* general */,
 				0C6664CF1C84358500FEB11F /* groupPage */,
@@ -1984,6 +2008,8 @@
 				0CBF90B11CA313A5004007DF /* UIImage+Alpha.m */,
 				0CBF90B21CA313A5004007DF /* UIImage+ColorAtPixel.h */,
 				0CBF90B31CA313A5004007DF /* UIImage+ColorAtPixel.m */,
+				160DEF8A1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.h */,
+				160DEF8B1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m */,
 				0C66E6071C957605005E4548 /* AudioButton */,
 				0C6666341C84358600FEB11F /* Constants */,
 				0C6666371C84358600FEB11F /* CropAction */,
@@ -2598,6 +2624,23 @@
 			path = FabricAnalytics;
 			sourceTree = "<group>";
 		};
+		161632091D26E56A004A13FE /* TopBar */ = {
+			isa = PBXGroup;
+			children = (
+				1608714A1D28482F006B6ABE /* house-icon.png */,
+				1616320A1D26E577004A13FE /* AddUser.png */,
+				1616320B1D26E577004A13FE /* Boy.png */,
+				1616320C1D26E577004A13FE /* BubbleWhite.png */,
+				1616320D1D26E577004A13FE /* BubbleYellow.png */,
+				1616320E1D26E577004A13FE /* FaceWithBubble-01.png */,
+				1616320F1D26E577004A13FE /* Mag Glass.png */,
+				161632101D26E577004A13FE /* Me.png */,
+				160871461D2847FC006B6ABE /* top-bar-boy-icon-yellow.png */,
+				160871471D2847FC006B6ABE /* top-bar-me-icon-yellow.png */,
+			);
+			path = TopBar;
+			sourceTree = "<group>";
+		};
 		8450906C1C2B1343004DAE99 = {
 			isa = PBXGroup;
 			children = (
@@ -2710,6 +2753,7 @@
 				0C857C171C94BEAA00F0B911 /* countries_images.json in Resources */,
 				0C6668A31C84358600FEB11F /* FooterView.xib in Resources */,
 				0C66677A1C84358600FEB11F /* MYRIADPRO-REGULAR.OTF in Resources */,
+				161632161D26E577004A13FE /* Mag Glass.png in Resources */,
 				0C6667921C84358600FEB11F /* accountPassword.png in Resources */,
 				0C6668371C84358600FEB11F /* c4.jpg in Resources */,
 				0C66678B1C84358600FEB11F /* smile.png in Resources */,
@@ -2718,6 +2762,7 @@
 				0C6668A01C84358600FEB11F /* ComicShareView.xib in Resources */,
 				0C6668B41C84358600FEB11F /* KeyboardView.xib in Resources */,
 				0C6668B61C84358600FEB11F /* ProfilePicView.xib in Resources */,
+				161632171D26E577004A13FE /* Me.png in Resources */,
 				0C6667A81C84358600FEB11F /* facebooklogo.png in Resources */,
 				0C6667B11C84358600FEB11F /* Main_MainPage.storyboard in Resources */,
 				0C6667F81C84358600FEB11F /* GroupCell.xib in Resources */,
@@ -2751,6 +2796,7 @@
 				0C6667AF1C84358600FEB11F /* LaunchScreen.storyboard in Resources */,
 				0C6668B01C84358600FEB11F /* GroupsSection.xib in Resources */,
 				0C6668171C84358600FEB11F /* Info.plist in Resources */,
+				161632131D26E577004A13FE /* BubbleWhite.png in Resources */,
 				0C66677B1C84358600FEB11F /* MYRIADPRO-SEMIBOLD.OTF in Resources */,
 				0C6667A71C84358600FEB11F /* everyone.png in Resources */,
 				0C6667701C84358600FEB11F /* american-typewriter.ttf in Resources */,
@@ -2758,20 +2804,26 @@
 				0C66689A1C84358600FEB11F /* AccountView.xib in Resources */,
 				0C6667AC1C84358600FEB11F /* twitterlogo.png in Resources */,
 				0C6667861C84358600FEB11F /* meButton.png in Resources */,
+				161632151D26E577004A13FE /* FaceWithBubble-01.png in Resources */,
 				0C66677F1C84358600FEB11F /* arrow.png in Resources */,
 				0C6668AE1C84358600FEB11F /* GroupSectionCell.xib in Resources */,
 				84ECE64B1CB5778B007AF54E /* searchFriendView.xib in Resources */,
 				0C6667911C84358600FEB11F /* accountId.png in Resources */,
 				0C66679E1C84358600FEB11F /* selectedImage.png in Resources */,
+				161632121D26E577004A13FE /* Boy.png in Resources */,
 				0C6668071C84358600FEB11F /* MeCell.xib in Resources */,
+				161632111D26E577004A13FE /* AddUser.png in Resources */,
 				0C66678F1C84358600FEB11F /* accountAge.png in Resources */,
 				0C6667A51C84358600FEB11F /* digup.png in Resources */,
 				0C6668121C84358600FEB11F /* ComicImageCollectionCell.xib in Resources */,
 				0C6667761C84358600FEB11F /* MYRIADPRO-BOLDCONDIT.OTF in Resources */,
+				160871491D2847FC006B6ABE /* top-bar-me-icon-yellow.png in Resources */,
 				0C66677C1C84358600FEB11F /* MYRIADPRO-SEMIBOLDIT.OTF in Resources */,
 				0C6667971C84358600FEB11F /* profilePicBack.png in Resources */,
+				1608714B1D28482F006B6ABE /* house-icon.png in Resources */,
 				0C6667A91C84358600FEB11F /* GobackButton.png in Resources */,
 				0C6667AD1C84358600FEB11F /* Default-568h@2x.png in Resources */,
+				160871481D2847FC006B6ABE /* top-bar-boy-icon-yellow.png in Resources */,
 				0C6667931C84358600FEB11F /* faceSignUp.png in Resources */,
 				0C6667811C84358600FEB11F /* arrow@3x.png in Resources */,
 				0CB7C33E1CF8DA640072E4B0 /* ARLRDBD.TTF in Resources */,
@@ -2787,6 +2839,7 @@
 				84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */,
 				0C6667A61C84358600FEB11F /* digup@2x.png in Resources */,
 				0C6667D81C84358600FEB11F /* FindFriendsTableCell.xib in Resources */,
+				161632141D26E577004A13FE /* BubbleYellow.png in Resources */,
 				0C6667771C84358600FEB11F /* MYRIADPRO-BOLDIT.OTF in Resources */,
 				0C6667721C84358600FEB11F /* Myriad Roman.ttf in Resources */,
 				0C6667831C84358600FEB11F /* searchByID.png in Resources */,
@@ -2904,6 +2957,7 @@
 				0C6668021C84358600FEB11F /* InboxViewController.m in Sources */,
 				0C66681D1C84358600FEB11F /* ComicEnhancements.m in Sources */,
 				0C66682B1C84358600FEB11F /* UserGroup.m in Sources */,
+				160DEF8C1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m in Sources */,
 				0C6667E81C84358600FEB11F /* GlideViewController.m in Sources */,
 				0C6668641C84358600FEB11F /* MTLJSONAdapter.m in Sources */,
 				0C66686A1C84358600FEB11F /* NSArray+MTLManipulationAdditions.m in Sources */,

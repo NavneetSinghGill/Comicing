@@ -185,7 +185,24 @@ NSString * const BottomBarView = @"BottomBarView";
 
 - (void)addTopBarView {
     topBarView = [self.storyboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    CGFloat heightOfTopBar;
+    if (IS_IPHONE_5)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+    }
+    else if(IS_IPHONE_6)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+9;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+10;
+    }
+    else
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+    }
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];
     [self.view addSubview:topBarView.view];
     [topBarView didMoveToParentViewController:self];
@@ -213,6 +230,7 @@ NSString * const BottomBarView = @"BottomBarView";
         TopSearchVC *topSearchView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:TOP_SEARCH_VIEW];
         [topSearchView displayContentController:self];
     };
+    topBarView.isHomeHidden = YES;
 }
 
 - (void)openInbox {
