@@ -1001,7 +1001,7 @@
         
         [self.FourthButton setHidden:FALSE];
         [self.mFourthDisplaylabel setHidden:FALSE];
-        [self.mFourthHollowlabel setHidden:TRUE];
+        [self.mFourthHollowlabel setHidden:FALSE];
         
         [self.ThirdButton setHidden:FALSE];
         [self.mThirdHollowlabel setHidden:FALSE];
