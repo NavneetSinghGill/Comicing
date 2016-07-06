@@ -362,6 +362,7 @@
 		161632151D26E577004A13FE /* FaceWithBubble-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1616320E1D26E577004A13FE /* FaceWithBubble-01.png */; };
 		161632161D26E577004A13FE /* Mag Glass.png in Resources */ = {isa = PBXBuildFile; fileRef = 1616320F1D26E577004A13FE /* Mag Glass.png */; };
 		161632171D26E577004A13FE /* Me.png in Resources */ = {isa = PBXBuildFile; fileRef = 161632101D26E577004A13FE /* Me.png */; };
+		16ED20DC1D2D5AB7004E71D9 /* ModifiedBlueBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 16ED20DB1D2D5AB7004E71D9 /* ModifiedBlueBoy.png */; };
 		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
 		84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D661CC94E1200C52C06 /* AvatarView.xib */; };
 		84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D681CC94E2B00C52C06 /* HeaderView.xib */; };
@@ -984,6 +985,7 @@
 		1616320E1D26E577004A13FE /* FaceWithBubble-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FaceWithBubble-01.png"; sourceTree = "<group>"; };
 		1616320F1D26E577004A13FE /* Mag Glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mag Glass.png"; sourceTree = "<group>"; };
 		161632101D26E577004A13FE /* Me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Me.png; sourceTree = "<group>"; };
+		16ED20DB1D2D5AB7004E71D9 /* ModifiedBlueBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ModifiedBlueBoy.png; sourceTree = "<group>"; };
 		8433BC921CC135D20073DE2A /* UIImage+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Trim.h"; sourceTree = "<group>"; };
 		8433BC931CC135D20073DE2A /* UIImage+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Trim.m"; sourceTree = "<group>"; };
 		845090751C2B1343004DAE99 /* Comicing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Comicing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2633,6 +2635,7 @@
 				1616320C1D26E577004A13FE /* BubbleWhite.png */,
 				1616320D1D26E577004A13FE /* BubbleYellow.png */,
 				1616320E1D26E577004A13FE /* FaceWithBubble-01.png */,
+				16ED20DB1D2D5AB7004E71D9 /* ModifiedBlueBoy.png */,
 				1616320F1D26E577004A13FE /* Mag Glass.png */,
 				161632101D26E577004A13FE /* Me.png */,
 				160871461D2847FC006B6ABE /* top-bar-boy-icon-yellow.png */,
@@ -2826,6 +2829,7 @@
 				160871481D2847FC006B6ABE /* top-bar-boy-icon-yellow.png in Resources */,
 				0C6667931C84358600FEB11F /* faceSignUp.png in Resources */,
 				0C6667811C84358600FEB11F /* arrow@3x.png in Resources */,
+				16ED20DC1D2D5AB7004E71D9 /* ModifiedBlueBoy.png in Resources */,
 				0CB7C33E1CF8DA640072E4B0 /* ARLRDBD.TTF in Resources */,
 				0CC9F3741CF653D100761F44 /* Segment7Standard.otf in Resources */,
 				84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */,

@@ -25,6 +25,7 @@
 #import "AppHelper.h"
 #import "MePageVC.h"
 #import "AppDelegate.h"
+#import "ContactController.h"
 
 #define FB 10
 #define IM 11
@@ -177,9 +178,15 @@ NSString * const BottomBarView = @"BottomBarView";
 
 - (void)addBottomBarView {
     bottomBarView = [self.storyboard instantiateViewControllerWithIdentifier:BottomBarView];
-    [bottomBarView.view setFrame:CGRectMake(0, self.view.frame.size.height - 30, bottomBarView.view.frame.size.width, bottomBarView.view.frame.size.height)];
+    [bottomBarView.view setFrame:CGRectMake(0, self.view.frame.size.height - 30,self.view.frame.size.width, self.view.frame.size.height/2.2f)];
     [self addChildViewController:bottomBarView];
     [self.view addSubview:bottomBarView.view];
+    bottomBarView.connectAction = ^(void) {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+        ContactController* cVc = (ContactController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"Contact"];
+        mainStoryboard = nil;
+        [self.navigationController pushViewController:cVc animated:YES];
+    };
     [bottomBarView didMoveToParentViewController:self];
 }
 

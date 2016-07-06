@@ -7,15 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void (^ ConnectAction) (void);
 @interface BottomBarViewController : UIViewController <UIGestureRecognizerDelegate> {
     CGRect rectContainer;
+    CGAffineTransform referTransform;
+    CGFloat frameDifference;
+    CGFloat theYStart;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *bottomButton;
+@property (weak, nonatomic) IBOutlet UIButton *btn_ConnectFriend;
+
 @property (weak, nonatomic) IBOutlet UIView *tap_View;
 @property (nonatomic,assign) CGRect openFrame;
 @property (nonatomic,assign) CGRect closeFrame;
+@property (nonatomic, strong) ConnectAction connectAction;
 
 - (void)setBottombuttonToYellow;
 
