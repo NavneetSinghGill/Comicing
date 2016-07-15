@@ -30,6 +30,9 @@
 #import "GroupCell.h"
 #import "GlideScrollViewController.h"
 #import "AppConstants.h"
+#import "ComicConversationModel.h"
+#import "ComicConversationBook.h"
+#import "PrivateConversationTextCell.h"
 
 @interface MainPageGroupViewController ()
 <UITableViewDataSource,
@@ -52,6 +55,15 @@ UICollectionViewDelegate>
 @property (strong, nonatomic) NSMutableArray *groupMember;
 @property (strong, nonatomic) NSMutableArray *comics;
 
+@property (nonatomic,weak) IBOutlet UIView *mHolderView;
+@property (nonatomic,weak) IBOutlet UITextField *mCommentInputTF;
+@property (nonatomic,weak) IBOutlet UIButton *mSendCommentButton;
+@property (nonatomic, assign) BOOL keyboardShown;
+@property (nonatomic,weak) IBOutlet NSLayoutConstraint *HolderViewBottomConstraint;
+@property (nonatomic,weak) IBOutlet NSLayoutConstraint *HolderViewHeightConstraint;
+@property (nonatomic, assign) int initialHeight;
+@property (nonatomic, assign) BOOL allowToAnimate;
+
 @property CGRect saveTableViewFrame;
 
 @end
@@ -60,9 +72,14 @@ UICollectionViewDelegate>
 
 @synthesize groupMember,comics, tblvComics, clvUsers, viewTopBar, saveTableViewFrame, viewTransperant, ComicBookDict, imgvGroupIcon,viewPen;
 
+
+
 #pragma mark - UIViewController Methods
 - (void)viewDidLoad
 {
+    UIScreen *mainScreen = [UIScreen mainScreen];
+    self.initialHeight = mainScreen.bounds.size.height - 20;
+    
     [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"MainPage-GroupPage" Attributes:nil];
     
     ComicBookDict=[NSMutableDictionary new];
@@ -72,6 +89,154 @@ UICollectionViewDelegate>
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyComicAnimation) name:@"StartGroupReplyComicAnimation" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyComicAnimation) name:@"StopGroupReplyComicAnimation" object:nil];
     [self prepareView];
+}
+
+
+#pragma mark - keyboard handling methods & Textfield delgates
+
+- (void)resetAnimationVariables
+{
+    self.allowToAnimate = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    [super viewWillAppear:YES];
+    
+    [self resetAnimationVariables];
+    
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Say Something to @%@", self.groupObj.groupTitle]
+                                                              attributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }];
+    self.mCommentInputTF.attributedPlaceholder = str;
+    
+    [self.mCommentInputTF setClipsToBounds:YES];
+    [self.mCommentInputTF.layer setMasksToBounds:YES];
+    [self.mCommentInputTF.layer setCornerRadius:3];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(keyboardWillShow:)
+     name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(keyboardWillHide:)
+     name:UIKeyboardWillHideNotification object:nil];
+}
+
+// Unsubscribe from keyboard show/hide notifications.
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+// Setup keyboard handlers to slide the view containing the table view and
+// text field upwards when the keyboard shows, and downwards when it hides.
+- (void)keyboardWillShow:(NSNotification*)notification
+{
+    //[self moveView:[notification userInfo] up:YES];
+    
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    if (!self.keyboardShown)
+    {
+        
+        self.keyboardShown = YES;
+        self.allowToAnimate = !self.keyboardShown;
+
+        
+        self.HolderViewBottomConstraint.constant = keyboardSize.height;
+
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            self.mHolderView.frame = CGRectMake(self.mHolderView.frame.origin.x,
+                                                20,
+                                                self.mHolderView.frame.size.width,
+                                                self.initialHeight - keyboardSize.height);
+        } completion:^(BOOL finished) {
+            if (!self.tblvComics.isDragging && (self.tblvComics.frame.size.height < self.tblvComics.contentSize.height)) {
+                CGPoint offset = CGPointMake(0, self.tblvComics.contentSize.height - self.tblvComics.frame.size.height);
+                [self.tblvComics setContentOffset:offset animated:NO];
+            }
+        }];
+    }
+    else
+    {
+        self.mHolderView.frame = CGRectMake(self.mHolderView.frame.origin.x,
+                                            20,
+                                            self.mHolderView.frame.size.width,
+                                            self.initialHeight - keyboardSize.height);
+        
+        self.HolderViewBottomConstraint.constant = keyboardSize.height;
+        
+        if (!self.tblvComics.isDragging && (self.tblvComics.frame.size.height < self.tblvComics.contentSize.height)) {
+            CGPoint offset = CGPointMake(0, self.tblvComics.contentSize.height - self.tblvComics.frame.size.height);
+            [self.tblvComics setContentOffset:offset animated:NO];
+        }
+    }
+    
+    
+}
+
+- (void)keyboardWillHide:(NSNotification*)notification
+{
+    //[self moveView:[notification userInfo] up:NO];
+    
+    //CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        self.mHolderView.frame = CGRectMake(self.mHolderView.frame.origin.x,
+                                            20,
+                                            self.mHolderView.frame.size.width,
+                                            self.initialHeight);
+        self.HolderViewBottomConstraint.constant = 0;
+        
+    } completion:^(BOOL finished) {
+        self.keyboardShown = NO;
+        self.allowToAnimate = !self.keyboardShown;
+    }];
+}
+
+#pragma mark TextField Delegates
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    if (self.mCommentInputTF.text.length > 0)
+    {
+        [GroupsAPIManager postGroupConversationV2CommentWithGroupID:self.groupObj.groupId
+                                                                          shareText:self.mCommentInputTF.text
+                                                                      currentUserId:[AppHelper getCurrentLoginId]
+                                                                       SuccessBlock:^(id object) {
+                                                                           NSLog(@"Post object response : %@", object);
+                                                                           self.mCommentInputTF.text = @"";
+                                                                           self.allowToAnimate = NO;
+                                                                           [self callAPItoGetGroupsComics];
+                                                                       } andFail:^(NSError *errorMessage) {
+                                                                           
+                                                                       }];
+    }
+    return YES;
+}
+
+#define MAX_LENGTH 50
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.text.length >= MAX_LENGTH && range.length == 0)
+    {
+        return NO; // return NO to not change text
+    }
+    else
+    {
+        return YES;
+    }
 }
 
 #pragma mark - UIView Methods
@@ -169,11 +334,30 @@ UICollectionViewDelegate>
      {
          NSLog(@"comic datat =  %@", object);
          NSError *error;
-         ComicsModel *comicsModel = [MTLJSONAdapter modelOfClass:ComicsModel.class fromJSONDictionary:[object valueForKey:@"data"] error:&error];
+         //ComicsModel *comicsModel = [MTLJSONAdapter modelOfClass:ComicsModel.class fromJSONDictionary:[object valueForKey:@"data"] error:&error];
+         
+         ComicConversationModel *comicsModel = [MTLJSONAdapter modelOfClass:ComicConversationModel.class fromJSONDictionary:[object valueForKey:@"data"] error:&error];
+
          NSLog(@"%@", comicsModel);
          self.shareId = comicsModel.shareId;
          comics = comicsModel.books.copy;
+         comics = [NSMutableArray arrayWithArray:[[comics reverseObjectEnumerator] allObjects]];
          [tblvComics reloadData];
+         
+         CGPoint offset = CGPointMake(0, self.tblvComics.contentSize.height - self.tblvComics.frame.size.height);
+         [self.tblvComics setContentOffset:offset animated:NO];
+         
+         //PUT request to update SEEN comic/ text object
+         [GroupsAPIManager putSeenStatusWithGroupID:self.groupObj.groupId
+                                                          userId:[AppHelper getCurrentLoginId]
+                                                    SuccessBlock:^(id object) {
+                                                        NSLog(@"Updated lastSeen comic/ text object");
+                                                    } andFail:^(NSError *errorMessage) {
+                                                        NSLog(@"fails to update lastSeen comic/ text object");
+                                                    }];
+         //---------------
+         
+         [self performSelector:@selector(resetAnimationVariables) withObject:nil afterDelay:1];
          
      } andFail:^(NSError *errorMessage)
      {
@@ -195,68 +379,148 @@ UICollectionViewDelegate>
     return headerView;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    CGFloat height = 45;
+    return height;
+}
+
+- (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 45)];
+    [headerView setBackgroundColor:[UIColor clearColor]];
+    return headerView;
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return comics.count;
 }
 
+#define CONVERSTION_TYPE_COMIC @"comic"
+#define CONVERSTION_TYPE_TEXT  @"text"
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *simpleTableIdentifier = @"GroupCell";
     
-    __block GroupCell* cell= (GroupCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-
-    cell = nil;
-    if (cell == nil) {
-        cell= (GroupCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-        if(nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
-        {
-            [ComicBookDict removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+    ComicConversationBook *mComicConversatinBook = (ComicConversationBook *)[comics objectAtIndex:indexPath.row];
+    
+    if ([mComicConversatinBook.conversationType isEqualToString:CONVERSTION_TYPE_COMIC])
+    {
+        __block GroupCell* cell= (GroupCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        
+        cell = nil;
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"GroupCell" owner:self options:nil];
+            
+            cell = [nib objectAtIndex:0];
+            
+            //cell= (GroupCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+            
+            if(nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
+            {
+                [ComicBookDict removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+            }
+            
+            ComicBookVC *comic=[self.storyboard instantiateViewControllerWithIdentifier:@"ComicBookVC"];
+            comic.delegate=self;
+            comic.Tag=(int)indexPath.row;
+            
+            comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+            
+            ComicBook *comicBook = (ComicBook *)mComicConversatinBook.coversation[0];
+            [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
+            
+            //dinesh
+            cell.mUserName.text = comicBook.userDetail.firstName;
+            cell.lblDate.text = [self dateFromString:comicBook.createdDate];
+            cell.lblTime.text = [self timeFromString:comicBook.createdDate];
+            
+            [cell.viewComicBook addSubview:comic.view];
+            
+            // vishnu
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
+            
+            // To repeat the cover image again on index page as the first slide.
+            if(slidesArray.count > 1) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+                
+                // Adding a sample slide to array to maintain the logic
+                Slides *slides = [Slides new];
+                [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6<slidesArray.count) {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
+            }
+            
+            [comic setSlidesArray:slidesArray];
+            [comic setupBook];
+            
+            [self addChildViewController:comic];
+            
+            [ComicBookDict setObject:comic forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+            
         }
         
-        ComicBookVC *comic=[self.storyboard instantiateViewControllerWithIdentifier:@"ComicBookVC"];
-        comic.delegate=self;
-        comic.Tag=(int)indexPath.row;
+        return cell;
+    }
+    else
+    {
         
-        comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+        PrivateConversationTextCell *cell = (PrivateConversationTextCell *)[tableView dequeueReusableCellWithIdentifier:@"fs"];
         
-        ComicBook *comicBook = [comics objectAtIndex:indexPath.row];
-        [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PrivateConversationTextCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        
+        ComicBook *comicBook = (ComicBook *)mComicConversatinBook.coversation[0];
+        [cell.userProfilePic sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
         
         //dinesh
         cell.mUserName.text = comicBook.userDetail.firstName;
-        cell.lblDate.text = [self dateFromString:comicBook.createdDate];
-        cell.lblTime.text = [self timeFromString:comicBook.createdDate];
         
-        [cell.viewComicBook addSubview:comic.view];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSDate *dateFromStr = [dateFormat dateFromString:comicBook.createdDate];
+        [dateFormat setDateFormat:@"MMM dd, yyyy"];
+        NSString *dateStr = [dateFormat stringFromDate:dateFromStr];
+        [dateFormat setDateFormat:@"hh.mm a"];
+        NSString *timeStr = [dateFormat stringFromDate:dateFromStr];
         
-        // vishnu
-        NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
-        [slidesArray addObjectsFromArray:comicBook.slides];
+        cell.lblDate.text = dateStr;
+        cell.lblTime.text = timeStr;
         
-        // To repeat the cover image again on index page as the first slide.
-        if(slidesArray.count > 1) {
-            [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
-            
-            // Adding a sample slide to array to maintain the logic
-            Slides *slides = [Slides new];
-            [slidesArray insertObject:slides atIndex:1];
-            
-            // vishnuvardhan logic for the second page
-            if(6<slidesArray.count) {
-                [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
-            }
+        cell.mMessage.text = comicBook.message;
+        
+        // NSLog(@"Book : %@", comicBook);
+        
+
+        //no need to display chat status since its a group chat
+        [cell.mChatStatus setHidden:YES];
+        
+        CGSize fontSize = [cell.mMessage.text sizeWithAttributes:
+                           @{NSFontAttributeName:cell.mMessage.font}];
+        
+        NSLog(@"fontSize : %@", NSStringFromCGSize(fontSize));
+        
+        if (fontSize.width > cell.mMessage.bounds.size.width)
+        {
+            cell.mMessageHolderView.frame = CGRectMake(cell.mMessageHolderView.frame.origin.x,
+                                                       cell.mMessageHolderView.frame.origin.y,
+                                                       cell.mMessageHolderView.frame.size.width,
+                                                       54);
         }
         
-        [comic setSlidesArray:slidesArray];
-        [comic setupBook];
-        
-        [self addChildViewController:comic];
-        
-        [ComicBookDict setObject:comic forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+        return cell;
     }
-    
-    return cell;
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -275,51 +539,68 @@ UICollectionViewDelegate>
      height= 269;
      }*/
     
-    int height=0;
-    if(IS_IPHONE_5)
+    ComicConversationBook *mComicConversatinBook = (ComicConversationBook *)[comics objectAtIndex:indexPath.row];
+    if ([mComicConversatinBook.conversationType isEqualToString:CONVERSTION_TYPE_COMIC])
     {
-        height=169;
+        int height=0;
+        if(IS_IPHONE_5)
+        {
+            height=169;
+        }
+        else if(IS_IPHONE_6)
+        {
+            height= 199;
+        }
+        else if(IS_IPHONE_6P)
+        {
+            height= 229;
+        }
+        
+        
+        return self.initialHeight - height;
+        
+        //return tableView.bounds.size.height-height;
     }
-    else if(IS_IPHONE_6)
+    else if ([mComicConversatinBook.conversationType isEqualToString:CONVERSTION_TYPE_TEXT])
     {
-        height= 199;
-    }
-    else if(IS_IPHONE_6P)
-    {
-        height= 229;
+        return 128;
     }
     
-    
-    
-    
-    return tableView.bounds.size.height-height;
+    return 0;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.contentView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    cell.contentView.layer.shadowOffset = CGSizeMake(10, 10);
-    cell.contentView.alpha = 0;
-    cell.contentView.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0.5);
-    cell.contentView.layer.anchorPoint = CGPointMake(0.5, 0.5);
+    if (self.allowToAnimate)
+    {
+        cell.contentView.layer.shadowColor = [[UIColor blackColor] CGColor];
+        cell.contentView.layer.shadowOffset = CGSizeMake(10, 10);
+        cell.contentView.alpha = 0;
+        cell.contentView.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0.5);
+        cell.contentView.layer.anchorPoint = CGPointMake(0.5, 0.5);
+        
+        [UIView animateWithDuration:1 animations:^{
+            cell.contentView.layer.shadowOffset = CGSizeMake(0, 0);
+            cell.contentView.alpha = 1;
+            cell.contentView.layer.transform = CATransform3DIdentity;
+        }];
+    }
     
-    [UIView animateWithDuration:1 animations:^{
-        cell.contentView.layer.shadowOffset = CGSizeMake(0, 0);
-        cell.contentView.alpha = 1;
-        cell.contentView.layer.transform = CATransform3DIdentity;
-    }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat offset = scrollView.contentOffset.y; // here you will get the offset value
-    CGFloat value = offset / tblvComics.frame.size.height;
-    
-    NSLog(@"value = %f",value);
-    
-    if(value > 0 && value < 1)
+    if (self.allowToAnimate)
     {
-        self.viewTransperant.alpha = 1-value/4;
+        CGFloat offset = scrollView.contentOffset.y; // here you will get the offset value
+        CGFloat value = offset / tblvComics.frame.size.height;
+        
+        NSLog(@"value = %f",value);
+        
+        if(value > 0 && value < 1)
+        {
+            self.viewTransperant.alpha = 1-value/4;
+        }
     }
 }
 

@@ -18,6 +18,8 @@
     return @{
              @"comicId": @"comic_id",
              @"comicTitle": @"comic_title",
+             @"comicChatId": @"comic_chat_id",
+             @"message":@"message",
              @"comicType": @"comic_type",
              @"coverImage": @"cover_image",
              @"conversationId": @"conversation_id",

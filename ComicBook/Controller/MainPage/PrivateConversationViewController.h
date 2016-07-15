@@ -10,7 +10,7 @@
 #import "ComicBookVC.h"
 #import "Friend.h"
 
-@interface PrivateConversationViewController : UIViewController<BookChangeDelegate>
+@interface PrivateConversationViewController : UIViewController<BookChangeDelegate, UITextFieldDelegate>
 
 @property (nonatomic,strong) NSMutableDictionary *ComicBookDict;
 @property (nonatomic,strong) Friend *friendObj;

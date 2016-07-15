@@ -363,6 +363,18 @@
 		161632161D26E577004A13FE /* Mag Glass.png in Resources */ = {isa = PBXBuildFile; fileRef = 1616320F1D26E577004A13FE /* Mag Glass.png */; };
 		161632171D26E577004A13FE /* Me.png in Resources */ = {isa = PBXBuildFile; fileRef = 161632101D26E577004A13FE /* Me.png */; };
 		16ED20DC1D2D5AB7004E71D9 /* ModifiedBlueBoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 16ED20DB1D2D5AB7004E71D9 /* ModifiedBlueBoy.png */; };
+		1B12FF861D32A6DD00E7320B /* indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B12FF831D32A6DD00E7320B /* indicator.png */; };
+		1B12FF871D32A6DD00E7320B /* indicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B12FF841D32A6DD00E7320B /* indicator@2x.png */; };
+		1B12FF881D32A6DD00E7320B /* indicator@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B12FF851D32A6DD00E7320B /* indicator@3x.png */; };
+		1B4FCCDB1D323D6400278B16 /* PrivateConversationTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */; };
+		1B4FCCDC1D323D6400278B16 /* PrivateConversationTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */; };
+		1B7E51FF1D36DEF60038199E /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B7E51FE1D36DEF60038199E /* camera.png */; };
+		1B99A7221D354DB500CFA820 /* private_conversation_input_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7201D354DB500CFA820 /* private_conversation_input_background@2x.png */; };
+		1B99A7231D354DB500CFA820 /* private_conversation_input_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7211D354DB500CFA820 /* private_conversation_input_background@3x.png */; };
+		1B99A7261D35749B00CFA820 /* group_conversation_input_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7241D35749B00CFA820 /* group_conversation_input_background@2x.png */; };
+		1B99A7271D35749B00CFA820 /* group_conversation_input_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7251D35749B00CFA820 /* group_conversation_input_background@3x.png */; };
+		1BAF305C1D3027DD00815495 /* ComicConversationBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAF30591D3027DC00815495 /* ComicConversationBook.m */; };
+		1BAF305D1D3027DD00815495 /* ComicConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAF305B1D3027DD00815495 /* ComicConversationModel.m */; };
 		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
 		84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D661CC94E1200C52C06 /* AvatarView.xib */; };
 		84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D681CC94E2B00C52C06 /* HeaderView.xib */; };
@@ -986,6 +998,21 @@
 		1616320F1D26E577004A13FE /* Mag Glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mag Glass.png"; sourceTree = "<group>"; };
 		161632101D26E577004A13FE /* Me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Me.png; sourceTree = "<group>"; };
 		16ED20DB1D2D5AB7004E71D9 /* ModifiedBlueBoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ModifiedBlueBoy.png; sourceTree = "<group>"; };
+		1B12FF831D32A6DD00E7320B /* indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indicator.png; sourceTree = "<group>"; };
+		1B12FF841D32A6DD00E7320B /* indicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "indicator@2x.png"; sourceTree = "<group>"; };
+		1B12FF851D32A6DD00E7320B /* indicator@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "indicator@3x.png"; sourceTree = "<group>"; };
+		1B4FCCD81D323D6400278B16 /* PrivateConversationTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateConversationTextCell.h; sourceTree = "<group>"; };
+		1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateConversationTextCell.m; sourceTree = "<group>"; };
+		1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateConversationTextCell.xib; sourceTree = "<group>"; };
+		1B7E51FE1D36DEF60038199E /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		1B99A7201D354DB500CFA820 /* private_conversation_input_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "private_conversation_input_background@2x.png"; sourceTree = "<group>"; };
+		1B99A7211D354DB500CFA820 /* private_conversation_input_background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "private_conversation_input_background@3x.png"; sourceTree = "<group>"; };
+		1B99A7241D35749B00CFA820 /* group_conversation_input_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_conversation_input_background@2x.png"; sourceTree = "<group>"; };
+		1B99A7251D35749B00CFA820 /* group_conversation_input_background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_conversation_input_background@3x.png"; sourceTree = "<group>"; };
+		1BAF30581D3027DC00815495 /* ComicConversationBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicConversationBook.h; sourceTree = "<group>"; };
+		1BAF30591D3027DC00815495 /* ComicConversationBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicConversationBook.m; sourceTree = "<group>"; };
+		1BAF305A1D3027DC00815495 /* ComicConversationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicConversationModel.h; sourceTree = "<group>"; };
+		1BAF305B1D3027DD00815495 /* ComicConversationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicConversationModel.m; sourceTree = "<group>"; };
 		8433BC921CC135D20073DE2A /* UIImage+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Trim.h"; sourceTree = "<group>"; };
 		8433BC931CC135D20073DE2A /* UIImage+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Trim.m"; sourceTree = "<group>"; };
 		845090751C2B1343004DAE99 /* Comicing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Comicing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1164,6 +1191,7 @@
 		0C6664BD1C84358500FEB11F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1B12FF821D32A6DD00E7320B /* Conversation */,
 				161632091D26E56A004A13FE /* TopBar */,
 				0C6664BE1C84358500FEB11F /* contactPage */,
 				0C6664C61C84358500FEB11F /* general */,
@@ -1193,6 +1221,7 @@
 		0C6664C61C84358500FEB11F /* general */ = {
 			isa = PBXGroup;
 			children = (
+				1B7E51FE1D36DEF60038199E /* camera.png */,
 				0C6664C71C84358500FEB11F /* backbutton.png */,
 				0C6664C81C84358500FEB11F /* cameraButton.png */,
 				0C6664C91C84358500FEB11F /* meButton.png */,
@@ -1780,6 +1809,9 @@
 				0C6665AF1C84358500FEB11F /* PrivateConversationCell.h */,
 				0C6665B01C84358500FEB11F /* PrivateConversationCell.m */,
 				0C6665B11C84358500FEB11F /* PrivateConversationCell.xib */,
+				1B4FCCD81D323D6400278B16 /* PrivateConversationTextCell.h */,
+				1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */,
+				1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */,
 			);
 			path = PrivateConvCell;
 			sourceTree = "<group>";
@@ -1886,6 +1918,10 @@
 		0C6665F31C84358600FEB11F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1BAF30581D3027DC00815495 /* ComicConversationBook.h */,
+				1BAF30591D3027DC00815495 /* ComicConversationBook.m */,
+				1BAF305A1D3027DC00815495 /* ComicConversationModel.h */,
+				1BAF305B1D3027DD00815495 /* ComicConversationModel.m */,
 				0C32C9951CB0B053001DA121 /* DataModel */,
 				0C66E6041C95756A005E4548 /* Enhancement.h */,
 				0C66E6051C95756A005E4548 /* Enhancement.m */,
@@ -2644,6 +2680,20 @@
 			path = TopBar;
 			sourceTree = "<group>";
 		};
+		1B12FF821D32A6DD00E7320B /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				1B99A7241D35749B00CFA820 /* group_conversation_input_background@2x.png */,
+				1B99A7251D35749B00CFA820 /* group_conversation_input_background@3x.png */,
+				1B99A7201D354DB500CFA820 /* private_conversation_input_background@2x.png */,
+				1B99A7211D354DB500CFA820 /* private_conversation_input_background@3x.png */,
+				1B12FF831D32A6DD00E7320B /* indicator.png */,
+				1B12FF841D32A6DD00E7320B /* indicator@2x.png */,
+				1B12FF851D32A6DD00E7320B /* indicator@3x.png */,
+			);
+			path = Conversation;
+			sourceTree = "<group>";
+		};
 		8450906C1C2B1343004DAE99 = {
 			isa = PBXGroup;
 			children = (
@@ -2740,17 +2790,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B4FCCDC1D323D6400278B16 /* PrivateConversationTextCell.xib in Resources */,
 				0C6667EA1C84358600FEB11F /* GroupsMembersCell.xib in Resources */,
 				0C6668AC1C84358600FEB11F /* GroupItem.xib in Resources */,
 				0C6667A41C84358600FEB11F /* CheckButton.png in Resources */,
 				0C6667941C84358600FEB11F /* findFriendsArrow.png in Resources */,
 				0C6667791C84358600FEB11F /* MYRIADPRO-CONDIT.OTF in Resources */,
+				1B99A7221D354DB500CFA820 /* private_conversation_input_background@2x.png in Resources */,
 				0C66677E1C84358600FEB11F /* add_small.png in Resources */,
 				0C6667991C84358600FEB11F /* profilePicClose.png in Resources */,
 				0C6667741C84358600FEB11F /* MYRIADPRO-BOLD.OTF in Resources */,
 				0C66678E1C84358600FEB11F /* groupMemberSearch.png in Resources */,
 				0C6667951C84358600FEB11F /* findFriendSelectionTick.png in Resources */,
 				0C6668351C84358600FEB11F /* c2.jpg in Resources */,
+				1B99A7261D35749B00CFA820 /* group_conversation_input_background@2x.png in Resources */,
 				0C66678C1C84358600FEB11F /* blueCheckmark.png in Resources */,
 				0C6668361C84358600FEB11F /* c3.jpg in Resources */,
 				0C857C171C94BEAA00F0B911 /* countries_images.json in Resources */,
@@ -2762,6 +2815,7 @@
 				0C66678B1C84358600FEB11F /* smile.png in Resources */,
 				0C66677D1C84358600FEB11F /* add.png in Resources */,
 				0C6668141C84358600FEB11F /* ComicImageListView.xib in Resources */,
+				1B12FF881D32A6DD00E7320B /* indicator@3x.png in Resources */,
 				0C6668A01C84358600FEB11F /* ComicShareView.xib in Resources */,
 				0C6668B41C84358600FEB11F /* KeyboardView.xib in Resources */,
 				0C6668B61C84358600FEB11F /* ProfilePicView.xib in Resources */,
@@ -2790,6 +2844,8 @@
 				0C6667B01C84358600FEB11F /* Main.storyboard in Resources */,
 				0C154E1F1CEFDC7F005116A4 /* Comicing_Terms_of_Service.html in Resources */,
 				0C6667801C84358600FEB11F /* arrow@2x.png in Resources */,
+				1B99A7231D354DB500CFA820 /* private_conversation_input_background@3x.png in Resources */,
+				1B7E51FF1D36DEF60038199E /* camera.png in Resources */,
 				0C6668A71C84358600FEB11F /* FriendsListTableViewCell.xib in Resources */,
 				0C6667871C84358600FEB11F /* parrotIcon.png in Resources */,
 				0C6667851C84358600FEB11F /* cameraButton.png in Resources */,
@@ -2800,6 +2856,7 @@
 				0C6668B01C84358600FEB11F /* GroupsSection.xib in Resources */,
 				0C6668171C84358600FEB11F /* Info.plist in Resources */,
 				161632131D26E577004A13FE /* BubbleWhite.png in Resources */,
+				1B12FF861D32A6DD00E7320B /* indicator.png in Resources */,
 				0C66677B1C84358600FEB11F /* MYRIADPRO-SEMIBOLD.OTF in Resources */,
 				0C6667A71C84358600FEB11F /* everyone.png in Resources */,
 				0C6667701C84358600FEB11F /* american-typewriter.ttf in Resources */,
@@ -2813,6 +2870,7 @@
 				84ECE64B1CB5778B007AF54E /* searchFriendView.xib in Resources */,
 				0C6667911C84358600FEB11F /* accountId.png in Resources */,
 				0C66679E1C84358600FEB11F /* selectedImage.png in Resources */,
+				1B99A7271D35749B00CFA820 /* group_conversation_input_background@3x.png in Resources */,
 				161632121D26E577004A13FE /* Boy.png in Resources */,
 				0C6668071C84358600FEB11F /* MeCell.xib in Resources */,
 				161632111D26E577004A13FE /* AddUser.png in Resources */,
@@ -2824,6 +2882,7 @@
 				0C66677C1C84358600FEB11F /* MYRIADPRO-SEMIBOLDIT.OTF in Resources */,
 				0C6667971C84358600FEB11F /* profilePicBack.png in Resources */,
 				1608714B1D28482F006B6ABE /* house-icon.png in Resources */,
+				1B12FF871D32A6DD00E7320B /* indicator@2x.png in Resources */,
 				0C6667A91C84358600FEB11F /* GobackButton.png in Resources */,
 				0C6667AD1C84358600FEB11F /* Default-568h@2x.png in Resources */,
 				160871481D2847FC006B6ABE /* top-bar-boy-icon-yellow.png in Resources */,
@@ -2902,6 +2961,7 @@
 				0C6667D01C84358600FEB11F /* InboxAPIManager.m in Sources */,
 				0C66688D1C84358600FEB11F /* STTwitterAppOnly.m in Sources */,
 				0C6668781C84358600FEB11F /* NSData+ImageContentType.m in Sources */,
+				1BAF305D1D3027DD00815495 /* ComicConversationModel.m in Sources */,
 				0C66681B1C84358600FEB11F /* CMCUser.m in Sources */,
 				0C6668571C84358600FEB11F /* AFURLSessionManager.m in Sources */,
 				0C66681A1C84358600FEB11F /* CMCComic.m in Sources */,
@@ -2978,6 +3038,7 @@
 				0C6668821C84358600FEB11F /* UIImage+MultiFormat.m in Sources */,
 				0C6668531C84358600FEB11F /* AFSecurityPolicy.m in Sources */,
 				0C66680D1C84358600FEB11F /* TextViewInternal.m in Sources */,
+				1B4FCCDB1D323D6400278B16 /* PrivateConversationTextCell.m in Sources */,
 				0C6668031C84358600FEB11F /* IndexPageVC.m in Sources */,
 				0C6667F71C84358600FEB11F /* GroupCell.m in Sources */,
 				0C6667CC1C84358600FEB11F /* ComicsAPIManager.m in Sources */,
@@ -3045,6 +3106,7 @@
 				0C6667C91C84358600FEB11F /* ZoomInteractiveTransition.m in Sources */,
 				0C6668931C84358600FEB11F /* BAVPlistNode.m in Sources */,
 				0C6668851C84358600FEB11F /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
+				1BAF305C1D3027DD00815495 /* ComicConversationBook.m in Sources */,
 				0C66684F1C84358600FEB11F /* AFHTTPRequestOperation.m in Sources */,
 				0C6668761C84358600FEB11F /* Reachability.m in Sources */,
 				0C66684B1C84358600FEB11F /* UIImage+resize.m in Sources */,
@@ -3262,7 +3324,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "3310ace2-2422-4dc8-9c40-7a06b8ad71f5";
+				PROVISIONING_PROFILE = "7b17308d-8081-4aed-a34a-b24ce26dae79";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
@@ -3295,7 +3357,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "3310ace2-2422-4dc8-9c40-7a06b8ad71f5";
+				PROVISIONING_PROFILE = "7b17308d-8081-4aed-a34a-b24ce26dae79";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;

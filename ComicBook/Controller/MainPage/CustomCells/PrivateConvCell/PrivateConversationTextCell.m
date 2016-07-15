@@ -1,28 +1,25 @@
 //
-//  PrivateConversationCell.m
-//  CurlDemo
+//  PrivateConversationTextCell.m
+//  ComicBook
 //
-//  Created by Subin Kurian on 11/1/15.
-//  Copyright © 2015 Subin Kurian. All rights reserved.
+//  Created by Guntikogula Dinesh on 10/07/16.
+//  Copyright © 2016 ADNAN THATHIYA. All rights reserved.
 //
-//#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-//#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
-//#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
-//#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
-//#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
-//#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
-//#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
-//#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
-#import "PrivateConversationCell.h"
+#import "PrivateConversationTextCell.h"
 #import "AppConstants.h"
 
-@implementation PrivateConversationCell
+@implementation PrivateConversationTextCell
 
-@synthesize widthconstraint,btnUser, userProfilePic;
+@synthesize btnUser, userProfilePic;
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    [self.mMessageHolderView setClipsToBounds:YES];
+    [self.mMessageHolderView.layer setMasksToBounds:YES];
+    [self.mMessageHolderView.layer setCornerRadius:8];
+    
     
     if(IS_IPHONE_5)
     {
@@ -59,18 +56,17 @@
     }
     
     
-    
-//    btnUser.layer.cornerRadius = CGRectGetHeight(btnUser.frame) / 2;
+    //    btnUser.layer.cornerRadius = CGRectGetHeight(btnUser.frame) / 2;
     btnUser.clipsToBounds = YES;
     
-//    userProfilePic.layer.cornerRadius = CGRectGetHeight(userProfilePic.frame) / 2;
+    //    userProfilePic.layer.cornerRadius = CGRectGetHeight(userProfilePic.frame) / 2;
     userProfilePic.clipsToBounds = YES;
-
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -108,5 +104,6 @@
      }
                      completion:nil];
 }
+
 
 @end
