@@ -123,7 +123,7 @@
     //    self.profilePicButton.backgroundColor = [UIColor grayColor];
     self.profileImageView.layer.cornerRadius = CGRectGetHeight(self.profileImageView.frame) / 2;
     self.profileImageView.clipsToBounds = YES;
-    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:[AppDelegate application].dataManager.friendObject.profilePic]];
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:[AppDelegate application].dataManager.friendObject.profilePic] placeholderImage:nil options:SDWebImageRetryFailed];
     [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@", [AppDelegate application].dataManager.friendObject.firstName, [AppDelegate application].dataManager.friendObject.lastName]];
     
     [self addUIRefreshControl];
@@ -460,7 +460,25 @@
 
 - (void)addTopBarView {
     topBarView = [self.storyboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    
+    CGFloat heightOfTopBar;
+    if (IS_IPHONE_5)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+    }
+    else if(IS_IPHONE_6)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+9;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+10;
+    }
+    else
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+    }
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];
     [self.view addSubview:topBarView.view];
     [topBarView didMoveToParentViewController:self];
@@ -1034,7 +1052,7 @@
         
         [self.FourthButton setHidden:FALSE];
         [self.mFourthDisplaylabel setHidden:FALSE];
-        [self.mFourthHollowlabel setHidden:TRUE];
+        [self.mFourthHollowlabel setHidden:FALSE];
         
         [self.ThirdButton setHidden:FALSE];
         [self.mThirdHollowlabel setHidden:FALSE];

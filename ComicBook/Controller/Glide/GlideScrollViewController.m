@@ -506,20 +506,19 @@ NSTimer* timerObject;
 - (void)comicMakingItemSave:(ComicPage *)comicPage
               withImageView:(id)comicItemData
             withPrintScreen:(UIImage *)printScreen
-               withRemove:(BOOL)remove{
+                 withRemove:(BOOL)remove
+              withImageView:(UIImageView *)imageView{
     
     if (self.comicPageComicItems == nil) {
         self.comicPageComicItems = [[ComicPage alloc] init];
     }
+    if (imageView == nil)
+        return;
     
-    //
     dispatch_queue_t autoSaveCurrentDrawQueue  = dispatch_queue_create("comicItem_AutoSave", NULL);
     dispatch_async( autoSaveCurrentDrawQueue ,
                    ^ {
                        @try {
-                           
-//                           NSLog(@"Start comicMakingItemSave");
-                           
                            self.dirtysubviewData = nil;
                            self.dirtySubviews = nil;
                            
@@ -571,7 +570,26 @@ NSTimer* timerObject;
                                [self setComicSendButton];
                            }
                            
-//                           NSLog(@"Finish comicMakingItemSave");
+                           self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImageJPEGRepresentation(imageView.image,1) type:@"jpg"];
+                           self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImageJPEGRepresentation(printScreen, 1) type:@"jpg"];
+                           
+                           NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
+                           
+//                           if (newslide)
+//                           {
+//                               [comicSlides addObject:data];
+//                               [self saveDataToFile:comicSlides];
+//                           }
+//                           else
+//                           {
+                           if ([comicSlides count ] > editSlideIndex) {
+                               [comicSlides replaceObjectAtIndex:editSlideIndex withObject:data];
+                               [self saveDataToFile:comicSlides];
+                           }else{
+                               [comicSlides addObject:data];
+                               [self saveDataToFile:comicSlides];
+                           }
+//                           }
                        }
                        @catch (NSException *exception) {
                        }

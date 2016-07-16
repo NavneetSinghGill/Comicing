@@ -15,4 +15,15 @@
                               SuccessBlock:(void(^)(id object))successBlock
                                    andFail:(void(^)(NSError *errorMessage))failBlock;
 
++ (void)postPrivateConversationV2CommentWithFriendId:(NSString *)friendId
+                                           shareText: (NSString *)shareText
+                                       currentUserId:(NSString *)currentUserId
+                                        SuccessBlock:(void(^)(id object))successBlock
+                                             andFail:(void(^)(NSError *errorMessage))failBlock;
+
++ (void)putSeenStatusWithOwnerId:(NSString *)friendId
+                          userId: (NSString *)userId
+                    SuccessBlock:(void(^)(id object))successBlock
+                         andFail:(void(^)(NSError *errorMessage))failBlock;
+
 @end

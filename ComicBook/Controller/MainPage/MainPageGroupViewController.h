@@ -10,7 +10,7 @@
 #import "ComicBookVC.h"
 #import "Group.h"
 
-@interface MainPageGroupViewController : UIViewController<BookChangeDelegate>
+@interface MainPageGroupViewController : UIViewController<BookChangeDelegate, UITextFieldDelegate>
 
 @property (nonatomic,strong) NSMutableDictionary *ComicBookDict;
 @property (nonatomic,strong) Group *groupObj;

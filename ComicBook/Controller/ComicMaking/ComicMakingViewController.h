@@ -23,10 +23,16 @@
  withPopView:(BOOL)isPopView;
 
 
+//- (void)comicMakingItemSave:(ComicPage *)comicPage
+//              withImageView:(id)comicItemData
+//            withPrintScreen:(UIImage *)printScreen
+//                 withRemove:(BOOL)remove;
+
 - (void)comicMakingItemSave:(ComicPage *)comicPage
               withImageView:(id)comicItemData
             withPrintScreen:(UIImage *)printScreen
-                 withRemove:(BOOL)remove;
+                 withRemove:(BOOL)remove
+              withImageView:(UIImageView *)imageView;
 
 - (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll
                                     ComicPageObj:(ComicPage *)comicPage

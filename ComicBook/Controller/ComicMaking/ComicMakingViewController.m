@@ -137,6 +137,8 @@ static CGRect CaptionTextViewMinRect;
 @property (nonatomic, strong) id<ComicItem> comicItem;
 @property (nonatomic,strong) NSMutableArray* comicItemArray;
 @property (nonatomic,strong) RowButtonsViewController *rowButton;
+@property (nonatomic) BOOL isAlreadyDoubleDrawColor;
+@property (nonatomic) UIColor *onColor;
 
 @property BOOL captionHeightSmall;
 
@@ -145,7 +147,7 @@ static CGRect CaptionTextViewMinRect;
 @implementation ComicMakingViewController
 
 @synthesize viewCameraPreview, viewCamera, imgvComic, uploadIcon, viewStickerList, viewRowButtons;
-@synthesize drawingColor,viewDrawing,frameDrawingView, drawView, centerImgvComic,lastScale, btnClose,bubbleListView,exclamationListView,shrinkHeight,viewFrame, shrinkCount, previousTimestamp, isNewSlide,viewBlackBoard,frameBlackboardView;
+@synthesize drawingColor,viewDrawing,frameDrawingView, drawView, centerImgvComic,lastScale, btnClose,bubbleListView,exclamationListView,shrinkHeight,viewFrame, shrinkCount, previousTimestamp, isNewSlide,viewBlackBoard,frameBlackboardView,onColor,isAlreadyDoubleDrawColor;
 @synthesize comicPage,printScreen, isSlideShrink,frameImgvComic,pinchGesture;
 
 #pragma mark - UIViewController Methods
@@ -2557,7 +2559,18 @@ static CGRect CaptionTextViewMinRect;
     drawView.delegate = self;
     
     drawView.frame = CGRectMake(0, 0, CGRectGetWidth(imgvComic.frame),CGRectGetHeight(imgvComic.frame));
-    
+    DrawingColorsViewController *drawingController;
+    for (UIViewController *controller in self.childViewControllers)
+    {
+        if ([controller isKindOfClass:[DrawingColorsViewController class]])
+        {
+            drawingController = (DrawingColorsViewController *)controller;
+        }
+    }
+    [UIView beginAnimations:@"ScaleButton" context:NULL];
+    [UIView setAnimationDuration: 0.0f];
+    [drawingController allScaleToNormal];
+    [UIView commitAnimations];
     [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         viewDrawing.frame = frameDrawingView;
@@ -2606,7 +2619,6 @@ static CGRect CaptionTextViewMinRect;
     //
     //        drawView.frame = CGRectMake(0, 0, CGRectGetWidth(drawView.frame),CGRectGetHeight(imgvComic.frame));
     //    }
-    
     imgvComic.userInteractionEnabled = YES;
     [imgvComic addSubview:drawView];
     
@@ -2619,12 +2631,15 @@ static CGRect CaptionTextViewMinRect;
             drawingController = (DrawingColorsViewController *)controller;
         }
     }
-    
+    [UIView beginAnimations:@"ScaleButton" context:NULL];
+    [UIView setAnimationDuration: 0.0f];
+    [drawingController allScaleToNormal];
+     [UIView commitAnimations];
     [UIView beginAnimations:@"ScaleButton" context:NULL];
     [UIView setAnimationDuration: 0.2f];
-    drawingController.btnRed.transform = CGAffineTransformMakeScale(2,2);
+    [drawingController allScaleToNormal];
+    drawingController.btnRed.transform = CGAffineTransformMakeScale(1.8f,1.8f);
     [UIView commitAnimations];
-    
     [self drawingColorTapEventWithColor:@"red"];
 }
 
@@ -2712,7 +2727,6 @@ static CGRect CaptionTextViewMinRect;
             rowController = (RowButtonsViewController *)controller;
         }
     }
-    
     if ([colorName isEqualToString:@"white"])
     {
         [rowController.btnPen setImage:[UIImage imageNamed:@"pen-icon-white"] forState:UIControlStateSelected];
@@ -2778,6 +2792,26 @@ static CGRect CaptionTextViewMinRect;
         [rowController.btnPen setImage:[UIImage imageNamed:@"pen-icon-cyan"] forState:UIControlStateSelected];
         
         drawView.lineColor = [UIColor drawingColorCyan];
+    }
+    
+    if ([onColor isEqual: drawView.lineColor])
+    {
+        if (isAlreadyDoubleDrawColor)
+        {
+            isAlreadyDoubleDrawColor = NO;
+            drawView.lineWidth = 2.8f;
+        }
+        else
+        {
+            isAlreadyDoubleDrawColor = YES;
+            drawView.lineWidth = 5.64f;
+        }
+    }
+    else
+    {
+        isAlreadyDoubleDrawColor = NO;
+        drawView.lineWidth = 2.8f;
+        onColor = drawView.lineColor;
     }
 }
 
@@ -3705,6 +3739,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
             
                                           [self.view setUserInteractionEnabled:YES];
                                          if(self.comicType != ReplyComic) {
+                                             isNewSlide = NO;
                                              UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                              SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
                                              controller.comicSlideFileName = self.fileNameToSave;
@@ -3762,7 +3797,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     NSMutableDictionary* comicMakeDic = [[NSMutableDictionary alloc] init];
     
     [comicMakeDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"]; // Hardcoded now
-    [comicMakeDic setObject:@"Hey .. Comic title test!!" forKey:@"comic_title"];
+    [comicMakeDic setObject:@"" forKey:@"comic_title"];
     
     if(self.comicType == ReplyComic) {
         [comicMakeDic setObject:@"CS" forKey:@"comic_type"];
@@ -3855,16 +3890,25 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
-        if (comicItemObj != nil) {
-            [self.delegate comicMakingItemSave:comicPage
-                                        withImageView:comicItemObj
-                                      withPrintScreen:printScreen withRemove:NO];
-        }
-        [self doPrintScreen];
+        [self doPrintScreen:^(bool isOutOfFrame) {
+           
+            if (comicItemObj != nil) {
+                [self.delegate comicMakingItemSave:comicPage
+                                     withImageView:comicItemObj
+                                   withPrintScreen:printScreen
+                                        withRemove:NO
+                                     withImageView:imgvComic];
+            }
+            
+        }];
     });
 }
 
--(void)doPrintScreen{
+-(void)doPrintScreen {
+    [self doPrintScreen:^(bool isOutOfFrame) {}];
+}
+
+-(void)doPrintScreen :(void (^)(bool isOutOfFrame))handler{
     [imgvComic setFrame:temImagFrame];
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -3873,6 +3917,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     dispatch_group_async(group, queue, ^{
         @try {
             printScreen = [UIImage imageWithView:imgvComic paque:YES];
+            handler(YES);
         } @catch (NSException *exception) {
             
         } @finally {
@@ -3905,7 +3950,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
-        [self.delegate comicMakingItemSave:comicPage withImageView:comicItemObj withPrintScreen:printScreen withRemove:YES];
+        [self.delegate comicMakingItemSave:comicPage withImageView:comicItemObj withPrintScreen:printScreen withRemove:YES withImageView:imgvComic];
     });
     [self doPrintScreen];
 }

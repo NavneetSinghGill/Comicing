@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSString *comicId;
 @property (nonatomic, strong) NSString *comicTitle;
 @property (nonatomic, strong) NSString *comicType;
+@property (nonatomic, strong) NSString *comicChatId;
+@property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) NSString *coverImage;
 @property (nonatomic, strong) NSString *conversationId;
 @property (nonatomic, strong) NSString *status;

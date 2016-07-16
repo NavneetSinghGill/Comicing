@@ -70,6 +70,14 @@ const int blurViewTag = 1010;
         [self.view setAlpha:1.0f];
     } completion:^(BOOL finished) {
     }];
+    if ([parentViewContent isKindOfClass:[MainPageVC class]])
+    {
+        topBarView.isHomeHidden = YES;
+    }
+    else
+    {
+        topBarView.isHomeHidden = NO;
+    }
 }
 
 //you can also write this method in MainViewController to remove the child VC you added before.
@@ -122,7 +130,24 @@ const int blurViewTag = 1010;
 
 - (void)addTopBarView {
     topBarView = [self.storyboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    CGFloat heightOfTopBar;
+    if (IS_IPHONE_5)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+    }
+    else if(IS_IPHONE_6)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+9;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+10;
+    }
+    else
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+    }
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];
     [self.view addSubview:topBarView.view];
     [topBarView didMoveToParentViewController:self];

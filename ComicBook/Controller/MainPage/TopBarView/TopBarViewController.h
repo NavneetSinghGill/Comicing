@@ -24,6 +24,9 @@ typedef void (^ SearchUser) (NSString* txtSearch);
 @property (nonatomic, strong) SearchAction searchAction;
 @property (nonatomic, strong) SearchUser searchUser;
 @property (nonatomic, strong) IBOutlet UIView *mSearchBarHolderView;
+@property (weak, nonatomic) IBOutlet UIButton *btn_ComicBoy;
+@property (weak, nonatomic) IBOutlet UIButton *btn_Me;
+@property (nonatomic) BOOL isHomeHidden;
 
 -(void)handleSearchControl:(BOOL)isActiveSearch;
 @end

@@ -8,9 +8,15 @@
 
 #import "TopBarViewController.h"
 #import "AppConstants.h"
+#import "NSLayoutConstraint+Multiplier.h"
 
 @interface TopBarViewController()<UITextFieldDelegate>
+{
 
+    __weak IBOutlet UIButton *btn_home;
+   
+    __weak IBOutlet NSLayoutConstraint *const_LeadingHome;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *txtSearchFiled;
 @property (weak, nonatomic) IBOutlet UIButton *btnSearch;
@@ -22,9 +28,11 @@
 @implementation TopBarViewController
 
 -(void)viewDidLoad{
+    _txtSearchFiled.userInteractionEnabled = NO;
     if (IS_IPHONE_5) {
         self.comicBoyLeadingLeft.constant = 20;
     }
+    
 }
 - (IBAction)tappedHomeButton:(id)sender {
     if(self.homeAction) {
@@ -57,11 +65,13 @@
         [self.txtSearchFiled setText:@""];
         [self.btnSearch setUserInteractionEnabled:YES];
         [self.txtSearchFiled setHidden:NO];
+        _txtSearchFiled.userInteractionEnabled = YES;
         [self.topViewLogo setHidden:YES];
         [self.txtSearchFiled becomeFirstResponder];
     }else{
         [self.btnSearch setUserInteractionEnabled:YES];
         [self.txtSearchFiled setHidden:YES];
+        _txtSearchFiled.userInteractionEnabled = NO;
         [self.topViewLogo setHidden:NO];
         [self.txtSearchFiled resignFirstResponder];
         [self.btnSearch setHidden:YES];
@@ -93,5 +103,39 @@
         self.searchUser(searchText);
     }
 }
+-(void)setIsHomeHidden:(BOOL)isHomeHidden
+{
+    _isHomeHidden = isHomeHidden;
+    if (isHomeHidden)
+    {
+        CGFloat diff;
+        if (IS_IPHONE_5)
+        {
+            diff = 3;
+        }
+        else if (IS_IPHONE_6)
+        {
+            diff = 7;
+        }
+        else if (IS_IPHONE_6P)
+        {
+            diff = 8;
 
+        }
+        else
+        {
+            diff = 5;
+
+        }
+        const_LeadingHome.constant = -7-btn_home.bounds.size.width-diff-6;
+        btn_home.hidden = YES;
+    }
+    else
+    {
+        const_LeadingHome.constant = -7;
+        btn_home.hidden = NO;
+       
+    }
+    [self.view layoutIfNeeded];
+}
 @end

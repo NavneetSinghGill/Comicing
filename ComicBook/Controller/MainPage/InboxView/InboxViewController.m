@@ -25,7 +25,12 @@ NSUInteger const GroupCollectionViewTag = 11;
 NSUInteger const FriendCollectionViewTag = 22;
 NSUInteger const AlphabetsCollectionViewTag = 33;
 
+@interface InboxViewController()
+{
 
+    IBOutlet UIImageView *img_ForFriend;
+}
+@end
 @implementation InboxViewController
 @synthesize alphabets,alphabetCV, timer;
 
@@ -34,13 +39,17 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     [super viewDidLoad];
 
     [self setupAlphabetCollectionView];
-    
+    //img_ForFriend.hidden = YES;
+
+    UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tappedOnConnectFriendImage)];
+    [img_ForFriend addGestureRecognizer:tapGest];
     //    [self setupInbox];
     // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    //img_ForFriend.hidden = YES;
     [self firstTimeCallAPITogetActiveFriends];
     
    timer = [NSTimer scheduledTimerWithTimeInterval:120
@@ -194,6 +203,30 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
         }
         else
         {
+            if ([AppDelegate application].dataManager.friendsArray.count>5  )
+            {
+                [UIView animateWithDuration:0.3 animations:^{
+                    img_ForFriend.alpha = 0;
+                } completion: ^(BOOL finished) {
+                    img_ForFriend.hidden = YES;
+                }];
+            }
+            else
+            {
+                [UIView animateWithDuration:0.3 animations:^{
+                    if ([AppDelegate application].isShownFriendImage)
+                    {
+                        img_ForFriend.alpha = 1;
+                    }
+                    else
+                    {
+                        img_ForFriend.alpha = 0;
+                    }
+                } completion: ^(BOOL finished) {
+                    img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
+                }];
+            }
+            
             [self setActiveFriendsWithFriends:[AppDelegate application].dataManager.friendsArray];
         }
         
@@ -221,11 +254,34 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
         NSLog(@"%@", [MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil]);
        
         NSMutableArray *friends = [[MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil] mutableCopy];
-        
+        if (friends.count>5 )
+        {
+            [UIView animateWithDuration:0.3 animations:^{
+                img_ForFriend.alpha = 0;
+            } completion: ^(BOOL finished) {
+                img_ForFriend.hidden = YES;
+            }];
+        }
+        else
+        {
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                if ([AppDelegate application].isShownFriendImage)
+                {
+                    img_ForFriend.alpha = 1;
+                }
+                else
+                {
+                    img_ForFriend.alpha = 0;
+                }
+                } completion: ^(BOOL finished) {
+                img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
+            }];
+        }
         [self setActiveFriendsWithFriends:friends.copy];
         
     } andFail:^(NSError *errorMessage) {
-        
+        img_ForFriend.hidden = NO;
         NSLog(@"%@", errorMessage);
     }];
 }
@@ -359,5 +415,14 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     groupView.groupObj = groupObj;
     [self presentViewController:groupView animated:YES completion:nil];
 }
-
+#pragma mark - tap Gesture Event
+-(void)tappedOnConnectFriendImage
+{
+    [AppDelegate application].isShownFriendImage = YES;
+    [UIView animateWithDuration:0.3 animations:^{
+        img_ForFriend.alpha = 0;
+    } completion: ^(BOOL finished) {
+        img_ForFriend.hidden = YES;
+    }];
+}
 @end

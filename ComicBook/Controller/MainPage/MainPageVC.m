@@ -30,6 +30,7 @@
 #import "Global.h"
 #import "MainPage2SlideCell.h"
 #import "InstructionView.h"
+#import "ContactController.h"
 
 #define FB 10
 #define IM 11
@@ -214,15 +215,38 @@ NSString * const BottomBarView = @"BottomBarView";
 
 - (void)addBottomBarView {
     bottomBarView = [self.storyboard instantiateViewControllerWithIdentifier:BottomBarView];
-    [bottomBarView.view setFrame:CGRectMake(0, self.view.frame.size.height - 30, bottomBarView.view.frame.size.width, bottomBarView.view.frame.size.height)];
+    [bottomBarView.view setFrame:CGRectMake(0, self.view.frame.size.height - 30,self.view.frame.size.width, self.view.frame.size.height/2.2f)];
     [self addChildViewController:bottomBarView];
     [self.view addSubview:bottomBarView.view];
+    bottomBarView.connectAction = ^(void) {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+        ContactController* cVc = (ContactController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"Contact"];
+        mainStoryboard = nil;
+        [self.navigationController pushViewController:cVc animated:YES];
+    };
     [bottomBarView didMoveToParentViewController:self];
 }
 
 - (void)addTopBarView {
     topBarView = [self.storyboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    CGFloat heightOfTopBar;
+    if (IS_IPHONE_5)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+    }
+    else if(IS_IPHONE_6)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+9;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+10;
+    }
+    else
+    {
+        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+    }
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];
     [self.view addSubview:topBarView.view];
     [topBarView didMoveToParentViewController:self];
@@ -250,6 +274,7 @@ NSString * const BottomBarView = @"BottomBarView";
         TopSearchVC *topSearchView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:TOP_SEARCH_VIEW];
         [topSearchView displayContentController:self];
     };
+    topBarView.isHomeHidden = YES;
 }
 
 - (void)openInbox {

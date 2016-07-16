@@ -312,7 +312,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "569"
             endingLineNumber = "569"
-            landmarkName = "-pageChange::"
+            landmarkName = "-tappedProfilePicButton:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -344,7 +344,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1525"
             endingLineNumber = "1525"
-            landmarkName = "-preferredStatusBarStyle"
+            landmarkName = "-callAPIToGetTheComicsWithPage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -376,7 +376,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "209"
             endingLineNumber = "209"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkName = "-textFieldShouldReturn:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -392,7 +392,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "225"
             endingLineNumber = "225"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkName = "-textFieldShouldReturn:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -408,7 +408,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "986"
             endingLineNumber = "986"
-            landmarkName = "-showCommentContainerView"
+            landmarkName = "-setUpComment"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -440,7 +440,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "985"
             endingLineNumber = "985"
-            landmarkName = "-showCommentContainerView"
+            landmarkName = "-setUpComment"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -456,7 +456,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1175"
             endingLineNumber = "1175"
-            landmarkName = "-keyboardWasShown:"
+            landmarkName = "-createAnimation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -472,7 +472,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1495"
             endingLineNumber = "1495"
-            landmarkName = "-callAPIToGetTheComicsWithPage:"
+            landmarkName = "-callAPIToGetTheComics"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -488,7 +488,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1502"
             endingLineNumber = "1502"
-            landmarkName = "-callAPIToGetTheComicsWithPage:"
+            landmarkName = "-callAPIToGetTheComics"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

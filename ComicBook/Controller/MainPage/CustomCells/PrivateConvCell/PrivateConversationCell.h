@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *viewComicBook;
 @property (weak, nonatomic) IBOutlet UIButton *btnUser;
 @property (weak, nonatomic) IBOutlet UILabel *mUserName;
+@property (weak, nonatomic) IBOutlet UILabel *mChatStatus;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblComicTitle;
 @end

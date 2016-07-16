@@ -27,36 +27,35 @@
     if(IS_IPHONE_5)
     {
         btnUser.frame = CGRectMake(CGRectGetMinX(btnUser.frame),
-                                    CGRectGetMinY(btnUser.frame),
-                                    40,
-                                    40);
+                                   CGRectGetMinY(btnUser.frame),
+                                   30,
+                                   30);
         userProfilePic.frame = CGRectMake(CGRectGetMinX(userProfilePic.frame),
-                                   CGRectGetMinY(userProfilePic.frame),
-                                   40,
-                                   40);
-        
+                                            CGRectGetMinY(userProfilePic.frame),
+                                            30,
+                                            30);
     }
     else if(IS_IPHONE_6)
     {
         btnUser.frame = CGRectMake(CGRectGetMinX(btnUser.frame),
-                                    CGRectGetMinY(btnUser.frame) ,
-                                    54,
-                                    54);
+                                   CGRectGetMinY(btnUser.frame) ,
+                                   36,
+                                   36);
         userProfilePic.frame = CGRectMake(CGRectGetMinX(userProfilePic.frame),
-                                   CGRectGetMinY(userProfilePic.frame) ,
-                                   54,
-                                   54);
+                                            CGRectGetMinY(userProfilePic.frame) ,
+                                            36,
+                                            36);
     }
     else if(IS_IPHONE_6P)
     {
         btnUser.frame = CGRectMake(CGRectGetMinX(btnUser.frame),
-                                    CGRectGetMinY(btnUser.frame) ,
-                                    60,
-                                    60);
+                                   CGRectGetMinY(btnUser.frame) ,
+                                   40,
+                                   40);
         userProfilePic.frame = CGRectMake(CGRectGetMinX(userProfilePic.frame),
-                                   CGRectGetMinY(userProfilePic.frame) ,
-                                   60,
-                                   60);
+                                            CGRectGetMinY(userProfilePic.frame) ,
+                                            40,
+                                            40);
     }
     
     

@@ -25,9 +25,10 @@
 
     if ([MFMessageComposeViewController canSendAttachments]) {
         
-        NSString* uti = (NSString*)kUTTypeDiskImage;
-        NSData *exportData = UIImageJPEGRepresentation(shareImage,1 );
+        NSString* uti = (NSString*)kUTTypeMessage;
+        NSData *exportData = UIImagePNGRepresentation(shareImage);
         [messageComposer addAttachmentData:exportData typeIdentifier:uti filename:@"Check.png"];
+        
     }
     if ([MFMessageComposeViewController canSendText]) {
             [messageComposer setBody:shareText];
