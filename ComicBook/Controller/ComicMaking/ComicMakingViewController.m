@@ -3462,6 +3462,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
             
                                           [self.view setUserInteractionEnabled:YES];
                                          if(self.comicType != ReplyComic) {
+                                             isNewSlide = NO;
                                              UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                              SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
                                              controller.comicSlideFileName = self.fileNameToSave;
@@ -3519,7 +3520,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     NSMutableDictionary* comicMakeDic = [[NSMutableDictionary alloc] init];
     
     [comicMakeDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"]; // Hardcoded now
-    [comicMakeDic setObject:@"Hey .. Comic title test!!" forKey:@"comic_title"];
+    [comicMakeDic setObject:@"" forKey:@"comic_title"];
     
     if(self.comicType == ReplyComic) {
         [comicMakeDic setObject:@"CS" forKey:@"comic_type"];
@@ -3612,16 +3613,25 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
-        if (comicItemObj != nil) {
-            [self.delegate comicMakingItemSave:comicPage
-                                        withImageView:comicItemObj
-                                      withPrintScreen:printScreen withRemove:NO];
-        }
-        [self doPrintScreen];
+        [self doPrintScreen:^(bool isOutOfFrame) {
+           
+            if (comicItemObj != nil) {
+                [self.delegate comicMakingItemSave:comicPage
+                                     withImageView:comicItemObj
+                                   withPrintScreen:printScreen
+                                        withRemove:NO
+                                     withImageView:imgvComic];
+            }
+            
+        }];
     });
 }
 
--(void)doPrintScreen{
+-(void)doPrintScreen {
+    [self doPrintScreen:^(bool isOutOfFrame) {}];
+}
+
+-(void)doPrintScreen :(void (^)(bool isOutOfFrame))handler{
     [imgvComic setFrame:temImagFrame];
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -3630,6 +3640,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     dispatch_group_async(group, queue, ^{
         @try {
             printScreen = [UIImage imageWithView:imgvComic paque:YES];
+            handler(YES);
         } @catch (NSException *exception) {
             
         } @finally {
@@ -3662,7 +3673,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
-        [self.delegate comicMakingItemSave:comicPage withImageView:comicItemObj withPrintScreen:printScreen withRemove:YES];
+        [self.delegate comicMakingItemSave:comicPage withImageView:comicItemObj withPrintScreen:printScreen withRemove:YES withImageView:imgvComic];
     });
     [self doPrintScreen];
 }

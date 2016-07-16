@@ -51,10 +51,11 @@
     
     _CurlDemoPage = [[UIImageView alloc]init];
     
-    [_CurlDemoPage sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [_CurlDemoPage sd_setImageWithURL:[NSURL URLWithString:slide.slideImage]
+                     placeholderImage:GlobalObject.placeholder_comic
+                              options:SDWebImageRetryFailed
+                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
-    
-    _CurlDemoPage.clipsToBounds=true;
     
    
     [self addSubview:_CurlDemoPage];

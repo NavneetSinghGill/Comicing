@@ -123,7 +123,7 @@
     //    self.profilePicButton.backgroundColor = [UIColor grayColor];
     self.profileImageView.layer.cornerRadius = CGRectGetHeight(self.profileImageView.frame) / 2;
     self.profileImageView.clipsToBounds = YES;
-    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:[AppDelegate application].dataManager.friendObject.profilePic]];
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:[AppDelegate application].dataManager.friendObject.profilePic] placeholderImage:nil options:SDWebImageRetryFailed];
     [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@", [AppDelegate application].dataManager.friendObject.firstName, [AppDelegate application].dataManager.friendObject.lastName]];
     
     [self addUIRefreshControl];
