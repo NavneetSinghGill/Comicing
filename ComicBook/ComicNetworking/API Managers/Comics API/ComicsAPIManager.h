@@ -10,9 +10,11 @@
 
 @interface ComicsAPIManager : NSObject
 
-+ (void)getTheComicsWithSuccessBlock:(void(^)(id object))successBlock
-                             andFail:(void(^)(NSError *errorMessage))failBlock;
+//+ (void)getTheComicsWithSuccessBlock:(void(^)(id object))successBlock
+//                             andFail:(void(^)(NSError *errorMessage))failBlock;
 
++ (void)getTheComicsWithPage:(NSUInteger)page SuccessBlock:(void(^)(id object))successBlock
+                     andFail:(void(^)(NSError *errorMessage))failBlock;
 
 + (void)setFlagForComic:(NSDictionary *)comic withSuccessBlock:(void(^)(id object))successBlock
                 andFail:(void(^)(NSError *errorMessage))failBlock;

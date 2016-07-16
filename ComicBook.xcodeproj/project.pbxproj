@@ -352,12 +352,25 @@
 		0CC9F3741CF653D100761F44 /* Segment7Standard.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0CC9F3731CF653D100761F44 /* Segment7Standard.otf */; };
 		0CDD9A821C99B30B00D942D3 /* TermsServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */; };
 		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
+		843ABB781D1FAA730078B7A8 /* MainPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843ABB771D1FAA730078B7A8 /* MainPageCell.m */; };
 		84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D661CC94E1200C52C06 /* AvatarView.xib */; };
 		84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D681CC94E2B00C52C06 /* HeaderView.xib */; };
 		8466E7F21CB169320075727A /* InviteFriendsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466E7F11CB169320075727A /* InviteFriendsView.m */; };
 		8466E7F41CB169500075727A /* InviteFriendsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8466E7F31CB169500075727A /* InviteFriendsView.xib */; };
+		846F3D961D2ECE93001191E6 /* MainPage2SlideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */; };
+		84A5DFE51D3690070089D6BE /* Slide-10.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFE41D3690070089D6BE /* Slide-10.gif */; };
+		84A5DFE71D36900E0089D6BE /* Slide-12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFE61D36900E0089D6BE /* Slide-12.gif */; };
+		84A5DFE91D3697770089D6BE /* Slide-2B.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFE81D3697770089D6BE /* Slide-2B.gif */; };
+		84A5DFEB1D3697A30089D6BE /* Slide-E.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFEA1D3697A30089D6BE /* Slide-E.gif */; };
 		84ECE6491CB57772007AF54E /* searchFriendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ECE6481CB57772007AF54E /* searchFriendView.m */; };
 		84ECE64B1CB5778B007AF54E /* searchFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84ECE64A1CB5778B007AF54E /* searchFriendView.xib */; };
+		84ED581C1D2956AF004E257F /* MainPage3SlideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED581B1D2956AF004E257F /* MainPage3SlideCell.m */; };
+		84EFBCC21D25878D00647A88 /* InstructionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EFBCC11D25878D00647A88 /* InstructionView.m */; };
+		84EFBCC41D25A2A700647A88 /* InstructionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EFBCC31D25A2A700647A88 /* InstructionView.xib */; };
+		84EFDA011D340E2C005B5FB0 /* YLGIFImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EFD9FD1D340E2C005B5FB0 /* YLGIFImage.m */; };
+		84EFDA021D340E2C005B5FB0 /* YLImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EFDA001D340E2C005B5FB0 /* YLImageView.m */; };
+		84F161341D35387400DBF9E0 /* Slide-7.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84F161331D35387400DBF9E0 /* Slide-7.gif */; };
+		84F1613A1D3554B200DBF9E0 /* Slide-13.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84F161391D3554B200DBF9E0 /* Slide-13.gif */; };
 		84F1B4411CB2E41A0096F79C /* InviteFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */; };
 		84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */; };
 /* End PBXBuildFile section */
@@ -963,15 +976,35 @@
 		0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsServiceViewController.m; sourceTree = "<group>"; };
 		8433BC921CC135D20073DE2A /* UIImage+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Trim.h"; sourceTree = "<group>"; };
 		8433BC931CC135D20073DE2A /* UIImage+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Trim.m"; sourceTree = "<group>"; };
+		843ABB761D1FAA730078B7A8 /* MainPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageCell.h; sourceTree = "<group>"; };
+		843ABB771D1FAA730078B7A8 /* MainPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageCell.m; sourceTree = "<group>"; };
 		845090751C2B1343004DAE99 /* Comicing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Comicing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84592D661CC94E1200C52C06 /* AvatarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarView.xib; sourceTree = "<group>"; };
 		84592D681CC94E2B00C52C06 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		8466E7F01CB169320075727A /* InviteFriendsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsView.h; sourceTree = "<group>"; };
 		8466E7F11CB169320075727A /* InviteFriendsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsView.m; sourceTree = "<group>"; };
 		8466E7F31CB169500075727A /* InviteFriendsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsView.xib; sourceTree = "<group>"; };
+		846F3D941D2ECE93001191E6 /* MainPage2SlideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPage2SlideCell.h; sourceTree = "<group>"; };
+		846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage2SlideCell.m; sourceTree = "<group>"; };
+		84A5DFE41D3690070089D6BE /* Slide-10.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-10.gif"; sourceTree = "<group>"; };
+		84A5DFE61D36900E0089D6BE /* Slide-12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-12.gif"; sourceTree = "<group>"; };
+		84A5DFE81D3697770089D6BE /* Slide-2B.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-2B.gif"; sourceTree = "<group>"; };
+		84A5DFEA1D3697A30089D6BE /* Slide-E.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-E.gif"; sourceTree = "<group>"; };
 		84ECE6471CB57772007AF54E /* searchFriendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = searchFriendView.h; sourceTree = "<group>"; };
 		84ECE6481CB57772007AF54E /* searchFriendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = searchFriendView.m; sourceTree = "<group>"; };
 		84ECE64A1CB5778B007AF54E /* searchFriendView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = searchFriendView.xib; sourceTree = "<group>"; };
+		84ED581A1D2956AF004E257F /* MainPage3SlideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPage3SlideCell.h; sourceTree = "<group>"; };
+		84ED581B1D2956AF004E257F /* MainPage3SlideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage3SlideCell.m; sourceTree = "<group>"; };
+		84EFBCC01D25878D00647A88 /* InstructionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructionView.h; sourceTree = "<group>"; };
+		84EFBCC11D25878D00647A88 /* InstructionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructionView.m; sourceTree = "<group>"; };
+		84EFBCC31D25A2A700647A88 /* InstructionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstructionView.xib; sourceTree = "<group>"; };
+		84EFD9FC1D340E2C005B5FB0 /* YLGIFImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLGIFImage.h; sourceTree = "<group>"; };
+		84EFD9FD1D340E2C005B5FB0 /* YLGIFImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLGIFImage.m; sourceTree = "<group>"; };
+		84EFD9FE1D340E2C005B5FB0 /* YLGIFImageInSwiftProjectDemo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YLGIFImageInSwiftProjectDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		84EFD9FF1D340E2C005B5FB0 /* YLImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLImageView.h; sourceTree = "<group>"; };
+		84EFDA001D340E2C005B5FB0 /* YLImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLImageView.m; sourceTree = "<group>"; };
+		84F161331D35387400DBF9E0 /* Slide-7.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-7.gif"; sourceTree = "<group>"; };
+		84F161391D3554B200DBF9E0 /* Slide-13.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-13.gif"; sourceTree = "<group>"; };
 		84F1B43E1CB2E41A0096F79C /* InviteFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendCell.h; sourceTree = "<group>"; };
 		84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendCell.m; sourceTree = "<group>"; };
 		84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendCell.xib; sourceTree = "<group>"; };
@@ -1065,6 +1098,7 @@
 				0C6665F21C84358600FEB11F /* main.m */,
 				0C6665F01C84358500FEB11F /* Info.plist */,
 				0C2125B61C98946700B6BAB5 /* Assets.xcassets */,
+				84EFDA031D34139F005B5FB0 /* Instruction GIF */,
 				0C6664AB1C84358500FEB11F /* Assets */,
 				0C6664FD1C84358500FEB11F /* Classes */,
 				0C66653E1C84358500FEB11F /* ComicNetworking */,
@@ -1246,6 +1280,7 @@
 		0C6664FD1C84358500FEB11F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				84EFD9FB1D340E2C005B5FB0 /* YLGIFImage */,
 				0C2235411C889C9800D1B4F2 /* PullableView */,
 				0C6664FE1C84358500FEB11F /* AppHelper.h */,
 				0C6664FF1C84358500FEB11F /* AppHelper.m */,
@@ -1717,6 +1752,7 @@
 		0C6665A11C84358500FEB11F /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				843ABB751D1FAA500078B7A8 /* MainPageCell */,
 				0C6665A21C84358500FEB11F /* CMCComicCell.h */,
 				0C6665A31C84358500FEB11F /* CMCComicCell.m */,
 				0C6665A41C84358500FEB11F /* CMCUserCell.h */,
@@ -2385,6 +2421,7 @@
 		0C66671C1C84358600FEB11F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84EFBCBF1D25851700647A88 /* InstructionView */,
 				0C66671D1C84358600FEB11F /* Account */,
 				0C6667221C84358600FEB11F /* AvatarSection */,
 				0C6667261C84358600FEB11F /* CameraView */,
@@ -2598,6 +2635,19 @@
 			path = FabricAnalytics;
 			sourceTree = "<group>";
 		};
+		843ABB751D1FAA500078B7A8 /* MainPageCell */ = {
+			isa = PBXGroup;
+			children = (
+				843ABB761D1FAA730078B7A8 /* MainPageCell.h */,
+				843ABB771D1FAA730078B7A8 /* MainPageCell.m */,
+				84ED581A1D2956AF004E257F /* MainPage3SlideCell.h */,
+				84ED581B1D2956AF004E257F /* MainPage3SlideCell.m */,
+				846F3D941D2ECE93001191E6 /* MainPage2SlideCell.h */,
+				846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */,
+			);
+			name = MainPageCell;
+			sourceTree = "<group>";
+		};
 		8450906C1C2B1343004DAE99 = {
 			isa = PBXGroup;
 			children = (
@@ -2628,6 +2678,42 @@
 				84ECE64A1CB5778B007AF54E /* searchFriendView.xib */,
 			);
 			name = "Invite Friends";
+			sourceTree = "<group>";
+		};
+		84EFBCBF1D25851700647A88 /* InstructionView */ = {
+			isa = PBXGroup;
+			children = (
+				84EFBCC01D25878D00647A88 /* InstructionView.h */,
+				84EFBCC11D25878D00647A88 /* InstructionView.m */,
+				84EFBCC31D25A2A700647A88 /* InstructionView.xib */,
+			);
+			name = InstructionView;
+			path = AnimationView;
+			sourceTree = "<group>";
+		};
+		84EFD9FB1D340E2C005B5FB0 /* YLGIFImage */ = {
+			isa = PBXGroup;
+			children = (
+				84EFD9FC1D340E2C005B5FB0 /* YLGIFImage.h */,
+				84EFD9FD1D340E2C005B5FB0 /* YLGIFImage.m */,
+				84EFD9FE1D340E2C005B5FB0 /* YLGIFImageInSwiftProjectDemo-Bridging-Header.h */,
+				84EFD9FF1D340E2C005B5FB0 /* YLImageView.h */,
+				84EFDA001D340E2C005B5FB0 /* YLImageView.m */,
+			);
+			path = YLGIFImage;
+			sourceTree = "<group>";
+		};
+		84EFDA031D34139F005B5FB0 /* Instruction GIF */ = {
+			isa = PBXGroup;
+			children = (
+				84F161331D35387400DBF9E0 /* Slide-7.gif */,
+				84F161391D3554B200DBF9E0 /* Slide-13.gif */,
+				84A5DFE41D3690070089D6BE /* Slide-10.gif */,
+				84A5DFE61D36900E0089D6BE /* Slide-12.gif */,
+				84A5DFE81D3697770089D6BE /* Slide-2B.gif */,
+				84A5DFEA1D3697A30089D6BE /* Slide-E.gif */,
+			);
+			path = "Instruction GIF";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2711,6 +2797,7 @@
 				0C6668A31C84358600FEB11F /* FooterView.xib in Resources */,
 				0C66677A1C84358600FEB11F /* MYRIADPRO-REGULAR.OTF in Resources */,
 				0C6667921C84358600FEB11F /* accountPassword.png in Resources */,
+				84EFBCC41D25A2A700647A88 /* InstructionView.xib in Resources */,
 				0C6668371C84358600FEB11F /* c4.jpg in Resources */,
 				0C66678B1C84358600FEB11F /* smile.png in Resources */,
 				0C66677D1C84358600FEB11F /* add.png in Resources */,
@@ -2719,6 +2806,8 @@
 				0C6668B41C84358600FEB11F /* KeyboardView.xib in Resources */,
 				0C6668B61C84358600FEB11F /* ProfilePicView.xib in Resources */,
 				0C6667A81C84358600FEB11F /* facebooklogo.png in Resources */,
+				84A5DFE71D36900E0089D6BE /* Slide-12.gif in Resources */,
+				84A5DFE51D3690070089D6BE /* Slide-10.gif in Resources */,
 				0C6667B11C84358600FEB11F /* Main_MainPage.storyboard in Resources */,
 				0C6667F81C84358600FEB11F /* GroupCell.xib in Resources */,
 				0C6667751C84358600FEB11F /* MYRIADPRO-BOLDCOND.OTF in Resources */,
@@ -2732,6 +2821,7 @@
 				0C6668A91C84358600FEB11F /* FriendsListView.xib in Resources */,
 				0C2125B71C98946700B6BAB5 /* Assets.xcassets in Resources */,
 				0C6668B81C84358600FEB11F /* SectionDividerView.xib in Resources */,
+				84F161341D35387400DBF9E0 /* Slide-7.gif in Resources */,
 				0C6667981C84358600FEB11F /* profilePicCamera.png in Resources */,
 				0C6667891C84358600FEB11F /* pen.png in Resources */,
 				0C6667881C84358600FEB11F /* parrotIcon_2.png in Resources */,
@@ -2753,6 +2843,7 @@
 				0C6668171C84358600FEB11F /* Info.plist in Resources */,
 				0C66677B1C84358600FEB11F /* MYRIADPRO-SEMIBOLD.OTF in Resources */,
 				0C6667A71C84358600FEB11F /* everyone.png in Resources */,
+				84F1613A1D3554B200DBF9E0 /* Slide-13.gif in Resources */,
 				0C6667701C84358600FEB11F /* american-typewriter.ttf in Resources */,
 				0C6667AA1C84358600FEB11F /* instagramlogo.png in Resources */,
 				0C66689A1C84358600FEB11F /* AccountView.xib in Resources */,
@@ -2791,11 +2882,13 @@
 				0C6667721C84358600FEB11F /* Myriad Roman.ttf in Resources */,
 				0C6667831C84358600FEB11F /* searchByID.png in Resources */,
 				0C6668BB1C84358600FEB11F /* SignUp.xib in Resources */,
+				84A5DFEB1D3697A30089D6BE /* Slide-E.gif in Resources */,
 				0C66678D1C84358600FEB11F /* checkMark.png in Resources */,
 				0C6667FA1C84358600FEB11F /* PrivateConversationCell.xib in Resources */,
 				0C6667AB1C84358600FEB11F /* savelogo.png in Resources */,
 				0C5D11391C87DE5600FEC6DA /* Settings.bundle in Resources */,
 				0C857BFB1C9352D000F0B911 /* countries.json in Resources */,
+				84A5DFE91D3697770089D6BE /* Slide-2B.gif in Resources */,
 				0C6667781C84358600FEB11F /* MYRIADPRO-COND.OTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2833,6 +2926,7 @@
 				0C6668B71C84358600FEB11F /* SectionDividerView.m in Sources */,
 				0C66688A1C84358600FEB11F /* NSString+STTwitter.m in Sources */,
 				0C6667DF1C84358600FEB11F /* ComicMakingViewController.m in Sources */,
+				84ED581C1D2956AF004E257F /* MainPage3SlideCell.m in Sources */,
 				0C6668791C84358600FEB11F /* SDImageCache.m in Sources */,
 				0C6668741C84358600FEB11F /* BFPaperButton.m in Sources */,
 				0C6667DD1C84358600FEB11F /* BlackboardViewController.m in Sources */,
@@ -2858,8 +2952,10 @@
 				0C6667C51C84358600FEB11F /* RCTwitter.m in Sources */,
 				0C6668651C84358600FEB11F /* MTLModel+NSCoding.m in Sources */,
 				0C6668961C84358600FEB11F /* UIScrollView+SVInfiniteScrolling.m in Sources */,
+				846F3D961D2ECE93001191E6 /* MainPage2SlideCell.m in Sources */,
 				0C6668541C84358600FEB11F /* AFURLConnectionOperation.m in Sources */,
 				0C6668011C84358600FEB11F /* GroupsCollectionViewCell.m in Sources */,
+				84EFDA011D340E2C005B5FB0 /* YLGIFImage.m in Sources */,
 				0C6668311C84358600FEB11F /* UserFriends.m in Sources */,
 				0C6667C31C84358600FEB11F /* RCInstagram.m in Sources */,
 				0C6668091C84358600FEB11F /* MePageVC.m in Sources */,
@@ -2963,6 +3059,7 @@
 				0C6668671C84358600FEB11F /* MTLReflection.m in Sources */,
 				0C6667EF1C84358600FEB11F /* CameraViewController.m in Sources */,
 				0C66684E1C84358600FEB11F /* Utilities.m in Sources */,
+				84EFDA021D340E2C005B5FB0 /* YLImageView.m in Sources */,
 				0C6667DB1C84358600FEB11F /* MainViewController.m in Sources */,
 				0C6667B21C84358600FEB11F /* AppHelper.m in Sources */,
 				0C66686B1C84358600FEB11F /* NSDictionary+MTLJSONKeyPath.m in Sources */,
@@ -3016,6 +3113,7 @@
 				0C6668381C84358600FEB11F /* Constants.m in Sources */,
 				0C6668BE1C84358600FEB11F /* VerifyView.m in Sources */,
 				0C6668131C84358600FEB11F /* ComicImageListView.m in Sources */,
+				843ABB781D1FAA730078B7A8 /* MainPageCell.m in Sources */,
 				0C6667E71C84358600FEB11F /* GlideScrollViewController.m in Sources */,
 				0C66685D1C84358600FEB11F /* JSONAPI.m in Sources */,
 				0C6668491C84358600FEB11F /* UIColor+colorWithHexString.m in Sources */,
@@ -3041,6 +3139,7 @@
 				0C6667D41C84358600FEB11F /* AccountViewController.m in Sources */,
 				0C6668731C84358600FEB11F /* MBProgressHUD.m in Sources */,
 				0C6668881C84358600FEB11F /* NSDateFormatter+STTwitter.m in Sources */,
+				84EFBCC21D25878D00647A88 /* InstructionView.m in Sources */,
 				0C6667F61C84358600FEB11F /* FriendCell.m in Sources */,
 				0C6668751C84358600FEB11F /* UIColor+BFPaperColors.m in Sources */,
 				0C32C99B1CB0B067001DA121 /* Stickers.m in Sources */,
@@ -3200,7 +3299,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "51cfc331-a9c4-4cd1-bea4-f4ca76bac2a2";
+				PROVISIONING_PROFILE = "47836a94-9a55-428d-8499-04cda266c580";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
@@ -3233,7 +3332,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "617f6e9d-0874-4255-a520-03b60432059b";
+				PROVISIONING_PROFILE = "ca2d499a-e06e-46f3-98a9-d7e5a0fa459c";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;

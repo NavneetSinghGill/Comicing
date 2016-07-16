@@ -15,5 +15,5 @@
 @property(weak, nonatomic) NSLayoutConstraint *height;
 @property(weak, nonatomic) NSLayoutConstraint *xConstraint;
 @property(weak, nonatomic) NSLayoutConstraint *yConstraint;
-
+@property (nonatomic,strong) NSMutableDictionary *ComicBookDict;
 @end

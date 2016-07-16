@@ -18,4 +18,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnUser;
 @property (weak, nonatomic) IBOutlet UILabel *mUserName;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblComicTitle;
 @end

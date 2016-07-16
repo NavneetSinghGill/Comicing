@@ -521,12 +521,42 @@
         comic.delegate=self;
         comic.Tag=(int)indexPath.row;
         
-        comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+        
         
         //        [cell.btnUser setBackgroundImage:comicInfo.creator.imgProfile forState:UIControlStateNormal];
         //        [cell.btnUser setBackgroundImage:comicInfo.creator.imgProfile forState:UIControlStateHighlighted];
         
         ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+        
+        CGRect lblFrame = cell.lblComicTitle.frame;
+        
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            cell.lblComicTitle.text = @"";
+            cell.lblComicTitle.hidden = YES;
+            
+            CGRect frameViewComicBook = cell.viewComicBook.frame;
+            frameViewComicBook.origin.y = lblFrame.origin.y;
+            frameViewComicBook.size.height = cell.frame.size.height;
+            cell.viewComicBook.frame = frameViewComicBook;
+            
+            cell.lblComicTitle.frame = lblFrame;
+            
+            comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame) - 10);
+            
+        }
+        else
+        {
+            cell.lblComicTitle.text = comicBook.comicTitle;
+            cell.lblComicTitle.hidden = NO;
+            
+            cell.lblComicTitle.frame = lblFrame;
+            
+            comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+        }
+
+        
+        
         [cell.userProfilePic sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
         
         //dinesh
@@ -577,38 +607,50 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*int height=0;
-     if(IS_IPHONE_5)
-     {
-     height=209;
-     }
-     else if(IS_IPHONE_6)
-     {
-     height= 239;
-     }
-     else if(IS_IPHONE_6P)
-     {
-     height= 269;
-     }*/
+    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
     
-    int height=0;
-    if(IS_IPHONE_5)
+    if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
     {
-        height=169;
+        int height=0;
+        if(IS_IPHONE_5)
+        {
+            height=169;
+        }
+        else if(IS_IPHONE_6)
+        {
+            height= 199;
+        }
+        else if(IS_IPHONE_6P)
+        {
+            height= 229;
+        }
+        
+        return tableView.bounds.size.height-height;
     }
-    else if(IS_IPHONE_6)
+    else
     {
-        height= 199;
+        int height=0;
+        if(IS_IPHONE_5)
+        {
+            height=109;
+        }
+        else if(IS_IPHONE_6)
+        {
+            height= 139;
+        }
+        else if(IS_IPHONE_6P)
+        {
+            height= 169;
+        }
+        
+        
+        
+        
+        return tableView.bounds.size.height-height;
     }
-    else if(IS_IPHONE_6P)
-    {
-        height= 229;
-    }
     
     
-    
-    
-    return tableView.bounds.size.height-height;
+ 
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

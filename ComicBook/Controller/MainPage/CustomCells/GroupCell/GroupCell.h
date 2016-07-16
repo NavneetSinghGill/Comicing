@@ -17,5 +17,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnUser;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *mUserName;
+@property (weak, nonatomic) IBOutlet UILabel *lblComicTitle;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicTitle;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintCointainerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpacingComicView;
 
 @end

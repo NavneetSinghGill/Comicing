@@ -35,6 +35,7 @@
 #import "CropRegisterViewController.h"
 #import "AppHelper.h"
 #import "UIImage+ColorAtPixel.h"
+#import "InstructionView.h"
 
 static void * CapturingStillImageContext = &CapturingStillImageContext;
 static void * RecordingContext = &RecordingContext;
@@ -42,7 +43,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 static int CaptionViewTextViewTag = 9191;
 static CGRect CaptionTextViewMinRect;
 
-@interface ComicMakingViewController ()<ACEDrawingViewDelegate,CropStickerViewControllerDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,AVAudioRecorderDelegate,UITextViewDelegate,ZoomTransitionProtocol,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface ComicMakingViewController ()<ACEDrawingViewDelegate,CropStickerViewControllerDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,AVAudioRecorderDelegate,UITextViewDelegate,ZoomTransitionProtocol,UINavigationControllerDelegate,UIImagePickerControllerDelegate,InstructionViewDelegate>
 {
     CGPoint backupOtherViewCenter;
     CGPoint backupToolCenter;
@@ -171,6 +172,34 @@ static CGRect CaptionTextViewMinRect;
         self.fileNameToSave = @"ComicSlide";
     }
     
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterSecondTimeComicMaking] == YES)
+    {
+        // open slideB Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+            if ([InstructionView getBoolValueForSlide:kInstructionSlide15] == YES)
+            {
+                if ([InstructionView getBoolValueForSlide:kInstructionSlideB] == NO)
+                {
+                    InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                    instView.delegate = self;
+                    [instView showInstructionWithSlideNumber:SlideNumberB withType:InstructionBubbleType];
+                    [instView setTrueForSlide:kInstructionSlideB];
+                    
+                    [self.view addSubview:instView];
+                }
+                
+            }
+            
+            
+            
+        });
+    }
+
+    
     [self prepareGlideView];
     
     [self prepareCaptionView];
@@ -179,12 +208,29 @@ static CGRect CaptionTextViewMinRect;
     
     
     viewCameraPreview.hidden = YES;
+    
+    // open Instruction
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSLog(@"Do some work");
+        
+       if ([InstructionView getBoolValueForSlide:kInstructionSlide1] == NO)
+       {
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber1 withType:InstructionBoxType];
+            [instView setTrueForSlide:kInstructionSlide1];
+            
+            [self.view addSubview:instView];
+        }
+    });
+    
+    
+   
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
-    
     [self addNotificationCenter];
 }
 
@@ -204,12 +250,24 @@ static CGRect CaptionTextViewMinRect;
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self removeNotificationCenter];
-    if (self.isMovingFromParentViewController || self.isBeingDismissed) {
+    if (self.isMovingFromParentViewController || self.isBeingDismissed)
+    {
         imgvComic.image = nil;
         imgvComic = nil;
         
         self.ImgvComic2.image = nil;
         self.ImgvComic2 = nil;
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES) {
+            //    // user firsttime enter
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsUserEnterSecondTimeComicMaking];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
+        
+        //    // user firsttime enter
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsUserEnterFirstTimeComicMaking];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
@@ -297,6 +355,7 @@ static CGRect CaptionTextViewMinRect;
     viewBlackBoard.alpha = 0;
 
     
+    
     for (UIViewController *controller in self.childViewControllers)
     {
         if ([controller isKindOfClass:[RowButtonsViewController class]])
@@ -313,6 +372,31 @@ static CGRect CaptionTextViewMinRect;
         [self.btnSend setEnabled:NO];
         
         [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SlideCreate" Action:@"Create" Label:@""];
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES)
+        {
+            // open slide 11 Instruction
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                NSLog(@"Do some work");
+                
+                 if ([InstructionView getBoolValueForSlide:kInstructionSlide15] == NO)
+                {
+                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                instView.delegate = self;
+                [instView showInstructionWithSlideNumber:SlideNumber15 withType:InstructionBubbleType];
+                [instView setTrueForSlide:kInstructionSlide15];
+                
+                [self.view addSubview:instView];
+                }
+            });
+            
+            
+            //second time user enter in comicmaking
+            
+            
+        }
+
     }
     else
     {
@@ -586,7 +670,6 @@ static CGRect CaptionTextViewMinRect;
 }
 
 #pragma mark - Camera Methods
-
 - (BOOL)isSessionRunningAndDeviceAuthorized
 {
     return [[self session] isRunning] && [self isDeviceAuthorized];
@@ -1031,7 +1114,8 @@ static CGRect CaptionTextViewMinRect;
         [ComicMakingViewController setFlashMode:AVCaptureFlashModeAuto forDevice:[[self videoDeviceInput] device]];
         
         // Capture a still image.
-        [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+        [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
+        {
             
             if (imageDataSampleBuffer)
             {
@@ -1062,7 +1146,84 @@ static CGRect CaptionTextViewMinRect;
                 btnClose.hidden = NO;
                 [self setComicImageViewSize];
                 [self doAutoSave:nil];
-            }
+                
+                // open slide 2 Instruction
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    NSLog(@"Do some work");
+                    
+                    if ([InstructionView getBoolValueForSlide:kInstructionSlide3] == NO)
+                    {
+                    InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                    instView.delegate = self;
+                    [instView showInstructionWithSlideNumber:SlideNumber3 withType:InstructionBubbleType];
+                    [instView setTrueForSlide:kInstructionSlide3];
+                    
+                    [self.view addSubview:instView];
+                    }
+                });
+                
+                
+                if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES)
+                {
+                    
+                    
+
+                    
+                    // open slide 12 Instruction
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        NSLog(@"Do some work");
+                        
+                        if ([InstructionView getBoolValueForSlide:kInstructionSlide12repeat] == NO)
+                        {
+                            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                            instView.delegate = self;
+                            [instView showInstructionWithSlideNumber:SlideNumber12 withType:InstructionGIFType];
+                            [instView setTrueForSlide:kInstructionSlide12repeat];
+                            
+                            [self.view addSubview:instView];
+                        }
+                    });
+
+                    
+                    
+                    // open slide 16 Instruction
+//                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+//                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                        NSLog(@"Do some work");
+//                        
+//                         if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == NO)
+//                        {
+//                        InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+//                        instView.delegate = self;
+//                        [instView showInstructionWithSlideNumber:SlideNumber16 withType:InstructionBubbleType];
+//                        [instView setTrueForSlide:kInstructionSlide16];
+//                        
+//                        [self.view addSubview:instView];
+//                         }
+//                    });
+                
+                    
+                    
+//                    // open slide 16 Instruction
+//                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+//                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                        NSLog(@"Do some work");
+//                        
+//                        if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == NO)
+//                        {
+//                            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+//                            instView.delegate = self;
+//                            [instView showInstructionWithSlideNumber:SlideNumber16 withType:InstructionBubbleType];
+//                            [instView setTrueForSlide:kInstructionSlide16];
+//                            
+//                            [self.view addSubview:instView];
+//                        }
+//                    });
+
+                }
+        }
         }];
     });
 #endif
@@ -1161,7 +1322,8 @@ static CGRect CaptionTextViewMinRect;
         btnClose.alpha = 0;
         viewRowButtons.center = CGPointMake(backupToolCenter.x-100, backupToolCenter.y );
         viewRowButtons.alpha = 0;
-    } completion:^(BOOL finished) {
+    } completion:^(BOOL finished)
+    {
         
     }];
     
@@ -1171,7 +1333,46 @@ static CGRect CaptionTextViewMinRect;
         
         viewStickerList.center = CGPointMake(backupOtherViewCenter.x -viewStickerList.bounds.size.width, backupOtherViewCenter.y );
         viewStickerList.alpha = 1;
-    } completion:^(BOOL finished) {
+    } completion:^(BOOL finished)
+    {
+        
+        // open slide 4 Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+            if ([InstructionView getBoolValueForSlide:kInstructionSlide4] == NO)
+            {
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber4 withType:InstructionBubbleType];
+            [instView setTrueForSlide:kInstructionSlide4];
+            
+            [self.view addSubview:instView];
+            }
+        });
+        
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES)
+        {
+            // open slide 11 Instruction
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                NSLog(@"Do some work");
+                
+                 if ([InstructionView getBoolValueForSlide:kInstructionSlide11] == NO)
+                {
+                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                instView.delegate = self;
+                [instView showInstructionWithSlideNumber:SlideNumber11 withType:InstructionBubbleType];
+                [instView setTrueForSlide:kInstructionSlide11];
+                
+                [self.view addSubview:instView];
+                 }
+            });
+
+        }
+        
         
     }];
     
@@ -1287,8 +1488,25 @@ static CGRect CaptionTextViewMinRect;
     UIImage* sticker = [UIImage imageWithContentsOfFile:stickerImageSting];
     [self addStickerWithImage:sticker];
 }
+
 - (void)addStickerWithImage:(UIImage *)sticker
 {
+    // open slide 10 Instruction
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSLog(@"Do some work");
+        
+        if ([InstructionView getBoolValueForSlide:kInstructionSlide10] == NO)
+        {
+        InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+        instView.delegate = self;
+        [instView showInstructionWithSlideNumber:SlideNumber10 withType:InstructionGIFType];
+        [instView setTrueForSlide:kInstructionSlide10];
+        
+        [self.view addSubview:instView];
+         }
+    });
+    
     ComicItemSticker* imageView = [self getComicItems:ComicSticker];
     imageView.frame = CGRectMake(0, 0, 150, 150);
     imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -1310,7 +1528,10 @@ static CGRect CaptionTextViewMinRect;
     
     //Handle Auto Save
     [self doAutoSave:imageView];
-//    sticker = nil;
+    
+    
+    
+
 }
 
 #pragma mark Exclamation
@@ -1474,6 +1695,8 @@ static CGRect CaptionTextViewMinRect;
         self.chatIcon.alpha = 1;
     } completion:^(BOOL finished) {
         
+        
+        
     }];
     
 }
@@ -1565,6 +1788,23 @@ static CGRect CaptionTextViewMinRect;
     [self addComicItem:bubbleHolderView ItemImage:bubbleImage];
     bubbleHolderView.center = bubbleHolderView.center;
     
+    
+    // open slide D Instruction
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSLog(@"Do some work");
+        
+         if ([InstructionView getBoolValueForSlide:kInstructionSlideD] == NO)
+         {
+        InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+        instView.delegate = self;
+        [instView showInstructionWithSlideNumber:SlideNumberD withType:InstructionBubbleType];
+        [instView setTrueForSlide:kInstructionSlideD];
+        
+        [self.view addSubview:instView];
+         }
+    });
+
     
     [self doAutoSave:bubbleHolderView];
 }
@@ -2165,7 +2405,27 @@ static CGRect CaptionTextViewMinRect;
                   [stickerImageView removeFromSuperview];
                   [stickerController.collectionView reloadData];
               }];
-         }completion:nil];
+         }completion:^(BOOL finished) {
+             
+             
+             // open slide 9 Instruction
+             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                 NSLog(@"Do some work");
+                 
+                if ([InstructionView getBoolValueForSlide:kInstructionSlide9] == NO)
+                {
+                 InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                 instView.delegate = self;
+                 [instView showInstructionWithSlideNumber:SlideNumber9 withType:InstructionBubbleType];
+                 [instView setTrueForSlide:kInstructionSlide9];
+                 
+                 [self.view addSubview:instView];
+                }
+             });
+
+             
+         }];
     }];
 }
 
@@ -2307,6 +2567,23 @@ static CGRect CaptionTextViewMinRect;
     } completion:^(BOOL finished)
      {
          [self addDrawingView];
+         
+         // open slide C Instruction
+         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+             NSLog(@"Do some work");
+             
+            if ([InstructionView getBoolValueForSlide:kInstructionSlideC] == NO)
+            {
+             InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+             instView.delegate = self;
+             [instView showInstructionWithSlideNumber:SlideNumberC withType:InstructionBubbleType];
+             [instView setTrueForSlide:kInstructionSlideC];
+             
+             [self.view addSubview:instView];
+              }
+         });
+
      }];
     
 }
@@ -3748,6 +4025,55 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 
     [AppHelper openMainPageviewController:self];
     
+}
+
+#pragma mark - InstructionViewDelegate Methods
+-(void)didCloseInstructionViewWith:(InstructionView *)view withClosedSlideNumber:(SlideNumber)number
+{
+    [view removeFromSuperview];
+    
+    if(number == SlideNumber1)
+    {
+        // open slide 2 Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+             if ([InstructionView getBoolValueForSlide:kInstructionSlide2] == NO)
+             {
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber2 withType:InstructionBubbleType];
+            [instView setTrueForSlide:kInstructionSlide2];
+            
+            [self.view addSubview:instView];
+             }
+        });
+
+    }
+    else if (number == SlideNumber10)
+    {
+        // open slide 12 Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+            if ([InstructionView getBoolValueForSlide:kInstructionSlide12] == NO)
+             {
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber12 withType:InstructionGIFType];
+            [instView setTrueForSlide:kInstructionSlide12];
+            
+            [self.view addSubview:instView];
+             }
+        });
+    }
+    else if (number == SlideNumber15)
+    {
+    
+       
+    }
 }
 
 

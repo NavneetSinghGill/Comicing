@@ -218,10 +218,25 @@ UICollectionViewDelegate>
         comic.delegate=self;
         comic.Tag=(int)indexPath.row;
         
-        comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
-        
         ComicBook *comicBook = [comics objectAtIndex:indexPath.row];
         [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
+        
+        
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            cell.lblComicTitle.hidden = YES;
+            cell.topSpacingComicView.constant = 5;
+            
+            [cell layoutIfNeeded];
+        }
+        else
+        {
+            cell.lblComicTitle.hidden = NO;
+            cell.lblComicTitle.text = comicBook.comicTitle;
+        }
+       
+        
+          comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
         
         //dinesh
         cell.mUserName.text = comicBook.userDetail.firstName;
@@ -275,24 +290,50 @@ UICollectionViewDelegate>
      height= 269;
      }*/
     
-    int height=0;
-    if(IS_IPHONE_5)
+    
+    ComicBook *comicBook = [comics objectAtIndex:indexPath.row];
+    
+    if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
     {
-        height=169;
+        int height=0;
+        if(IS_IPHONE_5)
+        {
+            height=169;
+        }
+        else if(IS_IPHONE_6)
+        {
+            height= 199;
+        }
+        else if(IS_IPHONE_6P)
+        {
+            height= 229;
+        }
+        
+        return tableView.bounds.size.height-height;
     }
-    else if(IS_IPHONE_6)
+    else
     {
-        height= 199;
+        int height=0;
+        if(IS_IPHONE_5)
+        {
+            height=109;
+        }
+        else if(IS_IPHONE_6)
+        {
+            height= 139;
+        }
+        else if(IS_IPHONE_6P)
+        {
+            height= 169;
+        }
+        
+        
+        
+        
+        return tableView.bounds.size.height-height;
     }
-    else if(IS_IPHONE_6P)
-    {
-        height= 229;
-    }
+
     
-    
-    
-    
-    return tableView.bounds.size.height-height;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

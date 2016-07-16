@@ -407,13 +407,18 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == comicsArray.count - 1 && currentPageDownScroll < lastPageDownScroll) {
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == comicsArray.count - 1 && currentPageDownScroll < lastPageDownScroll)
+    {
         // downscroll with same period
         [self callAPIToGetTheComicsWithPageNumber:currentPageDownScroll + 1  andTimelinePeriod:currentlyShowingTimelinePeriodDownScroll andDirection:DIRECTION_DOWN shouldClearAllData:NO];
-    } else if(indexPath.row == comicsArray.count - 1 && currentPageDownScroll == lastPageDownScroll) {
+    }
+    else if(indexPath.row == comicsArray.count - 1 && currentPageDownScroll == lastPageDownScroll)
+    {
         // downscroll with next period
-        if([self getTheNextPeriod:currentlyShowingTimelinePeriodDownScroll] != nil) {
+        if([self getTheNextPeriod:currentlyShowingTimelinePeriodDownScroll] != nil)
+        {
             currentPageDownScroll = 0;
             [self callAPIToGetTheComicsWithPageNumber:currentPageDownScroll + 1  andTimelinePeriod:[self getTheNextPeriod:currentlyShowingTimelinePeriodDownScroll] andDirection:DIRECTION_DOWN shouldClearAllData:NO];
         }
@@ -823,7 +828,8 @@
     return nil;
 }
 
-- (void)callAPIToGetTheComicsWithPageNumber:(NSUInteger)page andTimelinePeriod:(NSString *)period andDirection:(NSString *)direction shouldClearAllData:(BOOL)clearData {
+- (void)callAPIToGetTheComicsWithPageNumber:(NSUInteger)page andTimelinePeriod:(NSString *)period andDirection:(NSString *)direction shouldClearAllData:(BOOL)clearData
+{
     [MeAPIManager getTimelineWithPageNumber:page
                              timelinePeriod:period
                                   direction:direction
@@ -876,7 +882,8 @@
                                    
                                    
                                    self.lblComicCount.text =  @"0 Comic";
-                                   if(clearData) {
+                                   if(clearData)
+                                   {
                                        [comicsArray removeAllObjects];
                                        lastPageDownScroll = [comicsModelObj.pagination.last integerValue];
                                        currentPageDownScroll = [comicsModelObj.pagination.current integerValue];

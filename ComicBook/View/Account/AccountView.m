@@ -8,17 +8,21 @@
 
 #import "AccountView.h"
 #import "AppConstants.h"
+#import "InstructionView.h"
 
 #define kOFFSET_FOR_KEYBOARD (IS_IPHONE_5?80.0:80)
 #define Y_FOR_SUPERVIEW_KEYBOARD (IS_IPHONE_5?80.0:80)
+
 
 
 CGRect firstFrame;
 NSString* AgeDOB;
 @implementation AccountView
 
--(id)initWithFrame:(CGRect)frame{
+-(id)initWithFrame:(CGRect)frame
+{
     self = [super initWithFrame:frame];
+
     if(self)
     {
         //Load from xib
@@ -29,6 +33,7 @@ NSString* AgeDOB;
         [self configView];
         [self bindData];
     }
+    
     return self;
 }
 
@@ -582,6 +587,14 @@ NSString* AgeDOB;
                 return;
             }
             
+            self.isRegister = YES;
+            
+            // all instruction bool set to NO
+            [InstructionView setAllSlideUserDefaultsValueNO];
+            
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsUserRegisterFirstTime];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
             [self doLogin];
             
         } ErrorBlock:^(JSONModelError *error) {
@@ -593,7 +606,8 @@ NSString* AgeDOB;
     }
 }
 
--(void)doLogin{
+-(void)doLogin
+{
     //Do Validate
         NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
         NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
@@ -605,10 +619,21 @@ NSString* AgeDOB;
         
         
         ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
-        [cmNetWorking postLogin:dataDic completion:^(id json,id jsonResposeHeader) {
-            if ([[[json objectForKey:@"result"] lowercaseString] isEqualToString:@"failed"]) {
+        [cmNetWorking postLogin:dataDic completion:^(id json,id jsonResposeHeader)
+    {
+            if ([[[json objectForKey:@"result"] lowercaseString] isEqualToString:@"failed"])
+            {
                 [self showAlertMessage:[json objectForKey:@"message"]];
-            }else if ([[[json objectForKey:@"result"] lowercaseString] isEqualToString:@"sucess"]) {
+            }
+            else if ([[[json objectForKey:@"result"] lowercaseString] isEqualToString:@"sucess"])
+            {
+               
+                if (self.isRegister == NO)
+                {
+                    [InstructionView setAllSlideUserDefaultsValueYES];
+
+                }
+                
                 
                 [AppHelper showSuccessDropDownMessage:@"Thank you for the registration." mesage:@""];
                 [AppHelper setAuthandNonceId:[jsonResposeHeader objectForKey:@"Authorization"] Nonce:[jsonResposeHeader objectForKey:@"Nonce"]];
@@ -616,21 +641,26 @@ NSString* AgeDOB;
                     NSMutableDictionary* userDic = [[json objectForKey:@"data"] mutableCopy];
                     [userDic setObject:self.txtId.text forKey:@"login_id"];
                     [AppHelper setCurrentUser:userDic];
-                }else
+                }
+                else
                 {
                     [AppHelper setCurrentUser:[json objectForKey:@"data"]];
                 }
                 if ([json objectForKey:@"data"] &&
-                    [[json objectForKey:@"data"] objectForKey:@"user_id"]) {
+                    [[json objectForKey:@"data"] objectForKey:@"user_id"])
+                {
                     [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];
                 }
+                
                 [AppHelper setCurrentUserEmail:self.txtEmail.text];
+                
                 if (self.delegate && [self.delegate respondsToSelector:@selector(getAccountRequest)])
                 {
                     [self.delegate getAccountRequest];
                 }
             }
-            NSLog(@"json %@",json);
+        
+        NSLog(@"json %@",json);
             
         } ErrorBlock:^(id error) {
             [AppHelper showSuccessDropDownMessage:ERROR_MESSAGE mesage:@""];
