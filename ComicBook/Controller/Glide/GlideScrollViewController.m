@@ -62,7 +62,7 @@ NSTimer* timerObject;
     [self prepareView];
     
     if (comicSlides == nil || comicSlides.count == 0) {
-        [scrvComicSlide pushAddSlideTap:scrvComicSlide.btnAddSlide animation:NO];
+        [scrvComicSlide pushAddSlideTap:scrvComicSlide.btnPlusSlide animation:NO];
     }
 }
 //- (void)viewWillAppear:(BOOL)animated
@@ -143,7 +143,8 @@ NSTimer* timerObject;
     if (comicSlides.count == 0)
     {
         comicSlides = [[NSMutableArray alloc] init];
-        [scrvComicSlide addSlideButtonAtIndex:0];   
+//        [scrvComicSlide addSlideButtonAtIndex:0];
+        [scrvComicSlide addPlusButton:0];
     }
     else
     {
@@ -156,9 +157,10 @@ NSTimer* timerObject;
             count++;
         }
         [scrvComicSlide addSlideButtonAtIndex:count];
-        if (comicSlides.count == SLIDE_MAXCOUNT && scrvComicSlide.btnAddSlide) {
-            [scrvComicSlide.btnAddSlide setHidden:YES];
-            [scrvComicSlide.btnAddSlide removeFromSuperview];
+        [scrvComicSlide addPlusButton:count];
+        if (comicSlides.count == SLIDE_MAXCOUNT && scrvComicSlide.btnPlusSlide) {
+            [scrvComicSlide.btnPlusSlide setHidden:YES];
+            [scrvComicSlide.btnPlusSlide removeFromSuperview];
             [scrvComicSlide setScrollViewContectSizeByLastIndex:count-1];
         }
         
