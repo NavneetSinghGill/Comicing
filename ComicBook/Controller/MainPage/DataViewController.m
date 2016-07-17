@@ -9,7 +9,8 @@
 #import "Constants.h"
 #import "AppDelegate.h"
 
-@interface DataViewController () <AVAudioPlayerDelegate> {
+@interface DataViewController () <AVAudioPlayerDelegate>
+{
     UIView *audioView;
     UIImageView *img;
     CGFloat audioViewHeight;
@@ -38,20 +39,19 @@
      *  Checking if it is a table of content page or ordinary page.
      */
 
-
-    if(7>self.slidesArray.count)
+    NSLog(@"%lu",(unsigned long)self.slidesArray.count);
+    
+        
+    if(7 > self.slidesArray.count)
     {
-        
-        
-        if( self.pageNumber<self.slidesArray.count)
+        if(self.pageNumber < self.slidesArray.count)
         {
-            if(self.pageNumber==1)
+            if(self.pageNumber == 1)
             {
                 /**
                  *  second page of comic book table of content
                  */
                 [self SetupTableofContants];
-                
             }
             else
             {
@@ -67,7 +67,7 @@
     {
         if( self.pageNumber<self.slidesArray.count)
         {
-            if(self.pageNumber==1)
+            if(self.pageNumber == 1)
             {
                 /**
                  *  second page of comic book table of content
@@ -75,7 +75,7 @@
                 [self SetupTableofContants];
                 
             }
-            else if(self.pageNumber==2)
+            else if(self.pageNumber == 2)
             {
                 /**
                  *  second page of comic book table of content
@@ -212,19 +212,27 @@
     }
 }
 
-- (void)showAudioAnimation:(NSInteger)tag {
+- (void)showAudioAnimation:(NSInteger)tag
+{
     CGFloat audioViewY;
-    if(IS_IPHONE_5) {
+    if(IS_IPHONE_5)
+    {
         audioViewY = self.view.frame.size.height - 55;
-    } else if(IS_IPHONE_6) {
+    }
+    else if(IS_IPHONE_6)
+    {
         audioViewY = self.view.frame.size.height - 70;
-    } else if(IS_IPHONE_6P) {
+    }
+    else if(IS_IPHONE_6P)
+    {
         audioViewY = self.view.frame.size.height - 80;
     }
+    
     [audioView setFrame:CGRectMake(0, audioViewY, 50, audioViewHeight)];
     [self.view addSubview:audioView];
     audioView.alpha = 1;
     img.alpha = 1;
+    
     [UIView animateWithDuration:[[self.audioDurationSecondsArray objectAtIndex:tag] floatValue] delay:.2 usingSpringWithDamping:.8 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [audioView setFrame:CGRectMake(0, audioViewY, self.view.frame.size.width, audioViewHeight)];
         audioView.alpha = 1;

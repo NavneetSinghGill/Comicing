@@ -10,6 +10,7 @@
 #import "ComicNetworking.h"
 #import "FindFriendsViewController.h"
 #import "GlideScrollViewController.h"
+#import "InstructionView.h"
 
 @interface LoginViewController ()
 
@@ -194,6 +195,10 @@
                 {
                     [AppHelper setCurrentUser:[json objectForKey:@"data"]];
                 }
+                
+                [InstructionView setAllSlideUserDefaultsValueYES];
+
+                
                 [AppHelper setCurrentUserEmail:[[json objectForKey:@"data"] objectForKey:@"email"]];
                 [AppHelper setCurrentLoginId:[[json objectForKey:@"data"] objectForKey:@"user_id"]];
                 

@@ -20,7 +20,7 @@
 
 @implementation GroupCell
 
-@synthesize widthconstraint,btnUser, profileImageView;
+@synthesize widthconstraint,btnUser, profileImageView, lblComicTitle;
 
 - (void)awakeFromNib {
     // Initialization code
@@ -66,6 +66,20 @@
     profileImageView.layer.cornerRadius = CGRectGetHeight(profileImageView.frame) / 2;
     profileImageView.clipsToBounds = YES;
     
+    
+    if(IS_IPHONE_5)
+    {
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:23];
+    }
+    else if(IS_IPHONE_6)
+    {
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:26];
+        
+    }
+    else if(IS_IPHONE_6P)
+    {
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:29];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

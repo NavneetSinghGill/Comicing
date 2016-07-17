@@ -12,10 +12,11 @@
 
 @implementation ComicsAPIManager
 
-+ (void)getTheComicsWithSuccessBlock:(void(^)(id object))successBlock
-                               andFail:(void(^)(NSError *errorMessage))failBlock {
-    NSString *urlString = [NSString stringWithFormat:@"%@comics/page/1/itemCount/8", BASE_URL];
-  
++ (void)getTheComicsWithPage:(NSUInteger)page SuccessBlock:(void(^)(id object))successBlock
+                     andFail:(void(^)(NSError *errorMessage))failBlock
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@comics/page/%lu/itemCount/10", BASE_URL, (unsigned long)page];
+    
     [BaseAPIManager getRequestWithURLString:urlString
                               withParameter:nil
                                 withSuccess:^(id object) {
@@ -23,6 +24,13 @@
                                 } andFail:^(id errorObj) {
                                     failBlock(errorObj);
                                 } showIndicator:YES];
+}
+
+
++ (void)getTheComicsWithSuccessBlock:(void(^)(id object))successBlock
+                               andFail:(void(^)(NSError *errorMessage))failBlock
+{
+  
 }
 
 + (void)setFlagForComic:(NSDictionary *)comic withSuccessBlock:(void(^)(id object))successBlock

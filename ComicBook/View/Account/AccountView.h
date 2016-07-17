@@ -43,6 +43,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSignUp;
 @property (weak, nonatomic) IBOutlet UIButton *btnTermsService;
 
+@property (nonatomic) BOOL isRegister;
+
 - (IBAction)btnYesClick:(id)sender;
 
 @end

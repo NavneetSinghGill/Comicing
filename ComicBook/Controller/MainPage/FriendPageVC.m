@@ -123,7 +123,7 @@
     //    self.profilePicButton.backgroundColor = [UIColor grayColor];
     self.profileImageView.layer.cornerRadius = CGRectGetHeight(self.profileImageView.frame) / 2;
     self.profileImageView.clipsToBounds = YES;
-    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:[AppDelegate application].dataManager.friendObject.profilePic]];
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:[AppDelegate application].dataManager.friendObject.profilePic] placeholderImage:nil options:SDWebImageRetryFailed];
     [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@", [AppDelegate application].dataManager.friendObject.firstName, [AppDelegate application].dataManager.friendObject.lastName]];
     
     [self addUIRefreshControl];
@@ -212,21 +212,46 @@
     
     return tableView.bounds.size.height-height;*/
     
-    int height=0;
-    if(IS_IPHONE_5)
-    {
-        height=129;
-    }
-    else if(IS_IPHONE_6)
-    {
-        height= 159;
-    }
-    else if(IS_IPHONE_6P)
-    {
-        height= 189;
-    }
-    return tableView.bounds.size.height-height;
     
+    
+    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+
+    
+    if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+    {
+        int height=0;
+        if(IS_IPHONE_5)
+        {
+            height = 129;
+        }
+        else if(IS_IPHONE_6)
+        {
+            height= 159;
+        }
+        else if(IS_IPHONE_6P)
+        {
+            height= 189;
+        }
+        return tableView.bounds.size.height-height;
+
+    }
+    else
+    {
+        int height=0;
+        if(IS_IPHONE_5)
+        {
+            height = 69;
+        }
+        else if(IS_IPHONE_6)
+        {
+            height= 99;
+        }
+        else if(IS_IPHONE_6P)
+        {
+            height= 129;
+        }
+        return tableView.bounds.size.height-height;
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -249,9 +274,35 @@
         comic.delegate=self;
         comic.Tag=(int)indexPath.row;
         
-        comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+       
         
         ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+
+        CGRect lblFrame = cell.lblComicTitle.frame;
+        
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            cell.lblComicTitle.text = @"";
+            cell.lblComicTitle.hidden = YES;
+            
+            CGRect frameViewComicBook = cell.viewComicBook.frame;
+            frameViewComicBook.origin.y = lblFrame.origin.y;
+            frameViewComicBook.size.height = cell.frame.size.height;
+            cell.viewComicBook.frame = frameViewComicBook;
+            
+            cell.lblComicTitle.frame = lblFrame;
+            
+        }
+        else
+        {
+            cell.lblComicTitle.text = comicBook.comicTitle;
+            cell.lblComicTitle.hidden = NO;
+            
+            cell.lblComicTitle.frame = lblFrame;
+        }
+        
+         comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+        
         
         // vishnu
         NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
