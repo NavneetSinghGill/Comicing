@@ -1791,30 +1791,30 @@ NSString * const BottomBarView = @"BottomBarView";
         {
             if(IS_IPHONE_5)
             {
-                height = 270;
+                height = 280;
             }
             else if(IS_IPHONE_6)
             {
-                height = 338;
+                height = 348;
             }
             else if(IS_IPHONE_6P)
             {
-                height = 406;
+                height = 416;
             }
         }
         else
         {
             if(IS_IPHONE_5)
             {
-                height = 210;
+                height = 220;
             }
             else if(IS_IPHONE_6)
             {
-                height = 278;
+                height = 268;
             }
             else if(IS_IPHONE_6P)
             {
-                height = 346;
+                height = 356;
             }
 
         }
