@@ -17,5 +17,6 @@
 @property (nonatomic, strong) UIImage *imgSelectedSticker;
 
 -(void)addShareSticker:(UIImage*)imgSticker;
+
 @end
 

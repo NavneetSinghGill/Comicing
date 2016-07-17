@@ -19,7 +19,7 @@
 
 @implementation PrivateConversationCell
 
-@synthesize widthconstraint,btnUser, userProfilePic;
+@synthesize widthconstraint,btnUser, userProfilePic, lblComicTitle;
 
 - (void)awakeFromNib {
     // Initialization code
@@ -65,6 +65,22 @@
     
 //    userProfilePic.layer.cornerRadius = CGRectGetHeight(userProfilePic.frame) / 2;
     userProfilePic.clipsToBounds = YES;
+    
+    
+    if(IS_IPHONE_5)
+    {
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:23];
+    }
+    else if(IS_IPHONE_6)
+    {
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:26];
+        
+    }
+    else if(IS_IPHONE_6P)
+    {
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:29];
+    }
+
 
 }
 

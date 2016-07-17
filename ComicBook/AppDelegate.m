@@ -12,6 +12,8 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "FabricAnalytics.h"
+#import "InstructionView.h"
+#import "Global.h"
 
 @interface AppDelegate ()
 
@@ -36,13 +38,27 @@
     
     [[GoogleAnalytics sharedGoogleAnalytics] initTracking];
     
+
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserRegisterFirstTime] == YES)
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsUserRegisterFirstTime];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [Global global].isUserEnterSecondTime = YES;
+    }
+    else
+    {
+        [Global global].isUserEnterSecondTime = NO;
+    }
+    
     
     
     NSString* Identifier = @"MainViewController";
     
 //    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     
-    if (![AppHelper isActiveUser]) {
+    if (![AppHelper isActiveUser])
+    {
         self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         self.viewController = [storyboard instantiateViewControllerWithIdentifier:Identifier];
@@ -53,6 +69,12 @@
         storyboard = nil;
         [self.window makeKeyAndVisible];
     }
+    else
+    {
+        //Already register
+    }
+    
+    
     self.dataManager = [[DataManager alloc] init];
 
     [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"AppStart" Attributes:nil];

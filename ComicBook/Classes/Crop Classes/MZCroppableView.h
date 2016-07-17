@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class MZCroppableView;
+
+@protocol MZCroppableViewDelegate <NSObject>
+
+@optional
+
+- (void)didFinishedTouch;
+
+@end
+
 @interface MZCroppableView : UIView
 {
     UIImageView *animationView;
@@ -17,6 +27,7 @@
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) float lineWidth;
 @property (nonatomic, strong) UIImageView* camImageView;
+@property (nonatomic, assign) id<MZCroppableViewDelegate> delegate;
 
 - (id)initWithImageView:(UIImageView *)imageView;
 

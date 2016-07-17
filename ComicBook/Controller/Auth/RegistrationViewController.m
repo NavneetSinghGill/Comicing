@@ -14,7 +14,8 @@
 
 @implementation RegistrationViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     self.signUpView.delegate = self;
     self.ProfilePicView.delegate = self;
     [self bindSignUpPage];

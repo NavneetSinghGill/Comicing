@@ -19,4 +19,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *mUserName;
 @property (weak, nonatomic) IBOutlet UILabel *mChatStatus;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblComicTitle;
 @end

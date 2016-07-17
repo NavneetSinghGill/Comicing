@@ -16,8 +16,8 @@
 
 @implementation StickerShareViewController
 
-- (void)viewDidLoad {
-    
+- (void)viewDidLoad
+{
     [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"StickerShare" Attributes:nil];
     
     [self prepareView];

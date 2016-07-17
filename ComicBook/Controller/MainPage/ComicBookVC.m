@@ -28,9 +28,10 @@
 @implementation ComicBookVC
 @synthesize modelController = _modelController;
 @synthesize images, slidesArray;
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-   
     isFirstTime=TRUE;
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -42,23 +43,23 @@
     NSString *notificationName = @"PageChange";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pageChanged:) name:notificationName object:nil];
 }
-- (void) viewWillDisappear:(BOOL)animated {
+
+- (void) viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PageChange" object:nil];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
--(void)setupBook
+
+- (void)setupBook
 {
- 
     dispatch_async(dispatch_get_main_queue(), ^{
 
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     self.pageViewController.delegate = self;
-    DataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:[UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil]];
-    self.modelController.slidesArray=slidesArray;
+    
+        DataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:[UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil]];
+   
+        self.modelController.slidesArray=slidesArray;
     //    startingViewController.imageArray=images;
         
         [AppDelegate application].dataManager.viewWidth = self.view.frame.size.width;
@@ -82,17 +83,19 @@
     
     // Find the tap gesture recognizer so we can remove it!
     UIGestureRecognizer* tapRecognizer = nil;
-    for (UIGestureRecognizer* recognizer in self.pageViewController.gestureRecognizers) {
-        if ( [recognizer isKindOfClass:[UITapGestureRecognizer class]] ) {
+    for (UIGestureRecognizer* recognizer in self.pageViewController.gestureRecognizers)
+    {
+        if ( [recognizer isKindOfClass:[UITapGestureRecognizer class]] )
+        {
             tapRecognizer = recognizer;
             break;
         }
     }
     
-    if ( tapRecognizer ) {
+    if ( tapRecognizer )
+    {
         [self.view removeGestureRecognizer:tapRecognizer];
         [self.pageViewController.view removeGestureRecognizer:tapRecognizer];
-        
     }
     
     
@@ -220,13 +223,16 @@
     NSArray *viewControllers = nil;
     
     NSUInteger indexOfCurrentViewController = [self.modelController indexOfViewController:currentViewController];
+    
     if (indexOfCurrentViewController == 0 || indexOfCurrentViewController % 2 == 0) {
         DataViewController *nextViewController =(DataViewController*) [self.modelController pageViewController:self.pageViewController viewControllerAfterViewController:currentViewController];
         nextViewController.Tag=self.Tag;
         nextViewController.slidesArray=slidesArray;
         viewControllers = @[currentViewController, nextViewController];
         
-    } else {
+    }
+    else
+    {
         DataViewController *previousViewController =( DataViewController*) [self.modelController pageViewController:self.pageViewController viewControllerBeforeViewController:currentViewController];
         previousViewController.Tag=self.Tag;
         previousViewController.slidesArray=slidesArray;
