@@ -10,6 +10,9 @@
 
 @interface OpenCuteStickersGiftBoxViewController ()
 
+@property (nonatomic, weak) IBOutlet UIImageView *mGiftBoxImageView;
+@property (nonatomic, weak) IBOutlet UIButton *mScissorButton;
+
 @end
 
 @implementation OpenCuteStickersGiftBoxViewController
@@ -33,5 +36,18 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)scissorButtonClicke:(id)sender
+{
+
+
+}
+
+- (IBAction)closeClicked:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 
 @end

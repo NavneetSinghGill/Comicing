@@ -84,4 +84,5 @@
 
 #pragma mark showHUDLoader
 + (void)showHUDLoader:(BOOL)show;
+
 @end

@@ -19,6 +19,7 @@
 #import "CropStickerViewController.h"
 #import "VerifyView.h"
 #import "SignUp.h"
+#import "InviteViewController.h"
 
 //extern NSString *const SKeySticker;
 
