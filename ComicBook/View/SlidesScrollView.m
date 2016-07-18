@@ -74,6 +74,8 @@ const NSInteger spaceFromTop = 75;
             viewPreviewSize = viewSizeForIPhone5;
         }
     }
+    
+    
     self.delegate = self;
     
     return self;
@@ -300,6 +302,9 @@ const NSInteger spaceFromTop = 75;
     [self addSubview:slideView];
     [self.slidesScrollViewDelegate returnAddedView:slideView];
     [self addTimeLineView];
+    
+   
+
 }
 
 - (void)reloadComicAtIndex:(NSInteger)index withComicSlide:(ComicPage *)comicSlide
@@ -336,23 +341,32 @@ const NSInteger spaceFromTop = 75;
         }
     }
     
+    
+    
 //    [self scrollRectToVisible:view.frame animated:NO];
 }
 
 - (void)addSlideButtonAtIndex:(NSInteger)index
 {
-    viewPreviewSlide = [[UIView alloc] init];
   
+   
+}
+
+- (void)setPreviewForSlidesAtIndex:(NSInteger)index withImages:(NSArray *)slides
+{
+    viewPreviewSlide = [[ComicSlidePreview alloc] init];
     viewPreviewSlide.frame = [self frameForPreviewSlide:index];
     [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
-//    [viewPreviewSlide setImage:[UIImage imageNamed:@"ComicAdd"] forState:UIControlStateNormal];
     
     [viewPreviewSlide setUserInteractionEnabled:NO];
+    
+    [viewPreviewSlide setupComicSlidePreview:slides];
     
     [self addSubview:viewPreviewSlide];
     
     [self setScrollViewContectSize];
 }
+
 
 -(void)addPlusButton :(NSInteger)index{
     btnPlusSlide = [[UIButton alloc] init];
@@ -369,6 +383,11 @@ const NSInteger spaceFromTop = 75;
     [self addSubview:btnPlusSlide];
     
     [self setScrollViewContectSize];
+    
+    // below code is temp code - ATC
+    NSArray *tempArray = @[[UIImage imageNamed:@"cat-demo"], [UIImage imageNamed:@"cat-demo"] ,[UIImage imageNamed:@"cat-demo"]];
+    
+    [self setPreviewForSlidesAtIndex:index withImages:tempArray];
 }
 -(void)addTimeLineView{
     [self addTimeLineView:0];

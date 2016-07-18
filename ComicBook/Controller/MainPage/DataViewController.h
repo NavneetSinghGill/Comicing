@@ -19,4 +19,6 @@
 //@property CGFloat viewWidth;
 //@property CGFloat viewHeight;
 
+@property BOOL isSlidesContainImages;
+
 @end
