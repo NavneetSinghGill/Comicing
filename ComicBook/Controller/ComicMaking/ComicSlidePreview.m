@@ -175,10 +175,6 @@
     imgv4Slide4.layer.borderColor = [UIColor whiteColor].CGColor;
     imgv4Slide4.layer.borderWidth = 3;
     
-    
-    
-    
-    
     imgv4Slide1.image = slides[0];
     imgv4Slide2.image = slides[1];
     imgv4Slide3.image = slides[2];
@@ -201,7 +197,7 @@
     [viewComicBook addSubview:comic.view];
     
     // vishnu
-    NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+//    NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
   //  [slidesArray addObjectsFromArray:comicBook.slides];
     
     // To repeat the cover image again on index page as the first slide.

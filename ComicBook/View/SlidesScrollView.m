@@ -36,7 +36,7 @@ const NSInteger spaceFromTop = 75;
 @implementation SlidesScrollView
 
 @synthesize slideView;
-@synthesize viewPreviewSlide,setAddButtonIndex, allSlidesView, viewSize,viewPreviewSize,btnPlusSlide;
+@synthesize viewPreviewSlide,setAddButtonIndex, allSlidesView, viewSize,viewPreviewSize,btnPlusSlide,viewPreviewScrollSlide;
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
@@ -119,7 +119,7 @@ const NSInteger spaceFromTop = 75;
 
 - (void)setScrollViewContectSize
 {
-    self.contentSize = CGSizeMake(CGRectGetMaxX(viewPreviewSlide.frame) + spaceBetweenSlide , CGRectGetHeight(viewPreviewSlide.frame));
+    self.contentSize = CGSizeMake(CGRectGetMaxX(viewPreviewScrollSlide.frame) + spaceBetweenSlide , CGRectGetHeight(viewPreviewScrollSlide.frame));
 }
 
 - (void)setScrollViewContectSizeByLastIndex:(NSInteger)index
@@ -130,16 +130,16 @@ const NSInteger spaceFromTop = 75;
 
 
 #pragma mark Scrollviewdelegate
-//
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-//{
-//    NSLog(@"scrollViewWillBeginDragging Start");
-//}
-//
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    NSLog(@"scrollViewDidScroll Start");
-//}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isKindOfClass:[UIScrollView class]]) {
+    }
+}
 
 #pragma mark - make slideview methods
 - (UIView*)reloadSlideViewForIndex:(NSInteger)index mainView:(UIView*)subView
@@ -354,15 +354,51 @@ const NSInteger spaceFromTop = 75;
 
 - (void)setPreviewForSlidesAtIndex:(NSInteger)index withImages:(NSArray *)slides
 {
-    viewPreviewSlide = [[ComicSlidePreview alloc] init];
-    viewPreviewSlide.frame = [self frameForPreviewSlide:index];
-    [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
+    viewPreviewScrollSlide = [[UIScrollView alloc] init];
+    viewPreviewScrollSlide.frame = [self frameForPreviewSlide:index];
+    viewPreviewScrollSlide.delegate = self;
+    if ([slides count] >4) {
+        NSArray* firstArray = [slides subarrayWithRange:NSMakeRange(0, 4)];
+        NSArray* secondArray = [slides subarrayWithRange:NSMakeRange(0, 2)];
+        
+        //Handle FirstArray
+        
+        viewPreviewSlide = [[ComicSlidePreview alloc] init];
+        viewPreviewSlide.frame = CGRectMake(0, 0, viewPreviewScrollSlide.frame.size.width, viewPreviewScrollSlide.frame.size.height);
+        [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
+        
+        [viewPreviewSlide setUserInteractionEnabled:NO];
+        
+        [viewPreviewSlide setupComicSlidePreview:firstArray];
+        
+        [viewPreviewScrollSlide addSubview:viewPreviewSlide];
+
+        //Handle Secondarray
+        viewPreviewSlide = [[ComicSlidePreview alloc] init];
+        viewPreviewSlide.frame = CGRectMake(viewPreviewScrollSlide.frame.size.width, 0, viewPreviewScrollSlide.frame.size.width, viewPreviewScrollSlide.frame.size.height);
+        [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
+        
+        [viewPreviewSlide setUserInteractionEnabled:NO];
+        
+        [viewPreviewSlide setupComicSlidePreview:secondArray];
+        
+        [viewPreviewScrollSlide addSubview:viewPreviewSlide];
+        
+        [viewPreviewScrollSlide setContentSize:CGSizeMake(viewPreviewScrollSlide.frame.size.width * 2, viewPreviewScrollSlide.frame.size.height)];
+    }else{
+        viewPreviewSlide = [[ComicSlidePreview alloc] init];
+        viewPreviewSlide.frame = CGRectMake(0, 0, viewPreviewScrollSlide.frame.size.width, viewPreviewScrollSlide.frame.size.height);
+        [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
+        
+        [viewPreviewSlide setUserInteractionEnabled:NO];
+        
+        [viewPreviewSlide setupComicSlidePreview:slides];
+        
+        [viewPreviewScrollSlide addSubview:viewPreviewSlide];
+    }
     
-    [viewPreviewSlide setUserInteractionEnabled:NO];
     
-    [viewPreviewSlide setupComicSlidePreview:slides];
-    
-    [self addSubview:viewPreviewSlide];
+    [self addSubview:viewPreviewScrollSlide];
     
     [self setScrollViewContectSize];
 }
@@ -385,7 +421,7 @@ const NSInteger spaceFromTop = 75;
     [self setScrollViewContectSize];
     
     // below code is temp code - ATC
-    NSArray *tempArray = @[[UIImage imageNamed:@"cat-demo"], [UIImage imageNamed:@"cat-demo"] ,[UIImage imageNamed:@"cat-demo"]];
+    NSArray *tempArray = @[[UIImage imageNamed:@"cat-demo"], [UIImage imageNamed:@"cat-demo"] ,[UIImage imageNamed:@"cat-demo"],[UIImage imageNamed:@"cat-demo"],[UIImage imageNamed:@"cat-demo"]];
     
     [self setPreviewForSlidesAtIndex:index withImages:tempArray];
 }

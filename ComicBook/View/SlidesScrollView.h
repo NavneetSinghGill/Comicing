@@ -29,6 +29,7 @@
 @property NSInteger setAddButtonIndex;
 @property BOOL isStillSaving;
 //@property (nonatomic, strong) UIButton *btnAddSlide;
+@property (nonatomic, strong) UIScrollView *viewPreviewScrollSlide;
 @property (nonatomic, strong) ComicSlidePreview *viewPreviewSlide;
 @property (nonatomic, strong) UIButton *btnPlusSlide;
 @property (strong, nonatomic) NSMutableArray *allSlidesView;
