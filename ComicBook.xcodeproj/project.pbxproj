@@ -355,6 +355,20 @@
 		1B4FCCDB1D323D6400278B16 /* PrivateConversationTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */; };
 		1B4FCCDC1D323D6400278B16 /* PrivateConversationTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */; };
 		1B7E51FF1D36DEF60038199E /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B7E51FE1D36DEF60038199E /* camera.png */; };
+		1B99A7221D354DB500CFA820 /* private_conversation_input_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7201D354DB500CFA820 /* private_conversation_input_background@2x.png */; };
+		1B99A7231D354DB500CFA820 /* private_conversation_input_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7211D354DB500CFA820 /* private_conversation_input_background@3x.png */; };
+		1B99A7261D35749B00CFA820 /* group_conversation_input_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7241D35749B00CFA820 /* group_conversation_input_background@2x.png */; };
+		1B99A7271D35749B00CFA820 /* group_conversation_input_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7251D35749B00CFA820 /* group_conversation_input_background@3x.png */; };
+		1B9B7C181D3A9C5F003B04F1 /* InviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C171D3A9C5F003B04F1 /* InviteViewController.m */; };
+		1B9B7C221D3A9E03003B04F1 /* EmojiHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C1B1D3A9E03003B04F1 /* EmojiHelper.m */; };
+		1B9B7C231D3A9E03003B04F1 /* MyEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C1D1D3A9E03003B04F1 /* MyEmoji.m */; };
+		1B9B7C241D3A9E03003B04F1 /* MyEmojiCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C1F1D3A9E03003B04F1 /* MyEmojiCategory.m */; };
+		1B9B7C251D3A9E03003B04F1 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C211D3A9E03003B04F1 /* UICountingLabel.m */; };
+		1B9B7C351D3AB607003B04F1 /* InviteScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C301D3AB607003B04F1 /* InviteScore.m */; };
+		1B9B7C361D3AB607003B04F1 /* InviteScore+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C321D3AB607003B04F1 /* InviteScore+CoreDataProperties.m */; };
+		1BAA6A1E1D3BEBAE00E359DB /* OpenCuteStickersGiftBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAA6A1C1D3BEBAE00E359DB /* OpenCuteStickersGiftBoxViewController.m */; };
+		1BAA6A211D3BED1C00E359DB /* round-rectangular-area.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BAA6A201D3BED1C00E359DB /* round-rectangular-area.png */; };
+		1BAA6A231D3BEEAA00E359DB /* Scissor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BAA6A221D3BEEAA00E359DB /* Scissor.png */; };
 		1BAF305C1D3027DD00815495 /* ComicConversationBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAF30591D3027DC00815495 /* ComicConversationBook.m */; };
 		1BAF305D1D3027DD00815495 /* ComicConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAF305B1D3027DD00815495 /* ComicConversationModel.m */; };
 		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
@@ -1006,6 +1020,28 @@
 		1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateConversationTextCell.m; sourceTree = "<group>"; };
 		1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateConversationTextCell.xib; sourceTree = "<group>"; };
 		1B7E51FE1D36DEF60038199E /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		1B99A7201D354DB500CFA820 /* private_conversation_input_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "private_conversation_input_background@2x.png"; sourceTree = "<group>"; };
+		1B99A7211D354DB500CFA820 /* private_conversation_input_background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "private_conversation_input_background@3x.png"; sourceTree = "<group>"; };
+		1B99A7241D35749B00CFA820 /* group_conversation_input_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_conversation_input_background@2x.png"; sourceTree = "<group>"; };
+		1B99A7251D35749B00CFA820 /* group_conversation_input_background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_conversation_input_background@3x.png"; sourceTree = "<group>"; };
+		1B9B7C161D3A9C5F003B04F1 /* InviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteViewController.h; sourceTree = "<group>"; };
+		1B9B7C171D3A9C5F003B04F1 /* InviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteViewController.m; sourceTree = "<group>"; };
+		1B9B7C1A1D3A9E03003B04F1 /* EmojiHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiHelper.h; sourceTree = "<group>"; };
+		1B9B7C1B1D3A9E03003B04F1 /* EmojiHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiHelper.m; sourceTree = "<group>"; };
+		1B9B7C1C1D3A9E03003B04F1 /* MyEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEmoji.h; sourceTree = "<group>"; };
+		1B9B7C1D1D3A9E03003B04F1 /* MyEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEmoji.m; sourceTree = "<group>"; };
+		1B9B7C1E1D3A9E03003B04F1 /* MyEmojiCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEmojiCategory.h; sourceTree = "<group>"; };
+		1B9B7C1F1D3A9E03003B04F1 /* MyEmojiCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEmojiCategory.m; sourceTree = "<group>"; };
+		1B9B7C201D3A9E03003B04F1 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
+		1B9B7C211D3A9E03003B04F1 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
+		1B9B7C2F1D3AB607003B04F1 /* InviteScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteScore.h; sourceTree = "<group>"; };
+		1B9B7C301D3AB607003B04F1 /* InviteScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteScore.m; sourceTree = "<group>"; };
+		1B9B7C311D3AB607003B04F1 /* InviteScore+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InviteScore+CoreDataProperties.h"; sourceTree = "<group>"; };
+		1B9B7C321D3AB607003B04F1 /* InviteScore+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "InviteScore+CoreDataProperties.m"; sourceTree = "<group>"; };
+		1BAA6A1B1D3BEBAE00E359DB /* OpenCuteStickersGiftBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCuteStickersGiftBoxViewController.h; sourceTree = "<group>"; };
+		1BAA6A1C1D3BEBAE00E359DB /* OpenCuteStickersGiftBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenCuteStickersGiftBoxViewController.m; sourceTree = "<group>"; };
+		1BAA6A201D3BED1C00E359DB /* round-rectangular-area.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "round-rectangular-area.png"; sourceTree = "<group>"; };
+		1BAA6A221D3BEEAA00E359DB /* Scissor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Scissor.png; sourceTree = "<group>"; };
 		1BAF30581D3027DC00815495 /* ComicConversationBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicConversationBook.h; sourceTree = "<group>"; };
 		1BAF30591D3027DC00815495 /* ComicConversationBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicConversationBook.m; sourceTree = "<group>"; };
 		1BAF305A1D3027DC00815495 /* ComicConversationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicConversationModel.h; sourceTree = "<group>"; };
@@ -1137,6 +1173,10 @@
 		0C32C9951CB0B053001DA121 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				1B9B7C2F1D3AB607003B04F1 /* InviteScore.h */,
+				1B9B7C301D3AB607003B04F1 /* InviteScore.m */,
+				1B9B7C311D3AB607003B04F1 /* InviteScore+CoreDataProperties.h */,
+				1B9B7C321D3AB607003B04F1 /* InviteScore+CoreDataProperties.m */,
 				0C32C9961CB0B053001DA121 /* ComicBookData.xcdatamodeld */,
 				0C32C9991CB0B067001DA121 /* Stickers.h */,
 				0C32C99A1CB0B067001DA121 /* Stickers.m */,
@@ -1260,6 +1300,8 @@
 		0C6664C61C84358500FEB11F /* general */ = {
 			isa = PBXGroup;
 			children = (
+				1BAA6A221D3BEEAA00E359DB /* Scissor.png */,
+				1BAA6A201D3BED1C00E359DB /* round-rectangular-area.png */,
 				1B7E51FE1D36DEF60038199E /* camera.png */,
 				0C6664C71C84358500FEB11F /* backbutton.png */,
 				0C6664C81C84358500FEB11F /* cameraButton.png */,
@@ -1746,6 +1788,10 @@
 		0C6665941C84358500FEB11F /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
+				1B9B7C161D3A9C5F003B04F1 /* InviteViewController.h */,
+				1B9B7C171D3A9C5F003B04F1 /* InviteViewController.m */,
+				1BAA6A1B1D3BEBAE00E359DB /* OpenCuteStickersGiftBoxViewController.h */,
+				1BAA6A1C1D3BEBAE00E359DB /* OpenCuteStickersGiftBoxViewController.m */,
 				0C6665951C84358500FEB11F /* BottomBarView */,
 				0C6665981C84358500FEB11F /* CameraViewController.h */,
 				0C6665991C84358500FEB11F /* CameraViewController.m */,
@@ -2080,6 +2126,9 @@
 		0C6666331C84358600FEB11F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1B9B7C191D3A9E03003B04F1 /* Emoji */,
+				1B9B7C201D3A9E03003B04F1 /* UICountingLabel.h */,
+				1B9B7C211D3A9E03003B04F1 /* UICountingLabel.m */,
 				8433BC921CC135D20073DE2A /* UIImage+Trim.h */,
 				8433BC931CC135D20073DE2A /* UIImage+Trim.m */,
 				0CBF90B61CA3143D004007DF /* UIImage+ImageCompress.h */,
@@ -2718,6 +2767,19 @@
 			name = MainPageCell;
 			sourceTree = "<group>";
 		};
+		1B9B7C191D3A9E03003B04F1 /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				1B9B7C1A1D3A9E03003B04F1 /* EmojiHelper.h */,
+				1B9B7C1B1D3A9E03003B04F1 /* EmojiHelper.m */,
+				1B9B7C1C1D3A9E03003B04F1 /* MyEmoji.h */,
+				1B9B7C1D1D3A9E03003B04F1 /* MyEmoji.m */,
+				1B9B7C1E1D3A9E03003B04F1 /* MyEmojiCategory.h */,
+				1B9B7C1F1D3A9E03003B04F1 /* MyEmojiCategory.m */,
+			);
+			path = Emoji;
+			sourceTree = "<group>";
+		};
 		8450906C1C2B1343004DAE99 = {
 			isa = PBXGroup;
 			children = (
@@ -2903,6 +2965,7 @@
 				0C6667791C84358600FEB11F /* MYRIADPRO-CONDIT.OTF in Resources */,
 				84CEF11B1D3ADF68009FCB1D /* BubbleWhite.png in Resources */,
 				0C66677E1C84358600FEB11F /* add_small.png in Resources */,
+				1BAA6A231D3BEEAA00E359DB /* Scissor.png in Resources */,
 				0C6667991C84358600FEB11F /* profilePicClose.png in Resources */,
 				0C6667741C84358600FEB11F /* MYRIADPRO-BOLD.OTF in Resources */,
 				0C66678E1C84358600FEB11F /* groupMemberSearch.png in Resources */,
@@ -2996,6 +3059,7 @@
 				0C6667811C84358600FEB11F /* arrow@3x.png in Resources */,
 				84CEF1171D3ADF68009FCB1D /* private_conversation_input_background@2x.png in Resources */,
 				0CB7C33E1CF8DA640072E4B0 /* ARLRDBD.TTF in Resources */,
+				1BAA6A211D3BED1C00E359DB /* round-rectangular-area.png in Resources */,
 				0CC9F3741CF653D100761F44 /* Segment7Standard.otf in Resources */,
 				84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */,
 				0C6667711C84358600FEB11F /* Avenir Next LT W01 Ultra Light.ttf in Resources */,
@@ -3074,12 +3138,14 @@
 				0C6668781C84358600FEB11F /* NSData+ImageContentType.m in Sources */,
 				1BAF305D1D3027DD00815495 /* ComicConversationModel.m in Sources */,
 				0C66681B1C84358600FEB11F /* CMCUser.m in Sources */,
+				1B9B7C241D3A9E03003B04F1 /* MyEmojiCategory.m in Sources */,
 				0C6668571C84358600FEB11F /* AFURLSessionManager.m in Sources */,
 				0C66681A1C84358600FEB11F /* CMCComic.m in Sources */,
 				0C6668081C84358600FEB11F /* MePageDetailsVC.m in Sources */,
 				0C6667D71C84358600FEB11F /* FindFriendsTableCell.m in Sources */,
 				0C5896AA1CA82B9E003CD8A2 /* CurrentUser.m in Sources */,
 				0C66680A1C84358600FEB11F /* ModelController.m in Sources */,
+				1BAA6A1E1D3BEBAE00E359DB /* OpenCuteStickersGiftBoxViewController.m in Sources */,
 				0C6668151C84358600FEB11F /* SendPageViewController.m in Sources */,
 				0C66683A1C84358600FEB11F /* RKDropdownAlert.m in Sources */,
 				0C66E60A1C957605005E4548 /* CustomView.m in Sources */,
@@ -3141,6 +3207,7 @@
 				0C66686A1C84358600FEB11F /* NSArray+MTLManipulationAdditions.m in Sources */,
 				0C6667E21C84358600FEB11F /* ExclamationList.m in Sources */,
 				0C6668001C84358600FEB11F /* FriendsCollectionViewCell.m in Sources */,
+				1B9B7C351D3AB607003B04F1 /* InviteScore.m in Sources */,
 				84F1B4411CB2E41A0096F79C /* InviteFriendCell.m in Sources */,
 				0C6667D91C84358600FEB11F /* FindFriendsViewController.m in Sources */,
 				0C6668A21C84358600FEB11F /* FooterView.m in Sources */,
@@ -3162,10 +3229,12 @@
 				0C66681F1C84358600FEB11F /* ComicPage.m in Sources */,
 				0C66685C1C84358600FEB11F /* NSArray+JSONModel.m in Sources */,
 				0C6667E31C84358600FEB11F /* RowButtonsViewController.m in Sources */,
+				1B9B7C181D3A9C5F003B04F1 /* InviteViewController.m in Sources */,
 				0C6667F11C84358600FEB11F /* ComicCommentPeopleVC.m in Sources */,
 				0C6668501C84358600FEB11F /* AFHTTPRequestOperationManager.m in Sources */,
 				0C6668631C84358600FEB11F /* EXTScope.m in Sources */,
 				0C66676E1C84358600FEB11F /* AppDelegate.m in Sources */,
+				1B9B7C221D3A9E03003B04F1 /* EmojiHelper.m in Sources */,
 				0C66689B1C84358600FEB11F /* AvatarView.m in Sources */,
 				0C6667C11C84358600FEB11F /* RCiMessage.m in Sources */,
 				0C6668561C84358600FEB11F /* AFURLResponseSerialization.m in Sources */,
@@ -3177,6 +3246,7 @@
 				0C66685B1C84358600FEB11F /* JSONModelError.m in Sources */,
 				0C6668321C84358600FEB11F /* UserDetail.m in Sources */,
 				0C66685A1C84358600FEB11F /* JSONModelClassProperty.m in Sources */,
+				1B9B7C231D3A9E03003B04F1 /* MyEmoji.m in Sources */,
 				0C6668AA1C84358600FEB11F /* GlideCell.m in Sources */,
 				0C6668271C84358600FEB11F /* GroupCreate.m in Sources */,
 				0C6668691C84358600FEB11F /* MTLValueTransformer.m in Sources */,
@@ -3194,6 +3264,7 @@
 				0C6667CD1C84358600FEB11F /* CommentsAPIManager.m in Sources */,
 				0C66688B1C84358600FEB11F /* STHTTPRequest+STTwitter.m in Sources */,
 				0C6668671C84358600FEB11F /* MTLReflection.m in Sources */,
+				1B9B7C361D3AB607003B04F1 /* InviteScore+CoreDataProperties.m in Sources */,
 				0C6667EF1C84358600FEB11F /* CameraViewController.m in Sources */,
 				0C66684E1C84358600FEB11F /* Utilities.m in Sources */,
 				84EFDA021D340E2C005B5FB0 /* YLImageView.m in Sources */,
@@ -3279,6 +3350,7 @@
 				0C6668881C84358600FEB11F /* NSDateFormatter+STTwitter.m in Sources */,
 				84EFBCC21D25878D00647A88 /* InstructionView.m in Sources */,
 				0C6667F61C84358600FEB11F /* FriendCell.m in Sources */,
+				1B9B7C251D3A9E03003B04F1 /* UICountingLabel.m in Sources */,
 				0C6668751C84358600FEB11F /* UIColor+BFPaperColors.m in Sources */,
 				0C32C99B1CB0B067001DA121 /* Stickers.m in Sources */,
 				0C6667B51C84358600FEB11F /* ComicItem.m in Sources */,

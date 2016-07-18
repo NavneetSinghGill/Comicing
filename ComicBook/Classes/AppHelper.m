@@ -11,6 +11,7 @@
 #import "DACircularProgressView.h"
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
+#import "InviteScore.h"
 
 @implementation AppHelper
 
@@ -539,6 +540,24 @@ static AppHelper *_appHelper = nil;
 {
     timer==nil?nil:[timer invalidate];
     timer = nil;
+}
+
+
+#pragma mark DB
+
++(float)getCurrentScoreFromDB{
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"InviteScore"];
+    NSError *error      = nil;
+    NSArray *results    = [context executeFetchRequest:fetchRequest error:&error];
+    if ([results count] == 0) {
+        return 0;
+    }else{
+        NSString* scoreValue = ((InviteScore*)results[0]).scoreValue;
+        CGFloat fScoreValue = [scoreValue floatValue];
+        return fScoreValue;
+    }
 }
 
 @end
