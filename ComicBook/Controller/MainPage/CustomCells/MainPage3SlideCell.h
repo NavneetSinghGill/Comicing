@@ -10,7 +10,8 @@
 #import "ComicBook.h"
 
 @interface MainPage3SlideCell : UITableViewCell
-
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *const_Height;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *const_Width;
 @property (weak, nonatomic) IBOutlet UILabel *lblComicTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *imgvSlide1;
 @property (weak, nonatomic) IBOutlet UIImageView *imgvSlide2;

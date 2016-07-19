@@ -352,6 +352,9 @@
 		0CC9F3741CF653D100761F44 /* Segment7Standard.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0CC9F3731CF653D100761F44 /* Segment7Standard.otf */; };
 		0CDD9A821C99B30B00D942D3 /* TermsServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */; };
 		160DEF8C1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m in Sources */ = {isa = PBXBuildFile; fileRef = 160DEF8B1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m */; };
+		161A08171D3D54C500BF0F50 /* arielBlack.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 161A08161D3D546F00BF0F50 /* arielBlack.ttf */; };
+		168512131D3C052000A372E3 /* follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 168512111D3C052000A372E3 /* follow.png */; };
+		168512141D3C052000A372E3 /* followSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 168512121D3C052000A372E3 /* followSelected.png */; };
 		1B4FCCDB1D323D6400278B16 /* PrivateConversationTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */; };
 		1B4FCCDC1D323D6400278B16 /* PrivateConversationTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */; };
 		1B7E51FF1D36DEF60038199E /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B7E51FE1D36DEF60038199E /* camera.png */; };
@@ -1000,6 +1003,9 @@
 		0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsServiceViewController.m; sourceTree = "<group>"; };
 		160DEF8A1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Multiplier.h"; sourceTree = "<group>"; };
 		160DEF8B1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Multiplier.m"; sourceTree = "<group>"; };
+		161A08161D3D546F00BF0F50 /* arielBlack.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arielBlack.ttf; sourceTree = "<group>"; };
+		168512111D3C052000A372E3 /* follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = follow.png; sourceTree = "<group>"; };
+		168512121D3C052000A372E3 /* followSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followSelected.png; sourceTree = "<group>"; };
 		1B4FCCD81D323D6400278B16 /* PrivateConversationTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateConversationTextCell.h; sourceTree = "<group>"; };
 		1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateConversationTextCell.m; sourceTree = "<group>"; };
 		1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateConversationTextCell.xib; sourceTree = "<group>"; };
@@ -1186,6 +1192,7 @@
 		0C6664AC1C84358500FEB11F /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				161A08161D3D546F00BF0F50 /* arielBlack.ttf */,
 				0CB7C33D1CF8DA640072E4B0 /* ARLRDBD.TTF */,
 				0CC9F3731CF653D100761F44 /* Segment7Standard.otf */,
 				0C6664AD1C84358500FEB11F /* AmericanTypeWriter */,
@@ -1225,6 +1232,7 @@
 		0C6664BD1C84358500FEB11F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1685120C1D3C02C100A372E3 /* FriendPage */,
 				84CEF0FE1D3ADF68009FCB1D /* Conversation */,
 				84CEF1061D3ADF68009FCB1D /* TopBar */,
 				0C6664BE1C84358500FEB11F /* contactPage */,
@@ -2699,6 +2707,15 @@
 			path = FabricAnalytics;
 			sourceTree = "<group>";
 		};
+		1685120C1D3C02C100A372E3 /* FriendPage */ = {
+			isa = PBXGroup;
+			children = (
+				168512111D3C052000A372E3 /* follow.png */,
+				168512121D3C052000A372E3 /* followSelected.png */,
+			);
+			path = FriendPage;
+			sourceTree = "<group>";
+		};
 		843ABB751D1FAA500078B7A8 /* MainPageCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2906,6 +2923,7 @@
 				0C6668A01C84358600FEB11F /* ComicShareView.xib in Resources */,
 				0C6668B41C84358600FEB11F /* KeyboardView.xib in Resources */,
 				0C6668B61C84358600FEB11F /* ProfilePicView.xib in Resources */,
+				161A08171D3D54C500BF0F50 /* arielBlack.ttf in Resources */,
 				0C6667A81C84358600FEB11F /* facebooklogo.png in Resources */,
 				84A5DFE71D36900E0089D6BE /* Slide-12.gif in Resources */,
 				84A5DFE51D3690070089D6BE /* Slide-10.gif in Resources */,
@@ -2941,6 +2959,7 @@
 				84CEF1151D3ADF68009FCB1D /* indicator@2x.png in Resources */,
 				0C6667EC1C84358600FEB11F /* GroupsMembersSection.xib in Resources */,
 				0C6667901C84358600FEB11F /* accountEmail.png in Resources */,
+				168512141D3C052000A372E3 /* followSelected.png in Resources */,
 				84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */,
 				84CEF1161D3ADF68009FCB1D /* indicator@3x.png in Resources */,
 				0C6667AF1C84358600FEB11F /* LaunchScreen.storyboard in Resources */,
@@ -2996,6 +3015,7 @@
 				0C6667721C84358600FEB11F /* Myriad Roman.ttf in Resources */,
 				0C6667831C84358600FEB11F /* searchByID.png in Resources */,
 				0C6668BB1C84358600FEB11F /* SignUp.xib in Resources */,
+				168512131D3C052000A372E3 /* follow.png in Resources */,
 				84A5DFEB1D3697A30089D6BE /* Slide-E.gif in Resources */,
 				0C66678D1C84358600FEB11F /* checkMark.png in Resources */,
 				0C6667FA1C84358600FEB11F /* PrivateConversationCell.xib in Resources */,

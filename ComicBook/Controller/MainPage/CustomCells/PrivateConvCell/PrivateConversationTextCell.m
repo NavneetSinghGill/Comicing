@@ -21,7 +21,7 @@
     [self.mMessageHolderView.layer setCornerRadius:8];
     
     
-    if(IS_IPHONE_5)
+    /*if(IS_IPHONE_5)
     {
         btnUser.frame = CGRectMake(CGRectGetMinX(btnUser.frame),
                                    CGRectGetMinY(btnUser.frame),
@@ -53,14 +53,45 @@
                                             CGRectGetMinY(userProfilePic.frame) ,
                                             40,
                                             40);
+    }*/
+    
+    
+    CGFloat heiWei;
+    
+    if (IS_IPHONE_5)
+    {
+        heiWei = 34;
+        _mUserName.font = [_mUserName.font fontWithSize:8.f];
+        self.lblDate.font = [self.lblDate.font fontWithSize:8.f];
+        self.lblTime.font = [self.lblTime.font fontWithSize:8.f];
+        
+    }
+    else if (IS_IPHONE_6)
+    {
+        heiWei = 35;
+        _mUserName.font = [_mUserName.font fontWithSize:9.f];
+        self.lblDate.font = [self.lblDate.font fontWithSize:9.f];
+        self.lblTime.font = [self.lblTime.font fontWithSize:9.f];
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heiWei = 36;
+        _mUserName.font = [_mUserName.font fontWithSize:10.f];
+        self.lblDate.font = [self.lblDate.font fontWithSize:10.f];
+        self.lblTime.font = [self.lblTime.font fontWithSize:10.f];
     }
     
-    
+    _const_Width.constant = heiWei;
+    _const_Height.constant = heiWei;
+    btnUser.layer.cornerRadius = heiWei / 2;
+    btnUser.layer.masksToBounds = YES;
+    userProfilePic.layer.cornerRadius = heiWei / 2;
+    userProfilePic.layer.masksToBounds = YES;
     //    btnUser.layer.cornerRadius = CGRectGetHeight(btnUser.frame) / 2;
-    btnUser.clipsToBounds = YES;
+   /* btnUser.clipsToBounds = YES;
     
     //    userProfilePic.layer.cornerRadius = CGRectGetHeight(userProfilePic.frame) / 2;
-    userProfilePic.clipsToBounds = YES;
+    userProfilePic.clipsToBounds = YES;*/
     
 }
 
