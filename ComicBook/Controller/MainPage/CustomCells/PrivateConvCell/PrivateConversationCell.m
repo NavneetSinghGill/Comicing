@@ -19,7 +19,7 @@
 
 @implementation PrivateConversationCell
 
-@synthesize widthconstraint,btnUser, userProfilePic;
+@synthesize widthconstraint,btnUser, userProfilePic, lblComicTitle;
 
 - (void)awakeFromNib {
     // Initialization code

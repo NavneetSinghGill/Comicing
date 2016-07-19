@@ -261,10 +261,19 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 -(void)getAccountRequest
 {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    /*UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     FindFriendsViewController *controller = (FindFriendsViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"FindFriendsViewController"];
     
     controller.imgUser = _imgFinalCopedFace.image;
+    
+    [self.navigationController pushViewController:controller animated:YES];
+    mainStoryboard = nil;*/
+    
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    InviteViewController *controller = (InviteViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"InviteViewController"];
+    
+    //controller.imgUser = _imgFinalCopedFace.image;
     
     [self.navigationController pushViewController:controller animated:YES];
     mainStoryboard = nil;

@@ -628,7 +628,6 @@ UICollectionViewDelegate>
     {
         int height=0;
         
-        
         if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
         {
             if(IS_IPHONE_5)

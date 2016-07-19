@@ -11,6 +11,7 @@
 #import "CropStickerViewController.h"
 #import "stickerCell.h"
 #import "AppConstants.h"
+#import "InviteScore.h"
 
 //#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 //#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -79,7 +80,37 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 
 - (NSArray *)getDefaultStickers
 {
-    NSArray *imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"];
+    float scoreValue = [self getCurrentScoreFromDB];
+
+    NSArray *imageNames = nil;
+    
+    if (scoreValue >= INVITE_POINT_200)
+    {
+        imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",
+                       
+                       @"st1",@"st2",@"st3",@"st4",@"st5",
+                       @"st1",@"st2",@"st3",@"st4",@"st5",
+                       @"st1",@"st2",@"st3",@"st4",@"st5"];//add 15 stickers
+    }
+    else if(scoreValue >= INVITE_POINT_100 &&
+             scoreValue <= INVITE_POINT_200)
+    {
+        imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",
+                       
+                       @"st1",@"st2",@"st3",@"st4",@"st5",
+                       @"st1",@"st2",@"st3",@"st4",@"st5"];//add 10 stickers
+    }
+    else if(scoreValue >= INVITE_POINT_50 &&
+             scoreValue <= INVITE_POINT_100)
+    {
+        imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",
+                       @"st1",@"st2",@"st3",@"st4",@"st5"];//add 5 stickers
+    }
+    else
+    {
+        imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"];
+    }
+
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     
@@ -118,6 +149,20 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     return array;
 }
 
+-(float)getCurrentScoreFromDB{
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"InviteScore"];
+    NSError *error      = nil;
+    NSArray *results    = [context executeFetchRequest:fetchRequest error:&error];
+    if ([results count] == 0) {
+        return 0;
+    }else{
+        NSString* scoreValue = ((InviteScore*)results[0]).scoreValue;
+        CGFloat fScoreValue = [scoreValue floatValue];
+        return fScoreValue;
+    }
+}
 
 - (NSArray *)getStickerWithoutShadow
 {

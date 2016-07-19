@@ -29,6 +29,8 @@
 @synthesize modelController = _modelController;
 @synthesize images, slidesArray;
 
+@synthesize isSlidesContainImages;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,43 +56,43 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
 
-    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    self.pageViewController.delegate = self;
-    
+        self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+        self.pageViewController.delegate = self;
+        
         DataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:[UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil]];
-   
+        startingViewController.isSlidesContainImages = self.isSlidesContainImages;
         self.modelController.slidesArray=slidesArray;
-    //    startingViewController.imageArray=images;
+        //    startingViewController.imageArray=images;
         
         [AppDelegate application].dataManager.viewWidth = self.view.frame.size.width;
         [AppDelegate application].dataManager.viewHeight = self.view.frame.size.height;
-//        startingViewController.viewWidth = self.view.frame.size.width;
-//        startingViewController.viewHeight = self.view.frame.size.height;
+        //        startingViewController.viewWidth = self.view.frame.size.width;
+        //        startingViewController.viewHeight = self.view.frame.size.height;
         
-    startingViewController.slidesArray = slidesArray;
-    startingViewController.Tag=self.Tag;
-    
-    NSArray *viewControllers = @[startingViewController];
-    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
-    
-    self.pageViewController.dataSource = self.modelController;
-    [ self.pageViewController.view  setTranslatesAutoresizingMaskIntoConstraints:NO];
- 
-    [self.CurlContainer addSubview:self.pageViewController.view ];
-    
-       [self addChildViewController:self.pageViewController];
-    self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
-    
-    // Find the tap gesture recognizer so we can remove it!
-    UIGestureRecognizer* tapRecognizer = nil;
-    for (UIGestureRecognizer* recognizer in self.pageViewController.gestureRecognizers)
-    {
-        if ( [recognizer isKindOfClass:[UITapGestureRecognizer class]] )
+        startingViewController.slidesArray = slidesArray;
+        startingViewController.Tag = self.Tag;
+        
+        NSArray *viewControllers = @[startingViewController];
+        [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+        
+        self.pageViewController.dataSource = self.modelController;
+        [ self.pageViewController.view  setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        [self.CurlContainer addSubview:self.pageViewController.view ];
+        
+        [self addChildViewController:self.pageViewController];
+        self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
+        
+        // Find the tap gesture recognizer so we can remove it!
+        UIGestureRecognizer* tapRecognizer = nil;
+        for (UIGestureRecognizer* recognizer in self.pageViewController.gestureRecognizers)
         {
-            tapRecognizer = recognizer;
-            break;
+            if ( [recognizer isKindOfClass:[UITapGestureRecognizer class]] )
+            {
+                tapRecognizer = recognizer;
+                break;
+            }
         }
-    }
     
     if ( tapRecognizer )
     {
@@ -203,7 +205,7 @@
         // In portrait orientation or on iPhone: Set the spine position to "min" and the page view controller's view controllers array to contain just one view controller. Setting the spine position to 'UIPageViewControllerSpineLocationMid' in landscape orientation sets the doubleSided property to YES, so set it to NO here.
         
         DataViewController *currentViewController = self.pageViewController.viewControllers[0];
-        currentViewController.Tag=self.Tag;
+        currentViewController.Tag = self.Tag;
         currentViewController.slidesArray=slidesArray;
         NSArray *viewControllers = @[currentViewController];
         [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];

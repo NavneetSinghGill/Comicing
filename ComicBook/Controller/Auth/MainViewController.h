@@ -9,4 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface MainViewController : UIViewController<UIGestureRecognizerDelegate>
+
+-(void)getStickerListByCategory:(NSString*)strCategoryId CategoryName:(NSString*)ctName;
+- (void)hideInviteView;
+- (void)openInviteView;
+
 @end

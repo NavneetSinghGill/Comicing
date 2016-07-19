@@ -84,3 +84,10 @@
 #define ERROR_MESSAGE @"Oops!  Something went wrong"
 #define DEFAULT_EMAIL @"comic@comicing.cc"
 #define DEFAULT_PHONENUMBER @"0000000000"
+
+#define DEFAULT_EMOJI @"UIKeyboardEmojiCategoryNature"
+
+#define INVITE_POINT_PERINVITE 8
+#define INVITE_POINT_50 50
+#define INVITE_POINT_100 100
+#define INVITE_POINT_200 200

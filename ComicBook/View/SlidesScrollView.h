@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ComicPage.h"
-
+#import "ComicSlidePreview.h"
 @class SlidesScrollView;
 
 @protocol SlidesScrollViewDelegate <NSObject>
@@ -28,7 +28,10 @@
 @property NSUInteger maximumComicCount;
 @property NSInteger setAddButtonIndex;
 @property BOOL isStillSaving;
-@property (nonatomic, strong) UIButton *btnAddSlide;
+//@property (nonatomic, strong) UIButton *btnAddSlide;
+@property (nonatomic, strong) UIScrollView *viewPreviewScrollSlide;
+@property (nonatomic, strong) ComicSlidePreview *viewPreviewSlide;
+@property (nonatomic, strong) UIButton *btnPlusSlide;
 @property (strong, nonatomic) NSMutableArray *allSlidesView;
 @property (strong, nonatomic) NSMutableArray *timelineTimeArray;
 @property (strong, nonatomic) NSMutableArray *timelineBubbleArray;
@@ -39,8 +42,9 @@
 - (void)reloadComicImageAtIndex:(NSInteger)index withComicSlide:(UIImage *)printScreen;
 - (void)addSlideButtonAtIndex:(NSInteger)index;
 - (void)btnAddSlideTap:(UIButton *)sender;
+- (void)addPlusButton :(NSInteger)index;
 - (void)pushAddSlideTap:(UIButton *)sender animation:(BOOL)isPushWithAnimation;
--(void)addTimeLineView;
+- (void)addTimeLineView;
 - (void)setAddButtonFrame:(UIButton *)sender ButtonIndex:(int)btnIndex;
 - (void)setScrollViewContectSizeByLastIndex:(NSInteger)index;
 

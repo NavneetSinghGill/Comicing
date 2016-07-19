@@ -27,7 +27,7 @@
 
 @implementation DataViewController
 
-
+@synthesize isSlidesContainImages;
 
 - (void)viewDidLoad
 {
@@ -41,61 +41,138 @@
 
     NSLog(@"%lu",(unsigned long)self.slidesArray.count);
     
-        
-    if(7 > self.slidesArray.count)
+    if (isSlidesContainImages == YES)
     {
-        if(self.pageNumber < self.slidesArray.count)
+      //  [self SetupTableofContants];
+    
+//        NSArray *fourSlides = @[self.slidesArray[0],
+//                                self.slidesArray[1],
+//                                self.slidesArray[2],
+//                                self.slidesArray[3]];
+//        
+//        [self SetupTableofContantsForPreviewSlidesWithImages:fourSlides];
+//        
+//        
+//        for (int i = 4;i < self.slidesArray.count ; i++)
+//        {
+//            [self.scrollView setPage:[self.slidesArray objectAtIndex:i]];
+//        }
+    
+    
+        if(7 > self.slidesArray.count)
         {
-            if(self.pageNumber == 1)
+            if(self.pageNumber < self.slidesArray.count)
             {
-                /**
-                 *  second page of comic book table of content
-                 */
-                [self SetupTableofContants];
-            }
-            else
-            {
-                /**
-                 *  setting comic book else pages
-                 */
-                [self.scrollView setPage:[self.slidesArray objectAtIndex:self.pageNumber]];
-                [self addAudioButton:[self.slidesArray objectAtIndex:self.pageNumber]];
+                if(self.pageNumber == 1)
+                {
+                    /**
+                     *  second page of comic book table of content
+                     */
+                    [self SetupTableofContants];
+                }
+                else
+                {
+                    /**
+                     *  setting comic book else pages
+                     */
+                    [self.scrollView setPage:[self.slidesArray objectAtIndex:self.pageNumber]];
+                //    [self addAudioButton:[self.slidesArray objectAtIndex:self.pageNumber]];
+                }
             }
         }
+        else
+        {
+            if( self.pageNumber<self.slidesArray.count)
+            {
+                if(self.pageNumber == 1)
+                {
+                    /**
+                     *  second page of comic book table of content
+                     */
+                    [self SetupTableofContants];
+                    
+                }
+                else if(self.pageNumber == 2)
+                {
+                    /**
+                     *  second page of comic book table of content
+                     */
+                    [self SetupTableofContants];
+                    
+                }
+                else
+                {
+                    /**
+                     *  setting comic book else pages
+                     */
+                    [self.scrollView setPage:[self.slidesArray objectAtIndex:self.pageNumber]];
+                //    [self addAudioButton:[self.slidesArray objectAtIndex:self.pageNumber]];
+                }
+            }
+        }
+
+        
+        
     }
     else
     {
-        if( self.pageNumber<self.slidesArray.count)
+        if(7 > self.slidesArray.count)
         {
-            if(self.pageNumber == 1)
+            if(self.pageNumber < self.slidesArray.count)
             {
-                /**
-                 *  second page of comic book table of content
-                 */
-                [self SetupTableofContants];
-                
-            }
-            else if(self.pageNumber == 2)
-            {
-                /**
-                 *  second page of comic book table of content
-                 */
-                [self SetupTableofContants];
-                
-            }
-            else
-            {
-                /**
-                 *  setting comic book else pages
-                 */
-                [self.scrollView setPage:[self.slidesArray objectAtIndex:self.pageNumber]];
-                [self addAudioButton:[self.slidesArray objectAtIndex:self.pageNumber]];
+                if(self.pageNumber == 1)
+                {
+                    /**
+                     *  second page of comic book table of content
+                     */
+                    [self SetupTableofContants];
+                }
+                else
+                {
+                    /**
+                     *  setting comic book else pages
+                     */
+                    [self.scrollView setPage:[self.slidesArray objectAtIndex:self.pageNumber]];
+                    [self addAudioButton:[self.slidesArray objectAtIndex:self.pageNumber]];
+                }
             }
         }
+        else
+        {
+            if( self.pageNumber<self.slidesArray.count)
+            {
+                if(self.pageNumber == 1)
+                {
+                    /**
+                     *  second page of comic book table of content
+                     */
+                    [self SetupTableofContants];
+                    
+                }
+                else if(self.pageNumber == 2)
+                {
+                    /**
+                     *  second page of comic book table of content
+                     */
+                    [self SetupTableofContants];
+                    
+                }
+                else
+                {
+                    /**
+                     *  setting comic book else pages
+                     */
+                    [self.scrollView setPage:[self.slidesArray objectAtIndex:self.pageNumber]];
+                    [self addAudioButton:[self.slidesArray objectAtIndex:self.pageNumber]];
+                }
+            }
+        }
+
     }
 }
 
-- (void)setAudioView {
+- (void)setAudioView
+{
     if(IS_IPHONE_5)
     {
         audioViewHeight=40;
@@ -346,6 +423,9 @@
     
     UIStoryboard *mystoryboard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil];
     IndexPageVC *indexPage = [mystoryboard instantiateViewControllerWithIdentifier:@"IndexPage"];
+    
+    indexPage.isSlidesContainImages = self.isSlidesContainImages;
+    
     indexPage.slidesArray = [NSMutableArray arrayWithArray:self.slidesArray];
     indexPage.pageNumber=self.pageNumber;
     [indexPage.view setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -357,6 +437,26 @@
     
     
 }
+
+-(void)SetupTableofContantsForPreviewSlidesWithImages:(NSArray *)slides
+{
+    
+    UIStoryboard *mystoryboard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil];
+    IndexPageVC *indexPage = [mystoryboard instantiateViewControllerWithIdentifier:@"IndexPage"];
+    
+    indexPage.isSlidesContainImages = self.isSlidesContainImages;
+    
+    indexPage.slidesArray = [NSMutableArray arrayWithArray:slides];
+    indexPage.pageNumber=self.pageNumber;
+    [indexPage.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    indexPage.Tag=self.Tag;
+    [self.scrollView addSubview:indexPage.view];
+    [self addChildViewController:indexPage];
+    [self setBoundaryX:0 Y:0 width:0 height:0 toView:self.scrollView ChildView:indexPage.view];
+}
+
+
+
 /**
  *  setting  the bounds of view
  *

@@ -16,4 +16,7 @@
 @property(nonatomic,strong)IBOutlet UICollectionView*collectionView;
 @property(nonatomic,assign)int pageNumber;
 @property(nonatomic,assign) int Tag;
+
+@property BOOL isSlidesContainImages;
+
 @end
