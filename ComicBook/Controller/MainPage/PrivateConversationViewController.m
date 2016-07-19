@@ -41,11 +41,16 @@
 #import "ComicConversationModel.h"
 #import "ComicConversationBook.h"
 #import "PrivateConversationTextCell.h"
+#import "TopSearchVC.h"
 
 @interface PrivateConversationViewController () {
     int TagRecord;
     TopBarViewController *topBarView;
     NSArray *comicsArray;
+    
+    IBOutlet UIView *main_TransparentView;
+    IBOutlet NSLayoutConstraint *constHeaderTopY;
+    IBOutlet NSLayoutConstraint *constHeaderMholderTopY;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tblvComics;
@@ -95,6 +100,7 @@
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyComicAnimation) name:@"StartFriendReplyComicAnimation" object:nil];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyComicAnimation) name:@"StopFriendReplyComicAnimation" object:nil];
     [self callAPIToGetTheComics];
+    [main_TransparentView sendSubviewToBack:viewTransperant];
 }
 
 //dinesh
@@ -137,7 +143,13 @@
     [[NSNotificationCenter defaultCenter]
      removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
-
+-(void)viewDidLayoutSubviews
+{
+    btnMe.layer.cornerRadius = btnMe.bounds.size.height/2;
+    btnMe.layer.masksToBounds = YES;
+    btnFriend.layer.cornerRadius = btnFriend.bounds.size.height/2;
+    btnFriend.layer.masksToBounds = YES;
+}
 // Setup keyboard handlers to slide the view containing the table view and
 // text field upwards when the keyboard shows, and downwards when it hides.
 - (void)keyboardWillShow:(NSNotification*)notification
@@ -247,7 +259,7 @@
 #pragma mark - UIView Methods
 - (void)prepareView
 {
-    if(IS_IPHONE_5)
+   /* if(IS_IPHONE_5)
     {
         btnMe.frame = CGRectMake(CGRectGetMinX(btnMe.frame),
                                  CGRectGetMinY(btnMe.frame),
@@ -282,7 +294,7 @@
                                      CGRectGetMinY(btnFriend.frame),
                                      52,
                                      52);
-    }
+    }*/
     
     
     TagRecord=0;
@@ -352,24 +364,27 @@
 
 - (void)addTopBarView {
     topBarView = [self.storyboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-    
+    CGFloat heightOfNavBar = 44;
+
     CGFloat heightOfTopBar;
     if (IS_IPHONE_5)
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+        heightOfTopBar = heightOfNavBar+6;
     }
     else if(IS_IPHONE_6)
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+9;
+        heightOfTopBar = heightOfNavBar+9;
     }
     else if (IS_IPHONE_6P)
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+10;
+        heightOfTopBar = heightOfNavBar+10;
     }
     else
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+        heightOfTopBar = heightOfNavBar+6;
     }
+    constHeaderTopY.constant = heightOfTopBar-20;
+    constHeaderMholderTopY.constant = heightOfTopBar-20;
     [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];
     [self.view addSubview:topBarView.view];
@@ -379,7 +394,8 @@
     topBarView.homeAction = ^(void) {
         //        CameraViewController *cameraView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CAMERA_VIEW];
         //        [weakSelf presentViewController:cameraView animated:YES completion:nil];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+
     };
     topBarView.contactAction = ^(void) {
         //        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
@@ -391,6 +407,11 @@
         MePageVC *meView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:ME_VIEW_SEGUE];
         //        [weakSelf presentViewController:meView animated:YES completion:nil];
         [weakSelf.navigationController pushViewController:meView animated:YES];
+    };
+    topBarView.searchAction = ^(void)
+    {
+        TopSearchVC *topSearchView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:TOP_SEARCH_VIEW];
+        [topSearchView displayContentController:weakSelf];
     };
 }
 

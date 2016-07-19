@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface PrivateConversationTextCell : UITableViewCell
-
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *const_Height;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *const_Width;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfilePic;
 @property (weak, nonatomic) IBOutlet UILabel *lblDate;
 @property (weak, nonatomic) IBOutlet UILabel *lblTime;

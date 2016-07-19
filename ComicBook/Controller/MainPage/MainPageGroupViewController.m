@@ -33,7 +33,9 @@
 #import "ComicConversationModel.h"
 #import "ComicConversationBook.h"
 #import "PrivateConversationTextCell.h"
-
+#import "Constants.h"
+#import "TopSearchVC.h"
+#import "MePageVC.h"
 @interface MainPageGroupViewController ()
 <UITableViewDataSource,
 UITableViewDelegate,
@@ -41,6 +43,9 @@ UICollectionViewDataSource,
 UICollectionViewDelegate>
 {
     int TagRecord;
+    TopBarViewController *topBarView;
+    IBOutlet NSLayoutConstraint *constheaderTopY;
+
 }
 
 
@@ -88,6 +93,7 @@ UICollectionViewDelegate>
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(callAPItoGetGroupsComics) name:@"UpdateGroupComics" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyComicAnimation) name:@"StartGroupReplyComicAnimation" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyComicAnimation) name:@"StopGroupReplyComicAnimation" object:nil];
+     [self addTopBarView];
     [self prepareView];
 }
 
@@ -122,7 +128,12 @@ UICollectionViewDelegate>
      addObserver:self selector:@selector(keyboardWillHide:)
      name:UIKeyboardWillHideNotification object:nil];
 }
-
+-(void)viewDidLayoutSubviews
+{
+    UIView *hederBlankSpace = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, viewTransperant.bounds.size.height-50)];
+    hederBlankSpace.backgroundColor = [UIColor blackColor];
+    tblvComics.tableHeaderView = hederBlankSpace;
+}
 // Unsubscribe from keyboard show/hide notifications.
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -240,9 +251,66 @@ UICollectionViewDelegate>
 }
 
 #pragma mark - UIView Methods
+- (void)addTopBarView {
+    topBarView = [self.storyboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
+    CGFloat heightOfNavBar = 44;
+    
+    CGFloat heightOfTopBar;
+    if (IS_IPHONE_5)
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    else if(IS_IPHONE_6)
+    {
+        heightOfTopBar = heightOfNavBar+9;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heightOfTopBar = heightOfNavBar+10;
+    }
+    else
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    constheaderTopY.constant = heightOfTopBar-20;
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
+    [self addChildViewController:topBarView];
+    [self.view addSubview:topBarView.view];
+    [topBarView didMoveToParentViewController:self];
+    
+    __block typeof(self) weakSelf = self;
+    topBarView.homeAction = ^(void) {
+        //        currentPageDownScroll = 0;
+        //        currentPageUpScroll = 0;
+        //        [weakSelf callAPIToGetTheComicsWithPageNumber:currentPageDownScroll + 1  andTimelinePeriod:@"" andDirection:@"" shouldClearAllData:YES];
+        
+        //        MainPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:MAIN_PAGE_VIEW];
+        //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+
+        //[weakSelf.navigationController popViewControllerAnimated:YES];
+    };
+    topBarView.contactAction = ^(void) {
+        //        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
+        //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
+        [AppHelper closeMainPageviewController:weakSelf];
+    };
+    topBarView.meAction = ^(void) {
+        MePageVC *meView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:ME_VIEW_SEGUE];
+        //        [weakSelf presentViewController:meView animated:YES completion:nil];
+        [weakSelf.navigationController pushViewController:meView animated:YES];
+    };
+    topBarView.searchAction = ^(void) {
+        TopSearchVC *topSearchView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:TOP_SEARCH_VIEW];
+        [topSearchView displayContentController:weakSelf];
+        //        [weakSelf presentViewController:topSearchView animated:YES completion:nil];
+    };
+    topBarView.view.backgroundColor = [UIColor blackColor];
+}
+
 - (void)prepareView
 {
-    if(IS_IPHONE_5)
+    /*if(IS_IPHONE_5)
     {
         imgvGroupIcon.frame = CGRectMake(CGRectGetMinX(imgvGroupIcon.frame),
                                          CGRectGetMinY(imgvGroupIcon.frame),
@@ -262,8 +330,9 @@ UICollectionViewDelegate>
                                          CGRectGetMinY(imgvGroupIcon.frame),
                                          72,
                                          72);
-    }
-    
+    }*/
+    imgvGroupIcon.layer.cornerRadius = imgvGroupIcon.frame.size.height/25.f;
+    imgvGroupIcon.layer.masksToBounds = YES;
     comics = [[NSMutableArray alloc] init];
     groupMember = [[NSMutableArray alloc] init];
     
@@ -729,7 +798,7 @@ UICollectionViewDelegate>
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(IS_IPHONE_5)
+   /* if(IS_IPHONE_5)
     {
         return CGSizeMake(25, 25);
     }
@@ -744,7 +813,8 @@ UICollectionViewDelegate>
     else
     {
         return CGSizeMake(23, 25);
-    }
+    }*/
+    return CGSizeMake(collectionView.bounds.size.height, collectionView.bounds.size.height);
 }
 
 #pragma mark - Events Methods
