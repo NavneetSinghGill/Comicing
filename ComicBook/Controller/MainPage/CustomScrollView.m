@@ -49,22 +49,32 @@
 {
     _CurlDemoPage = [[UIImageView alloc]init];
     
-    [_CurlDemoPage sd_setImageWithURL:[NSURL URLWithString:slide.slideImage]
-                     placeholderImage:GlobalObject.placeholder_comic
-                              options:SDWebImageRetryFailed
-                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    }];
+    // adnan
+    if ([slide isKindOfClass:[UIImage class]])
+    {
+        _CurlDemoPage.image = (UIImage *)slide;
+    }
+    else
+    {
+        [_CurlDemoPage sd_setImageWithURL:[NSURL URLWithString:slide.slideImage]
+                         placeholderImage:GlobalObject.placeholder_comic
+                                  options:SDWebImageRetryFailed
+                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                }];
+
+    }
+    
     
    
     [self addSubview:_CurlDemoPage];
-      [_CurlDemoPage setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_CurlDemoPage setTranslatesAutoresizingMaskIntoConstraints:NO];
     /**
      *  Setting view with autolayout
      */
   
     
     [self setBoundaryX:0 Y:0 toView:self ChildView:_CurlDemoPage];
- _CurlDemoPage.contentMode=UIViewContentModeScaleAspectFill;
+    _CurlDemoPage.contentMode = UIViewContentModeScaleAspectFill;
     
 }
 /**

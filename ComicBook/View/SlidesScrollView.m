@@ -36,7 +36,7 @@ const NSInteger spaceFromTop = 75;
 @implementation SlidesScrollView
 
 @synthesize slideView;
-@synthesize viewPreviewSlide,setAddButtonIndex, allSlidesView, viewSize,viewPreviewSize,btnPlusSlide;
+@synthesize viewPreviewSlide,setAddButtonIndex, allSlidesView, viewSize,viewPreviewSize,btnPlusSlide,viewPreviewScrollSlide;
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
@@ -74,6 +74,8 @@ const NSInteger spaceFromTop = 75;
             viewPreviewSize = viewSizeForIPhone5;
         }
     }
+    
+    
     self.delegate = self;
     
     return self;
@@ -90,7 +92,7 @@ const NSInteger spaceFromTop = 75;
     CGFloat x = ( 50 * (columnCount + 1)) + (columnCount * viewSize.width);
     CGFloat y = ( 18 * (rowCount +  1)) + (rowCount * viewSize.width);
     
-    return CGRectMake(x, y, viewPreviewSize.width, viewPreviewSize.height);
+    return CGRectMake(x, y, viewPreviewSize.width + 70, viewPreviewSize.height);
 }
 
 - (CGRect)frameForPossition:(NSInteger)index
@@ -117,7 +119,7 @@ const NSInteger spaceFromTop = 75;
 
 - (void)setScrollViewContectSize
 {
-    self.contentSize = CGSizeMake(CGRectGetMaxX(viewPreviewSlide.frame) + spaceBetweenSlide , CGRectGetHeight(viewPreviewSlide.frame));
+    self.contentSize = CGSizeMake(CGRectGetMaxX(viewPreviewScrollSlide.frame) + spaceBetweenSlide , CGRectGetHeight(viewPreviewScrollSlide.frame));
 }
 
 - (void)setScrollViewContectSizeByLastIndex:(NSInteger)index
@@ -128,16 +130,16 @@ const NSInteger spaceFromTop = 75;
 
 
 #pragma mark Scrollviewdelegate
-//
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-//{
-//    NSLog(@"scrollViewWillBeginDragging Start");
-//}
-//
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    NSLog(@"scrollViewDidScroll Start");
-//}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isKindOfClass:[UIScrollView class]]) {
+    }
+}
 
 #pragma mark - make slideview methods
 - (UIView*)reloadSlideViewForIndex:(NSInteger)index mainView:(UIView*)subView
@@ -300,6 +302,9 @@ const NSInteger spaceFromTop = 75;
     [self addSubview:slideView];
     [self.slidesScrollViewDelegate returnAddedView:slideView];
     [self addTimeLineView];
+    
+   
+
 }
 
 - (void)reloadComicAtIndex:(NSInteger)index withComicSlide:(ComicPage *)comicSlide
@@ -336,23 +341,78 @@ const NSInteger spaceFromTop = 75;
         }
     }
     
+    
+    
 //    [self scrollRectToVisible:view.frame animated:NO];
 }
 
 - (void)addSlideButtonAtIndex:(NSInteger)index
 {
-    viewPreviewSlide = [[UIView alloc] init];
   
-    viewPreviewSlide.frame = [self frameForPreviewSlide:index];
-    [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
-//    [viewPreviewSlide setImage:[UIImage imageNamed:@"ComicAdd"] forState:UIControlStateNormal];
+   
+}
+
+- (void)setPreviewForSlidesAtIndex:(NSInteger)index withImages:(NSArray *)slides
+{
+    viewPreviewScrollSlide = [[UIScrollView alloc] init];
+    viewPreviewScrollSlide.frame = [self frameForPreviewSlide:index];
     
-    [viewPreviewSlide setUserInteractionEnabled:NO];
+    UIImageView *arrow = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(viewPreviewScrollSlide.frame) / 2 - 75, 50, 100)];
     
-    [self addSubview:viewPreviewSlide];
+    arrow.image = [UIImage imageNamed:@"forward"];
+    
+    [viewPreviewScrollSlide addSubview:arrow];
+    
+    viewPreviewScrollSlide.delegate = self;
+    
+    if ([slides count] >4) {
+        NSArray* firstArray = [slides subarrayWithRange:NSMakeRange(0, 4)];
+        NSArray* secondArray = [slides subarrayWithRange:NSMakeRange(0, 2)];
+        
+        //Handle FirstArray
+        
+        viewPreviewSlide = [[ComicSlidePreview alloc] init];
+        viewPreviewSlide.frame = CGRectMake(70, 0, viewPreviewScrollSlide.frame.size.width - 70, viewPreviewScrollSlide.frame.size.height);
+        [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
+        
+        [viewPreviewSlide setUserInteractionEnabled:NO];
+        
+        [viewPreviewSlide setupComicSlidePreview:firstArray];
+        
+        [viewPreviewScrollSlide addSubview:viewPreviewSlide];
+
+        //Handle Secondarray
+        viewPreviewSlide = [[ComicSlidePreview alloc] init];
+        viewPreviewSlide.frame = CGRectMake(viewPreviewScrollSlide.frame.size.width, 0, viewPreviewScrollSlide.frame.size.width - 70, viewPreviewScrollSlide.frame.size.height);
+        [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
+        
+        [viewPreviewSlide setUserInteractionEnabled:NO];
+        
+        [viewPreviewSlide setupComicSlidePreview:secondArray];
+        
+        [viewPreviewScrollSlide addSubview:viewPreviewSlide];
+        
+        [viewPreviewScrollSlide setContentSize:CGSizeMake(viewPreviewScrollSlide.frame.size.width * 2, viewPreviewScrollSlide.frame.size.height)];
+    }
+    else
+    {
+        viewPreviewSlide = [[ComicSlidePreview alloc] init];
+        viewPreviewSlide.frame = CGRectMake(70, 0, viewPreviewScrollSlide.frame.size.width - 70, viewPreviewScrollSlide.frame.size.height);
+        [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
+        
+        [viewPreviewSlide setUserInteractionEnabled:NO];
+        
+        [viewPreviewSlide setupComicSlidePreview:slides];
+        
+        [viewPreviewScrollSlide addSubview:viewPreviewSlide];
+    }
+    
+    
+    [self addSubview:viewPreviewScrollSlide];
     
     [self setScrollViewContectSize];
 }
+
 
 -(void)addPlusButton :(NSInteger)index{
     btnPlusSlide = [[UIButton alloc] init];
@@ -369,6 +429,11 @@ const NSInteger spaceFromTop = 75;
     [self addSubview:btnPlusSlide];
     
     [self setScrollViewContectSize];
+    
+    // below code is temp code - ATC
+    NSArray *tempArray = @[[UIImage imageNamed:@"cat-demo"], [UIImage imageNamed:@"cat-demo"] ,[UIImage imageNamed:@"cat-demo"],[UIImage imageNamed:@"cat-demo"],[UIImage imageNamed:@"cat-demo"]];
+    
+    [self setPreviewForSlidesAtIndex:index withImages:tempArray];
 }
 -(void)addTimeLineView{
     [self addTimeLineView:0];

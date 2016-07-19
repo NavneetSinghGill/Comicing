@@ -11,6 +11,8 @@
 @interface GroupCell : UITableViewCell
 
 @property(nonatomic,weak)IBOutlet NSLayoutConstraint*widthconstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *const_Height;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *const_Width;
 @property (weak, nonatomic) IBOutlet UILabel *lblDate;
 @property (weak, nonatomic) IBOutlet UILabel *lblTime;
 @property (weak, nonatomic) IBOutlet UIView *viewComicBook;

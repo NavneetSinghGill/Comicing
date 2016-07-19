@@ -38,6 +38,7 @@
 //#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
 //#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 //#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+#define arielBlackFont @"Arial-Black"
 
 @interface MePageVC ()<commentersDelegate> {
     int TagRecord;
@@ -54,6 +55,7 @@
     ComicsModel *comicsModelObj;
     UIRefreshControl *refreshControl;
     NSMutableArray *bubbleLabels;
+    IBOutlet NSLayoutConstraint *constHeaderTopY;
 }
 @property (weak, nonatomic) IBOutlet UIView *NameView;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -220,7 +222,24 @@
     [self.mThirdHollowlabel  setHidden:YES];
     [self.mFourthHollowlabel  setHidden:YES];
     [self.mNowHollowlabel setHidden:YES];
-    
+    if (IS_IPHONE_5)
+    {
+        self.lblFirstName.font = [UIFont fontWithName:arielBlackFont size:13.f];
+        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:13.f];
+    }
+    else if (IS_IPHONE_6)
+    {
+        
+        self.lblFirstName.font = [UIFont fontWithName:arielBlackFont size:14.f];
+        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:14.f];
+        
+    }
+    else if(IS_IPHONE_6P)
+    {
+        self.lblFirstName.font = [UIFont fontWithName:arielBlackFont size:15.f];
+        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:15.f];
+    }
+
     [self setBubbleLabels];
     
 }
@@ -234,7 +253,14 @@
     
     
 }
-
+-(void)viewDidLayoutSubviews
+{
+    UIView *headerblank = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, 5)];
+    headerblank.backgroundColor = [UIColor clearColor];
+    self.tableview.tableHeaderView = headerblank;
+    self.meUserPicImageView.layer.cornerRadius = self.meUserPicImageView.bounds.size.height/2;
+    self.meUserPicImageView.layer.masksToBounds = YES;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -451,29 +477,31 @@
 
 - (void)addTopBarView {
     topBarView = [self.storyboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-   
+    CGFloat heightOfNavBar = 44;
+
     CGFloat heightOfTopBar;
     if (IS_IPHONE_5)
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+        heightOfTopBar = heightOfNavBar+6;
     }
     else if(IS_IPHONE_6)
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+9;
+        heightOfTopBar = heightOfNavBar+9;
     }
     else if (IS_IPHONE_6P)
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+10;
+        heightOfTopBar = heightOfNavBar+10;
     }
     else
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+        heightOfTopBar = heightOfNavBar+6;
     }
+    constHeaderTopY.constant = heightOfNavBar;
     [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];
     [self.view addSubview:topBarView.view];
     [topBarView didMoveToParentViewController:self];
-    
+    topBarView.view.backgroundColor = [UIColor blackColor];
     __block typeof(self) weakSelf = self;
     topBarView.homeAction = ^(void) {
         //        currentPageDownScroll = 0;
@@ -483,7 +511,7 @@
         //        MainPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:MAIN_PAGE_VIEW];
         //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
         
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     };
     topBarView.contactAction = ^(void) {
         //        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
@@ -939,7 +967,7 @@
                                    [self.tableview reloadData];
                                    
                                    //Dinesh
-                                   CGSize size = [[[AppHelper initAppHelper] getCurrentUser].first_name sizeWithAttributes:
+                                   /*CGSize size = [[[AppHelper initAppHelper] getCurrentUser].first_name sizeWithAttributes:
                                                   @{NSFontAttributeName:
                                                         [UIFont systemFontOfSize:17]}];
                                    
@@ -965,7 +993,19 @@
                                                                              self.lblFirstName.frame.origin.y + self.lblFirstName.frame.size.height + 5,
                                                                              100,
                                                                              self.lblComicCount.frame.size.height);
-                                   }
+                                   }*/
+                                   [self.lblFirstName setText:[NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].first_name]];
+                                   
+                                   
+                                   NSMutableAttributedString *strName = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@", [[AppHelper initAppHelper] getCurrentUser].first_name] attributes:@{NSFontAttributeName:self.lblFirstName.font}];
+                                   
+                                   //[self.nameLabel.attributedText mutableCopy];
+                                   [strName appendAttributedString:[[NSAttributedString alloc] initWithString:@"       "]];
+                                   
+                                   NSMutableAttributedString *strName2 = [[NSMutableAttributedString alloc]initWithString:self.lblComicCount.text attributes:@{NSFontAttributeName:self.lblComicCount.font}];
+                                   
+                                   [strName appendAttributedString:strName2];
+                                   self.lblFirstName.attributedText = strName;
                                    //--------------
                                    
                                } andFail:^(NSError *errorMessage) {

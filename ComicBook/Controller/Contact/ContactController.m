@@ -85,23 +85,23 @@
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle: [NSBundle mainBundle]];
     
     topBarView = [mainStoryboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-    
+    CGFloat heightOfNavBar = 44;
     CGFloat heightOfTopBar;
     if (IS_IPHONE_5)
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+        heightOfTopBar = heightOfNavBar+6;
     }
     else if(IS_IPHONE_6)
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+9;
+        heightOfTopBar = heightOfNavBar+9;
     }
     else if (IS_IPHONE_6P)
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+10;
+        heightOfTopBar = heightOfNavBar+10;
     }
     else
     {
-        heightOfTopBar = self.navigationController.navigationBar.bounds.size.height+6;
+        heightOfTopBar = heightOfNavBar+6;
     }
     [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];

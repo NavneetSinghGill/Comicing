@@ -401,7 +401,15 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     PrivateConversationViewController *friendView = [[PrivateConversationViewController alloc] init];
     friendView = [self.storyboard instantiateViewControllerWithIdentifier:@"PrivateConversationView"];
     friendView.friendObj = friendObj;
-    [self presentViewController:friendView animated:YES completion:nil];
+    [CATransaction begin];
+    [self.navigationController pushViewController:friendView animated:YES];
+    [CATransaction setCompletionBlock:^{
+        //whatever you want to do after the push
+        [(BottomBarViewController *)self.parentViewController closeMenu];
+    }];
+    [CATransaction commit];
+    //Pushed By Sanjay: navigation stack can be overflowing
+   // [self presentViewController:friendView animated:YES completion:nil];
 }
 - (void)didTapImageOfGroup:(Group *)groupObj
 {
@@ -413,7 +421,15 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     MainPageGroupViewController *groupView = [[MainPageGroupViewController alloc] init];
     groupView = [self.storyboard instantiateViewControllerWithIdentifier:@"GroupView"];
     groupView.groupObj = groupObj;
-    [self presentViewController:groupView animated:YES completion:nil];
+    [CATransaction begin];
+    [self.navigationController pushViewController:groupView animated:YES];
+    [CATransaction setCompletionBlock:^{
+        //whatever you want to do after the push
+        [(BottomBarViewController *)self.parentViewController closeMenu];
+    }];
+    [CATransaction commit];
+//Pushed By Sanjay: navigation stack can be overflowing
+    //[self presentViewController:groupView animated:YES completion:nil];
 }
 #pragma mark - tap Gesture Event
 -(void)tappedOnConnectFriendImage

@@ -22,7 +22,7 @@ typedef void (^ ConnectAction) (void);
 @property (nonatomic,assign) CGRect openFrame;
 @property (nonatomic,assign) CGRect closeFrame;
 @property (nonatomic, strong) ConnectAction connectAction;
-
+-(void)closeMenu;
 - (void)setBottombuttonToYellow;
 
 @end

@@ -29,7 +29,10 @@
     UIRefreshControl *refreshControl;
     NSMutableArray *comicsArray;
     NSMutableArray *bubbleLabels;
+    
+    IBOutlet NSLayoutConstraint *const_headerTopY;
 }
+@property (strong, nonatomic) IBOutlet UIButton *btn_follow;
 
 @property(nonatomic,strong)NSMutableDictionary*ComicBookDict;
 @property (weak, nonatomic) IBOutlet UIView *NameView;
