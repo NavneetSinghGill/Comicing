@@ -92,7 +92,7 @@ const NSInteger spaceFromTop = 75;
     CGFloat x = ( 50 * (columnCount + 1)) + (columnCount * viewSize.width);
     CGFloat y = ( 18 * (rowCount +  1)) + (rowCount * viewSize.width);
     
-    return CGRectMake(x, y, viewPreviewSize.width, viewPreviewSize.height);
+    return CGRectMake(x, y, viewPreviewSize.width + 70, viewPreviewSize.height);
 }
 
 - (CGRect)frameForPossition:(NSInteger)index
@@ -356,7 +356,15 @@ const NSInteger spaceFromTop = 75;
 {
     viewPreviewScrollSlide = [[UIScrollView alloc] init];
     viewPreviewScrollSlide.frame = [self frameForPreviewSlide:index];
+    
+    UIImageView *arrow = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(viewPreviewScrollSlide.frame) / 2 - 75, 50, 100)];
+    
+    arrow.image = [UIImage imageNamed:@"forward"];
+    
+    [viewPreviewScrollSlide addSubview:arrow];
+    
     viewPreviewScrollSlide.delegate = self;
+    
     if ([slides count] >4) {
         NSArray* firstArray = [slides subarrayWithRange:NSMakeRange(0, 4)];
         NSArray* secondArray = [slides subarrayWithRange:NSMakeRange(0, 2)];
@@ -364,7 +372,7 @@ const NSInteger spaceFromTop = 75;
         //Handle FirstArray
         
         viewPreviewSlide = [[ComicSlidePreview alloc] init];
-        viewPreviewSlide.frame = CGRectMake(0, 0, viewPreviewScrollSlide.frame.size.width, viewPreviewScrollSlide.frame.size.height);
+        viewPreviewSlide.frame = CGRectMake(70, 0, viewPreviewScrollSlide.frame.size.width - 70, viewPreviewScrollSlide.frame.size.height);
         [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
         
         [viewPreviewSlide setUserInteractionEnabled:NO];
@@ -375,7 +383,7 @@ const NSInteger spaceFromTop = 75;
 
         //Handle Secondarray
         viewPreviewSlide = [[ComicSlidePreview alloc] init];
-        viewPreviewSlide.frame = CGRectMake(viewPreviewScrollSlide.frame.size.width, 0, viewPreviewScrollSlide.frame.size.width, viewPreviewScrollSlide.frame.size.height);
+        viewPreviewSlide.frame = CGRectMake(viewPreviewScrollSlide.frame.size.width, 0, viewPreviewScrollSlide.frame.size.width - 70, viewPreviewScrollSlide.frame.size.height);
         [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
         
         [viewPreviewSlide setUserInteractionEnabled:NO];
@@ -385,9 +393,11 @@ const NSInteger spaceFromTop = 75;
         [viewPreviewScrollSlide addSubview:viewPreviewSlide];
         
         [viewPreviewScrollSlide setContentSize:CGSizeMake(viewPreviewScrollSlide.frame.size.width * 2, viewPreviewScrollSlide.frame.size.height)];
-    }else{
+    }
+    else
+    {
         viewPreviewSlide = [[ComicSlidePreview alloc] init];
-        viewPreviewSlide.frame = CGRectMake(0, 0, viewPreviewScrollSlide.frame.size.width, viewPreviewScrollSlide.frame.size.height);
+        viewPreviewSlide.frame = CGRectMake(70, 0, viewPreviewScrollSlide.frame.size.width - 70, viewPreviewScrollSlide.frame.size.height);
         [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
         
         [viewPreviewSlide setUserInteractionEnabled:NO];

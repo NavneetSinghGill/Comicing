@@ -90,11 +90,13 @@ NSString * const BottomBarView = @"BottomBarView";
 @property (nonatomic, strong) NSArray *iOSAccounts;
 @property (nonatomic, strong) accountChooserBlock_t accountChooserBlock;
 
+@property BOOL isAPICalling;
+
 @end
 
 @implementation MainPageVC
 @synthesize modelController = _modelController;
-@synthesize currentPoint,keyboardHeight, ComicBookDict, mainLoader;
+@synthesize currentPoint,keyboardHeight, ComicBookDict, mainLoader, isAPICalling;
 
 - (void)viewDidLoad
 {
@@ -1530,10 +1532,10 @@ NSString * const BottomBarView = @"BottomBarView";
          {
              pageIndex = pageIndex + 1;
          }
-         
-         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-             [_tblvComics reloadData];
+         [_tblvComics reloadData];
 
+         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+             isAPICalling = NO;
          });
          
      } andFail:^(NSError *errorMessage)
@@ -1638,6 +1640,8 @@ NSString * const BottomBarView = @"BottomBarView";
         
         [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
         [cell layoutIfNeeded];
+        [cell.viewComicBook layoutIfNeeded];
+
         if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
         {
             cell.lblComicTitle.hidden = YES;
@@ -1645,18 +1649,30 @@ NSString * const BottomBarView = @"BottomBarView";
             cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height + 8;
             cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height - 10;
             [cell layoutIfNeeded];
+            [cell.viewComicBook layoutIfNeeded];
+
         }
         else
         {
             cell.lblComicTitle.hidden = NO;
             cell.lblComicTitle.text = comicBook.comicTitle;
+            
+            cell.topConstraintComicView.constant = 5;
+
+            cell.heightConstraintComicView.constant = 0;
+            
+            
+            
+            [cell.viewComicBook layoutIfNeeded];
+
         }
+        
+        [cell.viewComicBook layoutIfNeeded];
+        [cell layoutIfNeeded];
         
         cell.mUserName.text = comicBook.userDetail.firstName;
         cell.lblDate.text = [self dateFromString:comicBook.createdDate];
         cell.lblTime.text = [self timeFromString:comicBook.createdDate];
-        
-        
         
         Slides *slide1 = comicBook.slides[0];
         Slides *slide2 = comicBook.slides[1];
@@ -1868,29 +1884,38 @@ NSString * const BottomBarView = @"BottomBarView";
 {
     [cell layoutSubviews];
     
+    
+    
     if (indexPath.row == comicsArray.count - 1)
     {
         NSLog(@"call API");
         
         if (oldPageIndex != pageIndex)
         {
+            isAPICalling = YES;
             oldPageIndex = pageIndex;
             [self callAPIToGetTheComicsWithPage:pageIndex];
 
         }
+        
+        
     }
     
-    cell.contentView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    cell.contentView.layer.shadowOffset = CGSizeMake(10, 10);
-    cell.contentView.alpha = 0;
-    cell.contentView.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0.5);
-    cell.contentView.layer.anchorPoint = CGPointMake(0.5, 0.5);
-    
-    [UIView animateWithDuration:1 animations:^{
-        cell.contentView.layer.shadowOffset = CGSizeMake(0, 0);
-        cell.contentView.alpha = 1;
-        cell.contentView.layer.transform = CATransform3DIdentity;
-    }];
+    if (isAPICalling == NO)
+    {
+        cell.contentView.layer.shadowColor = [[UIColor blackColor] CGColor];
+        cell.contentView.layer.shadowOffset = CGSizeMake(10, 10);
+        cell.contentView.alpha = 0;
+        cell.contentView.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0.5);
+        cell.contentView.layer.anchorPoint = CGPointMake(0.5, 0.5);
+        
+        [UIView animateWithDuration:1 animations:^{
+            cell.contentView.layer.shadowOffset = CGSizeMake(0, 0);
+            cell.contentView.alpha = 1;
+            cell.contentView.layer.transform = CATransform3DIdentity;
+        }];
+
+    }
 }
 
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView
