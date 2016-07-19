@@ -61,7 +61,9 @@
     [self.mHolderView.layer setCornerRadius:10];
     
     [self getPhoneContact];
-    [self getFriendsByUserId];
+    //[self getFriendsByUserId];
+    [self getContactListFromServer];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -262,6 +264,47 @@
     NSMutableArray* phoneContact = [self getPhoneContact];
     
     NSLog(@"Phone Cntactc: %@", phoneContact);
+}
+
+#pragma Webservice
+
+-(void)getContactListFromServer{
+    
+        NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
+    
+        [userDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"];
+        [userDic setObject:contactList forKey:@"contacts"];
+        [dataDic setObject:userDic forKey:@"data"];
+    
+        userDic = nil;
+    
+        ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
+    
+    
+    
+     /*temp
+        [cmNetWorking postPhoneContactList:dataDic Id:@"659"
+                                completion:^(id json,id jsonResposeHeader) {
+    
+                                    NSLog(@"jsonResposeHeader");
+    
+                                } ErrorBlock:^(JSONModelError *error) {
+    
+                                }];*/
+    
+    
+        [cmNetWorking postPhoneContactList:dataDic Id:[AppHelper getCurrentLoginId]
+                                completion:^(id json,id jsonResposeHeader) {
+    
+                                    NSLog(@"jsonResposeHeader");
+    
+        } ErrorBlock:^(JSONModelError *error) {
+            
+        }];
+        
+    
+       dataDic = nil;
 }
 
 -(NSMutableArray*)getPhoneContact{
