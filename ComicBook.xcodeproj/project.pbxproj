@@ -355,10 +355,6 @@
 		1B4FCCDB1D323D6400278B16 /* PrivateConversationTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */; };
 		1B4FCCDC1D323D6400278B16 /* PrivateConversationTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */; };
 		1B7E51FF1D36DEF60038199E /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B7E51FE1D36DEF60038199E /* camera.png */; };
-		1B99A7221D354DB500CFA820 /* private_conversation_input_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7201D354DB500CFA820 /* private_conversation_input_background@2x.png */; };
-		1B99A7231D354DB500CFA820 /* private_conversation_input_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7211D354DB500CFA820 /* private_conversation_input_background@3x.png */; };
-		1B99A7261D35749B00CFA820 /* group_conversation_input_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7241D35749B00CFA820 /* group_conversation_input_background@2x.png */; };
-		1B99A7271D35749B00CFA820 /* group_conversation_input_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7251D35749B00CFA820 /* group_conversation_input_background@3x.png */; };
 		1B9B7C181D3A9C5F003B04F1 /* InviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C171D3A9C5F003B04F1 /* InviteViewController.m */; };
 		1B9B7C221D3A9E03003B04F1 /* EmojiHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C1B1D3A9E03003B04F1 /* EmojiHelper.m */; };
 		1B9B7C231D3A9E03003B04F1 /* MyEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C1D1D3A9E03003B04F1 /* MyEmoji.m */; };
@@ -1018,10 +1014,6 @@
 		1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateConversationTextCell.m; sourceTree = "<group>"; };
 		1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateConversationTextCell.xib; sourceTree = "<group>"; };
 		1B7E51FE1D36DEF60038199E /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
-		1B99A7201D354DB500CFA820 /* private_conversation_input_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "private_conversation_input_background@2x.png"; sourceTree = "<group>"; };
-		1B99A7211D354DB500CFA820 /* private_conversation_input_background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "private_conversation_input_background@3x.png"; sourceTree = "<group>"; };
-		1B99A7241D35749B00CFA820 /* group_conversation_input_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_conversation_input_background@2x.png"; sourceTree = "<group>"; };
-		1B99A7251D35749B00CFA820 /* group_conversation_input_background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_conversation_input_background@3x.png"; sourceTree = "<group>"; };
 		1B9B7C161D3A9C5F003B04F1 /* InviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteViewController.h; sourceTree = "<group>"; };
 		1B9B7C171D3A9C5F003B04F1 /* InviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteViewController.m; sourceTree = "<group>"; };
 		1B9B7C1A1D3A9E03003B04F1 /* EmojiHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiHelper.h; sourceTree = "<group>"; };
@@ -2748,19 +2740,6 @@
 			path = FabricAnalytics;
 			sourceTree = "<group>";
 		};
-		843ABB751D1FAA500078B7A8 /* MainPageCell */ = {
-			isa = PBXGroup;
-			children = (
-				843ABB761D1FAA730078B7A8 /* MainPageCell.h */,
-				843ABB771D1FAA730078B7A8 /* MainPageCell.m */,
-				84ED581A1D2956AF004E257F /* MainPage3SlideCell.h */,
-				84ED581B1D2956AF004E257F /* MainPage3SlideCell.m */,
-				846F3D941D2ECE93001191E6 /* MainPage2SlideCell.h */,
-				846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */,
-			);
-			name = MainPageCell;
-			sourceTree = "<group>";
-		};
 		1B9B7C191D3A9E03003B04F1 /* Emoji */ = {
 			isa = PBXGroup;
 			children = (
@@ -2772,6 +2751,19 @@
 				1B9B7C1F1D3A9E03003B04F1 /* MyEmojiCategory.m */,
 			);
 			path = Emoji;
+			sourceTree = "<group>";
+		};
+		843ABB751D1FAA500078B7A8 /* MainPageCell */ = {
+			isa = PBXGroup;
+			children = (
+				843ABB761D1FAA730078B7A8 /* MainPageCell.h */,
+				843ABB771D1FAA730078B7A8 /* MainPageCell.m */,
+				84ED581A1D2956AF004E257F /* MainPage3SlideCell.h */,
+				84ED581B1D2956AF004E257F /* MainPage3SlideCell.m */,
+				846F3D941D2ECE93001191E6 /* MainPage2SlideCell.h */,
+				846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */,
+			);
+			name = MainPageCell;
 			sourceTree = "<group>";
 		};
 		8450906C1C2B1343004DAE99 = {
@@ -3495,7 +3487,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "47836a94-9a55-428d-8499-04cda266c580";
+				PROVISIONING_PROFILE = "7b17308d-8081-4aed-a34a-b24ce26dae79";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
