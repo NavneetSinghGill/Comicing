@@ -1600,6 +1600,10 @@ NSString * const BottomBarView = @"BottomBarView";
         {
             cell.lblComicTitle.hidden = NO;
             cell.lblComicTitle.text = comicBook.comicTitle;
+            cell.topConstraintComicView.constant = 5;
+            cell.heightConstraintComicView.constant = 0;
+            [cell layoutIfNeeded];
+
         }
 
         cell.mUserName.text = comicBook.userDetail.firstName;
