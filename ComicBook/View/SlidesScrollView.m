@@ -31,6 +31,9 @@ const NSInteger spaceFromTop = 75;
 
 @property (nonatomic) CGSize viewSize;
 @property (nonatomic) CGSize viewPreviewSize;
+
+@property (strong,nonatomic) UIImageView *arrowImage;
+
 @end
 
 @implementation SlidesScrollView
@@ -92,7 +95,7 @@ const NSInteger spaceFromTop = 75;
     CGFloat x = ( 50 * (columnCount + 1)) + (columnCount * viewSize.width);
     CGFloat y = ( 18 * (rowCount +  1)) + (rowCount * viewSize.width);
     
-    return CGRectMake(x, y, viewPreviewSize.width + 70, viewPreviewSize.height);
+    return CGRectMake(x + 100, y, viewPreviewSize.width, viewPreviewSize.height);
 }
 
 - (CGRect)frameForPossition:(NSInteger)index
@@ -115,6 +118,19 @@ const NSInteger spaceFromTop = 75;
     CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width) - 20;
     
     return CGRectMake(x, y, 20, 20);
+}
+
+- (CGRect)frmaeForArrowImage:(NSInteger)index
+{
+    NSInteger columnCount = index % viewsInOneRow;
+    NSInteger rowCount    = index / viewsInOneRow;
+    
+    CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) - 10;
+    CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width) - 10;
+    
+    CGFloat middlePoint = y / 2 + (viewSize.height / 2);
+    
+    return CGRectMake(x + 50, middlePoint, 50 , 100);
 }
 
 - (void)setScrollViewContectSize
@@ -357,12 +373,6 @@ const NSInteger spaceFromTop = 75;
     viewPreviewScrollSlide = [[UIScrollView alloc] init];
     viewPreviewScrollSlide.frame = [self frameForPreviewSlide:index];
     
-    UIImageView *arrow = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(viewPreviewScrollSlide.frame) / 2 - 75, 50, 100)];
-    
-    arrow.image = [UIImage imageNamed:@"forward"];
-    
-    [viewPreviewScrollSlide addSubview:arrow];
-    
     viewPreviewScrollSlide.delegate = self;
     
     if ([slides count] >4) {
@@ -372,7 +382,7 @@ const NSInteger spaceFromTop = 75;
         //Handle FirstArray
         
         viewPreviewSlide = [[ComicSlidePreview alloc] init];
-        viewPreviewSlide.frame = CGRectMake(70, 0, viewPreviewScrollSlide.frame.size.width - 70, viewPreviewScrollSlide.frame.size.height);
+        viewPreviewSlide.frame = CGRectMake(0, 0, viewPreviewScrollSlide.frame.size.width, viewPreviewScrollSlide.frame.size.height);
         [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
         
         [viewPreviewSlide setUserInteractionEnabled:NO];
@@ -383,7 +393,7 @@ const NSInteger spaceFromTop = 75;
 
         //Handle Secondarray
         viewPreviewSlide = [[ComicSlidePreview alloc] init];
-        viewPreviewSlide.frame = CGRectMake(viewPreviewScrollSlide.frame.size.width, 0, viewPreviewScrollSlide.frame.size.width - 70, viewPreviewScrollSlide.frame.size.height);
+        viewPreviewSlide.frame = CGRectMake(viewPreviewScrollSlide.frame.size.width, 0, viewPreviewScrollSlide.frame.size.width, viewPreviewScrollSlide.frame.size.height);
         [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
         
         [viewPreviewSlide setUserInteractionEnabled:NO];
@@ -397,7 +407,7 @@ const NSInteger spaceFromTop = 75;
     else
     {
         viewPreviewSlide = [[ComicSlidePreview alloc] init];
-        viewPreviewSlide.frame = CGRectMake(70, 0, viewPreviewScrollSlide.frame.size.width - 70, viewPreviewScrollSlide.frame.size.height);
+        viewPreviewSlide.frame = CGRectMake(0, 0, viewPreviewScrollSlide.frame.size.width, viewPreviewScrollSlide.frame.size.height);
         [viewPreviewSlide setBackgroundColor:[UIColor whiteColor]];
         
         [viewPreviewSlide setUserInteractionEnabled:NO];
@@ -435,7 +445,21 @@ const NSInteger spaceFromTop = 75;
     
     [self setPreviewForSlidesAtIndex:index withImages:tempArray];
 }
--(void)addTimeLineView{
+
+- (void)addArrowImage:(NSInteger)index
+{
+    self.arrowImage = [[UIImageView alloc] init];
+    self.arrowImage.frame = [self frmaeForArrowImage:index];
+    
+    self.arrowImage.image = [UIImage imageNamed:@"forward"];
+    
+    self.arrowImage.contentMode = UIViewContentModeScaleAspectFit;
+    
+    [self addSubview:self.arrowImage];
+}
+
+-(void)addTimeLineView
+{
     [self addTimeLineView:0];
 }
 

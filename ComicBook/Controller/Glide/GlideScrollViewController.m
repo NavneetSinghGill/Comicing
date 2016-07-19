@@ -156,8 +156,12 @@ NSTimer* timerObject;
             comicPage = nil;
             count++;
         }
+        
         [scrvComicSlide addSlideButtonAtIndex:count];
         [scrvComicSlide addPlusButton:count];
+        [scrvComicSlide addArrowImage:count];
+        
+        
         if (comicSlides.count == SLIDE_MAXCOUNT && scrvComicSlide.btnPlusSlide) {
             [scrvComicSlide.btnPlusSlide setHidden:YES];
             [scrvComicSlide.btnPlusSlide removeFromSuperview];

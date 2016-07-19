@@ -47,6 +47,7 @@
 - (void)addTimeLineView;
 - (void)setAddButtonFrame:(UIButton *)sender ButtonIndex:(int)btnIndex;
 - (void)setScrollViewContectSizeByLastIndex:(NSInteger)index;
+- (void)addArrowImage:(NSInteger)index;
 
 @property (nonatomic, weak) id<SlidesScrollViewDelegate> slidesScrollViewDelegate;
 
