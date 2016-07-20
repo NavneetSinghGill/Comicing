@@ -51,11 +51,13 @@
 
 - (void)getPreviewSlideVC:(NSArray *)slides{
     
-    if (viewControllers) {
+    if (viewControllers)
+    {
         [viewControllers removeAllObjects];
     }
     
-    if ([slides count] >4) {
+    if ([slides count] >4)
+    {
         
         NSArray* firstArray = [slides subarrayWithRange:NSMakeRange(0, 4)];
         NSArray* secondArray = [slides subarrayWithRange:NSMakeRange(4, [slides count]-4)];

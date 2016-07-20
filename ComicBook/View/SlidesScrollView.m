@@ -90,14 +90,32 @@ const NSInteger spaceFromTop = 75;
 
 - (CGRect)frameForPreviewSlide:(NSInteger)index
 {
-    NSInteger columnCount = index % viewsInOneRow;
+//    NSInteger columnCount = index % viewsInOneRow;
     NSInteger rowCount    = index / viewsInOneRow;
     
-    CGFloat x = ( 50 * (columnCount + 1)) + (columnCount * viewSize.width);
-    CGFloat y = ( 18 * (rowCount +  1)) + (rowCount * viewSize.width);
+ //   CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width);
+    CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width);
     
-    return CGRectMake(x + 100, y, viewPreviewSize.width, viewPreviewSize.height);
+    return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50, y + 20, viewSize.width + 20, viewSize.height);
 }
+
+- (CGRect)frameForPreview3Slide:(NSInteger)index
+{
+    return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50, 0, viewSize.width + 20, self.frame.size.height - 80);
+}
+
+- (CGRect)frameForPreview4Slide:(NSInteger)index
+{
+    NSInteger rowCount    = index / viewsInOneRow;
+    
+    CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width);
+    
+    return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50 , y, viewSize.width, viewSize.height);
+
+}
+
+
+
 
 - (CGRect)frameForPossition:(NSInteger)index
 {
@@ -123,15 +141,15 @@ const NSInteger spaceFromTop = 75;
 
 - (CGRect)frmaeForArrowImage:(NSInteger)index
 {
-    NSInteger columnCount = index % viewsInOneRow;
+ //   NSInteger columnCount = index % viewsInOneRow;
     NSInteger rowCount    = index / viewsInOneRow;
     
-    CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) - 10;
+ //   CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) - 10;
     CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width) - 10;
     
     CGFloat middlePoint = y / 2 + (viewSize.height / 2);
     
-    return CGRectMake(x + 50, middlePoint, 50 , 100);
+    return CGRectMake(CGRectGetMinX(btnPlusSlide.frame) + 70, middlePoint + 10, 45 , 90);
 }
 
 - (void)setScrollViewContectSize
@@ -379,10 +397,32 @@ const NSInteger spaceFromTop = 75;
 - (void)setPreviewForSlidesAtIndex:(NSInteger)index withImages:(NSArray *)slides
 {
     [self addArrowImage:self.btnPlusSlide.tag];
-    if (viewPreviewScrollSlide == nil) {
+    if (viewPreviewScrollSlide == nil)
+    {
         viewPreviewScrollSlide = [[SlidePreviewScrollView alloc] init];
     }
-    viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:self.btnPlusSlide.tag];
+    
+    if (slides.count == 3)
+    {
+        viewPreviewScrollSlide.view.frame = [self frameForPreview3Slide:self.btnPlusSlide.tag];
+    }
+    else if (slides.count == 4)
+    {
+        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
+    }
+    else if (slides.count == 1)
+    {
+        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
+    }
+    else if (slides.count == 2)
+    {
+        viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:self.btnPlusSlide.tag];
+    }
+    else
+    {
+        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
+    }
+    
     viewPreviewScrollSlide.allSlideImages = slides;
     [viewPreviewScrollSlide setupBook];
 
