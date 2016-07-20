@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ComicSlidePreview : UIView
+@interface ComicSlidePreview : UIViewController
 
+
+-(id)initWithFrame:(CGRect)frame;
 - (void)setupComicSlidePreview:(NSArray *)slides;
-
 
 @end

@@ -346,6 +346,7 @@
 		0C8C61ED1CB14445008073FA /* ComicSlidesData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C61EC1CB14445008073FA /* ComicSlidesData.m */; };
 		0C9A3A2E1C8DE85500D75895 /* stickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9A3A2D1C8DE85500D75895 /* stickerCell.m */; };
 		0CB7C33E1CF8DA640072E4B0 /* ARLRDBD.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0CB7C33D1CF8DA640072E4B0 /* ARLRDBD.TTF */; };
+		0CBA37E51D3EA65B00610F20 /* SlidePreviewScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBA37E41D3EA65B00610F20 /* SlidePreviewScrollView.m */; };
 		0CBF90B41CA313A5004007DF /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B11CA313A5004007DF /* UIImage+Alpha.m */; };
 		0CBF90B51CA313A5004007DF /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B31CA313A5004007DF /* UIImage+ColorAtPixel.m */; };
 		0CBF90B81CA3143D004007DF /* UIImage+ImageCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */; };
@@ -358,10 +359,6 @@
 		1B4FCCDB1D323D6400278B16 /* PrivateConversationTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */; };
 		1B4FCCDC1D323D6400278B16 /* PrivateConversationTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */; };
 		1B7E51FF1D36DEF60038199E /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B7E51FE1D36DEF60038199E /* camera.png */; };
-		1B99A7221D354DB500CFA820 /* private_conversation_input_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7201D354DB500CFA820 /* private_conversation_input_background@2x.png */; };
-		1B99A7231D354DB500CFA820 /* private_conversation_input_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7211D354DB500CFA820 /* private_conversation_input_background@3x.png */; };
-		1B99A7261D35749B00CFA820 /* group_conversation_input_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7241D35749B00CFA820 /* group_conversation_input_background@2x.png */; };
-		1B99A7271D35749B00CFA820 /* group_conversation_input_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B99A7251D35749B00CFA820 /* group_conversation_input_background@3x.png */; };
 		1B9B7C181D3A9C5F003B04F1 /* InviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C171D3A9C5F003B04F1 /* InviteViewController.m */; };
 		1B9B7C221D3A9E03003B04F1 /* EmojiHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C1B1D3A9E03003B04F1 /* EmojiHelper.m */; };
 		1B9B7C231D3A9E03003B04F1 /* MyEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B7C1D1D3A9E03003B04F1 /* MyEmoji.m */; };
@@ -990,8 +987,8 @@
 		0C66675E1C84358600FEB11F /* SignUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUp.h; sourceTree = "<group>"; };
 		0C66675F1C84358600FEB11F /* SignUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUp.m; sourceTree = "<group>"; };
 		0C6667601C84358600FEB11F /* SignUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUp.xib; sourceTree = "<group>"; };
-		0C6667611C84358600FEB11F /* SlidesScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidesScrollView.h; sourceTree = "<group>"; };
-		0C6667621C84358600FEB11F /* SlidesScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidesScrollView.m; sourceTree = "<group>"; };
+		0C6667611C84358600FEB11F /* SlidesScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlidesScrollView.h; path = ../SlidesScrollView.h; sourceTree = "<group>"; };
+		0C6667621C84358600FEB11F /* SlidesScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SlidesScrollView.m; path = ../SlidesScrollView.m; sourceTree = "<group>"; };
 		0C6667651C84358600FEB11F /* VerifyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyView.h; sourceTree = "<group>"; };
 		0C6667661C84358600FEB11F /* VerifyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyView.m; sourceTree = "<group>"; };
 		0C6667671C84358600FEB11F /* VerifyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerifyView.xib; sourceTree = "<group>"; };
@@ -1008,6 +1005,8 @@
 		0C9A3A2C1C8DE85500D75895 /* stickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stickerCell.h; sourceTree = "<group>"; };
 		0C9A3A2D1C8DE85500D75895 /* stickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = stickerCell.m; sourceTree = "<group>"; };
 		0CB7C33D1CF8DA640072E4B0 /* ARLRDBD.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = ARLRDBD.TTF; sourceTree = "<group>"; };
+		0CBA37E31D3EA65B00610F20 /* SlidePreviewScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidePreviewScrollView.h; sourceTree = "<group>"; };
+		0CBA37E41D3EA65B00610F20 /* SlidePreviewScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidePreviewScrollView.m; sourceTree = "<group>"; };
 		0CBF90B01CA313A5004007DF /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		0CBF90B11CA313A5004007DF /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		0CBF90B21CA313A5004007DF /* UIImage+ColorAtPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorAtPixel.h"; sourceTree = "<group>"; };
@@ -1026,10 +1025,6 @@
 		1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateConversationTextCell.m; sourceTree = "<group>"; };
 		1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateConversationTextCell.xib; sourceTree = "<group>"; };
 		1B7E51FE1D36DEF60038199E /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
-		1B99A7201D354DB500CFA820 /* private_conversation_input_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "private_conversation_input_background@2x.png"; sourceTree = "<group>"; };
-		1B99A7211D354DB500CFA820 /* private_conversation_input_background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "private_conversation_input_background@3x.png"; sourceTree = "<group>"; };
-		1B99A7241D35749B00CFA820 /* group_conversation_input_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_conversation_input_background@2x.png"; sourceTree = "<group>"; };
-		1B99A7251D35749B00CFA820 /* group_conversation_input_background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_conversation_input_background@3x.png"; sourceTree = "<group>"; };
 		1B9B7C161D3A9C5F003B04F1 /* InviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteViewController.h; sourceTree = "<group>"; };
 		1B9B7C171D3A9C5F003B04F1 /* InviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteViewController.m; sourceTree = "<group>"; };
 		1B9B7C1A1D3A9E03003B04F1 /* EmojiHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiHelper.h; sourceTree = "<group>"; };
@@ -2548,6 +2543,7 @@
 		0C66671C1C84358600FEB11F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0CBA37E21D3EA53300610F20 /* ComicListView */,
 				84EFBCBF1D25851700647A88 /* InstructionView */,
 				0C66671D1C84358600FEB11F /* Account */,
 				0C6667221C84358600FEB11F /* AvatarSection */,
@@ -2565,8 +2561,6 @@
 				0C6667541C84358600FEB11F /* ProfilePicView */,
 				0C6667581C84358600FEB11F /* SectionDivider */,
 				0C66675C1C84358600FEB11F /* SignUp */,
-				0C6667611C84358600FEB11F /* SlidesScrollView.h */,
-				0C6667621C84358600FEB11F /* SlidesScrollView.m */,
 				0C6667631C84358600FEB11F /* Verify */,
 			);
 			path = View;
@@ -2762,6 +2756,17 @@
 			path = FabricAnalytics;
 			sourceTree = "<group>";
 		};
+		0CBA37E21D3EA53300610F20 /* ComicListView */ = {
+			isa = PBXGroup;
+			children = (
+				0C6667611C84358600FEB11F /* SlidesScrollView.h */,
+				0C6667621C84358600FEB11F /* SlidesScrollView.m */,
+				0CBA37E31D3EA65B00610F20 /* SlidePreviewScrollView.h */,
+				0CBA37E41D3EA65B00610F20 /* SlidePreviewScrollView.m */,
+			);
+			path = ComicListView;
+			sourceTree = "<group>";
+		};
 		1685120C1D3C02C100A372E3 /* FriendPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2769,19 +2774,6 @@
 				168512121D3C052000A372E3 /* followSelected.png */,
 			);
 			path = FriendPage;
-			sourceTree = "<group>";
-		};
-		843ABB751D1FAA500078B7A8 /* MainPageCell */ = {
-			isa = PBXGroup;
-			children = (
-				843ABB761D1FAA730078B7A8 /* MainPageCell.h */,
-				843ABB771D1FAA730078B7A8 /* MainPageCell.m */,
-				84ED581A1D2956AF004E257F /* MainPage3SlideCell.h */,
-				84ED581B1D2956AF004E257F /* MainPage3SlideCell.m */,
-				846F3D941D2ECE93001191E6 /* MainPage2SlideCell.h */,
-				846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */,
-			);
-			name = MainPageCell;
 			sourceTree = "<group>";
 		};
 		1B9B7C191D3A9E03003B04F1 /* Emoji */ = {
@@ -2795,6 +2787,19 @@
 				1B9B7C1F1D3A9E03003B04F1 /* MyEmojiCategory.m */,
 			);
 			path = Emoji;
+			sourceTree = "<group>";
+		};
+		843ABB751D1FAA500078B7A8 /* MainPageCell */ = {
+			isa = PBXGroup;
+			children = (
+				843ABB761D1FAA730078B7A8 /* MainPageCell.h */,
+				843ABB771D1FAA730078B7A8 /* MainPageCell.m */,
+				84ED581A1D2956AF004E257F /* MainPage3SlideCell.h */,
+				84ED581B1D2956AF004E257F /* MainPage3SlideCell.m */,
+				846F3D941D2ECE93001191E6 /* MainPage2SlideCell.h */,
+				846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */,
+			);
+			name = MainPageCell;
 			sourceTree = "<group>";
 		};
 		8450906C1C2B1343004DAE99 = {
@@ -3277,6 +3282,7 @@
 				0C6668B31C84358600FEB11F /* KeyboardView.m in Sources */,
 				8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */,
 				0C6667CA1C84358600FEB11F /* ZOZolaZoomTransition.m in Sources */,
+				0CBA37E51D3EA65B00610F20 /* SlidePreviewScrollView.m in Sources */,
 				0C6667F41C84358600FEB11F /* CMCUserCell.m in Sources */,
 				0C6668521C84358600FEB11F /* AFNetworkReachabilityManager.m in Sources */,
 				0C6668621C84358600FEB11F /* EXTRuntimeExtensions.m in Sources */,

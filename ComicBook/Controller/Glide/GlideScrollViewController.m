@@ -143,8 +143,8 @@ NSTimer* timerObject;
     if (comicSlides.count == 0)
     {
         comicSlides = [[NSMutableArray alloc] init];
-//        [scrvComicSlide addSlideButtonAtIndex:0];
         [scrvComicSlide addPlusButton:0];
+        [self refreshListPreview];
     }
     else
     {
@@ -156,8 +156,8 @@ NSTimer* timerObject;
             comicPage = nil;
             count++;
         }
-        [scrvComicSlide addSlideButtonAtIndex:count];
         [scrvComicSlide addPlusButton:count];
+        [self refreshListPreview];
         if (comicSlides.count == SLIDE_MAXCOUNT && scrvComicSlide.btnPlusSlide) {
             [scrvComicSlide.btnPlusSlide setHidden:YES];
             [scrvComicSlide.btnPlusSlide removeFromSuperview];
@@ -166,6 +166,23 @@ NSTimer* timerObject;
         
     }
     [scrvComicSlide addTimeLineView];
+}
+
+-(void)refreshListPreview{
+    int count = 0;
+    for (NSData *data in comicSlides)
+    {
+        ComicPage *comicPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (comicPage.printScreenPath) {
+            if (scrvComicSlide.listViewImages == nil) {
+                scrvComicSlide.listViewImages = [[NSMutableArray alloc] init];
+            }
+            [scrvComicSlide.listViewImages addObject:[scrvComicSlide getImageFile:comicPage.printScreenPath]];
+        }
+        comicPage = nil;
+        count++;
+    }
+    [scrvComicSlide refreshPreview:count withImages:scrvComicSlide.listViewImages];
 }
 
 #pragma mark - SlidesScrollViewDelegate Methods
@@ -301,6 +318,29 @@ NSTimer* timerObject;
 {
     transitionView = view;
 }
+
+- (void)updateListView:(NSArray*)listArray
+{
+    
+}
+
+//- (void)setPreviewForSlidesAtIndex:(CGRect)frameValue withImages:(NSArray *)slides completion:(void (^)(CGRect previewFrame))completion
+//{
+//    viewPreviewScrollSlide = [[SlidePreviewScrollView alloc] init];
+//    viewPreviewScrollSlide.view.frame = frameValue;
+//    viewPreviewScrollSlide.allSlideImages = slides;
+//
+//    [viewPreviewScrollSlide setupBook];
+////    viewPreviewScrollSlide.delegate = self;
+//
+////    [viewPreviewScrollSlide setPreviewForSlidesAtIndex:index withImages:slides];
+//
+//    [self addChildViewController:viewPreviewScrollSlide];
+//
+//    completion
+//    [self setScrollViewContectSize];
+//}
+
 
 #pragma mark - ZoomTransitionProtocol
 
@@ -577,13 +617,7 @@ NSTimer* timerObject;
                            
                            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
                            
-//                           if (newslide)
-//                           {
-//                               [comicSlides addObject:data];
-//                               [self saveDataToFile:comicSlides];
-//                           }
-//                           else
-//                           {
+                           
                            if ([comicSlides count ] > editSlideIndex) {
                                [comicSlides replaceObjectAtIndex:editSlideIndex withObject:data];
                                [self saveDataToFile:comicSlides];
@@ -591,7 +625,6 @@ NSTimer* timerObject;
                                [comicSlides addObject:data];
                                [self saveDataToFile:comicSlides];
                            }
-//                           }
                        }
                        @catch (NSException *exception) {
                        }
@@ -648,25 +681,10 @@ NSTimer* timerObject;
                         [comicSlides replaceObjectAtIndex:editSlideIndex withObject:data];
                         [self saveDataToFile:comicSlides];
                     }
-                    
-//                    NSLog(@"************* editSlideIndex ***************");
-//                    ComicPage * sample = [NSKeyedUnarchiver unarchiveObjectWithData:comicSlides[editSlideIndex]];
-//                    NSLog(@"%@",sample.subviews);
-//                    NSLog(@"************* editSlideIndex ***************");
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                     self.scrvComicSlide.isStillSaving = NO;
                     data = nil;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self setComicSendButton];
-                        
-                        
                         if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterSecondTimeGlideViewController] == YES)
                         {
                             if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == YES)
@@ -686,12 +704,8 @@ NSTimer* timerObject;
                                         [self.view addSubview:instView];
                                     }
                                 });
-                                
                             }
-                            
-                            
                         }
-                        
                         // second time gif animation
                         
                         if ([InstructionView getBoolValueForSlide:kInstructionSlide14] == YES)

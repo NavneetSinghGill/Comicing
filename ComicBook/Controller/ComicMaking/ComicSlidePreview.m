@@ -16,7 +16,7 @@
     ComicBookVC *comic;
 }
 
-@property (strong, nonatomic) IBOutlet UIView *view;
+//@property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet UIView *view3Slide;
 @property (weak, nonatomic) IBOutlet UIView *view2Slide;
 @property (weak, nonatomic) IBOutlet UIView *view1Slide;
@@ -58,6 +58,21 @@
 @synthesize imgv4Slide1, imgv4Slide2, imgv4Slide3, imgv4Slide4;
 @synthesize viewComicBook;
 
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
@@ -68,19 +83,26 @@
 
 -(id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
-    
-    if(self)
-    {
-        //Load from xib
-        [[NSBundle mainBundle] loadNibNamed:@"ComicSlidePreview" owner:self options:nil];
-        self.view.frame = self.frame;
-        [self addSubview:self.view];
-        
-        [self setup];
+    self = [super initWithNibName:@"ComicSlidePreview" bundle:nil];
+    if (self) {
+        self.view.frame = frame;
+        // Do whatever nonsense you'd like to do in init.
     }
-    
     return self;
+//    
+//    self = [super initWithFrame:frame];
+//    
+//    if(self)
+//    {
+//        //Load from xib
+//        [[NSBundle mainBundle] loadNibNamed:@"ComicSlidePreview" owner:self options:nil];
+//        self.view.frame = self.frame;
+//        [self addSubview:self.view];
+//        
+//        [self setup];
+//    }
+//    
+//    return self;
 }
 
 
@@ -91,6 +113,7 @@
 
 - (void)setupComicSlidePreview:(NSArray *)slidesImages
 {
+    [self setup];
     slides = slidesImages;
     
     if (slides.count == 1)
@@ -178,7 +201,7 @@
     imgv4Slide1.image = slides[0];
     imgv4Slide2.image = slides[1];
     imgv4Slide3.image = slides[2];
-    imgv4Slide4.image = slides[2];
+    imgv4Slide4.image = slides[3];
 }
 
 - (void)setupComicBook
