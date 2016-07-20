@@ -88,23 +88,27 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     {
         imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",
                        
-                       @"st1",@"st2",@"st3",@"st4",@"st5",
-                       @"st1",@"st2",@"st3",@"st4",@"st5",
-                       @"st1",@"st2",@"st3",@"st4",@"st5"];//add 15 stickers
+                       @"stickers_00_0001",@"stickers_00_0002",@"stickers_00_0003",@"stickers_00_0004",@"stickers_00_0005",
+                       @"stickers_00_0006",@"stickers_00_0007",@"stickers_00_0008",@"stickers_00_0009",@"stickers_00_0010",
+                       @"stickers_00_0011",@"stickers_00_0012",@"stickers_00_0013",@"stickers_00_0014",@"stickers_00_0015",
+                       @"emoji_01",@"emoji_02",@"emoji_03",@"emoji_04",@"emoji_05",
+                       @"emoji_06",@"emoji_07",@"emoji_08",@"emoji_09",@"emoji_10",
+                       @"emoji_11",@"emoji_12",@"emoji_13",@"emoji_14",@"emoji_15"];
     }
     else if(scoreValue >= INVITE_POINT_100 &&
              scoreValue <= INVITE_POINT_200)
     {
         imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",
                        
-                       @"st1",@"st2",@"st3",@"st4",@"st5",
-                       @"st1",@"st2",@"st3",@"st4",@"st5"];//add 10 stickers
+                       @"stickers_00_0001",@"stickers_00_0002",@"stickers_00_0003",@"stickers_00_0004",@"stickers_00_0005",
+                       @"stickers_00_0006",@"stickers_00_0007",@"stickers_00_0008",@"stickers_00_0009",@"stickers_00_0010",
+                       @"stickers_00_0011",@"stickers_00_0012",@"stickers_00_0013",@"stickers_00_0014",@"stickers_00_0015"];
     }
     else if(scoreValue >= INVITE_POINT_50 &&
              scoreValue <= INVITE_POINT_100)
     {
         imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",
-                       @"st1",@"st2",@"st3",@"st4",@"st5"];//add 5 stickers
+                       @"stickers_00_0001",@"stickers_00_0002",@"stickers_00_0003",@"stickers_00_0004",@"stickers_00_0005"];
     }
     else
     {

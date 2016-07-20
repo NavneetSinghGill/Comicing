@@ -31,6 +31,9 @@ const NSInteger spaceFromTop = 75;
 
 @property (nonatomic) CGSize viewSize;
 @property (nonatomic) CGSize viewPreviewSize;
+
+@property (strong,nonatomic) UIImageView *arrowImage;
+
 @end
 
 @implementation SlidesScrollView
@@ -93,7 +96,7 @@ const NSInteger spaceFromTop = 75;
     CGFloat x = ( 50 * (columnCount + 1)) + (columnCount * viewSize.width);
     CGFloat y = ( 18 * (rowCount +  1)) + (rowCount * viewSize.width);
     
-    return CGRectMake(x, y, viewPreviewSize.width + 70, viewPreviewSize.height);
+    return CGRectMake(x + 100, y, viewPreviewSize.width, viewPreviewSize.height);
 }
 
 - (CGRect)frameForPossition:(NSInteger)index
@@ -116,6 +119,19 @@ const NSInteger spaceFromTop = 75;
     CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width) - 20;
     
     return CGRectMake(x, y, 20, 20);
+}
+
+- (CGRect)frmaeForArrowImage:(NSInteger)index
+{
+    NSInteger columnCount = index % viewsInOneRow;
+    NSInteger rowCount    = index / viewsInOneRow;
+    
+    CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) - 10;
+    CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width) - 10;
+    
+    CGFloat middlePoint = y / 2 + (viewSize.height / 2);
+    
+    return CGRectMake(x + 50, middlePoint, 50 , 100);
 }
 
 - (void)setScrollViewContectSize
@@ -388,7 +404,21 @@ const NSInteger spaceFromTop = 75;
     [self addSubview:btnPlusSlide];
     
 }
--(void)addTimeLineView{
+
+- (void)addArrowImage:(NSInteger)index
+{
+    self.arrowImage = [[UIImageView alloc] init];
+    self.arrowImage.frame = [self frmaeForArrowImage:index];
+    
+    self.arrowImage.image = [UIImage imageNamed:@"forward"];
+    
+    self.arrowImage.contentMode = UIViewContentModeScaleAspectFit;
+    
+    [self addSubview:self.arrowImage];
+}
+
+-(void)addTimeLineView
+{
     [self addTimeLineView:0];
 }
 

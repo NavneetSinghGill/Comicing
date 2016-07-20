@@ -3539,7 +3539,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "47836a94-9a55-428d-8499-04cda266c580";
+				PROVISIONING_PROFILE = "7b17308d-8081-4aed-a34a-b24ce26dae79";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;

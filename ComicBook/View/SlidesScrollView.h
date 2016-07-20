@@ -50,6 +50,7 @@
 - (void)setScrollViewContectSizeByLastIndex:(NSInteger)index;
 - (void)refreshPreview:(NSInteger)index withImages:(NSArray *)slides;
 -(UIImage*)getImageFile:(NSString*)fileName;
+- (void)addArrowImage:(NSInteger)index;
 
 @property (nonatomic, weak) id<SlidesScrollViewDelegate> slidesScrollViewDelegate;
 

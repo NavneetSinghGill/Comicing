@@ -499,12 +499,22 @@ UICollectionViewDelegate>
             
             
             ComicBook *comicBook = (ComicBook *)mComicConversatinBook.coversation[0];
-            
+            CGRect lblFrame = cell.lblComicTitle.frame;
+
             
             if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
             {
                 cell.lblComicTitle.hidden = YES;
                 cell.topSpacingComicView.constant = 5;
+                
+                CGRect frameViewComicBook = cell.viewComicBook.frame;
+                frameViewComicBook.origin.y = lblFrame.origin.y;
+                frameViewComicBook.size.height = cell.frame.size.height;
+                cell.viewComicBook.frame = frameViewComicBook;
+                
+                cell.lblComicTitle.frame = lblFrame;
+                
+                comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame) - 10);
                 
                 [cell layoutIfNeeded];
             }
