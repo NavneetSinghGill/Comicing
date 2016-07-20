@@ -79,7 +79,7 @@
 }
 - (IBAction)btnInviteClick:(id)sender {
     [self stopTitleAutoLoad];
-    [self updateInviteScore:INVITE_POINT_PERINVITE];
+//    [self updateInviteScore:INVITE_POINT_PERINVITE];
     if ([contactList count] > self.contactIndex) {
         NSDictionary* dct = [contactList objectAtIndex:self.contactIndex];
         [self openMessageComposer:[NSArray arrayWithObjects:[dct objectForKey:@"MobileNumber"], nil]
