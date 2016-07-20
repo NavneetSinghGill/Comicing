@@ -157,6 +157,11 @@ const NSInteger spaceFromTop = 75;
     self.contentSize = CGSizeMake(CGRectGetMaxX(viewPreviewScrollSlide.view.frame) + spaceBetweenSlide , CGRectGetHeight(viewPreviewScrollSlide.view.frame));
 }
 
+- (void)setScrollViewContectSizeForEmptySlide
+{
+    self.contentSize = CGSizeMake(CGRectGetMaxX(btnPlusSlide.frame) + spaceBetweenSlide , CGRectGetHeight(btnPlusSlide.frame));
+}
+
 - (void)setScrollViewContectSizeByLastIndex:(NSInteger)index
 {
     CGRect rectSize = [self frameForPossition:index];
@@ -397,9 +402,11 @@ const NSInteger spaceFromTop = 75;
 - (void)setPreviewForSlidesAtIndex:(NSInteger)index withImages:(NSArray *)slides
 {
     [self addArrowImage:self.btnPlusSlide.tag];
+    BOOL isAdd = NO;
     if (viewPreviewScrollSlide == nil)
     {
         viewPreviewScrollSlide = [[SlidePreviewScrollView alloc] init];
+        isAdd = YES;
     }
     
     if (slides.count == 3)
@@ -426,9 +433,24 @@ const NSInteger spaceFromTop = 75;
     viewPreviewScrollSlide.allSlideImages = slides;
     [viewPreviewScrollSlide setupBook];
 
-    [self addSubview:viewPreviewScrollSlide.view];
+    if (isAdd) {
+        [self addSubview:viewPreviewScrollSlide.view];
+    }
     
-    [self setScrollViewContectSize];
+    [self.arrowImage setAlpha:1];
+    [viewPreviewScrollSlide.view setAlpha:1];
+    //Handle empty slide
+    if ([slides count] == 0) {
+        //fade in
+        [UIView animateWithDuration:1.0f animations:^{
+            [self.arrowImage setAlpha:0];
+            [viewPreviewScrollSlide.view setAlpha:0];
+        } completion:^(BOOL finished) {
+        }];
+        [self setScrollViewContectSizeForEmptySlide];
+    }else{
+     [self setScrollViewContectSize];
+    }
 }
 
 
