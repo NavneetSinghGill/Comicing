@@ -378,6 +378,7 @@ const NSInteger spaceFromTop = 75;
 
 - (void)setPreviewForSlidesAtIndex:(NSInteger)index withImages:(NSArray *)slides
 {
+    [self addArrowImage:self.btnPlusSlide.tag];
     if (viewPreviewScrollSlide == nil) {
         viewPreviewScrollSlide = [[SlidePreviewScrollView alloc] init];
     }
@@ -407,14 +408,20 @@ const NSInteger spaceFromTop = 75;
 
 - (void)addArrowImage:(NSInteger)index
 {
-    self.arrowImage = [[UIImageView alloc] init];
+    BOOL isAdd = NO;
+    if (self.arrowImage == nil) {
+        self.arrowImage = [[UIImageView alloc] init];
+        isAdd = YES;
+    }
     self.arrowImage.frame = [self frmaeForArrowImage:index];
     
     self.arrowImage.image = [UIImage imageNamed:@"forward"];
     
     self.arrowImage.contentMode = UIViewContentModeScaleAspectFit;
     
-    [self addSubview:self.arrowImage];
+    if (isAdd) {
+        [self addSubview:self.arrowImage];
+    }
 }
 
 -(void)addTimeLineView

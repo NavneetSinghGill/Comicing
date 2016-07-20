@@ -157,8 +157,7 @@ NSTimer* timerObject;
             count++;
         }
         [scrvComicSlide addPlusButton:count];
-//        [scrvComicSlide addSlideButtonAtIndex:count];
-        [scrvComicSlide addArrowImage:count];
+//        [scrvComicSlide addArrowImage:count];
         [self refreshListPreview];
         if (comicSlides.count == SLIDE_MAXCOUNT && scrvComicSlide.btnPlusSlide) {
             [scrvComicSlide.btnPlusSlide setHidden:YES];
