@@ -2763,19 +2763,6 @@
 			path = FriendPage;
 			sourceTree = "<group>";
 		};
-		843ABB751D1FAA500078B7A8 /* MainPageCell */ = {
-			isa = PBXGroup;
-			children = (
-				843ABB761D1FAA730078B7A8 /* MainPageCell.h */,
-				843ABB771D1FAA730078B7A8 /* MainPageCell.m */,
-				84ED581A1D2956AF004E257F /* MainPage3SlideCell.h */,
-				84ED581B1D2956AF004E257F /* MainPage3SlideCell.m */,
-				846F3D941D2ECE93001191E6 /* MainPage2SlideCell.h */,
-				846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */,
-			);
-			name = MainPageCell;
-			sourceTree = "<group>";
-		};
 		1B9B7C191D3A9E03003B04F1 /* Emoji */ = {
 			isa = PBXGroup;
 			children = (
@@ -2787,6 +2774,19 @@
 				1B9B7C1F1D3A9E03003B04F1 /* MyEmojiCategory.m */,
 			);
 			path = Emoji;
+			sourceTree = "<group>";
+		};
+		843ABB751D1FAA500078B7A8 /* MainPageCell */ = {
+			isa = PBXGroup;
+			children = (
+				843ABB761D1FAA730078B7A8 /* MainPageCell.h */,
+				843ABB771D1FAA730078B7A8 /* MainPageCell.m */,
+				84ED581A1D2956AF004E257F /* MainPage3SlideCell.h */,
+				84ED581B1D2956AF004E257F /* MainPage3SlideCell.m */,
+				846F3D941D2ECE93001191E6 /* MainPage2SlideCell.h */,
+				846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */,
+			);
+			name = MainPageCell;
 			sourceTree = "<group>";
 		};
 		8450906C1C2B1343004DAE99 = {
@@ -3525,7 +3525,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "7b17308d-8081-4aed-a34a-b24ce26dae79";
+				PROVISIONING_PROFILE = "47836a94-9a55-428d-8499-04cda266c580";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
@@ -3535,7 +3535,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Providence Education Inc. (PV7F3V653B)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = YES;

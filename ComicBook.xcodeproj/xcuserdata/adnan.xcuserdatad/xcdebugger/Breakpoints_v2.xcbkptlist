@@ -707,11 +707,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/View/AnimationView/InstructionView.m"
-            timestampString = "490303158.724748"
+            timestampString = "490729168.848302"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "476"
-            endingLineNumber = "476"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
             landmarkName = "-gifAnimation"
             landmarkType = "5">
          </BreakpointContent>
@@ -905,22 +905,6 @@
             startingLineNumber = "260"
             endingLineNumber = "260"
             landmarkName = "-viewDidDisappear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ComicBook/Controller/Glide/GlideScrollViewController.m"
-            timestampString = "490645611.719337"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "709"
-            endingLineNumber = "709"
-            landmarkName = "-comicMakingViewControllerWithEditingDone:withImageView:withPrintScreen:withNewSlide:withPopView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

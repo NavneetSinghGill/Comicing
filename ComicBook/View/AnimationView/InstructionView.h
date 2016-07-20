@@ -26,6 +26,7 @@
 #define kInstructionSlide14  @"slide14"
 #define kInstructionSlide15  @"slide15"
 #define kInstructionSlide16  @"slide16"
+#define kInstructionSlide16B  @"slide16B"
 
 #define kInstructionSlideB  @"slideB"
 #define kInstructionSlide2B @"slide2B"
@@ -70,6 +71,7 @@ typedef enum SlideNumber
     SlideNumber14,
     SlideNumber15,
     SlideNumber16,
+    SlideNumber16B,
     SlideNumberB,
     SlideNumber2B,
     SlideNumberC,

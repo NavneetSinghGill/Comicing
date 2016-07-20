@@ -216,6 +216,11 @@
     {
         [self slide16Animation];
     }
+    else if (number == SlideNumber16B)
+    {
+        [self slide16BAnimation];
+    }
+    
     else if (number == SlideNumberB)
     {
         [self slideBAnimation];
@@ -352,6 +357,9 @@
     [userDefault setBool:false forKey:kInstructionSlide14];
     [userDefault setBool:false forKey:kInstructionSlide15];
     [userDefault setBool:false forKey:kInstructionSlide16];
+    [userDefault setBool:false forKey:kInstructionSlide16B];
+
+    
     [userDefault setBool:false forKey:kInstructionSlideB];
     [userDefault setBool:false forKey:kInstructionSlide2B];
     [userDefault setBool:false forKey:kInstructionSlideC];
@@ -385,6 +393,9 @@
     [userDefault setBool:YES forKey:kInstructionSlide14];
     [userDefault setBool:YES forKey:kInstructionSlide15];
     [userDefault setBool:YES forKey:kInstructionSlide16];
+    [userDefault setBool:YES forKey:kInstructionSlide16B];
+
+    
     [userDefault setBool:YES forKey:kInstructionSlideB];
     [userDefault setBool:YES forKey:kInstructionSlide2B];
     [userDefault setBool:YES forKey:kInstructionSlideC];
@@ -583,6 +594,14 @@
 {
     imgvSlide16.hidden = NO;
     [self bubbleAnimationWithView:imgvSlide16];
+}
+
+- (void)slide16BAnimation
+{
+    imgvSlide10.hidden = NO;
+    imgvSlide10.image = [YLGIFImage imageNamed:@"Slide-12.gif"];
+    
+    [self gifAnimation];
 }
 
 - (void)slideBAnimation
