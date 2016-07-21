@@ -280,9 +280,7 @@
     }
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
-                     withVelocity:(CGPoint)velocity
-              targetContentOffset:(inout CGPoint *)targetContentOffset
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset withTableView:(UITableView *)tableView
 {
     if (velocity.y > 0)
     {
@@ -295,18 +293,18 @@
         
         [UIView animateWithDuration:0.6 animations:^
          {
-          
+             
              CGRect frame = _headerView2.frame;
              frame.origin.y = _avView.frame.origin.y + _avView.frame.size.height;
              _headerView2.frame = frame;
-
+             
              frame = _friendsList.frame;
              frame.origin.y = _headerView2.frame.origin.y + _headerView2.frame.size.height;
              frame.size.height = self.view.frame.size.height - _footerView.frame.size.height - frame.origin.y - _headerView2.frame.size.height;
              _friendsList.frame = frame;
              
              _friendsList.enableSectionTitles = YES;
-         
+             
          }completion:^(BOOL finished) {
              [_friendsList.friendsListTableView reloadData];
          }];
@@ -314,7 +312,8 @@
 
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView withTableView:(UITableView *)tableView
 {
     if (scrollView.contentOffset.y < 100)
     {
