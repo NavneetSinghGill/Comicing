@@ -90,14 +90,32 @@ const NSInteger spaceFromTop = 75;
 
 - (CGRect)frameForPreviewSlide:(NSInteger)index
 {
-    NSInteger columnCount = index % viewsInOneRow;
+//    NSInteger columnCount = index % viewsInOneRow;
     NSInteger rowCount    = index / viewsInOneRow;
     
-    CGFloat x = ( 50 * (columnCount + 1)) + (columnCount * viewSize.width);
-    CGFloat y = ( 18 * (rowCount +  1)) + (rowCount * viewSize.width);
+ //   CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width);
+    CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width);
     
-    return CGRectMake(x + 100, y, viewPreviewSize.width, viewPreviewSize.height);
+    return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50, y + 20, viewSize.width + 20, viewSize.height);
 }
+
+- (CGRect)frameForPreview3Slide:(NSInteger)index
+{
+    return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50, 0, viewSize.width + 20, self.frame.size.height - 80);
+}
+
+- (CGRect)frameForPreview4Slide:(NSInteger)index
+{
+    NSInteger rowCount    = index / viewsInOneRow;
+    
+    CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width);
+    
+    return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50 , y, viewSize.width, viewSize.height);
+
+}
+
+
+
 
 - (CGRect)frameForPossition:(NSInteger)index
 {
@@ -123,20 +141,25 @@ const NSInteger spaceFromTop = 75;
 
 - (CGRect)frmaeForArrowImage:(NSInteger)index
 {
-    NSInteger columnCount = index % viewsInOneRow;
+ //   NSInteger columnCount = index % viewsInOneRow;
     NSInteger rowCount    = index / viewsInOneRow;
     
-    CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) - 10;
+ //   CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) - 10;
     CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width) - 10;
     
     CGFloat middlePoint = y / 2 + (viewSize.height / 2);
     
-    return CGRectMake(x + 50, middlePoint, 50 , 100);
+    return CGRectMake(CGRectGetMinX(btnPlusSlide.frame) + 70, middlePoint + 10, 45 , 90);
 }
 
 - (void)setScrollViewContectSize
 {
     self.contentSize = CGSizeMake(CGRectGetMaxX(viewPreviewScrollSlide.view.frame) + spaceBetweenSlide , CGRectGetHeight(viewPreviewScrollSlide.view.frame));
+}
+
+- (void)setScrollViewContectSizeForEmptySlide
+{
+    self.contentSize = CGSizeMake(CGRectGetMaxX(btnPlusSlide.frame) + spaceBetweenSlide , CGRectGetHeight(btnPlusSlide.frame));
 }
 
 - (void)setScrollViewContectSizeByLastIndex:(NSInteger)index
@@ -379,16 +402,55 @@ const NSInteger spaceFromTop = 75;
 - (void)setPreviewForSlidesAtIndex:(NSInteger)index withImages:(NSArray *)slides
 {
     [self addArrowImage:self.btnPlusSlide.tag];
-    if (viewPreviewScrollSlide == nil) {
+    BOOL isAdd = NO;
+    if (viewPreviewScrollSlide == nil)
+    {
         viewPreviewScrollSlide = [[SlidePreviewScrollView alloc] init];
+        isAdd = YES;
     }
-    viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:self.btnPlusSlide.tag];
+    
+    if (slides.count == 3)
+    {
+        viewPreviewScrollSlide.view.frame = [self frameForPreview3Slide:self.btnPlusSlide.tag];
+    }
+    else if (slides.count == 4)
+    {
+        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
+    }
+    else if (slides.count == 1)
+    {
+        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
+    }
+    else if (slides.count == 2)
+    {
+        viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:self.btnPlusSlide.tag];
+    }
+    else
+    {
+        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
+    }
+    
     viewPreviewScrollSlide.allSlideImages = slides;
     [viewPreviewScrollSlide setupBook];
 
-    [self addSubview:viewPreviewScrollSlide.view];
+    if (isAdd) {
+        [self addSubview:viewPreviewScrollSlide.view];
+    }
     
-    [self setScrollViewContectSize];
+    [self.arrowImage setAlpha:1];
+    [viewPreviewScrollSlide.view setAlpha:1];
+    //Handle empty slide
+    if ([slides count] == 0) {
+        //fade in
+        [UIView animateWithDuration:1.0f animations:^{
+            [self.arrowImage setAlpha:0];
+            [viewPreviewScrollSlide.view setAlpha:0];
+        } completion:^(BOOL finished) {
+        }];
+        [self setScrollViewContectSizeForEmptySlide];
+    }else{
+     [self setScrollViewContectSize];
+    }
 }
 
 

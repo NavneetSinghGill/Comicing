@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgv3Slide2;
 @property (weak, nonatomic) IBOutlet UIImageView *imgv3Slide3;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constTrailingbackground;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constBottom3Slide;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constWidth3Slide;
 
 //2SlideImageViews
 @property (weak, nonatomic) IBOutlet UIImageView *imgv2Slide1;
@@ -35,12 +37,16 @@
 
 //1SlideImageViews
 @property (weak, nonatomic) IBOutlet UIImageView *imgv1Slide;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constHeight1Slide;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constWidth1Slide;
 
 //4SlideImageViews
 @property (weak, nonatomic) IBOutlet UIImageView *imgv4Slide1;
 @property (weak, nonatomic) IBOutlet UIImageView *imgv4Slide2;
 @property (weak, nonatomic) IBOutlet UIImageView *imgv4Slide3;
 @property (weak, nonatomic) IBOutlet UIImageView *imgv4Slide4;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constWidth4Slides;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constHeight4Slides;
 
 // Morethan 4 Slides
 @property (weak, nonatomic) IBOutlet UIView *viewComicBook;
@@ -57,7 +63,8 @@
 @synthesize imgv1Slide;
 @synthesize imgv4Slide1, imgv4Slide2, imgv4Slide3, imgv4Slide4;
 @synthesize viewComicBook;
-
+@synthesize constWidth4Slides, constHeight4Slides;
+@synthesize constWidth1Slide, constHeight1Slide;
 
 - (void)viewDidLoad {
     
@@ -151,12 +158,29 @@
 {
     if (IS_IPHONE_6P)
     {
-        self.constTrailingbackground.constant = 10 ;
+        self.constTrailingbackground.constant = 0;
+        self.constBottom3Slide.constant = 28;
+        self.constWidth3Slide.constant = 0;
+
     }
     else if (IS_IPHONE_6)
     {
         self.constTrailingbackground.constant = 7;
 
+        self.constBottom3Slide.constant = 25;
+        self.constWidth3Slide.constant = -4;
+
+    }
+    else if (IS_IPHONE_5)
+    {
+        self.constBottom3Slide.constant = 22;
+        self.constWidth3Slide.constant = -3;
+
+    }
+    else
+    {
+        self.constBottom3Slide.constant = 22;
+        self.constWidth3Slide.constant = -3;
     }
     
     
@@ -165,6 +189,17 @@
     imgv3Slide1.image = slides[0];
     imgv3Slide2.image = slides[1];
     imgv3Slide3.image = slides[2];
+    
+    imgv3Slide1.layer.borderColor = [UIColor blackColor].CGColor;
+    imgv3Slide1.layer.borderWidth = 2;
+    
+    imgv3Slide2.layer.borderColor = [UIColor blackColor].CGColor;
+    imgv3Slide2.layer.borderWidth = 2;
+    
+    imgv3Slide3.layer.borderColor = [UIColor blackColor].CGColor;
+    imgv3Slide3.layer.borderWidth = 2;
+    
+    
 }
 
 - (void)setup2SlideComicPreview
@@ -173,30 +208,87 @@
 
     imgv2Slide1.image = slides[0];
     imgv2Slide2.image = slides[1];
+    
+    imgv2Slide1.layer.borderColor = [UIColor blackColor].CGColor;
+    imgv2Slide1.layer.borderWidth = 2;
+    
+    imgv2Slide2.layer.borderColor = [UIColor blackColor].CGColor;
+    imgv2Slide2.layer.borderWidth = 2;
+
 }
 
 - (void)setup1SlideComicPreview
 {
+    if (IS_IPHONE_6P)
+    {
+        self.constWidth1Slide.constant = -2;
+        constHeight1Slide.constant = 0;
+    }
+    else if (IS_IPHONE_6)
+    {
+        self.constWidth1Slide.constant = -9;
+        constHeight1Slide.constant = -5;
+    }
+    else if (IS_IPHONE_5)
+    {
+        self.constWidth1Slide.constant = -9;
+        constHeight1Slide.constant = -5;
+    }
+    else
+    {
+        self.constWidth1Slide.constant = -4;
+        constHeight1Slide.constant = -3;
+        
+    }
+
+    
     view1Slide.hidden = NO;
     
     imgv1Slide.image = slides[0];
+    
+    imgv1Slide.layer.borderColor = [UIColor blackColor].CGColor;
+    imgv1Slide.layer.borderWidth = 2;
+
 }
 
 - (void)setup4SlideComicPreview
 {
+    if (IS_IPHONE_6P)
+    {
+        self.constWidth4Slides.constant = -2;
+        constHeight4Slides.constant = 0;
+    }
+    else if (IS_IPHONE_6)
+    {
+        self.constWidth4Slides.constant = -3;
+        constHeight4Slides.constant = -2;
+    }
+    else if (IS_IPHONE_5)
+    {
+        self.constWidth4Slides.constant = -4;
+        constHeight4Slides.constant = -3;
+    }
+    else
+    {
+        self.constWidth4Slides.constant = -4;
+        constHeight4Slides.constant = -3;
+
+    }
+
+    
     view4Slide.hidden = NO;
     
-    imgv4Slide1.layer.borderColor = [UIColor whiteColor].CGColor;
-    imgv4Slide1.layer.borderWidth = 3;
+    imgv4Slide1.layer.borderColor = [UIColor blackColor].CGColor;
+    imgv4Slide1.layer.borderWidth = 2;
 
-    imgv4Slide2.layer.borderColor = [UIColor whiteColor].CGColor;
-    imgv4Slide2.layer.borderWidth = 3;
+    imgv4Slide2.layer.borderColor = [UIColor blackColor].CGColor;
+    imgv4Slide2.layer.borderWidth = 2;
     
-    imgv4Slide3.layer.borderColor = [UIColor whiteColor].CGColor;
-    imgv4Slide3.layer.borderWidth = 3;
+    imgv4Slide3.layer.borderColor = [UIColor blackColor].CGColor;
+    imgv4Slide3.layer.borderWidth = 2;
     
-    imgv4Slide4.layer.borderColor = [UIColor whiteColor].CGColor;
-    imgv4Slide4.layer.borderWidth = 3;
+    imgv4Slide4.layer.borderColor = [UIColor blackColor].CGColor;
+    imgv4Slide4.layer.borderWidth = 2;
     
     imgv4Slide1.image = slides[0];
     imgv4Slide2.image = slides[1];
@@ -206,7 +298,6 @@
 
 - (void)setupComicBook
 {
-    
     _viewComic.hidden = NO;
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil];

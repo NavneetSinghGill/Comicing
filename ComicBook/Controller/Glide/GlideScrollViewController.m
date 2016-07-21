@@ -688,6 +688,9 @@ NSTimer* timerObject;
                         [self setComicSendButton];
                         if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterSecondTimeGlideViewController] == YES)
                         {
+                            
+                            
+                            // below code for slide 16
                             if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == YES)
                             {
                                 // open "delete a comic" Instruction
@@ -709,6 +712,7 @@ NSTimer* timerObject;
                         }
                         // second time gif animation
                         
+                        
                         if ([InstructionView getBoolValueForSlide:kInstructionSlide14] == YES)
                         {
                             // "send it to friends" slide16
@@ -716,18 +720,19 @@ NSTimer* timerObject;
                             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                                 NSLog(@"Do some work");
                                 
-                                if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == NO)
+                                if ([InstructionView getBoolValueForSlide:kInstructionSlide16B] == NO)
                                 {
                                     InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
                                     instView.delegate = self;
-                                    [instView showInstructionWithSlideNumber:SlideNumber16 withType:InstructionBubbleType];
-                                    [instView setTrueForSlide:kInstructionSlide16];
+                                    [instView showInstructionWithSlideNumber:SlideNumber16B withType:InstructionGIFType];
+                                    [instView setTrueForSlide:kInstructionSlide16B];
                                     
                                     [self.view addSubview:instView];
                                 }
                             });
-
+                            
                         }
+                        
                         
                         if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeGlideViewController] == YES)
                         {
@@ -905,6 +910,26 @@ NSTimer* timerObject;
             [self.view addSubview:instView];
               }
         });
+    }
+    else if (number == SlideNumber16B)
+    {
+            // "send it to friends" slide16
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                NSLog(@"Do some work");
+                
+                if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == NO)
+                {
+                    InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                    instView.delegate = self;
+                    [instView showInstructionWithSlideNumber:SlideNumber16 withType:InstructionBubbleType];
+                    [instView setTrueForSlide:kInstructionSlide16];
+                    
+                    [self.view addSubview:instView];
+                }
+            });
+            
+     
     }
     
     
