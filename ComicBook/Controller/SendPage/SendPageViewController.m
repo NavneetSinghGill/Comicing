@@ -465,7 +465,6 @@ SendPageViewController ()<UITextFieldDelegate>
 }
 
 #pragma mark FriendsList Delegate
-
 -(void)selectedRow:(id)object
 {
     [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SendPage" Action:@"FriendsShare" Label:@""];
@@ -474,100 +473,107 @@ SendPageViewController ()<UITextFieldDelegate>
         [self generateFriendShareArray:uf];
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView withTableView:(UITableView *)tableView
 {
     NSLog(@"%f",scrollView.contentOffset.y);
 
-    if (_isSearchEnable == NO)
+    CGFloat yVelocity = [scrollView.panGestureRecognizer velocityInView:scrollView].y;
+    if (yVelocity < 0)
     {
-        if (isInvitefriendListOpen)
+        NSLog(@"Up");
+        
+        if (!_isSearchEnable)
         {
-            if (scrollView.contentOffset.y < 100)
+            if (isInvitefriendListOpen == NO)
             {
-                [UIView animateWithDuration:0.6 animations:^{
-                    
-                    _viewSearch.frame = frameSearchView;
-                    _viewShare.frame = frameViewShare;
-                    viewPrivate.frame = _frameViewPrivate;
-                    _lblFriends.frame = frameLblFriend;
-                    _friendsListView.frame = frameFriendListView;
-                    
-                    
-                    
-                }completion:^(BOOL finished) {
-                    _lblGroup.hidden = NO;
-                     isInvitefriendListOpen = NO;
-                    _friendsListView.enableSectionTitles = NO;
-                    [_friendsListView.friendsListTableView reloadData];
-                }];
+                tableView.scrollEnabled = NO;
+                scrollView.scrollsToTop = YES;
+                // _viewShare
+                // _viewSearch
                 
+                isInvitefriendListOpen = YES;
+                [UIView animateWithDuration:0.6 animations:^
+                 {
+                     CGRect frame = _friendsListView.frame;
+                     
+                     frame = _viewSearch.frame;
+                     frame.origin.y = _comicImageList.frame.size.height;
+                     _viewSearch.frame = frame;
+                     
+                     frame = _viewShare.frame;
+                     frame.origin.y = frame.origin.y - _viewShare.frame.size.height;
+                     _viewShare.frame = frame;
+                     
+                     frame = viewPrivate.frame;
+                     frame.origin.y = _comicImageList.frame.size.height + _viewSearch.frame.size.height;
+                     frame.size.height = heightOfViewPrivate;
+                     viewPrivate.frame = frame;
+                     
+                     frame = _lblFriends.frame;
+                     frame.origin.y = positionYoflblFriends;
+                     _lblFriends.frame = frame;
+                     
+                     frame =  _friendsListView.frame;
+                     frame.origin.y = _lblFriends.frame.origin.y + _lblFriends.frame.size.height;
+                     frame.size.height = heightOfFriendlist;
+                     _friendsListView.frame = frame;
+                     
+                     _lblGroup.hidden = YES;
+                     
+                     _friendsListView.enableSectionTitles = YES;
+                 }completion:^(BOOL finished) {
+                     [_friendsListView.friendsListTableView reloadData];
+                     
+                     tableView.scrollEnabled = YES;
+                 }];
+
+            }
+            else
+            {
+                tableView.scrollEnabled = YES;
+
             }
             
+            
         }
-
     }
-    
-    
-    }
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-    
-    if (!_isSearchEnable)
+    else if (yVelocity > 0)
     {
-        if (velocity.y > 0)
+        NSLog(@"Down");
+        
+        if (_isSearchEnable == NO)
         {
-            // NSLog(@"up");
-            NSLog(@"%f",velocity.y);
-           
-            
-            // _viewShare
-            // _viewSearch
-            
-            [UIView animateWithDuration:0.6 animations:^
-             {
-                 CGRect frame = _friendsListView.frame;
-                 
-                 frame = _viewSearch.frame;
-                 frame.origin.y = _comicImageList.frame.size.height;
-                 _viewSearch.frame = frame;
-                 
-                 frame = _viewShare.frame;
-                 frame.origin.y = frame.origin.y - _viewShare.frame.size.height;
-                 _viewShare.frame = frame;
-                 
-                 frame = viewPrivate.frame;
-                 frame.origin.y = _comicImageList.frame.size.height + _viewSearch.frame.size.height;
-                 frame.size.height = heightOfViewPrivate;
-                 viewPrivate.frame = frame;
-                 
-                 frame = _lblFriends.frame;
-                 frame.origin.y = positionYoflblFriends;
-                 _lblFriends.frame = frame;
-                 
-                 frame =  _friendsListView.frame;
-                 frame.origin.y = _lblFriends.frame.origin.y + _lblFriends.frame.size.height;
-                 frame.size.height = heightOfFriendlist;
-                 _friendsListView.frame = frame;
-                 
-                 _lblGroup.hidden = YES;
-                 isInvitefriendListOpen = YES;
-                 
-                 _friendsListView.enableSectionTitles = YES;
-             }completion:^(BOOL finished) {
-                 [_friendsListView.friendsListTableView reloadData];
-             }];
-        }
+            if (isInvitefriendListOpen)
+            {
+                if (scrollView.contentOffset.y < 40)
+                {
+                    [UIView animateWithDuration:0.3 animations:^
+                    {
+                        _viewSearch.frame = frameSearchView;
+                        _viewShare.frame = frameViewShare;
+                        viewPrivate.frame = _frameViewPrivate;
+                        _lblFriends.frame = frameLblFriend;
+                        _friendsListView.frame = frameFriendListView;
 
-        
-    }
-    else
-    {
-        
+                    }completion:^(BOOL finished)
+                    {
+                        _lblGroup.hidden = NO;
+                        isInvitefriendListOpen = NO;
+                        _friendsListView.enableSectionTitles = NO;
+                        [_friendsListView.friendsListTableView reloadData];
+                        tableView.scrollEnabled = YES;
+                        
+                    }];
+                }
+            }
+        }
     }
 }
 
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset withTableView:(UITableView *)tableView
+{
 
+}
 
 #pragma mark : InviteFriendsViewDelegate Methods
 
@@ -589,7 +595,6 @@ SendPageViewController ()<UITextFieldDelegate>
             
         }];
     }
-
 }
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
