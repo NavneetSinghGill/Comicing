@@ -19,6 +19,8 @@
 #import "MyEmojiCategory.h"
 #import "GlideScrollViewController.h"
 #import "OpenCuteStickersGiftBoxViewController.h"
+#import "FrinedsUsingComicingCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface InviteViewController ()<MFMessageComposeViewControllerDelegate>
 {
@@ -39,6 +41,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnGiftBox100;
 @property (weak, nonatomic) IBOutlet UIButton *btnGiftBox200;
 @property (weak, nonatomic) IBOutlet UIView *mHolderView;
+@property (strong, nonatomic) NSArray <NSDictionary *> *friendsUsingComicing;
+@property (strong, nonatomic) IBOutlet UICollectionView *mCollectionView;
 
 @end
 
@@ -48,6 +52,9 @@
     
     [self prepareView];
     [super viewDidLoad];
+    
+    [self.mCollectionView registerNib:[UINib nibWithNibName:@"FrinedsUsingComicingCell" bundle:nil] forCellWithReuseIdentifier:@"fs"];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -293,22 +300,44 @@
     
                                 }];*/
     
+    self.friendsUsingComicing = nil;
     
         [cmNetWorking postPhoneContactList:dataDic Id:[AppHelper getCurrentLoginId]
                                 completion:^(id json,id jsonResposeHeader) {
     
                                     NSLog(@"jsonResposeHeader");
     
+                                    //@"845"
+                                    [cmNetWorking getComicingFriendsList:nil Id:[AppHelper getCurrentLoginId] completion:^(id json, id jsonResponse) {
+                                        //NSLog(@"json : %@", json);
+                                        
+                                        self.friendsUsingComicing = json[@"data"];
+                                        [self.mCollectionView reloadData];
+                                        
+                                    } ErrorBlock:^(JSONModelError *error) {
+                                        NSLog(@"error : %@", error.localizedDescription);
+                                    }];
+                                    
         } ErrorBlock:^(JSONModelError *error) {
             
         }];
+    
+    /*[cmNetWorking getComicingFriendsList:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json, id jsonResponse) {
+        NSLog(@"json : %@", json);
+
+    } ErrorBlock:^(JSONModelError *error) {
+        NSLog(@"error : %@", error.localizedDescription);
+    }];*/
         
     
        dataDic = nil;
 }
 
 -(NSMutableArray*)getPhoneContact{
-    ABAddressBookRef addressBook = ABAddressBookCreate();
+    //ABAddressBookRef addressBook = ABAddressBookCreate();
+    
+    CFErrorRef error = NULL;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL,&error);
     
     __block BOOL accessGranted = NO;
     
@@ -341,57 +370,43 @@
         contactList = nil;
     }
     contactList = [[NSMutableArray alloc] init];
-    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+    //    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
     CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
+    ABRecordRef source = ABAddressBookCopyDefaultSource(addressBook);
+    CFArrayRef allPeople =ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, source, kABPersonSortByFirstName);
     
-    for (int i=0;i < nPeople;i++) {
-        //        NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
+    CFIndex number = CFArrayGetCount(allPeople);
+    
+    NSString *firstName;
+    NSString *lastName;
+    NSString *phoneNumber ;
+    
+    for( int i=0;i<number;i++)
+    {
         
-        ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
-        //For username and surname
-        ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(ref, kABPersonPhoneProperty));
+        ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+        firstName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+        lastName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
+        ABMultiValueRef phones = ABRecordCopyValue(person, kABPersonPhoneProperty);
+        phoneNumber = (__bridge NSString *) ABMultiValueCopyValueAtIndex(phones, 0);
         
-        CFStringRef firstName, lastName;
-        firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
-        lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
         if (firstName == nil) {
-            firstName = (__bridge CFStringRef)@"";
+            firstName = @"";
         }
         if (lastName == nil) {
-            lastName = (__bridge CFStringRef)@"";
+            lastName = @"";
         }
-        NSMutableDictionary* dictObj = [[NSMutableDictionary alloc] init];
         
         NSString* FullName = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
-        [dictObj setObject:FullName forKey:@"FullName"];
-        //For Phone number
         
-        NSString* mobileLabel;
-        for(CFIndex j = 0; j < ABMultiValueGetCount(phones); j++)
+        if(phoneNumber != NULL)
         {
-            mobileLabel = (__bridge NSString*)ABMultiValueCopyLabelAtIndex(phones, j);
-            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
-            {
-//                [contactNumber addObject:[self removeSpecialChara:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, j)]];
-                mobileLabel = [self removeSpecialChara:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, j)];
-                //       [dOfPerson setObject:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, j) forKey:@"mobile"];
-            }
-            else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
-            {
-//                [contactNumber addObject:[self removeSpecialChara:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, j)]];
-                mobileLabel = [self removeSpecialChara:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, j)];
-                //                [dOfPerson setObject:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, j) forKey:@"mobile"];
-                break ;
-            }else{
-                mobileLabel = nil;
-            }
-        }
-        if (mobileLabel != nil) {
-            [dictObj setObject:mobileLabel forKey:@"MobileNumber"];
+            NSMutableDictionary* dictObj = [[NSMutableDictionary alloc] init];
+            [dictObj setObject:FullName forKey:@"FullName"];
+            [dictObj setObject:phoneNumber forKey:@"MobileNumber"];
             [contactList addObject:dictObj];
+            dictObj = nil;
         }
-        
-        dictObj = nil;
     }
     [self setContactName];
     [self startTitleAutoLoad];
@@ -421,6 +436,35 @@
     }
     [self startTitleAutoLoad];
     [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+#pragma mark collection view data source
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(collectionView.frame.size.height - 6, collectionView.frame.size.height - 6);
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+
+    return self.friendsUsingComicing.count;
+
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    FrinedsUsingComicingCell *cell = (FrinedsUsingComicingCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"fs" forIndexPath:indexPath];
+    
+    NSString *profilePic = self.friendsUsingComicing[indexPath.item][@"profile_pic"];
+    
+    if ([profilePic isKindOfClass:[NSString class]] &&
+        profilePic.length > 0)
+    {
+        [cell.mDPImageView sd_setImageWithURL:[NSURL URLWithString:profilePic] placeholderImage:nil options:SDWebImageRetryFailed];
+    }
+
+    return cell;
 }
 
 #pragma mark DBMethods

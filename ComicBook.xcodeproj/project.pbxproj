@@ -356,6 +356,8 @@
 		161A08171D3D54C500BF0F50 /* arielBlack.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 161A08161D3D546F00BF0F50 /* arielBlack.ttf */; };
 		168512131D3C052000A372E3 /* follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 168512111D3C052000A372E3 /* follow.png */; };
 		168512141D3C052000A372E3 /* followSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 168512121D3C052000A372E3 /* followSelected.png */; };
+		1B37C6F31D4123BF000A8C37 /* FrinedsUsingComicingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B37C6F11D4123BF000A8C37 /* FrinedsUsingComicingCell.m */; };
+		1B37C6F41D4123BF000A8C37 /* FrinedsUsingComicingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B37C6F21D4123BF000A8C37 /* FrinedsUsingComicingCell.xib */; };
 		1B4FCCDB1D323D6400278B16 /* PrivateConversationTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */; };
 		1B4FCCDC1D323D6400278B16 /* PrivateConversationTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */; };
 		1B7E51FF1D36DEF60038199E /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B7E51FE1D36DEF60038199E /* camera.png */; };
@@ -1021,6 +1023,9 @@
 		161A08161D3D546F00BF0F50 /* arielBlack.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arielBlack.ttf; sourceTree = "<group>"; };
 		168512111D3C052000A372E3 /* follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = follow.png; sourceTree = "<group>"; };
 		168512121D3C052000A372E3 /* followSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followSelected.png; sourceTree = "<group>"; };
+		1B37C6F01D4123BF000A8C37 /* FrinedsUsingComicingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrinedsUsingComicingCell.h; sourceTree = "<group>"; };
+		1B37C6F11D4123BF000A8C37 /* FrinedsUsingComicingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrinedsUsingComicingCell.m; sourceTree = "<group>"; };
+		1B37C6F21D4123BF000A8C37 /* FrinedsUsingComicingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FrinedsUsingComicingCell.xib; sourceTree = "<group>"; };
 		1B4FCCD81D323D6400278B16 /* PrivateConversationTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateConversationTextCell.h; sourceTree = "<group>"; };
 		1B4FCCD91D323D6400278B16 /* PrivateConversationTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateConversationTextCell.m; sourceTree = "<group>"; };
 		1B4FCCDA1D323D6400278B16 /* PrivateConversationTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateConversationTextCell.xib; sourceTree = "<group>"; };
@@ -1870,6 +1875,9 @@
 				0C6665A61C84358500FEB11F /* FriendCell */,
 				0C6665AA1C84358500FEB11F /* GroupCell */,
 				0C6665AE1C84358500FEB11F /* PrivateConvCell */,
+				1B37C6F01D4123BF000A8C37 /* FrinedsUsingComicingCell.h */,
+				1B37C6F11D4123BF000A8C37 /* FrinedsUsingComicingCell.m */,
+				1B37C6F21D4123BF000A8C37 /* FrinedsUsingComicingCell.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -3022,6 +3030,7 @@
 				0C6667841C84358600FEB11F /* backbutton.png in Resources */,
 				0C6667F51C84358600FEB11F /* FreindCellxib.xib in Resources */,
 				0C6668341C84358600FEB11F /* c1.jpg in Resources */,
+				1B37C6F41D4123BF000A8C37 /* FrinedsUsingComicingCell.xib in Resources */,
 				0C6668A91C84358600FEB11F /* FriendsListView.xib in Resources */,
 				0C2125B71C98946700B6BAB5 /* Assets.xcassets in Resources */,
 				0C6668B81C84358600FEB11F /* SectionDividerView.xib in Resources */,
@@ -3312,6 +3321,7 @@
 				0C6667EE1C84358600FEB11F /* BottomBarViewController.m in Sources */,
 				0C6668BA1C84358600FEB11F /* SignUp.m in Sources */,
 				0C6667E61C84358600FEB11F /* ContactController.m in Sources */,
+				1B37C6F31D4123BF000A8C37 /* FrinedsUsingComicingCell.m in Sources */,
 				0C66687F1C84358600FEB11F /* SDWebImagePrefetcher.m in Sources */,
 				0C6667E41C84358600FEB11F /* StickerList.m in Sources */,
 				0C66686F1C84358600FEB11F /* NSObject+MTLComparisonAdditions.m in Sources */,

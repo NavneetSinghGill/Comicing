@@ -28,6 +28,8 @@
 #define USER_UPDATE [BASE_URL stringByAppendingFormat:@"users/id/"]
 #define LOGIN [BASE_URL stringByAppendingFormat:@"auth/"]
 #define REGISTER_PHONECONTACT [BASE_URL stringByAppendingFormat:@"contacts/"]
+#define PHONECONTACT_FRIENDS_LIST_BY_USERID [BASE_URL stringByAppendingFormat:@"contacts/id/"]
+
 #define COMIC_CREATE [BASE_URL stringByAppendingFormat:@"comics/"]
 #define COUNTRIES_ALL [BASE_URL stringByAppendingFormat:@"countries"]
 #define IMAGE_UPLOADER @"imageUploader.php"

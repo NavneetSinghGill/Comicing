@@ -11,7 +11,7 @@
 #import "UICountingLabel.h"
 #import "ComicNetworking.h"
 
-@interface InviteViewController : UIViewController <ComicNetworkingDelegate>
+@interface InviteViewController : UIViewController <ComicNetworkingDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, strong) UINavigationController *parentViewController;
 @property (nonatomic, strong) MainViewController *delegate;

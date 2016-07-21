@@ -10,4 +10,6 @@
 
 @interface FrinedsUsingComicingCell : UICollectionViewCell
 
+@property (nonatomic, weak) IBOutlet UIImageView *mDPImageView;
+
 @end
