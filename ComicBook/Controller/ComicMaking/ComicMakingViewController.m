@@ -3801,7 +3801,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     if(self.comicType == ReplyComic) {
         [comicMakeDic setObject:@"CS" forKey:@"comic_type"];
-        [comicMakeDic setObject:self.shareId forKey:@"share_id"];
+        [comicMakeDic setObject:(self.shareId == nil ?@"0":self.shareId) forKey:@"share_id"];
     } else {
         [comicMakeDic setObject:@"CM" forKey:@"comic_type"]; // COMIC MAKING
     }
