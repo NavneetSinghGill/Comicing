@@ -67,6 +67,9 @@
         _mUserName.font = [_mUserName.font fontWithSize:8.f];
         self.lblDate.font = [self.lblDate.font fontWithSize:8.f];
         self.lblTime.font = [self.lblTime.font fontWithSize:8.f];
+        
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:23];
+
 
     }
     else if (IS_IPHONE_6)
@@ -75,6 +78,9 @@
         _mUserName.font = [_mUserName.font fontWithSize:9.f];
         self.lblDate.font = [self.lblDate.font fontWithSize:9.f];
         self.lblTime.font = [self.lblTime.font fontWithSize:9.f];
+
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:26];
+
     }
     else if (IS_IPHONE_6P)
     {
@@ -82,12 +88,14 @@
         _mUserName.font = [_mUserName.font fontWithSize:10.f];
         self.lblDate.font = [self.lblDate.font fontWithSize:10.f];
         self.lblTime.font = [self.lblTime.font fontWithSize:10.f];
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:29];
+
     }
     
     _const_Width.constant = heiWei;
     _const_Height.constant = heiWei;
-    btnUser.layer.cornerRadius = heiWei / 2;
-    btnUser.layer.masksToBounds = YES;
+ //   btnUser.layer.cornerRadius = heiWei / 2;
+ //   btnUser.layer.masksToBounds = YES;
     profileImageView.layer.cornerRadius = heiWei / 2;
     profileImageView.layer.masksToBounds = YES;
     

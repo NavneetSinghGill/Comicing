@@ -290,19 +290,102 @@
     }
     return tableView.bounds.size.height-height;*/
     
+    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+
     int height=0;
-    if(IS_IPHONE_5)
+
+    if (comicBook.comments.count > 0)
     {
-        height=99;
+        // MeCell
+        
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            if(IS_IPHONE_5)
+            {
+                height= 89;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height= 119;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height= 149;
+            }
+            
+        }
+        else
+        {
+            if(IS_IPHONE_5)
+            {
+                height=29;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height= 59;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height= 89;
+            }
+            
+        }
+
     }
-    else if(IS_IPHONE_6)
+    else
     {
-        height= 129;
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            if(IS_IPHONE_5)
+            {
+                height=149;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height= 179;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height= 209;
+            }
+            
+        }
+        else
+        {
+            if(IS_IPHONE_5)
+            {
+                height=89;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height= 119;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height= 149;
+            }
+            
+        }
+
     }
-    else if(IS_IPHONE_6P)
-    {
-        height= 159;
-    }
+    
+    
+    
+    
+    
+//    int height=0;
+//    if(IS_IPHONE_5)
+//    {
+//        height=99;
+//    }
+//    else if(IS_IPHONE_6)
+//    {
+//        height= 129;
+//    }
+//    else if(IS_IPHONE_6P)
+//    {
+//        height= 159;
+//    }
     return tableView.bounds.size.height-height;
     
     
@@ -332,13 +415,15 @@
     NSArray *a = @[commentModel1, commentModel2];
     comicBook.comments = a;
     */
-    if(comicBook.comments.count > 0) {
+    if(comicBook.comments.count > 0)
+    {
         static NSString *simpleTableIdentifier = @"Cell";
         __block MeCell* cell= (MeCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tableView.frame.size.width, cell.frame.size.height);
         
         cell=nil;
-        if (cell == nil) {
+        if (cell == nil)
+        {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MeCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
             if(nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
@@ -348,6 +433,28 @@
             
             comic.delegate=self;
             comic.Tag=(int)indexPath.row;
+            
+            
+            if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+            {
+                cell.lblComicTitle.hidden = YES;
+                
+                cell.topSpacingComicView.constant = -cell.lblComicTitle.frame.size.height + 8;
+                [cell layoutIfNeeded];
+                
+            }
+            else
+            {
+                cell.topSpacingComicView.constant = 5;
+                
+                cell.lblComicTitle.hidden = NO;
+                cell.lblComicTitle.text = comicBook.comicTitle;
+                
+                [cell layoutIfNeeded];
+            }
+            
+            comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(container.frame), CGRectGetHeight(container.frame));
+            
             [container addSubview:comic.view];
             //            [comic setImages: [self setupImages:indexPath]];
             
@@ -380,7 +487,9 @@
             [self performSelectorInBackground:@selector(addCommentPeople:) withObject:peopleContainer];
         }
         return cell;
-    } else {
+    }
+    else
+    {
         static NSString *simpleTableIdentifier = @"Cell";
         __block FriendCell * cell= (FriendCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         cell = nil;
@@ -389,7 +498,7 @@
             cell = [nib objectAtIndex:0];
             cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tableView.frame.size.width, cell.frame.size.height);
             
-            if(nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
+            if(nil != [ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
             {
                 [ComicBookDict removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
             }
@@ -398,7 +507,36 @@
             comic.delegate=self;
             comic.Tag=(int)indexPath.row;
             
+            
+            // Adnan
+            CGRect lblFrame = cell.lblComicTitle.frame;
+            
+            if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+            {
+                cell.lblComicTitle.text = @"";
+                cell.lblComicTitle.hidden = YES;
+                
+                CGRect frameViewComicBook = cell.viewComicBook.frame;
+                frameViewComicBook.origin.y = lblFrame.origin.y + 5;
+                frameViewComicBook.size.height = cell.frame.size.height - 10;
+                cell.viewComicBook.frame = frameViewComicBook;
+                
+                cell.lblComicTitle.frame = lblFrame;
+                
+            }
+            else
+            {
+                cell.lblComicTitle.text = comicBook.comicTitle;
+                cell.lblComicTitle.hidden = NO;
+                
+                cell.lblComicTitle.frame = lblFrame;
+            }
+            
             comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+            
+            
+            
+            
             
             [cell.viewComicBook addSubview:comic.view];
             [self addChildViewController:comic];

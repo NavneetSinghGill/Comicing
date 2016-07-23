@@ -24,4 +24,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintCointainerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpacingComicView;
 
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraintComicView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicView;
+
+
 @end

@@ -57,7 +57,7 @@
                 <outlet property="selectedTickImage" destination="MZM-K1-mPT" id="eqf-Ye-i2r"/>
                 <outlet property="userImage" destination="eQY-Rk-WVk" id="dGs-wD-9Pa"/>
             </connections>
-            <point key="canvasLocation" x="215" y="310.5"/>
+            <point key="canvasLocation" x="236" y="404.5"/>
         </tableViewCell>
     </objects>
     <resources>

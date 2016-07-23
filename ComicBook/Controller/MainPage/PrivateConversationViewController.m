@@ -718,9 +718,6 @@
             
             cell = [nib objectAtIndex:0];
             
-            //        CMCComic *comicInfo = comics[indexPath.row];
-            
-            
             if(nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
             {
                 [ComicBookDict removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
@@ -730,16 +727,8 @@
             comic.delegate=self;
             comic.Tag=(int)indexPath.row;
             
-            CGRect lblFrame = cell.lblComicTitle.frame;
-            
-            
-            
-           // comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
-            
-            //        [cell.btnUser setBackgroundImage:comicInfo.creator.imgProfile forState:UIControlStateNormal];
-            //        [cell.btnUser setBackgroundImage:comicInfo.creator.imgProfile forState:UIControlStateHighlighted];
-            
             ComicBook *comicBook = (ComicBook *)mComicConversatinBook.coversation[0];
+         
             [cell.userProfilePic sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
             
             //dinesh
@@ -756,19 +745,28 @@
             cell.lblDate.text = dateStr;
             cell.lblTime.text = timeStr;
             
+            CGRect lblFrame = cell.lblComicTitle.frame;
+            
             if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
             {
                 cell.lblComicTitle.text = @"";
                 cell.lblComicTitle.hidden = YES;
                 
-                CGRect frameViewComicBook = cell.viewComicBook.frame;
-                frameViewComicBook.origin.y = lblFrame.origin.y;
-                frameViewComicBook.size.height = cell.frame.size.height;
-                cell.viewComicBook.frame = frameViewComicBook;
-                
-                cell.lblComicTitle.frame = lblFrame;
-                
-                comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame) - 10);
+//                CGRect frameViewComicBook = cell.viewComicBook.frame;
+//                frameViewComicBook.origin.y = lblFrame.origin.y;
+//                frameViewComicBook.size.height = cell.frame.size.height;
+//                cell.viewComicBook.frame = frameViewComicBook;
+//                
+//                cell.lblComicTitle.frame = lblFrame;
+//                
+//                
+//                cell.viewComicBook.frame = CGRectMake(CGRectGetMinX(cell.viewComicBook.frame), 4, CGRectGetWidth(cell.viewComicBook.frame), cell.frame.size.height);
+//                
+//                comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.frame) - 10);
+
+                cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height + 8;
+                cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height - 10;
+                [cell layoutIfNeeded];
                 
             }
             else
@@ -778,10 +776,15 @@
                 
                 cell.lblComicTitle.frame = lblFrame;
                 
-                comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
-            }
+                cell.topConstraintComicView.constant = 5;
+                
+                cell.heightConstraintComicView.constant = 0;
 
+                [cell layoutIfNeeded];
+            }
             
+            
+            comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
             
             [cell.viewComicBook addSubview:comic.view];
             
