@@ -11,7 +11,7 @@
 @implementation ComicPage
 
 //@synthesize containerImage, subviews, subviewData, printScreen,timelineString;
-@synthesize containerImagePath, subviews, subviewData,timelineString,printScreenPath,subviewTranformData;
+@synthesize containerImagePath, subviews, subviewData,timelineString,printScreenPath,subviewTranformData,titleString;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -24,6 +24,7 @@
         subviewData = [aDecoder decodeObjectForKey:@"subviewData"];
         subviewTranformData = [aDecoder decodeObjectForKey:@"subviewTranformData"];
         timelineString = [aDecoder decodeObjectForKey:@"timelineString"];
+        titleString = [aDecoder decodeObjectForKey:@"titleString"];
     }
     
     return self;
@@ -37,6 +38,7 @@
     [aCoder encodeObject:subviewData forKey:@"subviewData"];
     [aCoder encodeObject:subviewTranformData forKey:@"subviewTranformData"];
     [aCoder encodeObject:timelineString forKey:@"timelineString"];
+    [aCoder encodeObject:titleString forKey:@"titleString"];
 }
 
 @end
