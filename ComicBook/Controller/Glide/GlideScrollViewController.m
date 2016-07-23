@@ -178,7 +178,10 @@ NSTimer* timerObject;
             if (scrvComicSlide.listViewImages == nil) {
                 scrvComicSlide.listViewImages = [[NSMutableArray alloc] init];
             }
-            [scrvComicSlide.listViewImages addObject:[scrvComicSlide getImageFile:comicPage.printScreenPath]];
+            UIImage* imgPrintScreen = [scrvComicSlide getImageFile:comicPage.printScreenPath];
+            if (imgPrintScreen != nil) {
+                [scrvComicSlide.listViewImages addObject:imgPrintScreen];
+            }
         }
         comicPage = nil;
         count++;
