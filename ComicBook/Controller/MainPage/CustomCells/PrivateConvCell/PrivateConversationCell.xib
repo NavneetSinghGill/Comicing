@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,22 +13,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="379"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="379.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3d-YU-Y3L">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="379"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hey..Comic title test!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="mKZ-5h-l8U">
-                                <rect key="frame" x="100" y="0.0" width="210" height="60"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="34w-W1-0Hi"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="40"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oWX-oQ-PAp">
                                 <rect key="frame" x="0.0" y="0.0" width="102" height="379"/>
                                 <subviews>
@@ -109,24 +100,32 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dia-wN-KoL">
-                                <rect key="frame" x="100" y="60" width="210" height="299"/>
+                                <rect key="frame" x="100" y="68" width="210" height="299"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hey..Comic title test!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="mKZ-5h-l8U">
+                                <rect key="frame" x="100" y="2" width="210" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oWX-oQ-PAp" firstAttribute="leading" secondItem="I3d-YU-Y3L" secondAttribute="leading" id="02g-t2-TFT"/>
                             <constraint firstAttribute="trailing" secondItem="cfF-pd-r3l" secondAttribute="trailing" constant="8" id="4w4-aE-Xjv"/>
-                            <constraint firstItem="mKZ-5h-l8U" firstAttribute="leading" secondItem="oWX-oQ-PAp" secondAttribute="trailing" constant="-2" id="7bM-hM-ros"/>
-                            <constraint firstItem="mKZ-5h-l8U" firstAttribute="top" secondItem="I3d-YU-Y3L" secondAttribute="top" id="K1o-aE-HrD"/>
-                            <constraint firstItem="dia-wN-KoL" firstAttribute="leading" secondItem="oWX-oQ-PAp" secondAttribute="trailing" constant="-2" id="MbF-zD-L5d"/>
+                            <constraint firstItem="dia-wN-KoL" firstAttribute="leading" secondItem="oWX-oQ-PAp" secondAttribute="trailing" constant="-2" id="8fg-06-ll6"/>
+                            <constraint firstItem="mKZ-5h-l8U" firstAttribute="width" secondItem="dia-wN-KoL" secondAttribute="width" id="DMF-ct-IcH"/>
+                            <constraint firstItem="cfF-pd-r3l" firstAttribute="top" secondItem="dia-wN-KoL" secondAttribute="bottom" id="HYn-Bn-5ck"/>
+                            <constraint firstAttribute="trailing" secondItem="dia-wN-KoL" secondAttribute="trailing" constant="10" id="LPm-PY-dd7"/>
+                            <constraint firstItem="mKZ-5h-l8U" firstAttribute="height" secondItem="I3d-YU-Y3L" secondAttribute="height" multiplier="0.1583" id="RLh-EU-ab1"/>
+                            <constraint firstItem="dia-wN-KoL" firstAttribute="height" secondItem="I3d-YU-Y3L" secondAttribute="height" multiplier="0.7889" id="Vna-oZ-FWU"/>
+                            <constraint firstItem="dia-wN-KoL" firstAttribute="top" secondItem="mKZ-5h-l8U" secondAttribute="bottom" constant="6" id="ZQx-ML-neY"/>
+                            <constraint firstItem="mKZ-5h-l8U" firstAttribute="top" secondItem="I3d-YU-Y3L" secondAttribute="top" constant="2" id="ald-o5-gyy"/>
                             <constraint firstItem="oWX-oQ-PAp" firstAttribute="top" secondItem="I3d-YU-Y3L" secondAttribute="top" id="dW7-mk-D59"/>
-                            <constraint firstItem="dia-wN-KoL" firstAttribute="top" secondItem="I3d-YU-Y3L" secondAttribute="top" constant="60" id="p92-jx-uKX"/>
-                            <constraint firstAttribute="bottom" secondItem="dia-wN-KoL" secondAttribute="bottom" constant="20" id="pMY-Fy-Oss"/>
                             <constraint firstAttribute="bottom" secondItem="oWX-oQ-PAp" secondAttribute="bottom" id="rUp-7T-0Gq"/>
-                            <constraint firstItem="cfF-pd-r3l" firstAttribute="top" secondItem="dia-wN-KoL" secondAttribute="bottom" constant="8" id="sXB-3z-lYg"/>
-                            <constraint firstAttribute="trailing" secondItem="dia-wN-KoL" secondAttribute="trailing" constant="10" id="sZs-oB-ZHz"/>
-                            <constraint firstAttribute="trailing" secondItem="mKZ-5h-l8U" secondAttribute="trailing" constant="10" id="uSZ-FQ-J0w"/>
+                            <constraint firstAttribute="trailing" secondItem="mKZ-5h-l8U" secondAttribute="trailing" constant="10" id="uEg-rd-Fwa"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -143,11 +142,13 @@
                 <outlet property="btnUser" destination="8wr-gm-T2a" id="UBd-ue-u8I"/>
                 <outlet property="const_Height" destination="QHQ-vv-2WM" id="NbU-FW-681"/>
                 <outlet property="const_Width" destination="eZj-N0-o4j" id="sw4-0r-5XS"/>
+                <outlet property="heightConstraintComicView" destination="Vna-oZ-FWU" id="K0B-9B-7VU"/>
                 <outlet property="lblComicTitle" destination="mKZ-5h-l8U" id="5LO-BS-vby"/>
                 <outlet property="lblDate" destination="wgZ-3a-PZX" id="nIg-QB-l7k"/>
                 <outlet property="lblTime" destination="EDl-H3-mpX" id="v4n-dL-bLg"/>
                 <outlet property="mChatStatus" destination="cfF-pd-r3l" id="dtR-kU-YU5"/>
                 <outlet property="mUserName" destination="Ib1-Sl-2zV" id="K7a-0a-lsa"/>
+                <outlet property="topConstraintComicView" destination="ZQx-ML-neY" id="IdO-lO-R1G"/>
                 <outlet property="userProfilePic" destination="Ife-yB-oIp" id="5ua-KS-9eP"/>
                 <outlet property="viewComicBook" destination="dia-wN-KoL" id="IW1-dY-7NU"/>
             </connections>

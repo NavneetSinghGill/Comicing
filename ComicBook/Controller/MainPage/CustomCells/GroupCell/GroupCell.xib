@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="ARLRDBD.TTF">
+            <string>ArialRoundedMTBold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -13,27 +19,24 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="360"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1nL-kc-ri4" id="RVk-G5-WzL">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="359"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="359.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AO8-gj-iIa">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AO8-gj-iIa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="360"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hey..Comic title test!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="elE-hQ-8yF">
                                 <rect key="frame" x="100" y="0.0" width="207" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="TJs-mL-kGP"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="40"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Opc-uC-wmH">
-                                <rect key="frame" x="100" y="60" width="207" height="279"/>
+                                <rect key="frame" x="100" y="60" width="207" height="280"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3MQ-Sw-NLJ">
+                            <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3MQ-Sw-NLJ">
                                 <rect key="frame" x="0.0" y="0.0" width="102" height="360"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7Y-8z-xlu">
@@ -122,25 +125,18 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="elE-hQ-8yF" secondAttribute="trailing" constant="13" id="0zY-tA-mMQ"/>
-                            <constraint firstItem="Opc-uC-wmH" firstAttribute="top" secondItem="elE-hQ-8yF" secondAttribute="bottom" id="1UO-S7-FoY"/>
+                            <constraint firstItem="Opc-uC-wmH" firstAttribute="top" secondItem="elE-hQ-8yF" secondAttribute="bottom" id="3LL-Ze-dJq"/>
+                            <constraint firstItem="elE-hQ-8yF" firstAttribute="height" secondItem="AO8-gj-iIa" secondAttribute="height" multiplier="0.1666" id="4vA-e4-bSM"/>
                             <constraint firstItem="elE-hQ-8yF" firstAttribute="top" secondItem="AO8-gj-iIa" secondAttribute="top" id="77R-i8-WSJ"/>
                             <constraint firstItem="Opc-uC-wmH" firstAttribute="trailing" secondItem="elE-hQ-8yF" secondAttribute="trailing" id="CRC-iJ-rHs"/>
                             <constraint firstAttribute="bottom" secondItem="3MQ-Sw-NLJ" secondAttribute="bottom" id="JZD-wj-u1t"/>
                             <constraint firstItem="Opc-uC-wmH" firstAttribute="leading" secondItem="elE-hQ-8yF" secondAttribute="leading" id="Of2-Gy-SyR"/>
                             <constraint firstItem="Opc-uC-wmH" firstAttribute="centerX" secondItem="elE-hQ-8yF" secondAttribute="centerX" id="bec-Wa-naA"/>
-                            <constraint firstItem="Opc-uC-wmH" firstAttribute="top" secondItem="AO8-gj-iIa" secondAttribute="top" constant="60" id="juK-jZ-PwG"/>
                             <constraint firstItem="elE-hQ-8yF" firstAttribute="leading" secondItem="AO8-gj-iIa" secondAttribute="leading" constant="100" id="jvA-cX-5ws"/>
                             <constraint firstItem="3MQ-Sw-NLJ" firstAttribute="leading" secondItem="AO8-gj-iIa" secondAttribute="leading" id="lcb-Ew-QGB"/>
-                            <constraint firstItem="Uqs-o1-eCJ" firstAttribute="top" secondItem="Opc-uC-wmH" secondAttribute="top" id="nET-Lf-n9I"/>
                             <constraint firstAttribute="bottom" secondItem="Opc-uC-wmH" secondAttribute="bottom" constant="20" id="qbA-LX-nbP"/>
                             <constraint firstItem="3MQ-Sw-NLJ" firstAttribute="top" secondItem="AO8-gj-iIa" secondAttribute="top" id="u6p-my-GBs"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="nET-Lf-n9I"/>
-                                <exclude reference="1UO-S7-FoY"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -161,7 +157,7 @@
                 <outlet property="lblTime" destination="eWI-xd-kbD" id="TUJ-Fv-ldf"/>
                 <outlet property="mUserName" destination="5X0-xg-LKy" id="acQ-Fh-GgN"/>
                 <outlet property="profileImageView" destination="Uqs-o1-eCJ" id="9ez-Il-Hyu"/>
-                <outlet property="topSpacingComicView" destination="juK-jZ-PwG" id="bqU-5V-9Pc"/>
+                <outlet property="topSpacingComicView" destination="3LL-Ze-dJq" id="1QT-df-ymA"/>
                 <outlet property="viewComicBook" destination="Opc-uC-wmH" id="pjS-91-nhK"/>
             </connections>
             <point key="canvasLocation" x="240" y="227"/>
