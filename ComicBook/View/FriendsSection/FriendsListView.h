@@ -16,14 +16,14 @@
 
 @optional
 
--(void)selectedRow:(id)object;
--(void)selectedRow:(id)object param:(id)objectList;
--(void)openMessageComposer:(NSArray*)sendNumbers messageText:(NSString*)messageTextValue;
+- (void)selectedRow:(id)object;
+- (void)selectedRow:(id)object param:(id)objectList;
+- (void)openMessageComposer:(NSArray*)sendNumbers messageText:(NSString*)messageTextValue;
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
                      withVelocity:(CGPoint)velocity
-              targetContentOffset:(inout CGPoint *)targetContentOffset;
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+              targetContentOffset:(inout CGPoint *)targetContentOffset withTableView:(UITableView *)tableView;
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView withTableView:(UITableView *)tableView;;
 
 @end
 
@@ -46,6 +46,8 @@
     
     NSMutableDictionary *searchUsers;
     NSMutableDictionary *saveFriendsDictWithAlpabets;
+    
+    CGPoint pointNow;
 }
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet UITableView *friendsListTableView;

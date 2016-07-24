@@ -3697,6 +3697,41 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     [self sendComic];
 }
 
+-(NSMutableDictionary*)setPutParamets :(NSString*)shareUserId ReplyTypeValue:(ReplyType)type ComicShareId:(NSString*)comic_id{
+    NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
+    [userDic setObject:comic_id forKey:@"comic_id"];
+    [userDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"];
+    NSMutableArray* arrayObj = [[NSMutableArray alloc] init];
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    if(type == FriendReply){
+        [dict setValue:shareUserId forKey:@"friend_id"];
+        [dict setValue:@"1" forKey:@"status"];
+        
+        [arrayObj addObject:dict];
+        [userDic setObject:arrayObj forKey:@"friendShares"];
+        
+        arrayObj = nil;
+        dict = nil;
+    }
+    else if(type == GroupReply){
+        
+        [dict setValue:shareUserId forKey:@"group_id"];
+        [dict setValue:@"1" forKey:@"status"];
+        
+        [arrayObj addObject:dict];
+        
+        
+        [userDic setObject:arrayObj forKey:@"groupShares"];
+        
+        arrayObj = nil;
+        dict = nil;
+    }
+    
+    [dataDic setObject:userDic forKey:@"data"];
+    return dataDic;
+}
+
 -(void)sendComic{
     
     [self.delegate comicMakingViewControllerWithEditingDone:self
@@ -3736,7 +3771,6 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                                      Id:nil completion:^(id json,id jsonResposeHeader) {
             
             [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
-            
                                           [self.view setUserInteractionEnabled:YES];
                                          if(self.comicType != ReplyComic) {
                                              isNewSlide = NO;
@@ -3746,18 +3780,31 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                                              
                                              [self.navigationController pushViewController:controller animated:YES];
                                          } else {
-                                             if(self.replyType == FriendReply) {
-                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
-                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
-                                                 [self dismissViewControllerAnimated:YES completion:^{}];
-                                             } else if(self.replyType == GroupReply) {
-                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
-                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
-                                                 [self dismissViewControllerAnimated:YES completion:^{}];
-                                             }
-                                             if (self.fileNameToSave) {
-                                                 [AppHelper deleteSlideFile:self.fileNameToSave];
-                                             }
+                                             [cmNetWorking shareComicImage:[self setPutParamets:self.friendOrGroupId
+                                                                                 ReplyTypeValue:self.replyType
+                                                                                   ComicShareId:[json objectForKey:@"data"]]
+                                                                        Id:[json objectForKey:@"data"] completion:^(id json, id jsonResponse) {
+                                                                        
+                                                                            if (json) {
+                                                                                if(self.replyType == FriendReply) {
+                                                                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
+                                                                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+                                                                                    [self dismissViewControllerAnimated:YES completion:^{}];
+                                                                                } else if(self.replyType == GroupReply) {
+                                                                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
+                                                                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+                                                                                    [self dismissViewControllerAnimated:YES completion:^{}];
+                                                                                }
+                                                                                if (self.fileNameToSave) {
+                                                                                    [AppHelper deleteSlideFile:self.fileNameToSave];
+                                                                                }
+                                                                            }else{
+                                                                                 [AppHelper showErrorDropDownMessage:@"something went wrong !" mesage:@""];
+                                                                            }
+                                                 
+                                             } ErrorBlock:^(JSONModelError *error) {
+                                                 
+                                             }];
                                          }
             
         } ErrorBlock:^(JSONModelError *error) {
@@ -3801,7 +3848,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     if(self.comicType == ReplyComic) {
         [comicMakeDic setObject:@"CS" forKey:@"comic_type"];
-        [comicMakeDic setObject:self.shareId forKey:@"share_id"];
+        [comicMakeDic setObject:(self.shareId == nil ?@"0":self.shareId) forKey:@"share_id"];
     } else {
         [comicMakeDic setObject:@"CM" forKey:@"comic_type"]; // COMIC MAKING
     }
@@ -3813,15 +3860,16 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     NSMutableArray* slides = [[NSMutableArray alloc] init];
     
     for (int i=0; i< [comicSlides count]; i++) {
-//    for (NSData* data in comicSlides) {
         NSData* data = [comicSlides objectAtIndex:i];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
+        if (i == 0 && cmPage.titleString && cmPage.titleString.length >0) {
+            [comicMakeDic setObject:cmPage.titleString forKey:@"comic_title"];
+        }
+        
         //ComicSlides Object
         NSMutableDictionary* cmSlide = [[NSMutableDictionary alloc] init];
-//        [cmSlide setObject:[AppHelper encodeToBase64String:[AppHelper getImageFile:cmPage.printScreenPath]] forKey:@"slide_image"];
-//        [cmSlide setObject:@"" forKey:@"slide_text"];
-        
+
         //Comic Slide image url obj
         NSDictionary* urlSlides = [slideArray objectAtIndex:i];
         

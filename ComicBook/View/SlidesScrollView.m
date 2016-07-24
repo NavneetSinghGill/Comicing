@@ -25,7 +25,7 @@ const NSInteger timlineTextTag    = 200;
 const NSInteger viewsInOneRow    = SLIDE_MAXCOUNT + 1;
 
 const NSInteger spaceBetweenSlide = 20;
-const NSInteger spaceFromTop = 75;
+const NSInteger spaceFromTop = 100;
 
 @interface SlidesScrollView()
 
@@ -114,9 +114,6 @@ const NSInteger spaceFromTop = 75;
 
 }
 
-
-
-
 - (CGRect)frameForPossition:(NSInteger)index
 {
     NSInteger columnCount = index % viewsInOneRow;
@@ -184,11 +181,8 @@ const NSInteger spaceFromTop = 75;
 #pragma mark - make slideview methods
 - (UIView*)reloadSlideViewForIndex:(NSInteger)index mainView:(UIView*)subView
 {
-//    NSLog(@"1 subView %@", subView);
     subView.frame = [self frameForPossition:index];
     subView.tag = index;
-//    NSLog(@" subView index %ld", (long)index);
-//    NSLog(@"2 subView %@", subView);
     
     for (id objId in [subView subviews]) {
         if ([objId isKindOfClass:[UIImageView class]]) {
@@ -201,20 +195,10 @@ const NSInteger spaceFromTop = 75;
     }
     
     //Adject timeline time text
-//    if ([self viewWithTag:((index + 1) * timlineViewTag)]) {
-//        [self viewWithTag:((index + 1) * timlineViewTag)].frame = CGRectMake(((subView.frame.size.width/2) + subView.frame.origin.x ) - spaceBetweenSlide ,
-//                                                                       subView.frame.origin.y - 50, 27, 27);
-//    }
-
     if ([self viewWithTag:((index + 1) * timlineTextTag)]) {
-//        UIView* viewRound = [self viewWithTag:((index + 1) * timlineViewTag)];
-//        [self viewWithTag:((index + 1) * timlineTextTag)].frame = CGRectMake(viewRound.frame.origin.x - 27, viewRound.frame.origin.y - 20, 100, 20);
-        
         [self viewWithTag:((index + 1) * timlineTextTag)].frame = CGRectMake(((subView.frame.size.width/2)  + subView.frame.origin.x ) - 50,
-                                                                             subView.frame.origin.y - 30, 100, 20);
+                                                                             subView.frame.origin.y - 80, 100, 20);
     }
-    
-//    [self viewWithTag:((index + 1) * timlineViewTag)].tag =  index * timlineViewTag;
     [self viewWithTag:((index + 1) * timlineTextTag)].tag =  index * timlineTextTag;
     
     return subView;
@@ -240,8 +224,6 @@ const NSInteger spaceFromTop = 75;
     [allSlidesView addObject:view];
     
     
-//    [slideButton addTarget:self action:@selector(clickedOnSlide:) forControlEvents:UIControlEventTouchUpInside];
-    
     UITapGestureRecognizer* tapbutton = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickedOnSlide:)];
     tapbutton.numberOfTapsRequired = 1;
     [view addGestureRecognizer:tapbutton];
@@ -257,15 +239,12 @@ const NSInteger spaceFromTop = 75;
     [view addGestureRecognizer:swipeUpGestureRecognizer];
     
     [view addSubview:imgvComic];
-//    [view addSubview:slideButton];
-    
+
     //Add time line Bubble
     UIView* viewRound = [[UIView alloc] initWithFrame:CGRectMake(((view.frame.size.width/2) + view.frame.origin.x ) - spaceBetweenSlide ,
                                                                  view.frame.origin.y - 50, 27, 27)];
     viewRound.layer.cornerRadius = viewRound.frame.size.width/2;
     viewRound.layer.masksToBounds = YES;
-    //[viewRound setBackgroundColor:[UIColor colorWithHexStr:@"26aae1"]];//Dinesh : Ref : Bug list : line 307
-//    viewRound.tag = timlineViewTag * index;
     
     //dinesh
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -277,11 +256,9 @@ const NSInteger spaceFromTop = 75;
     
     
     //Add time line text
-    //UILabel* lblTimeText = [[UILabel alloc] initWithFrame:CGRectMake(viewRound.frame.origin.x - 27, viewRound.frame.origin.y - 20, 80, 20)];
-    UILabel* lblTimeText = [[UILabel alloc] initWithFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y - 30, view.frame.size.width, 20)];
+    UILabel* lblTimeText = [[UILabel alloc] initWithFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y - 80, view.frame.size.width, 20)];
     lblTimeText.text = finalString;
     lblTimeText.textColor = [UIColor colorWithHexStr:@"26aae1"];//Dinesh : Ref : Bug list : line 307
-//    lblTimeText.font = [UIFont fontWithName:@"digital-7" size:15];
     lblTimeText.font = [UIFont fontWithName:@"Arial" size:15];
     lblTimeText.textAlignment = NSTextAlignmentCenter;
     lblTimeText.tag = timlineTextTag * index;
@@ -295,6 +272,35 @@ const NSInteger spaceFromTop = 75;
         lblTimeText.text = [dateFormatter stringFromDate:now];
         lblTimeText.textColor = [UIColor colorWithHexStr:@"26aae1"];//Dinesh : Ref : Bug list : line 307
         dateFormatter = nil;
+    }
+    
+    if (index == 0) {
+        UITextField* textField = [[UITextField alloc] initWithFrame:CGRectMake(view.frame.origin.x,
+                                                                                  view.frame.origin.y - 50 ,
+                                                                                  view.frame.size.width, 40)];
+        [textField setBackgroundColor:[UIColor clearColor]];
+        [textField setBorderStyle:UITextBorderStyleRoundedRect];
+//        textField .placeholder = @" Set yout title here.";
+        
+        textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Set your title here."
+                                                                             attributes:@{
+                                                                                          NSForegroundColorAttributeName:[UIColor colorWithHexStr:@"fdfdfd"],
+                                                                                          NSFontAttributeName:[UIFont fontWithName:@"ArialRoundedMTBold" size:24.0]
+                                                                                          }];
+        textField.textColor = [UIColor whiteColor];
+        textField.delegate = self;
+        [textField setFont:[UIFont fontWithName:@"ArialRoundedMTBold" size:16.0f]];
+        if (comicSlide.titleString && comicSlide.titleString.length != 0) {
+            textField.text = comicSlide.titleString;
+        }
+        textField.returnKeyType = UIReturnKeyDone;
+        
+        if (self.slideTitleArray == nil) {
+            self.slideTitleArray = [[NSMutableArray alloc] init];
+        }
+        
+        [self.slideTitleArray addObject:textField];
+        [self addSubview:textField];
     }
     
     [self addSubview:viewRound];
@@ -513,6 +519,63 @@ const NSInteger spaceFromTop = 75;
     }
 }
 
+#pragma mark - UITextField deletegate
+
+#define MAX_LENGTH 25
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([string isEqualToString:@"\n"])
+    {
+        [textField resignFirstResponder];
+        return NO;
+    }
+    
+    if (textField.text.length >= MAX_LENGTH && range.length == 0)
+    {
+        return NO;
+    }
+    else
+    {
+        [self handleBubbleText:textField];
+        return YES;
+    }
+}
+
+-(void)handleBubbleText:(UITextField*)textView{
+    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
+    paragraphStyle.alignment                = NSTextAlignmentLeft;
+    
+    NSMutableAttributedString *attibute = [[NSMutableAttributedString alloc] initWithString:textView.text];
+    
+    [attibute addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, textView.text.length)];
+    if (textView && ![textView.text isEqualToString:@""] && textView.text.length <= 10) {
+        [attibute addAttribute:NSFontAttributeName
+                         value:[UIFont fontWithName:@"ArialRoundedMTBold" size:24.0f]
+                         range:NSMakeRange(0, textView.text.length)];
+    }else{
+        
+        [attibute addAttribute:NSFontAttributeName
+                         value:[UIFont fontWithName:@"ArialRoundedMTBold" size:16.0f]
+                         range:NSMakeRange(0, textView.text.length)];
+    }
+    
+    [textView setAttributedText:attibute];
+    attibute = nil;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    [self.slidesScrollViewDelegate saveSlideTitle:textField.text slideIndex:0];
+    return YES;
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+}
+
 #pragma mark - Events Methods
 
 -(void)handleSwipeUpFrom:(UIGestureRecognizer*)gestureRecognizer
@@ -550,7 +613,12 @@ const NSInteger spaceFromTop = 75;
                              [temItemTimeTextObj removeFromSuperview];
                              [self.timelineBubbleArray removeObject:temItemTimeTextObj];
                              temItemTimeTextObj = nil;
-                             
+                             if ([allSlidesView count] == 0 && gestureIndex == 0) {
+                                 id txtView = [self.slideTitleArray objectAtIndex:gestureIndex];
+                                 if (txtView) {
+                                     [txtView removeFromSuperview];
+                                 }
+                             }
                              
                          } completion:^(BOOL finished) {
                              [((UIView*)itemToRemove) removeFromSuperview];
@@ -575,16 +643,11 @@ const NSInteger spaceFromTop = 75;
                                  itemIndex = itemIndex + 1;
                              }
                              
-                             //Resetting plus button
-//                             if (allSlidesView.count == 0) {
-//                                 [self addSlideButtonAtIndex:0];
-//                             }else{
-                                 btnPlusSlide.tag = allSlidesView.count;
-                                btnPlusSlide.frame = [self frameForPossitionPlusButton:btnPlusSlide.tag];
-                                viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:btnPlusSlide.tag];
-                                [self setScrollViewContectSize];
+                             btnPlusSlide.tag = allSlidesView.count;
+                             btnPlusSlide.frame = [self frameForPossitionPlusButton:btnPlusSlide.tag];
+                             viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:btnPlusSlide.tag];
+                             [self setScrollViewContectSize];
                              [self refreshPreview:itemIndex withImages:self.listViewImages];
-//                             }
                              [self addTimeLineView: (spaceBetweenSlide + btnPlusSlide.frame.size.width)];
                          }];
         [self.slidesScrollViewDelegate slidesScrollView:self didRemovedAtIndexPath:gestureIndex];

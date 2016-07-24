@@ -1736,6 +1736,10 @@ NSString * const BottomBarView = @"BottomBarView";
             {
                 cell.lblComicTitle.hidden = NO;
                 cell.lblComicTitle.text = comicBook.comicTitle;
+                
+                cell.topConstraintComicView.constant = 5;
+                
+                cell.heightConstraintComicView.constant = 0;
             }
             
             comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));

@@ -8,6 +8,7 @@
 
 #import "GroupsCollectionViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "AppConstants.h"
 
 @implementation GroupsCollectionViewCell
 @synthesize groupImageView;
@@ -26,16 +27,41 @@
 - (void)makeCircularImageView:(Group *)grp
 {
     self.groupImageView.layer.cornerRadius = 4.0;
-    self.groupImageView.clipsToBounds = YES;
+    self.groupImageView.layer.masksToBounds = YES;
+    CGFloat fontSize = 7;
+    CGFloat borderWidthon;
+    if (IS_IPHONE_5)
+    {
+        borderWidthon = 2;
+        fontSize = 6;
 
+    }
+    else if (IS_IPHONE_6)
+    {
+        borderWidthon = 3;
+        fontSize = 7;
+
+    }
+    else if (IS_IPHONE_6P)
+    {
+        borderWidthon = 3;
+        fontSize = 7;
+
+    }
+    else
+    {
+        borderWidthon = 2;
+        fontSize = 6;
+    }
+    self.groupNameLabel.font = [self.groupNameLabel.font fontWithSize:fontSize];
     if (grp.isSelected)
     {
-        self.groupImageView.layer.borderWidth = 4.0f;
+        self.groupImageView.layer.borderWidth = borderWidthon;
         self.groupImageView.layer.borderColor = [UIColor yellowColor].CGColor;
     }
     else
     {
-        self.groupImageView.layer.borderWidth = 4.0f;
+        self.groupImageView.layer.borderWidth = borderWidthon;
         self.groupImageView.layer.borderColor = [UIColor clearColor].CGColor;
     }
 

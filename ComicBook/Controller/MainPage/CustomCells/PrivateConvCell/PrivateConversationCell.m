@@ -75,6 +75,9 @@
         self.lblDate.font = [self.lblDate.font fontWithSize:8.f];
         self.lblTime.font = [self.lblTime.font fontWithSize:8.f];
         
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:23];
+
+        
     }
     else if (IS_IPHONE_6)
     {
@@ -82,6 +85,9 @@
         _mUserName.font = [_mUserName.font fontWithSize:9.f];
         self.lblDate.font = [self.lblDate.font fontWithSize:9.f];
         self.lblTime.font = [self.lblTime.font fontWithSize:9.f];
+        
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:26];
+
     }
     else if (IS_IPHONE_6P)
     {
@@ -89,6 +95,9 @@
         _mUserName.font = [_mUserName.font fontWithSize:10.f];
         self.lblDate.font = [self.lblDate.font fontWithSize:10.f];
         self.lblTime.font = [self.lblTime.font fontWithSize:10.f];
+        
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:29];
+
     }
     
     _const_Width.constant = heiWei;
@@ -97,7 +106,6 @@
     btnUser.layer.masksToBounds = YES;
     userProfilePic.layer.cornerRadius = heiWei / 2;
     userProfilePic.layer.masksToBounds = YES;
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

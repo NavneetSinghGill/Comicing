@@ -10,4 +10,13 @@
 
 @interface MeCell : UITableViewCell
 @property(nonatomic,weak)IBOutlet NSLayoutConstraint*widthconstraint;
+@property (weak, nonatomic) IBOutlet UILabel *lblComicTitle;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpacingComicView;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraintComicView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicView;
+
+
+
 @end

@@ -38,7 +38,9 @@
 #define COUNTRIES_ALL  [BASE_URL stringByAppendingFormat:@"countries"]
 /* */
 
-#define INVITE_TEXT @"Add me to Comicing  Username:%@ www.AreYouComicing.com"
+//find out more about my life with comicing ! Add me at <username> www.AreYouComicing.com
+
+#define INVITE_TEXT @"find out more about my life with comicing ! Add me at %@ www.AreYouComicing.com"
 
 #define ImagePlaceHolder_COLOUR @[@"ffffff",@"ff3300",@"3399ff",@"ffcc33",@"33cc66",@"9966cc",@"ff3366",@"99cc00",@"3333cc",@"996633",@"000000"]
 
