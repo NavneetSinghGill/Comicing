@@ -109,14 +109,15 @@
     }
 
     _imgvSlide1.layer.borderColor = [UIColor blackColor].CGColor;
-    _imgvSlide1.layer.borderWidth = 3;
+    _imgvSlide1.layer.borderWidth = 1.5;
 
     _imgvSlide2.layer.borderColor = [UIColor blackColor].CGColor;
-    _imgvSlide2.layer.borderWidth = 3;
+    _imgvSlide2.layer.borderWidth = 1.5;
 
     _imgvSlide3.layer.borderColor = [UIColor blackColor].CGColor;
-    _imgvSlide3.layer.borderWidth = 3;
+    _imgvSlide3.layer.borderWidth = 1.5;
 
+    viewComicBook.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
