@@ -400,6 +400,10 @@ NSTimer* timerObject;
         NSData* data = [comicSlides objectAtIndex:i];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
+        if (i == 0 && cmPage.titleString && cmPage.titleString.length >0) {
+            [comicMakeDic setObject:cmPage.titleString forKey:@"comic_title"];
+        }
+        
         //Comic Slide image url obj
         NSDictionary* urlSlides = [slideArray objectAtIndex:i];
         

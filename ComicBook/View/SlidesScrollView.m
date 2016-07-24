@@ -281,8 +281,12 @@ const NSInteger spaceFromTop = 100;
         [textField setBackgroundColor:[UIColor clearColor]];
         [textField setBorderStyle:UITextBorderStyleRoundedRect];
 //        textField .placeholder = @" Set yout title here.";
-        textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Set yout title here."
-                                                                             attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexStr:@"fdfdfd"]}];
+        
+        textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Set your title here."
+                                                                             attributes:@{
+                                                                                          NSForegroundColorAttributeName:[UIColor colorWithHexStr:@"fdfdfd"],
+                                                                                          NSFontAttributeName:[UIFont fontWithName:@"ArialRoundedMTBold" size:24.0]
+                                                                                          }];
         textField.textColor = [UIColor whiteColor];
         textField.delegate = self;
         [textField setFont:[UIFont fontWithName:@"ArialRoundedMTBold" size:16.0f]];

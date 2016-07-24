@@ -185,10 +185,10 @@
     if(currentpage>0)
     [[self delegate]bookChanged:self.Tag];
     
-    if(currentpage==totalPage-1)
+//    if(currentpage==totalPage-1)
+    if(currentpage== 0)
     {
         self.shadowImage.hidden=true;
-        
     }
     else
     {

@@ -3860,15 +3860,16 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     NSMutableArray* slides = [[NSMutableArray alloc] init];
     
     for (int i=0; i< [comicSlides count]; i++) {
-//    for (NSData* data in comicSlides) {
         NSData* data = [comicSlides objectAtIndex:i];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
+        if (i == 0 && cmPage.titleString && cmPage.titleString.length >0) {
+            [comicMakeDic setObject:cmPage.titleString forKey:@"comic_title"];
+        }
+        
         //ComicSlides Object
         NSMutableDictionary* cmSlide = [[NSMutableDictionary alloc] init];
-//        [cmSlide setObject:[AppHelper encodeToBase64String:[AppHelper getImageFile:cmPage.printScreenPath]] forKey:@"slide_image"];
-//        [cmSlide setObject:@"" forKey:@"slide_text"];
-        
+
         //Comic Slide image url obj
         NSDictionary* urlSlides = [slideArray objectAtIndex:i];
         
