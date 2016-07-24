@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSMutableArray *subviewData;
 @property (strong, nonatomic) NSMutableArray *subviewTranformData;
 @property (strong, nonatomic) NSString *timelineString;
+@property (strong, nonatomic) NSString *titleString;
 
 - (id)initWithCoder:(NSCoder *)decoder;
 - (void)encodeWithCoder:(NSCoder *)encoder;

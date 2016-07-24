@@ -21,6 +21,8 @@
 #import "OpenCuteStickersGiftBoxViewController.h"
 #import "FrinedsUsingComicingCell.h"
 #import "UIImageView+WebCache.h"
+#import "YLGIFImage.h"
+#import <Contacts/Contacts.h>
 
 @interface InviteViewController ()<MFMessageComposeViewControllerDelegate>
 {
@@ -44,9 +46,14 @@
 @property (strong, nonatomic) NSArray <NSDictionary *> *friendsUsingComicing;
 @property (strong, nonatomic) IBOutlet UICollectionView *mCollectionView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *gifBox50;
+@property (weak, nonatomic) IBOutlet UIImageView *giftBox100;
+@property (weak, nonatomic) IBOutlet UIImageView *giftBox200;
+
 @end
 
 @implementation InviteViewController
+
 
 - (void)viewDidLoad {
     
@@ -55,14 +62,6 @@
     
     [self.mCollectionView registerNib:[UINib nibWithNibName:@"FrinedsUsingComicingCell" bundle:nil] forCellWithReuseIdentifier:@"fs"];
     
-    // Do any additional setup after loading the view.
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-
-    [super viewWillAppear:YES];
-    
     [self.mHolderView setClipsToBounds:YES];
     [self.mHolderView.layer setMasksToBounds:YES];
     [self.mHolderView.layer setCornerRadius:10];
@@ -70,7 +69,13 @@
     [self getPhoneContact];
     //[self getFriendsByUserId];
     [self getContactListFromServer];
+    
+    // Do any additional setup after loading the view.
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,8 +94,20 @@
 //    [self updateInviteScore:INVITE_POINT_PERINVITE];
     if ([contactList count] > self.contactIndex) {
         NSDictionary* dct = [contactList objectAtIndex:self.contactIndex];
-        [self openMessageComposer:[NSArray arrayWithObjects:[dct objectForKey:@"MobileNumber"], nil]
-                      messageText:INVITE_TEXT];
+        
+        id mobile = [dct objectForKey:@"MobileNumber"];
+        
+        if ([mobile isKindOfClass:[NSString class]])
+        {
+            [self openMessageComposer:[NSArray arrayWithObjects:[dct objectForKey:@"MobileNumber"], nil]
+                          messageText:INVITE_TEXT];
+        }
+        else if ([mobile isKindOfClass:[NSArray class]])
+        {
+            [self openMessageComposer:[NSArray arrayWithArray:[dct objectForKey:@"MobileNumber"]]
+                          messageText:INVITE_TEXT];
+        }
+        
     }
 }
 - (IBAction)btnSkipClick:(id)sender {
@@ -223,25 +240,36 @@
     
 }
 -(void)enableScoreRow{
+    
+//    self.giftBox200.image = [UIImage imageNamed:@"GifBox_200"];
+//    self.giftBox100.image = [UIImage imageNamed:@"GifBox_100"];
+//    self.gifBox50.image   = [UIImage imageNamed:@"GifBox_50"];
+    
     self.lblCurrentScore.text = [NSString stringWithFormat:@"%.f", [self getCurrentScoreFromDB]];
     float scoreValue = [self getCurrentScoreFromDB];
     if (scoreValue >= INVITE_POINT_200) {
+        self.giftBox200.image = [YLGIFImage imageNamed:@"box03.gif"];
         [self.btnGifBox50 setUserInteractionEnabled:YES];
         [self.btnGiftBox100 setUserInteractionEnabled:YES];
         [self.btnGiftBox200 setUserInteractionEnabled:YES];
     }else if(scoreValue >= INVITE_POINT_100 &&
              scoreValue <= INVITE_POINT_200) {
+        self.giftBox100.image = [YLGIFImage imageNamed:@"box02.gif"];
         [self.btnGifBox50 setUserInteractionEnabled:YES];
         [self.btnGiftBox100 setUserInteractionEnabled:YES];
+        
     }else if(scoreValue >= INVITE_POINT_50 &&
              scoreValue <= INVITE_POINT_100) {
+        self.gifBox50.image   = [YLGIFImage imageNamed:@"box01.gif"];
         [self.btnGifBox50 setUserInteractionEnabled:YES];
     }else{
         [self.btnGifBox50 setUserInteractionEnabled:NO];
         [self.btnGiftBox100 setUserInteractionEnabled:NO];
         [self.btnGiftBox200 setUserInteractionEnabled:NO];
     }
+    
 }
+
 
 
 #pragma mark Adddressbook
@@ -268,9 +296,9 @@
     {
         friendsFromServer = [UserFriends arrayOfModelsFromDictionaries:response[@"data"]];
     }
-    NSMutableArray* phoneContact = [self getPhoneContact];
     
-    NSLog(@"Phone Cntactc: %@", phoneContact);
+    [self getPhoneContact];
+    
 }
 
 #pragma Webservice
@@ -333,35 +361,64 @@
        dataDic = nil;
 }
 
--(NSMutableArray*)getPhoneContact{
-    //ABAddressBookRef addressBook = ABAddressBookCreate();
+-(void)getPhoneContact{
     
-    CFErrorRef error = NULL;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL,&error);
-    
-    __block BOOL accessGranted = NO;
-    
-    if (&ABAddressBookRequestAccessWithCompletion != NULL) { // We are on iOS 6
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0"))
+    {
+        // OS version >= 9.0
+        // Call contact address book function
         
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
-            accessGranted = granted;
-            dispatch_semaphore_signal(semaphore);
-        });
+        if ([CNContactStore class]) {
+            //ios9 or later
+            CNEntityType entityType = CNEntityTypeContacts;
+            if( [CNContactStore authorizationStatusForEntityType:entityType] == CNAuthorizationStatusNotDetermined)
+            {
+                CNContactStore * contactStore = [[CNContactStore alloc] init];
+                [contactStore requestAccessForEntityType:entityType completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                    if(granted){
+                        [self getAllContact];
+                    }
+                }];
+            }
+            else if( [CNContactStore authorizationStatusForEntityType:entityType]== CNAuthorizationStatusAuthorized)
+            {
+                [self getAllContact];
+            }
+        }
+    } else {
+        // OS version < 9.0
+        // Call address book function
         
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        //ABAddressBookRef addressBook = ABAddressBookCreate();
+        
+        CFErrorRef error = NULL;
+        ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL,&error);
+        
+        __block BOOL accessGranted = NO;
+        
+        if (&ABAddressBookRequestAccessWithCompletion != NULL) { // We are on iOS 6
+            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+            
+            ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+                accessGranted = granted;
+                dispatch_semaphore_signal(semaphore);
+            });
+            
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        }
+        
+        else { // We are on iOS 5 or Older
+            accessGranted = YES;
+             [self getContactsWithAddressBook:addressBook];
+        }
+        
+        if (accessGranted) {
+             [self getContactsWithAddressBook:addressBook];
+        }
     }
-    
-    else { // We are on iOS 5 or Older
-        accessGranted = YES;
-        return [self getContactsWithAddressBook:addressBook];
-    }
-    
-    if (accessGranted) {
-        return [self getContactsWithAddressBook:addressBook];
-    }
-    return nil;
 }
+
+#pragma mark Address book methods
 
 // Get the contacts.
 - (NSMutableArray*)getContactsWithAddressBook:(ABAddressBookRef )addressBook {
@@ -399,7 +456,8 @@
         
         NSString* FullName = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
         
-        if(phoneNumber != NULL)
+        if(phoneNumber != NULL &&
+           FullName != NULL)
         {
             NSMutableDictionary* dictObj = [[NSMutableDictionary alloc] init];
             [dictObj setObject:FullName forKey:@"FullName"];
@@ -413,6 +471,89 @@
     [self enableScoreRow];
     return contactList;
 }
+
+#pragma mark Contacts methods
+
+-(void)getAllContact
+{
+    if([CNContactStore class])
+    {
+        if (contactList) {
+            [contactList removeAllObjects];
+            contactList = nil;
+        }
+        contactList = [[NSMutableArray alloc] init];
+        
+        //iOS 9 or later
+        NSError* contactError;
+        CNContactStore* addressBook = [[CNContactStore alloc]init];
+        [addressBook containersMatchingPredicate:[CNContainer predicateForContainersWithIdentifiers: @[addressBook.defaultContainerIdentifier]] error:&contactError];
+        NSArray * keysToFetch =@[CNContactEmailAddressesKey, CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactGivenNameKey, CNContactPostalAddressesKey];
+        CNContactFetchRequest * request = [[CNContactFetchRequest alloc]initWithKeysToFetch:keysToFetch];
+        BOOL success = [addressBook enumerateContactsWithFetchRequest:request error:&contactError usingBlock:^(CNContact * __nonnull contact, BOOL * __nonnull stop){
+            [self parseContactWithContact:contact];
+        }];
+        
+        if (success)
+        {
+            NSLog(@"got contacts");
+            
+            [self setContactName];
+            [self startTitleAutoLoad];
+            [self enableScoreRow];
+        }
+    }
+}
+
+- (void)parseContactWithContact :(CNContact* )contact
+{
+    
+    
+    NSString * firstName =  contact.givenName;
+    NSString * lastName =  contact.familyName;
+    NSArray * phoneNumber = [[contact.phoneNumbers valueForKey:@"value"] valueForKey:@"digits"];
+    NSString * email = [contact.emailAddresses valueForKey:@"value"];
+    NSArray * addrArr = [self parseAddressWithContac:contact];
+    
+    if (firstName == nil) {
+        firstName = @"";
+    }
+    if (lastName == nil) {
+        lastName = @"";
+    }
+    
+    NSString* FullName = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
+    
+    //NSLog(@"full name : %@, phoneNumber : %@", FullName, phoneNumber);
+    
+    if((phoneNumber != NULL &&
+        [phoneNumber isKindOfClass:[NSArray class]]) &&
+       FullName != NULL)
+    {
+        NSMutableDictionary* dictObj = [[NSMutableDictionary alloc] init];
+        [dictObj setObject:FullName forKey:@"FullName"];
+        [dictObj setObject:phoneNumber forKey:@"MobileNumber"];
+        [contactList addObject:dictObj];
+        dictObj = nil;
+    }
+
+}
+
+- (NSMutableArray *)parseAddressWithContac: (CNContact *)contact
+{
+    NSMutableArray * addrArr = [[NSMutableArray alloc]init];
+    CNPostalAddressFormatter * formatter = [[CNPostalAddressFormatter alloc]init];
+    NSArray * addresses = (NSArray*)[contact.postalAddresses valueForKey:@"value"];
+    if (addresses.count > 0) {
+        for (CNPostalAddress* address in addresses) {
+            [addrArr addObject:[formatter stringFromPostalAddress:address]];
+        }
+    }
+    return addrArr;
+}
+
+
+#pragma mark -
 -(NSString*)removeSpecialChara :(NSString*)phoneNumberString{
     return [[phoneNumberString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
             componentsJoinedByString:@""];
@@ -421,6 +562,8 @@
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
 {
+    //[self updateInviteScore:INVITE_POINT_PERINVITE];
+
     switch (result) {
         case MessageComposeResultCancelled:
             NSLog(@"Cancelled");
@@ -441,7 +584,7 @@
 #pragma mark collection view data source
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(collectionView.frame.size.height - 6, collectionView.frame.size.height - 6);
+    return CGSizeMake(collectionView.frame.size.height, collectionView.frame.size.height);
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -451,6 +594,9 @@
 
 }
 
+#define SAFESTRING(str) ISVALIDSTRING(str) ? str : @""
+#define ISVALIDSTRING(str) (str != nil && [str isKindOfClass:[NSNull class]] == NO)
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -458,12 +604,14 @@
     
     NSString *profilePic = self.friendsUsingComicing[indexPath.item][@"profile_pic"];
     
-    if ([profilePic isKindOfClass:[NSString class]] &&
-        profilePic.length > 0)
+    if (ISVALIDSTRING(profilePic))
     {
-        [cell.mDPImageView sd_setImageWithURL:[NSURL URLWithString:profilePic] placeholderImage:nil options:SDWebImageRetryFailed];
+        [cell.mDPImageView sd_setImageWithURL:[NSURL URLWithString:profilePic] placeholderImage:[UIImage imageNamed:@"Placeholder"] options:SDWebImageRetryFailed];
     }
-
+    
+    NSString *displayName = self.friendsUsingComicing[indexPath.item][@"first_name"];
+    cell.mFirstName.text = SAFESTRING(displayName);
+    
     return cell;
 }
 

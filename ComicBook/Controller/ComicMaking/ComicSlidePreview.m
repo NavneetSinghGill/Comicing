@@ -191,13 +191,13 @@
     imgv3Slide3.image = slides[2];
     
     imgv3Slide1.layer.borderColor = [UIColor blackColor].CGColor;
-    imgv3Slide1.layer.borderWidth = 2;
+    imgv3Slide1.layer.borderWidth = 1.5;
     
     imgv3Slide2.layer.borderColor = [UIColor blackColor].CGColor;
-    imgv3Slide2.layer.borderWidth = 2;
+    imgv3Slide2.layer.borderWidth = 1.5;
     
     imgv3Slide3.layer.borderColor = [UIColor blackColor].CGColor;
-    imgv3Slide3.layer.borderWidth = 2;
+    imgv3Slide3.layer.borderWidth = 1.5;
     
     
 }
@@ -210,10 +210,10 @@
     imgv2Slide2.image = slides[1];
     
     imgv2Slide1.layer.borderColor = [UIColor blackColor].CGColor;
-    imgv2Slide1.layer.borderWidth = 2;
+    imgv2Slide1.layer.borderWidth = 1.5;
     
     imgv2Slide2.layer.borderColor = [UIColor blackColor].CGColor;
-    imgv2Slide2.layer.borderWidth = 2;
+    imgv2Slide2.layer.borderWidth = 1.5;
 
 }
 
@@ -247,7 +247,7 @@
     imgv1Slide.image = slides[0];
     
     imgv1Slide.layer.borderColor = [UIColor blackColor].CGColor;
-    imgv1Slide.layer.borderWidth = 2;
+    imgv1Slide.layer.borderWidth = 1.5;
 
 }
 
@@ -279,16 +279,16 @@
     view4Slide.hidden = NO;
     
     imgv4Slide1.layer.borderColor = [UIColor blackColor].CGColor;
-    imgv4Slide1.layer.borderWidth = 2;
+    imgv4Slide1.layer.borderWidth = 1.5;
 
     imgv4Slide2.layer.borderColor = [UIColor blackColor].CGColor;
-    imgv4Slide2.layer.borderWidth = 2;
+    imgv4Slide2.layer.borderWidth = 1.5;
     
     imgv4Slide3.layer.borderColor = [UIColor blackColor].CGColor;
-    imgv4Slide3.layer.borderWidth = 2;
+    imgv4Slide3.layer.borderWidth = 1.5;
     
     imgv4Slide4.layer.borderColor = [UIColor blackColor].CGColor;
-    imgv4Slide4.layer.borderWidth = 2;
+    imgv4Slide4.layer.borderWidth = 1.5;
     
     imgv4Slide1.image = slides[0];
     imgv4Slide2.image = slides[1];

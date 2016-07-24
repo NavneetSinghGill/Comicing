@@ -16,6 +16,6 @@
 @property (nonatomic, strong) UINavigationController *parentViewController;
 @property (nonatomic, strong) MainViewController *delegate;
 
--(NSMutableArray*)getPhoneContact;
+-(void)getPhoneContact;
 
 @end

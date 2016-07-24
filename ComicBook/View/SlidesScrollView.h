@@ -20,10 +20,11 @@
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAddButtonAtIndex:(NSInteger)index withView:(UIView *)view pusWithAnimation:(BOOL)isPushAnimation;
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didRemovedAtIndexPath:(NSInteger)index;
 - (void)returnAddedView:(UIView *)view;
+- (void)saveSlideTitle:(NSString*)strValue slideIndex:(NSInteger)slideIndex;
 
 @end
 
-@interface SlidesScrollView : UIScrollView<UIScrollViewDelegate,UIGestureRecognizerDelegate>
+@interface SlidesScrollView : UIScrollView<UIScrollViewDelegate,UIGestureRecognizerDelegate,UITextFieldDelegate>
 
 @property (strong, nonatomic) UIView *slideView;
 @property NSUInteger maximumComicCount;
@@ -36,6 +37,7 @@
 @property (strong, nonatomic) NSMutableArray *allSlidesView;
 @property (strong, nonatomic) NSMutableArray *timelineTimeArray;
 @property (strong, nonatomic) NSMutableArray *timelineBubbleArray;
+@property (strong, nonatomic) NSMutableArray *slideTitleArray;
 @property (nonatomic, strong) UIView *timelineView;
 
 - (void)addViewAtIndex:(NSInteger)index withComicSlide:(ComicPage *)comicSlide;

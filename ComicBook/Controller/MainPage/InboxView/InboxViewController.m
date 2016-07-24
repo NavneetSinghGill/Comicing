@@ -29,6 +29,9 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 {
 
     IBOutlet UIImageView *img_ForFriend;
+    IBOutlet UILabel *lbl_Friends;
+    IBOutlet UILabel *lbl_Groups;
+    IBOutlet NSLayoutConstraint *const_HeightOfFriend;
 }
 @end
 @implementation InboxViewController
@@ -43,8 +46,48 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 
     UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tappedOnConnectFriendImage)];
     [img_ForFriend addGestureRecognizer:tapGest];
+    CGFloat fontSize = 13;
+    if (IS_IPHONE_5)
+    {
+        fontSize = 11;
+    }
+    else if (IS_IPHONE_6)
+    {
+        fontSize = 12;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        fontSize = 13;
+    }
+    lbl_Groups.font = [lbl_Groups.font fontWithSize:fontSize];
+    lbl_Friends.font = [lbl_Friends.font fontWithSize:fontSize];
+    /*if (IS_IPHONE_6P)
+    {
+        self.friendsCV.frame = CGRectMake(self.friendsCV.frame.origin.x, self.friendsCV.frame.origin.y, self.friendsCV.frame.size.width, (self.friendsCV.frame.size.width/3.0416666667)+100);
+    }
+    else
+    {*/
+    
+    //}
+    
+
     //    [self setupInbox];
     // Do any additional setup after loading the view.
+    CGFloat ratioOn = 3.0416666667f;
+    if (IS_IPHONE_6P)
+    {
+        ratioOn = 2.7f;
+    }
+    else if (IS_IPHONE_6)
+    {
+        ratioOn = 2.8f;
+    }
+    else if (IS_IPHONE_5)
+    {
+        ratioOn = 2.95f;
+    }
+    const_HeightOfFriend.constant = [UIScreen mainScreen].bounds.size.width/ratioOn;
+    [self.friendsCV layoutIfNeeded];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,18 +105,23 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 - (void)viewDidAppear:(BOOL)animated
 {
    // [timer invalidate];
+    
 }
-
+-(void)viewDidLayoutSubviews
+{
+    
+    
+}
 - (void)setupAlphabetCollectionView
 {
-    CGFloat width = CGRectGetWidth(self.view.frame) -  CGRectGetMinX(alphabetCV.frame);
+   /* CGFloat width = CGRectGetWidth(self.view.frame) -  CGRectGetMinX(alphabetCV.frame);
     
     CGRect frame = CGRectMake(CGRectGetMinX(alphabetCV.frame),
                               CGRectGetMinY(alphabetCV.frame),
                               width,
                               CGRectGetHeight(alphabetCV.frame));
     
-    alphabetCV.frame = frame;
+    alphabetCV.frame = frame;*/
     
     alphabets = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
     
@@ -357,7 +405,39 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     return nil;
 }
 
-
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(collectionView.tag == GroupCollectionViewTag)
+    {
+        CGFloat heightShouldbe = ([UIScreen mainScreen].bounds.size.width-28)/5.4677419355;
+        return CGSizeMake(0.9615384615*heightShouldbe, heightShouldbe);
+    }
+    else if (collectionView.tag == FriendCollectionViewTag)
+    {
+       /* if (IS_IPHONE_6P)
+        {
+            return CGSizeMake(collectionView.frame.size.height/2*0.59, (collectionView.frame.size.height/2)-7);
+        }*/
+        return CGSizeMake(const_HeightOfFriend.constant/2*0.56, const_HeightOfFriend.constant/2);
+    }
+    else
+    {
+        CGFloat sizeOFCcell = 22;
+        if (IS_IPHONE_5)
+        {
+            sizeOFCcell = 18;
+        }
+        else if(IS_IPHONE_6)
+        {
+            sizeOFCcell = 19;
+        }
+        else if (IS_IPHONE_6P)
+        {
+            sizeOFCcell = 20;
+        }
+        return CGSizeMake(sizeOFCcell, sizeOFCcell);
+    }
+}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (collectionView.tag == AlphabetsCollectionViewTag)

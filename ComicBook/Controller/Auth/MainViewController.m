@@ -12,6 +12,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 #import "CropRegisterViewController.h"
+#import "OpenCuteStickersGiftBoxViewController.h"
+#import "InviteViewController.h"
 
 @interface MainViewController ()
 {
@@ -40,6 +42,14 @@
     [AppHelper hideAllDropMessages];
     [self.view setAlpha:1];
     [super viewWillAppear:animated];
+    
+    /*UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
+    OpenCuteStickersGiftBoxViewController *controller = (OpenCuteStickersGiftBoxViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"OpenCuteStickersGiftBoxViewController"];
+    [self presentViewController:controller animated:YES completion:nil];*/
+    
+    /*UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
+    InviteViewController *controller = (InviteViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"InviteViewController"];
+    [self presentViewController:controller animated:YES completion:nil];*/
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
