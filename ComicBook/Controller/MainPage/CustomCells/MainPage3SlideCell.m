@@ -28,6 +28,7 @@
 @property (strong, nonatomic) NSMutableArray *downloadedAudioDataArray;
 @property (strong, nonatomic) NSMutableArray *audioUrlArray;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 
 @end
 
@@ -64,6 +65,8 @@
         _mUserName.font = [_mUserName.font fontWithSize:8.f];
         self.lblDate.font = [self.lblDate.font fontWithSize:8.f];
         self.lblTime.font = [self.lblTime.font fontWithSize:8.f];
+        
+       // heightConstraint.cons
         
     }
     else if (IS_IPHONE_6)
