@@ -15,6 +15,8 @@
         <mutableArray key="arielBlack.ttf">
             <string>Arial-Black</string>
             <string>Arial-Black</string>
+            <string>Arial-Black</string>
+            <string>Arial-Black</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -2444,10 +2446,17 @@ Comicing </string>
                                             <action selector="btnClose:" destination="erY-Xy-9Qk" eventType="touchUpInside" id="6f0-yj-xJq"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stickers Pack - Special Edition" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2EP-43-r4u">
-                                        <rect key="frame" x="88" y="11" width="224" height="60"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stickers Pack" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sBG-5U-wqg">
+                                        <rect key="frame" x="135" y="18" width="158" height="28"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Arial-Black" family="Arial Black" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="Arial-Black" family="Arial Black" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Special Edition" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jXh-bZ-9Xo">
+                                        <rect key="frame" x="135" y="43" width="158" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                        <fontDescription key="fontDescription" name="Arial-Black" family="Arial Black" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -2484,7 +2493,7 @@ Comicing </string>
                                                 <color key="textColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GifBox_50" id="iCs-1t-Vt0">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GifBox_50" id="iCs-1t-Vt0" customClass="YLImageView">
                                                 <rect key="frame" x="166" y="20" width="56" height="48"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2536,7 +2545,7 @@ Comicing </string>
                                                 <color key="textColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GifBox_100" id="6UL-dh-0oC">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GifBox_100" id="6UL-dh-0oC" customClass="YLImageView">
                                                 <rect key="frame" x="156" y="18" width="71" height="53"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2588,7 +2597,7 @@ Comicing </string>
                                                 <color key="textColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GifBox_200" id="sTG-P0-EtN">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GifBox_200" id="sTG-P0-EtN" customClass="YLImageView">
                                                 <rect key="frame" x="145" y="4" width="95" height="72"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2693,14 +2702,14 @@ Comicing </string>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Friends on Comicing" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QDU-6S-Knv">
-                                                <rect key="frame" x="18" y="9" width="83" height="30"/>
+                                                <rect key="frame" x="8" y="9" width="83" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
                                                 <color key="textColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="c69-mE-XzA">
-                                                <rect key="frame" x="100" y="9" width="140" height="30"/>
+                                                <rect key="frame" x="91" y="5" width="151" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FpW-CF-REA">
@@ -2721,9 +2730,9 @@ Comicing </string>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Invite_icon" id="3e0-RT-6Ci">
-                                <rect key="frame" x="9" y="26" width="69" height="68"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stickers_icon.png" id="3e0-RT-6Ci">
+                                <rect key="frame" x="14" y="0.0" width="119" height="122"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AWU-Y1-kZi">
                                 <rect key="frame" x="241" y="533" width="59" height="30"/>
@@ -2745,6 +2754,9 @@ Comicing </string>
                         <outlet property="btnInvite" destination="6cp-KL-0xS" id="I9E-b0-jnu"/>
                         <outlet property="btnSkip" destination="ihX-KE-hFi" id="kh8-rT-lN4"/>
                         <outlet property="btnSkipBack" destination="6nj-NB-Izz" id="NNP-tI-s1x"/>
+                        <outlet property="gifBox50" destination="iCs-1t-Vt0" id="B36-Pe-jQ6"/>
+                        <outlet property="giftBox100" destination="6UL-dh-0oC" id="FhO-dE-eWu"/>
+                        <outlet property="giftBox200" destination="sTG-P0-EtN" id="WHG-Kf-s82"/>
                         <outlet property="lblContactName" destination="CGh-5S-dsg" id="5WB-g8-2bv"/>
                         <outlet property="lblCurrentScore" destination="x5p-Pp-QXz" id="LEp-LF-CEE"/>
                         <outlet property="lblEmoji" destination="Bgm-IK-QAb" id="8hv-we-Rz5"/>
@@ -2754,7 +2766,7 @@ Comicing </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nfM-fr-eRC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-199" y="-497"/>
+            <point key="canvasLocation" x="-519" y="-589"/>
         </scene>
         <!--Open Cute Stickers Gift Box View Controller-->
         <scene sceneID="HO5-rc-M1c">
@@ -2768,21 +2780,20 @@ Comicing </string>
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stickers Pack - Special Edition" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pBb-K7-jjP">
-                                        <rect key="frame" x="88" y="16" width="224" height="60"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stickers Pack" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pBb-K7-jjP">
+                                        <rect key="frame" x="135" y="17" width="158" height="28"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Arial-Black" family="Arial Black" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="Arial-Black" family="Arial Black" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SlL-ai-0Xm">
-                                        <rect key="frame" x="280" y="0.0" width="40" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
-                                        <state key="normal" image="inviteClose"/>
-                                        <connections>
-                                            <action selector="closeClicked:" destination="5U4-q3-w9E" eventType="touchUpInside" id="r2T-rt-HNM"/>
-                                        </connections>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Special Edition" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jry-YO-xwB">
+                                        <rect key="frame" x="135" y="42" width="158" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                        <fontDescription key="fontDescription" name="Arial-Black" family="Arial Black" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -2794,35 +2805,36 @@ Comicing </string>
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="410"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Once you are on the app press scissors" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f5u-8c-ERp">
-                                        <rect key="frame" x="8" y="275" width="234" height="68"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="21"/>
-                                        <color key="textColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IzU-9F-dQ9">
-                                        <rect key="frame" x="0.0" y="269" width="250" height="1"/>
+                                        <rect key="frame" x="0.0" y="272" width="250" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Once you are on the app press scissors" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f5u-8c-ERp">
+                                        <rect key="frame" x="18" y="278" width="213" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
+                                        <color key="textColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to open" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="322-lR-uOK">
-                                        <rect key="frame" x="8" y="174" width="234" height="60"/>
+                                        <rect key="frame" x="8" y="144" width="234" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="25"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="30"/>
                                         <color key="textColor" red="0.3803921569" green="0.3803921569" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GifBox_50" id="xsJ-jV-82j">
-                                        <rect key="frame" x="85" y="80" width="80" height="80"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="box01.gif" id="xsJ-jV-82j" customClass="YLImageView">
+                                        <rect key="frame" x="91" y="78" width="67" height="66"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="i7m-CX-W32">
-                                        <rect key="frame" x="8" y="347" width="40" height="48"/>
+                                        <rect key="frame" x="18" y="336" width="40" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="Scissor.png"/>
@@ -2830,25 +2842,43 @@ Comicing </string>
                                             <action selector="scissorButtonClicke:" destination="5U4-q3-w9E" eventType="touchUpInside" id="XuA-cI-yzV"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="openbox-5.gif" id="0vH-bx-ieh">
+                                        <rect key="frame" x="8" y="0.0" width="240" height="400"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="loopCount" value="1"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Invite_icon" id="yAY-8E-VMM">
-                                <rect key="frame" x="9" y="26" width="69" height="68"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stickers_icon.png" id="yAY-8E-VMM">
+                                <rect key="frame" x="14" y="0.0" width="119" height="122"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SlL-ai-0Xm">
+                                <rect key="frame" x="281" y="0.0" width="39" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                                <state key="normal" image="inviteClose"/>
+                                <connections>
+                                    <action selector="closeClicked:" destination="5U4-q3-w9E" eventType="touchUpInside" id="r2T-rt-HNM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.33725490200000002" green="0.79215686269999996" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="mGiftBoxImageView" destination="xsJ-jV-82j" id="S3p-Wz-EJH"/>
+                        <outlet property="mGiftBoxOpenImageView" destination="0vH-bx-ieh" id="6bl-H7-xJk"/>
                         <outlet property="mScissorButton" destination="i7m-CX-W32" id="vls-WO-dg4"/>
+                        <outlet property="mTapToOpenLabel" destination="322-lR-uOK" id="jT1-RB-WOy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Gn-8g-pvl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="216" y="-491"/>
+            <point key="canvasLocation" x="-321" y="-613"/>
         </scene>
     </scenes>
     <resources>
@@ -2860,7 +2890,6 @@ Comicing </string>
         <image name="GobackButton.png" width="67" height="67"/>
         <image name="InviteBack" width="10" height="11"/>
         <image name="InviteTrophy" width="33" height="40"/>
-        <image name="Invite_icon" width="77" height="72"/>
         <image name="MainPageLogo" width="220" height="239"/>
         <image name="MainPageLogo_Text" width="301" height="79"/>
         <image name="Scissor.png" width="40" height="48"/>
@@ -2875,6 +2904,7 @@ Comicing </string>
         <image name="blue-square-selected" width="30" height="30"/>
         <image name="blue-square-unselected" width="16" height="16"/>
         <image name="blueCheckmark.png" width="78" height="78"/>
+        <image name="box01.gif" width="200" height="200"/>
         <image name="boyIcon" width="31" height="32"/>
         <image name="brown-square-selected" width="30" height="30"/>
         <image name="brown-square-unselected" width="16" height="16"/>
@@ -2905,6 +2935,7 @@ Comicing </string>
         <image name="leftarrow" width="56" height="57"/>
         <image name="mic" width="50" height="50"/>
         <image name="openClose" width="30" height="50"/>
+        <image name="openbox-5.gif" width="832" height="1492"/>
         <image name="pen-icon" width="16" height="22"/>
         <image name="pink-square-selected" width="30" height="30"/>
         <image name="pink-square-unselected" width="17" height="16"/>
@@ -2914,6 +2945,7 @@ Comicing </string>
         <image name="searchFriends.png" width="48" height="63"/>
         <image name="sticker-icon" width="17" height="21"/>
         <image name="sticker-sharing-icon" width="36" height="32"/>
+        <image name="stickers_icon.png" width="487" height="431"/>
         <image name="text_icon" width="90" height="91"/>
         <image name="twitterlogo.png" width="63" height="66"/>
         <image name="undo-drawing-icon" width="15" height="19"/>

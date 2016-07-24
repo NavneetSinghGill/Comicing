@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AnimatedGif.h"
 
 @interface OpenCuteStickersGiftBoxViewController : UIViewController
 

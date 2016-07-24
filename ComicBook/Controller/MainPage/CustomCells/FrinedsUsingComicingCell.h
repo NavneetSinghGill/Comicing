@@ -11,5 +11,6 @@
 @interface FrinedsUsingComicingCell : UICollectionViewCell
 
 @property (nonatomic, weak) IBOutlet UIImageView *mDPImageView;
+@property (nonatomic, weak) IBOutlet UILabel *mFirstName;
 
 @end
