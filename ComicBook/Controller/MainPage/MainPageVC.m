@@ -1595,8 +1595,8 @@ NSString * const BottomBarView = @"BottomBarView";
         {
             cell.lblComicTitle.hidden = YES;
            
-            cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height + 8;
-            cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height - 10;
+            cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height - 30;
+            cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height;
             [cell layoutIfNeeded];
         }
         else
@@ -1654,7 +1654,7 @@ NSString * const BottomBarView = @"BottomBarView";
             cell.lblComicTitle.hidden = YES;
             
             cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height + 8;
-            cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height - 10;
+            cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height - 8;
             [cell layoutIfNeeded];
             [cell.viewComicBook layoutIfNeeded];
 
@@ -1664,9 +1664,9 @@ NSString * const BottomBarView = @"BottomBarView";
             cell.lblComicTitle.hidden = NO;
             cell.lblComicTitle.text = comicBook.comicTitle;
             
-            cell.topConstraintComicView.constant = 5;
+            cell.topConstraintComicView.constant = 8;
 
-            cell.heightConstraintComicView.constant = 0;
+            cell.heightConstraintComicView.constant = -2;
             
             
             
@@ -1806,9 +1806,7 @@ NSString * const BottomBarView = @"BottomBarView";
         else
         {
             return tableView.bounds.size.height + 60;
-
         }
-
     }
     else if (comicBook.slides.count == 2)
     {

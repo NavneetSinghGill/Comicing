@@ -28,6 +28,8 @@
 @property (strong, nonatomic) NSMutableArray *downloadedAudioDataArray;
 @property (strong, nonatomic) NSMutableArray *audioUrlArray;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstant;
 
 @end
 
@@ -65,6 +67,9 @@
         self.lblDate.font = [self.lblDate.font fontWithSize:8.f];
         self.lblTime.font = [self.lblTime.font fontWithSize:8.f];
         
+        self.heightConstraint.constant = 0;
+        self. widthConstant.constant = -2;
+        
     }
     else if (IS_IPHONE_6)
     {
@@ -72,6 +77,11 @@
         _mUserName.font = [_mUserName.font fontWithSize:9.f];
         self.lblDate.font = [self.lblDate.font fontWithSize:9.f];
         self.lblTime.font = [self.lblTime.font fontWithSize:9.f];
+        
+        self.heightConstraint.constant = -0;
+        self. widthConstant.constant = -1;
+
+
     }
     else if (IS_IPHONE_6P)
     {
@@ -79,6 +89,11 @@
         _mUserName.font = [_mUserName.font fontWithSize:10.f];
         self.lblDate.font = [self.lblDate.font fontWithSize:10.f];
         self.lblTime.font = [self.lblTime.font fontWithSize:10.f];
+
+        self.heightConstraint.constant = 0;
+        self. widthConstant.constant = 0;
+
+
     }
     
     _const_Width.constant = heiWei;
@@ -117,7 +132,7 @@
     _imgvSlide3.layer.borderColor = [UIColor blackColor].CGColor;
     _imgvSlide3.layer.borderWidth = 1.5;
 
-    viewComicBook.backgroundColor = [UIColor whiteColor];
+//    viewComicBook.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

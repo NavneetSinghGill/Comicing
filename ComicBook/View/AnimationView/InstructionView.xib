@@ -150,10 +150,6 @@
                             <rect key="frame" x="0.0" y="24" width="318" height="148"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slide-14" id="lX2-VE-Hwm">
-                            <rect key="frame" x="29" y="16" width="230" height="148"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slide-2B" id="v6J-SI-vtt">
                             <rect key="frame" x="0.0" y="37" width="320" height="459"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -161,6 +157,10 @@
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slide-16" id="Rwu-tM-egL">
                             <rect key="frame" x="78" y="419" width="240" height="128"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slide-14" id="lX2-VE-Hwm">
+                            <rect key="frame" x="125" y="59" width="195" height="143"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XSW-U5-nJH">
@@ -181,20 +181,20 @@
     </objects>
     <resources>
         <image name="slide-1" width="671" height="1082"/>
-        <image name="slide-11" width="1080" height="479"/>
-        <image name="slide-14" width="1080" height="467"/>
-        <image name="slide-15" width="1080" height="420"/>
-        <image name="slide-16" width="1080" height="462"/>
-        <image name="slide-2" width="1080" height="505"/>
+        <image name="slide-11" width="1242" height="565"/>
+        <image name="slide-14" width="549" height="269"/>
+        <image name="slide-15" width="1242" height="496"/>
+        <image name="slide-16" width="640" height="294"/>
+        <image name="slide-2" width="1242" height="581"/>
         <image name="slide-2B" width="988" height="1741"/>
-        <image name="slide-3" width="1080" height="480"/>
-        <image name="slide-4" width="1080" height="483"/>
-        <image name="slide-5" width="669" height="277"/>
-        <image name="slide-6" width="1080" height="447"/>
-        <image name="slide-8" width="1080" height="467"/>
-        <image name="slide-9" width="1080" height="455"/>
-        <image name="slide-B" width="1080" height="455"/>
-        <image name="slide-C" width="1080" height="455"/>
-        <image name="slide-D" width="1080" height="455"/>
+        <image name="slide-3" width="1242" height="543"/>
+        <image name="slide-4" width="1242" height="535"/>
+        <image name="slide-5" width="1242" height="503"/>
+        <image name="slide-6" width="1242" height="505"/>
+        <image name="slide-8" width="1242" height="539"/>
+        <image name="slide-9" width="1242" height="514"/>
+        <image name="slide-B" width="1242" height="633"/>
+        <image name="slide-C" width="1242" height="631"/>
+        <image name="slide-D" width="1242" height="711"/>
     </resources>
 </document>
