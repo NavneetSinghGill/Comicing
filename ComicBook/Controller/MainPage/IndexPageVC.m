@@ -32,32 +32,25 @@
 //    [self.imageArray addObjectsFromArray:tempArray];
 //    [self.collectionView reloadData];
     
-    if (self.isSlidesContainImages)
+    if(self.pageNumber==1)
     {
-        if(self.pageNumber==1)
+        [self.slidesArray removeObjectAtIndex:0];
+        [self.slidesArray removeObjectAtIndex:0];
+        if(4<self.slidesArray.count)
         {
             [self.slidesArray removeObjectAtIndex:0];
-            [self.slidesArray removeObjectAtIndex:0];
-            
-            if(4<self.slidesArray.count)
-            {
-                //            Slides *slides = [Slides new];
-                //            [self.slidesArray insertObject:slides atIndex:0];
-                [self.slidesArray removeObjectAtIndex:0];
-            }
-        }
-        else if (self.pageNumber==2)
-        {
-            //        Slides *slides = [Slides new];
-            //        [self.slidesArray insertObject:slides atIndex:0];
-            for(int i=0;i<7;i++)
-            {
-                [self.slidesArray removeObjectAtIndex:0];
-            }
-            
         }
     }
-    
+    else if (self.pageNumber==2)
+    {
+//        Slides *slides = [Slides new];
+//        [self.slidesArray insertObject:slides atIndex:0];
+        for(int i=0;i<7;i++)
+        {
+            [self.slidesArray removeObjectAtIndex:0];
+        }
+        
+    }
     
     /**
      *  collectionview with layout
@@ -126,111 +119,54 @@
     
     UIImageView *img=(UIImageView*)[cell viewWithTag:1];
     
-    if(self.slidesArray.count == 2)
-    {
+    if(self.slidesArray.count == 2) {
         // logic for 2 items
-        if(indexPath.row == 0 || indexPath.row == 3)
-        {
-            NSLog(@"showww1");
-            if(indexPath.row == 0)
-            {
-                if (self.isSlidesContainImages == YES)
-                {
-                    img.image = [self.slidesArray objectAtIndex:0];
-                }
-                else
-                {
-                    Slides *slide = [self.slidesArray objectAtIndex:0];
-                    [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                    }];
-
-                }
+        if(indexPath.row == 0 || indexPath.row == 3) {
+            if(indexPath.row == 0) {
+                Slides *slide = [self.slidesArray objectAtIndex:0];
+                [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                }];
+            } else if(indexPath.row == 3) {
+                Slides *slide = [self.slidesArray objectAtIndex:1];
+                [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                }];
             }
-            else if(indexPath.row == 3)
-            {
-                if (self.isSlidesContainImages == YES)
-                {
-                    img.image = [self.slidesArray objectAtIndex:1];
-
-                }
-                else
-                {
-                    Slides *slide = [self.slidesArray objectAtIndex:1];
-                    [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                    }];
-
-                }
-            }
-            
-            img.layer.borderWidth = 3;
-            img.layer.borderColor = [UIColor blackColor].CGColor;
+            img.layer.borderWidth=2;
+            img.layer.borderColor=[UIColor blackColor].CGColor;
             [img.layer setMasksToBounds:true];
-        }
-        else
-        {
+        } else {
             img.image=nil;
-            img.layer.borderWidth = 0;
-            img.layer.borderColor = [UIColor clearColor].CGColor;
+            img.layer.borderWidth=0;
+            img.layer.borderColor=[UIColor clearColor].CGColor;
             [img.layer setMasksToBounds:true];
         }
         
-    }
-    else if(self.slidesArray.count == 3)
-    {
-        if(indexPath.section == 0)
-        {
-            if (self.isSlidesContainImages == YES)
-            {
-                img.image = [self.slidesArray objectAtIndex:indexPath.row];
-
-            }
-            else
-            {
-                Slides *slide = [self.slidesArray objectAtIndex:indexPath.row];
-                [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                }];
-                img.layer.borderWidth = 3;
-                img.layer.borderColor = [UIColor blackColor].CGColor;
-                [img.layer setMasksToBounds:true];
-
-            }
+    } else if(self.slidesArray.count == 3) {
+        if(indexPath.section == 0) {
+            Slides *slide = [self.slidesArray objectAtIndex:indexPath.row];
+            [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            }];
+            img.layer.borderWidth=2;
+            img.layer.borderColor=[UIColor blackColor].CGColor;
+            [img.layer setMasksToBounds:true];
+        } else {
+            Slides *slide = [self.slidesArray objectAtIndex:2];
+            [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            }];
+            img.layer.borderWidth=2;
+            img.layer.borderColor=[UIColor blackColor].CGColor;
+            [img.layer setMasksToBounds:true];
         }
-        else
+        
+    } else {
+        if(indexPath.row<self.slidesArray.count)
         {
-            if (self.isSlidesContainImages == YES)
-            {
-                img.image = [self.slidesArray objectAtIndex:2];
-
-            }
-            else
-            {
-                Slides *slide = [self.slidesArray objectAtIndex:2];
-                [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                }];
-                img.layer.borderWidth = 3;
-                img.layer.borderColor = [UIColor blackColor].CGColor;
-                [img.layer setMasksToBounds:true];
-            }
-        }
-    }
-    else
-    {
-        if(indexPath.row < self.slidesArray.count)
-        {
-            if (self.isSlidesContainImages == YES)
-            {
-                img.image = [self.slidesArray objectAtIndex:indexPath.row];
-
-            }
-            else
-            {
-                Slides *slide = [self.slidesArray objectAtIndex:indexPath.row];
-                [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                }];
-                img.layer.borderWidth = 3;
-                img.layer.borderColor = [UIColor blackColor].CGColor;
-                [img.layer setMasksToBounds:true];
-            }
+            Slides *slide = [self.slidesArray objectAtIndex:indexPath.row];
+            [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            }];
+            img.layer.borderWidth=2;
+            img.layer.borderColor=[UIColor blackColor].CGColor;
+            [img.layer setMasksToBounds:true];
         }
         else
         {

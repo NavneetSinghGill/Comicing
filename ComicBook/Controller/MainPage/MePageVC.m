@@ -534,10 +534,6 @@
             
             comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
             
-            
-            
-            
-            
             [cell.viewComicBook addSubview:comic.view];
             [self addChildViewController:comic];
             //            [comic setImages: [self setupImages:indexPath]];
