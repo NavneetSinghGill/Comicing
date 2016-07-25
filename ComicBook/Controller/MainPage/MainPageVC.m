@@ -1595,7 +1595,7 @@ NSString * const BottomBarView = @"BottomBarView";
         {
             cell.lblComicTitle.hidden = YES;
            
-            cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height - 30;
+            cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height - 20;
             cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height;
             [cell layoutIfNeeded];
         }
@@ -1816,30 +1816,30 @@ NSString * const BottomBarView = @"BottomBarView";
         {
             if(IS_IPHONE_5)
             {
-                height = 280;
+                height = 300;
             }
             else if(IS_IPHONE_6)
             {
-                height = 348;
+                height = 368;
             }
             else if(IS_IPHONE_6P)
             {
-                height = 416;
+                height = 436;
             }
         }
         else
         {
             if(IS_IPHONE_5)
             {
-                height = 220;
+                height = 240;
             }
             else if(IS_IPHONE_6)
             {
-                height = 268;
+                height = 288;
             }
             else if(IS_IPHONE_6P)
             {
-                height = 356;
+                height = 376;
             }
 
         }

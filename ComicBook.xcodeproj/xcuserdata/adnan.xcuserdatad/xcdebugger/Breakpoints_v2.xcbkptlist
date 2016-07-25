@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "490300106.711779"
+            timestampString = "491167107.927489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2915"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "490300106.711779"
+            timestampString = "491167107.927489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2918"
@@ -228,11 +228,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "490300106.711779"
+            timestampString = "491167107.927489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1791"
-            endingLineNumber = "1791"
+            startingLineNumber = "1809"
+            endingLineNumber = "1809"
             landmarkName = "-addBubbleWithImage:TextFiledRect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -756,12 +756,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "490300106.711779"
+            timestampString = "491167107.927489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4035"
-            endingLineNumber = "4035"
-            landmarkName = "-isEndOfPan:success:"
+            startingLineNumber = "4054"
+            endingLineNumber = "4054"
+            landmarkName = "-getComicItems:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -772,12 +772,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "490300106.711779"
+            timestampString = "491167107.927489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4034"
-            endingLineNumber = "4034"
-            landmarkName = "-isEndOfPan:success:"
+            startingLineNumber = "4053"
+            endingLineNumber = "4053"
+            landmarkName = "-getComicItems:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -788,12 +788,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "490300106.711779"
+            timestampString = "491167107.927489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4036"
-            endingLineNumber = "4036"
-            landmarkName = "-isEndOfPan:success:"
+            startingLineNumber = "4055"
+            endingLineNumber = "4055"
+            landmarkName = "-getComicItems:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -804,12 +804,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "490300106.711779"
+            timestampString = "491167107.927489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4072"
-            endingLineNumber = "4072"
-            landmarkName = "-btnComicBoyClick:"
+            startingLineNumber = "4091"
+            endingLineNumber = "4091"
+            landmarkName = "-isEndOfPan:success:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -613,6 +613,7 @@
                                             <outlet property="profileImageView" destination="NMQ-bl-szh" id="aNo-7k-HOO"/>
                                             <outlet property="topConstraintComicView" destination="G6M-tM-Htv" id="5sf-Q8-mFZ"/>
                                             <outlet property="viewComicBook" destination="BPg-rI-Xop" id="5vI-KZ-g13"/>
+                                            <outlet property="widthConstraint" destination="XBA-Ja-n5s" id="RVT-uN-IeB"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mainPageCell" rowHeight="400" id="M1X-At-bev" customClass="MainPageCell">

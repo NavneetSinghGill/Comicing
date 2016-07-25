@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicTitle;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heighConstraintImgvSlide1;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraintComicView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
 
 @property (strong, nonatomic) ComicBook *comic;
 

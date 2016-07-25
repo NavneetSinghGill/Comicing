@@ -388,6 +388,7 @@
 		1BEB1FDC1D43DD2700CC1304 /* stickers_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FD31D43DD2700CC1304 /* stickers_icon@2x.png */; };
 		1BEB1FDD1D43DD2700CC1304 /* stickers_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FD41D43DD2700CC1304 /* stickers_icon@3x.png */; };
 		1BEB20221D43FCA100CC1304 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB20211D43FCA100CC1304 /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8405267E1D469D0B00639E0F /* Slide-12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8405267D1D469D0B00639E0F /* Slide-12.gif */; };
 		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
 		843ABB781D1FAA730078B7A8 /* MainPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843ABB771D1FAA730078B7A8 /* MainPageCell.m */; };
 		84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D661CC94E1200C52C06 /* AvatarView.xib */; };
@@ -396,7 +397,6 @@
 		8466E7F41CB169500075727A /* InviteFriendsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8466E7F31CB169500075727A /* InviteFriendsView.xib */; };
 		846F3D961D2ECE93001191E6 /* MainPage2SlideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */; };
 		84A5DFE51D3690070089D6BE /* Slide-10.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFE41D3690070089D6BE /* Slide-10.gif */; };
-		84A5DFE71D36900E0089D6BE /* Slide-12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFE61D36900E0089D6BE /* Slide-12.gif */; };
 		84A5DFE91D3697770089D6BE /* Slide-2B.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFE81D3697770089D6BE /* Slide-2B.gif */; };
 		84A5DFEB1D3697A30089D6BE /* Slide-E.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFEA1D3697A30089D6BE /* Slide-E.gif */; };
 		84CEF1121D3ADF68009FCB1D /* group_conversation_input_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84CEF0FF1D3ADF68009FCB1D /* group_conversation_input_background@2x.png */; };
@@ -1084,6 +1084,7 @@
 		1BEB1FD31D43DD2700CC1304 /* stickers_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stickers_icon@2x.png"; sourceTree = "<group>"; };
 		1BEB1FD41D43DD2700CC1304 /* stickers_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stickers_icon@3x.png"; sourceTree = "<group>"; };
 		1BEB20211D43FCA100CC1304 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		8405267D1D469D0B00639E0F /* Slide-12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-12.gif"; sourceTree = "<group>"; };
 		8433BC921CC135D20073DE2A /* UIImage+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Trim.h"; sourceTree = "<group>"; };
 		8433BC931CC135D20073DE2A /* UIImage+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Trim.m"; sourceTree = "<group>"; };
 		843ABB761D1FAA730078B7A8 /* MainPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageCell.h; sourceTree = "<group>"; };
@@ -1097,7 +1098,6 @@
 		846F3D941D2ECE93001191E6 /* MainPage2SlideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPage2SlideCell.h; sourceTree = "<group>"; };
 		846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage2SlideCell.m; sourceTree = "<group>"; };
 		84A5DFE41D3690070089D6BE /* Slide-10.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-10.gif"; sourceTree = "<group>"; };
-		84A5DFE61D36900E0089D6BE /* Slide-12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-12.gif"; sourceTree = "<group>"; };
 		84A5DFE81D3697770089D6BE /* Slide-2B.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-2B.gif"; sourceTree = "<group>"; };
 		84A5DFEA1D3697A30089D6BE /* Slide-E.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-E.gif"; sourceTree = "<group>"; };
 		84CEF0FF1D3ADF68009FCB1D /* group_conversation_input_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_conversation_input_background@2x.png"; sourceTree = "<group>"; };
@@ -2987,9 +2987,9 @@
 				84F161331D35387400DBF9E0 /* Slide-7.gif */,
 				84F161391D3554B200DBF9E0 /* Slide-13.gif */,
 				84A5DFE41D3690070089D6BE /* Slide-10.gif */,
-				84A5DFE61D36900E0089D6BE /* Slide-12.gif */,
 				84A5DFE81D3697770089D6BE /* Slide-2B.gif */,
 				84A5DFEA1D3697A30089D6BE /* Slide-E.gif */,
+				8405267D1D469D0B00639E0F /* Slide-12.gif */,
 			);
 			path = "Instruction GIF";
 			sourceTree = "<group>";
@@ -3090,13 +3090,13 @@
 				0C66678B1C84358600FEB11F /* smile.png in Resources */,
 				0C66677D1C84358600FEB11F /* add.png in Resources */,
 				0C6668141C84358600FEB11F /* ComicImageListView.xib in Resources */,
+				8405267E1D469D0B00639E0F /* Slide-12.gif in Resources */,
 				0C6668A01C84358600FEB11F /* ComicShareView.xib in Resources */,
 				0C6668B41C84358600FEB11F /* KeyboardView.xib in Resources */,
 				1BEB1FDC1D43DD2700CC1304 /* stickers_icon@2x.png in Resources */,
 				0C6668B61C84358600FEB11F /* ProfilePicView.xib in Resources */,
 				161A08171D3D54C500BF0F50 /* arielBlack.ttf in Resources */,
 				0C6667A81C84358600FEB11F /* facebooklogo.png in Resources */,
-				84A5DFE71D36900E0089D6BE /* Slide-12.gif in Resources */,
 				84A5DFE51D3690070089D6BE /* Slide-10.gif in Resources */,
 				0C6667B11C84358600FEB11F /* Main_MainPage.storyboard in Resources */,
 				0C6667F81C84358600FEB11F /* GroupCell.xib in Resources */,
@@ -3637,7 +3637,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "7b17308d-8081-4aed-a34a-b24ce26dae79";
+				PROVISIONING_PROFILE = "47836a94-9a55-428d-8499-04cda266c580";
 				STRIP_INSTALLED_PRODUCT = NO;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -3648,8 +3648,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Providence Education Inc. (PV7F3V653B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Providence Education Inc. (PV7F3V653B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = YES;
@@ -3672,7 +3672,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "7b17308d-8081-4aed-a34a-b24ce26dae79";
+				PROVISIONING_PROFILE = "47836a94-9a55-428d-8499-04cda266c580";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
