@@ -2028,6 +2028,7 @@
 		0C6665EE1C84358500FEB11F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1BEB20211D43FCA100CC1304 /* Contacts.framework */,
 				0C380E671CF4F6E2003DDBA6 /* MediaPlayer.framework */,
 				0C380E651CF4F6BB003DDBA6 /* CoreGraphics.framework */,
 				0C380E621CF4F694003DDBA6 /* UIKit.framework */,
@@ -2886,7 +2887,6 @@
 		8450906C1C2B1343004DAE99 = {
 			isa = PBXGroup;
 			children = (
-				1BEB20211D43FCA100CC1304 /* Contacts.framework */,
 				0C6664A71C84358500FEB11F /* ComicBook */,
 				845090761C2B1343004DAE99 /* Products */,
 			);
