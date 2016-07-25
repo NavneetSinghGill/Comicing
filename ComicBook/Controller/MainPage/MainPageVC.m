@@ -1595,7 +1595,7 @@ NSString * const BottomBarView = @"BottomBarView";
         {
             cell.lblComicTitle.hidden = YES;
            
-            cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height;
+            cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height - 30;
             cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height;
             [cell layoutIfNeeded];
         }

@@ -373,7 +373,7 @@
                                                             <rect key="frame" x="12" y="8" width="177" height="110"/>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="SiJ-1n-QCN" firstAttribute="height" secondItem="0Qk-V6-1kc" secondAttribute="height" multiplier="0.3333" id="0iG-yS-kEe"/>
                                                         <constraint firstAttribute="trailing" secondItem="tCP-PJ-HDI" secondAttribute="trailing" constant="-10" id="7dF-7J-F63"/>
