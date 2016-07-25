@@ -42,15 +42,20 @@
     if(IS_IPHONE_5)
     {
         lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:23];
+        
+        self.widthConstraint.constant = -2;
     }
     else if(IS_IPHONE_6)
     {
         lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:28];
-        
+        self.widthConstraint.constant = -2;
+
     }
     else if(IS_IPHONE_6P)
     {
         lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:29];
+        self.widthConstraint.constant = -2;
+
     }
     
     _imgvSlide1.layer.borderColor = [UIColor blackColor].CGColor;

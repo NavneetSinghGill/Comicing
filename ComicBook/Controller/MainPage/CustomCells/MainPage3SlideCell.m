@@ -132,7 +132,7 @@
     _imgvSlide3.layer.borderColor = [UIColor blackColor].CGColor;
     _imgvSlide3.layer.borderWidth = 1.5;
 
-    viewComicBook.backgroundColor = [UIColor whiteColor];
+//    viewComicBook.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

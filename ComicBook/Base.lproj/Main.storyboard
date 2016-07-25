@@ -2712,8 +2712,8 @@ Comicing </string>
                                                 <rect key="frame" x="91" y="5" width="151" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FpW-CF-REA">
-                                                    <size key="itemSize" width="24" height="24"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="FpW-CF-REA">
+                                                    <size key="itemSize" width="35" height="24"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="3" minY="3" maxX="3" maxY="0.0"/>
@@ -2821,13 +2821,11 @@ Comicing </string>
                                         <color key="textColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to open" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="322-lR-uOK">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tap_to_open.png" id="AlK-QO-s4T">
                                         <rect key="frame" x="8" y="144" width="234" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="30"/>
-                                        <color key="textColor" red="0.3803921569" green="0.3803921569" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="box01.gif" id="xsJ-jV-82j" customClass="YLImageView">
                                         <rect key="frame" x="91" y="78" width="67" height="66"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -2873,7 +2871,6 @@ Comicing </string>
                         <outlet property="mGiftBoxImageView" destination="xsJ-jV-82j" id="S3p-Wz-EJH"/>
                         <outlet property="mGiftBoxOpenImageView" destination="0vH-bx-ieh" id="6bl-H7-xJk"/>
                         <outlet property="mScissorButton" destination="i7m-CX-W32" id="vls-WO-dg4"/>
-                        <outlet property="mTapToOpenLabel" destination="322-lR-uOK" id="jT1-RB-WOy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Gn-8g-pvl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2884,9 +2881,9 @@ Comicing </string>
     <resources>
         <image name="!-icon" width="12" height="26"/>
         <image name="CheckButton.png" width="42" height="42"/>
-        <image name="GifBox_100" width="77" height="64"/>
-        <image name="GifBox_200" width="106" height="101"/>
-        <image name="GifBox_50" width="60" height="50"/>
+        <image name="GifBox_100" width="70" height="70"/>
+        <image name="GifBox_200" width="80" height="80"/>
+        <image name="GifBox_50" width="60" height="60"/>
         <image name="GobackButton.png" width="67" height="67"/>
         <image name="InviteBack" width="10" height="11"/>
         <image name="InviteTrophy" width="33" height="40"/>
@@ -2946,6 +2943,7 @@ Comicing </string>
         <image name="sticker-icon" width="17" height="21"/>
         <image name="sticker-sharing-icon" width="36" height="32"/>
         <image name="stickers_icon.png" width="487" height="431"/>
+        <image name="tap_to_open.png" width="737" height="198"/>
         <image name="text_icon" width="90" height="91"/>
         <image name="twitterlogo.png" width="63" height="66"/>
         <image name="undo-drawing-icon" width="15" height="19"/>

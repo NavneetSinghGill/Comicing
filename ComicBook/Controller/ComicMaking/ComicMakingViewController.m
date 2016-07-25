@@ -1790,24 +1790,6 @@ static CGRect CaptionTextViewMinRect;
     [self addComicItem:bubbleHolderView ItemImage:bubbleImage];
     bubbleHolderView.center = bubbleHolderView.center;
     
-    
-    // open slide D Instruction
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        NSLog(@"Do some work");
-        
-         if ([InstructionView getBoolValueForSlide:kInstructionSlideD] == NO)
-         {
-        InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-        instView.delegate = self;
-        [instView showInstructionWithSlideNumber:SlideNumberD withType:InstructionBubbleType];
-        [instView setTrueForSlide:kInstructionSlideD];
-        
-        [self.view addSubview:instView];
-         }
-    });
-
-    
     [self doAutoSave:bubbleHolderView];
 }
 
@@ -3100,6 +3082,25 @@ static CGRect CaptionTextViewMinRect;
         [textView resignFirstResponder];
         [self doAutoSave:nil];
         return YES;
+    }
+    else
+    {
+        // open slide D Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+            if ([InstructionView getBoolValueForSlide:kInstructionSlideD] == NO)
+            {
+                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                instView.delegate = self;
+                [instView showInstructionWithSlideNumber:SlideNumberD withType:InstructionBubbleType];
+                [instView setTrueForSlide:kInstructionSlideD];
+                
+                [self.view addSubview:instView];
+            }
+        });
+
     }
     
     [self handleBubbleText:textView];

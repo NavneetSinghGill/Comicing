@@ -378,6 +378,7 @@
 		1BAA6A231D3BEEAA00E359DB /* Scissor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BAA6A221D3BEEAA00E359DB /* Scissor.png */; };
 		1BAF305C1D3027DD00815495 /* ComicConversationBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAF30591D3027DC00815495 /* ComicConversationBook.m */; };
 		1BAF305D1D3027DD00815495 /* ComicConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAF305B1D3027DD00815495 /* ComicConversationModel.m */; };
+		1BCF66861D46910D00EA450F /* tap_to_open.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BCF66851D46910D00EA450F /* tap_to_open.png */; };
 		1BEB1FD51D43DD2700CC1304 /* box01.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FCC1D43DD2700CC1304 /* box01.gif */; };
 		1BEB1FD61D43DD2700CC1304 /* box02.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FCD1D43DD2700CC1304 /* box02.gif */; };
 		1BEB1FD71D43DD2700CC1304 /* box03.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FCE1D43DD2700CC1304 /* box03.gif */; };
@@ -388,6 +389,7 @@
 		1BEB1FDC1D43DD2700CC1304 /* stickers_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FD31D43DD2700CC1304 /* stickers_icon@2x.png */; };
 		1BEB1FDD1D43DD2700CC1304 /* stickers_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FD41D43DD2700CC1304 /* stickers_icon@3x.png */; };
 		1BEB20221D43FCA100CC1304 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB20211D43FCA100CC1304 /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8405267E1D469D0B00639E0F /* Slide-12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8405267D1D469D0B00639E0F /* Slide-12.gif */; };
 		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
 		843ABB781D1FAA730078B7A8 /* MainPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843ABB771D1FAA730078B7A8 /* MainPageCell.m */; };
 		84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D661CC94E1200C52C06 /* AvatarView.xib */; };
@@ -396,7 +398,6 @@
 		8466E7F41CB169500075727A /* InviteFriendsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8466E7F31CB169500075727A /* InviteFriendsView.xib */; };
 		846F3D961D2ECE93001191E6 /* MainPage2SlideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */; };
 		84A5DFE51D3690070089D6BE /* Slide-10.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFE41D3690070089D6BE /* Slide-10.gif */; };
-		84A5DFE71D36900E0089D6BE /* Slide-12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFE61D36900E0089D6BE /* Slide-12.gif */; };
 		84A5DFE91D3697770089D6BE /* Slide-2B.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFE81D3697770089D6BE /* Slide-2B.gif */; };
 		84A5DFEB1D3697A30089D6BE /* Slide-E.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84A5DFEA1D3697A30089D6BE /* Slide-E.gif */; };
 		84CEF1121D3ADF68009FCB1D /* group_conversation_input_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84CEF0FF1D3ADF68009FCB1D /* group_conversation_input_background@2x.png */; };
@@ -1074,6 +1075,7 @@
 		1BAF30591D3027DC00815495 /* ComicConversationBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicConversationBook.m; sourceTree = "<group>"; };
 		1BAF305A1D3027DC00815495 /* ComicConversationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicConversationModel.h; sourceTree = "<group>"; };
 		1BAF305B1D3027DD00815495 /* ComicConversationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicConversationModel.m; sourceTree = "<group>"; };
+		1BCF66851D46910D00EA450F /* tap_to_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tap_to_open.png; sourceTree = "<group>"; };
 		1BEB1FCC1D43DD2700CC1304 /* box01.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = box01.gif; sourceTree = "<group>"; };
 		1BEB1FCD1D43DD2700CC1304 /* box02.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = box02.gif; sourceTree = "<group>"; };
 		1BEB1FCE1D43DD2700CC1304 /* box03.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = box03.gif; sourceTree = "<group>"; };
@@ -1084,6 +1086,7 @@
 		1BEB1FD31D43DD2700CC1304 /* stickers_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stickers_icon@2x.png"; sourceTree = "<group>"; };
 		1BEB1FD41D43DD2700CC1304 /* stickers_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stickers_icon@3x.png"; sourceTree = "<group>"; };
 		1BEB20211D43FCA100CC1304 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		8405267D1D469D0B00639E0F /* Slide-12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-12.gif"; sourceTree = "<group>"; };
 		8433BC921CC135D20073DE2A /* UIImage+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Trim.h"; sourceTree = "<group>"; };
 		8433BC931CC135D20073DE2A /* UIImage+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Trim.m"; sourceTree = "<group>"; };
 		843ABB761D1FAA730078B7A8 /* MainPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageCell.h; sourceTree = "<group>"; };
@@ -1097,7 +1100,6 @@
 		846F3D941D2ECE93001191E6 /* MainPage2SlideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPage2SlideCell.h; sourceTree = "<group>"; };
 		846F3D951D2ECE93001191E6 /* MainPage2SlideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage2SlideCell.m; sourceTree = "<group>"; };
 		84A5DFE41D3690070089D6BE /* Slide-10.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-10.gif"; sourceTree = "<group>"; };
-		84A5DFE61D36900E0089D6BE /* Slide-12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-12.gif"; sourceTree = "<group>"; };
 		84A5DFE81D3697770089D6BE /* Slide-2B.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-2B.gif"; sourceTree = "<group>"; };
 		84A5DFEA1D3697A30089D6BE /* Slide-E.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-E.gif"; sourceTree = "<group>"; };
 		84CEF0FF1D3ADF68009FCB1D /* group_conversation_input_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_conversation_input_background@2x.png"; sourceTree = "<group>"; };
@@ -2846,6 +2848,7 @@
 		1BEB1FCA1D43DD2700CC1304 /* Invite */ = {
 			isa = PBXGroup;
 			children = (
+				1BCF66851D46910D00EA450F /* tap_to_open.png */,
 				1BEB1FCB1D43DD2700CC1304 /* Invite_GitBox */,
 				1BEB1FD21D43DD2700CC1304 /* stickers_icon.png */,
 				1BEB1FD31D43DD2700CC1304 /* stickers_icon@2x.png */,
@@ -2987,9 +2990,9 @@
 				84F161331D35387400DBF9E0 /* Slide-7.gif */,
 				84F161391D3554B200DBF9E0 /* Slide-13.gif */,
 				84A5DFE41D3690070089D6BE /* Slide-10.gif */,
-				84A5DFE61D36900E0089D6BE /* Slide-12.gif */,
 				84A5DFE81D3697770089D6BE /* Slide-2B.gif */,
 				84A5DFEA1D3697A30089D6BE /* Slide-E.gif */,
+				8405267D1D469D0B00639E0F /* Slide-12.gif */,
 			);
 			path = "Instruction GIF";
 			sourceTree = "<group>";
@@ -3074,6 +3077,7 @@
 				0C6667991C84358600FEB11F /* profilePicClose.png in Resources */,
 				0C6667741C84358600FEB11F /* MYRIADPRO-BOLD.OTF in Resources */,
 				0C66678E1C84358600FEB11F /* groupMemberSearch.png in Resources */,
+				1BCF66861D46910D00EA450F /* tap_to_open.png in Resources */,
 				0C6667951C84358600FEB11F /* findFriendSelectionTick.png in Resources */,
 				0C6668351C84358600FEB11F /* c2.jpg in Resources */,
 				0C66678C1C84358600FEB11F /* blueCheckmark.png in Resources */,
@@ -3090,13 +3094,13 @@
 				0C66678B1C84358600FEB11F /* smile.png in Resources */,
 				0C66677D1C84358600FEB11F /* add.png in Resources */,
 				0C6668141C84358600FEB11F /* ComicImageListView.xib in Resources */,
+				8405267E1D469D0B00639E0F /* Slide-12.gif in Resources */,
 				0C6668A01C84358600FEB11F /* ComicShareView.xib in Resources */,
 				0C6668B41C84358600FEB11F /* KeyboardView.xib in Resources */,
 				1BEB1FDC1D43DD2700CC1304 /* stickers_icon@2x.png in Resources */,
 				0C6668B61C84358600FEB11F /* ProfilePicView.xib in Resources */,
 				161A08171D3D54C500BF0F50 /* arielBlack.ttf in Resources */,
 				0C6667A81C84358600FEB11F /* facebooklogo.png in Resources */,
-				84A5DFE71D36900E0089D6BE /* Slide-12.gif in Resources */,
 				84A5DFE51D3690070089D6BE /* Slide-10.gif in Resources */,
 				0C6667B11C84358600FEB11F /* Main_MainPage.storyboard in Resources */,
 				0C6667F81C84358600FEB11F /* GroupCell.xib in Resources */,
@@ -3637,7 +3641,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "7b17308d-8081-4aed-a34a-b24ce26dae79";
+				PROVISIONING_PROFILE = "47836a94-9a55-428d-8499-04cda266c580";
 				STRIP_INSTALLED_PRODUCT = NO;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -3648,8 +3652,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Providence Education Inc. (PV7F3V653B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Providence Education Inc. (PV7F3V653B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = YES;
@@ -3672,7 +3676,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "7b17308d-8081-4aed-a34a-b24ce26dae79";
+				PROVISIONING_PROFILE = "47836a94-9a55-428d-8499-04cda266c580";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
