@@ -17,7 +17,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView *mGiftBoxImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *mGiftBoxOpenImageView;
 @property (nonatomic, weak) IBOutlet UIButton *mScissorButton;
-@property (nonatomic, weak) IBOutlet UILabel *mTapToOpenLabel;
 
 @end
 
