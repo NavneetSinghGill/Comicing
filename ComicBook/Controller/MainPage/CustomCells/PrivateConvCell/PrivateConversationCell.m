@@ -70,10 +70,9 @@
     
     if (IS_IPHONE_5)
     {
-        heiWei = 34;
+        heiWei = 30;
         _mUserName.font = [_mUserName.font fontWithSize:8.f];
         self.lblDate.font = [self.lblDate.font fontWithSize:8.f];
-        self.lblTime.font = [self.lblTime.font fontWithSize:8.f];
         
         lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:23];
 
@@ -81,20 +80,18 @@
     }
     else if (IS_IPHONE_6)
     {
-        heiWei = 35;
+        heiWei = 30;
         _mUserName.font = [_mUserName.font fontWithSize:9.f];
         self.lblDate.font = [self.lblDate.font fontWithSize:9.f];
-        self.lblTime.font = [self.lblTime.font fontWithSize:9.f];
         
         lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:26];
 
     }
     else if (IS_IPHONE_6P)
     {
-        heiWei = 36;
+        heiWei = 30;
         _mUserName.font = [_mUserName.font fontWithSize:10.f];
         self.lblDate.font = [self.lblDate.font fontWithSize:10.f];
-        self.lblTime.font = [self.lblTime.font fontWithSize:10.f];
         
         lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:29];
 

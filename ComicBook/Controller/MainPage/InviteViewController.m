@@ -100,12 +100,12 @@
         if ([mobile isKindOfClass:[NSString class]])
         {
             [self openMessageComposer:[NSArray arrayWithObjects:[dct objectForKey:@"MobileNumber"], nil]
-                          messageText:INVITE_TEXT];
+                          messageText:INVITE_TEXT([dct objectForKey:@"FullName"])];
         }
         else if ([mobile isKindOfClass:[NSArray class]])
         {
             [self openMessageComposer:[NSArray arrayWithArray:[dct objectForKey:@"MobileNumber"]]
-                          messageText:INVITE_TEXT];
+                          messageText:INVITE_TEXT([dct objectForKey:@"FullName"])];
         }
         
     }

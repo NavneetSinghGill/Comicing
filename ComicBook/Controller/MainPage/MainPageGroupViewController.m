@@ -397,6 +397,35 @@ UICollectionViewDelegate>
                                              }];
 }
 
+- (NSArray *)getGroupedComics: (NSArray *)cmcs
+{
+    //ComicConversationBook *mComicConversatinBook = (ComicConversationBook *)[comicsArray objectAtIndex:indexPath.row];
+    
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    NSString *lastUserId = nil;
+    
+    for (ComicConversationBook *conversationBook in cmcs)
+    {
+        ComicBook *comicBook = (ComicBook *)conversationBook.coversation[0];
+        
+        if (lastUserId &&
+            [lastUserId isEqualToString:comicBook.userDetail.userId])
+        {
+            [[tempArray lastObject] addObject:conversationBook];
+        }
+        else
+        {
+            NSMutableArray *tempArray1 = [[NSMutableArray alloc] init];
+            [tempArray1 addObject:conversationBook];
+            [tempArray addObject:tempArray1];
+        }
+        
+        lastUserId = comicBook.userDetail.userId;
+    }
+    
+    return tempArray;
+}
+
 - (void)callAPItoGetGroupsComics
 {
     [GroupsAPIManager getListComicsOfGroupForGroupID:self.groupObj.groupId  withSuccessBlock:^(id object)
@@ -409,8 +438,11 @@ UICollectionViewDelegate>
 
          NSLog(@"%@", comicsModel);
          self.shareId = comicsModel.shareId;
-         comics = comicsModel.books.copy;
-         comics = [NSMutableArray arrayWithArray:[[comics reverseObjectEnumerator] allObjects]];
+         
+         NSArray *temp = comicsModel.books.copy;
+         temp = [[temp reverseObjectEnumerator] allObjects];
+         
+         comics = [NSMutableArray arrayWithArray:[[[self getGroupedComics:temp] reverseObjectEnumerator] allObjects]];
          [tblvComics reloadData];
          
          CGPoint offset = CGPointMake(0, self.tblvComics.contentSize.height - self.tblvComics.frame.size.height);
@@ -437,8 +469,13 @@ UICollectionViewDelegate>
 #pragma mark - UITableViewDataSource & UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    CGFloat height = CGRectGetHeight(viewTransperant.frame);
-    return height;
+    if (section == 0)
+    {
+        CGFloat height = CGRectGetHeight(viewTransperant.frame);
+        return height;
+    }
+    
+    return 0;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -450,8 +487,15 @@ UICollectionViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    CGFloat height = 45;
-    return height;
+    if (comics != nil &&
+        comics.count > 0 &&
+        (comics.count - 1) == section)
+    {
+        CGFloat height = 45;
+        return height;
+    }
+    
+    return 0;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -461,10 +505,15 @@ UICollectionViewDelegate>
     return headerView;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    
+    return comics.count;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return comics.count;
+    return [comics[section] count];
 }
 
 #define CONVERSTION_TYPE_COMIC @"comic"
@@ -474,7 +523,7 @@ UICollectionViewDelegate>
 {
     static NSString *simpleTableIdentifier = @"GroupCell";
     
-    ComicConversationBook *mComicConversatinBook = (ComicConversationBook *)[comics objectAtIndex:indexPath.row];
+    ComicConversationBook *mComicConversatinBook = (ComicConversationBook *)[comics[indexPath.section] objectAtIndex:indexPath.row];
     
     if ([mComicConversatinBook.conversationType isEqualToString:CONVERSTION_TYPE_COMIC])
     {
@@ -499,27 +548,12 @@ UICollectionViewDelegate>
             
             
             ComicBook *comicBook = (ComicBook *)mComicConversatinBook.coversation[0];
-       //     CGRect lblFrame = cell.lblComicTitle.frame;
-
             
             if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
             {
 
                 cell.lblComicTitle.hidden = YES;
-                
-                
-                
-//                cell.topSpacingComicView.constant = 5;
-//                
-//                CGRect frameViewComicBook = cell.viewComicBook.frame;
-//                frameViewComicBook.origin.y = lblFrame.origin.y;
-//                frameViewComicBook.size.height = cell.frame.size.height;
-//                cell.viewComicBook.frame = frameViewComicBook;
-//                
-//                cell.lblComicTitle.frame = lblFrame;
-//                
-//                comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame) - 10);
-//                
+
                 cell.topSpacingComicView.constant = -cell.lblComicTitle.frame.size.height + 8;
                 cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height - 10;
                 [cell layoutIfNeeded];
@@ -579,7 +613,6 @@ UICollectionViewDelegate>
     else
     {
         
-//        ComicBook *comicBook = [comics objectAtIndex:indexPath.row];
         ComicBook *comicBook = (ComicBook *)mComicConversatinBook.coversation[0];
 
         PrivateConversationTextCell *cell = (PrivateConversationTextCell *)[tableView dequeueReusableCellWithIdentifier:@"fs"];
@@ -590,33 +623,63 @@ UICollectionViewDelegate>
             cell = [nib objectAtIndex:0];
         }
         
-//        ComicBook *comicBook = (ComicBook *)mComicConversatinBook.coversation[0];
-        [cell.userProfilePic sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
-        
-        
-       
-        
-        //dinesh
-        cell.mUserName.text = comicBook.userDetail.firstName;
+        if ([comicBook.userDetail.userId isEqualToString:[AppHelper getCurrentLoginId]])
+        {
+            [cell.leftIndicator setHidden:YES];
+            [cell.rightIndicator setHidden:NO];
+            
+            [cell.userProfilePic setHidden:YES];
+            [cell.mUserName setHidden:YES];
+            
+            [cell.mMessageHolderView setBackgroundColor:[UIColor colorWithHexStr:@"97999C"]];
+        }
+        else
+        {
+            [cell.leftIndicator setHidden:NO];
+            [cell.rightIndicator setHidden:YES];
+            
+            [cell.userProfilePic setHidden:NO];
+            [cell.mUserName setHidden:NO];
+            
+            [cell.mMessageHolderView setBackgroundColor:[UIColor colorWithHexStr:@"5BCAF4"]];
+            
+            [cell.userProfilePic sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
+            cell.mUserName.text = comicBook.userDetail.firstName;
+        }
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSDate *dateFromStr = [dateFormat dateFromString:comicBook.createdDate];
-        [dateFormat setDateFormat:@"MMM dd, yyyy"];
+        [dateFormat setDateFormat:@"MMM dd, hh.mm a"];
         NSString *dateStr = [dateFormat stringFromDate:dateFromStr];
-        [dateFormat setDateFormat:@"hh.mm a"];
-        NSString *timeStr = [dateFormat stringFromDate:dateFromStr];
         
         cell.lblDate.text = dateStr;
-        cell.lblTime.text = timeStr;
         
         cell.mMessage.text = comicBook.message;
         
-        // NSLog(@"Book : %@", comicBook);
+        if ([comicBook.userDetail.userId isEqualToString:[AppHelper getCurrentLoginId]])
+        {
+            if ([mComicConversatinBook.chatStatus isEqualToString:@"seen"])
+            {
+                cell.mChatStatus.text = @"Read";
+            }
+            else
+            {
+                cell.mChatStatus.text = @"Unread";
+            }
+        }
+        else
+        {
+            
+            if (![(ComicConversationBook *)[comics[indexPath.section] firstObject] isEqual:mComicConversatinBook])
+            {
+                cell.mUserName.hidden = YES;
+                cell.userProfilePic.hidden = YES;
+            }
+        }
         
-
-        //no need to display chat status since its a group chat
-        [cell.mChatStatus setHidden:YES];
+        cell.mChatStatus.hidden = YES;
+        cell.const_bottom_bubble.constant = 1;
         
         CGSize fontSize = [cell.mMessage.text sizeWithAttributes:
                            @{NSFontAttributeName:cell.mMessage.font}];
@@ -638,7 +701,7 @@ UICollectionViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ComicConversationBook *mComicConversatinBook = (ComicConversationBook *)[comics objectAtIndex:indexPath.row];
+    ComicConversationBook *mComicConversatinBook = (ComicConversationBook *)[comics[indexPath.section] objectAtIndex:indexPath.row];
     
     ComicBook *comicBook = (ComicBook *)mComicConversatinBook.coversation[0];
     
@@ -650,40 +713,61 @@ UICollectionViewDelegate>
         {
             if(IS_IPHONE_5)
             {
-                height=169;
+                height=161;
             }
             else if(IS_IPHONE_6)
             {
-                height= 199;
+                height= 191;
             }
             else if(IS_IPHONE_6P)
             {
-                height= 229;
+                height= 221;
             }
         }
         else
         {
             if(IS_IPHONE_5)
             {
-                height=109;
+                height=101;
             }
             else if(IS_IPHONE_6)
             {
-                height= 139;
+                height= 131;
             }
             else if(IS_IPHONE_6P)
             {
-                height= 169;
+                height= 161;
             }
         }
         
         return self.initialHeight - height;
-        
-        //return tableView.bounds.size.height-height;
     }
     else if ([mComicConversatinBook.conversationType isEqualToString:CONVERSTION_TYPE_TEXT])
     {
-        return 128;
+        CGFloat fontSize = 8;
+        
+        if (IS_IPHONE_5)
+        {
+            fontSize = 8.;
+            
+        }
+        else if (IS_IPHONE_6)
+        {
+            fontSize = 9.;
+        }
+        else if (IS_IPHONE_6P)
+        {
+            fontSize = 10.;
+        }
+        
+        CGSize labelExtectedSize = [comicBook.message sizeWithAttributes:
+                                    @{NSFontAttributeName:[UIFont fontWithName:@"ArialMT" size:fontSize]}];
+        if (labelExtectedSize.width > tableView.frame.size.width - 180)
+        {
+            return 69;
+        }
+        
+        return 50;
     }
     
     return 0;
