@@ -1570,6 +1570,7 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return comicsArray.count;
