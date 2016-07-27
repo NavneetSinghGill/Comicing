@@ -70,7 +70,8 @@ AnimatedGif * animation;
 - (void)openGitBox: (UIGestureRecognizer *)gesture
 {
     [mTapToOpenImageView setUserInteractionEnabled:NO];
-    
+    [mGiftBoxOpenImageView setUserInteractionEnabled:NO];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animatedGifDidStart:) name:AnimatedGifDidStartLoadingingEvent object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animatedGifDidFinish:) name:AnimatedGifDidFinishLoadingingEvent object:nil];
     
