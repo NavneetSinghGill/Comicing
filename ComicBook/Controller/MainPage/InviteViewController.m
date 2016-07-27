@@ -76,6 +76,25 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    
+    
+    if ([AppHelper isNiceGiftBoxOpened])
+    {
+        [self.btnGifBox50 setUserInteractionEnabled:NO];
+        self.gifBox50.image = [YLGIFImage imageNamed:@"open_gift_box_flat.png"];
+    }
+    
+    if ([AppHelper isAwesomeGiftBoxOpened])
+    {
+        [self.btnGiftBox100 setUserInteractionEnabled:NO];
+        self.giftBox100.image = [YLGIFImage imageNamed:@"open_gift_box_flat.png"];
+    }
+    
+    if ([AppHelper isExoticGiftBoxOpened])
+    {
+        [self.btnGiftBox200 setUserInteractionEnabled:NO];
+        self.giftBox200.image = [YLGIFImage imageNamed:@"open_gift_box_flat.png"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,21 +110,22 @@
 }
 - (IBAction)btnInviteClick:(id)sender {
     [self stopTitleAutoLoad];
-//    [self updateInviteScore:INVITE_POINT_PERINVITE];
+    //    [self updateInviteScore:INVITE_POINT_PERINVITE];
     if ([contactList count] > self.contactIndex) {
         NSDictionary* dct = [contactList objectAtIndex:self.contactIndex];
         
         id mobile = [dct objectForKey:@"MobileNumber"];
+        NSString *loginID = [NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].login_id];
         
         if ([mobile isKindOfClass:[NSString class]])
         {
             [self openMessageComposer:[NSArray arrayWithObjects:[dct objectForKey:@"MobileNumber"], nil]
-                          messageText:INVITE_TEXT([dct objectForKey:@"FullName"])];
+                          messageText:INVITE_TEXT(loginID)];
         }
         else if ([mobile isKindOfClass:[NSArray class]])
         {
             [self openMessageComposer:[NSArray arrayWithArray:[dct objectForKey:@"MobileNumber"]]
-                          messageText:INVITE_TEXT([dct objectForKey:@"FullName"])];
+                          messageText:INVITE_TEXT(loginID)];
         }
         
     }
@@ -113,7 +133,7 @@
 - (IBAction)btnSkipClick:(id)sender {
     [self stopTitleAutoLoad];
     [self loadContact];
-    [self startTitleAutoLoad];
+    //[self startTitleAutoLoad];
 }
 - (IBAction)btnSkipBack:(id)sender {
     [self stopTitleAutoLoad];
@@ -122,7 +142,7 @@
         self.contactIndex = 0;
     }
     [self setContactName];
-    [self startTitleAutoLoad];
+    //[self startTitleAutoLoad];
 }
 - (IBAction)btnGiftBoxClick50:(id)sender {
     [self btnClose:nil];
@@ -159,7 +179,7 @@
 
 -(void)setContactName{
     if ([contactList count] > self.contactIndex) {
-     
+        
         NSDictionary* dct = [contactList objectAtIndex:self.contactIndex];
         self.lblContactName.text = [NSString stringWithFormat:@"Invite %@",[dct objectForKey:@"FullName"]];
         
@@ -177,10 +197,10 @@
 - (void)startTitleAutoLoad{
     [self.loadTimer invalidate];
     self.loadTimer = [NSTimer scheduledTimerWithTimeInterval:2
-                                                 target:self
-                                               selector:@selector(loadContact)
-                                               userInfo:nil
-                                                repeats:YES];
+                                                      target:self
+                                                    selector:@selector(loadContact)
+                                                    userInfo:nil
+                                                     repeats:YES];
 }
 
 - (void)stopTitleAutoLoad{
@@ -207,9 +227,9 @@
     self.contactIndex = 0;
     
     /*self.view.layer.borderColor = [UIColor blackColor].CGColor;
-    self.view.layer.borderWidth = 1.0f;
-    self.view.layer.cornerRadius = 10;
-    self.view.layer.masksToBounds = true;*/
+     self.view.layer.borderWidth = 1.0f;
+     self.view.layer.cornerRadius = 10;
+     self.view.layer.masksToBounds = true;*/
     
     self.btnInvite.layer.cornerRadius = 5;
     self.btnInvite.layer.masksToBounds = true;
@@ -239,35 +259,42 @@
     }
     
 }
--(void)enableScoreRow{
-    
-//    self.giftBox200.image = [UIImage imageNamed:@"GifBox_200"];
-//    self.giftBox100.image = [UIImage imageNamed:@"GifBox_100"];
-//    self.gifBox50.image   = [UIImage imageNamed:@"GifBox_50"];
+-(void)enableScoreRow
+{
+    [self.btnGifBox50 setUserInteractionEnabled:NO];
+    [self.btnGiftBox100 setUserInteractionEnabled:NO];
+    [self.btnGiftBox200 setUserInteractionEnabled:NO];
     
     self.lblCurrentScore.text = [NSString stringWithFormat:@"%.f", [self getCurrentScoreFromDB]];
     float scoreValue = [self getCurrentScoreFromDB];
     if (scoreValue >= INVITE_POINT_200) {
-        self.giftBox200.image = [YLGIFImage imageNamed:@"box03.gif"];
-        [self.btnGifBox50 setUserInteractionEnabled:YES];
-        [self.btnGiftBox100 setUserInteractionEnabled:YES];
-        [self.btnGiftBox200 setUserInteractionEnabled:YES];
+        if (![AppHelper isExoticGiftBoxOpened])
+        {
+            self.giftBox200.image = [YLGIFImage imageNamed:@"box03.gif"];
+            [self.btnGifBox50 setUserInteractionEnabled:YES];
+            [self.btnGiftBox100 setUserInteractionEnabled:YES];
+            [self.btnGiftBox200 setUserInteractionEnabled:YES];
+        }
+        
     }else if(scoreValue >= INVITE_POINT_100 &&
              scoreValue <= INVITE_POINT_200) {
-        self.giftBox100.image = [YLGIFImage imageNamed:@"box02.gif"];
-        [self.btnGifBox50 setUserInteractionEnabled:YES];
-        [self.btnGiftBox100 setUserInteractionEnabled:YES];
+        
+        if (![AppHelper isAwesomeGiftBoxOpened])
+        {
+            self.giftBox100.image = [YLGIFImage imageNamed:@"box02.gif"];
+            [self.btnGifBox50 setUserInteractionEnabled:YES];
+            [self.btnGiftBox100 setUserInteractionEnabled:YES];
+        }
         
     }else if(scoreValue >= INVITE_POINT_50 &&
              scoreValue <= INVITE_POINT_100) {
-        self.gifBox50.image   = [YLGIFImage imageNamed:@"box01.gif"];
-        [self.btnGifBox50 setUserInteractionEnabled:YES];
-    }else{
-        [self.btnGifBox50 setUserInteractionEnabled:NO];
-        [self.btnGiftBox100 setUserInteractionEnabled:NO];
-        [self.btnGiftBox200 setUserInteractionEnabled:NO];
+        
+        if (![AppHelper isNiceGiftBoxOpened])
+        {
+            self.gifBox50.image   = [YLGIFImage imageNamed:@"box01.gif"];
+            [self.btnGifBox50 setUserInteractionEnabled:YES];
+        }
     }
-    
 }
 
 
@@ -305,60 +332,60 @@
 
 -(void)getContactListFromServer{
     
-        NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
-        NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
     
-        [userDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"];
-        [userDic setObject:contactList forKey:@"contacts"];
-        [dataDic setObject:userDic forKey:@"data"];
+    [userDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"];
+    [userDic setObject:contactList forKey:@"contacts"];
+    [dataDic setObject:userDic forKey:@"data"];
     
-        userDic = nil;
+    userDic = nil;
     
-        ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
+    ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
     
     
     
-     /*temp
-        [cmNetWorking postPhoneContactList:dataDic Id:@"659"
-                                completion:^(id json,id jsonResposeHeader) {
-    
-                                    NSLog(@"jsonResposeHeader");
-    
-                                } ErrorBlock:^(JSONModelError *error) {
-    
-                                }];*/
+    /*temp
+     [cmNetWorking postPhoneContactList:dataDic Id:@"659"
+     completion:^(id json,id jsonResposeHeader) {
+     
+     NSLog(@"jsonResposeHeader");
+     
+     } ErrorBlock:^(JSONModelError *error) {
+     
+     }];*/
     
     self.friendsUsingComicing = nil;
     
-        [cmNetWorking postPhoneContactList:dataDic Id:[AppHelper getCurrentLoginId]
-                                completion:^(id json,id jsonResposeHeader) {
-    
-                                    NSLog(@"jsonResposeHeader");
-    
-                                    //@"845"
-                                    [cmNetWorking getComicingFriendsList:nil Id:[AppHelper getCurrentLoginId] completion:^(id json, id jsonResponse) {
-                                        //NSLog(@"json : %@", json);
-                                        
-                                        self.friendsUsingComicing = json[@"data"];
-                                        [self.mCollectionView reloadData];
-                                        
-                                    } ErrorBlock:^(JSONModelError *error) {
-                                        NSLog(@"error : %@", error.localizedDescription);
-                                    }];
+    [cmNetWorking postPhoneContactList:dataDic Id:[AppHelper getCurrentLoginId]
+                            completion:^(id json,id jsonResposeHeader) {
+                                
+                                NSLog(@"jsonResposeHeader");
+                                
+                                //@"845"
+                                [cmNetWorking getComicingFriendsList:nil Id:[AppHelper getCurrentLoginId] completion:^(id json, id jsonResponse) {
+                                    //NSLog(@"json : %@", json);
                                     
-        } ErrorBlock:^(JSONModelError *error) {
-            
-        }];
+                                    self.friendsUsingComicing = json[@"data"];
+                                    [self.mCollectionView reloadData];
+                                    
+                                } ErrorBlock:^(JSONModelError *error) {
+                                    NSLog(@"error : %@", error.localizedDescription);
+                                }];
+                                
+                            } ErrorBlock:^(JSONModelError *error) {
+                                
+                            }];
     
     /*[cmNetWorking getComicingFriendsList:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json, id jsonResponse) {
-        NSLog(@"json : %@", json);
-
-    } ErrorBlock:^(JSONModelError *error) {
-        NSLog(@"error : %@", error.localizedDescription);
-    }];*/
-        
+     NSLog(@"json : %@", json);
+     
+     } ErrorBlock:^(JSONModelError *error) {
+     NSLog(@"error : %@", error.localizedDescription);
+     }];*/
     
-       dataDic = nil;
+    
+    dataDic = nil;
 }
 
 -(void)getPhoneContact{
@@ -409,11 +436,11 @@
         
         else { // We are on iOS 5 or Older
             accessGranted = YES;
-             [self getContactsWithAddressBook:addressBook];
+            [self getContactsWithAddressBook:addressBook];
         }
         
         if (accessGranted) {
-             [self getContactsWithAddressBook:addressBook];
+            [self getContactsWithAddressBook:addressBook];
         }
     }
 }
@@ -467,7 +494,7 @@
         }
     }
     [self setContactName];
-    [self startTitleAutoLoad];
+    //[self startTitleAutoLoad];
     [self enableScoreRow];
     return contactList;
 }
@@ -499,7 +526,7 @@
             NSLog(@"got contacts");
             
             [self setContactName];
-            [self startTitleAutoLoad];
+            //[self startTitleAutoLoad];
             [self enableScoreRow];
         }
     }
@@ -536,7 +563,7 @@
         [contactList addObject:dictObj];
         dictObj = nil;
     }
-
+    
 }
 
 - (NSMutableArray *)parseAddressWithContac: (CNContact *)contact
@@ -563,7 +590,7 @@
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
 {
     //[self updateInviteScore:INVITE_POINT_PERINVITE];
-
+    
     switch (result) {
         case MessageComposeResultCancelled:
             NSLog(@"Cancelled");
@@ -577,7 +604,8 @@
         default:
             break;
     }
-    [self startTitleAutoLoad];
+    [self loadContact];
+    //[self startTitleAutoLoad];
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
@@ -589,9 +617,9 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-
+    
     return self.friendsUsingComicing.count;
-
+    
 }
 
 #define SAFESTRING(str) ISVALIDSTRING(str) ? str : @""
@@ -599,7 +627,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     FrinedsUsingComicingCell *cell = (FrinedsUsingComicingCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"fs" forIndexPath:indexPath];
     
     NSString *profilePic = self.friendsUsingComicing[indexPath.item][@"profile_pic"];
@@ -645,7 +673,7 @@
             
             [managedObject setValue:[NSString stringWithFormat:@"%.i", fScoreValue] forKey:@"scoreValue"];
             
-//            self.lblCurrentScore.text = [NSString stringWithFormat:@"%.f", [self getCurrentScoreFromDB]];
+            //            self.lblCurrentScore.text = [NSString stringWithFormat:@"%.f", [self getCurrentScoreFromDB]];
             self.lblCurrentScore.format = @"%d";
             [self.lblCurrentScore countFrom:oldScoreValue to:fScoreValue withDuration:3.0];
             
@@ -674,14 +702,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #pragma mark - statusbar
 

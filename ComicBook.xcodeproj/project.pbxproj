@@ -379,6 +379,9 @@
 		1BAF305C1D3027DD00815495 /* ComicConversationBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAF30591D3027DC00815495 /* ComicConversationBook.m */; };
 		1BAF305D1D3027DD00815495 /* ComicConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BAF305B1D3027DD00815495 /* ComicConversationModel.m */; };
 		1BCF66861D46910D00EA450F /* tap_to_open.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BCF66851D46910D00EA450F /* tap_to_open.png */; };
+		1BDDB74D1D489C0800FA931F /* open_gift_box_flat.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BDDB74C1D489C0800FA931F /* open_gift_box_flat.png */; };
+		1BDDB7501D48A79400FA931F /* open_gift_box_flat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BDDB74E1D48A79400FA931F /* open_gift_box_flat@2x.png */; };
+		1BDDB7511D48A79400FA931F /* open_gift_box_flat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BDDB74F1D48A79400FA931F /* open_gift_box_flat@3x.png */; };
 		1BEB1FD51D43DD2700CC1304 /* box01.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FCC1D43DD2700CC1304 /* box01.gif */; };
 		1BEB1FD61D43DD2700CC1304 /* box02.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FCD1D43DD2700CC1304 /* box02.gif */; };
 		1BEB1FD71D43DD2700CC1304 /* box03.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FCE1D43DD2700CC1304 /* box03.gif */; };
@@ -1076,6 +1079,9 @@
 		1BAF305A1D3027DC00815495 /* ComicConversationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicConversationModel.h; sourceTree = "<group>"; };
 		1BAF305B1D3027DD00815495 /* ComicConversationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicConversationModel.m; sourceTree = "<group>"; };
 		1BCF66851D46910D00EA450F /* tap_to_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tap_to_open.png; sourceTree = "<group>"; };
+		1BDDB74C1D489C0800FA931F /* open_gift_box_flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open_gift_box_flat.png; sourceTree = "<group>"; };
+		1BDDB74E1D48A79400FA931F /* open_gift_box_flat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open_gift_box_flat@2x.png"; sourceTree = "<group>"; };
+		1BDDB74F1D48A79400FA931F /* open_gift_box_flat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open_gift_box_flat@3x.png"; sourceTree = "<group>"; };
 		1BEB1FCC1D43DD2700CC1304 /* box01.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = box01.gif; sourceTree = "<group>"; };
 		1BEB1FCD1D43DD2700CC1304 /* box02.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = box02.gif; sourceTree = "<group>"; };
 		1BEB1FCE1D43DD2700CC1304 /* box03.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = box03.gif; sourceTree = "<group>"; };
@@ -2849,6 +2855,9 @@
 		1BEB1FCA1D43DD2700CC1304 /* Invite */ = {
 			isa = PBXGroup;
 			children = (
+				1BDDB74C1D489C0800FA931F /* open_gift_box_flat.png */,
+				1BDDB74E1D48A79400FA931F /* open_gift_box_flat@2x.png */,
+				1BDDB74F1D48A79400FA931F /* open_gift_box_flat@3x.png */,
 				1BCF66851D46910D00EA450F /* tap_to_open.png */,
 				1BEB1FCB1D43DD2700CC1304 /* Invite_GitBox */,
 				1BEB1FD21D43DD2700CC1304 /* stickers_icon.png */,
@@ -3148,6 +3157,7 @@
 				84CEF11F1D3ADF68009FCB1D /* Mag Glass.png in Resources */,
 				1BEB1FDA1D43DD2700CC1304 /* openbox-5.gif in Resources */,
 				0C66677B1C84358600FEB11F /* MYRIADPRO-SEMIBOLD.OTF in Resources */,
+				1BDDB7511D48A79400FA931F /* open_gift_box_flat@3x.png in Resources */,
 				0C6667A71C84358600FEB11F /* everyone.png in Resources */,
 				84F1613A1D3554B200DBF9E0 /* Slide-13.gif in Resources */,
 				1BEB1FD61D43DD2700CC1304 /* box02.gif in Resources */,
@@ -3156,6 +3166,7 @@
 				0C66689A1C84358600FEB11F /* AccountView.xib in Resources */,
 				0C6667AC1C84358600FEB11F /* twitterlogo.png in Resources */,
 				0C6667861C84358600FEB11F /* meButton.png in Resources */,
+				1BDDB7501D48A79400FA931F /* open_gift_box_flat@2x.png in Resources */,
 				84CEF1131D3ADF68009FCB1D /* group_conversation_input_background@3x.png in Resources */,
 				0C66677F1C84358600FEB11F /* arrow.png in Resources */,
 				0C6668AE1C84358600FEB11F /* GroupSectionCell.xib in Resources */,
@@ -3172,6 +3183,7 @@
 				0C66677C1C84358600FEB11F /* MYRIADPRO-SEMIBOLDIT.OTF in Resources */,
 				0C6667971C84358600FEB11F /* profilePicBack.png in Resources */,
 				0C6667A91C84358600FEB11F /* GobackButton.png in Resources */,
+				1BDDB74D1D489C0800FA931F /* open_gift_box_flat.png in Resources */,
 				0C6667AD1C84358600FEB11F /* Default-568h@2x.png in Resources */,
 				84CEF1201D3ADF68009FCB1D /* Me.png in Resources */,
 				84CEF1191D3ADF68009FCB1D /* AddUser.png in Resources */,
@@ -3676,7 +3688,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "cf937335-7466-4779-8407-70db5ebe367a";
+				PROVISIONING_PROFILE = "7b17308d-8081-4aed-a34a-b24ce26dae79";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;

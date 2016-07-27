@@ -17,12 +17,13 @@
 @property (nonatomic, weak) IBOutlet UIImageView *mGiftBoxImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *mGiftBoxOpenImageView;
 @property (nonatomic, weak) IBOutlet UIButton *mScissorButton;
+@property (nonatomic, weak) IBOutlet UIImageView *mTapToOpenImageView;
 
 @end
 
 @implementation OpenCuteStickersGiftBoxViewController
 
-@synthesize mGiftBoxImageView, mGiftBoxOpenImageView;
+@synthesize mGiftBoxImageView, mGiftBoxOpenImageView, mTapToOpenImageView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,11 +60,17 @@
     [mGiftBoxImageView setUserInteractionEnabled:YES];
     [mGiftBoxImageView addGestureRecognizer:mtapGesture];
     
+    UITapGestureRecognizer *mtapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openGitBox:)];
+    [mtapGesture1 setNumberOfTapsRequired:1];
+    [mTapToOpenImageView setUserInteractionEnabled:YES];
+    [mTapToOpenImageView addGestureRecognizer:mtapGesture1];
+    
 }
 
 - (void)openGitBox: (UIGestureRecognizer *)gesture
 {
     [mGiftBoxImageView setHidden:YES];
+    [mTapToOpenImageView setUserInteractionEnabled:NO];
     [mGiftBoxOpenImageView setHidden:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animatedGifDidStart:) name:AnimatedGifDidStartLoadingingEvent object:nil];
@@ -75,16 +82,20 @@
     
     if (scoreValue >= INVITE_POINT_200) {        
         path = [[NSBundle mainBundle] pathForResource:@"openbox-15" ofType:@"gif"];
+        [AppHelper willOpenExoticGiftbox];
 
     }else if(scoreValue >= INVITE_POINT_100 &&
              scoreValue <= INVITE_POINT_200) {
         path = [[NSBundle mainBundle] pathForResource:@"openbox-10" ofType:@"gif"];
+        [AppHelper willOpenAwesomeGiftbox];
 
     }else if(scoreValue >= INVITE_POINT_50 &&
              scoreValue <= INVITE_POINT_100) {
         path = [[NSBundle mainBundle] pathForResource:@"openbox-5" ofType:@"gif"];
+        [AppHelper willOpenNiceGiftbox];
     }else{
         path = [[NSBundle mainBundle] pathForResource:@"openbox-15" ofType:@"gif"];
+        [AppHelper willOpenNiceGiftbox];
     }
     
     AnimatedGif * animation = [AnimatedGif getAnimationForGifAtUrl:[NSURL fileURLWithPath:path]];

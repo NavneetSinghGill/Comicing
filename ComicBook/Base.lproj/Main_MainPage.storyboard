@@ -1018,7 +1018,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7O-bA-hjG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2130" y="312"/>
+            <point key="canvasLocation" x="2231" y="312"/>
         </scene>
         <!--Comic BookVC-->
         <scene sceneID="aDY-f3-GB5">
@@ -1164,7 +1164,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2d4-sv-r2m" secondAttribute="height" multiplier="70:76" id="gSA-m0-yIS"/>
                                 </constraints>
-                                <state key="normal" image="Boy.png"/>
+                                <state key="normal" image="boyIcon"/>
                                 <variation key="heightClass=regular" fixedFrame="YES">
                                     <rect key="frame" x="354" y="11" width="40" height="40"/>
                                 </variation>
@@ -1292,7 +1292,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yft-x5-Gb0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1681" y="-228"/>
+            <point key="canvasLocation" x="-1568" y="-236"/>
         </scene>
         <!--Bottom Bar View Controller-->
         <scene sceneID="dPd-bv-4Kk">
@@ -2461,7 +2461,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AlphabetCell" id="gcU-KD-JZE" customClass="AlphabetCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="1.5" width="22" height="22"/>
+                                        <rect key="frame" x="0.0" y="2" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -2986,13 +2986,13 @@
                                     <constraint firstItem="oiX-aX-U5k" firstAttribute="top" secondItem="gAb-4z-u15" secondAttribute="bottom" id="xC6-Cq-SLt"/>
                                 </constraints>
                             </view>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-dI-brN">
+                            <view opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-dI-brN">
                                 <rect key="frame" x="-4" y="20" width="379" height="60"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDz-Gv-1eN">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDz-Gv-1eN">
                                         <rect key="frame" x="0.0" y="0.0" width="379" height="60"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Johnny" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfE-Hv-3BS">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Johnny" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfE-Hv-3BS">
                                                 <rect key="frame" x="87" y="13" width="239" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" red="0.33725490200000002" green="0.79215686269999996" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -3051,7 +3051,7 @@
                                     <constraint firstItem="ZDz-Gv-1eN" firstAttribute="leading" secondItem="AuI-dI-brN" secondAttribute="leading" id="pWf-vZ-rjn"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qSg-Ln-bFh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qSg-Ln-bFh">
                                 <rect key="frame" x="12" y="24" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="qSg-Ln-bFh" secondAttribute="height" multiplier="1:1" id="5l6-U7-lEK"/>
@@ -3683,7 +3683,6 @@
     <resources>
         <image name="3slideImageBackground" width="892" height="2003"/>
         <image name="AddUser.png" width="80" height="102"/>
-        <image name="Boy.png" width="70" height="76"/>
         <image name="BubbleWhite.png" width="76" height="69"/>
         <image name="Mag Glass.png" width="69" height="81"/>
         <image name="Me.png" width="132" height="79"/>
@@ -3693,6 +3692,7 @@
         <image name="backbutton.png" width="15" height="24"/>
         <image name="blueCheckmark.png" width="78" height="78"/>
         <image name="blueCircle" width="208" height="208"/>
+        <image name="boyIcon" width="31" height="32"/>
         <image name="camera.png" width="50" height="50"/>
         <image name="follow.png" width="630" height="630"/>
         <image name="followSelected.png" width="630" height="630"/>
