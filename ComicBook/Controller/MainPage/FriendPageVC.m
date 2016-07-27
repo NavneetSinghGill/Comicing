@@ -788,7 +788,6 @@
             {
                 if ([frd.friendId isEqualToString:[AppDelegate application].dataManager.friendObject.userId])
                 {
-                    
                     // unfriend API
                     self.btn_follow.selected = YES;
                     break;

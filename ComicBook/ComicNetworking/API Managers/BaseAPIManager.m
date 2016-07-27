@@ -177,6 +177,10 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
     if ([AppHelper getNonceId] && ![[AppHelper getNonceId] isEqualToString:@""]) {
         [manager.requestSerializer setValue:[AppHelper getNonceId] forHTTPHeaderField:@"Nonce"];
     }
+    NSLog(@"URL : %@",urlString);
+    NSLog(@"Nonce : %@",[AppHelper getNonceId]);
+    NSLog(@"Authorization : %@",[AppHelper getAuthId]);
+    
     manager.operationQueue.maxConcurrentOperationCount = 1;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [manager GET:urlString

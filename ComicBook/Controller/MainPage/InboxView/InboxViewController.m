@@ -17,6 +17,7 @@
 #import "PrivateConversationViewController.h"
 #import "AppHelper.h"
 #import "MainPageGroupViewController.h"
+#import "ContactController.h"
 
 NSString *const GroupCellIdentifier = @"GroupCell";
 NSString *const FriendCellIdentifier = @"FriendCell";
@@ -233,7 +234,7 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 #pragma mark - API Methods
 - (void)firstTimeCallAPITogetActiveFriends
 {
-    [InboxAPIManager getActiveFriendsForUserID:[AppHelper getCurrentLoginId] SuccessBlock:^(id object)
+    [InboxAPIManager getFriendsForUserID:[AppHelper getCurrentLoginId] SuccessBlock:^(id object)
     {
         
         NSLog(@"%@", object);
@@ -275,7 +276,8 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
                 }];
             }
             
-            [self setActiveFriendsWithFriends:[AppDelegate application].dataManager.friendsArray];
+            NSMutableArray *friends = [[MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil] mutableCopy];
+            [self setActiveFriendsWithFriends:friends];
         }
         
         if([AppDelegate application].dataManager.groupsArray.count == 0)
@@ -520,5 +522,11 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     } completion: ^(BOOL finished) {
         img_ForFriend.hidden = YES;
     }];
+}
+- (IBAction)tappedConnectFriendButton:(id)sender {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    ContactController* cVc = (ContactController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"Contact"];
+    mainStoryboard = nil;
+    [self.navigationController pushViewController:cVc animated:YES];
 }
 @end

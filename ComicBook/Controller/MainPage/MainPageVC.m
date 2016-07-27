@@ -116,7 +116,6 @@ NSString * const BottomBarView = @"BottomBarView";
     [self addTopBarView];
     [self addBottomBarView];
     [self chooseAccount];
-    [self callAPIToGetTheComics];
     isFirstTime=TRUE;
     
     self.coverTemp.layer.borderColor=[UIColor whiteColor].CGColor;
@@ -183,6 +182,7 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 -(void)viewDidAppear:(BOOL)animated
 {
+    [self callAPIToGetTheComics];
     [super viewDidAppear:animated];
     
     
@@ -1904,11 +1904,8 @@ NSString * const BottomBarView = @"BottomBarView";
         {
             isAPICalling = YES;
             oldPageIndex = pageIndex;
-            [self callAPIToGetTheComicsWithPage:pageIndex];
-
+//            [self callAPIToGetTheComicsWithPage:pageIndex];
         }
-        
-        
     }
     
     if (isAPICalling == NO)
