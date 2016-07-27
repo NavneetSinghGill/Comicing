@@ -146,7 +146,7 @@
                 {
                     // add obj
                     cell.groupImage.layer.borderColor = [UIColor clearColor].CGColor;
-                    cell.groupImage.layer.borderWidth = 3;
+                    cell.groupImage.layer.borderWidth = 4;
                     
                     [selectedGroups removeObject:ug];
                 }
@@ -154,7 +154,7 @@
                 {
                     // remove obj
                     cell.groupImage.layer.borderColor = [UIColor colorWithHexStr:@"26ace2"].CGColor;
-                    cell.groupImage.layer.borderWidth = 3;
+                    cell.groupImage.layer.borderWidth = 4;
                     
                     [selectedGroups addObject:ug];
                 }
