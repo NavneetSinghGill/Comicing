@@ -21,4 +21,7 @@
 //@property (strong, nonatomic) NSString *role;
 @property (strong, nonatomic) NSMutableArray *members;
 
+//// below property is used for select/unselect group cell
+//@property (nonatomic) BOOL isSelected;
+
 @end

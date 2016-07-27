@@ -155,10 +155,36 @@ SendPageViewController ()<UITextFieldDelegate>
     frame.size.height = 87;
     self.groupsView.groupCollectionView.frame = frame;
 }
--(void)configText{
+-(void)configText
+{
+    if (IS_IPHONE_5)
+    {
+        [self.lblGroup setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:15]];
+        [self.lblFriends setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:15]];
+    }
+    else if (IS_IPHONE_6)
+    {
+        [self.lblGroup setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:17]];
+        [self.lblFriends setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:17]];
+    }
+    else if (IS_IPHONE_6P)
+    {
+        [self.lblGroup setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:20]];
+        [self.lblFriends setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:20]];
+    }
+    else
+    {
+        [self.lblGroup setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:15]];
+        [self.lblFriends setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:15]];
+    }
     
-    [self.lblGroup setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:22]];
-    [self.lblFriends setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:22]];
+   
+    
+    
+    
+    
+    
+    
     [self.friendsListView.headerName setFont:[UIFont  fontWithName:@"MYRIADPRO-REGULAR" size:12]];
     self.friendsListView.headerName.text = @"Best friends";
     [self.friendsListView.headerName setTextColor:[UIColor colorWithHexStr:@"231f20"]];
@@ -196,7 +222,15 @@ SendPageViewController ()<UITextFieldDelegate>
         shareGroupsArray = [[NSMutableArray alloc] init];
     if(ug)
     {
-        [shareGroupsArray addObject:[self getGroupShares:ug]];
+        if ([shareGroupsArray containsObject:[self getGroupShares:ug]])
+        {
+            [shareGroupsArray removeObject:[self getGroupShares:ug]];
+        }
+        else
+        {
+            [shareGroupsArray addObject:[self getGroupShares:ug]];
+
+        }
     }
 }
 
@@ -689,6 +723,9 @@ SendPageViewController ()<UITextFieldDelegate>
     [textField resignFirstResponder];
     
     [self searchButtonAnimationStop];
+    
+    [_friendsListView searchFriendByString:@""];
+    [_friendsListView.friendsListTableView reloadData];
     
     return YES;
 }
