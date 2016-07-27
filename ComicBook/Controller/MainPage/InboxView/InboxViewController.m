@@ -234,9 +234,10 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 }
 
 #pragma mark - API Methods
+
 - (void)firstTimeCallAPITogetActiveFriends
 {
-    [InboxAPIManager getFriendsForUserID:[AppHelper getCurrentLoginId] SuccessBlock:^(id object)
+    [InboxAPIManager getActiveFriendsForUserID:[AppHelper getCurrentLoginId] SuccessBlock:^(id object)
     {
         
         NSLog(@"%@", object);
@@ -248,12 +249,12 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInboxButtonColor" object:nil];
         }
         
-        if([AppDelegate application].dataManager.friendsArray.count == 0)
-        {
+//        if([AppDelegate application].dataManager.friendsArray.count == 0)
+//        {
             [self callAPIToGetFriends];
-        }
-        else
-        {
+//        }
+//        else
+//        {
             if ([AppDelegate application].dataManager.friendsArray.count > 5)
             {
                 [UIView animateWithDuration:0.3 animations:^{
@@ -277,19 +278,16 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
                     img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
                 }];
             }
-            
-            NSMutableArray *friends = [[MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil] mutableCopy];
-            [self setActiveFriendsWithFriends:friends];
-        }
+//        }
         
-        if([AppDelegate application].dataManager.groupsArray.count == 0)
-        {
+//        if([AppDelegate application].dataManager.groupsArray.count == 0)
+//        {
             [self callAPIToGetGroups];
-        }
-        else
-        {
+//        }
+//        else
+//        {
             [self setActiveGroupsWithGroups:[AppDelegate application].dataManager.groupsArray];
-        }
+//        }
         
     } andFail:^(NSError *errorMessage) {
        
