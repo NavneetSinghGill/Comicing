@@ -3940,8 +3940,10 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
         [self doPrintScreen:^(bool isOutOfFrame) {
-           
             if (comicItemObj != nil) {
+                if (isNewSlide) {
+                    isNewSlide = NO;
+                }
                 [self.delegate comicMakingItemSave:comicPage
                                      withImageView:comicItemObj
                                    withPrintScreen:printScreen

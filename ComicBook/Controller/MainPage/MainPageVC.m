@@ -116,7 +116,6 @@ NSString * const BottomBarView = @"BottomBarView";
     [self addTopBarView];
     [self addBottomBarView];
     [self chooseAccount];
-    [self callAPIToGetTheComics];
     isFirstTime=TRUE;
     
     self.coverTemp.layer.borderColor=[UIColor whiteColor].CGColor;
@@ -183,6 +182,7 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 -(void)viewDidAppear:(BOOL)animated
 {
+    [self callAPIToGetTheComics];
     [super viewDidAppear:animated];
     
     
@@ -1106,7 +1106,7 @@ NSString * const BottomBarView = @"BottomBarView";
     count++;
     UIView *cell=[self Cell:comment:imageUrl];
     CGRect Rect=cell.frame;
-    Rect.origin.y=currentPoint-keyboardHeight;
+    Rect.origin.y =currentPoint-keyboardHeight;
     cell.frame=Rect;
     [self.scrollView addSubview:cell];
     [UIView animateWithDuration:1 animations:^{
@@ -1596,7 +1596,7 @@ NSString * const BottomBarView = @"BottomBarView";
         {
             cell.lblComicTitle.hidden = YES;
            
-            cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height - 20;
+            cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height - 5;
             cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height;
             [cell layoutIfNeeded];
         }
@@ -1904,11 +1904,8 @@ NSString * const BottomBarView = @"BottomBarView";
         {
             isAPICalling = YES;
             oldPageIndex = pageIndex;
-            [self callAPIToGetTheComicsWithPage:pageIndex];
-
+//            [self callAPIToGetTheComicsWithPage:pageIndex];
         }
-        
-        
     }
     
     if (isAPICalling == NO)
