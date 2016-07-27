@@ -59,9 +59,9 @@
         self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
         self.pageViewController.delegate = self;
         
+        self.modelController.slidesArray=slidesArray;
         DataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:[UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil]];
         startingViewController.isSlidesContainImages = self.isSlidesContainImages;
-        self.modelController.slidesArray=slidesArray;
         //    startingViewController.imageArray=images;
         
         [AppDelegate application].dataManager.viewWidth = self.view.frame.size.width;
@@ -183,10 +183,10 @@
 {
 
     if(currentpage>0)
-    [[self delegate]bookChanged:self.Tag];
+        [[self delegate]bookChanged:self.Tag];
     
-//    if(currentpage==totalPage-1)
-    if(currentpage== 0)
+    if(currentpage == totalPage)
+//    if(currentpage== 0)
     {
         self.shadowImage.hidden=true;
     }

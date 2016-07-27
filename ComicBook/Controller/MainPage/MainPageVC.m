@@ -599,10 +599,9 @@ NSString * const BottomBarView = @"BottomBarView";
  */
 -(void)pageChange:(int)currentpage :(int)totalPage
 {
-    if(currentpage==totalPage-1 || currentpage>totalPage-1)
+    if(currentpage==totalPage )
     {
         self.shadowImage.hidden=true;
-        
     }
     else
     {
