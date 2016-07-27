@@ -1508,7 +1508,7 @@ Comicing </string>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell1" id="dr5-RS-Mql">
-                                <rect key="frame" x="0.0" y="2" width="60" height="68"/>
+                                <rect key="frame" x="0.0" y="2" width="60" height="67.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="68"/>
@@ -2826,11 +2826,6 @@ Comicing </string>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="box01.gif" id="xsJ-jV-82j" customClass="YLImageView">
-                                        <rect key="frame" x="91" y="78" width="67" height="66"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="i7m-CX-W32">
                                         <rect key="frame" x="18" y="336" width="40" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -2840,7 +2835,7 @@ Comicing </string>
                                             <action selector="scissorButtonClicke:" destination="5U4-q3-w9E" eventType="touchUpInside" id="XuA-cI-yzV"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="openbox-5.gif" id="0vH-bx-ieh">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0vH-bx-ieh">
                                         <rect key="frame" x="8" y="0.0" width="240" height="400"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2868,7 +2863,6 @@ Comicing </string>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="mGiftBoxImageView" destination="xsJ-jV-82j" id="S3p-Wz-EJH"/>
                         <outlet property="mGiftBoxOpenImageView" destination="0vH-bx-ieh" id="6bl-H7-xJk"/>
                         <outlet property="mScissorButton" destination="i7m-CX-W32" id="vls-WO-dg4"/>
                         <outlet property="mTapToOpenImageView" destination="AlK-QO-s4T" id="Nyc-4l-288"/>
@@ -2902,7 +2896,6 @@ Comicing </string>
         <image name="blue-square-selected" width="30" height="30"/>
         <image name="blue-square-unselected" width="16" height="16"/>
         <image name="blueCheckmark.png" width="78" height="78"/>
-        <image name="box01.gif" width="200" height="200"/>
         <image name="boyIcon" width="31" height="32"/>
         <image name="brown-square-selected" width="30" height="30"/>
         <image name="brown-square-unselected" width="16" height="16"/>
@@ -2933,7 +2926,6 @@ Comicing </string>
         <image name="leftarrow" width="56" height="57"/>
         <image name="mic" width="50" height="50"/>
         <image name="openClose" width="30" height="50"/>
-        <image name="openbox-5.gif" width="832" height="1492"/>
         <image name="pen-icon" width="16" height="22"/>
         <image name="pink-square-selected" width="30" height="30"/>
         <image name="pink-square-unselected" width="17" height="16"/>
