@@ -159,6 +159,7 @@ NSString * const BottomBarView = @"BottomBarView";
         [self handleScocialButtons];
     });
     
+    [self callAPIToGetTheComics];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swipeLeft:) name:@"ChangeNextPage" object:nil];
     [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"MainPage" Attributes:nil];
     
@@ -182,7 +183,6 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self callAPIToGetTheComics];
     [super viewDidAppear:animated];
     
     
