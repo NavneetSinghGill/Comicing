@@ -45,8 +45,10 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     [self setupAlphabetCollectionView];
     //img_ForFriend.hidden = YES;
 
-    UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tappedOnConnectFriendImage)];
-    [img_ForFriend addGestureRecognizer:tapGest];
+//    UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tappedOnConnectFriendImage)];
+//    [img_ForFriend addGestureRecognizer:tapGest];
+    
+    
     CGFloat fontSize = 13;
     if (IS_IPHONE_5)
     {
@@ -253,7 +255,7 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 //        }
 //        else
 //        {
-            if ([AppDelegate application].dataManager.friendsArray.count>5  )
+            if ([AppDelegate application].dataManager.friendsArray.count > 5)
             {
                 [UIView animateWithDuration:0.3 animations:^{
                     img_ForFriend.alpha = 0;

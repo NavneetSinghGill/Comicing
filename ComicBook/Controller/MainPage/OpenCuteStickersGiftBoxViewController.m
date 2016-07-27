@@ -14,15 +14,17 @@
 
 @interface OpenCuteStickersGiftBoxViewController () <AnimatedGifDelegate>
 
-@property (nonatomic, weak) IBOutlet UIImageView *mGiftBoxImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *mGiftBoxOpenImageView;
 @property (nonatomic, weak) IBOutlet UIButton *mScissorButton;
+@property (nonatomic, weak) IBOutlet UIImageView *mTapToOpenImageView;
 
 @end
 
 @implementation OpenCuteStickersGiftBoxViewController
 
-@synthesize mGiftBoxImageView, mGiftBoxOpenImageView;
+@synthesize  mGiftBoxOpenImageView, mTapToOpenImageView;
+
+AnimatedGif * animation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,39 +34,42 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:YES];
+
     float scoreValue = [self getCurrentScoreFromDB];
     
     if (scoreValue >= INVITE_POINT_200) {
-        mGiftBoxImageView.image = [YLGIFImage imageNamed:@"box03.gif"];
+        self.mGiftBoxOpenImageView.image = [UIImage imageNamed:@"openbox-15-flat.png"];
         
     }else if(scoreValue >= INVITE_POINT_100 &&
              scoreValue <= INVITE_POINT_200) {
-        mGiftBoxImageView.image = [YLGIFImage imageNamed:@"box02.gif"];
+        self.mGiftBoxOpenImageView.image = [UIImage imageNamed:@"openbox-10-flat.png"];
         
     }else if(scoreValue >= INVITE_POINT_50 &&
              scoreValue <= INVITE_POINT_100) {
-        mGiftBoxImageView.image = [YLGIFImage imageNamed:@"box01.gif"];
+        self.mGiftBoxOpenImageView.image = [UIImage imageNamed:@"openbox-5-flat.png"];
     }else{
-        mGiftBoxImageView.image = [YLGIFImage imageNamed:@"box03.gif"];
+        self.mGiftBoxOpenImageView.image = [UIImage imageNamed:@"openbox-15-flat.png"];
     }
-
     
-    [super viewWillAppear:YES];
-    [mGiftBoxImageView setHidden:NO];
-    [mGiftBoxOpenImageView setHidden:YES];
+    [mGiftBoxOpenImageView setHidden:NO];
     
     
     UITapGestureRecognizer *mtapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openGitBox:)];
     [mtapGesture setNumberOfTapsRequired:1];
-    [mGiftBoxImageView setUserInteractionEnabled:YES];
-    [mGiftBoxImageView addGestureRecognizer:mtapGesture];
+    [mGiftBoxOpenImageView setUserInteractionEnabled:YES];
+    [mGiftBoxOpenImageView addGestureRecognizer:mtapGesture];
+    
+    UITapGestureRecognizer *mtapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openGitBox:)];
+    [mtapGesture1 setNumberOfTapsRequired:1];
+    [mTapToOpenImageView setUserInteractionEnabled:YES];
+    [mTapToOpenImageView addGestureRecognizer:mtapGesture1];
     
 }
 
 - (void)openGitBox: (UIGestureRecognizer *)gesture
 {
-    [mGiftBoxImageView setHidden:YES];
-    [mGiftBoxOpenImageView setHidden:NO];
+    [mTapToOpenImageView setUserInteractionEnabled:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animatedGifDidStart:) name:AnimatedGifDidStartLoadingingEvent object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animatedGifDidFinish:) name:AnimatedGifDidFinishLoadingingEvent object:nil];
@@ -72,24 +77,27 @@
     float scoreValue = [self getCurrentScoreFromDB];
     
     NSString *path = nil;
-    
-    if (scoreValue >= INVITE_POINT_200) {        
+
+    if (scoreValue >= INVITE_POINT_200) {
         path = [[NSBundle mainBundle] pathForResource:@"openbox-15" ofType:@"gif"];
+        [AppHelper willOpenExoticGiftbox];
 
     }else if(scoreValue >= INVITE_POINT_100 &&
              scoreValue <= INVITE_POINT_200) {
         path = [[NSBundle mainBundle] pathForResource:@"openbox-10" ofType:@"gif"];
+        [AppHelper willOpenAwesomeGiftbox];
 
     }else if(scoreValue >= INVITE_POINT_50 &&
              scoreValue <= INVITE_POINT_100) {
         path = [[NSBundle mainBundle] pathForResource:@"openbox-5" ofType:@"gif"];
+        [AppHelper willOpenNiceGiftbox];
     }else{
         path = [[NSBundle mainBundle] pathForResource:@"openbox-15" ofType:@"gif"];
+        [AppHelper willOpenNiceGiftbox];
     }
     
-    AnimatedGif * animation = [AnimatedGif getAnimationForGifAtUrl:[NSURL fileURLWithPath:path]];
+    animation = [AnimatedGif getAnimationForGifAtUrl:[NSURL fileURLWithPath:path]];
     animation.delegate = self;
-    
     [mGiftBoxOpenImageView setAnimatedGif:animation startImmediately:YES];
     [animation start];
 }

@@ -15,6 +15,8 @@
 
 @implementation GroupsSection
 
+@synthesize selectedGroups;
+
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if(self)
@@ -39,6 +41,9 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.groupCollectionView registerClass:[GroupSectionCell class] forCellWithReuseIdentifier:@"tabCell"];
     self.groupCollectionView.delegate = self;
+    selectedGroups = [[NSMutableArray alloc] init];
+
+    
     [self getGroupsByUserId];
 }
 
@@ -52,13 +57,16 @@
     return 1;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     GroupSectionCell *cell = (GroupSectionCell*)[cv dequeueReusableCellWithReuseIdentifier:@"tabCell" forIndexPath:indexPath];
     
     cell.backgroundColor = [UIColor clearColor];
 
     [cell.mHolderView setHidden:NO];
-    if (indexPath.row == 0 && self.enableAdd) {
+    
+    if (indexPath.row == 0 && self.enableAdd)
+    {
         [cell.mHolderView setHidden:YES];
         [cell.addHolder setHidden:NO];
         [cell.addGroupButton addTarget:self action:@selector(addGroup) forControlEvents:UIControlEventTouchUpInside];
@@ -96,8 +104,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (self.enableSelection) {
-        if (self.enableAdd && indexPath.row != 0) {
+    if (self.enableSelection)
+    {
+        if (self.enableAdd && indexPath.row != 0)
+        {
+            
             //do call selection
             [self selectCellItems:[self.groupsArray objectAtIndex:indexPath.row]];
         }
@@ -114,7 +125,8 @@
 
 #pragma mark - Events
 
--(void)openGroup:(UIButton*)sender{
+-(void)openGroup:(UIButton*)sender
+{
     if(self.enableSelection)
     {
         NSInteger itemIndex = ((UIButton*)sender).tag - cell_button_tag;
@@ -123,12 +135,32 @@
             NSIndexPath* tempIndexPath = [NSIndexPath indexPathForRow:itemIndex inSection:0];
 
             GroupSectionCell *cell = (GroupSectionCell*)[self.groupCollectionView cellForItemAtIndexPath:tempIndexPath];
+            
             if(cell)
             {
-                [cell.bgSelectionView setBackgroundColor:[UIColor colorWithHexStr:@"26ace2"]];
+               // [cell.bgSelectionView setBackgroundColor:[UIColor colorWithHexStr:@"26ace2"]];
+               
+                UserGroup* ug =  (UserGroup*)[self.groupsArray objectAtIndex:itemIndex];
+ 
+                if ([selectedGroups containsObject:ug] == YES)
+                {
+                    // add obj
+                    cell.groupImage.layer.borderColor = [UIColor clearColor].CGColor;
+                    cell.groupImage.layer.borderWidth = 4;
+                    
+                    [selectedGroups removeObject:ug];
+                }
+                else
+                {
+                    // remove obj
+                    cell.groupImage.layer.borderColor = [UIColor colorWithHexStr:@"26ace2"].CGColor;
+                    cell.groupImage.layer.borderWidth = 4;
+                    
+                    [selectedGroups addObject:ug];
+                }
             }
             
-             [self selectCellItems:[self.groupsArray objectAtIndex:itemIndex]];
+            [self selectCellItems:[self.groupsArray objectAtIndex:itemIndex]];
         }
     }
     else if (self.delegate && [self.delegate respondsToSelector:@selector(showGroup:)])

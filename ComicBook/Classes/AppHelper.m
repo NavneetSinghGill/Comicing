@@ -354,6 +354,7 @@ static AppHelper *_appHelper = nil;
         return [[NSUserDefaults standardUserDefaults] objectForKey:@"emailId"];
     return @"";
 }
+
 +(void)setAuthandNonceId:(NSString*)Auth Nonce:(NSString*)Nonce{
     if (Auth && ![Auth isEqualToString:@""] && Auth.length > 0) {
         [[NSUserDefaults standardUserDefaults] setValue:Auth forKey:@"Authorization"];
@@ -558,6 +559,67 @@ static AppHelper *_appHelper = nil;
         CGFloat fScoreValue = [scoreValue floatValue];
         return fScoreValue;
     }
+}
+
+#pragma mark - invite methods
+
++ (BOOL)isNiceGiftBoxOpened
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults boolForKey:@"nice_box_opened"])
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)isAwesomeGiftBoxOpened
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults boolForKey:@"awesome_box_opened"])
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)isExoticGiftBoxOpened
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults boolForKey:@"exotic_box_opened"])
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (void)willOpenNiceGiftbox
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:@"nice_box_opened"];
+    [defaults synchronize];
+}
+
++ (void)willOpenAwesomeGiftbox
+{
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:@"awesome_box_opened"];
+    [defaults synchronize];
+}
+
++ (void)willOpenExoticGiftbox
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:@"exotic_box_opened"];
+    [defaults synchronize];
+
 }
 
 @end
