@@ -442,7 +442,7 @@ UICollectionViewDelegate>
          NSArray *temp = comicsModel.books.copy;
          temp = [[temp reverseObjectEnumerator] allObjects];
          
-         comics = [NSMutableArray arrayWithArray:[[[self getGroupedComics:temp] reverseObjectEnumerator] allObjects]];
+         comics = [NSMutableArray arrayWithArray:[self getGroupedComics:temp]];
          [tblvComics reloadData];
          
          CGPoint offset = CGPointMake(0, self.tblvComics.contentSize.height - self.tblvComics.frame.size.height);
