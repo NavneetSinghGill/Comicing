@@ -446,8 +446,7 @@
         friendsDictWithAlpabets = [[NSMutableDictionary alloc] init];
         
         friendsDictWithAlpabets = saveFriendsDictWithAlpabets;
-         alphabetsSectionTitles = saveAlphabetsSectionTitles;
-
+        alphabetsSectionTitles = saveAlphabetsSectionTitles;
     }
     else
     {
