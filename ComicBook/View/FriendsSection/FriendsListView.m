@@ -534,7 +534,7 @@
         
         NSString *loginID = [NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].login_id];
         
-        NSString *inviteString = [NSString stringWithFormat:INVITE_TEXT(@""),loginID];
+        NSString *inviteString = INVITE_TEXT(loginID);
         
         
         if (usSelection.mobile != nil)

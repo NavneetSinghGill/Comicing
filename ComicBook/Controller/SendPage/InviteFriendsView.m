@@ -301,7 +301,7 @@
         
         NSString *loginID = [NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].login_id];
         
-        NSString *inviteString = [NSString stringWithFormat:INVITE_TEXT(dict[@"name"]),loginID];
+        NSString *inviteString = INVITE_TEXT(loginID);
         
         
         [self.delegate openMessageComposer:[NSArray arrayWithObjects:phoneNumber, nil] messageText:inviteString];

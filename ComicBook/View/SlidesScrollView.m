@@ -11,13 +11,13 @@
 #import "UIImage+Image.h"
 #import "UIColor+colorWithHexString.h"
 
-const CGSize viewSizeForIPhone5            = {214, 378};
-const CGSize viewSizeForIPhone6            = {250, 444};
-const CGSize viewSizeForIPhone6Plus        = {276, 490};
+const CGSize viewSizeForIPhone5            = {195, 330};//{214, 378};
+const CGSize viewSizeForIPhone6            = {225, 385};//{250, 444};
+const CGSize viewSizeForIPhone6Plus        = {250, 425};//{300, 650};
 
-const CGSize viewPreviewSlideSizeForIPhone5            = {214, 378};
-const CGSize viewPreviewSlideSizeForIPhone6            = {250, 444};
-const CGSize viewPreviewSlideSizeForIPhone6Plus        = {300, 650};
+const CGSize viewPreviewSlideSizeForIPhone5            = {195, 330};//{214, 378};
+const CGSize viewPreviewSlideSizeForIPhone6            = {225, 385};//{250, 444};
+const CGSize viewPreviewSlideSizeForIPhone6Plus        = {250, 425};//{300, 650};
 
 const NSInteger timlineViewTag    = 100;
 const NSInteger timlineTextTag    = 200;
@@ -25,7 +25,7 @@ const NSInteger timlineTextTag    = 200;
 const NSInteger viewsInOneRow    = SLIDE_MAXCOUNT + 1;
 
 const NSInteger spaceBetweenSlide = 20;
-const NSInteger spaceFromTop = 100;
+//const NSInteger spaceFromTop = 140;
 
 @interface SlidesScrollView()
 
@@ -88,13 +88,36 @@ const NSInteger spaceFromTop = 100;
 
 #pragma mark - Helper method
 
+- (CGFloat)getSpaceFromTop
+{
+
+    if (IS_IPHONE_5)
+    {
+        return 140;
+    }
+    else if (IS_IPHONE_6)
+    {
+        return 150;
+
+    }
+    else if (IS_IPHONE_6P)
+    {
+        return 175;
+
+    }
+    else
+    {
+        return 140;
+    }
+}
+
 - (CGRect)frameForPreviewSlide:(NSInteger)index
 {
 //    NSInteger columnCount = index % viewsInOneRow;
     NSInteger rowCount    = index / viewsInOneRow;
     
  //   CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width);
-    CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width);
+    CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width);
     
     return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50, y + 20, viewSize.width + 20, viewSize.height);
 }
@@ -108,7 +131,7 @@ const NSInteger spaceFromTop = 100;
 {
     NSInteger rowCount    = index / viewsInOneRow;
     
-    CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width);
+    CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width);
     
     return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50 , y, viewSize.width, viewSize.height);
 
@@ -120,7 +143,7 @@ const NSInteger spaceFromTop = 100;
     NSInteger rowCount    = index / viewsInOneRow;
     
     CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width);
-    CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width);
+    CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width);
     
     return CGRectMake(x, y, viewSize.width, viewSize.height);
 }
@@ -131,7 +154,7 @@ const NSInteger spaceFromTop = 100;
     NSInteger rowCount    = index / viewsInOneRow;
     
     CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) - 20;
-    CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width) - 20;
+    CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width) - 20;
     
     return CGRectMake(x, y, 20, 20);
 }
@@ -142,7 +165,7 @@ const NSInteger spaceFromTop = 100;
     NSInteger rowCount    = index / viewsInOneRow;
     
  //   CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) - 10;
-    CGFloat y = ( spaceFromTop * (rowCount +  1)) + (rowCount * viewSize.width) - 10;
+    CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width) - 10;
     
     CGFloat middlePoint = y / 2 + (viewSize.height / 2);
     
@@ -204,6 +227,25 @@ const NSInteger spaceFromTop = 100;
     return subView;
 }
 
+- (CGFloat)listViewTitleFontSize
+{
+    if(IS_IPHONE_5)
+    {
+        return 19;
+    }
+    else if(IS_IPHONE_6)
+    {
+       return 23;
+    }
+    else if(IS_IPHONE_6P)
+    {
+        return 27;
+    }
+    
+    return 24;
+}
+
+
 - (UIView *)makeSlideViewForIndex:(NSInteger)index andComicSlide:(ComicPage *)comicSlide
 {
     UIView *view = [[UIView alloc] initWithFrame:[self frameForPossition:index]];
@@ -256,7 +298,7 @@ const NSInteger spaceFromTop = 100;
     
     
     //Add time line text
-    UILabel* lblTimeText = [[UILabel alloc] initWithFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y - 80, view.frame.size.width, 20)];
+    UILabel* lblTimeText = [[UILabel alloc] initWithFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y - [self getSpaceFromTop] + 10, view.frame.size.width, 20)];
     lblTimeText.text = finalString;
     lblTimeText.textColor = [UIColor colorWithHexStr:@"26aae1"];//Dinesh : Ref : Bug list : line 307
     lblTimeText.font = [UIFont fontWithName:@"Arial" size:15];
@@ -285,11 +327,13 @@ const NSInteger spaceFromTop = 100;
         textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Set your title here."
                                                                              attributes:@{
                                                                                           NSForegroundColorAttributeName:[UIColor colorWithHexStr:@"fdfdfd"],
-                                                                                          NSFontAttributeName:[UIFont fontWithName:@"ArialRoundedMTBold" size:24.0]
+                                                                                          NSFontAttributeName:[UIFont fontWithName:@"Arial-BoldMT" size:[self listViewTitleFontSize]]
                                                                                           }];
+        
+        //textField.adjustsFontSizeToFitWidth = YES;
         textField.textColor = [UIColor whiteColor];
         textField.delegate = self;
-        [textField setFont:[UIFont fontWithName:@"ArialRoundedMTBold" size:16.0f]];
+        [textField setFont:[UIFont fontWithName:@"Arial-BoldMT" size:[self listViewTitleFontSize]]];
         if (comicSlide.titleString && comicSlide.titleString.length != 0) {
             textField.text = comicSlide.titleString;
         }
@@ -537,7 +581,7 @@ const NSInteger spaceFromTop = 100;
     }
     else
     {
-        [self handleBubbleText:textField];
+        //[self handleBubbleText:textField];
         return YES;
     }
 }
