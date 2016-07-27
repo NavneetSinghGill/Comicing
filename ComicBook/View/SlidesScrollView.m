@@ -93,21 +93,21 @@ const NSInteger spaceBetweenSlide = 20;
 
     if (IS_IPHONE_5)
     {
-        return 140;
+        return 133;
     }
     else if (IS_IPHONE_6)
     {
-        return 150;
+        return 147;
 
     }
     else if (IS_IPHONE_6P)
     {
-        return 175;
+        return 170;
 
     }
     else
     {
-        return 140;
+        return 133;
     }
 }
 
@@ -231,18 +231,18 @@ const NSInteger spaceBetweenSlide = 20;
 {
     if(IS_IPHONE_5)
     {
-        return 19;
+        return 25;
     }
     else if(IS_IPHONE_6)
     {
-       return 23;
+       return 29;
     }
     else if(IS_IPHONE_6P)
     {
-        return 27;
+        return 31;
     }
     
-    return 24;
+    return 27;
 }
 
 
@@ -298,7 +298,7 @@ const NSInteger spaceBetweenSlide = 20;
     
     
     //Add time line text
-    UILabel* lblTimeText = [[UILabel alloc] initWithFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y - [self getSpaceFromTop] + 10, view.frame.size.width, 20)];
+    UILabel* lblTimeText = [[UILabel alloc] initWithFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y - [self getSpaceFromTop], view.frame.size.width, 20)];
     lblTimeText.text = finalString;
     lblTimeText.textColor = [UIColor colorWithHexStr:@"26aae1"];//Dinesh : Ref : Bug list : line 307
     lblTimeText.font = [UIFont fontWithName:@"Arial" size:15];
@@ -318,13 +318,13 @@ const NSInteger spaceBetweenSlide = 20;
     
     if (index == 0) {
         UITextField* textField = [[UITextField alloc] initWithFrame:CGRectMake(view.frame.origin.x,
-                                                                                  view.frame.origin.y - 50 ,
+                                                                                  view.frame.origin.y - 55 ,
                                                                                   view.frame.size.width, 40)];
         [textField setBackgroundColor:[UIColor clearColor]];
         [textField setBorderStyle:UITextBorderStyleRoundedRect];
 //        textField .placeholder = @" Set yout title here.";
         
-        textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Set your title here."
+        textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Comic title"
                                                                              attributes:@{
                                                                                           NSForegroundColorAttributeName:[UIColor colorWithHexStr:@"fdfdfd"],
                                                                                           NSFontAttributeName:[UIFont fontWithName:@"Arial-BoldMT" size:[self listViewTitleFontSize]]

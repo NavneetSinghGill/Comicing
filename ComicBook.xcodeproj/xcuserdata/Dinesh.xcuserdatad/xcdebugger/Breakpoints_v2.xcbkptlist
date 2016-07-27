@@ -282,12 +282,12 @@
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Dinesh/Documents/victor/iOS/Comicing/ComicBook/Controller/MainPage/BottomBarView/BottomBarViewController.m"
-                  timestampString = "491338587.954984"
+                  timestampString = "491347284.544693"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "182"
                   endingLineNumber = "182"
-                  offsetFromSymbolStart = "160">
+                  offsetFromSymbolStart = "148">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -297,12 +297,12 @@
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Dinesh/Documents/victor/iOS/Comicing/ComicBook/Controller/MainPage/BottomBarView/BottomBarViewController.m"
-                  timestampString = "491338587.955135"
+                  timestampString = "491347284.544913"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "182"
                   endingLineNumber = "182"
-                  offsetFromSymbolStart = "28">
+                  offsetFromSymbolStart = "15">
                </Location>
             </Locations>
          </BreakpointContent>
