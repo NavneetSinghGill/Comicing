@@ -9,6 +9,7 @@
 #import "GroupsCollectionViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "AppConstants.h"
+#import "AppHelper.h"
 
 @implementation GroupsCollectionViewCell
 @synthesize groupImageView;
@@ -54,7 +55,7 @@
         fontSize = 6;
     }
     self.groupNameLabel.font = [self.groupNameLabel.font fontWithSize:fontSize];
-    if (grp.isSelected)
+    if (grp.isSelected && ![self isComicRead:grp.groupId shareType:@"G"])
     {
         self.groupImageView.layer.borderWidth = borderWidthon;
         self.groupImageView.layer.borderColor = [UIColor yellowColor].CGColor;
@@ -74,4 +75,21 @@
     }
 }
 
+#pragma mark DataBase
+
+-(BOOL)isComicRead:(NSString*)user_id shareType:(NSString*)share_type{
+    NSError *error = nil;
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ActiveInbox"];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user_id == %@ AND isRead == %@ AND share_type == %@", user_id,@"YES",share_type];
+    [fetchRequest setPredicate:predicate];
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    if (results == nil || [results count] ==0) {
+        return NO;
+    }else{
+        return YES;
+    }
+}
 @end

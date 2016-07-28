@@ -90,15 +90,15 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
         ratioOn = 2.95f;
     }
     const_HeightOfFriend.constant = [UIScreen mainScreen].bounds.size.width/ratioOn;
-    [self.friendsCV layoutIfNeeded];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self.friendsCV reloadData];
     //img_ForFriend.hidden = YES;
     [self firstTimeCallAPITogetActiveFriends];
     
-   timer = [NSTimer scheduledTimerWithTimeInterval:120
+   timer = [NSTimer scheduledTimerWithTimeInterval:60
                                      target:self
                                    selector:@selector(getActiveFriendsAfterTwoMinutes:)
                                    userInfo:nil
@@ -169,11 +169,18 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     {
         if ([activeFriendDict[@"share_type"] isEqualToString:@"F"])
         {
+            if(![self isComicExisting:[activeFriendDict objectForKey:@"comic_delivery_id"] shareType:activeFriendDict[@"share_type"]])
+            {
+                [self insertComicExisting:activeFriendDict[@"comic_delivery_id"]
+                                shareType:activeFriendDict[@"share_type"]
+                                   userId:activeFriendDict[@"user_id"]];
+            }
             NSString *frdID = activeFriendDict[@"user_id"];
             
             for (Friend *frd in sortedArray.copy)
             {
-                if ([frdID isEqualToString:frd.friendId] || frd.isSelected == YES)
+                if (([frdID isEqualToString:frd.friendId] || frd.isSelected == YES) &&
+                    ![self isComicRead:frdID shareType:@"F"])
                 {
                     frd.isSelected = YES;
                     
@@ -189,8 +196,6 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     
     [AppDelegate application].dataManager.friendsArray = activeFrd.copy;
     
-    [self.friendsCV reloadData];
-
 }
 
 - (void)setActiveGroupsWithGroups:(NSArray *)allGroups
@@ -204,13 +209,22 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     
     for (NSDictionary *activeFriendDict in [AppDelegate application].dataManager.activeInboxArray)
     {
+        
         if ([activeFriendDict[@"share_type"] isEqualToString:@"G"])
         {
+            if(![self isComicExisting:[activeFriendDict objectForKey:@"comic_delivery_id"] shareType:activeFriendDict[@"share_type"]])
+            {
+                [self insertComicExisting:activeFriendDict[@"comic_delivery_id"]
+                                shareType:activeFriendDict[@"share_type"]
+                                   userId:activeFriendDict[@"group_id"]];
+            }
+            
             NSString *grpID = activeFriendDict[@"group_id"];
             
             for (Group *grp in sortedArray.copy)
             {
-                if ([grpID integerValue] == [grp.groupId integerValue] || grp.isSelected == YES)
+                if (([grpID integerValue] == [grp.groupId integerValue] || grp.isSelected == YES) &&
+                    ![self isComicRead:grpID shareType:@"G"])
                 {
                     grp.isSelected = YES;
                     
@@ -479,6 +493,7 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 
 - (void)didTapProfileImageOfFriend:(Friend *)friendObj {
     NSLog(@"-----tappedFriendImage----- %@", friendObj);
+    [self updateComicRead:friendObj.friendId shareType:@"F"];
     friendObj.isSelected = NO;
     PrivateConversationViewController *friendView = [[PrivateConversationViewController alloc] init];
     friendView = [self.storyboard instantiateViewControllerWithIdentifier:@"PrivateConversationView"];
@@ -497,9 +512,9 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 {
     NSLog(@"******tappedGroupImage******* %@", groupObj);
 
-    groupObj.isSelected = NO;
-   
+    [self updateComicRead:groupObj.groupId shareType:@"G"];
     
+    groupObj.isSelected = NO;
     MainPageGroupViewController *groupView = [[MainPageGroupViewController alloc] init];
     groupView = [self.storyboard instantiateViewControllerWithIdentifier:@"GroupView"];
     groupView.groupObj = groupObj;
@@ -528,5 +543,78 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     ContactController* cVc = (ContactController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"Contact"];
     mainStoryboard = nil;
     [self.navigationController pushViewController:cVc animated:YES];
+}
+
+#pragma mark Data Methods
+
+-(BOOL)isComicExisting:(NSString*)comic_delivery_id shareType:(NSString*)share_type{
+    NSError *error = nil;
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ActiveInbox"];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"comic_delivery_id == %@ AND share_type == %@", comic_delivery_id,share_type];
+    [fetchRequest setPredicate:predicate];
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    if (results == nil || [results count] ==0) {
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
+-(BOOL)isComicRead:(NSString*)user_id shareType:(NSString*)share_type{
+    NSError *error = nil;
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ActiveInbox"];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user_id == %@ AND isRead == %@ AND share_type == %@", user_id,@"YES",share_type];
+    [fetchRequest setPredicate:predicate];
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    if (results == nil || [results count] ==0) {
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
+-(void)insertComicExisting:(NSString*)comicDeliveryId shareType:(NSString*)share_type userId:(NSString*)user_id{
+    
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSManagedObject *activeInbox = [NSEntityDescription insertNewObjectForEntityForName:@"ActiveInbox" inManagedObjectContext:context];
+    [activeInbox setValue:comicDeliveryId forKey:@"comic_delivery_id"];
+    [activeInbox setValue:share_type forKey:@"share_type"];
+    [activeInbox setValue:user_id forKey:@"user_id"];
+    [activeInbox setValue:@"NO" forKey:@"isRead"];
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+}
+
+-(void)updateComicRead:(NSString*)user_id shareType:(NSString*)share_type{
+    
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ActiveInbox"];
+    NSError *error      = nil;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user_id == %@ AND share_type == %@",user_id,share_type];
+    [fetchRequest setPredicate:predicate];
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] != 0) {
+        for (NSManagedObject *managedObject in results) {
+            
+            [managedObject setValue:@"YES" forKey:@"isRead"];
+            
+            NSError *error = nil;
+            if (![context save:&error]) {
+                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+            }
+        }
+    }
 }
 @end
