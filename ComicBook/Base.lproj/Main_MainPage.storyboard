@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XO4-2R-B3p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XO4-2R-B3p">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -2372,33 +2372,33 @@
                                     <constraint firstAttribute="width" secondItem="j2c-bE-O0D" secondAttribute="height" multiplier="369:80" id="p3J-1v-qKL"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="PR0-Yq-yNB">
-                                    <size key="itemSize" width="69" height="64"/>
+                                    <size key="itemSize" width="63" height="64"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GroupCell" id="rzs-T7-yJa" customClass="GroupsCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="69" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="63" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="69" height="64"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="63" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ziB-vF-xY7">
-                                                    <rect key="frame" x="6" y="4" width="57" height="57"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="ziB-vF-xY7" secondAttribute="height" multiplier="1:1" id="Im4-RQ-O9h"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Stephen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XT3-5y-mzR">
-                                                    <rect key="frame" x="6" y="61" width="57" height="3"/>
+                                                    <rect key="frame" x="0.0" y="54" width="56" height="10"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="9"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ad5-0A-f0Z">
-                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="34"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
                                                     <connections>
                                                         <action selector="tappedGroupPic:" destination="rzs-T7-yJa" eventType="touchUpInside" id="Fsh-dd-M3F"/>
                                                     </connections>
@@ -2408,16 +2408,20 @@
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="ziB-vF-xY7" firstAttribute="leading" secondItem="rzs-T7-yJa" secondAttribute="leadingMargin" constant="-2" id="0Sb-VX-iyL"/>
+                                            <constraint firstItem="ziB-vF-xY7" firstAttribute="leading" secondItem="rzs-T7-yJa" secondAttribute="leadingMargin" constant="-1" id="0Sb-VX-iyL"/>
                                             <constraint firstItem="Ad5-0A-f0Z" firstAttribute="leading" secondItem="rzs-T7-yJa" secondAttribute="leading" id="0aQ-Ce-gZd"/>
+                                            <constraint firstItem="Ad5-0A-f0Z" firstAttribute="height" secondItem="ziB-vF-xY7" secondAttribute="height" id="2AA-QM-10f"/>
+                                            <constraint firstItem="Ad5-0A-f0Z" firstAttribute="width" secondItem="ziB-vF-xY7" secondAttribute="width" id="4x6-3f-Hgd"/>
                                             <constraint firstItem="ziB-vF-xY7" firstAttribute="leading" secondItem="rzs-T7-yJa" secondAttribute="leadingMargin" id="Cwv-FB-odf"/>
                                             <constraint firstItem="ziB-vF-xY7" firstAttribute="top" secondItem="rzs-T7-yJa" secondAttribute="topMargin" constant="-4" id="Dnj-zP-zvT"/>
-                                            <constraint firstItem="XT3-5y-mzR" firstAttribute="top" secondItem="ziB-vF-xY7" secondAttribute="bottom" id="FNr-Tg-e5C"/>
+                                            <constraint firstItem="XT3-5y-mzR" firstAttribute="top" secondItem="ziB-vF-xY7" secondAttribute="bottom" constant="-2" id="FNr-Tg-e5C"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="ziB-vF-xY7" secondAttribute="trailing" id="JD0-5x-L4e"/>
+                                            <constraint firstItem="Ad5-0A-f0Z" firstAttribute="centerX" secondItem="ziB-vF-xY7" secondAttribute="centerX" id="OZB-7X-JFH"/>
                                             <constraint firstItem="XT3-5y-mzR" firstAttribute="leading" secondItem="ziB-vF-xY7" secondAttribute="leading" id="UWa-iI-aQ8"/>
                                             <constraint firstItem="XT3-5y-mzR" firstAttribute="leading" secondItem="ziB-vF-xY7" secondAttribute="trailing" constant="-63" id="XTQ-ru-SOW"/>
+                                            <constraint firstItem="Ad5-0A-f0Z" firstAttribute="centerY" secondItem="ziB-vF-xY7" secondAttribute="centerY" id="cdA-An-Ob8"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="XT3-5y-mzR" secondAttribute="bottom" constant="-8" id="izW-kc-GBy"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="ziB-vF-xY7" secondAttribute="trailing" constant="-2" id="jPB-WP-Jtv"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="ziB-vF-xY7" secondAttribute="trailing" constant="-1" id="jPB-WP-Jtv"/>
                                             <constraint firstItem="Ad5-0A-f0Z" firstAttribute="top" secondItem="rzs-T7-yJa" secondAttribute="top" id="ndd-Fb-A4X"/>
                                             <constraint firstItem="XT3-5y-mzR" firstAttribute="trailing" secondItem="ziB-vF-xY7" secondAttribute="trailing" id="s8S-ni-qRs"/>
                                         </constraints>
