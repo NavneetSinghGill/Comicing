@@ -187,9 +187,14 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation,id responseObject) {
              [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-             if ([[responseObject valueForKey:@"result"] isEqualToString:@"failed"]) {
-                 failBlock(@"");
-             }else{
+             
+             if ([[responseObject valueForKey:@"result"] isEqualToString:@"failed"])
+             {
+                 
+                 successBlock(nil);
+             }
+             else
+             {
                  successBlock(responseObject);
              }
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
