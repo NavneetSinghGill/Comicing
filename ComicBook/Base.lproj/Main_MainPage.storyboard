@@ -2461,7 +2461,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AlphabetCell" id="gcU-KD-JZE" customClass="AlphabetCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="2" width="22" height="22"/>
+                                        <rect key="frame" x="0.0" y="1.5" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -2610,7 +2610,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UK-eD-rg7">
-                                <rect key="frame" x="383" y="5" width="21" height="27"/>
+                                <rect key="frame" x="375" y="5" width="21" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9UK-eD-rg7" secondAttribute="height" multiplier="80:102" id="cfj-bt-rP4"/>
                                     <constraint firstAttribute="height" constant="27" id="kEM-fK-MDg"/>
@@ -2633,7 +2633,7 @@
                             <constraint firstItem="RXT-ay-hT2" firstAttribute="leading" secondItem="f6x-Le-35W" secondAttribute="leadingMargin" id="2KG-kc-Boi"/>
                             <constraint firstItem="RXT-ay-hT2" firstAttribute="top" secondItem="j2c-bE-O0D" secondAttribute="bottom" constant="15" id="5PX-xa-U2K"/>
                             <constraint firstItem="rJU-QL-hXs" firstAttribute="leading" secondItem="f6x-Le-35W" secondAttribute="leadingMargin" constant="-4" id="9bx-fo-xFQ"/>
-                            <constraint firstItem="9UK-eD-rg7" firstAttribute="trailing" secondItem="PPG-4V-yh6" secondAttribute="trailing" id="DEv-nN-AIj"/>
+                            <constraint firstItem="9UK-eD-rg7" firstAttribute="trailing" secondItem="PPG-4V-yh6" secondAttribute="trailing" constant="-8" id="DEv-nN-AIj"/>
                             <constraint firstItem="j2c-bE-O0D" firstAttribute="trailing" secondItem="f6x-Le-35W" secondAttribute="trailingMargin" id="EZe-9e-z3P"/>
                             <constraint firstItem="PPG-4V-yh6" firstAttribute="top" secondItem="cOd-pg-FWm" secondAttribute="bottom" constant="-35" id="EdT-cR-L27"/>
                             <constraint firstItem="AD9-kM-2hG" firstAttribute="leading" secondItem="f6x-Le-35W" secondAttribute="leadingMargin" constant="83" id="HoX-yh-RLj"/>
@@ -2986,13 +2986,13 @@
                                     <constraint firstItem="oiX-aX-U5k" firstAttribute="top" secondItem="gAb-4z-u15" secondAttribute="bottom" id="xC6-Cq-SLt"/>
                                 </constraints>
                             </view>
-                            <view opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-dI-brN">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-dI-brN">
                                 <rect key="frame" x="-4" y="20" width="379" height="60"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDz-Gv-1eN">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDz-Gv-1eN">
                                         <rect key="frame" x="0.0" y="0.0" width="379" height="60"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Johnny" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfE-Hv-3BS">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Johnny" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfE-Hv-3BS">
                                                 <rect key="frame" x="87" y="13" width="239" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" red="0.33725490200000002" green="0.79215686269999996" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -3051,7 +3051,7 @@
                                     <constraint firstItem="ZDz-Gv-1eN" firstAttribute="leading" secondItem="AuI-dI-brN" secondAttribute="leading" id="pWf-vZ-rjn"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qSg-Ln-bFh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qSg-Ln-bFh">
                                 <rect key="frame" x="12" y="24" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="qSg-Ln-bFh" secondAttribute="height" multiplier="1:1" id="5l6-U7-lEK"/>

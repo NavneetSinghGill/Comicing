@@ -187,9 +187,20 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation,id responseObject) {
              [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-             if ([[responseObject valueForKey:@"result"] isEqualToString:@"failed"]) {
-                 failBlock(@"");
-             }else{
+             
+             if ([[responseObject valueForKey:@"result"] isEqualToString:@"failed"])
+             {
+                 if ([[responseObject valueForKey:@"result"] isEqualToString:@"No Friend added"])
+                 {
+                     successBlock(nil);
+                 }
+                 else
+                 {
+                     failBlock(@"");
+                 }
+             }
+             else
+             {
                  successBlock(responseObject);
              }
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

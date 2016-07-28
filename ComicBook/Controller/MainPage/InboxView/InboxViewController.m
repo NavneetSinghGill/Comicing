@@ -43,6 +43,10 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     [super viewDidLoad];
 
     [self setupAlphabetCollectionView];
+    
+    img_ForFriend.alpha = 1;
+    img_ForFriend.hidden = NO;
+    
     //img_ForFriend.hidden = YES;
 
 //    UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tappedOnConnectFriendImage)];
@@ -95,10 +99,9 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //img_ForFriend.hidden = YES;
     [self firstTimeCallAPITogetActiveFriends];
     
-   timer = [NSTimer scheduledTimerWithTimeInterval:120
+    timer = [NSTimer scheduledTimerWithTimeInterval:120
                                      target:self
                                    selector:@selector(getActiveFriendsAfterTwoMinutes:)
                                    userInfo:nil
@@ -150,9 +153,7 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
         [self setActiveGroupsWithGroups:[AppDelegate application].dataManager.groupsArray];
         
     } andFail:^(NSError *errorMessage) {
-        
         NSLog(@"%@", errorMessage);
-        
     }];
 }
 
@@ -238,49 +239,62 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 {
     [InboxAPIManager getFriendsForUserID:[AppHelper getCurrentLoginId] SuccessBlock:^(id object)
     {
-        
         NSLog(@"%@", object);
         
-        [AppDelegate application].dataManager.activeInboxArray = object[@"data"];
-        
-        if ([AppDelegate application].dataManager.activeInboxArray.count > 0)
+        if (object == nil)
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInboxButtonColor" object:nil];
-        }
-        
-        if([AppDelegate application].dataManager.friendsArray.count == 0)
-        {
-            [self callAPIToGetFriends];
+            [AppDelegate application].dataManager.activeInboxArray = nil;
         }
         else
         {
-            if ([AppDelegate application].dataManager.friendsArray.count > 5)
+            [AppDelegate application].dataManager.activeInboxArray = object[@"data"];
+            
+            if ([AppDelegate application].dataManager.activeInboxArray.count > 0)
             {
-                [UIView animateWithDuration:0.3 animations:^{
-                    img_ForFriend.alpha = 0;
-                } completion: ^(BOOL finished) {
-                    img_ForFriend.hidden = YES;
-                }];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInboxButtonColor" object:nil];
+            }
+            
+            if([AppDelegate application].dataManager.friendsArray.count == 0)
+            {
+                [self callAPIToGetFriends];
             }
             else
             {
-                [UIView animateWithDuration:0.3 animations:^{
-                    if ([AppDelegate application].isShownFriendImage)
-                    {
-                        img_ForFriend.alpha = 1;
-                    }
-                    else
-                    {
-                        img_ForFriend.alpha = 0;
-                    }
-                } completion: ^(BOOL finished) {
-                    img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
-                }];
+                if ([AppDelegate application].dataManager.activeInboxArray.count > 5)
+                {
+                    [UIView animateWithDuration:0.3 animations:^
+                     {
+                         img_ForFriend.alpha = 0;
+                     } completion: ^(BOOL finished)
+                     {
+                         img_ForFriend.hidden = YES;
+                     }];
+                }
+                else
+                {
+                    img_ForFriend.alpha = 1;
+                    img_ForFriend.hidden = NO;
+                    //                [UIView animateWithDuration:0.3 animations:^{
+                    //                    if ([AppDelegate application].isShownFriendImage)
+                    //                    {
+                    //                    }
+                    //                    else
+                    //                    {
+                    //                        img_ForFriend.alpha = 0;
+                    //                    }
+                    //                } completion: ^(BOOL finished)
+                    //                {
+                    //                    img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
+                    //                }];
+                }
+                
+                NSMutableArray *friends = [[MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil] mutableCopy];
+                [self setActiveFriendsWithFriends:friends];
             }
-            
-            NSMutableArray *friends = [[MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil] mutableCopy];
-            [self setActiveFriendsWithFriends:friends];
+
         }
+        
+        
         
         if([AppDelegate application].dataManager.groupsArray.count == 0)
         {
@@ -294,7 +308,6 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     } andFail:^(NSError *errorMessage) {
        
          NSLog(@"%@", errorMessage);
-        
     }];
 }
 
@@ -306,7 +319,8 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
         NSLog(@"%@", [MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil]);
        
         NSMutableArray *friends = [[MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil] mutableCopy];
-        if (friends.count>5 )
+       
+        if (friends.count > 5 )
         {
             [UIView animateWithDuration:0.3 animations:^{
                 img_ForFriend.alpha = 0;
@@ -316,19 +330,21 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
         }
         else
         {
-            
-            [UIView animateWithDuration:0.3 animations:^{
-                if ([AppDelegate application].isShownFriendImage)
-                {
-                    img_ForFriend.alpha = 1;
-                }
-                else
-                {
-                    img_ForFriend.alpha = 0;
-                }
-                } completion: ^(BOOL finished) {
-                img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
-            }];
+            img_ForFriend.alpha = 1;
+            img_ForFriend.hidden = NO;
+
+//            [UIView animateWithDuration:0.3 animations:^{
+//                if ([AppDelegate application].isShownFriendImage)
+//                {
+//                    
+//                }
+//                else
+//                {
+//                    img_ForFriend.alpha = 0;
+//                }
+//                } completion: ^(BOOL finished) {
+//                img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
+//            }];
         }
         [self setActiveFriendsWithFriends:friends.copy];
         

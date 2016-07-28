@@ -1514,9 +1514,7 @@ NSString * const BottomBarView = @"BottomBarView";
         NSLog(@"%@", errorMessage);
         _containerView.hidden = YES;
         [[self Loader] stopAnimating];
-   
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
+        [mainLoader stopAnimating];
     }];
 }
 
