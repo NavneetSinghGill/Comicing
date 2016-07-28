@@ -190,14 +190,8 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
              
              if ([[responseObject valueForKey:@"result"] isEqualToString:@"failed"])
              {
-                 if ([[responseObject valueForKey:@"result"] isEqualToString:@"No Friend added"])
-                 {
-                     successBlock(nil);
-                 }
-                 else
-                 {
-                     failBlock(@"");
-                 }
+                 
+                 successBlock(nil);
              }
              else
              {

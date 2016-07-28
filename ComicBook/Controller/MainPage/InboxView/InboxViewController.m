@@ -242,19 +242,15 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
         
         NSLog(@"%@", object);
         
-        [AppDelegate application].dataManager.activeInboxArray = object[@"data"];
-        
-        if ([AppDelegate application].dataManager.activeInboxArray.count > 0)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInboxButtonColor" object:nil];
-        }
-        
-//        if([AppDelegate application].dataManager.friendsArray.count == 0)
-//        {
-            [self callAPIToGetFriends];
-//        }
-//        else
-//        {
+    //    if (object != nil)
+    //    {
+            [AppDelegate application].dataManager.activeInboxArray = object[@"data"];
+            
+            if ([AppDelegate application].dataManager.activeInboxArray.count > 0)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInboxButtonColor" object:nil];
+            }
+            
             if ([AppDelegate application].dataManager.friendsArray.count > 5)
             {
                 [UIView animateWithDuration:0.3 animations:^{
@@ -265,20 +261,35 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
             }
             else
             {
-                [UIView animateWithDuration:0.3 animations:^{
-                    if ([AppDelegate application].isShownFriendImage)
-                    {
-                        img_ForFriend.alpha = 1;
-                    }
-                    else
-                    {
-                        img_ForFriend.alpha = 0;
-                    }
-                } completion: ^(BOOL finished) {
-                    img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
-                }];
+                img_ForFriend.alpha = 1;
+                img_ForFriend.hidden = NO;
+                
+                //                [UIView animateWithDuration:0.3 animations:^{
+                //                    if ([AppDelegate application].isShownFriendImage)
+                //                    {
+                //                        img_ForFriend.alpha = 1;
+                //                    }
+                //                    else
+                //                    {
+                //                        img_ForFriend.alpha = 0;
+                //                    }
+                //                } completion: ^(BOOL finished) {
+                //                    img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
+                //                }];
             }
+
+
+     //   }
+        
+        
+        
+//        if([AppDelegate application].dataManager.friendsArray.count == 0)
+//        {
+            [self callAPIToGetFriends];
 //        }
+//        else
+//        {
+         //        }
         
 //        if([AppDelegate application].dataManager.groupsArray.count == 0)
 //        {
@@ -315,18 +326,21 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
         else
         {
             
-            [UIView animateWithDuration:0.3 animations:^{
-                if ([AppDelegate application].isShownFriendImage)
-                {
-                    img_ForFriend.alpha = 1;
-                }
-                else
-                {
-                    img_ForFriend.alpha = 0;
-                }
-                } completion: ^(BOOL finished) {
-                img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
-            }];
+            img_ForFriend.alpha = 1;
+            img_ForFriend.hidden = NO;
+            
+//            [UIView animateWithDuration:0.3 animations:^{
+//                if ([AppDelegate application].isShownFriendImage)
+//                {
+//                    img_ForFriend.alpha = 1;
+//                }
+//                else
+//                {
+//                    img_ForFriend.alpha = 0;
+//                }
+//                } completion: ^(BOOL finished) {
+//                img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
+//            }];
         }
         [self setActiveFriendsWithFriends:friends.copy];
         
