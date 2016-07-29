@@ -93,21 +93,21 @@ const NSInteger spaceBetweenSlide = 20;
 
     if (IS_IPHONE_5)
     {
-        return 133;
+        return 145;
     }
     else if (IS_IPHONE_6)
     {
-        return 147;
+        return 160;
 
     }
     else if (IS_IPHONE_6P)
     {
-        return 170;
+        return 190;
 
     }
     else
     {
-        return 133;
+        return 145;
     }
 }
 
@@ -155,6 +155,26 @@ const NSInteger spaceBetweenSlide = 20;
     
     CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) - 20;
     CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width) - 20;
+    
+    /*//-------------------
+    if (index > 1)
+    {
+        CGRect rect = textField.frame;
+        rect.size.width = viewSize.width*1.75;//
+        
+        textField.frame = rect;
+        mComicTitle.frame = rect;
+    }
+    else
+    {
+        CGRect rect = textField.frame;
+        rect.size.width = viewSize.width;
+        
+        textField.frame = rect;
+        mComicTitle.frame = rect;
+        
+    }
+    //-------------------*/
     
     return CGRectMake(x, y, 20, 20);
 }
@@ -246,6 +266,9 @@ const NSInteger spaceBetweenSlide = 20;
 }
 
 
+UITextField* textField;
+UILabel *mComicTitle;
+
 - (UIView *)makeSlideViewForIndex:(NSInteger)index andComicSlide:(ComicPage *)comicSlide
 {
     UIView *view = [[UIView alloc] initWithFrame:[self frameForPossition:index]];
@@ -317,12 +340,12 @@ const NSInteger spaceBetweenSlide = 20;
     }
     
     if (index == 0) {
-        UITextField* textField = [[UITextField alloc] initWithFrame:CGRectMake(view.frame.origin.x,
-                                                                                  view.frame.origin.y - 55 ,
+        
+        textField = [[UITextField alloc] initWithFrame:CGRectMake(view.frame.origin.x,
+                                                                                  view.frame.origin.y - 90 ,
                                                                                   view.frame.size.width, 40)];
         [textField setBackgroundColor:[UIColor clearColor]];
-        [textField setBorderStyle:UITextBorderStyleRoundedRect];
-//        textField .placeholder = @" Set yout title here.";
+        [textField setBorderStyle:UITextBorderStyleNone];
         
         textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Comic title"
                                                                              attributes:@{
@@ -330,13 +353,9 @@ const NSInteger spaceBetweenSlide = 20;
                                                                                           NSFontAttributeName:[UIFont fontWithName:@"Arial-BoldMT" size:[self listViewTitleFontSize]]
                                                                                           }];
         
-        //textField.adjustsFontSizeToFitWidth = YES;
         textField.textColor = [UIColor whiteColor];
         textField.delegate = self;
         [textField setFont:[UIFont fontWithName:@"Arial-BoldMT" size:[self listViewTitleFontSize]]];
-        if (comicSlide.titleString && comicSlide.titleString.length != 0) {
-            textField.text = comicSlide.titleString;
-        }
         textField.returnKeyType = UIReturnKeyDone;
         
         if (self.slideTitleArray == nil) {
@@ -344,7 +363,43 @@ const NSInteger spaceBetweenSlide = 20;
         }
         
         [self.slideTitleArray addObject:textField];
+        
+        
+        //DUMMY LABEL
+        mComicTitle = [[UILabel alloc] init];
+        mComicTitle.lineBreakMode = NSLineBreakByCharWrapping;
+        [mComicTitle setFrame:textField.frame];
+        [mComicTitle setHidden:NO];
+        [mComicTitle setNumberOfLines:2];
+        [mComicTitle setTextColor:[UIColor whiteColor]];
+        [mComicTitle setFont:[UIFont fontWithName:@"Arial-BoldMT" size:[self listViewTitleFontSize]]];
+        [self addSubview:mComicTitle];
+        
+        if (comicSlide.titleString && comicSlide.titleString.length != 0) {
+            textField.text = comicSlide.titleString;
+            mComicTitle.text = comicSlide.titleString;
+        }
+        else
+        {
+            mComicTitle.text = textField.placeholder;
+        }
+        
+        [textField setHidden:YES];
         [self addSubview:textField];
+        
+        CGRect rect = textField.frame;
+        rect.size.width = viewSize.width*1.75;//
+        
+        textField.frame = rect;
+        mComicTitle.frame = rect;
+
+        
+        //add tap gesture
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didtapOnTitle:)];
+        [tapGesture setNumberOfTapsRequired:1];
+        [mComicTitle setUserInteractionEnabled:YES];
+        [mComicTitle addGestureRecognizer:tapGesture];
+
     }
     
     [self addSubview:viewRound];
@@ -362,6 +417,13 @@ const NSInteger spaceBetweenSlide = 20;
     [self.timelineBubbleArray addObject:viewRound];
     
     return view;
+}
+
+- (void)didtapOnTitle: (UIGestureRecognizer *)recogniser
+{
+    [mComicTitle setHidden:YES];
+    [textField setHidden:NO];
+    [textField becomeFirstResponder];
 }
 
 //- (void)wasDragged:(UIPanGestureRecognizer *)recognizer {
@@ -508,6 +570,7 @@ const NSInteger spaceBetweenSlide = 20;
     btnPlusSlide = [[UIButton alloc] init];
     btnPlusSlide.frame = [self frameForPossitionPlusButton:index];
     
+    
     [btnPlusSlide setImage:[UIImage imageNamed:@"AddCoimicSlide"] forState:UIControlStateNormal];
     
     [btnPlusSlide addTarget:self action:@selector(btnAddSlideTap:) forControlEvents:UIControlEventTouchUpInside];
@@ -615,9 +678,36 @@ const NSInteger spaceBetweenSlide = 20;
     return YES;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+
+    textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Comic title"
+                                                                      attributes:@{
+                                                                                   NSForegroundColorAttributeName:[UIColor clearColor],
+                                                                                   NSFontAttributeName:[UIFont fontWithName:@"Arial-BoldMT" size:[self listViewTitleFontSize]]
+                                                                                   }];
+
+}
+
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
+    textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Comic title"
+                                                                      attributes:@{
+                                                                                   NSForegroundColorAttributeName:[UIColor colorWithHexStr:@"fdfdfd"],
+                                                                                   NSFontAttributeName:[UIFont fontWithName:@"Arial-BoldMT" size:[self listViewTitleFontSize]]
+                                                                                   }];
     
+    if (textField.text.length > 0)
+    {
+        mComicTitle.text = textField.text;
+    }
+    else
+    {
+        mComicTitle.text = textField.placeholder;
+    }
+    
+    [mComicTitle setHidden:NO];
+    [textField setHidden:YES];
 }
 
 #pragma mark - Events Methods
@@ -632,6 +722,16 @@ const NSInteger spaceBetweenSlide = 20;
     itemToRemove = [allSlidesView objectAtIndex:gestureIndex];
     [allSlidesView removeObjectAtIndex:gestureIndex];
     [self.listViewImages removeObjectAtIndex:gestureIndex];
+    
+    if (allSlidesView.count == 0)
+    {
+        [textField removeFromSuperview];
+        [mComicTitle removeFromSuperview];
+        
+        textField = nil;
+        mComicTitle = nil;
+    }
+    //-------------------
     
     //Adding back the Plus Button
     if ([allSlidesView count] == (SLIDE_MAXCOUNT - 1)) {
@@ -732,6 +832,19 @@ const NSInteger spaceBetweenSlide = 20;
 {
     
     sender.frame = [self frameForPossition:sender.tag];
+    
+    //-------------------
+    CGSize comicTitleSize = [mComicTitle.text sizeWithAttributes:@{NSFontAttributeName:[mComicTitle font]}];
+    
+    if (viewSize.width < comicTitleSize.width)
+    {
+        CGRect rect = textField.frame;
+        rect.size.width = comicTitleSize.width;
+        
+        textField.frame = rect;
+        mComicTitle.frame = rect;
+    }
+    //-------------------
     
     NSLog(@"sender count = %ld",(long)sender.tag);
     
