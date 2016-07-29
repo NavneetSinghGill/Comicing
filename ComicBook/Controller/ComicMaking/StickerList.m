@@ -86,21 +86,21 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     
     if (scoreValue >= INVITE_POINT_200)
     {
-        imageNames = [NSMutableArray arrayWithArray:@[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",@"st10",@"st11",@"st12",@"st13"]];
+        imageNames = [NSMutableArray arrayWithArray:@[@"st10",@"st11",@"st12",@"st13",@"st14",@"st15",@"st16",@"st17",@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"]];
     }
     else if(scoreValue >= INVITE_POINT_100 &&
              scoreValue <= INVITE_POINT_200)
     {
-        imageNames = [NSMutableArray arrayWithArray:@[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",@"st10",@"st11",@"st12",@"st13"]];
+        imageNames = [NSMutableArray arrayWithArray:@[@"st10",@"st11",@"st12",@"st13",@"st14",@"st15",@"st16",@"st17",@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"]];
     }
     else if(scoreValue >= INVITE_POINT_50 &&
              scoreValue <= INVITE_POINT_100)
     {
-        imageNames = [NSMutableArray arrayWithArray:@[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",@"st10",@"st11",@"st12",@"st13"]];
+        imageNames = [NSMutableArray arrayWithArray:@[@"st10",@"st11",@"st12",@"st13",@"st14",@"st15",@"st16",@"st17",@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"]];
     }
     else
     {
-        imageNames = [NSMutableArray arrayWithArray:@[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9",@"st10",@"st11",@"st12",@"st13"]];
+        imageNames = [NSMutableArray arrayWithArray:@[@"st10",@"st11",@"st12",@"st13",@"st14",@"st15",@"st16",@"st17",@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"]];
     }
 
     

@@ -70,6 +70,7 @@
     //[self getFriendsByUserId];
     [self getContactListFromServer];
     
+    [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"InviteView" Attributes:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -109,6 +110,8 @@
     [self.delegate hideInviteView];
 }
 - (IBAction)btnInviteClick:(id)sender {
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"InviteClick" Action:@"InviteClick" Label:@""];
     [self stopTitleAutoLoad];
     //    [self updateInviteScore:INVITE_POINT_PERINVITE];
     if ([contactList count] > self.contactIndex) {
