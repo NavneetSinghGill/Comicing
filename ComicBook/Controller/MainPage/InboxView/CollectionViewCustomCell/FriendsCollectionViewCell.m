@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppConstants.h"
+#import "AppHelper.h"
 
 @implementation FriendsCollectionViewCell
 
@@ -52,19 +53,16 @@
     {
         borderWidthon = 2;
         fontSize = 6;
-        
     }
     else if (IS_IPHONE_6)
     {
         borderWidthon = 3;
         fontSize = 7;
-        
     }
     else if (IS_IPHONE_6P)
     {
         borderWidthon = 3;
         fontSize = 7;
-        
     }
     else
     {
@@ -73,9 +71,8 @@
     }
     self.friendNameLabel.font = [self.friendNameLabel.font fontWithSize:fontSize];
 
-    if (frd.isSelected)
+    if (frd.isSelected && ![self isComicRead:frd.friendId shareType:@"F"])
     {
-        
         self.friendImageView.layer.borderWidth = borderWidthon;
         self.friendImageView.layer.borderColor = [UIColor yellowColor].CGColor;
     }
@@ -96,6 +93,24 @@
 - (IBAction)tappedProfilePic:(id)sender {
     if([self.delegate respondsToSelector:@selector(didTapProfileImageOfFriend:)]) {
         [self.delegate didTapProfileImageOfFriend:self.friendObject];
+    }
+}
+
+#pragma mark DataBase
+
+-(BOOL)isComicRead:(NSString*)user_id shareType:(NSString*)share_type{
+    NSError *error = nil;
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ActiveInbox"];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user_id == %@ AND isRead == %@ AND share_type == %@", user_id,@"YES",share_type];
+    [fetchRequest setPredicate:predicate];
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    if (results == nil || [results count] ==0) {
+        return NO;
+    }else{
+        return YES;
     }
 }
 
