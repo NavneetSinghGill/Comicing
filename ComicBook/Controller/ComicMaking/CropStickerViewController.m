@@ -22,6 +22,8 @@
 #import "UIImage+ImageCompress.h"
 #import "UIImage+Trim.h"
 #import "AppConstants.h"
+#import "InstructionView.h"
+
 //#import "SettingViewController.h"
 
 //#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
@@ -44,7 +46,9 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 @interface CropStickerViewController ()
 <UIImagePickerControllerDelegate,
-UINavigationControllerDelegate>
+UINavigationControllerDelegate,
+InstructionViewDelegate,
+MZCroppableViewDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UIView *viewCamera;
@@ -141,6 +145,32 @@ UINavigationControllerDelegate>
     
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (self.isRegView == NO)
+    {
+        // open slide 5 Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+             if ([InstructionView getBoolValueForSlide:kInstructionSlide5] == NO)
+             {
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber5 withType:InstructionBubbleType];
+            [instView setTrueForSlide:kInstructionSlide5];
+            
+            [self.view addSubview:instView];
+             }
+        });
+        
+    }
+
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     dispatch_async([self sessionQueue], ^{
@@ -153,6 +183,9 @@ UINavigationControllerDelegate>
         [self removeObserver:self forKeyPath:@"stillImageOutput.capturingStillImage" context:CapturingStillImageContext];
         [self removeObserver:self forKeyPath:@"movieFileOutput.recording" context:RecordingContext];
     });
+    
+    
+    
 }
 
 #pragma mark - UIView Methods
@@ -191,7 +224,25 @@ UINavigationControllerDelegate>
     else
     {
         self.frameImgvCrop = imgvCrop.frame;
-
+        
+        // open slide F Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+            if ([InstructionView getBoolValueForSlide:kInstructionSlideF] == NO)
+            {
+                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                instView.delegate = self;
+                [instView showInstructionWithSlideNumber:SlideNumber7 withType:InstructionGIFType];
+                [instView setTrueForSlide:kInstructionSlideF];
+                [self.view addSubview:instView];
+            }
+            
+            
+            
+        });
+        
+        
         [self prepareCameraView];
     #if !(TARGET_OS_SIMULATOR)
         [self btnCameraReverseTap:nil];
@@ -632,7 +683,7 @@ UINavigationControllerDelegate>
 
     [mzCroppableView removeFromSuperview];
     mzCroppableView = [[MZCroppableView alloc] initWithImageView:imgvCrop];
-
+    mzCroppableView.delegate = self;
     [self.view addSubview:mzCroppableView];
     
     [self bringToFrontAllButtons];
@@ -764,6 +815,26 @@ UINavigationControllerDelegate>
                     cameraPreview.hidden = YES;
                     btnCrop.enabled = YES;
                     btnCameraReverse.hidden = YES;
+                    
+                    
+                    if (self.isRegView == NO)
+                    {
+                        // open slide 6 Instruction
+                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC));
+                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                            NSLog(@"Do some work");
+                            
+                            if ([InstructionView getBoolValueForSlide:kInstructionSlide6] == NO)
+                            {
+                            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                            instView.delegate = self;
+                            [instView showInstructionWithSlideNumber:SlideNumber6 withType:InstructionBubbleType];
+                            [instView setTrueForSlide:kInstructionSlide6];
+                            
+                            [self.view addSubview:instView];
+                             }
+                        });
+                    }
                 }
             }];
             
@@ -1382,4 +1453,55 @@ UIImageOrientation mirroredImageOrientation(UIImageOrientation orientation) {
     CGImageRelease(cgimg);
     return img;
 }
+
+#pragma mark - InstructionViewDelegate Methods
+- (void)didCloseInstructionViewWith:(InstructionView *)view withClosedSlideNumber:(SlideNumber)number
+{
+    [view removeFromSuperview];
+    
+    if (number == SlideNumber6)
+    {
+        // open slide 7 Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+             if ([InstructionView getBoolValueForSlide:kInstructionSlide7] == NO)
+             {
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber7 withType:InstructionGIFType];
+            [instView setTrueForSlide:kInstructionSlide7];
+            
+            [self.view addSubview:instView];
+             }
+        });
+
+    }
+}
+
+#pragma mark - MZCroppableView Methods
+-(void)didFinishedTouch
+{
+    if (_isRegView == NO)
+    {
+        // open slide 8 Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+            if ([InstructionView getBoolValueForSlide:kInstructionSlide8] == NO)
+            {
+                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                instView.delegate = self;
+                [instView showInstructionWithSlideNumber:SlideNumber8 withType:InstructionBubbleType];
+                [instView setTrueForSlide:kInstructionSlide8];
+                
+                [self.view addSubview:instView];
+            }
+        });
+
+    }
+}
+
 @end

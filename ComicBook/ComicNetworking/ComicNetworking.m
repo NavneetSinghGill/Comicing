@@ -151,6 +151,16 @@ static ComicNetworking *_sharedComicNetworking = nil;
     }];
 }
 
+-(void)getComicingFriendsList:(NSMutableDictionary*)paramData Id:(NSString*)Id completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock)errorBlock
+{
+    
+    [self handlingRKRequest:PHONECONTACT_FRIENDS_LIST_BY_USERID singleParam:Id QueryStringParameters:paramData completion:^(id json,id jsonResponse) {
+        completeBlock(json,jsonResponse);
+    } ErrorBlock:^(JSONModelError *error) {
+        errorBlock(error);
+    }];
+}
+
 -(void)postComicCreation:(NSMutableDictionary*)paramData Id:(NSString*)Id completion:(ComicNetworkingBlock)completeBlock ErrorBlock:(ComicNetworkingFailBlock)errorBlock
 {
     [self handlingPOSTRequest:COMIC_CREATE singleParam:Id QueryStringParameters:paramData completion:^(id json,id jsonResponse) {

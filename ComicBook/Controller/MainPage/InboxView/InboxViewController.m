@@ -17,6 +17,7 @@
 #import "PrivateConversationViewController.h"
 #import "AppHelper.h"
 #import "MainPageGroupViewController.h"
+#import "ContactController.h"
 
 NSString *const GroupCellIdentifier = @"GroupCell";
 NSString *const FriendCellIdentifier = @"FriendCell";
@@ -25,7 +26,15 @@ NSUInteger const GroupCollectionViewTag = 11;
 NSUInteger const FriendCollectionViewTag = 22;
 NSUInteger const AlphabetsCollectionViewTag = 33;
 
+@interface InboxViewController()
+{
 
+    IBOutlet UIImageView *img_ForFriend;
+    IBOutlet UILabel *lbl_Friends;
+    IBOutlet UILabel *lbl_Groups;
+    IBOutlet NSLayoutConstraint *const_HeightOfFriend;
+}
+@end
 @implementation InboxViewController
 @synthesize alphabets,alphabetCV, timer;
 
@@ -34,16 +43,62 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     [super viewDidLoad];
 
     [self setupAlphabetCollectionView];
+    //img_ForFriend.hidden = YES;
+
+//    UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tappedOnConnectFriendImage)];
+//    [img_ForFriend addGestureRecognizer:tapGest];
     
+    
+    CGFloat fontSize = 13;
+    if (IS_IPHONE_5)
+    {
+        fontSize = 11;
+    }
+    else if (IS_IPHONE_6)
+    {
+        fontSize = 12;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        fontSize = 13;
+    }
+    lbl_Groups.font = [lbl_Groups.font fontWithSize:fontSize];
+    lbl_Friends.font = [lbl_Friends.font fontWithSize:fontSize];
+    /*if (IS_IPHONE_6P)
+    {
+        self.friendsCV.frame = CGRectMake(self.friendsCV.frame.origin.x, self.friendsCV.frame.origin.y, self.friendsCV.frame.size.width, (self.friendsCV.frame.size.width/3.0416666667)+100);
+    }
+    else
+    {*/
+    
+    //}
+    
+
     //    [self setupInbox];
     // Do any additional setup after loading the view.
+    CGFloat ratioOn = 3.0416666667f;
+    if (IS_IPHONE_6P)
+    {
+        ratioOn = 2.7f;
+    }
+    else if (IS_IPHONE_6)
+    {
+        ratioOn = 2.8f;
+    }
+    else if (IS_IPHONE_5)
+    {
+        ratioOn = 2.95f;
+    }
+    const_HeightOfFriend.constant = [UIScreen mainScreen].bounds.size.width/ratioOn;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self.friendsCV reloadData];
+    //img_ForFriend.hidden = YES;
     [self firstTimeCallAPITogetActiveFriends];
     
-   timer = [NSTimer scheduledTimerWithTimeInterval:120
+   timer = [NSTimer scheduledTimerWithTimeInterval:60
                                      target:self
                                    selector:@selector(getActiveFriendsAfterTwoMinutes:)
                                    userInfo:nil
@@ -53,18 +108,23 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 - (void)viewDidAppear:(BOOL)animated
 {
    // [timer invalidate];
+    
 }
-
+-(void)viewDidLayoutSubviews
+{
+    
+    
+}
 - (void)setupAlphabetCollectionView
 {
-    CGFloat width = CGRectGetWidth(self.view.frame) -  CGRectGetMinX(alphabetCV.frame);
+   /* CGFloat width = CGRectGetWidth(self.view.frame) -  CGRectGetMinX(alphabetCV.frame);
     
     CGRect frame = CGRectMake(CGRectGetMinX(alphabetCV.frame),
                               CGRectGetMinY(alphabetCV.frame),
                               width,
                               CGRectGetHeight(alphabetCV.frame));
     
-    alphabetCV.frame = frame;
+    alphabetCV.frame = frame;*/
     
     alphabets = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
     
@@ -109,11 +169,18 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     {
         if ([activeFriendDict[@"share_type"] isEqualToString:@"F"])
         {
+            if(![self isComicExisting:[activeFriendDict objectForKey:@"comic_delivery_id"] shareType:activeFriendDict[@"share_type"]])
+            {
+                [self insertComicExisting:activeFriendDict[@"comic_delivery_id"]
+                                shareType:activeFriendDict[@"share_type"]
+                                   userId:activeFriendDict[@"user_id"]];
+            }
             NSString *frdID = activeFriendDict[@"user_id"];
             
             for (Friend *frd in sortedArray.copy)
             {
-                if ([frdID isEqualToString:frd.friendId] || frd.isSelected == YES)
+                if (([frdID isEqualToString:frd.friendId] || frd.isSelected == YES) &&
+                    ![self isComicRead:frdID shareType:@"F"])
                 {
                     frd.isSelected = YES;
                     
@@ -129,8 +196,6 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     
     [AppDelegate application].dataManager.friendsArray = activeFrd.copy;
     
-    [self.friendsCV reloadData];
-
 }
 
 - (void)setActiveGroupsWithGroups:(NSArray *)allGroups
@@ -144,13 +209,22 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     
     for (NSDictionary *activeFriendDict in [AppDelegate application].dataManager.activeInboxArray)
     {
+        
         if ([activeFriendDict[@"share_type"] isEqualToString:@"G"])
         {
+            if(![self isComicExisting:[activeFriendDict objectForKey:@"comic_delivery_id"] shareType:activeFriendDict[@"share_type"]])
+            {
+                [self insertComicExisting:activeFriendDict[@"comic_delivery_id"]
+                                shareType:activeFriendDict[@"share_type"]
+                                   userId:activeFriendDict[@"group_id"]];
+            }
+            
             NSString *grpID = activeFriendDict[@"group_id"];
             
             for (Group *grp in sortedArray.copy)
             {
-                if ([grpID integerValue] == [grp.groupId integerValue] || grp.isSelected == YES)
+                if (([grpID integerValue] == [grp.groupId integerValue] || grp.isSelected == YES) &&
+                    ![self isComicRead:grpID shareType:@"G"])
                 {
                     grp.isSelected = YES;
                     
@@ -174,6 +248,7 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 }
 
 #pragma mark - API Methods
+
 - (void)firstTimeCallAPITogetActiveFriends
 {
     [InboxAPIManager getActiveFriendsForUserID:[AppHelper getCurrentLoginId] SuccessBlock:^(id object)
@@ -181,30 +256,63 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
         
         NSLog(@"%@", object);
         
-        [AppDelegate application].dataManager.activeInboxArray = object[@"data"];
+    //    if (object != nil)
+    //    {
+            [AppDelegate application].dataManager.activeInboxArray = object[@"data"];
+            
+            if ([AppDelegate application].dataManager.activeInboxArray.count > 0)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInboxButtonColor" object:nil];
+            }
+            
+            if ([AppDelegate application].dataManager.friendsArray.count > 5)
+            {
+                [UIView animateWithDuration:0.3 animations:^{
+                    img_ForFriend.alpha = 0;
+                } completion: ^(BOOL finished) {
+                    img_ForFriend.hidden = YES;
+                }];
+            }
+            else
+            {
+                img_ForFriend.alpha = 1;
+                img_ForFriend.hidden = NO;
+                
+                //                [UIView animateWithDuration:0.3 animations:^{
+                //                    if ([AppDelegate application].isShownFriendImage)
+                //                    {
+                //                        img_ForFriend.alpha = 1;
+                //                    }
+                //                    else
+                //                    {
+                //                        img_ForFriend.alpha = 0;
+                //                    }
+                //                } completion: ^(BOOL finished) {
+                //                    img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
+                //                }];
+            }
+
+
+     //   }
         
-        if ([AppDelegate application].dataManager.activeInboxArray.count > 0)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"changeInboxButtonColor" object:nil];
-        }
         
-        if([AppDelegate application].dataManager.friendsArray.count == 0)
-        {
+        
+//        if([AppDelegate application].dataManager.friendsArray.count == 0)
+//        {
             [self callAPIToGetFriends];
-        }
-        else
-        {
-            [self setActiveFriendsWithFriends:[AppDelegate application].dataManager.friendsArray];
-        }
+//        }
+//        else
+//        {
+         //        }
         
-        if([AppDelegate application].dataManager.groupsArray.count == 0)
-        {
+//        if([AppDelegate application].dataManager.groupsArray.count == 0)
+//        {
             [self callAPIToGetGroups];
-        }
-        else
-        {
+//        }
+//        else
+//        {
             [self setActiveGroupsWithGroups:[AppDelegate application].dataManager.groupsArray];
-        }
+//        }
         
     } andFail:^(NSError *errorMessage) {
        
@@ -221,11 +329,37 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
         NSLog(@"%@", [MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil]);
        
         NSMutableArray *friends = [[MTLJSONAdapter modelsOfClass:[Friend class] fromJSONArray:[object valueForKey:@"data"] error:nil] mutableCopy];
-        
+        if (friends.count>5 )
+        {
+            [UIView animateWithDuration:0.3 animations:^{
+                img_ForFriend.alpha = 0;
+            } completion: ^(BOOL finished) {
+                img_ForFriend.hidden = YES;
+            }];
+        }
+        else
+        {
+            
+            img_ForFriend.alpha = 1;
+            img_ForFriend.hidden = NO;
+            
+//            [UIView animateWithDuration:0.3 animations:^{
+//                if ([AppDelegate application].isShownFriendImage)
+//                {
+//                    img_ForFriend.alpha = 1;
+//                }
+//                else
+//                {
+//                    img_ForFriend.alpha = 0;
+//                }
+//                } completion: ^(BOOL finished) {
+//                img_ForFriend.hidden = [AppDelegate application].isShownFriendImage;
+//            }];
+        }
         [self setActiveFriendsWithFriends:friends.copy];
         
     } andFail:^(NSError *errorMessage) {
-        
+        img_ForFriend.hidden = NO;
         NSLog(@"%@", errorMessage);
     }];
 }
@@ -301,7 +435,39 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
     return nil;
 }
 
-
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(collectionView.tag == GroupCollectionViewTag)
+    {
+        CGFloat heightShouldbe = ([UIScreen mainScreen].bounds.size.width-28)/5.4677419355;
+        return CGSizeMake(0.9615384615*heightShouldbe, heightShouldbe);
+    }
+    else if (collectionView.tag == FriendCollectionViewTag)
+    {
+       /* if (IS_IPHONE_6P)
+        {
+            return CGSizeMake(collectionView.frame.size.height/2*0.59, (collectionView.frame.size.height/2)-7);
+        }*/
+        return CGSizeMake(const_HeightOfFriend.constant/2*0.56, const_HeightOfFriend.constant/2);
+    }
+    else
+    {
+        CGFloat sizeOFCcell = 22;
+        if (IS_IPHONE_5)
+        {
+            sizeOFCcell = 18;
+        }
+        else if(IS_IPHONE_6)
+        {
+            sizeOFCcell = 19;
+        }
+        else if (IS_IPHONE_6P)
+        {
+            sizeOFCcell = 20;
+        }
+        return CGSizeMake(sizeOFCcell, sizeOFCcell);
+    }
+}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (collectionView.tag == AlphabetsCollectionViewTag)
@@ -341,23 +507,128 @@ NSUInteger const AlphabetsCollectionViewTag = 33;
 
 - (void)didTapProfileImageOfFriend:(Friend *)friendObj {
     NSLog(@"-----tappedFriendImage----- %@", friendObj);
+    [self updateComicRead:friendObj.friendId shareType:@"F"];
     friendObj.isSelected = NO;
     PrivateConversationViewController *friendView = [[PrivateConversationViewController alloc] init];
     friendView = [self.storyboard instantiateViewControllerWithIdentifier:@"PrivateConversationView"];
     friendView.friendObj = friendObj;
-    [self presentViewController:friendView animated:YES completion:nil];
+    [CATransaction begin];
+    [self.navigationController pushViewController:friendView animated:YES];
+    [CATransaction setCompletionBlock:^{
+        //whatever you want to do after the push
+        [(BottomBarViewController *)self.parentViewController closeMenu];
+    }];
+    [CATransaction commit];
+    //Pushed By Sanjay: navigation stack can be overflowing
+   // [self presentViewController:friendView animated:YES completion:nil];
 }
 - (void)didTapImageOfGroup:(Group *)groupObj
 {
     NSLog(@"******tappedGroupImage******* %@", groupObj);
 
-    groupObj.isSelected = NO;
-   
+    [self updateComicRead:groupObj.groupId shareType:@"G"];
     
+    groupObj.isSelected = NO;
     MainPageGroupViewController *groupView = [[MainPageGroupViewController alloc] init];
     groupView = [self.storyboard instantiateViewControllerWithIdentifier:@"GroupView"];
     groupView.groupObj = groupObj;
-    [self presentViewController:groupView animated:YES completion:nil];
+    [CATransaction begin];
+    [self.navigationController pushViewController:groupView animated:YES];
+    [CATransaction setCompletionBlock:^{
+        //whatever you want to do after the push
+        [(BottomBarViewController *)self.parentViewController closeMenu];
+    }];
+    [CATransaction commit];
+//Pushed By Sanjay: navigation stack can be overflowing
+    //[self presentViewController:groupView animated:YES completion:nil];
+}
+#pragma mark - tap Gesture Event
+-(void)tappedOnConnectFriendImage
+{
+    [AppDelegate application].isShownFriendImage = YES;
+    [UIView animateWithDuration:0.3 animations:^{
+        img_ForFriend.alpha = 0;
+    } completion: ^(BOOL finished) {
+        img_ForFriend.hidden = YES;
+    }];
+}
+- (IBAction)tappedConnectFriendButton:(id)sender {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    ContactController* cVc = (ContactController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"Contact"];
+    mainStoryboard = nil;
+    [self.navigationController pushViewController:cVc animated:YES];
 }
 
+#pragma mark Data Methods
+
+-(BOOL)isComicExisting:(NSString*)comic_delivery_id shareType:(NSString*)share_type{
+    NSError *error = nil;
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ActiveInbox"];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"comic_delivery_id == %@ AND share_type == %@", comic_delivery_id,share_type];
+    [fetchRequest setPredicate:predicate];
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    if (results == nil || [results count] ==0) {
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
+-(BOOL)isComicRead:(NSString*)user_id shareType:(NSString*)share_type{
+    NSError *error = nil;
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ActiveInbox"];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user_id == %@ AND isRead == %@ AND share_type == %@", user_id,@"YES",share_type];
+    [fetchRequest setPredicate:predicate];
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    if (results == nil || [results count] ==0) {
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
+-(void)insertComicExisting:(NSString*)comicDeliveryId shareType:(NSString*)share_type userId:(NSString*)user_id{
+    
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSManagedObject *activeInbox = [NSEntityDescription insertNewObjectForEntityForName:@"ActiveInbox" inManagedObjectContext:context];
+    [activeInbox setValue:comicDeliveryId forKey:@"comic_delivery_id"];
+    [activeInbox setValue:share_type forKey:@"share_type"];
+    [activeInbox setValue:user_id forKey:@"user_id"];
+    [activeInbox setValue:@"NO" forKey:@"isRead"];
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+}
+
+-(void)updateComicRead:(NSString*)user_id shareType:(NSString*)share_type{
+    
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ActiveInbox"];
+    NSError *error      = nil;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user_id == %@ AND share_type == %@",user_id,share_type];
+    [fetchRequest setPredicate:predicate];
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] != 0) {
+        for (NSManagedObject *managedObject in results) {
+            
+            [managedObject setValue:@"YES" forKey:@"isRead"];
+            
+            NSError *error = nil;
+            if (![context save:&error]) {
+                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+            }
+        }
+    }
+}
 @end

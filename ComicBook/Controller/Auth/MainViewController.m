@@ -12,6 +12,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 #import "CropRegisterViewController.h"
+#import "OpenCuteStickersGiftBoxViewController.h"
+#import "InviteViewController.h"
 
 @interface MainViewController ()
 {
@@ -19,6 +21,11 @@
     MPMoviePlayerController *playerNotification;
 }
 @property (weak, nonatomic) IBOutlet UIView *introViewHolder;
+@property (weak, nonatomic) IBOutlet UIView *viewInviteHolder;
+@property (weak, nonatomic) InviteViewController *referInvite;
+@property (strong, nonatomic) IBOutlet UIView *inviteContainerView;
+
+
 @end
 
 @implementation MainViewController
@@ -35,6 +42,14 @@
     [AppHelper hideAllDropMessages];
     [self.view setAlpha:1];
     [super viewWillAppear:animated];
+    
+    /*UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
+    OpenCuteStickersGiftBoxViewController *controller = (OpenCuteStickersGiftBoxViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"OpenCuteStickersGiftBoxViewController"];
+    [self presentViewController:controller animated:YES completion:nil];*/
+    
+    /*UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: [NSBundle mainBundle]];
+    InviteViewController *controller = (InviteViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"InviteViewController"];
+    [self presentViewController:controller animated:YES completion:nil];*/
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -48,6 +63,50 @@
     }else{
         [self gotoRegisterPage];
     }
+}
+
+#pragma mark PublicMethods
+
+-(void)getStickerListByCategory:(NSString*)strCategoryId CategoryName:(NSString*)ctName
+{
+    //NSMutableArray* listArray = [AppHelper getAllStickeyList];
+    //[self.stickeyViewController getBind:listArray IsEnableSaveSticky:YES];
+    //self.lblCategoryName.text = @"ALL";
+    
+}
+
+
+- (void)openInviteView{
+    
+    [self.viewInviteHolder setHidden:NO];
+    
+    [UIView animateWithDuration:0.3/1.5 animations:^{
+        self.viewInviteHolder.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3/2 animations:^{
+            self.viewInviteHolder.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.3/2   animations:^{
+                self.viewInviteHolder.transform = CGAffineTransformIdentity;
+            }completion:^(BOOL finished) {
+            }];
+        }];
+    }];
+    
+    // InviteViewController *inviteVc = self.navigationController.childViewControllers[2]; //assuming you have only one child
+    [self.referInvite getPhoneContact];
+}
+
+- (void)hideInviteView{
+    
+    [UIView animateWithDuration:0.3/1.5 animations:^{
+        self.viewInviteHolder.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3/2 animations:^{
+            self.viewInviteHolder.transform = CGAffineTransformIdentity;
+            [self.viewInviteHolder setHidden:YES];
+        }];
+    }];
 }
 
 - (void) playVideo:(NSString *)fileName

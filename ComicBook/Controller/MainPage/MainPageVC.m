@@ -25,6 +25,12 @@
 #import "AppHelper.h"
 #import "MePageVC.h"
 #import "AppDelegate.h"
+#import "MainPageCell.h"
+#import "MainPage3SlideCell.h"
+#import "Global.h"
+#import "MainPage2SlideCell.h"
+#import "InstructionView.h"
+#import "ContactController.h"
 
 #define FB 10
 #define IM 11
@@ -36,14 +42,14 @@ NSString * const BottomBarView = @"BottomBarView";
 
 #define kScreenWidth [[UIScreen mainScreen] bounds].size.width
 
-@interface MainPageVC () <pagechangeDelegate,CustomTextViewDelegate, UIActionSheetDelegate, STTwitterAPIOSProtocol, UIGestureRecognizerDelegate> {
+@interface MainPageVC () <pagechangeDelegate,CustomTextViewDelegate, UIActionSheetDelegate, STTwitterAPIOSProtocol, UIGestureRecognizerDelegate,BookChangeDelegate, UITextViewDelegate, InstructionViewDelegate> {
     // used by comment
     UIView *commentContainerView;
     CustomTextView *textView;
     int count;
     BOOL isFirstTime;
     int comicBookIndex;
-    NSArray *comicsArray;
+    NSMutableArray *comicsArray;
     NSMutableArray *slideImages;
     UISwitch *onoff;
     ACAccount *twitterAccount;
@@ -51,6 +57,12 @@ NSString * const BottomBarView = @"BottomBarView";
     Friend *friendObject;
     TopSearchVC *topSearchView;
     BOOL changePage;
+    int TagRecord;
+    NSInteger currentComicIndex;
+   
+    NSUInteger pageIndex;
+    NSUInteger oldPageIndex;
+
 }
 @property (weak, nonatomic) IBOutlet UIView *CurlContainer;
 @property (weak, nonatomic) IBOutlet UIButton *profilePic;
@@ -61,10 +73,11 @@ NSString * const BottomBarView = @"BottomBarView";
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *Loader;
 @property (readonly, strong, atomic) ModelController *modelController;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicOfComic;
-@property (weak, nonatomic) IBOutlet UIView *testView;
 @property (weak, nonatomic) IBOutlet UILabel *shareDotLabel;
 @property (weak, nonatomic) IBOutlet MBProgressHUD *HUD;
 @property (weak, nonatomic) IBOutlet ComicShareView *comicShareView;
+@property (weak, nonatomic) IBOutlet UITableView *tblvComics;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *mainLoader;
 
 //used by comment
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -77,11 +90,13 @@ NSString * const BottomBarView = @"BottomBarView";
 @property (nonatomic, strong) NSArray *iOSAccounts;
 @property (nonatomic, strong) accountChooserBlock_t accountChooserBlock;
 
+@property BOOL isAPICalling;
+
 @end
 
 @implementation MainPageVC
 @synthesize modelController = _modelController;
-@synthesize currentPoint,keyboardHeight;
+@synthesize currentPoint,keyboardHeight, ComicBookDict, mainLoader, isAPICalling;
 
 - (void)viewDidLoad
 {
@@ -89,12 +104,18 @@ NSString * const BottomBarView = @"BottomBarView";
     [self.navigationController setNavigationBarHidden:YES];
 //    [self addNotifications];
     
+    comicsArray = [[NSMutableArray alloc] init];
+    
+    
+
+    ComicBookDict=[NSMutableDictionary new];
+
+    
     _containerView.hidden = YES;
     
     [self addTopBarView];
     [self addBottomBarView];
     [self chooseAccount];
-    [self callAPIToGetTheComics];
     isFirstTime=TRUE;
     
     self.coverTemp.layer.borderColor=[UIColor whiteColor].CGColor;
@@ -138,8 +159,27 @@ NSString * const BottomBarView = @"BottomBarView";
         [self handleScocialButtons];
     });
     
+    [self callAPIToGetTheComics];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swipeLeft:) name:@"ChangeNextPage" object:nil];
     [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"MainPage" Attributes:nil];
+    
+    // open slide 2B Instruction
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSLog(@"Do some work");
+        
+       if ([InstructionView getBoolValueForSlide:kInstructionSlide2B] == NO)
+       {
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber2B withType:InstructionBubbleType];
+            [instView setTrueForSlide:kInstructionSlide2B];
+            
+            [self.view addSubview:instView];
+       }
+    });
+    
+
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -177,15 +217,41 @@ NSString * const BottomBarView = @"BottomBarView";
 
 - (void)addBottomBarView {
     bottomBarView = [self.storyboard instantiateViewControllerWithIdentifier:BottomBarView];
-    [bottomBarView.view setFrame:CGRectMake(0, self.view.frame.size.height - 30, bottomBarView.view.frame.size.width, bottomBarView.view.frame.size.height)];
+    [bottomBarView.view setFrame:CGRectMake(0, self.view.frame.size.height - 30,self.view.frame.size.width, self.view.frame.size.height/2.2f)];
     [self addChildViewController:bottomBarView];
     [self.view addSubview:bottomBarView.view];
+    bottomBarView.connectAction = ^(void) {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+        ContactController* cVc = (ContactController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"Contact"];
+        mainStoryboard = nil;
+        [self.navigationController pushViewController:cVc animated:YES];
+    };
     [bottomBarView didMoveToParentViewController:self];
 }
 
 - (void)addTopBarView {
     topBarView = [self.storyboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    CGFloat heightOfTopBar;
+    CGFloat heightOfNavBar = 44;
+
+    
+    if (IS_IPHONE_5)
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    else if(IS_IPHONE_6)
+    {
+        heightOfTopBar = heightOfNavBar+9;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heightOfTopBar = heightOfNavBar+10;
+    }
+    else
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];
     [self.view addSubview:topBarView.view];
     [topBarView didMoveToParentViewController:self];
@@ -213,6 +279,7 @@ NSString * const BottomBarView = @"BottomBarView";
         TopSearchVC *topSearchView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:TOP_SEARCH_VIEW];
         [topSearchView displayContentController:self];
     };
+    topBarView.isHomeHidden = YES;
 }
 
 - (void)openInbox {
@@ -532,10 +599,9 @@ NSString * const BottomBarView = @"BottomBarView";
  */
 -(void)pageChange:(int)currentpage :(int)totalPage
 {
-    if(currentpage==totalPage-1 || currentpage>totalPage-1)
+    if(currentpage==totalPage )
     {
         self.shadowImage.hidden=true;
-        
     }
     else
     {
@@ -784,7 +850,8 @@ NSString * const BottomBarView = @"BottomBarView";
     return result;
 }
 
-- (IBAction)btnShareToSocialMedia:(id)sender {
+- (IBAction)btnShareToSocialMedia:(id)sender
+{
     ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
     if (comicBook.slides && [comicBook.slides count] >0)
     {
@@ -831,11 +898,11 @@ NSString * const BottomBarView = @"BottomBarView";
 }
 
 -(void)doShareTo :(ShapeType)type ShareImage:(UIImage*)imgShareto{
+
     
     NSData *imageData = UIImagePNGRepresentation(imgShareto);
     UIImage *image=[UIImage imageWithData:imageData];
     
-
     
     /* Commented for testing*/
     ShareHelper* sHelper = [ShareHelper shareHelperInit];
@@ -843,6 +910,8 @@ NSString * const BottomBarView = @"BottomBarView";
     [sHelper shareAction:type ShareText:@""
               ShareImage:image
               completion:^(BOOL status) {
+              
+
               }];
     
 }
@@ -857,7 +926,7 @@ NSString * const BottomBarView = @"BottomBarView";
 
 -(void)setUpComment
 {
-    self.keyboardHeight=5;
+    self.keyboardHeight = 5;
     currentPoint=[[self scrollView] bounds].size.height;
     self.scrollView.layer.zPosition = 1;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
@@ -889,20 +958,21 @@ NSString * const BottomBarView = @"BottomBarView";
         onOffX= 135;
         width = 190;
     }
+    
     commentContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 93, self.view.frame.size.width, 60)]; // 95
-    onoff = [[UISwitch alloc] initWithFrame: CGRectMake(onOffX, 0, 30, 30)];
+    onoff = [[UISwitch alloc] initWithFrame: CGRectMake(0, 0, 30, 30)];
     onoff.onTintColor= [UIColor colorWithRed:(.61) green:(.93) blue:(.93) alpha:1];
     onoff.transform = CGAffineTransformMakeScale(0.30, 0.30);
     [commentContainerView addSubview:onoff];
     [onoff setOn:YES animated:YES];
     [onoff addTarget:self action:@selector(toggledTweetSwitch:) forControlEvents:UIControlEventValueChanged];
-    UILabel*twitterLabel=[[UILabel alloc]initWithFrame: CGRectMake(twitterLabelX, 10, 160, 10)];
+    UILabel*twitterLabel=[[UILabel alloc]initWithFrame: CGRectMake(40, 10, 160, 10)];
     twitterLabel.text=@"Tweet this comment";
     twitterLabel.textColor=[UIColor whiteColor];
     twitterLabel.font = [UIFont fontWithName:@"AmericanTypewriter"  size:10];
     [commentContainerView addSubview:twitterLabel];
 //    [commentContainerView setBackgroundColor:[UIColor redColor]];
-    textView = [[CustomTextView alloc] initWithFrame:CGRectMake(textViewX, 22, self.view.frame.size.width - width, 25)];
+    textView = [[CustomTextView alloc] initWithFrame:CGRectMake(20, 22, self.view.frame.size.width - 40, 25)];
     textView.isScrollable = NO;
     textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
     textView.minNumberOfLines = 1;
@@ -919,22 +989,48 @@ NSString * const BottomBarView = @"BottomBarView";
     
     
     // Flag Button
-    UIButton *btnFlag = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 40 , CGRectGetMinY(textView.frame), 50, CGRectGetHeight(textView.frame))];
-    [btnFlag addTarget:self action:@selector(openFlahSheet) forControlEvents:UIControlEventTouchUpInside];
-    
-    [btnFlag setImage:[UIImage imageNamed:@"flag-button"] forState:UIControlStateNormal];
-    
-    [commentContainerView addSubview:btnFlag];
-    
+//    UIButton *btnFlag = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 40 , CGRectGetMinY(textView.frame), 50, CGRectGetHeight(textView.frame))];
+//    [btnFlag addTarget:self action:@selector(openFlahSheet) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [btnFlag setImage:[UIImage imageNamed:@"flag-button"] forState:UIControlStateNormal];
+//    
+//    [commentContainerView addSubview:btnFlag];
+//    
     [self.view addSubview:commentContainerView];
+    
+    commentContainerView.alpha = 0;
     
     commentContainerView.layer.zPosition = 0;
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [commentContainerView addSubview:textView];
     commentContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     commentContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    
+    
+  //  [commentContainerView bringSubviewToFront:self.view];
 }
 
+- (void)showCommentContainerView
+{
+    [textView becomeFirstResponder];
+    
+    
+   [UIView animateWithDuration:0.6 animations:^{
+       
+       commentContainerView.alpha = 1;
+       
+   }];
+}
+
+-(void)hideCommentContainerView
+{
+    [textView resignFirstResponder];
+    
+    [UIView animateWithDuration:0.6 animations:^{
+        commentContainerView.alpha = 0;
+
+    }];
+}
 
 #pragma mark - Flag Event
 - (void)openFlahSheet
@@ -1009,7 +1105,7 @@ NSString * const BottomBarView = @"BottomBarView";
     count++;
     UIView *cell=[self Cell:comment:imageUrl];
     CGRect Rect=cell.frame;
-    Rect.origin.y=currentPoint-keyboardHeight;
+    Rect.origin.y =currentPoint-keyboardHeight;
     cell.frame=Rect;
     [self.scrollView addSubview:cell];
     [UIView animateWithDuration:1 animations:^{
@@ -1038,7 +1134,8 @@ NSString * const BottomBarView = @"BottomBarView";
     });
 }
 
-- (void)callAPIToPostComment:(NSString *)comment {
+- (void)callAPIToPostComment:(NSString *)comment
+{
     [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"PostComment" Action:comment Label:@""];
     CommentModel *commentModel = [[CommentModel alloc] init];
     commentModel.commentType = @"T";
@@ -1046,7 +1143,7 @@ NSString * const BottomBarView = @"BottomBarView";
     commentModel.referenceId = @"0";
     commentModel.userId = [AppHelper getCurrentLoginId];
     commentModel.status = @"1";
-    ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
+    ComicBook *comicBook = [comicsArray objectAtIndex:currentComicIndex];
     NSError *error;
     [CommentsAPIManager postCommentForComicId:comicBook.comicId
                               WithCommentDict:[MTLJSONAdapter JSONDictionaryFromModel:commentModel error:&error]
@@ -1167,13 +1264,19 @@ NSString * const BottomBarView = @"BottomBarView";
  *
  *  @return return the status true or false according charecter
  */
--(BOOL)growingTextViewShouldReturn:(CustomTextView *)growingTextView {
-    if([textView.text length]!=0) {
+-(BOOL)growingTextViewShouldReturn:(CustomTextView *)growingTextView
+{
+    if([textView.text length]!=0)
+    {
         [self postTwitterStatus:textView.text forAccount:twitterAccount];
         [self callAPIToPostComment:textView.text];
         textView.text = @"";
     }
+    
     [textView resignFirstResponder];
+    
+    [self hideCommentContainerView];
+    
     return NO;
 }
 /**
@@ -1242,7 +1345,8 @@ NSString * const BottomBarView = @"BottomBarView";
  *
  *  @return Size of the frame needed to display comment
  */
--(CGSize)frameForText:(NSString*)text sizeWithFont:(UIFont*)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode  {
+-(CGSize)frameForText:(NSString*)text sizeWithFont:(UIFont*)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode
+{
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
     paragraphStyle.lineBreakMode = lineBreakMode;
     NSDictionary * attributes = @{NSFontAttributeName:font,
@@ -1372,24 +1476,76 @@ NSString * const BottomBarView = @"BottomBarView";
 
 #pragma mark - API
 
-- (void)callAPIToGetTheComics {
-    [ComicsAPIManager getTheComicsWithSuccessBlock:^(id object)
+- (void)callAPIToGetTheComics
+{
+    pageIndex = 0;
+    
+    [mainLoader startAnimating];
+    
+    [ComicsAPIManager getTheComicsWithPage:1 SuccessBlock:^(id object)
+    {
+        [mainLoader stopAnimating];
+
+        
+        _containerView.hidden = NO;
+        NSError *error;
+        ComicsModel *comicsModel = [MTLJSONAdapter modelOfClass:ComicsModel.class fromJSONDictionary:[object valueForKey:@"data"] error:&error];
+        comicBookIndex = 0;
+        slideImages = [[NSMutableArray alloc] init];
+        
+        if (comicsModel.books.count > 0)
+        {
+            pageIndex = pageIndex + 1;
+
+        }
+        
+        
+        [comicsArray addObjectsFromArray:comicsModel.books];
+        // [self SetupBook:comicBookIndex];
+        
+        
+        
+        [_tblvComics reloadData];
+        
+        
+    } andFail:^(NSError *errorMessage)
+    {
+        NSLog(@"%@", errorMessage);
+        _containerView.hidden = YES;
+        [[self Loader] stopAnimating];
+        [mainLoader stopAnimating];
+    }];
+}
+
+- (void)callAPIToGetTheComicsWithPage:(NSUInteger)page
+{
+    [ComicsAPIManager getTheComicsWithPage:page SuccessBlock:^(id object)
      {
          _containerView.hidden = NO;
          NSError *error;
          ComicsModel *comicsModel = [MTLJSONAdapter modelOfClass:ComicsModel.class fromJSONDictionary:[object valueForKey:@"data"] error:&error];
-         comicBookIndex = 0;
          slideImages = [[NSMutableArray alloc] init];
-         comicsArray = comicsModel.books;
-         [self SetupBook:comicBookIndex];
+         
+         [comicsArray addObjectsFromArray:comicsModel.books];
+         
+         if (comicsModel.books.count > 0)
+         {
+             pageIndex = pageIndex + 1;
+         }
+         [_tblvComics reloadData];
+
+         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+             isAPICalling = NO;
+         });
+         
      } andFail:^(NSError *errorMessage)
-     {
+    {
          NSLog(@"%@", errorMessage);
          _containerView.hidden = YES;
          [[self Loader] stopAnimating];
-         
      }];
 }
+
 
 #pragma mark - statusbar
 
@@ -1401,4 +1557,490 @@ NSString * const BottomBarView = @"BottomBarView";
 {
     return NO;
 }
+
+#pragma mark - UITextFieldDelegate Methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self hideCommentContainerView];
+    
+    return YES;
+}
+
+#pragma mark - UITableViewDataSource & UITableViewDelegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return comicsArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+    
+    if (comicBook.slides.count == 3)
+    {
+        NSLog(@"%@",comicBook.slides);
+        
+        static NSString *identifier = @"mainPage3SlideCell";
+        
+        MainPage3SlideCell *cell = (MainPage3SlideCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        cell.comic = comicBook;
+        
+        [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
+        
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            cell.lblComicTitle.hidden = YES;
+           
+            cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height - 5;
+            cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height;
+            [cell layoutIfNeeded];
+        }
+        else
+        {
+            cell.lblComicTitle.hidden = NO;
+            cell.lblComicTitle.text = comicBook.comicTitle;
+            cell.topConstraintComicView.constant = 5;
+            cell.heightConstraintComicView.constant = 0;
+            [cell layoutIfNeeded];
+
+        }
+
+        cell.mUserName.text = comicBook.userDetail.firstName;
+        cell.lblDate.text = [self dateFromString:comicBook.createdDate];
+        cell.lblTime.text = [self timeFromString:comicBook.createdDate];
+        
+        
+        [cell layoutIfNeeded];
+        
+        
+        Slides *slide1 = comicBook.slides[0];
+        Slides *slide2 = comicBook.slides[1];
+        Slides *slide3 = comicBook.slides[2];
+        
+        [cell.imgvSlide1 sd_setImageWithURL:[NSURL URLWithString:slide1.slideImage ] placeholderImage:GlobalObject.placeholder_comic];
+        [cell.imgvSlide2 sd_setImageWithURL:[NSURL URLWithString:slide2.slideImage ] placeholderImage:GlobalObject.placeholder_comic];
+        [cell.imgvSlide3 sd_setImageWithURL:[NSURL URLWithString:slide3.slideImage ] placeholderImage:GlobalObject.placeholder_comic];
+        
+        
+        //buttons events
+        cell.btnBubble.tag = indexPath.row;
+        cell.btnTwitter.tag = indexPath.row;
+        cell.btnFacebook.tag = indexPath.row;
+        
+        [cell.btnFacebook addTarget:self action:@selector(btnFacebookTap:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btnTwitter addTarget:self action:@selector(btnTwitterTap:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btnBubble addTarget:self action:@selector(btnBubbleTap:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cell;
+    }
+    else if (comicBook.slides.count == 2)
+    {
+        static NSString *identifier = @"mainPage2SlideCell";
+        
+        MainPage2SlideCell *cell = (MainPage2SlideCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        cell.comic = comicBook;
+        
+        [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
+        [cell layoutIfNeeded];
+        [cell.viewComicBook layoutIfNeeded];
+
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            cell.lblComicTitle.hidden = YES;
+            
+            cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height + 8;
+            cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height - 8;
+            [cell layoutIfNeeded];
+            [cell.viewComicBook layoutIfNeeded];
+
+        }
+        else
+        {
+            cell.lblComicTitle.hidden = NO;
+            cell.lblComicTitle.text = comicBook.comicTitle;
+            
+            cell.topConstraintComicView.constant = 8;
+
+            cell.heightConstraintComicView.constant = -2;
+            
+            
+            
+            [cell.viewComicBook layoutIfNeeded];
+
+        }
+        
+        [cell.viewComicBook layoutIfNeeded];
+        [cell layoutIfNeeded];
+        
+        cell.mUserName.text = comicBook.userDetail.firstName;
+        cell.lblDate.text = [self dateFromString:comicBook.createdDate];
+        cell.lblTime.text = [self timeFromString:comicBook.createdDate];
+        
+        Slides *slide1 = comicBook.slides[0];
+        Slides *slide2 = comicBook.slides[1];
+        
+        [cell.imgvSlide1 sd_setImageWithURL:[NSURL URLWithString:slide1.slideImage ] placeholderImage:GlobalObject.placeholder_comic];
+        [cell.imgvSlide2 sd_setImageWithURL:[NSURL URLWithString:slide2.slideImage ] placeholderImage:GlobalObject.placeholder_comic];
+        
+        
+        //buttons events
+        cell.btnBubble.tag = indexPath.row;
+        cell.btnTwitter.tag = indexPath.row;
+        cell.btnFacebook.tag = indexPath.row;
+        
+        [cell.btnFacebook addTarget:self action:@selector(btnFacebookTap:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btnTwitter addTarget:self action:@selector(btnTwitterTap:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btnBubble addTarget:self action:@selector(btnBubbleTap:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cell;
+
+    }
+    else
+    {
+        static NSString *simpleTableIdentifier = @"mainPageCell";
+        
+        __block MainPageCell* cell= (MainPageCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        
+        cell = nil;
+        if (cell == nil)
+        {
+            cell = (MainPageCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+            
+            if (nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
+            {
+                [ComicBookDict removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+            }
+            
+            ComicBookVC *comic = [self.storyboard instantiateViewControllerWithIdentifier:@"ComicBookVC"];
+            comic.delegate = self;
+            comic.Tag = (int)indexPath.row;
+            
+            [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
+            
+            [cell layoutIfNeeded];
+            
+            if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+            {
+                cell.lblComicTitle.hidden = YES;
+               
+                cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height + 8;
+                cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height - 10;
+                [cell layoutIfNeeded];
+            }
+            else
+            {
+                cell.lblComicTitle.hidden = NO;
+                cell.lblComicTitle.text = comicBook.comicTitle;
+                
+                cell.topConstraintComicView.constant = 5;
+                
+                cell.heightConstraintComicView.constant = 0;
+            }
+            
+            comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+            
+            //dinesh
+            cell.mUserName.text = comicBook.userDetail.firstName;
+            cell.lblDate.text = [self dateFromString:comicBook.createdDate];
+            cell.lblTime.text = [self timeFromString:comicBook.createdDate];
+            
+            [cell.viewComicBook addSubview:comic.view];
+            
+            // vishnu
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
+            
+            // To repeat the cover image again on index page as the first slide.
+            if(slidesArray.count > 1)
+            {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+                
+                // Adding a sample slide to array to maintain the logic
+                Slides *slides = [Slides new];
+                [slidesArray insertObject:slides atIndex:1];
+                
+                // vishnuvardhan logic for the second page
+                if(6 < slidesArray.count)
+                {
+                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+                }
+            }
+            
+            [comic setSlidesArray:slidesArray];
+            [comic setupBook];
+            
+            [self addChildViewController:comic];
+            
+            [ComicBookDict setObject:comic forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+            
+            //buttons events
+            cell.btnBubble.tag = indexPath.row;
+            cell.btnTwitter.tag = indexPath.row;
+            cell.btnFacebook.tag = indexPath.row;
+            
+            [cell.btnFacebook addTarget:self action:@selector(btnFacebookTap:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnTwitter addTarget:self action:@selector(btnTwitterTap:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnBubble addTarget:self action:@selector(btnBubbleTap:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
+        return cell;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+    
+    if (comicBook.slides.count == 3)
+    {
+
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            return tableView.bounds.size.height;
+        }
+        else
+        {
+            return tableView.bounds.size.height + 60;
+        }
+    }
+    else if (comicBook.slides.count == 2)
+    {
+        int height = 0;
+
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            if(IS_IPHONE_5)
+            {
+                height = 300;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height = 368;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height = 436;
+            }
+        }
+        else
+        {
+            if(IS_IPHONE_5)
+            {
+                height = 240;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height = 288;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height = 376;
+            }
+
+        }
+        
+        return tableView.bounds.size.height - height;
+    }
+    else
+    {
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            int height = 0;
+            
+            if(IS_IPHONE_5)
+            {
+                height = 134;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height= 167;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height= 200;
+            }
+        
+            return tableView.bounds.size.height - height;
+        }
+        else
+        {
+            int height = 0;
+            
+            if(IS_IPHONE_5)
+            {
+                height = 74;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height = 107;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height = 140;
+            }
+            
+            return tableView.bounds.size.height - height;
+        }
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell layoutSubviews];
+    
+    
+    
+    if (indexPath.row == comicsArray.count - 1)
+    {
+        NSLog(@"call API");
+        
+        if (oldPageIndex != pageIndex)
+        {
+            isAPICalling = YES;
+            oldPageIndex = pageIndex;
+//            [self callAPIToGetTheComicsWithPage:pageIndex];
+        }
+    }
+    
+    if (isAPICalling == NO)
+    {
+        cell.contentView.layer.shadowColor = [[UIColor blackColor] CGColor];
+        cell.contentView.layer.shadowOffset = CGSizeMake(10, 10);
+        cell.contentView.alpha = 0;
+        cell.contentView.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0.5);
+        cell.contentView.layer.anchorPoint = CGPointMake(0.5, 0.5);
+        
+        [UIView animateWithDuration:1 animations:^{
+            cell.contentView.layer.shadowOffset = CGSizeMake(0, 0);
+            cell.contentView.alpha = 1;
+            cell.contentView.layer.transform = CATransform3DIdentity;
+        }];
+
+    }
+}
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    CGFloat offset = scrollView.contentOffset.y; // here you will get the offset value
+//    CGFloat value = offset / _tblvComics.frame.size.height;
+//    
+//    NSLog(@"value = %f",value);
+//    
+//    if(value > 0 && value < 1)
+//    {
+//        self.viewTransperant.alpha = 1-value/4;
+//    }
+//}
+
+#pragma mark - share button events
+- (void)btnFacebookTap:(UIButton *)sender
+{
+    ComicBook *comicBook = [comicsArray objectAtIndex:sender.tag];
+    
+    if (comicBook.slides && [comicBook.slides count] >0)
+    {
+        NSUInteger imageCount = [comicBook.slides count] >= 4 ? 4 : [comicBook.slides count];
+        NSMutableArray* imageArray = [[NSMutableArray alloc] init];
+        for (int i=0; i < imageCount; i++) {
+            
+            Slides *slides = (Slides*)comicBook.slides[i];
+            [imageArray addObject:[self getImageFromURL:slides.slideImage]];
+            //I do have only this option need to check with Vishu
+            //            [imageArray addObject:[self getImageFromURL:[slideImages objectAtIndex:i]]];
+        }
+        
+        
+        [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"FACEBOOK" Label:@""];
+        [self doShareTo:FACEBOOK ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+    }
+}
+
+- (void)btnTwitterTap:(UIButton *)sender
+{
+    ComicBook *comicBook = [comicsArray objectAtIndex:sender.tag];
+    
+
+    
+    if (comicBook.slides && [comicBook.slides count] >0)
+    {
+        NSUInteger imageCount = [comicBook.slides count] >= 4 ? 4 : [comicBook.slides count];
+        NSMutableArray* imageArray = [[NSMutableArray alloc] init];
+        for (int i=0; i < imageCount; i++)
+        {
+            Slides *slides = (Slides*)comicBook.slides[i];
+            [imageArray addObject:[self getImageFromURL:slides.slideImage]];
+            //I do have only this option need to check with Vishu
+            //            [imageArray addObject:[self getImageFromURL:[slideImages objectAtIndex:i]]];
+        }
+        
+        [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"TWITTER" Label:@""];
+        [self doShareTo:TWITTER ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+    }
+}
+
+- (void)btnBubbleTap:(UIButton *)sender
+{
+    [self showCommentContainerView];
+    
+    currentComicIndex = sender.tag;
+    
+    ComicBook *comicBook = [comicsArray objectAtIndex:currentComicIndex];
+    
+    textView.placeholder = [NSString stringWithFormat:@"Say something to %@", comicBook.userDetail.firstName];
+}
+
+#pragma mark - BookChangeDelegate Methods
+-(void)bookChanged:(int)Tag
+{
+    if(TagRecord!=Tag)
+    {
+        ComicBookVC*comic=(ComicBookVC*)[ComicBookDict objectForKey:[NSString stringWithFormat:@"%d",TagRecord]];
+        [comic ResetBook];
+    }
+    
+    TagRecord=Tag;
+}
+
+
+#pragma mark - Helper Methods
+- (NSString *)dateFromString:(NSString *)dateString
+{
+    // createdDate = "2015-07-06 10:15:36";
+    
+    // Convert string to date object
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSDate *date = [dateFormat dateFromString:dateString];
+    
+    // Convert date object to desired output format
+    [dateFormat setDateFormat:@"MMM dd, yyyy"];
+    return [dateFormat stringFromDate:date];
+    
+    //Oct 5,2015
+}
+
+- (NSString *)timeFromString:(NSString *)timeString
+{
+    // createdDate = "2015-07-06 10:15:36";
+    
+    // Convert string to date object
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSDate *date = [dateFormat dateFromString:timeString];
+    
+    // Convert date object to desired output format
+    [dateFormat setDateFormat:@"hh.mm a"];
+    return [dateFormat stringFromDate:date];
+    
+    //Oct 5,2015
+}
+
+- (void)didCloseInstructionViewWith:(InstructionView *)view withClosedSlideNumber:(SlideNumber)number
+{
+    [view removeFromSuperview];
+}
+
 @end

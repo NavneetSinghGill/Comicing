@@ -34,7 +34,7 @@
     [self.btnUser sd_setImageWithURL:user.profileImageURL forState:UIControlStateNormal];
     if ([user.role isEqualToString:@"2"])
     {
-        CGRect frame = self.frame;
+        /*CGRect frame = self.frame;
         
         frame.origin.y = frame.origin.y - 7;
         frame.origin.x = frame.origin.x - 11;
@@ -43,18 +43,27 @@
         
         self.frame = frame;
         
-        btnUser.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+        btnUser.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));*/
     }
     else
     {
-        btnUser.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+        //btnUser.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     }
     
-    btnUser.layer.cornerRadius = CGRectGetHeight(btnUser.frame) / 2;
+    /*btnUser.layer.cornerRadius = CGRectGetHeight(btnUser.frame) / 2;
+    btnUser.clipsToBounds = YES;
+    btnUser.layer.masksToBounds=YES;*/
+}
+-(void)layoutSubviews
+{
+    if (btnUser.bounds.size.height != self.bounds.size.height)
+    {
+        btnUser.frame = CGRectMake(0, 0, self.bounds.size.height, self.bounds.size.height);
+    }
+    btnUser.layer.cornerRadius = self.bounds.size.height/2;;
     btnUser.clipsToBounds = YES;
     btnUser.layer.masksToBounds=YES;
 }
-
 - (IBAction)btnUserTouchDown:(id)sender
 {
     [UIView animateWithDuration:0.1 animations:^

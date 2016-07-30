@@ -331,7 +331,7 @@
         
         NSString *loginID = [NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].login_id];
         
-        NSString *inviteString = [NSString stringWithFormat:INVITE_TEXT,loginID];
+        NSString *inviteString = INVITE_TEXT(loginID);
 
         
         [self openMessageComposer:[NSArray arrayWithObjects:phoneNumber, nil] messageText:inviteString];
@@ -410,9 +410,7 @@
         }];
     }}
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
-                     withVelocity:(CGPoint)velocity
-              targetContentOffset:(inout CGPoint *)targetContentOffset
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset withTableView:(UITableView *)tableView
 {
     
     if (velocity.y > 0)
@@ -428,7 +426,7 @@
 }
 
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView withTableView:(UITableView *)tableView
 {
     if (self.isSearchON == NO)
     {

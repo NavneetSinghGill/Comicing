@@ -67,6 +67,23 @@ static GoogleAnalytics *sharedGoogleAnalytics = nil;
            value:nil];
 }
 
+-(void)logExceptions:(NSString*)exceptionsString{
+    
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    NSString * model = [[UIDevice currentDevice] model];
+    NSString * version = [[UIDevice currentDevice] systemVersion];
+    NSString * description = [NSString stringWithFormat:@"%@.%@.%@.",
+                              model,
+                              version,
+                              exceptionsString];
+    
+    [tracker send:[[GAIDictionaryBuilder
+                   createExceptionWithDescription:description
+                   withFatal:0]  build]];
+}
+
+
 //-(void)setcustomDimension:(NSInteger)index{
 //    
 //    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];

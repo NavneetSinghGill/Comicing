@@ -84,4 +84,15 @@
 
 #pragma mark showHUDLoader
 + (void)showHUDLoader:(BOOL)show;
+
+#pragma mark - invite methods
+
++ (BOOL)isNiceGiftBoxOpened;
++ (BOOL)isAwesomeGiftBoxOpened;
++ (BOOL)isExoticGiftBoxOpened;
+
++ (void)willOpenNiceGiftbox;
++ (void)willOpenAwesomeGiftbox;
++ (void)willOpenExoticGiftbox;
+
 @end

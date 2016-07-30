@@ -85,7 +85,25 @@
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle: [NSBundle mainBundle]];
     
     topBarView = [mainStoryboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    CGFloat heightOfNavBar = 44;
+    CGFloat heightOfTopBar;
+    if (IS_IPHONE_5)
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    else if(IS_IPHONE_6)
+    {
+        heightOfTopBar = heightOfNavBar+9;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heightOfTopBar = heightOfNavBar+10;
+    }
+    else
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];
     [self.view addSubview:topBarView.view];
     [topBarView didMoveToParentViewController:self];
@@ -262,9 +280,7 @@
     }
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
-                     withVelocity:(CGPoint)velocity
-              targetContentOffset:(inout CGPoint *)targetContentOffset
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset withTableView:(UITableView *)tableView
 {
     if (velocity.y > 0)
     {
@@ -277,18 +293,18 @@
         
         [UIView animateWithDuration:0.6 animations:^
          {
-          
+             
              CGRect frame = _headerView2.frame;
              frame.origin.y = _avView.frame.origin.y + _avView.frame.size.height;
              _headerView2.frame = frame;
-
+             
              frame = _friendsList.frame;
              frame.origin.y = _headerView2.frame.origin.y + _headerView2.frame.size.height;
              frame.size.height = self.view.frame.size.height - _footerView.frame.size.height - frame.origin.y - _headerView2.frame.size.height;
              _friendsList.frame = frame;
              
              _friendsList.enableSectionTitles = YES;
-         
+             
          }completion:^(BOOL finished) {
              [_friendsList.friendsListTableView reloadData];
          }];
@@ -296,7 +312,8 @@
 
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView withTableView:(UITableView *)tableView
 {
     if (scrollView.contentOffset.y < 100)
     {

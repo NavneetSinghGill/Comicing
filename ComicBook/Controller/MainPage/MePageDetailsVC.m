@@ -111,7 +111,7 @@
     UILabel*labl=(UILabel*)[cell viewWithTag:2];
     
     CommentModel *commentModel = [self.comicBook.comments objectAtIndex:indexPath.row];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:commentModel.profilePic]];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:commentModel.profilePic] placeholderImage:nil options:SDWebImageRetryFailed];
     labl.text = commentModel.commentText;
 }
 /*

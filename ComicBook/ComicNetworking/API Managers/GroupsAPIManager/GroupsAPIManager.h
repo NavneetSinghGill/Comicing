@@ -22,4 +22,15 @@
                       withSuccessBlock:(void(^)(id object))successBlock
                                andFail:(void(^)(NSError *errorMessage))failBlock;
 
++ (void)postGroupConversationV2CommentWithGroupID:(NSString *)groupID
+                                           shareText: (NSString *)shareText
+                                       currentUserId:(NSString *)currentUserId
+                                        SuccessBlock:(void(^)(id object))successBlock
+                                             andFail:(void(^)(NSError *errorMessage))failBlock;
+
++ (void)putSeenStatusWithGroupID:(NSString *)groupID
+                          userId: (NSString *)userId
+                    SuccessBlock:(void(^)(id object))successBlock
+                         andFail:(void(^)(NSError *errorMessage))failBlock;
+
 @end

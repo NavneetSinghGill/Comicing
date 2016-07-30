@@ -106,7 +106,20 @@
     }
 }
 
+- (void)selectedRow:(id)object param:(id)objectList
+{
+}
+- (void)openMessageComposer:(NSArray*)sendNumbers messageText:(NSString*)messageTextValue
+{
+}
 
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
+                     withVelocity:(CGPoint)velocity
+              targetContentOffset:(inout CGPoint *)targetContentOffset withTableView:(UITableView *)tableView
+{
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView withTableView:(UITableView *)tableView
+{}
 /*
 #pragma mark - Navigation
 

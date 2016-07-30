@@ -11,6 +11,7 @@
 #import "DACircularProgressView.h"
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
+#import "InviteScore.h"
 
 @implementation AppHelper
 
@@ -353,6 +354,7 @@ static AppHelper *_appHelper = nil;
         return [[NSUserDefaults standardUserDefaults] objectForKey:@"emailId"];
     return @"";
 }
+
 +(void)setAuthandNonceId:(NSString*)Auth Nonce:(NSString*)Nonce{
     if (Auth && ![Auth isEqualToString:@""] && Auth.length > 0) {
         [[NSUserDefaults standardUserDefaults] setValue:Auth forKey:@"Authorization"];
@@ -539,6 +541,85 @@ static AppHelper *_appHelper = nil;
 {
     timer==nil?nil:[timer invalidate];
     timer = nil;
+}
+
+
+#pragma mark DB
+
++(float)getCurrentScoreFromDB{
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"InviteScore"];
+    NSError *error      = nil;
+    NSArray *results    = [context executeFetchRequest:fetchRequest error:&error];
+    if ([results count] == 0) {
+        return 0;
+    }else{
+        NSString* scoreValue = ((InviteScore*)results[0]).scoreValue;
+        CGFloat fScoreValue = [scoreValue floatValue];
+        return fScoreValue;
+    }
+}
+
+#pragma mark - invite methods
+
++ (BOOL)isNiceGiftBoxOpened
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults boolForKey:@"nice_box_opened"])
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)isAwesomeGiftBoxOpened
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults boolForKey:@"awesome_box_opened"])
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)isExoticGiftBoxOpened
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults boolForKey:@"exotic_box_opened"])
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (void)willOpenNiceGiftbox
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:@"nice_box_opened"];
+    [defaults synchronize];
+}
+
++ (void)willOpenAwesomeGiftbox
+{
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:@"awesome_box_opened"];
+    [defaults synchronize];
+}
+
++ (void)willOpenExoticGiftbox
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:@"exotic_box_opened"];
+    [defaults synchronize];
+
 }
 
 @end

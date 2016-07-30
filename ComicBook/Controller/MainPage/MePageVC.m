@@ -38,6 +38,7 @@
 //#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
 //#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 //#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+#define arielBlackFont @"Arial-Black"
 
 @interface MePageVC ()<commentersDelegate> {
     int TagRecord;
@@ -54,6 +55,7 @@
     ComicsModel *comicsModelObj;
     UIRefreshControl *refreshControl;
     NSMutableArray *bubbleLabels;
+    IBOutlet NSLayoutConstraint *constHeaderTopY;
 }
 @property (weak, nonatomic) IBOutlet UIView *NameView;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -220,7 +222,24 @@
     [self.mThirdHollowlabel  setHidden:YES];
     [self.mFourthHollowlabel  setHidden:YES];
     [self.mNowHollowlabel setHidden:YES];
-    
+    if (IS_IPHONE_5)
+    {
+        self.lblFirstName.font = [UIFont fontWithName:arielBlackFont size:13.f];
+        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:13.f];
+    }
+    else if (IS_IPHONE_6)
+    {
+        
+        self.lblFirstName.font = [UIFont fontWithName:arielBlackFont size:14.f];
+        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:14.f];
+        
+    }
+    else if(IS_IPHONE_6P)
+    {
+        self.lblFirstName.font = [UIFont fontWithName:arielBlackFont size:15.f];
+        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:15.f];
+    }
+
     [self setBubbleLabels];
     
 }
@@ -234,7 +253,14 @@
     
     
 }
-
+-(void)viewDidLayoutSubviews
+{
+    UIView *headerblank = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, 5)];
+    headerblank.backgroundColor = [UIColor clearColor];
+    self.tableview.tableHeaderView = headerblank;
+    self.meUserPicImageView.layer.cornerRadius = self.meUserPicImageView.bounds.size.height/2;
+    self.meUserPicImageView.layer.masksToBounds = YES;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -264,19 +290,102 @@
     }
     return tableView.bounds.size.height-height;*/
     
+    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+
     int height=0;
-    if(IS_IPHONE_5)
+
+    if (comicBook.comments.count > 0)
     {
-        height=99;
+        // MeCell
+        
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            if(IS_IPHONE_5)
+            {
+                height= 89;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height= 119;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height= 149;
+            }
+            
+        }
+        else
+        {
+            if(IS_IPHONE_5)
+            {
+                height=29;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height= 59;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height= 89;
+            }
+            
+        }
+
     }
-    else if(IS_IPHONE_6)
+    else
     {
-        height= 129;
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            if(IS_IPHONE_5)
+            {
+                height=149;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height= 179;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height= 209;
+            }
+            
+        }
+        else
+        {
+            if(IS_IPHONE_5)
+            {
+                height=89;
+            }
+            else if(IS_IPHONE_6)
+            {
+                height= 119;
+            }
+            else if(IS_IPHONE_6P)
+            {
+                height= 149;
+            }
+            
+        }
+
     }
-    else if(IS_IPHONE_6P)
-    {
-        height= 159;
-    }
+    
+    
+    
+    
+    
+//    int height=0;
+//    if(IS_IPHONE_5)
+//    {
+//        height=99;
+//    }
+//    else if(IS_IPHONE_6)
+//    {
+//        height= 129;
+//    }
+//    else if(IS_IPHONE_6P)
+//    {
+//        height= 159;
+//    }
     return tableView.bounds.size.height-height;
     
     
@@ -306,13 +415,15 @@
     NSArray *a = @[commentModel1, commentModel2];
     comicBook.comments = a;
     */
-    if(comicBook.comments.count > 0) {
+    if(comicBook.comments.count > 0)
+    {
         static NSString *simpleTableIdentifier = @"Cell";
         __block MeCell* cell= (MeCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tableView.frame.size.width, cell.frame.size.height);
         
         cell=nil;
-        if (cell == nil) {
+        if (cell == nil)
+        {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MeCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
             if(nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
@@ -322,6 +433,28 @@
             
             comic.delegate=self;
             comic.Tag=(int)indexPath.row;
+            
+            
+            if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+            {
+                cell.lblComicTitle.hidden = YES;
+                
+                cell.topSpacingComicView.constant = -cell.lblComicTitle.frame.size.height + 8;
+                [cell layoutIfNeeded];
+                
+            }
+            else
+            {
+                cell.topSpacingComicView.constant = 5;
+                
+                cell.lblComicTitle.hidden = NO;
+                cell.lblComicTitle.text = comicBook.comicTitle;
+                
+                [cell layoutIfNeeded];
+            }
+            
+            comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(container.frame), CGRectGetHeight(container.frame));
+            
             [container addSubview:comic.view];
             //            [comic setImages: [self setupImages:indexPath]];
             
@@ -354,7 +487,9 @@
             [self performSelectorInBackground:@selector(addCommentPeople:) withObject:peopleContainer];
         }
         return cell;
-    } else {
+    }
+    else
+    {
         static NSString *simpleTableIdentifier = @"Cell";
         __block FriendCell * cell= (FriendCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         cell = nil;
@@ -363,7 +498,7 @@
             cell = [nib objectAtIndex:0];
             cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tableView.frame.size.width, cell.frame.size.height);
             
-            if(nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
+            if(nil != [ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
             {
                 [ComicBookDict removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
             }
@@ -371,6 +506,31 @@
             ComicBookVC *comic=[self.storyboard instantiateViewControllerWithIdentifier:@"ComicBookVC"];
             comic.delegate=self;
             comic.Tag=(int)indexPath.row;
+            
+            
+            // Adnan
+            CGRect lblFrame = cell.lblComicTitle.frame;
+            
+            if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+            {
+                cell.lblComicTitle.text = @"";
+                cell.lblComicTitle.hidden = YES;
+                
+                CGRect frameViewComicBook = cell.viewComicBook.frame;
+                frameViewComicBook.origin.y = lblFrame.origin.y + 5;
+                frameViewComicBook.size.height = cell.frame.size.height - 10;
+                cell.viewComicBook.frame = frameViewComicBook;
+                
+                cell.lblComicTitle.frame = lblFrame;
+                
+            }
+            else
+            {
+                cell.lblComicTitle.text = comicBook.comicTitle;
+                cell.lblComicTitle.hidden = NO;
+                
+                cell.lblComicTitle.frame = lblFrame;
+            }
             
             comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
             
@@ -407,13 +567,18 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == comicsArray.count - 1 && currentPageDownScroll < lastPageDownScroll) {
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == comicsArray.count - 1 && currentPageDownScroll < lastPageDownScroll)
+    {
         // downscroll with same period
         [self callAPIToGetTheComicsWithPageNumber:currentPageDownScroll + 1  andTimelinePeriod:currentlyShowingTimelinePeriodDownScroll andDirection:DIRECTION_DOWN shouldClearAllData:NO];
-    } else if(indexPath.row == comicsArray.count - 1 && currentPageDownScroll == lastPageDownScroll) {
+    }
+    else if(indexPath.row == comicsArray.count - 1 && currentPageDownScroll == lastPageDownScroll)
+    {
         // downscroll with next period
-        if([self getTheNextPeriod:currentlyShowingTimelinePeriodDownScroll] != nil) {
+        if([self getTheNextPeriod:currentlyShowingTimelinePeriodDownScroll] != nil)
+        {
             currentPageDownScroll = 0;
             [self callAPIToGetTheComicsWithPageNumber:currentPageDownScroll + 1  andTimelinePeriod:[self getTheNextPeriod:currentlyShowingTimelinePeriodDownScroll] andDirection:DIRECTION_DOWN shouldClearAllData:NO];
         }
@@ -446,11 +611,31 @@
 
 - (void)addTopBarView {
     topBarView = [self.storyboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    CGFloat heightOfNavBar = 44;
+
+    CGFloat heightOfTopBar;
+    if (IS_IPHONE_5)
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    else if(IS_IPHONE_6)
+    {
+        heightOfTopBar = heightOfNavBar+9;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heightOfTopBar = heightOfNavBar+10;
+    }
+    else
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    constHeaderTopY.constant = heightOfNavBar;
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];
     [self.view addSubview:topBarView.view];
     [topBarView didMoveToParentViewController:self];
-    
+    topBarView.view.backgroundColor = [UIColor blackColor];
     __block typeof(self) weakSelf = self;
     topBarView.homeAction = ^(void) {
         //        currentPageDownScroll = 0;
@@ -460,7 +645,7 @@
         //        MainPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:MAIN_PAGE_VIEW];
         //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
         
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     };
     topBarView.contactAction = ^(void) {
         //        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
@@ -823,7 +1008,8 @@
     return nil;
 }
 
-- (void)callAPIToGetTheComicsWithPageNumber:(NSUInteger)page andTimelinePeriod:(NSString *)period andDirection:(NSString *)direction shouldClearAllData:(BOOL)clearData {
+- (void)callAPIToGetTheComicsWithPageNumber:(NSUInteger)page andTimelinePeriod:(NSString *)period andDirection:(NSString *)direction shouldClearAllData:(BOOL)clearData
+{
     [MeAPIManager getTimelineWithPageNumber:page
                              timelinePeriod:period
                                   direction:direction
@@ -876,7 +1062,8 @@
                                    
                                    
                                    self.lblComicCount.text =  @"0 Comic";
-                                   if(clearData) {
+                                   if(clearData)
+                                   {
                                        [comicsArray removeAllObjects];
                                        lastPageDownScroll = [comicsModelObj.pagination.last integerValue];
                                        currentPageDownScroll = [comicsModelObj.pagination.current integerValue];
@@ -914,7 +1101,7 @@
                                    [self.tableview reloadData];
                                    
                                    //Dinesh
-                                   CGSize size = [[[AppHelper initAppHelper] getCurrentUser].first_name sizeWithAttributes:
+                                   /*CGSize size = [[[AppHelper initAppHelper] getCurrentUser].first_name sizeWithAttributes:
                                                   @{NSFontAttributeName:
                                                         [UIFont systemFontOfSize:17]}];
                                    
@@ -940,7 +1127,19 @@
                                                                              self.lblFirstName.frame.origin.y + self.lblFirstName.frame.size.height + 5,
                                                                              100,
                                                                              self.lblComicCount.frame.size.height);
-                                   }
+                                   }*/
+                                   [self.lblFirstName setText:[NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].first_name]];
+                                   
+                                   
+                                   NSMutableAttributedString *strName = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@", [[AppHelper initAppHelper] getCurrentUser].first_name] attributes:@{NSFontAttributeName:self.lblFirstName.font}];
+                                   
+                                   //[self.nameLabel.attributedText mutableCopy];
+                                   [strName appendAttributedString:[[NSAttributedString alloc] initWithString:@"       "]];
+                                   
+                                   NSMutableAttributedString *strName2 = [[NSMutableAttributedString alloc]initWithString:self.lblComicCount.text attributes:@{NSFontAttributeName:self.lblComicCount.font}];
+                                   
+                                   [strName appendAttributedString:strName2];
+                                   self.lblFirstName.attributedText = strName;
                                    //--------------
                                    
                                } andFail:^(NSError *errorMessage) {
@@ -1083,7 +1282,7 @@
         
         [self.FourthButton setHidden:FALSE];
         [self.mFourthDisplaylabel setHidden:FALSE];
-        [self.mFourthHollowlabel setHidden:TRUE];
+        [self.mFourthHollowlabel setHidden:FALSE];
         
         [self.ThirdButton setHidden:FALSE];
         [self.mThirdHollowlabel setHidden:FALSE];

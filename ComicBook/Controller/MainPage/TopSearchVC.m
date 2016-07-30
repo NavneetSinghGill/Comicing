@@ -19,6 +19,8 @@
 #import "AppHelper.h"
 #import "FriendPageVC.h"
 #import "AppDelegate.h"
+#import "MainPageGroupViewController.h"
+#import "PrivateConversationViewController.h"
 
 const int blurViewTag = 1010;
 
@@ -70,6 +72,14 @@ const int blurViewTag = 1010;
         [self.view setAlpha:1.0f];
     } completion:^(BOOL finished) {
     }];
+    if ([parentViewContent isKindOfClass:[MainPageVC class]])
+    {
+        topBarView.isHomeHidden = YES;
+    }
+    else
+    {
+        topBarView.isHomeHidden = NO;
+    }
 }
 
 //you can also write this method in MainViewController to remove the child VC you added before.
@@ -122,16 +132,42 @@ const int blurViewTag = 1010;
 
 - (void)addTopBarView {
     topBarView = [self.storyboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    CGFloat heightOfTopBar;
+    CGFloat heightOfNavBar = 44;
+
+    if (IS_IPHONE_5)
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    else if(IS_IPHONE_6)
+    {
+        heightOfTopBar = heightOfNavBar+9;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heightOfTopBar = heightOfNavBar+10;
+    }
+    else
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];
     [self.view addSubview:topBarView.view];
     [topBarView didMoveToParentViewController:self];
     
     __block typeof(self) weakSelf = self;
     topBarView.homeAction = ^(void) {
+        if ([weakSelf.parentViewController isKindOfClass:[MainPageGroupViewController class]]||[weakSelf.parentViewController isKindOfClass:[PrivateConversationViewController class]])
+        {
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        }
+        else
+        {
         MainPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:MAIN_PAGE_VIEW];
         //        [weakSelf presentViewController:contactsView animated:YES completion:nil];
         [weakSelf.navigationController pushViewController:contactsView animated:YES];
+        }
     };
     topBarView.contactAction = ^(void) {
         //        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
@@ -305,11 +341,12 @@ const int blurViewTag = 1010;
     friend.loginId = self.friendSearchObject.loginId;
     [AppDelegate application].dataManager.friendObject = friend;
     
-    [self performSegueWithIdentifier:@"FriendPageSegue" sender:indexPath];
+    //[self performSegueWithIdentifier:@"FriendPageSegue" sender:indexPath];
     
-    //    __block typeof(self) weakSelf = self;
-    //    FriendPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:FRIEND_PAGE_VIEW];
-    //    [weakSelf.navigationController pushViewController:contactsView animated:YES];
+        __block typeof(self) weakSelf = self;
+        FriendPageVC *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:FRIEND_PAGE_VIEW];
+    NSLog(@"%@",NSStringFromClass([weakSelf.parentViewController class]));
+        [weakSelf.parentViewController.navigationController pushViewController:contactsView animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

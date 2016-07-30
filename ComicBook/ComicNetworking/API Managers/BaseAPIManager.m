@@ -9,6 +9,7 @@
 #import "BaseAPIManager.h"
 #import "AppDelegate.h"
 #import "AppHelper.h"
+#import "GoogleAnalytics.h"
 
 NSString * const CONTENT_TYPE_JSON = @"text/html";
 
@@ -46,6 +47,7 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
              [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
              successBlock(responseObject,operation);
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             [[GoogleAnalytics sharedGoogleAnalytics] logExceptions:operation.responseString];
              [AppHelper showHUDLoader:NO];
              [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
              failBlock(error);
@@ -85,6 +87,7 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
           failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          NSString* strg = [self jsonString:operation.responseString];
+         [[GoogleAnalytics sharedGoogleAnalytics] logExceptions:operation.responseString];
          [AppHelper showHUDLoader:NO];
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          if (strg && ![strg isEqualToString:@""]) {
@@ -130,6 +133,7 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
          failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          NSString* strg = [self jsonString:operation.responseString];
+         [[GoogleAnalytics sharedGoogleAnalytics] logExceptions:operation.responseString];
          [AppHelper showHUDLoader:NO];
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          if (strg && ![strg isEqualToString:@""]) {
@@ -173,19 +177,28 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
     if ([AppHelper getNonceId] && ![[AppHelper getNonceId] isEqualToString:@""]) {
         [manager.requestSerializer setValue:[AppHelper getNonceId] forHTTPHeaderField:@"Nonce"];
     }
+    NSLog(@"URL : %@",urlString);
+    NSLog(@"Nonce : %@",[AppHelper getNonceId]);
+    NSLog(@"Authorization : %@",[AppHelper getAuthId]);
+    
     manager.operationQueue.maxConcurrentOperationCount = 1;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [manager GET:urlString
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation,id responseObject) {
              [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-             if ([[responseObject valueForKey:@"result"] isEqualToString:@"failed"]) {
-                 failBlock(@"");
-             }else{
+             
+             if ([[responseObject valueForKey:@"result"] isEqualToString:@"failed"])
+             {
+                 
+                 successBlock(nil);
+             }
+             else
+             {
                  successBlock(responseObject);
              }
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//             [AppHelper showHUDLoader:NO];
+             [[GoogleAnalytics sharedGoogleAnalytics] logExceptions:operation.responseString];
              [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
              failBlock(error);
          }];
@@ -223,6 +236,7 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
      }
           failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         [[GoogleAnalytics sharedGoogleAnalytics] logExceptions:operation.responseString];
          [AppHelper showHUDLoader:NO];
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          failBlock(error);
@@ -252,6 +266,7 @@ NSString * const CONTENT_TYPE_JSON = @"text/html";
      }
          failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         [[GoogleAnalytics sharedGoogleAnalytics] logExceptions:operation.responseString];
          [AppHelper showHUDLoader:NO];
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          failBlock(error);

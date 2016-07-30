@@ -49,7 +49,7 @@
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     UIImageView *img=[cell viewWithTag:1];
     CommentModel *commentModel = [CommentPeopleArray objectAtIndex:indexPath.row];
-    [img sd_setImageWithURL:[NSURL URLWithString:commentModel.profilePic]];
+    [img sd_setImageWithURL:[NSURL URLWithString:commentModel.profilePic] placeholderImage:nil options:SDWebImageRetryFailed];
 }
 - (IBAction)commenters:(id)sender {
     [[self delegate]commentersPressedAtRow:self.row];

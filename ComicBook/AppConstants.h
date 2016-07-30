@@ -27,6 +27,8 @@
 #define USER_UPDATE [BASE_URL stringByAppendingFormat:@"users/id/"]
 #define LOGIN [BASE_URL stringByAppendingFormat:@"auth/"]
 #define REGISTER_PHONECONTACT [BASE_URL stringByAppendingFormat:@"contacts/"]
+#define PHONECONTACT_FRIENDS_LIST_BY_USERID [BASE_URL stringByAppendingFormat:@"contacts/id/"]
+
 #define COMIC_CREATE [BASE_URL stringByAppendingFormat:@"comics/"]
 #define COUNTRIES_ALL [BASE_URL stringByAppendingFormat:@"countries"]
 #define IMAGE_UPLOADER @"imageUploader.php"
@@ -35,7 +37,10 @@
 #define COUNTRIES_ALL  [BASE_URL stringByAppendingFormat:@"countries"]
 /* */
 
-#define INVITE_TEXT @"Add me to Comicing  Username:%@ www.AreYouComicing.com"
+//find out more about my life with comicing ! Add me at <username> www.AreYouComicing.com
+
+
+#define INVITE_TEXT(str) str ? [NSString stringWithFormat:@"find out more about my life with Comicing!  Add me @%@ www.AreYouComicing.com", str] : @"find out more about my life with Comicing! www.AreYouComicing.com"
 
 #define ImagePlaceHolder_COLOUR @[@"ffffff",@"ff3300",@"3399ff",@"ffcc33",@"33cc66",@"9966cc",@"ff3366",@"99cc00",@"3333cc",@"996633",@"000000"]
 
@@ -83,3 +88,10 @@
 #define ERROR_MESSAGE @"Oops!  Something went wrong"
 #define DEFAULT_EMAIL @"comic@comicing.cc"
 #define DEFAULT_PHONENUMBER @"0000000000"
+
+#define DEFAULT_EMOJI @"UIKeyboardEmojiCategoryNature"
+
+#define INVITE_POINT_PERINVITE 8
+#define INVITE_POINT_50 50
+#define INVITE_POINT_100 100
+#define INVITE_POINT_200 200

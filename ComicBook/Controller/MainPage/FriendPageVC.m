@@ -25,6 +25,8 @@
 #import "AppHelper.h"
 #import "AppDelegate.h"
 #import "AppConstants.h"
+#define arielBlackFont @"Arial-Black"
+
 
 //#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 //#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -123,8 +125,25 @@
     //    self.profilePicButton.backgroundColor = [UIColor grayColor];
     self.profileImageView.layer.cornerRadius = CGRectGetHeight(self.profileImageView.frame) / 2;
     self.profileImageView.clipsToBounds = YES;
-    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:[AppDelegate application].dataManager.friendObject.profilePic]];
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:[AppDelegate application].dataManager.friendObject.profilePic] placeholderImage:nil options:SDWebImageRetryFailed];
     [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@", [AppDelegate application].dataManager.friendObject.firstName, [AppDelegate application].dataManager.friendObject.lastName]];
+    if (IS_IPHONE_5)
+    {
+        self.nameLabel.font = [UIFont fontWithName:arielBlackFont size:13.f];
+        self.totalComicCountLabel.font = [self.totalComicCountLabel.font fontWithSize:13.f];
+    }
+    else if (IS_IPHONE_6)
+    {
+        
+        self.nameLabel.font = [UIFont fontWithName:arielBlackFont size:14.f];
+        self.totalComicCountLabel.font = [self.totalComicCountLabel.font fontWithSize:14.f];
+
+    }
+    else if(IS_IPHONE_6P)
+    {
+        self.nameLabel.font = [UIFont fontWithName:arielBlackFont size:15.f];
+        self.totalComicCountLabel.font = [self.totalComicCountLabel.font fontWithSize:15.f];
+    }
     
     [self addUIRefreshControl];
     currentPageDownScroll = 0;
@@ -168,6 +187,7 @@
     [self.mNowHollowlabel setHidden:YES];
     
     [self setBubbleLabels];
+    [self callApiForIsFriendStatus];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -179,7 +199,15 @@
     
     
 }
-
+-(void)viewDidLayoutSubviews
+{
+    self.profilePicButton.layer.cornerRadius = CGRectGetHeight(self.profilePicButton.frame) / 2;
+    //    self.profilePicButton.backgroundColor = [UIColor grayColor];
+    self.profileImageView.layer.cornerRadius = CGRectGetHeight(self.profileImageView.frame) / 2;
+    UIView *headerblank = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, 5)];
+    headerblank.backgroundColor = [UIColor clearColor];
+    self.tableview.tableHeaderView = headerblank;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -212,21 +240,46 @@
     
     return tableView.bounds.size.height-height;*/
     
-    int height=0;
-    if(IS_IPHONE_5)
-    {
-        height=129;
-    }
-    else if(IS_IPHONE_6)
-    {
-        height= 159;
-    }
-    else if(IS_IPHONE_6P)
-    {
-        height= 189;
-    }
-    return tableView.bounds.size.height-height;
     
+    
+    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+
+    
+    if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+    {
+        int height=0;
+        if(IS_IPHONE_5)
+        {
+            height = 129;
+        }
+        else if(IS_IPHONE_6)
+        {
+            height= 159;
+        }
+        else if(IS_IPHONE_6P)
+        {
+            height= 189;
+        }
+        return tableView.bounds.size.height-height;
+
+    }
+    else
+    {
+        int height=0;
+        if(IS_IPHONE_5)
+        {
+            height = 69;
+        }
+        else if(IS_IPHONE_6)
+        {
+            height= 99;
+        }
+        else if(IS_IPHONE_6P)
+        {
+            height= 129;
+        }
+        return tableView.bounds.size.height-height;
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -249,9 +302,35 @@
         comic.delegate=self;
         comic.Tag=(int)indexPath.row;
         
-        comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+       
         
         ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+
+        CGRect lblFrame = cell.lblComicTitle.frame;
+        
+        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        {
+            cell.lblComicTitle.text = @"";
+            cell.lblComicTitle.hidden = YES;
+            
+            CGRect frameViewComicBook = cell.viewComicBook.frame;
+            frameViewComicBook.origin.y = lblFrame.origin.y;
+            frameViewComicBook.size.height = cell.frame.size.height;
+            cell.viewComicBook.frame = frameViewComicBook;
+            
+            cell.lblComicTitle.frame = lblFrame;
+            
+        }
+        else
+        {
+            cell.lblComicTitle.text = comicBook.comicTitle;
+            cell.lblComicTitle.hidden = NO;
+            
+            cell.lblComicTitle.frame = lblFrame;
+        }
+        
+         comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+        
         
         // vishnu
         NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
@@ -409,7 +488,27 @@
 
 - (void)addTopBarView {
     topBarView = [self.storyboard instantiateViewControllerWithIdentifier:TOP_BAR_VIEW];
-    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    
+    CGFloat heightOfTopBar;
+    CGFloat heightOfNavBar = 44;
+    if (IS_IPHONE_5)
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    else if(IS_IPHONE_6)
+    {
+        heightOfTopBar = heightOfNavBar+9;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heightOfTopBar = heightOfNavBar+10;
+    }
+    else
+    {
+        heightOfTopBar = heightOfNavBar+6;
+    }
+    const_headerTopY.constant = heightOfNavBar-20;
+    [topBarView.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, heightOfTopBar)];
     [self addChildViewController:topBarView];
     [self.view addSubview:topBarView.view];
     [topBarView didMoveToParentViewController:self];
@@ -418,7 +517,10 @@
     topBarView.homeAction = ^(void) {
         currentPageDownScroll = 0;
         currentPageUpScroll = 0;
-        [weakSelf callAPIToGetTheComicsWithPageNumber:currentPageDownScroll + 1  andTimelinePeriod:@"" andDirection:@"" shouldClearAllData:YES];
+       
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        //commented By Sanjay: Want to dismiss this view.
+        //[weakSelf callAPIToGetTheComicsWithPageNumber:currentPageDownScroll + 1  andTimelinePeriod:@"" andDirection:@"" shouldClearAllData:YES];
     };
     topBarView.contactAction = ^(void) {
 //        ContactsViewController *contactsView = [weakSelf.storyboard instantiateViewControllerWithIdentifier:CONTACTS_VIEW];
@@ -462,7 +564,6 @@
     
     if(value>0&&value<2.8)
     {
-        
         self.NameView.alpha=1-value/4;
     }
 }
@@ -675,7 +776,25 @@
     
     return nil;
 }
-
+-(void)callApiForIsFriendStatus
+{
+    
+    //Get List of friends and check if this user is friend of current user
+    [self getFriendsList:^(id object) {
+        
+        BOOL isAlreadyFriend = NO;
+        if(![object isKindOfClass:[NSString class]])
+            for (Friend *frd in object)
+            {
+                if ([frd.friendId isEqualToString:[AppDelegate application].dataManager.friendObject.userId])
+                {
+                    // unfriend API
+                    self.btn_follow.selected = YES;
+                    break;
+                }
+            }
+    }];
+}
 - (UILabel *)getDisplayabel: (UIButton *)sender
 {
     
@@ -701,10 +820,20 @@
      }];
 }
 
-- (IBAction)tappedUserPic:(id)sender {
+- (IBAction)tappedFollow:(id)sender {
     
-    //Get List of friends and check if this user is friend of current user
-    [self getFriendsList:^(id object) {
+    
+    if (self.btn_follow.selected)
+    {
+        self.btn_follow.selected = NO;
+        [self callFriendUnfriendAPIWithStatus:@"0"];
+    }
+    else
+    {
+        self.btn_follow.selected = YES;
+        [self callFriendUnfriendAPIWithStatus:@"1"];
+    }
+  /*  [self getFriendsList:^(id object) {
        
         BOOL isAlreadyFriend = NO;
         if(![object isKindOfClass:[NSString class]])
@@ -780,7 +909,7 @@
                   }];
              }];
         }
-    }];
+    }];*/
 }
 
 - (IBAction)tappedBackButton:(id)sender {
@@ -847,8 +976,21 @@
                                    self.totalComicCountLabel.text = [NSString stringWithFormat:@"%@ Comics", comicsModelObj.totalCount];
                                    [self.tableview reloadData];
                                    
+                                   
+                                   [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@", [AppDelegate application].dataManager.friendObject.firstName, [AppDelegate application].dataManager.friendObject.lastName]];
+                                   
+                                   
+                                   NSMutableAttributedString *strName = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@ %@", [AppDelegate application].dataManager.friendObject.firstName, [AppDelegate application].dataManager.friendObject.lastName] attributes:@{NSFontAttributeName:self.nameLabel.font}];
+                                   
+                                   //[self.nameLabel.attributedText mutableCopy];
+                                   [strName appendAttributedString:[[NSAttributedString alloc] initWithString:@"       "]];
+                                   
+                                     NSMutableAttributedString *strName2 = [[NSMutableAttributedString alloc]initWithString:self.totalComicCountLabel.text attributes:@{NSFontAttributeName:self.totalComicCountLabel.font}];
+                                   
+                                   [strName appendAttributedString:strName2];
+                                   self.nameLabel.attributedText = strName;
                                    //Dinesh
-                                   CGSize size = [self.nameLabel.text sizeWithAttributes:
+                                   /*CGSize size = [self.nameLabel.text sizeWithAttributes:
                                                   @{NSFontAttributeName:
                                                         [UIFont boldSystemFontOfSize:17]}];
                                    
@@ -874,7 +1016,7 @@
                                                                              self.nameLabel.frame.origin.y + self.nameLabel.frame.size.height + 5,
                                                                              100,
                                                                              self.totalComicCountLabel.frame.size.height);
-                                   }
+                                   }*/
                                    //--------------
                                    
                                } andFail:^(NSError *errorMessage) {
@@ -983,7 +1125,7 @@
         
         [self.FourthButton setHidden:FALSE];
         [self.mFourthDisplaylabel setHidden:FALSE];
-        [self.mFourthHollowlabel setHidden:TRUE];
+        [self.mFourthHollowlabel setHidden:FALSE];
         
         [self.ThirdButton setHidden:FALSE];
         [self.mThirdHollowlabel setHidden:FALSE];

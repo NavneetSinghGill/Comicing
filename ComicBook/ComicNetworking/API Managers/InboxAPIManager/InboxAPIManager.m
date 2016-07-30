@@ -27,4 +27,19 @@
                                 } showIndicator:NO];
 }
 
++ (void)getFriendsForUserID:(NSString *)userID
+                     SuccessBlock:(void(^)(id object))successBlock
+                          andFail:(void(^)(NSError *errorMessage))failBlock
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@", BASE_URL, GET_FRIENDS_URL, userID];
+    
+    [BaseAPIManager getRequestWithURLString:urlString
+                              withParameter:nil
+                                withSuccess:^(id object) {
+                                    successBlock(object);
+                                } andFail:^(id errorObj) {
+                                    failBlock(errorObj);
+                                } showIndicator:NO];
+}
+
 @end

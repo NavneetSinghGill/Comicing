@@ -35,5 +35,8 @@
 @property(strong,nonatomic)   NSMutableArray* groupsArray;
 @property (assign, nonatomic) BOOL enableSelection;
 
+@property (strong, nonatomic) NSMutableArray *selectedGroups;
+
+
 -(void)getGroupsByUserId;
 @end

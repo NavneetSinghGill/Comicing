@@ -1528,6 +1528,8 @@ NSArray *pointsFromBezierPath(UIBezierPath *bpath)
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"cropFinished"
      object:self];
+    
+    [self.delegate didFinishedTouch];
 }
 
 @end

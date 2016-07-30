@@ -19,44 +19,43 @@
 
 @implementation PrivateConversationCell
 
-@synthesize widthconstraint,btnUser, userProfilePic;
+@synthesize widthconstraint,btnUser, userProfilePic, lblComicTitle;
 
 - (void)awakeFromNib {
     // Initialization code
     
-    if(IS_IPHONE_5)
+    /*if(IS_IPHONE_5)
     {
         btnUser.frame = CGRectMake(CGRectGetMinX(btnUser.frame),
-                                    CGRectGetMinY(btnUser.frame),
-                                    40,
-                                    40);
+                                   CGRectGetMinY(btnUser.frame),
+                                   30,
+                                   30);
         userProfilePic.frame = CGRectMake(CGRectGetMinX(userProfilePic.frame),
-                                   CGRectGetMinY(userProfilePic.frame),
-                                   40,
-                                   40);
-        
+                                            CGRectGetMinY(userProfilePic.frame),
+                                            30,
+                                            30);
     }
     else if(IS_IPHONE_6)
     {
         btnUser.frame = CGRectMake(CGRectGetMinX(btnUser.frame),
-                                    CGRectGetMinY(btnUser.frame) ,
-                                    54,
-                                    54);
+                                   CGRectGetMinY(btnUser.frame) ,
+                                   36,
+                                   36);
         userProfilePic.frame = CGRectMake(CGRectGetMinX(userProfilePic.frame),
-                                   CGRectGetMinY(userProfilePic.frame) ,
-                                   54,
-                                   54);
+                                            CGRectGetMinY(userProfilePic.frame) ,
+                                            36,
+                                            36);
     }
     else if(IS_IPHONE_6P)
     {
         btnUser.frame = CGRectMake(CGRectGetMinX(btnUser.frame),
-                                    CGRectGetMinY(btnUser.frame) ,
-                                    60,
-                                    60);
+                                   CGRectGetMinY(btnUser.frame) ,
+                                   40,
+                                   40);
         userProfilePic.frame = CGRectMake(CGRectGetMinX(userProfilePic.frame),
-                                   CGRectGetMinY(userProfilePic.frame) ,
-                                   60,
-                                   60);
+                                            CGRectGetMinY(userProfilePic.frame) ,
+                                            40,
+                                            40);
     }
     
     
@@ -65,8 +64,45 @@
     btnUser.clipsToBounds = YES;
     
 //    userProfilePic.layer.cornerRadius = CGRectGetHeight(userProfilePic.frame) / 2;
-    userProfilePic.clipsToBounds = YES;
+    userProfilePic.clipsToBounds = YES;*/
+    
+    CGFloat heiWei;
+    
+    if (IS_IPHONE_5)
+    {
+        heiWei = 30;
+        _mUserName.font = [_mUserName.font fontWithSize:8.f];
+        self.lblDate.font = [self.lblDate.font fontWithSize:8.f];
+        
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:23];
 
+        
+    }
+    else if (IS_IPHONE_6)
+    {
+        heiWei = 30;
+        _mUserName.font = [_mUserName.font fontWithSize:9.f];
+        self.lblDate.font = [self.lblDate.font fontWithSize:9.f];
+        
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:26];
+
+    }
+    else if (IS_IPHONE_6P)
+    {
+        heiWei = 30;
+        _mUserName.font = [_mUserName.font fontWithSize:10.f];
+        self.lblDate.font = [self.lblDate.font fontWithSize:10.f];
+        
+        lblComicTitle.font = [UIFont fontWithName:@"Arial-BoldMT" size:29];
+
+    }
+    
+    _const_Width.constant = heiWei;
+    _const_Height.constant = heiWei;
+    btnUser.layer.cornerRadius = heiWei / 2;
+    btnUser.layer.masksToBounds = YES;
+    userProfilePic.layer.cornerRadius = heiWei / 2;
+    userProfilePic.layer.masksToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

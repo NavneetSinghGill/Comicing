@@ -17,10 +17,13 @@
 @interface ComicBookVC : UIViewController
 -(void)setupBook;
 @property(nonatomic,assign) int Tag;
-@property(nonatomic,strong)NSArray *images;
-@property(nonatomic,strong)NSArray *slidesArray;
+@property(nonatomic,strong) NSArray *images;
+@property(nonatomic,strong) NSArray *slidesArray;
+
+@property BOOL isSlidesContainImages;
 
 @property(nonatomic,strong)id<BookChangeDelegate>delegate;
+
 - (void)ResetBook;
 
 @end

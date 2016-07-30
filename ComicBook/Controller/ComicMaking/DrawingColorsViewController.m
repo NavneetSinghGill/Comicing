@@ -26,14 +26,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnCyan;
 @property (weak, nonatomic) IBOutlet UIButton *btnPink;
 @property (weak, nonatomic) IBOutlet UIButton *btnPurple;
-
+@property (weak, nonatomic) IBOutlet UIButton *btnReference;
+@property (nonatomic) BOOL isAlreadyDouble;
 @property (nonatomic, strong) ComicMakingViewController *parentViewController;
 
 @end
 
 @implementation DrawingColorsViewController
 
-@synthesize btnBlack,btnBlue,btnBrown,btnGreen,btnRed,btnUndo,btnWhite,btnYellow,btnCyan,btnOrange,btnPink,btnPurple;
+@synthesize btnBlack,btnBlue,btnBrown,btnGreen,btnRed,btnUndo,btnWhite,btnYellow,btnCyan,btnOrange,btnPink,btnPurple,btnReference,isAlreadyDouble;
 @synthesize parentViewController;
 
 #pragma mark - UIViewController Methods
@@ -42,6 +43,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setColorButtonsSize];
+    
+    btnReference = btnRed;
+    
 }
 
 - (void)setColorButtonsSize
@@ -49,7 +53,7 @@
     CGFloat dx;
     CGFloat dy;
     
-    if (IS_IPHONE_5)
+    /*if (IS_IPHONE_5)
     {
         dx = 14;
         dy = 14;
@@ -63,8 +67,10 @@
     {
         dx = 14;
         dy = 14;
-    }
-    
+    }*/
+    dx = 4.5f;
+    dy = 4.5f;
+
     CALayer *subblack = [CALayer new];
     subblack.frame = CGRectInset(btnBlack.bounds, dx, dy);
     btnBlack.layer.cornerRadius = CGRectGetHeight(btnBlack.frame) / 2;
@@ -179,6 +185,7 @@
 
 - (IBAction)btnDrawingTap:(UIButton *)sender
 {
+    
     [UIView beginAnimations:@"ScaleButton" context:NULL];
     [UIView setAnimationDuration: 0.2f];
     btnBlack.transform = CGAffineTransformMakeScale(1,1);
@@ -196,7 +203,25 @@
     
     [UIView beginAnimations:@"ScaleButton" context:NULL];
     [UIView setAnimationDuration: 0.2f];
-    sender.transform = CGAffineTransformMakeScale(2,2);
+    if (btnReference!=sender)
+    {
+        isAlreadyDouble = NO;
+        btnReference=sender;
+        sender.transform = CGAffineTransformMakeScale(1.8f,1.8f);
+    }
+    else
+    {
+        if (isAlreadyDouble)
+        {
+            isAlreadyDouble = NO;
+            sender.transform = CGAffineTransformMakeScale(1.8f,1.8f);
+        }
+        else
+        {
+            isAlreadyDouble = YES;
+            sender.transform = CGAffineTransformMakeScale(3.2f,3.2f);
+        }
+    }
     [UIView commitAnimations];
     
     if (sender == btnWhite)
@@ -229,6 +254,7 @@
     }
     else if (sender == btnPink)
     {
+        btnReference = btnPink;
         [parentViewController drawingColorTapEventWithColor:@"pink"];
     }
     else if (sender == btnPurple)
@@ -243,11 +269,27 @@
     {
         [parentViewController drawingColorTapEventWithColor:@"cyan"];
     }
-
+        
 }
 
 - (IBAction)btnUndoTap:(id)sender
 {
     [parentViewController drawingUndoTap];
+}
+-(void)allScaleToNormal
+{
+      btnReference = btnRed;
+    isAlreadyDouble = NO;
+    btnBlack.transform = CGAffineTransformMakeScale(1,1);
+    btnBlue.transform = CGAffineTransformMakeScale(1,1);
+    btnBrown.transform = CGAffineTransformMakeScale(1,1);
+    btnGreen.transform = CGAffineTransformMakeScale(1,1);
+    btnRed.transform = CGAffineTransformMakeScale(1,1);
+    btnWhite.transform = CGAffineTransformMakeScale(1,1);
+    btnYellow.transform = CGAffineTransformMakeScale(1,1);
+    btnCyan.transform = CGAffineTransformMakeScale(1,1);
+    btnPink.transform = CGAffineTransformMakeScale(1,1);
+    btnPurple.transform = CGAffineTransformMakeScale(1,1);
+    btnOrange.transform = CGAffineTransformMakeScale(1,1);
 }
 @end

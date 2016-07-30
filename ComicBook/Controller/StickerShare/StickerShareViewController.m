@@ -16,8 +16,8 @@
 
 @implementation StickerShareViewController
 
-- (void)viewDidLoad {
-    
+- (void)viewDidLoad
+{
     [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"StickerShare" Attributes:nil];
     
     [self prepareView];
@@ -43,7 +43,7 @@
     self.imgSelectedSticker = imgSticker;
 }
 
--(UIImage*)createImageWithLogo:(UIImage*)imgActualImage{
+/*-(UIImage*)createImageWithLogo:(UIImage*)imgActualImage{
     
     //Image with out topbottom transpancey
     UIImage* imgWithOutAlpha = [imgActualImage imageByTrimmingTransparentPixels];
@@ -77,6 +77,59 @@
     
     viewHolder = nil;
     imageViewSticker = nil;
+    
+    return imgShareTo;
+}*/
+
+
+-(UIImage*)createImageWithLogo:(UIImage*)imgActualImage{
+    
+    //lets fix the share sticker size
+    //w = 110;
+    //h = 155;
+    
+    //Selected image adding to imageview
+    UIImageView *imageViewSticker = [[UIImageView alloc] initWithImage:imgActualImage];
+    imageViewSticker.frame = CGRectMake(50, 50, 110, 155);
+    [imageViewSticker setContentMode:UIViewContentModeScaleAspectFit];
+    
+    //get logo
+    UIImage* imgStickerLogo = [UIImage imageNamed:@"ShareStickerLogo"];
+    
+    
+    //lets fix the share footer logo size
+    //w = 133;
+    //h = 28;
+    
+    //Selected image adding to imageview
+    UIImageView *imageViewStLogo = [[UIImageView alloc] initWithImage:imgStickerLogo];
+    imageViewStLogo.frame = CGRectMake(38, 225, 133, 28);
+    [imageViewStLogo setContentMode:UIViewContentModeScaleAspectFit];
+    
+    //Calculating Framesize
+    UIView* viewHolder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 210, 293)];
+    [viewHolder setClipsToBounds:YES];
+    
+    [viewHolder setBackgroundColor:[UIColor clearColor]];
+    [viewHolder addSubview:imageViewSticker];
+    [viewHolder addSubview:imageViewStLogo];
+    
+    //Generating image
+    UIImage* imgShareTo = [UIImage imageWithView:viewHolder paque:NO];
+    
+    viewHolder = nil;
+    imageViewSticker = nil;
+    
+    //---------------------
+    //uncomment to check the file type and quality
+    /*NSData *pngData = UIImagePNGRepresentation(imgShareTo);
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"wa_image.png"]; //Add the file name
+    [pngData writeToFile:filePath atomically:YES]; //Write the file*/
+    //---------------------
+    
     
     return imgShareTo;
 }

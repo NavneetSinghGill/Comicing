@@ -65,14 +65,17 @@
 }
 
 
--(void)configView{
-    
+-(void)configView
+{
+
     self.friendsListTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.friendsListTableView.sectionIndexColor = [UIColor blackColor];
     self.friendsListTableView.sectionIndexTrackingBackgroundColor = [UIColor clearColor];
     self.friendsListTableView.sectionIndexBackgroundColor = [UIColor clearColor];
     self.enableInvite = YES;
 }
+
+
 
 - (void)setNeedsLayout{
     
@@ -112,7 +115,7 @@
     
     if ([headerTitle isEqualToString:@"!"])
     {
-        return @" ";
+        return nil;
     }
     
     
@@ -149,6 +152,8 @@
 
     return [alphabetsSectionTitles indexOfObject:title];
 }
+
+
 
 // This will tell your UITableView what data to put in which cells in your table.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -405,19 +410,31 @@
     // header.contentView.backgroundColor = [UIColor blackColor];
 }
 
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    pointNow = scrollView.contentOffset;
+
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [ self.delegate scrollViewDidScroll:scrollView];
+    if (scrollView.contentOffset.y < pointNow.y)
+    {
+        NSLog(@"down");
+    }
+    else if (scrollView.contentOffset.y > pointNow.y)
+    {
+        NSLog(@"up");
+    }
+    
+    [self.delegate scrollViewDidScroll:scrollView withTableView:self.friendsListTableView];
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
                      withVelocity:(CGPoint)velocity
               targetContentOffset:(inout CGPoint *)targetContentOffset
 {
-    
-    
-    [self.delegate scrollViewWillEndDragging:scrollView withVelocity:velocity targetContentOffset:targetContentOffset];
+    [self.delegate scrollViewWillEndDragging:scrollView withVelocity:velocity targetContentOffset:targetContentOffset withTableView:self.friendsListTableView];
 }
 
 - (void)searchFriendByString:(NSString *)searchString
@@ -429,8 +446,7 @@
         friendsDictWithAlpabets = [[NSMutableDictionary alloc] init];
         
         friendsDictWithAlpabets = saveFriendsDictWithAlpabets;
-         alphabetsSectionTitles = saveAlphabetsSectionTitles;
-
+        alphabetsSectionTitles = saveAlphabetsSectionTitles;
     }
     else
     {
@@ -517,7 +533,7 @@
         
         NSString *loginID = [NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].login_id];
         
-        NSString *inviteString = [NSString stringWithFormat:INVITE_TEXT,loginID];
+        NSString *inviteString = INVITE_TEXT(loginID);
         
         
         if (usSelection.mobile != nil)

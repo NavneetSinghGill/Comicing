@@ -11,6 +11,7 @@
 #import "CropStickerViewController.h"
 #import "stickerCell.h"
 #import "AppConstants.h"
+#import "InviteScore.h"
 
 //#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 //#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -79,7 +80,46 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 
 - (NSArray *)getDefaultStickers
 {
-    NSArray *imageNames = @[@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"];
+    float scoreValue = [self getCurrentScoreFromDB];
+
+    NSMutableArray *imageNames = [[NSMutableArray alloc] init];
+    
+    if (scoreValue >= INVITE_POINT_200)
+    {
+        imageNames = [NSMutableArray arrayWithArray:@[@"st10",@"st11",@"st12",@"st13",@"st14",@"st15",@"st16",@"st17",@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"]];
+    }
+    else if(scoreValue >= INVITE_POINT_100 &&
+             scoreValue <= INVITE_POINT_200)
+    {
+        imageNames = [NSMutableArray arrayWithArray:@[@"st10",@"st11",@"st12",@"st13",@"st14",@"st15",@"st16",@"st17",@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"]];
+    }
+    else if(scoreValue >= INVITE_POINT_50 &&
+             scoreValue <= INVITE_POINT_100)
+    {
+        imageNames = [NSMutableArray arrayWithArray:@[@"st10",@"st11",@"st12",@"st13",@"st14",@"st15",@"st16",@"st17",@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"]];
+    }
+    else
+    {
+        imageNames = [NSMutableArray arrayWithArray:@[@"st10",@"st11",@"st12",@"st13",@"st14",@"st15",@"st16",@"st17",@"st1",@"st2",@"st3",@"st4",@"st5",@"st6",@"st7",@"st8",@"st9"]];
+    }
+
+    
+    if ([AppHelper isNiceGiftBoxOpened])
+    {
+        [imageNames addObjectsFromArray:@[ @"stickers_00_0001",@"stickers_00_0002",@"stickers_00_0003",@"stickers_00_0004",@"stickers_00_0005"]];
+    }
+    
+    if ([AppHelper isAwesomeGiftBoxOpened])
+    {
+        [imageNames addObjectsFromArray:@[@"stickers_00_0006",@"stickers_00_0007",@"stickers_00_0008",@"stickers_00_0009",@"stickers_00_0010",@"stickers_00_0011",@"stickers_00_0012",@"stickers_00_0013",@"stickers_00_0014",@"stickers_00_0015"]];
+    }
+    
+    if([AppHelper isExoticGiftBoxOpened])
+    {
+        [imageNames addObjectsFromArray:@[@"emoji_01",@"emoji_02",@"emoji_03",@"emoji_04",@"emoji_05",
+                                          @"emoji_06",@"emoji_07",@"emoji_08",@"emoji_09",@"emoji_10",
+                                          @"emoji_11",@"emoji_12",@"emoji_13",@"emoji_14",@"emoji_15"]];
+    }
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     
@@ -118,6 +158,20 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     return array;
 }
 
+-(float)getCurrentScoreFromDB{
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"InviteScore"];
+    NSError *error      = nil;
+    NSArray *results    = [context executeFetchRequest:fetchRequest error:&error];
+    if ([results count] == 0) {
+        return 0;
+    }else{
+        NSString* scoreValue = ((InviteScore*)results[0]).scoreValue;
+        CGFloat fScoreValue = [scoreValue floatValue];
+        return fScoreValue;
+    }
+}
 
 - (NSArray *)getStickerWithoutShadow
 {

@@ -35,6 +35,7 @@
 #import "CropRegisterViewController.h"
 #import "AppHelper.h"
 #import "UIImage+ColorAtPixel.h"
+#import "InstructionView.h"
 
 static void * CapturingStillImageContext = &CapturingStillImageContext;
 static void * RecordingContext = &RecordingContext;
@@ -42,7 +43,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 static int CaptionViewTextViewTag = 9191;
 static CGRect CaptionTextViewMinRect;
 
-@interface ComicMakingViewController ()<ACEDrawingViewDelegate,CropStickerViewControllerDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,AVAudioRecorderDelegate,UITextViewDelegate,ZoomTransitionProtocol,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface ComicMakingViewController ()<ACEDrawingViewDelegate,CropStickerViewControllerDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,AVAudioRecorderDelegate,UITextViewDelegate,ZoomTransitionProtocol,UINavigationControllerDelegate,UIImagePickerControllerDelegate,InstructionViewDelegate>
 {
     CGPoint backupOtherViewCenter;
     CGPoint backupToolCenter;
@@ -136,6 +137,8 @@ static CGRect CaptionTextViewMinRect;
 @property (nonatomic, strong) id<ComicItem> comicItem;
 @property (nonatomic,strong) NSMutableArray* comicItemArray;
 @property (nonatomic,strong) RowButtonsViewController *rowButton;
+@property (nonatomic) BOOL isAlreadyDoubleDrawColor;
+@property (nonatomic) UIColor *onColor;
 
 @property BOOL captionHeightSmall;
 
@@ -144,7 +147,7 @@ static CGRect CaptionTextViewMinRect;
 @implementation ComicMakingViewController
 
 @synthesize viewCameraPreview, viewCamera, imgvComic, uploadIcon, viewStickerList, viewRowButtons;
-@synthesize drawingColor,viewDrawing,frameDrawingView, drawView, centerImgvComic,lastScale, btnClose,bubbleListView,exclamationListView,shrinkHeight,viewFrame, shrinkCount, previousTimestamp, isNewSlide,viewBlackBoard,frameBlackboardView;
+@synthesize drawingColor,viewDrawing,frameDrawingView, drawView, centerImgvComic,lastScale, btnClose,bubbleListView,exclamationListView,shrinkHeight,viewFrame, shrinkCount, previousTimestamp, isNewSlide,viewBlackBoard,frameBlackboardView,onColor,isAlreadyDoubleDrawColor;
 @synthesize comicPage,printScreen, isSlideShrink,frameImgvComic,pinchGesture;
 
 #pragma mark - UIViewController Methods
@@ -171,6 +174,34 @@ static CGRect CaptionTextViewMinRect;
         self.fileNameToSave = @"ComicSlide";
     }
     
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterSecondTimeComicMaking] == YES)
+    {
+        // open slideB Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+            if ([InstructionView getBoolValueForSlide:kInstructionSlide15] == YES)
+            {
+                if ([InstructionView getBoolValueForSlide:kInstructionSlideB] == NO)
+                {
+                    InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                    instView.delegate = self;
+                    [instView showInstructionWithSlideNumber:SlideNumberB withType:InstructionBubbleType];
+                    [instView setTrueForSlide:kInstructionSlideB];
+                    
+                    [self.view addSubview:instView];
+                }
+                
+            }
+            
+            
+            
+        });
+    }
+
+    
     [self prepareGlideView];
     
     [self prepareCaptionView];
@@ -179,12 +210,29 @@ static CGRect CaptionTextViewMinRect;
     
     
     viewCameraPreview.hidden = YES;
+    
+    // open Instruction
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSLog(@"Do some work");
+        
+       if ([InstructionView getBoolValueForSlide:kInstructionSlide1] == NO)
+       {
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber1 withType:InstructionBoxType];
+            [instView setTrueForSlide:kInstructionSlide1];
+            
+            [self.view addSubview:instView];
+        }
+    });
+    
+    
+   
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
-    
     [self addNotificationCenter];
 }
 
@@ -204,12 +252,24 @@ static CGRect CaptionTextViewMinRect;
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self removeNotificationCenter];
-    if (self.isMovingFromParentViewController || self.isBeingDismissed) {
+    if (self.isMovingFromParentViewController || self.isBeingDismissed)
+    {
         imgvComic.image = nil;
         imgvComic = nil;
         
         self.ImgvComic2.image = nil;
         self.ImgvComic2 = nil;
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES) {
+            //    // user firsttime enter
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsUserEnterSecondTimeComicMaking];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
+        
+        //    // user firsttime enter
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsUserEnterFirstTimeComicMaking];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
@@ -297,6 +357,7 @@ static CGRect CaptionTextViewMinRect;
     viewBlackBoard.alpha = 0;
 
     
+    
     for (UIViewController *controller in self.childViewControllers)
     {
         if ([controller isKindOfClass:[RowButtonsViewController class]])
@@ -313,6 +374,31 @@ static CGRect CaptionTextViewMinRect;
         [self.btnSend setEnabled:NO];
         
         [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"SlideCreate" Action:@"Create" Label:@""];
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES)
+        {
+            // open slide 11 Instruction
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                NSLog(@"Do some work");
+                
+                 if ([InstructionView getBoolValueForSlide:kInstructionSlide15] == NO)
+                {
+                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                instView.delegate = self;
+                [instView showInstructionWithSlideNumber:SlideNumber15 withType:InstructionBubbleType];
+                [instView setTrueForSlide:kInstructionSlide15];
+                
+                [self.view addSubview:instView];
+                }
+            });
+            
+            
+            //second time user enter in comicmaking
+            
+            
+        }
+
     }
     else
     {
@@ -586,7 +672,6 @@ static CGRect CaptionTextViewMinRect;
 }
 
 #pragma mark - Camera Methods
-
 - (BOOL)isSessionRunningAndDeviceAuthorized
 {
     return [[self session] isRunning] && [self isDeviceAuthorized];
@@ -1031,7 +1116,8 @@ static CGRect CaptionTextViewMinRect;
         [ComicMakingViewController setFlashMode:AVCaptureFlashModeAuto forDevice:[[self videoDeviceInput] device]];
         
         // Capture a still image.
-        [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+        [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
+        {
             
             if (imageDataSampleBuffer)
             {
@@ -1062,7 +1148,84 @@ static CGRect CaptionTextViewMinRect;
                 btnClose.hidden = NO;
                 [self setComicImageViewSize];
                 [self doAutoSave:nil];
-            }
+                
+                // open slide 2 Instruction
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    NSLog(@"Do some work");
+                    
+                    if ([InstructionView getBoolValueForSlide:kInstructionSlide3] == NO)
+                    {
+                    InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                    instView.delegate = self;
+                    [instView showInstructionWithSlideNumber:SlideNumber3 withType:InstructionBubbleType];
+                    [instView setTrueForSlide:kInstructionSlide3];
+                    
+                    [self.view addSubview:instView];
+                    }
+                });
+                
+                
+                if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES)
+                {
+                    
+                    
+
+                    
+                    // open slide 12 Instruction
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        NSLog(@"Do some work");
+                        
+                        if ([InstructionView getBoolValueForSlide:kInstructionSlide12repeat] == NO)
+                        {
+                            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                            instView.delegate = self;
+                            [instView showInstructionWithSlideNumber:SlideNumber12 withType:InstructionGIFType];
+                            [instView setTrueForSlide:kInstructionSlide12repeat];
+                            
+                            [self.view addSubview:instView];
+                        }
+                    });
+
+                    
+                    
+                    // open slide 16 Instruction
+//                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+//                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                        NSLog(@"Do some work");
+//                        
+//                         if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == NO)
+//                        {
+//                        InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+//                        instView.delegate = self;
+//                        [instView showInstructionWithSlideNumber:SlideNumber16 withType:InstructionBubbleType];
+//                        [instView setTrueForSlide:kInstructionSlide16];
+//                        
+//                        [self.view addSubview:instView];
+//                         }
+//                    });
+                
+                    
+                    
+//                    // open slide 16 Instruction
+//                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+//                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                        NSLog(@"Do some work");
+//                        
+//                        if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == NO)
+//                        {
+//                            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+//                            instView.delegate = self;
+//                            [instView showInstructionWithSlideNumber:SlideNumber16 withType:InstructionBubbleType];
+//                            [instView setTrueForSlide:kInstructionSlide16];
+//                            
+//                            [self.view addSubview:instView];
+//                        }
+//                    });
+
+                }
+        }
         }];
     });
 #endif
@@ -1161,7 +1324,8 @@ static CGRect CaptionTextViewMinRect;
         btnClose.alpha = 0;
         viewRowButtons.center = CGPointMake(backupToolCenter.x-100, backupToolCenter.y );
         viewRowButtons.alpha = 0;
-    } completion:^(BOOL finished) {
+    } completion:^(BOOL finished)
+    {
         
     }];
     
@@ -1171,7 +1335,46 @@ static CGRect CaptionTextViewMinRect;
         
         viewStickerList.center = CGPointMake(backupOtherViewCenter.x -viewStickerList.bounds.size.width, backupOtherViewCenter.y );
         viewStickerList.alpha = 1;
-    } completion:^(BOOL finished) {
+    } completion:^(BOOL finished)
+    {
+        
+        // open slide 4 Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+            if ([InstructionView getBoolValueForSlide:kInstructionSlide4] == NO)
+            {
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber4 withType:InstructionBubbleType];
+            [instView setTrueForSlide:kInstructionSlide4];
+            
+            [self.view addSubview:instView];
+            }
+        });
+        
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES)
+        {
+            // open slide 11 Instruction
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                NSLog(@"Do some work");
+                
+                 if ([InstructionView getBoolValueForSlide:kInstructionSlide11] == NO)
+                {
+                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                instView.delegate = self;
+                [instView showInstructionWithSlideNumber:SlideNumber11 withType:InstructionBubbleType];
+                [instView setTrueForSlide:kInstructionSlide11];
+                
+                [self.view addSubview:instView];
+                 }
+            });
+
+        }
+        
         
     }];
     
@@ -1287,8 +1490,25 @@ static CGRect CaptionTextViewMinRect;
     UIImage* sticker = [UIImage imageWithContentsOfFile:stickerImageSting];
     [self addStickerWithImage:sticker];
 }
+
 - (void)addStickerWithImage:(UIImage *)sticker
 {
+    // open slide 10 Instruction
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSLog(@"Do some work");
+        
+        if ([InstructionView getBoolValueForSlide:kInstructionSlide10] == NO)
+        {
+        InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+        instView.delegate = self;
+        [instView showInstructionWithSlideNumber:SlideNumber10 withType:InstructionGIFType];
+        [instView setTrueForSlide:kInstructionSlide10];
+        
+        [self.view addSubview:instView];
+         }
+    });
+    
     ComicItemSticker* imageView = [self getComicItems:ComicSticker];
     imageView.frame = CGRectMake(0, 0, 150, 150);
     imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -1310,7 +1530,10 @@ static CGRect CaptionTextViewMinRect;
     
     //Handle Auto Save
     [self doAutoSave:imageView];
-//    sticker = nil;
+    
+    
+    
+
 }
 
 #pragma mark Exclamation
@@ -1474,6 +1697,8 @@ static CGRect CaptionTextViewMinRect;
         self.chatIcon.alpha = 1;
     } completion:^(BOOL finished) {
         
+        
+        
     }];
     
 }
@@ -1564,7 +1789,6 @@ static CGRect CaptionTextViewMinRect;
     
     [self addComicItem:bubbleHolderView ItemImage:bubbleImage];
     bubbleHolderView.center = bubbleHolderView.center;
-    
     
     [self doAutoSave:bubbleHolderView];
 }
@@ -2165,7 +2389,27 @@ static CGRect CaptionTextViewMinRect;
                   [stickerImageView removeFromSuperview];
                   [stickerController.collectionView reloadData];
               }];
-         }completion:nil];
+         }completion:^(BOOL finished) {
+             
+             
+             // open slide 9 Instruction
+             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                 NSLog(@"Do some work");
+                 
+                if ([InstructionView getBoolValueForSlide:kInstructionSlide9] == NO)
+                {
+                 InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                 instView.delegate = self;
+                 [instView showInstructionWithSlideNumber:SlideNumber9 withType:InstructionBubbleType];
+                 [instView setTrueForSlide:kInstructionSlide9];
+                 
+                 [self.view addSubview:instView];
+                }
+             });
+
+             
+         }];
     }];
 }
 
@@ -2297,7 +2541,18 @@ static CGRect CaptionTextViewMinRect;
     drawView.delegate = self;
     
     drawView.frame = CGRectMake(0, 0, CGRectGetWidth(imgvComic.frame),CGRectGetHeight(imgvComic.frame));
-    
+    DrawingColorsViewController *drawingController;
+    for (UIViewController *controller in self.childViewControllers)
+    {
+        if ([controller isKindOfClass:[DrawingColorsViewController class]])
+        {
+            drawingController = (DrawingColorsViewController *)controller;
+        }
+    }
+    [UIView beginAnimations:@"ScaleButton" context:NULL];
+    [UIView setAnimationDuration: 0.0f];
+    [drawingController allScaleToNormal];
+    [UIView commitAnimations];
     [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         viewDrawing.frame = frameDrawingView;
@@ -2307,6 +2562,23 @@ static CGRect CaptionTextViewMinRect;
     } completion:^(BOOL finished)
      {
          [self addDrawingView];
+         
+         // open slide C Instruction
+         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+             NSLog(@"Do some work");
+             
+            if ([InstructionView getBoolValueForSlide:kInstructionSlideC] == NO)
+            {
+             InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+             instView.delegate = self;
+             [instView showInstructionWithSlideNumber:SlideNumberC withType:InstructionBubbleType];
+             [instView setTrueForSlide:kInstructionSlideC];
+             
+             [self.view addSubview:instView];
+              }
+         });
+
      }];
     
 }
@@ -2329,7 +2601,6 @@ static CGRect CaptionTextViewMinRect;
     //
     //        drawView.frame = CGRectMake(0, 0, CGRectGetWidth(drawView.frame),CGRectGetHeight(imgvComic.frame));
     //    }
-    
     imgvComic.userInteractionEnabled = YES;
     [imgvComic addSubview:drawView];
     
@@ -2342,12 +2613,15 @@ static CGRect CaptionTextViewMinRect;
             drawingController = (DrawingColorsViewController *)controller;
         }
     }
-    
+    [UIView beginAnimations:@"ScaleButton" context:NULL];
+    [UIView setAnimationDuration: 0.0f];
+    [drawingController allScaleToNormal];
+     [UIView commitAnimations];
     [UIView beginAnimations:@"ScaleButton" context:NULL];
     [UIView setAnimationDuration: 0.2f];
-    drawingController.btnRed.transform = CGAffineTransformMakeScale(2,2);
+    [drawingController allScaleToNormal];
+    drawingController.btnRed.transform = CGAffineTransformMakeScale(1.8f,1.8f);
     [UIView commitAnimations];
-    
     [self drawingColorTapEventWithColor:@"red"];
 }
 
@@ -2435,7 +2709,6 @@ static CGRect CaptionTextViewMinRect;
             rowController = (RowButtonsViewController *)controller;
         }
     }
-    
     if ([colorName isEqualToString:@"white"])
     {
         [rowController.btnPen setImage:[UIImage imageNamed:@"pen-icon-white"] forState:UIControlStateSelected];
@@ -2501,6 +2774,26 @@ static CGRect CaptionTextViewMinRect;
         [rowController.btnPen setImage:[UIImage imageNamed:@"pen-icon-cyan"] forState:UIControlStateSelected];
         
         drawView.lineColor = [UIColor drawingColorCyan];
+    }
+    
+    if ([onColor isEqual: drawView.lineColor])
+    {
+        if (isAlreadyDoubleDrawColor)
+        {
+            isAlreadyDoubleDrawColor = NO;
+            drawView.lineWidth = 2.8f;
+        }
+        else
+        {
+            isAlreadyDoubleDrawColor = YES;
+            drawView.lineWidth = 5.64f;
+        }
+    }
+    else
+    {
+        isAlreadyDoubleDrawColor = NO;
+        drawView.lineWidth = 2.8f;
+        onColor = drawView.lineColor;
     }
 }
 
@@ -2789,6 +3082,25 @@ static CGRect CaptionTextViewMinRect;
         [textView resignFirstResponder];
         [self doAutoSave:nil];
         return YES;
+    }
+    else
+    {
+        // open slide D Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+            if ([InstructionView getBoolValueForSlide:kInstructionSlideD] == NO)
+            {
+                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                instView.delegate = self;
+                [instView showInstructionWithSlideNumber:SlideNumberD withType:InstructionBubbleType];
+                [instView setTrueForSlide:kInstructionSlideD];
+                
+                [self.view addSubview:instView];
+            }
+        });
+
     }
     
     [self handleBubbleText:textView];
@@ -3386,6 +3698,41 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     [self sendComic];
 }
 
+-(NSMutableDictionary*)setPutParamets :(NSString*)shareUserId ReplyTypeValue:(ReplyType)type ComicShareId:(NSString*)comic_id{
+    NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
+    [userDic setObject:comic_id forKey:@"comic_id"];
+    [userDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"];
+    NSMutableArray* arrayObj = [[NSMutableArray alloc] init];
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    if(type == FriendReply){
+        [dict setValue:shareUserId forKey:@"friend_id"];
+        [dict setValue:@"1" forKey:@"status"];
+        
+        [arrayObj addObject:dict];
+        [userDic setObject:arrayObj forKey:@"friendShares"];
+        
+        arrayObj = nil;
+        dict = nil;
+    }
+    else if(type == GroupReply){
+        
+        [dict setValue:shareUserId forKey:@"group_id"];
+        [dict setValue:@"1" forKey:@"status"];
+        
+        [arrayObj addObject:dict];
+        
+        
+        [userDic setObject:arrayObj forKey:@"groupShares"];
+        
+        arrayObj = nil;
+        dict = nil;
+    }
+    
+    [dataDic setObject:userDic forKey:@"data"];
+    return dataDic;
+}
+
 -(void)sendComic{
     
     [self.delegate comicMakingViewControllerWithEditingDone:self
@@ -3425,27 +3772,40 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                                      Id:nil completion:^(id json,id jsonResposeHeader) {
             
             [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
-            
                                           [self.view setUserInteractionEnabled:YES];
                                          if(self.comicType != ReplyComic) {
+                                             isNewSlide = NO;
                                              UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
                                              SendPageViewController *controller = (SendPageViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"SendPage"];
                                              controller.comicSlideFileName = self.fileNameToSave;
                                              
                                              [self.navigationController pushViewController:controller animated:YES];
                                          } else {
-                                             if(self.replyType == FriendReply) {
-                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
-                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
-                                                 [self dismissViewControllerAnimated:YES completion:^{}];
-                                             } else if(self.replyType == GroupReply) {
-                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
-                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
-                                                 [self dismissViewControllerAnimated:YES completion:^{}];
-                                             }
-                                             if (self.fileNameToSave) {
-                                                 [AppHelper deleteSlideFile:self.fileNameToSave];
-                                             }
+                                             [cmNetWorking shareComicImage:[self setPutParamets:self.friendOrGroupId
+                                                                                 ReplyTypeValue:self.replyType
+                                                                                   ComicShareId:[json objectForKey:@"data"]]
+                                                                        Id:[json objectForKey:@"data"] completion:^(id json, id jsonResponse) {
+                                                                        
+                                                                            if (json) {
+                                                                                if(self.replyType == FriendReply) {
+                                                                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
+                                                                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+                                                                                    [self dismissViewControllerAnimated:YES completion:^{}];
+                                                                                } else if(self.replyType == GroupReply) {
+                                                                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupComics" object:nil];
+                                                                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+                                                                                    [self dismissViewControllerAnimated:YES completion:^{}];
+                                                                                }
+                                                                                if (self.fileNameToSave) {
+                                                                                    [AppHelper deleteSlideFile:self.fileNameToSave];
+                                                                                }
+                                                                            }else{
+                                                                                 [AppHelper showErrorDropDownMessage:@"something went wrong !" mesage:@""];
+                                                                            }
+                                                 
+                                             } ErrorBlock:^(JSONModelError *error) {
+                                                 
+                                             }];
                                          }
             
         } ErrorBlock:^(JSONModelError *error) {
@@ -3489,7 +3849,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     if(self.comicType == ReplyComic) {
         [comicMakeDic setObject:@"CS" forKey:@"comic_type"];
-        [comicMakeDic setObject:self.shareId forKey:@"share_id"];
+        [comicMakeDic setObject:(self.shareId == nil ?@"0":self.shareId) forKey:@"share_id"];
     } else {
         [comicMakeDic setObject:@"CM" forKey:@"comic_type"]; // COMIC MAKING
     }
@@ -3501,15 +3861,16 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     NSMutableArray* slides = [[NSMutableArray alloc] init];
     
     for (int i=0; i< [comicSlides count]; i++) {
-//    for (NSData* data in comicSlides) {
         NSData* data = [comicSlides objectAtIndex:i];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
+        if (i == 0 && cmPage.titleString && cmPage.titleString.length >0) {
+            [comicMakeDic setObject:cmPage.titleString forKey:@"comic_title"];
+        }
+        
         //ComicSlides Object
         NSMutableDictionary* cmSlide = [[NSMutableDictionary alloc] init];
-//        [cmSlide setObject:[AppHelper encodeToBase64String:[AppHelper getImageFile:cmPage.printScreenPath]] forKey:@"slide_image"];
-//        [cmSlide setObject:@"" forKey:@"slide_text"];
-        
+
         //Comic Slide image url obj
         NSDictionary* urlSlides = [slideArray objectAtIndex:i];
         
@@ -3578,16 +3939,27 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
-        if (comicItemObj != nil) {
-            [self.delegate comicMakingItemSave:comicPage
-                                        withImageView:comicItemObj
-                                      withPrintScreen:printScreen withRemove:NO];
-        }
-        [self doPrintScreen];
+        [self doPrintScreen:^(bool isOutOfFrame) {
+            if (comicItemObj != nil) {
+                if (isNewSlide) {
+                    isNewSlide = NO;
+                }
+                [self.delegate comicMakingItemSave:comicPage
+                                     withImageView:comicItemObj
+                                   withPrintScreen:printScreen
+                                        withRemove:NO
+                                     withImageView:imgvComic];
+            }
+            
+        }];
     });
 }
 
--(void)doPrintScreen{
+-(void)doPrintScreen {
+    [self doPrintScreen:^(bool isOutOfFrame) {}];
+}
+
+-(void)doPrintScreen :(void (^)(bool isOutOfFrame))handler{
     [imgvComic setFrame:temImagFrame];
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -3596,6 +3968,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     dispatch_group_async(group, queue, ^{
         @try {
             printScreen = [UIImage imageWithView:imgvComic paque:YES];
+            handler(YES);
         } @catch (NSException *exception) {
             
         } @finally {
@@ -3628,7 +4001,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
-        [self.delegate comicMakingItemSave:comicPage withImageView:comicItemObj withPrintScreen:printScreen withRemove:YES];
+        [self.delegate comicMakingItemSave:comicPage withImageView:comicItemObj withPrintScreen:printScreen withRemove:YES withImageView:imgvComic];
     });
     [self doPrintScreen];
 }
@@ -3748,6 +4121,55 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 
     [AppHelper openMainPageviewController:self];
     
+}
+
+#pragma mark - InstructionViewDelegate Methods
+-(void)didCloseInstructionViewWith:(InstructionView *)view withClosedSlideNumber:(SlideNumber)number
+{
+    [view removeFromSuperview];
+    
+    if(number == SlideNumber1)
+    {
+        // open slide 2 Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+             if ([InstructionView getBoolValueForSlide:kInstructionSlide2] == NO)
+             {
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber2 withType:InstructionBubbleType];
+            [instView setTrueForSlide:kInstructionSlide2];
+            
+            [self.view addSubview:instView];
+             }
+        });
+
+    }
+    else if (number == SlideNumber10)
+    {
+        // open slide 12 Instruction
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"Do some work");
+            
+            if ([InstructionView getBoolValueForSlide:kInstructionSlide12] == NO)
+             {
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber12 withType:InstructionGIFType];
+            [instView setTrueForSlide:kInstructionSlide12];
+            
+            [self.view addSubview:instView];
+             }
+        });
+    }
+    else if (number == SlideNumber15)
+    {
+    
+       
+    }
 }
 
 

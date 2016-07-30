@@ -14,4 +14,8 @@
                      SuccessBlock:(void(^)(id object))successBlock
                           andFail:(void(^)(NSError *errorMessage))failBlock;
 
++ (void)getFriendsForUserID:(NSString *)userID
+               SuccessBlock:(void(^)(id object))successBlock
+                    andFail:(void(^)(NSError *errorMessage))failBlock;
+
 @end
