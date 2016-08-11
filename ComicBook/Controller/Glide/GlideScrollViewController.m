@@ -33,6 +33,8 @@
 @property (strong, nonatomic) NSMutableArray *dirtysubviewData;
 @property (strong, nonatomic) NSString *fileNameToSave;
 
+@property (nonatomic) BOOL isWideSlide;
+
 @end
 
 @implementation GlideScrollViewController
@@ -264,6 +266,22 @@ NSTimer* timerObject;
     [self slidesScrollView:scrollview didSelectAddButtonAtIndex:index withView:view pusWithAnimation:YES];
 }
 
+
+- (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAddButtonAtIndex:(NSInteger)index withView:(UIView *)view withType:(AddButtonType)type
+{
+    if (type == AddButtonTypeWide)
+    {
+        self.isWideSlide = YES;
+    }
+    else
+    {
+        self.isWideSlide = NO;
+
+    }
+     [self slidesScrollView:scrollview didSelectAddButtonAtIndex:index withView:view pusWithAnimation:YES];
+    
+}
+
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAddButtonAtIndex:(NSInteger)index withView:(UIView *)view pusWithAnimation:(BOOL)isPushAnimation
 {
     if (self.scrvComicSlide.isStillSaving)
@@ -281,6 +299,17 @@ NSTimer* timerObject;
     [scrvComicSlide addViewAtIndex:newSlideIndex withComicSlide:nil];
     
     ComicMakingViewController *cmv = [self.storyboard instantiateViewControllerWithIdentifier:@"ComicMakingViewController"];
+    
+    if (self.isWideSlide == YES)
+    {
+        cmv.isWideSlide = YES;
+    }
+    else
+    {
+        cmv.isWideSlide = NO;
+        
+    }
+    
     cmv.isNewSlide = YES;
     
     cmv.comicType = self.comicType;
@@ -615,7 +644,8 @@ NSTimer* timerObject;
               withImageView:(id)comicItemData
             withPrintScreen:(UIImage *)printScreen
                  withRemove:(BOOL)remove
-              withImageView:(UIImageView *)imageView{
+              withImageView:(UIImageView *)imageView
+{
     
     if (self.comicPageComicItems == nil) {
         self.comicPageComicItems = [[ComicPage alloc] init];
@@ -700,11 +730,11 @@ NSTimer* timerObject;
     
 }
 
+
 - (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll
                                    withImageView:(UIImageView *)imageView
                                  withPrintScreen:(UIImage *)printScreen
-                                    withNewSlide:(BOOL)newslide
-                                     withPopView:(BOOL)isPopView
+                                    withNewSlide:(BOOL)newslide withPopView:(BOOL)isPopView withIsWideSlide:(BOOL)isWideSlide
 {
     if (isPopView)
     {
@@ -735,6 +765,16 @@ NSTimer* timerObject;
                     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
                     self.comicPageComicItems.timelineString = [dateFormatter stringFromDate:now];
                     dateFormatter = nil;
+                    
+                    if (isWideSlide)
+                    {
+                        self.comicPageComicItems.slideType = slideTypeWide;
+                    }
+                    else
+                    {
+                        self.comicPageComicItems.slideType = slideTypeTall;
+                    }
+
                     
                     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
                     if (newslide)
@@ -859,6 +899,15 @@ NSTimer* timerObject;
                 [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
                 self.comicPageComicItems.timelineString = [dateFormatter stringFromDate:now];
                 dateFormatter = nil;
+                
+                if (isWideSlide)
+                {
+                    self.comicPageComicItems.slideType = slideTypeWide;
+                }
+                else
+                {
+                    self.comicPageComicItems.slideType = slideTypeTall;
+                }
                 
                 NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
                 

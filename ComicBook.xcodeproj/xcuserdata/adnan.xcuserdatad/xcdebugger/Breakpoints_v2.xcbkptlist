@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "491167107.927489"
+            timestampString = "492635117.929248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2915"
-            endingLineNumber = "2915"
+            startingLineNumber = "3020"
+            endingLineNumber = "3020"
             landmarkName = "-createCaptionView"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "491167107.927489"
+            timestampString = "492635117.929248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2918"
-            endingLineNumber = "2918"
+            startingLineNumber = "3023"
+            endingLineNumber = "3023"
             landmarkName = "-createCaptionView"
             landmarkType = "5">
          </BreakpointContent>
@@ -228,12 +228,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "491167107.927489"
+            timestampString = "492635117.929248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1809"
-            endingLineNumber = "1809"
-            landmarkName = "-closeSpeach:"
+            startingLineNumber = "1880"
+            endingLineNumber = "1880"
+            landmarkName = "-addBubbleWithImage:TextFiledRect:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -436,11 +436,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "490300106.711779"
+            timestampString = "492553567.855063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -452,12 +452,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/Glide/GlideScrollViewController.m"
-            timestampString = "491079113.261194"
+            timestampString = "492201372.97027"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "594"
-            endingLineNumber = "594"
-            landmarkName = "-comicMakingItemSave:withImageView:withPrintScreen:withRemove:withImageView:"
+            startingLineNumber = "623"
+            endingLineNumber = "623"
+            landmarkName = "-sendComic"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -740,11 +740,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "490300106.711779"
+            timestampString = "492553567.855063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
             landmarkName = "-viewDidDisappear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -756,11 +756,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "491167107.927489"
+            timestampString = "492635117.929248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4054"
-            endingLineNumber = "4054"
+            startingLineNumber = "4194"
+            endingLineNumber = "4194"
+            landmarkName = "-getComicItems:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+            timestampString = "492635117.929248"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "4193"
+            endingLineNumber = "4193"
+            landmarkName = "-getComicItems:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+            timestampString = "492635117.929248"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "4195"
+            endingLineNumber = "4195"
+            landmarkName = "-getComicItems:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+            timestampString = "492635117.929248"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "4231"
+            endingLineNumber = "4231"
             landmarkName = "-isEndOfPan:success:"
             landmarkType = "5">
          </BreakpointContent>
@@ -772,59 +820,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "491167107.927489"
+            timestampString = "492553567.855063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4053"
-            endingLineNumber = "4053"
-            landmarkName = "-isEndOfPan:success:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "491167107.927489"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4055"
-            endingLineNumber = "4055"
-            landmarkName = "-isEndOfPan:success:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "491167107.927489"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4091"
-            endingLineNumber = "4091"
-            landmarkName = "@implementation ComicMakingViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "490300106.711779"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "-viewDidDisappear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -836,11 +836,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "490300106.711779"
+            timestampString = "492553567.855063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "-viewDidDisappear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -852,12 +852,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/Glide/GlideScrollViewController.m"
-            timestampString = "491079113.261194"
+            timestampString = "492553567.855063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "654"
-            endingLineNumber = "654"
-            landmarkName = "-comicMakingViewControllerWithEditingDone:withImageView:withPrintScreen:withNewSlide:withPopView:"
+            startingLineNumber = "684"
+            endingLineNumber = "684"
+            landmarkName = "-comicMakingItemSave:withImageView:withPrintScreen:withRemove:withImageView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -884,12 +884,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/View/SlidesScrollView.m"
-            timestampString = "490738515.968486"
+            timestampString = "492629756.895647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "364"
-            endingLineNumber = "364"
-            landmarkName = "-reloadComicAtIndex:withComicSlide:"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
+            landmarkName = "-makeSlideViewForIndex:andComicSlide:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -900,13 +900,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/View/SlidesScrollView.m"
-            timestampString = "490738515.968486"
+            timestampString = "492629756.895647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
-            landmarkName = "@implementation SlidesScrollView"
-            landmarkType = "3">
+            startingLineNumber = "350"
+            endingLineNumber = "350"
+            landmarkName = "-makeSlideViewForIndex:andComicSlide:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1033,7 +1033,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "151"
             endingLineNumber = "151"
-            landmarkName = "-frmaeForArrowImage:"
+            landmarkName = "-frameForPossitionPlusButton:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1395,12 +1395,12 @@
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Adnan/Comicing-SourceTree/ComicBook/Controller/MainPage/MainPageVC.m"
-                  timestampString = "491420044.645558"
+                  timestampString = "492635629.31847"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1192"
                   endingLineNumber = "1192"
-                  offsetFromSymbolStart = "1124">
+                  offsetFromSymbolStart = "700">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1410,12 +1410,12 @@
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Adnan/Comicing-SourceTree/ComicBook/Controller/MainPage/MainPageVC.m"
-                  timestampString = "491420044.645651"
+                  timestampString = "492635629.318713"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1192"
                   endingLineNumber = "1192"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "64">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1425,12 +1425,12 @@
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Adnan/Comicing-SourceTree/ComicBook/Controller/MainPage/MainPageVC.m"
-                  timestampString = "491420044.645731"
+                  timestampString = "492635629.318896"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1192"
                   endingLineNumber = "1192"
-                  offsetFromSymbolStart = "29">
+                  offsetFromSymbolStart = "36">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1591,7 +1591,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "240"
             endingLineNumber = "240"
-            landmarkName = "-firstTimeCallAPITogetActiveFriends"
+            landmarkName = "-setActiveGroupsWithGroups:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1623,7 +1623,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "247"
             endingLineNumber = "247"
-            landmarkName = "-firstTimeCallAPITogetActiveFriends"
+            landmarkName = "-setActiveGroupsWithGroups:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1639,7 +1639,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "318"
             endingLineNumber = "318"
-            landmarkName = "-callAPIToGetFriends"
+            landmarkName = "-firstTimeCallAPITogetActiveFriends"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1671,7 +1671,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "243"
             endingLineNumber = "243"
-            landmarkName = "-firstTimeCallAPITogetActiveFriends"
+            landmarkName = "-setActiveGroupsWithGroups:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1688,6 +1688,288 @@
             startingLineNumber = "167"
             endingLineNumber = "167"
             landmarkName = "+getRequestWithURLString:withParameter:withSuccess:andFail:showIndicator:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/Glide/GlideScrollViewController.m"
+            timestampString = "492201372.97027"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
+            landmarkName = "-slidesScrollView:didSelectAddButtonAtIndex:withView:pusWithAnimation:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/Glide/GlideScrollViewController.m"
+            timestampString = "492201258.4853"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "-slidesScrollView:didSelectAddButtonAtIndex:withView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+            timestampString = "492553567.855063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1175"
+            endingLineNumber = "1175"
+            landmarkName = "-btnCameraReverseTap:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+            timestampString = "492553567.855063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1119"
+            endingLineNumber = "1119"
+            landmarkName = "-closeCamera"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/ComicCropView/ComicCropView.m"
+            timestampString = "492553567.855063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "424"
+            endingLineNumber = "424"
+            landmarkName = "-outputImage"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/ComicCropView/ComicCropView.m"
+            timestampString = "492553567.855063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
+            landmarkName = "-croppedImage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+            timestampString = "492553567.855063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
+            landmarkName = "-addComicCropViewWithImage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+            timestampString = "492553567.855063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
+            landmarkName = "-addComicCropViewWithImage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+            timestampString = "492553567.855063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
+            landmarkName = "-addComicCropViewWithImage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/ComicCropView/ComicCropView.m"
+            timestampString = "492553567.855063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "-setImage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/ComicCropView/ComicCropView.m"
+            timestampString = "492553567.855063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-setImageViewFrame"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/ComicCropView/ComicCropView.m"
+            timestampString = "492553567.855063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-initialize"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/ComicCropView/ComicCropView.m"
+            timestampString = "492553567.855063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
+            landmarkName = "-resetRatioControls"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+            timestampString = "492635117.929248"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "4342"
+            endingLineNumber = "4342"
+            landmarkName = "-croppedImage:withImageView:WithFrame:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+            timestampString = "492635117.929248"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "4111"
+            endingLineNumber = "4111"
+            landmarkName = "-doPrintScreen:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/SlidesScrollView.m"
+            timestampString = "492629756.895647"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
+            landmarkName = "-reloadComicAtIndex:withComicSlide:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/SlidesScrollView.m"
+            timestampString = "492629752.302029"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "-makeSlideViewForIndex:andComicSlide:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

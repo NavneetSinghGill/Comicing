@@ -8,10 +8,13 @@
 
 #import "ComicPage.h"
 
+NSString* const slideTypeWide = @"wide";
+NSString* const slideTypeTall = @"tall";
+
 @implementation ComicPage
 
 //@synthesize containerImage, subviews, subviewData, printScreen,timelineString;
-@synthesize containerImagePath, subviews, subviewData,timelineString,printScreenPath,subviewTranformData,titleString;
+@synthesize containerImagePath, subviews, subviewData,timelineString,printScreenPath,subviewTranformData,titleString, slideType;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -25,6 +28,7 @@
         subviewTranformData = [aDecoder decodeObjectForKey:@"subviewTranformData"];
         timelineString = [aDecoder decodeObjectForKey:@"timelineString"];
         titleString = [aDecoder decodeObjectForKey:@"titleString"];
+        slideType = [aDecoder decodeObjectForKey:@"iswideslide"];
     }
     
     return self;
@@ -39,6 +43,8 @@
     [aCoder encodeObject:subviewTranformData forKey:@"subviewTranformData"];
     [aCoder encodeObject:timelineString forKey:@"timelineString"];
     [aCoder encodeObject:titleString forKey:@"titleString"];
+    [aCoder encodeObject:slideType forKey:@"iswideslide"];
+
 }
 
 @end

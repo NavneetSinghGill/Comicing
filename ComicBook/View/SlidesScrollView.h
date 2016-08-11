@@ -11,12 +11,20 @@
 #import "ComicSlidePreview.h"
 #import "SlidePreviewScrollView.h"
 
+enum
+{
+    AddButtonTypeWide,
+    AddButtonTypeLong
+};
+
+typedef NSUInteger AddButtonType;
+
 @class SlidesScrollView;
 
 @protocol SlidesScrollViewDelegate <NSObject>
 
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAtIndexPath:(NSInteger)index withView:(UIView *)view;
-- (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAddButtonAtIndex:(NSInteger)index withView:(UIView *)view;
+- (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAddButtonAtIndex:(NSInteger)index withView:(UIView *)view withType:(AddButtonType)type;
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAddButtonAtIndex:(NSInteger)index withView:(UIView *)view pusWithAnimation:(BOOL)isPushAnimation;
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didRemovedAtIndexPath:(NSInteger)index;
 - (void)returnAddedView:(UIView *)view;
@@ -33,6 +41,8 @@
 @property (nonatomic, strong) SlidePreviewScrollView *viewPreviewScrollSlide;
 @property (nonatomic, strong) ComicSlidePreview *viewPreviewSlide;
 @property (nonatomic, strong) UIButton *btnPlusSlide;
+@property (nonatomic, strong) UIButton *btnWidePlusSlide;
+
 @property (strong, nonatomic) NSMutableArray *listViewImages;
 @property (strong, nonatomic) NSMutableArray *allSlidesView;
 @property (strong, nonatomic) NSMutableArray *timelineTimeArray;
