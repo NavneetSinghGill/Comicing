@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ComicSlidePreview.h"
 
-@interface SlidePreviewScrollView : UIPageViewController<UIGestureRecognizerDelegate,UIPageViewControllerDelegate,UIPageViewControllerDataSource>
+@interface SlidePreviewScrollView : UIPageViewController<UIGestureRecognizerDelegate,UIPageViewControllerDelegate,UIPageViewControllerDataSource,ComicSlidePreviewDelegate>
 
 //@property (strong, atomic) UIPageViewController *pageViewController;
 //@property (nonatomic, strong) ComicSlidePreview *viewPreviewSlide;
@@ -18,4 +18,5 @@
 - (ComicSlidePreview*)getSlideVC:(NSInteger)index withImages:(NSArray *)slides;
 
 - (void)setupBook;
+
 @end

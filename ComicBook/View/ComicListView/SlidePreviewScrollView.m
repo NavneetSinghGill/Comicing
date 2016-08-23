@@ -7,6 +7,7 @@
 //
 
 #import "SlidePreviewScrollView.h"
+#import "ComicImage.h"
 
 @implementation SlidePreviewScrollView
 {
@@ -34,11 +35,13 @@
 
 #pragma mark public Methods
 
-- (ComicSlidePreview*)addPreviewView:(NSArray *)slides{
-    
+- (ComicSlidePreview*)addPreviewView:(NSArray *)slides
+{
     ComicSlidePreview* viewPreviewSlide = [[ComicSlidePreview alloc] initWithFrame:CGRectMake(0, 0,
                                                                                               self.view.frame.size.width,
                                                                                               self.view.frame.size.height)];
+   
+    viewPreviewSlide.delegate = self;
     [viewPreviewSlide.view setBackgroundColor:[UIColor whiteColor]];
     
     [viewPreviewSlide.view setUserInteractionEnabled:NO];
@@ -49,8 +52,8 @@
     
 }
 
-- (void)getPreviewSlideVC:(NSArray *)slides{
-    
+- (void)getPreviewSlideVC:(NSArray *)slides
+{
     if (viewControllers)
     {
         [viewControllers removeAllObjects];
@@ -58,7 +61,6 @@
     
     if ([slides count] >4)
     {
-        
         NSArray* firstArray = [slides subarrayWithRange:NSMakeRange(0, 4)];
         NSArray* secondArray = [slides subarrayWithRange:NSMakeRange(4, [slides count]-4)];
         
@@ -69,6 +71,8 @@
     {
        [viewControllers addObject:[self addPreviewView:slides]];
     }
+    
+ 
 }
 
 #pragma mark method
@@ -108,13 +112,17 @@
 
 #pragma mark - UIPageViewController delegate methods
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
-    if (nil == viewController) {
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    if (nil == viewController)
+    {
         return viewControllers[0];
     }
     NSInteger idx = [viewControllers indexOfObject:viewController];
     NSParameterAssert(idx != NSNotFound);
-    if (idx >= [viewControllers count] - 1) {
+    
+    if (idx >= [viewControllers count] - 1)
+    {
         // we're at the end of the _pages array
         return nil;
     }
@@ -134,6 +142,21 @@
     }
     // return the previous page's view controller
     return viewControllers[idx - 1];
+}
+
+#pragma mark - ComicSlidePreviewDelegate Methods
+
+- (void)didFrameChange:(ComicSlidePreview *)view withFrame:(CGRect)frame
+{
+    CGRect viewFrame = self.view.frame;
+    
+    
+    viewFrame.size.width = frame.size.width;
+    viewFrame.size.height = frame.size.height;
+
+    
+    self.view.frame = viewFrame;
+    
 }
 
 @end

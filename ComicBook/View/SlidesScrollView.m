@@ -57,6 +57,7 @@ const NSInteger spaceBetweenSlide = 20;
     {
         allSlidesView = [[NSMutableArray alloc] init];
         listViewImages = [[NSMutableArray alloc] init];
+        
         if (IS_IPHONE_5)
         {
             viewSize = viewSizeForIPhone5;
@@ -79,9 +80,7 @@ const NSInteger spaceBetweenSlide = 20;
         }
     }
     
-    
     self.delegate = self;
-    
     return self;
 }
 
@@ -124,7 +123,16 @@ const NSInteger spaceBetweenSlide = 20;
 
 - (CGRect)frameForPreview3Slide:(NSInteger)index
 {
-    return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50, 0, viewSize.width + 20, self.frame.size.height - 80);
+    return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50, 0, viewSize.width, self.frame.size.height - 50);
+}
+
+- (void)setFrameForViewPreviewScrollSlide
+{
+    CGFloat height = viewPreviewScrollSlide.view.frame.size.height;
+    
+    CGFloat y = (CGRectGetHeight(self.frame) - height) / 2;
+    
+    viewPreviewScrollSlide.view.frame = CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50, y, viewSize.width, height);
 }
 
 - (CGRect)frameForPreview4Slide:(NSInteger)index
@@ -560,38 +568,54 @@ UILabel *mComicTitle;
         isAdd = YES;
     }
     
-    if (slides.count == 3)
-    {
-        viewPreviewScrollSlide.view.frame = [self frameForPreview3Slide:self.btnPlusSlide.tag];
-    }
-    else if (slides.count == 4)
-    {
-        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
-    }
-    else if (slides.count == 1)
-    {
-        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
-    }
-    else if (slides.count == 2)
-    {
-        viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:self.btnPlusSlide.tag];
-    }
-    else
-    {
-        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
-    }
+//    if (slides.count == 3)
+//    {
+//        viewPreviewScrollSlide.view.frame = [self frameForPreview3Slide:self.btnPlusSlide.tag];
+//    }
+//    else if (slides.count == 4)
+//    {
+//        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
+//    }
+//    else if (slides.count == 1)
+//    {
+//        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
+//    }
+//    else if (slides.count == 2)
+//    {
+//        viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:self.btnPlusSlide.tag];
+//    }
+//    else
+//    {
+//        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
+//    }
+    
+    viewPreviewScrollSlide.view.frame = [self frameForPreview3Slide:self.btnPlusSlide.tag];
     
     viewPreviewScrollSlide.allSlideImages = slides;
     [viewPreviewScrollSlide setupBook];
-
-    if (isAdd) {
+    
+    if (isAdd)
+    {
         [self addSubview:viewPreviewScrollSlide.view];
     }
+    
+    
+    for (id subview in viewPreviewScrollSlide.view.subviews)
+    {
+        if ([subview isKindOfClass:[ComicSlidePreview class]])
+        {
+            ComicSlidePreview *view = (ComicSlidePreview *)subview;
+            
+            NSLog(@"%@",view);
+        }
+    }
+    
     
     [self.arrowImage setAlpha:1];
     [viewPreviewScrollSlide.view setAlpha:1];
     //Handle empty slide
-    if ([slides count] == 0) {
+    if ([slides count] == 0)
+    {
         //fade in
         [UIView animateWithDuration:1.0f animations:^{
             [self.arrowImage setAlpha:0];
@@ -599,7 +623,9 @@ UILabel *mComicTitle;
         } completion:^(BOOL finished) {
         }];
         [self setScrollViewContectSizeForEmptySlide];
-    }else{
+    }
+    else
+    {
      [self setScrollViewContectSize];
     }
 }

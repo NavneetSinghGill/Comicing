@@ -399,6 +399,7 @@
 		8405267E1D469D0B00639E0F /* Slide-12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8405267D1D469D0B00639E0F /* Slide-12.gif */; };
 		842E385E1D566A0A00CD324F /* ComicCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 842E385D1D566A0A00CD324F /* ComicCropView.m */; };
 		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
+		843561EB1D65EEC3002B9330 /* ComicImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 843561EA1D65EEC3002B9330 /* ComicImage.m */; };
 		843ABB781D1FAA730078B7A8 /* MainPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843ABB771D1FAA730078B7A8 /* MainPageCell.m */; };
 		84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D661CC94E1200C52C06 /* AvatarView.xib */; };
 		84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84592D681CC94E2B00C52C06 /* HeaderView.xib */; };
@@ -1107,6 +1108,8 @@
 		842E385D1D566A0A00CD324F /* ComicCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicCropView.m; sourceTree = "<group>"; };
 		8433BC921CC135D20073DE2A /* UIImage+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Trim.h"; sourceTree = "<group>"; };
 		8433BC931CC135D20073DE2A /* UIImage+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Trim.m"; sourceTree = "<group>"; };
+		843561E91D65EEC3002B9330 /* ComicImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicImage.h; sourceTree = "<group>"; };
+		843561EA1D65EEC3002B9330 /* ComicImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicImage.m; sourceTree = "<group>"; };
 		843ABB761D1FAA730078B7A8 /* MainPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageCell.h; sourceTree = "<group>"; };
 		843ABB771D1FAA730078B7A8 /* MainPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageCell.m; sourceTree = "<group>"; };
 		845090751C2B1343004DAE99 /* Comicing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Comicing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2993,6 +2996,8 @@
 				84E36C031D3BB25800D9B22B /* ComicSlidePreview.h */,
 				84E36C041D3BB25800D9B22B /* ComicSlidePreview.m */,
 				84E36C061D3BB26800D9B22B /* ComicSlidePreview.xib */,
+				843561E91D65EEC3002B9330 /* ComicImage.h */,
+				843561EA1D65EEC3002B9330 /* ComicImage.m */,
 			);
 			name = SlidePreviewView;
 			sourceTree = "<group>";
@@ -3416,6 +3421,7 @@
 				1B9B7C231D3A9E03003B04F1 /* MyEmoji.m in Sources */,
 				0C6668AA1C84358600FEB11F /* GlideCell.m in Sources */,
 				1B00F6C31D450D3300514291 /* UIImageView+AnimatedGif.m in Sources */,
+				843561EB1D65EEC3002B9330 /* ComicImage.m in Sources */,
 				0C6668271C84358600FEB11F /* GroupCreate.m in Sources */,
 				0C6668691C84358600FEB11F /* MTLValueTransformer.m in Sources */,
 				0C6667CB1C84358600FEB11F /* BaseAPIManager.m in Sources */,
