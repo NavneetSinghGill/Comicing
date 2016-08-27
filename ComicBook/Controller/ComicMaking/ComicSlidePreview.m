@@ -245,6 +245,9 @@
 
 -(void)addSlide:(int)indexValue
 {
+    if([comicImages count] == 0)
+        return;
+    
     if (indexValue == 0)
         self.currentSlideFrame = CGRectZero;
     
