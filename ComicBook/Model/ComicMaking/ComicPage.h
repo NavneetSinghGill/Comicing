@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+extern NSString* const slideTypeWide;
+extern NSString* const slideTypeTall;
+
 @interface ComicPage : NSObject <NSCoding>
 
 
@@ -21,6 +24,7 @@
 @property (strong, nonatomic) NSMutableArray *subviewTranformData;
 @property (strong, nonatomic) NSString *timelineString;
 @property (strong, nonatomic) NSString *titleString;
+@property (strong, nonatomic) NSString *slideType;
 
 - (id)initWithCoder:(NSCoder *)decoder;
 - (void)encodeWithCoder:(NSCoder *)encoder;

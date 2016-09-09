@@ -6,6 +6,8 @@
 //  Copyright © 2015 ADNAN THATHIYA. All rights reserved.
 //
 
+
+
 #import "ComicMakingViewController.h"
 #import "AVCamPreviewView.h"
 #import <AVFoundation/AVFoundation.h>
@@ -37,6 +39,11 @@
 #import "UIImage+ColorAtPixel.h"
 #import "InstructionView.h"
 #import "UIImage+GIF.h"
+#import "ComicCropView.h"
+
+CGSize CGSizeAbsolute2(CGSize size) {
+    return (CGSize){fabs(size.width), fabs(size.height)};
+}
 
 static void * CapturingStillImageContext = &CapturingStillImageContext;
 static void * RecordingContext = &RecordingContext;
@@ -44,7 +51,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 static int CaptionViewTextViewTag = 9191;
 static CGRect CaptionTextViewMinRect;
 
-@interface ComicMakingViewController ()<ACEDrawingViewDelegate,CropStickerViewControllerDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,AVAudioRecorderDelegate,UITextViewDelegate,ZoomTransitionProtocol,UINavigationControllerDelegate,UIImagePickerControllerDelegate,InstructionViewDelegate>
+@interface ComicMakingViewController ()<ACEDrawingViewDelegate,CropStickerViewControllerDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,AVAudioRecorderDelegate,UITextViewDelegate,ZoomTransitionProtocol,UINavigationControllerDelegate,UIImagePickerControllerDelegate,InstructionViewDelegate,ComicCropViewDelegate>
 {
     CGPoint backupOtherViewCenter;
     CGPoint backupToolCenter;
@@ -143,13 +150,16 @@ static CGRect CaptionTextViewMinRect;
 
 @property BOOL captionHeightSmall;
 
+@property (strong, nonatomic) ComicCropView *comicCropView;
+@property (nonatomic) BOOL isCameraOn;
+@property (nonatomic) BOOL isshrinkingEnd;
 @end
 
 @implementation ComicMakingViewController
 
 @synthesize viewCameraPreview, viewCamera, imgvComic, uploadIcon, viewStickerList, viewRowButtons;
 @synthesize drawingColor,viewDrawing,frameDrawingView, drawView, centerImgvComic,lastScale, btnClose,bubbleListView,exclamationListView,shrinkHeight,viewFrame, shrinkCount, previousTimestamp, isNewSlide,viewBlackBoard,frameBlackboardView,onColor,isAlreadyDoubleDrawColor;
-@synthesize comicPage,printScreen, isSlideShrink,frameImgvComic,pinchGesture;
+@synthesize comicPage,printScreen, isSlideShrink,frameImgvComic,pinchGesture, isWideSlide,comicCropView, isCameraOn;
 
 #pragma mark - UIViewController Methods
 - (void)viewDidLoad
@@ -163,6 +173,13 @@ static CGRect CaptionTextViewMinRect;
     frameDrawingView = viewDrawing.frame;
     centerImgvComic = imgvComic.center;
     viewRowButtons.alpha = 0;
+    
+    
+    if (isWideSlide == YES)
+    {
+        isCameraOn = YES;
+        [self addComicCropViewWithImage:nil];
+    }
     
     [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"ComicMaking" Attributes:nil];
     
@@ -196,9 +213,6 @@ static CGRect CaptionTextViewMinRect;
                 }
                 
             }
-            
-            
-            
         });
     }
 
@@ -227,9 +241,6 @@ static CGRect CaptionTextViewMinRect;
             [self.view addSubview:instView];
         }
     });
-    
-    
-   
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -287,6 +298,69 @@ static CGRect CaptionTextViewMinRect;
     return (isSlideShrink ? self.ImgvComic2: imgvComic);
 }
 
+#pragma mark - ComicCrop Methods
+- (void)addComicCropViewWithImage:(UIImage *)image
+{
+    if (comicCropView != nil)
+    {
+        [comicCropView removeFromSuperview];
+    }
+
+    comicCropView  = [[ComicCropView alloc] initWithFrame:self.view.frame];
+    if (image != nil)
+    {
+        comicCropView.image = image;
+
+    }
+    comicCropView.delegate = self;
+    [self.view insertSubview:comicCropView belowSubview:viewRowButtons];
+}
+
+- (void)removeComicCropView
+{
+    [comicCropView removeFromSuperview];
+}
+
+- (void)updateComicCropFrame:(CGRect)frame
+{
+    comicCropView.frame = frame;
+    
+    [comicCropView updateAllFrames];
+}
+
+#pragma mark - ComicCropViewDelegate Methods
+- (void)didTapOnComicCropView:(ComicCropView *)view
+{
+    if (isCameraOn == NO)
+    {
+        UIImage *cropimage = [comicCropView outputImage];
+        imgvComic.image = cropimage;
+        
+        [self doAutoSave:nil];
+
+        
+        [self removeComicCropView];
+        
+        RowButtonsViewController *rowButtonsController;
+        
+        for (UIViewController *controller in self.childViewControllers)
+        {
+            if ([controller isKindOfClass:[RowButtonsViewController class]])
+            {
+                rowButtonsController = (RowButtonsViewController *)controller;
+            }
+        }
+        
+        rowButtonsController.btnCamera.selected = YES;
+        [rowButtonsController allButtonsFadeIn:rowButtonsController.btnCamera];
+        
+        [self setComicImageViewSize];
+        [self doAutoSave:nil];
+        
+        //dinesh
+        [self.mSendComicButton setHidden:NO];
+    }
+}
 
 #pragma mark - UIView Methods
 
@@ -396,10 +470,7 @@ static CGRect CaptionTextViewMinRect;
             
             
             //second time user enter in comicmaking
-            
-            
         }
-
     }
     else
     {
@@ -414,6 +485,15 @@ static CGRect CaptionTextViewMinRect;
 //        NSLog(@"************* SUBVIEW ***************");
 //        NSLog(@"%@",comicPage.subviews);
 //        NSLog(@"************* SUBVIEW ***************");
+        
+        if ([comicPage.slideType isEqualToString:slideTypeWide])
+        {
+            isWideSlide = YES;
+        }
+        else
+        {
+            isWideSlide = NO;
+        }
         
         for (int i = 0; i < comicPage.subviews.count; i ++)
         {
@@ -1033,6 +1113,14 @@ static CGRect CaptionTextViewMinRect;
     btnClose.hidden = YES;
     
     GlobalObject.isTakePhoto = NO;
+    isCameraOn = YES;
+    
+    if (isWideSlide)
+    {
+        [self addComicCropViewWithImage:nil];
+
+    }
+    
 }
 
 #pragma mark - Camera Events
@@ -1103,6 +1191,17 @@ static CGRect CaptionTextViewMinRect;
     [self.mSendComicButton setHidden:NO];//dinesh
     [imgvComic setImage:[UIImage imageNamed:@"cat-demo"]];
     imgvComic.hidden = NO;
+    
+    if (isWideSlide)
+    {
+        // ComicCropView code
+        comicCropView.imageView = self.imgvComic;
+        UIImage *cropimage = [comicCropView outputImage];
+        imgvComic.image = cropimage ;
+        [self removeComicCropView];
+        
+    }
+    
     GlobalObject.isTakePhoto = YES;
     btnClose.hidden = NO;
     [self setComicImageViewSize];
@@ -1142,9 +1241,25 @@ static CGRect CaptionTextViewMinRect;
                 UIImage *cropedImage = [image cropedImagewithCropRect:cropRects];
                 
                 imgvComic.image = cropedImage;
+                
+                
+                if (isWideSlide)
+                {
+                    // ComicCropView code
+                    comicCropView.imageView = self.imgvComic;
+                    UIImage *cropimage = [comicCropView outputImage];
+                    
+                    imgvComic.image = cropimage ;
+                    [self removeComicCropView];
+
+                }
+              
+                
                 imgvComic.hidden = NO;
                 
                 GlobalObject.isTakePhoto = YES;
+                
+                //remove Cropview
                 
                 btnClose.hidden = NO;
                 [self setComicImageViewSize];
@@ -1170,9 +1285,6 @@ static CGRect CaptionTextViewMinRect;
                 if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES)
                 {
                     
-                    
-
-                    
                     // open slide 12 Instruction
                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
                     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -1188,43 +1300,6 @@ static CGRect CaptionTextViewMinRect;
                             [self.view addSubview:instView];
                         }
                     });
-
-                    
-                    
-                    // open slide 16 Instruction
-//                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
-//                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//                        NSLog(@"Do some work");
-//                        
-//                         if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == NO)
-//                        {
-//                        InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-//                        instView.delegate = self;
-//                        [instView showInstructionWithSlideNumber:SlideNumber16 withType:InstructionBubbleType];
-//                        [instView setTrueForSlide:kInstructionSlide16];
-//                        
-//                        [self.view addSubview:instView];
-//                         }
-//                    });
-                
-                    
-                    
-//                    // open slide 16 Instruction
-//                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
-//                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//                        NSLog(@"Do some work");
-//                        
-//                        if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == NO)
-//                        {
-//                            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-//                            instView.delegate = self;
-//                            [instView showInstructionWithSlideNumber:SlideNumber16 withType:InstructionBubbleType];
-//                            [instView setTrueForSlide:kInstructionSlide16];
-//                            
-//                            [self.view addSubview:instView];
-//                        }
-//                    });
-
                 }
         }
         }];
@@ -1243,7 +1318,10 @@ static CGRect CaptionTextViewMinRect;
     imgvComic.frame = CGRectMake(0, 0, imageWidth, imageHeight);
     
     imgvComic.center = centerImgvComic;
-    
+   
+  //  [self updateComicCropFrame:imgvComic.frame];
+
+    imgvComic.layer.masksToBounds = YES;
 //    temImagFrame = imgvComic.frame;
 }
 
@@ -1272,8 +1350,6 @@ static CGRect CaptionTextViewMinRect;
          GlobalObject.isTakePhoto = YES;
          
          btnClose.hidden = NO;
-         [self setComicImageViewSize];
-         [self doAutoSave:nil];
          
          RowButtonsViewController *rowButtonsController;
          
@@ -1284,11 +1360,27 @@ static CGRect CaptionTextViewMinRect;
                  rowButtonsController = (RowButtonsViewController *)controller;
              }
          }
-         rowButtonsController.btnCamera.selected = YES;
-         [rowButtonsController allButtonsFadeIn:rowButtonsController.btnCamera];
          
-         //dinesh
-         [self.mSendComicButton setHidden:NO];
+         rowButtonsController.btnCamera.selected = YES;
+
+         if (isWideSlide)
+         {
+             [self addComicCropViewWithImage:selectedImage];
+         }
+         else
+         {
+             rowButtonsController.btnCamera.selected = YES;
+             [rowButtonsController allButtonsFadeIn:rowButtonsController.btnCamera];
+             
+             [self setComicImageViewSize];
+             [self doAutoSave:nil];
+             
+             //dinesh
+             [self.mSendComicButton setHidden:NO];
+         }
+        
+         // add crop view
+         isCameraOn = NO;
      }];
 }
 
@@ -2355,11 +2447,36 @@ static CGRect CaptionTextViewMinRect;
         if (self.ImgvComic2.frame.size.height < shrinkHeight && isSlideShrink == NO)
         {
             isSlideShrink = YES;
+            
+            if (isWideSlide == YES)
+            {
+                UIImageView *cropImageView = [[UIImageView alloc] initWithFrame:temImagFrame];
+                cropImageView.image = printScreen;
+                cropImageView.contentMode = UIViewContentModeScaleAspectFit;
+                
+                //CGPoint center  = [self.view convertPoint:self.view.center fromView:parent.superview];
+
+                CGFloat y = (CGRectGetMaxY(temImagFrame) - CGRectGetMinY(temImagFrame)) / 2;
+                
+                CGRect cropframe = CGRectMake(0, y - (wideBoxHeight / 2), temImagFrame.size.width, wideBoxHeight);
+                
+                UIImage *image = [self croppedImage:printScreen withImageView:cropImageView WithFrame:cropframe];
+                
+                printScreen = image;
+                
+                NSLog(@"cropped");
+                
+            }
+            
+
+            
             [self.delegate comicMakingViewControllerWithEditingDone:self
                                                       withImageView:imgvComic
                                                     withPrintScreen:printScreen
                                                        withNewSlide:isNewSlide
-                                                        withPopView:YES];
+                                                        withPopView:YES withIsWideSlide:isWideSlide];
+            
+            
             
         }
         else
@@ -2458,6 +2575,14 @@ static CGRect CaptionTextViewMinRect;
 #pragma mark - Blackboard Methods
 - (void)openBlackBoard
 {
+    if(isWideSlide)
+    {
+        if (comicCropView != nil)
+        {
+            [comicCropView removeFromSuperview];
+        }
+    }
+    
     viewBlackBoard.alpha = 0;
     viewCamera.hidden = YES;
     [self.mSendComicButton setHidden:NO];//dinesh
@@ -3812,7 +3937,10 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                                               withImageView:imgvComic
                                             withPrintScreen:printScreen
                                                withNewSlide:isNewSlide
-                                                withPopView:NO];
+                                                withPopView:NO withIsWideSlide:isWideSlide];
+    
+   
+    
     //Desable the image view intactin
     [self.view setUserInteractionEnabled:NO];
     NSMutableArray* comicSlides = [self getDataFromFile];
@@ -4038,17 +4166,25 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 
 #pragma mark ComicItem methods
 
--(void)doAutoSave :(id)comicItemObj{
+-(void)doAutoSave :(id)comicItemObj
+{
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
     
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
-        [self doPrintScreen:^(bool isOutOfFrame) {
-            if (comicItemObj != nil) {
-                if (isNewSlide) {
+        [self doPrintScreen:^(bool isOutOfFrame)
+        {
+            if (comicItemObj != nil)
+            {
+                if (isNewSlide)
+                {
                     isNewSlide = NO;
                 }
+                
+                
+                
+                
                 [self.delegate comicMakingItemSave:comicPage
                                      withImageView:comicItemObj
                                    withPrintScreen:printScreen
@@ -4060,11 +4196,13 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     });
 }
 
--(void)doPrintScreen {
+-(void)doPrintScreen
+{
     [self doPrintScreen:^(bool isOutOfFrame) {}];
 }
 
--(void)doPrintScreen :(void (^)(bool isOutOfFrame))handler{
+-(void)doPrintScreen :(void (^)(bool isOutOfFrame))handler
+{
     [imgvComic setFrame:temImagFrame];
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -4073,6 +4211,10 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     dispatch_group_async(group, queue, ^{
         @try {
             printScreen = [UIImage imageWithView:imgvComic paque:YES];
+            
+            
+            
+            
             handler(YES);
         } @catch (NSException *exception) {
             
@@ -4080,6 +4222,24 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
             
         }
     });
+}
+
+- (UIImage *)imageByCroppingImage:(UIImage *)image toSize:(CGSize)size
+{
+    // not equivalent to image.size (which depends on the imageOrientation)!
+    double refWidth = CGImageGetWidth(image.CGImage);
+    double refHeight = CGImageGetHeight(image.CGImage);
+    
+    double x = (refWidth - size.width) / 2.0;
+    double y = (refHeight - size.height) / 2.0;
+    
+    CGRect cropRect = CGRectMake(x, y, size.height, size.width);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
+    
+    UIImage *cropped = [UIImage imageWithCGImage:imageRef scale:0.0 orientation:image.imageOrientation];
+    CGImageRelease(imageRef);
+    
+    return cropped;
 }
 
 
@@ -4285,5 +4445,70 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     }
 }
 
+#pragma mark - Crop Methods
+- (UIImage *)croppedImage:(UIImage *)imageToCrop withImageView:(UIImageView *)imageView WithFrame:(CGRect)currentCropRect
+{
+    CGSize imageSize = imageToCrop.size;
+    CGSize scaledImageSize = [self imageFrameFromImageViewWithAspectFitMode:imageView].size;
+    CGFloat widthFactor = scaledImageSize.width / imageSize.width;
+    CGFloat heightFactor = scaledImageSize.height / imageSize.height;
+    
+   // CGRect currentCropRect = rect;
+    CGRect actualCropRect = CGRectMake(
+                                       roundf(currentCropRect.origin.x / widthFactor),
+                                       roundf(currentCropRect.origin.y / heightFactor),
+                                       roundf(currentCropRect.size.width / widthFactor),
+                                       roundf(currentCropRect.size.height / heightFactor)
+                                       );
+    UIImage *outputImage = nil;
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect(imageToCrop.CGImage, actualCropRect);
+    outputImage = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    
+    return outputImage;
+}
+
+- (CGRect)imageFrameFromImageViewWithAspectFitMode:(UIImageView *)theImageView
+{
+    if (theImageView.image == nil) {
+        return CGRectMake(0, 0, 0, 0);
+    }
+    
+    CGSize imageSize = CGSizeAbsolute2([self sizeForRotatedImage:theImageView.image]);
+    
+    float imageRatio = imageSize.width / imageSize.height;
+    float viewRatio = theImageView.frame.size.width / theImageView.frame.size.height;
+    
+    if (imageRatio < viewRatio)
+    {
+        float scale = theImageView.frame.size.height / imageSize.height;
+        float width = scale * imageSize.width;
+        float topLeftX = .5 * (theImageView.frame.size.width - width);
+        return CGRectMake(topLeftX, 0, width, theImageView.frame.size.height);
+    }
+    else
+    {
+        float scale = theImageView.frame.size.width / imageSize.width;
+        float height = scale * imageSize.height;
+        float topLeftY = .5 * (theImageView.frame.size.height - height);
+        return CGRectMake(0, topLeftY, theImageView.frame.size.width, height);
+    }
+}
+
+- (CGSize)sizeForRotatedImage:(UIImage *)imageToRotate
+{
+    if (imageToRotate == nil) {
+        return CGSizeMake(0, 0);
+    }
+    
+    CGFloat rotationAngle = 0 * M_PI / 2;
+    
+    CGSize imageSize = imageToRotate.size;
+    // Image size after the transformation
+    CGSize outputSize = CGSizeApplyAffineTransform(imageSize, CGAffineTransformMakeRotation(rotationAngle));
+    
+    return outputSize;
+}
 
 @end

@@ -236,7 +236,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" patternImage="FB872006-3355-4701-854B-2AB132D99E0C" colorSpace="pattern"/>
+            <color key="backgroundColor" patternImage="A6954033-3DBF-452C-921E-FAF355D8F377" colorSpace="pattern"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="J2U-3P-46U" secondAttribute="trailing" id="1Ha-52-sTm"/>
                 <constraint firstAttribute="bottom" secondItem="L30-SI-Ia8" secondAttribute="bottom" id="4l5-cV-ZAv"/>
@@ -264,7 +264,7 @@
     </objects>
     <resources>
         <image name="3slideImageBackground" width="892" height="2003"/>
-        <image name="FB872006-3355-4701-854B-2AB132D99E0C" width="640" height="920">
+        <image name="A6954033-3DBF-452C-921E-FAF355D8F377" width="640" height="920">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
