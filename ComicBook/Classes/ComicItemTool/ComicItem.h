@@ -22,7 +22,8 @@ typedef enum {
     ComicSticker,
     ComicExclamation,
     ComicBubble,
-    ComicCaption
+    ComicCaption,
+    ComicAnimatedSticker
 } ComicItemType;
 
 @protocol ComicItem <NSObject>
@@ -42,6 +43,19 @@ typedef enum {
 @property (assign, nonatomic) CGFloat scaleValueY;
 @property (assign, nonatomic) CGFloat tX;
 @property (assign, nonatomic) CGFloat tY;
+@end
+
+#pragma mark - ComicItem Animated Sticker
+
+@interface ComicItemAnimatedSticker : UIImageView<ComicItem> {}
+
+@property (strong, nonatomic) NSString* animatedStickerName;
+@property (assign, nonatomic) CGFloat angle;
+@property (assign, nonatomic) CGFloat scaleValueX;
+@property (assign, nonatomic) CGFloat scaleValueY;
+@property (assign, nonatomic) CGFloat tX;
+@property (assign, nonatomic) CGFloat tY;
+@property (assign, nonatomic) CGRect objFrame;
 @end
 
 #pragma mark - ComicItemExclamation

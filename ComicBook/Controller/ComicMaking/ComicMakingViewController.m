@@ -36,6 +36,7 @@
 #import "AppHelper.h"
 #import "UIImage+ColorAtPixel.h"
 #import "InstructionView.h"
+#import "UIImage+GIF.h"
 
 static void * CapturingStillImageContext = &CapturingStillImageContext;
 static void * RecordingContext = &RecordingContext;
@@ -1643,9 +1644,32 @@ static CGRect CaptionTextViewMinRect;
     float imageHeight = scale * imageView.image.size.height;
     
     imageView.frame = CGRectMake(0, 0, imageWidth, imageHeight);
-//    imageView.center = imgvComic.center;
-    
     [self addComicItem:imageView ItemImage:exclamationImage];
+    
+    imageView.center = imageView.center;
+    [self doAutoSave:imageView];
+}
+
+- (void)addAnimatedSticker:(NSString *)exclamationImageString{
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"AnimatedSticker" Action:@"AddAnimatedSticker" Label:@""];
+    
+//    UIImage* animatedImage = [UIImage imageNamed:exclamationImageString];
+    UIImage* animatedImage = [UIImage sd_animatedGIFNamed:exclamationImageString];
+    
+    ComicItemAnimatedSticker* imageView = [self getComicItems:ComicAnimatedSticker];
+    imageView.frame = CGRectMake(15, 15, 150, 150);
+    imageView.image = animatedImage;
+    imageView.animatedStickerName = exclamationImageString;
+    
+    float widthRatio = imageView.bounds.size.width / imageView.image.size.width;
+    float heightRatio = imageView.bounds.size.height / imageView.image.size.height;
+    float scale = MIN(widthRatio, heightRatio);
+    float imageWidth = scale * imageView.image.size.width;
+    float imageHeight = scale * imageView.image.size.height;
+    
+    imageView.frame = CGRectMake(0, 0, imageWidth, imageHeight);
+    [self addComicItem:imageView ItemImage:animatedImage];
     
     imageView.center = imageView.center;
     [self doAutoSave:imageView];
@@ -2075,13 +2099,9 @@ static CGRect CaptionTextViewMinRect;
         recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
                                              recognizer.view.center.y + translation.y);
         
-//        CGAffineTransform transform = CGAffineTransformTranslate([[recognizer view] transform], 0, 0);
-//        [recognizer view].transform = transform;
-        
         [recognizer setTranslation:CGPointMake(0, 0) inView:imgvComic];
         
-//        NSLog(@"RAMESH :: panGestureDetected");
-        
+        ((ComicItemAnimatedSticker*)recognizer.view).objFrame = recognizer.view.frame;
     }
     
     //Handle remove items
@@ -2247,7 +2267,10 @@ static CGRect CaptionTextViewMinRect;
         isSlideShrink = NO;
         
         [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
-        
+//        imgvComic.autoresizesSubviews = YES;
+        for (UIView* subview in [imgvComic subviews]) {
+            subview.autoresizingMask = UIViewAutoresizingNone;
+        }
         self.previousTimestamp = event.timestamp;
         shinkLimit = [touch locationInView:self.view];
     }
@@ -2257,10 +2280,6 @@ static CGRect CaptionTextViewMinRect;
 {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:self.view];
-    
-//    NSLog(@"location : %@", NSStringFromCGPoint(location));
-//    NSLog(@"shinkLimit : %@", NSStringFromCGPoint(shinkLimit));
-//    NSLog(@"location : %@", NSStringFromCGPoint(self.ImgvComic2.frame.origin));
     
     if ((touch.view == self.view || touch.view == imgvComic) &&
         (fabs(location.y - shinkLimit.y) > [self getShrinkValue] ||
@@ -2298,15 +2317,33 @@ static CGRect CaptionTextViewMinRect;
             
             self.ImgvComic2.image = printScreen;
             imgvComic.frame = self.ImgvComic2.frame;
+            
+            [self shrinkAnimatedImages:(speedX/5) speedY:(speedY/5) speedWidth:(speedWidth/5) speedHeight:(speedHeight/5)];
         }
-        
-//        CGPoint centerPoint = CGPointMake([[UIScreen mainScreen] bounds].size.width/2, [[UIScreen mainScreen] bounds].size.height/2);
-//        self.view.center = centerPoint;
-        
-//        if (self.ImgvComic2.frame.size.height < shrinkHeight && isSlideShrink == NO)
-//        {
-//        }
     }
+}
+
+-(void)shrinkAnimatedImages:(CGFloat)speedX
+                     speedY:(CGFloat)speedY
+                 speedWidth:(CGFloat)speedWidth
+                speedHeight:(CGFloat)speedHeight{
+    
+//    CGFloat ff = 1;
+    for (UIView* subview in [self.view subviews]) {
+        if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
+            
+//            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) - speedX,
+//                                               CGRectGetMinY(subview.frame) - speedY,
+//                                               CGRectGetWidth(subview.frame)- speedX,
+//                                               CGRectGetHeight(subview.frame)-speedY);
+            
+            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + speedX,
+                                       CGRectGetMinY(subview.frame) - speedY,
+                                       CGRectGetWidth(subview.frame) - speedWidth,
+                                       CGRectGetHeight(subview.frame) - speedHeight);
+        }
+    }
+    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -3409,21 +3446,57 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     imageView.image = nil;
     imageView.image = imgWithOutAlpha;
     
-//    float widthRatio = imageView.bounds.size.width / imgWithOutAlpha.size.width;
-//    float heightRatio = imageView.bounds.size.height / imgWithOutAlpha.size.height;
-//    float scale = MIN(widthRatio, heightRatio);
-//    float imageWidth = scale * imgWithOutAlpha.size.width;
-//    float imageHeight = scale * imgWithOutAlpha.size.height;
-    
-//    imageView.frame = CGRectMake(CGRectGetMinX(imageView.frame), CGRectGetMinY(imageView.frame), imageWidth, imageHeight);
-//    CGAffineTransform tt_1 = imageView.transform;
-//    
-//    NSString * nn =  @"[1, 0, 0, 1, 0, 0]";
-//    CGAffineTransform tt= CGAffineTransformFromString(nn);
-//    imageView.transform = tt;
-    
     [imgvComic addSubview:imageView];
+}
+
+- (void)addAnimatedImageView:(UIImageView *)imageView
+              ComicItemImage:(UIImage*)itemImage
+                   rectValue:(CGRect)rect
+                    Tranform:(CGAffineTransform)tranformData
+{
+    CGAffineTransform transform ;
+    if (!CGRectEqualToRect(rect,CGRectZero)) {
+        if ([imageView isKindOfClass:[ComicItemAnimatedSticker class]])
+        {
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
+            CGFloat angle = ((ComicItemAnimatedSticker*)imageView).angle;
+            CGFloat scaleValueX = ((ComicItemAnimatedSticker*)imageView).scaleValueX;
+            CGFloat scaleValueY = ((ComicItemAnimatedSticker*)imageView).scaleValueY;
+            CGFloat tX = ((ComicItemAnimatedSticker*)imageView).tX;
+            CGFloat tY = ((ComicItemAnimatedSticker*)imageView).tY;
+            transform = makeTransform(scaleValueX,scaleValueY,angle,tX,tY);
+            imageView.transform =transform;
+        }
+    }else{
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    imageView.image = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+    imageView.userInteractionEnabled = YES;
+    imageView.userInteractionEnabled = YES;
+    imageView.clipsToBounds = NO;
+    [imageView setBackgroundColor:[UIColor clearColor]];
     
+    UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotatePiece:)];
+    [imageView addGestureRecognizer:rotationGesture];
+    
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scalePiece:)];
+    [pinchGesture setDelegate:self];
+    [imageView addGestureRecognizer:pinchGesture];
+    
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureDetected:)];
+    [panGestureRecognizer setDelegate:self];
+    [imageView addGestureRecognizer:panGestureRecognizer];
+    
+    imgvComic.userInteractionEnabled = YES;
+    imgvComic.clipsToBounds = YES;
+    
+    UIImage* imgWithOutAlpha = [imageView.image imageByTrimmingTransparentPixelsRequiringFullOpacity:NO];
+    imageView.image = nil;
+    imageView.image = imgWithOutAlpha;
+    
+    ((ComicItemAnimatedSticker*)imageView).objFrame = imageView.frame;
+    [self.view addSubview:imageView];
+    [self.view bringSubviewToFront:imageView];
 }
 
 - (void)addBubbleWithImage:(ComicItemBubble *)bubbleHolderView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect
@@ -3915,6 +3988,38 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                     [enhancements addObject:cmEng];
                 }
             }
+            if([imageView isKindOfClass:[ComicItemAnimatedSticker class]])
+            {
+//                if ([((ComicItemBubble*)imageView) isPlayVoice]) {
+                    //Yes there is a Audio
+                    //ComicSlides Object
+                    NSMutableDictionary* cmEng = [[NSMutableDictionary alloc] init];
+                    [cmEng setObject:@"GIF" forKey:@"enhancement_type"];
+                    [cmEng setObject:@"1" forKey:@"enhancement_type_id"];
+                    [cmEng setObject:@"1" forKey:@"is_custom"];
+                    [cmEng setObject:@"" forKey:@"enhancement_text"];
+                
+                    UIImage* imgGif = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+                
+                    CGDataProviderRef provider = CGImageGetDataProvider(imgGif.CGImage);
+                    NSData* gifData = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+                
+                    [cmEng setObject:[gifData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]
+                              forKey:@"enhancement_file"];
+                    [cmEng setObject:@"gif" forKey:@"enhancement_file_type"];
+                    
+                    CGFloat midPointX = myRect.origin.x + (myRect.size.width/2);
+                    CGFloat midPointY = myRect.origin.y + (myRect.size.height/2);
+                    
+                    [cmEng setObject:[NSString stringWithFormat:@"%f",midPointY] forKey:@"position_top"];
+                    [cmEng setObject:[NSString stringWithFormat:@"%f",midPointX] forKey:@"position_left"];
+                    [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.width] forKey:@"width"];
+                    [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.height] forKey:@"height"];
+                    [cmEng setObject:@"1" forKey:@"z_index"];
+                    
+                    [enhancements addObject:cmEng];
+//                }
+            }
             if (enhancements && [enhancements count] > 0) {
                 [cmSlide setObject:enhancements forKey:@"enhancements"];
             }
@@ -4020,6 +4125,10 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     {
         [self addCaptionView:comicItemView rectValue:rect];
     }
+    else if([comicItemView isKindOfClass:[ComicItemAnimatedSticker class]])
+    {
+        [self addAnimatedImageView:comicItemView ComicItemImage:itemImage rectValue:rect Tranform:tranformData];
+    }
 }
 - (void)addComicItem:(id)comicItemView ItemImage:(UIImage*)itemImage
 {
@@ -4044,6 +4153,10 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         case ComicCaption:
         {
             return [[ComicItemCaption alloc] init];
+        }
+        case ComicAnimatedSticker:
+        {
+            return [[ComicItemAnimatedSticker alloc] init];
         }
     }
     return nil;

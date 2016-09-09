@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "InstructionView.h"
+#import "UIImage+GIF.h"
 @interface GlideScrollViewController () <SlidesScrollViewDelegate,ZoomTransitionProtocol,InstructionViewDelegate>
 //
 //@property (weak, nonatomic) IBOutlet SlidesScrollView *scrvComicSlide;
@@ -305,7 +306,7 @@ NSTimer* timerObject;
 
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didRemovedAtIndexPath:(NSInteger)index
 {
-    if (index >= 0) {
+    if (index >= 0 && [comicSlides count] > 0) {
         [comicSlides removeObjectAtIndex:index];
         [self saveDataToFile:comicSlides];
     }
@@ -448,6 +449,35 @@ NSTimer* timerObject;
                     
                     [enhancements addObject:cmEng];
                 }
+            }
+            if([imageView isKindOfClass:[ComicItemAnimatedSticker class]])
+            {
+                NSMutableDictionary* cmEng = [[NSMutableDictionary alloc] init];
+                [cmEng setObject:@"GIF" forKey:@"enhancement_type"];
+                [cmEng setObject:@"1" forKey:@"enhancement_type_id"];
+                [cmEng setObject:@"1" forKey:@"is_custom"];
+                [cmEng setObject:@"" forKey:@"enhancement_text"];
+                
+                UIImage* imgGif = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+                
+                CGDataProviderRef provider = CGImageGetDataProvider(imgGif.CGImage);
+                NSData* gifData = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+                
+                [cmEng setObject:[gifData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]
+                          forKey:@"enhancement_file"];
+                [cmEng setObject:@"gif" forKey:@"enhancement_file_type"];
+                
+                CGFloat midPointX = myRect.origin.x + (myRect.size.width/2);
+                CGFloat midPointY = myRect.origin.y + (myRect.size.height/2);
+                
+                [cmEng setObject:[NSString stringWithFormat:@"%f",midPointY] forKey:@"position_top"];
+                [cmEng setObject:[NSString stringWithFormat:@"%f",midPointX] forKey:@"position_left"];
+                [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.width] forKey:@"width"];
+                [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.height] forKey:@"height"];
+                [cmEng setObject:@"1" forKey:@"z_index"];
+                
+                [enhancements addObject:cmEng];
+                //                }
             }
             if (enhancements && [enhancements count] > 0) {
                 [cmSlide setObject:enhancements forKey:@"enhancements"];
@@ -709,7 +739,7 @@ NSTimer* timerObject;
     if (isPopView)
     {
         [self.navigationController popViewControllerAnimated:YES];
-        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen];
+        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen withComicSlide:comicSlides];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             //Do background work
             @try {
@@ -838,7 +868,7 @@ NSTimer* timerObject;
     else
     {
         //Doing main thread
-        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen];
+        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen withComicSlide:comicSlides];
         @try {
             self.scrvComicSlide.isStillSaving = YES;
             @autoreleasepool {
