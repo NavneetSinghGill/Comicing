@@ -3542,7 +3542,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
 //    imageView.frame = CGRectMake(CGRectGetMinX(imageView.frame), CGRectGetMinY(imageView.frame), imageWidth, imageHeight);
 //    CGAffineTransform tt_1 = imageView.transform;
-//    
+//
 //    NSString * nn =  @"[1, 0, 0, 1, 0, 0]";
 //    CGAffineTransform tt= CGAffineTransformFromString(nn);
 //    imageView.transform = tt;
