@@ -224,8 +224,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (clc_Animations == collectionView)
-    {
-        [self.parentViewController addExclamationListImage:[NSString stringWithFormat:@"%@.gif",[[arrOfAnimationTemp objectAtIndex:indexPath.row] valueForKey:@"image_gif"]]];
+    {    
+        [self.parentViewController addAnimatedSticker:[NSString stringWithFormat:@"%@",[[arrOfAnimationTemp objectAtIndex:indexPath.row] valueForKey:@"image_gif"]]];
     }
     else
     {
