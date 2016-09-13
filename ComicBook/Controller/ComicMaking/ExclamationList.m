@@ -42,12 +42,12 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 //    exclamationListArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"01 Regular"],[UIImage imageNamed:@"02 Eh"],[UIImage imageNamed:@"03 Thinking"],[UIImage imageNamed:@"04 Love"],[UIImage imageNamed:@"05 Scared"],[UIImage imageNamed:@"06 Angry_yelling"],[UIImage imageNamed:@"07 Great_Awesome"],[UIImage imageNamed:@"08 Strong_Powerful"],[UIImage imageNamed:@"09 Angry"],[UIImage imageNamed:@"10 Ohno"], nil];
 
     exclamationLargeListArray = [[NSMutableArray alloc] initWithObjects:
-                                 @"-.. bubble",
+                                 //@"-.. bubble",
+                                 @"animation_1",
                                  @"A$AP",@"BOOOM",
                                  @"BoOoOoOo!!",
                                  @"DKM",
                                  @"GOOD VIBE",
-                                 
                                  @"HUH",
                                  @"JKS",
                                  @"LOL",
@@ -74,7 +74,6 @@ static NSString * const reuseIdentifier1 = @"Cell1";
                                  @"BoOoOoOo!!_low",
                                  @"DKM_low",
                                  @"GOOD VIBE_low",
-                                 
                                  @"HUH_low",
                                  @"JKS_low",
                                  @"LOL_low",
@@ -175,7 +174,8 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     }
     else
     {
-        [parentViewController addExclamationListImage:exclamationLargeListArray[indexPath.row - 1]];
+//        [parentViewController addExclamationListImage:exclamationLargeListArray[indexPath.row - 1]];
+        [parentViewController addAnimatedSticker:exclamationLargeListArray[indexPath.row - 1]];
     }
 }
 

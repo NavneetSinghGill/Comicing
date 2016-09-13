@@ -69,6 +69,7 @@
 -(void)closeBubbleList;
 //- (void)addBubbleWithImage:(NSString *)bubbleImageString;
 - (void)addBubbleWithImage:(NSString *)bubbleImageString TextFiledRect:(CGRect)textViewSize;
+- (void)addAnimatedSticker:(NSString *)exclamationImageString;
 -(void)openComicEditMode:(BOOL)isAddnew;
 //End
 

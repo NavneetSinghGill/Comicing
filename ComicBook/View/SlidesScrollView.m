@@ -10,6 +10,8 @@
 #import "AppConstants.h"
 #import "UIImage+Image.h"
 #import "UIColor+colorWithHexString.h"
+#import "ComicItem.h"
+#import "UIImage+GIF.h"
 
 const CGSize viewSizeForIPhone5            = {195, 330};//{214, 378};
 const CGSize viewSizeForIPhone6            = {225, 385};//{250, 444};
@@ -283,6 +285,9 @@ UILabel *mComicTitle;
     
     UIImageView *imgvComic = [[UIImageView alloc] initWithFrame:view.bounds];
     
+    UIImage* printScreenImage =  [self getImageFile:comicSlide.printScreenPath];
+    imgvComic.image = [UIImage ScaletoFill:printScreenImage toSize:view.frame.size];
+
    // imgvComic.image =
     
     UIImage *image = [self getImageFile:comicSlide.printScreenPath];
@@ -296,10 +301,17 @@ UILabel *mComicTitle;
         imgvComic.image = [UIImage ScaletoFill:image toSize:view.frame.size];
 
     }
-    
-    
-    
     imgvComic.contentMode = UIViewContentModeScaleAspectFit;
+    
+    
+    float scaleFactor = imgvComic.image.size.width / printScreenImage.size.width;
+    for (int i = 0; i < comicSlide.subviews.count; i ++)
+    {
+        id imageView = comicSlide.subviews[i];
+        CGRect myRect = [comicSlide.subviewData[i] CGRectValue];
+        [self addComicItem:imageView ItemImage:imgvComic rectValue:myRect ScaleValue:scaleFactor];
+    }
+    
     
     UIButton *slideButton = [[UIButton alloc] initWithFrame:view.bounds];
     
@@ -512,7 +524,7 @@ UILabel *mComicTitle;
     }
 }
 
-- (void)reloadComicImageAtIndex:(NSInteger)index withComicSlide:(UIImage *)printScreen
+- (void)reloadComicImageAtIndex:(NSInteger)index withComicSlide:(UIImage *)printScreen withComicSlide:(NSMutableArray *)comicSlide
 {
     UIView *view = allSlidesView[index];
     
@@ -524,6 +536,22 @@ UILabel *mComicTitle;
         {
             UIImageView *imgvComic = (UIImageView *)subview;
             imgvComic.contentMode = UIViewContentModeScaleAspectFit;
+            imgvComic.image = [UIImage ScaletoFill:printScreen toSize:view.frame.size];
+            
+            float scaleFactor = imgvComic.image.size.width / printScreen.size.width;
+            
+            //Remove all subviews
+            for (id subView in [imgvComic subviews]) {
+                [subView removeFromSuperview];
+            }
+            
+            ComicPage *comicPage = [NSKeyedUnarchiver unarchiveObjectWithData:[comicSlide objectAtIndex:index]];
+            for (int i = 0; i < comicPage.subviews.count; i ++)
+            {
+                id imageView = comicPage.subviews[i];
+                CGRect myRect = [comicPage.subviewData[i] CGRectValue];
+                [self addComicItem:imageView ItemImage:imgvComic rectValue:myRect ScaleValue:scaleFactor];
+            }
             
             if (printScreen.size.height < printScreen.size.width)
             {
@@ -532,7 +560,6 @@ UILabel *mComicTitle;
             else
             {
                 imgvComic.image = [UIImage ScaletoFill:printScreen toSize:view.frame.size];
-
             }
             
             
@@ -540,6 +567,36 @@ UILabel *mComicTitle;
         }
     }
 //    [self scrollRectToVisible:view.frame animated:NO];
+}
+
+
+- (void)addComicItem:(id)comicItemView ItemImage:(UIImageView*)itemImage rectValue:(CGRect)rect ScaleValue:(float)scaleValue
+{
+    if([comicItemView isKindOfClass:[ComicItemAnimatedSticker class]])
+    {
+        [self addAnimatedImageView:comicItemView ComicItemImage:itemImage rectValue:rect ScaleValue:scaleValue];
+    }
+}
+
+- (void)addAnimatedImageView:(UIImageView *)imageView
+              ComicItemImage:(UIImageView*)itemImage
+                   rectValue:(CGRect)rect
+                  ScaleValue:(float)ScaleValue
+{
+    imageView.image = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+    imageView.userInteractionEnabled = YES;
+    imageView.userInteractionEnabled = YES;
+    imageView.clipsToBounds = NO;
+    [imageView setBackgroundColor:[UIColor clearColor]];
+    
+    CGRect rectValue = imageView.frame;
+    rectValue.origin.x = rectValue.origin.x * ScaleValue;
+    rectValue.origin.y = rectValue.origin.y * ScaleValue;
+    rectValue.size.width = rectValue.size.width * ScaleValue;
+    rectValue.size.height = rectValue.size.height * ScaleValue;
+    imageView.frame = rectValue;
+    
+    [itemImage addSubview:imageView];
 }
 
 -(void)updatePrivewListImage:(NSInteger)index withComicSlide:(UIImage *)printScreen
@@ -804,7 +861,9 @@ UILabel *mComicTitle;
     gestureIndex = viewGesture.tag;
     itemToRemove = [allSlidesView objectAtIndex:gestureIndex];
     [allSlidesView removeObjectAtIndex:gestureIndex];
-    [self.listViewImages removeObjectAtIndex:gestureIndex];
+    if ([self.listViewImages count] > gestureIndex) {
+        [self.listViewImages removeObjectAtIndex:gestureIndex];
+    }
     
     if (allSlidesView.count == 0)
     {

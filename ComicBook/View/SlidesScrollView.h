@@ -52,7 +52,8 @@ typedef NSUInteger AddButtonType;
 
 - (void)addViewAtIndex:(NSInteger)index withComicSlide:(ComicPage *)comicSlide;
 - (void)reloadComicAtIndex:(NSInteger)index withComicSlide:(ComicPage *)comicSlide;
-- (void)reloadComicImageAtIndex:(NSInteger)index withComicSlide:(UIImage *)printScreen;
+//- (void)reloadComicImageAtIndex:(NSInteger)index withComicSlide:(UIImage *)printScreen;
+- (void)reloadComicImageAtIndex:(NSInteger)index withComicSlide:(UIImage *)printScreen withComicSlide:(NSMutableArray *)comicSlide;
 //- (void)addSlideButtonAtIndex:(NSInteger)index;
 - (void)btnAddSlideTap:(UIButton *)sender;
 - (void)addPlusButton :(NSInteger)index;
