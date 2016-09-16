@@ -478,7 +478,6 @@
             }
             [comic setSlidesArray:slidesArray];
             [comic setupBook];
-            [comic.view layoutIfNeeded];
             [self addChildViewController:comic];
             [ comic.view setTranslatesAutoresizingMaskIntoConstraints:NO];
             [self setBoundary:0 :0 toView:container addView:comic.view];
@@ -561,7 +560,6 @@
             [comic setSlidesArray:slidesArray];
             
             [comic setupBook];
-            [comic.view layoutIfNeeded];
             [ComicBookDict setObject:comic forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         }
         

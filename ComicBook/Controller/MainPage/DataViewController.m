@@ -8,8 +8,6 @@
 #import "CustomView.h"
 #import "Constants.h"
 #import "AppDelegate.h"
-#import "UIImageView+WebCache.h"
-#import "UIImage+GIF.h"
 
 @interface DataViewController () <AVAudioPlayerDelegate>
 {
@@ -18,15 +16,12 @@
     CGFloat audioViewHeight;
     CGFloat imgHeight;
     AVAudioPlayer *player;
-    NSMutableArray *arrOfSubviews;
 }
 
 @property (strong, nonatomic) AVAudioPlayer *backgroundMusicPlayer;
 @property (strong, nonatomic) NSMutableArray *audioDurationSecondsArray;
 @property (strong, nonatomic) NSMutableArray *downloadedAudioDataArray;
 @property (strong, nonatomic) NSMutableArray *audioUrlArray;
-@property (strong, nonatomic) NSMutableArray *animationUrlArray;
-
 
 @end
 
@@ -175,47 +170,7 @@
 
     }
 }
--(void)viewDidLayoutSubviews
-{
-    for (int i=0; i<arrOfSubviews.count; i++)
-    {
-        NSDictionary *obj = [arrOfSubviews objectAtIndex:i];
-        UIImageView *imgVw = [obj valueForKey:@"subView"];
-        Enhancement *enhancement = [obj valueForKey:@"Enhance"];
-        CGFloat ratioBefore= [AppDelegate application].dataManager.viewWidth/[AppDelegate application].dataManager.viewHeight;
-        CGFloat ratioNow = self.view.frame.size.width/self.view.frame.size.height;
-        
-        CGFloat myWidth = self.view.frame.size.width;
-        CGFloat myHeight = self.view.frame.size.height;
-        float xfactor = myWidth/[UIScreen mainScreen].bounds.size.width;
-        float yfactor = myHeight/[UIScreen mainScreen].bounds.size.height;
-        NSLog(@"%@",NSStringFromCGRect(self.view.frame));
-        /*if(xfactor == 1 && yfactor == 1) {
-            xfactor = 0.65;
-            yfactor = 0.65;
-        }*/
-        float originX = xfactor * [enhancement.xPos floatValue];
-        float originY = yfactor * [enhancement.yPos floatValue];
-        float sizeX = xfactor * [enhancement.width floatValue];
-        float sizeY = yfactor * [enhancement.height floatValue];
-        
-        
-//        float originX = myWidth*[enhancement.xPos floatValue]/[AppDelegate application].dataManager.viewWidth;
-//         float originY = myHeight*[enhancement.yPos floatValue]/[AppDelegate application].dataManager.viewHeight;
-//         float sizeX = myWidth*[enhancement.width floatValue]/[AppDelegate application].dataManager.viewWidth;
-//         float sizeY = myHeight*[enhancement.height floatValue]/[AppDelegate application].dataManager.viewHeight;
-       /* float originX = [enhancement.xPos floatValue]*xfactor;
-        float originY = [enhancement.yPos floatValue]*yfactor;
-        float sizeX = [enhancement.width floatValue]*xfactor;
-        float sizeY = [enhancement.height floatValue]*yfactor;*/
-        NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
-        NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
-        // originX and originY are currently middle points. So changing it to origin.
-        /*originX = originX - sizeX/2;
-         originY = originY - sizeY/2;*/
-        [imgVw setFrame:CGRectMake(originX, originY, sizeX , sizeY )];
-    }
-}
+
 - (void)setAudioView
 {
     if(IS_IPHONE_5)
@@ -242,138 +197,75 @@
 }
 
 - (void)addAudioButton:(Slides *)slide {
-    
+
     /*
      Enhancement *en = [[Enhancement alloc] init];
      en.enhancementFile = @"http://68.169.44.163/sounds/comics/slides/56dbc70542dba";
      en.xPos = @"50.0";
      en.yPos = @"75.0";
-     
-     Enhancement *en1 = [[Enhancement alloc] init];
-     en1.enhancementFile = @"http://68.169.44.163/sounds/comics/slides/56dbc70542dba";
-     en1.xPos = @"150.0";
-     en1.yPos = @"75.0";
-     
-     Enhancement *en2 = [[Enhancement alloc] init];
-     en2.enhancementFile = @"http://www.noiseaddicts.com/samples_1w72b820/4927.mp3";
-     en2.xPos = @"250.0";
-     en2.yPos = @"75.0";
-     
+    
+    Enhancement *en1 = [[Enhancement alloc] init];
+    en1.enhancementFile = @"http://68.169.44.163/sounds/comics/slides/56dbc70542dba";
+    en1.xPos = @"150.0";
+    en1.yPos = @"75.0";
+    
+    Enhancement *en2 = [[Enhancement alloc] init];
+    en2.enhancementFile = @"http://www.noiseaddicts.com/samples_1w72b820/4927.mp3";
+    en2.xPos = @"250.0";
+    en2.yPos = @"75.0";
+    
      NSArray *t = @[en, en1, en2];
      slide.enhancements = t;
-     
-     // http://www.noiseaddicts.com/samples_1w72b820/4927.mp3
-     // http://68.169.44.163/sounds/comics/slides/56dbc70542dba
-     */
-    int countOfAudioEnhancements=0;
-    for (int i=0; i<slide.enhancements.count; i++)
-    {
-        Enhancement *enh = [slide.enhancements objectAtIndex:i];
-        if (![enh.enhancementType isEqualToString:@"GIF"])
-        {
-            countOfAudioEnhancements++;
-        }
-    }
-    self.audioUrlArray = [[NSMutableArray alloc] initWithCapacity:countOfAudioEnhancements];
-    self.audioDurationSecondsArray = [[NSMutableArray alloc] initWithCapacity:countOfAudioEnhancements];
-    self.downloadedAudioDataArray = [[NSMutableArray alloc] initWithCapacity:countOfAudioEnhancements];
-    for (int i = 0; i < countOfAudioEnhancements; i ++) {
+    
+    // http://www.noiseaddicts.com/samples_1w72b820/4927.mp3
+    // http://68.169.44.163/sounds/comics/slides/56dbc70542dba
+    */
+    
+    self.audioUrlArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
+    self.audioDurationSecondsArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
+    self.downloadedAudioDataArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
+    for (int i = 0; i < slide.enhancements.count; i ++) {
         [self.downloadedAudioDataArray addObject:[NSNull null]];
     }
-    arrOfSubviews = [[NSMutableArray alloc]init];
     for(Enhancement *enhancement in slide.enhancements) {
-        if (![enhancement.enhancementType isEqualToString:@"GIF"])
-        {
-            
-            [self.audioUrlArray addObject:[NSURL URLWithString:enhancement.enhancementFile]];
-            [self performSelectorInBackground:@selector(getTheAudioLength:) withObject:[NSNumber numberWithInteger:[slide.enhancements indexOfObject:enhancement]]];
-            [self configureAudioPlayer:[slide.enhancements indexOfObject:enhancement]];
-            CustomView *audioButton = [[CustomView alloc] init];
-            audioButton.tag = [slide.enhancements indexOfObject:enhancement];
-            //        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
-            float xfactor = [AppDelegate application].dataManager.viewWidth/self.view.frame.size.width;
-            float yfactor = [AppDelegate application].dataManager.viewHeight/self.view.frame.size.height;
-            if(xfactor == 1 && yfactor == 1) {
-                xfactor = 0.75;
-                yfactor = 0.75;
-            }
-            float originX = xfactor * [enhancement.xPos floatValue];
-            float originY = yfactor * [enhancement.yPos floatValue];
-            float sizeX = xfactor * [enhancement.width floatValue];
-            float sizeY = yfactor * [enhancement.height floatValue];
-            
-            NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
-            NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
-            // originX and originY are currently middle points. So changing it to origin.
-            originX = originX - sizeX/2;
-            originY = originY - sizeY/2;
-            [audioButton setFrame:CGRectMake(originX, originY, sizeX + sizeX/2, sizeY + sizeY/2)];
-            //        [audioButton setBackgroundColor:[UIColor yellowColor]];
-            //        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 25)];
-            //        imageView.image = [UIImage imageNamed:@"bubbleAudioPlay"];
-            //        imageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
-            //        [audioButton addSubview:imageView];
-            __weak __typeof(self)weakSelf = self;
-            __weak __typeof(audioButton)weakAudioButton = audioButton;
-            audioButton.playAudio = ^{
-                [weakSelf playAudio:weakAudioButton.tag];
-            };
-            audioButton.pauseAudio = ^{
-                [weakSelf pauseAudio];
-            };
-            [self.scrollView addSubview:audioButton];
+        [self.audioUrlArray addObject:[NSURL URLWithString:enhancement.enhancementFile]];
+        [self performSelectorInBackground:@selector(getTheAudioLength:) withObject:[NSNumber numberWithInteger:[slide.enhancements indexOfObject:enhancement]]];
+        [self configureAudioPlayer:[slide.enhancements indexOfObject:enhancement]];
+        CustomView *audioButton = [[CustomView alloc] init];
+        audioButton.tag = [slide.enhancements indexOfObject:enhancement];
+//        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
+        float xfactor = [AppDelegate application].dataManager.viewWidth/self.view.frame.size.width;
+        float yfactor = [AppDelegate application].dataManager.viewHeight/self.view.frame.size.height;
+        if(xfactor == 1 && yfactor == 1) {
+            xfactor = 0.75;
+            yfactor = 0.75;
         }
-        else
-        {
-            [self.animationUrlArray addObject:[NSURL URLWithString:enhancement.enhancementFile]];
-            UIImageView *animationImage = [[UIImageView alloc] init];
-            animationImage.backgroundColor = [UIColor redColor];
-            animationImage.tag = [slide.enhancements indexOfObject:enhancement];
-            //        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
-            CGFloat myWidth = self.view.frame.size.width;
-            CGFloat myHeight = self.view.frame.size.height;
-            float xfactor = myWidth/[AppDelegate application].dataManager.viewWidth;
-            float yfactor = myHeight/[AppDelegate application].dataManager.viewHeight;
-            NSLog(@"%@",NSStringFromCGRect(self.view.frame));
-            /*if(xfactor == 1 && yfactor == 1) {
-                xfactor = 0.75;
-                yfactor = 0.75;
-            }*/
-            float originX = xfactor * [enhancement.xPos floatValue];
-            float originY = yfactor * [enhancement.yPos floatValue];
-            float sizeX = xfactor * [enhancement.width floatValue];
-            float sizeY = yfactor * [enhancement.height floatValue];
-            
-            
-            /*float originX = self.view.frame.size.width*[enhancement.xPos floatValue]/[AppDelegate application].dataManager.viewWidth;
-             float originY = self.view.frame.size.height*[enhancement.yPos floatValue]/[AppDelegate application].dataManager.viewHeight;
-             float sizeX = self.view.frame.size.width*[enhancement.width floatValue]/[AppDelegate application].dataManager.viewWidth;
-             float sizeY = self.view.frame.size.width*[enhancement.height floatValue]/[AppDelegate application].dataManager.viewHeight;*/
-            NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
-            NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
-            // originX and originY are currently middle points. So changing it to origin.
-            /*originX = originX - sizeX/2;
-             originY = originY - sizeY/2;*/
-            [animationImage setFrame:CGRectMake(originX, originY, sizeX , sizeY )];
-            //        [audioButton setBackgroundColor:[UIColor yellowColor]];
-            //        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 25)];
-            //        imageView.image = [UIImage imageNamed:@"bubbleAudioPlay"];
-            //        imageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
-            //        [audioButton addSubview:imageView];
-            /*[animationImage sd_setImageWithURL:[NSURL URLWithString:enhancement.enhancementFile]];
-            [animationImage sd_setImageWithURL:[NSURL URLWithString:enhancement.enhancementFile] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                
-            }];*/
-            animationImage.image = [UIImage sd_animatedGIFNamed:@"cat1Anim1"];
-            NSDictionary *objOn = @{
-                                    @"Enhance":enhancement,
-                                    @"subView":animationImage
-                                    };
-            [arrOfSubviews addObject:objOn];
-            [self.scrollView addSubview:animationImage];
-        }
+        float originX = xfactor * [enhancement.xPos floatValue];
+        float originY = yfactor * [enhancement.yPos floatValue];
+        float sizeX = xfactor * [enhancement.width floatValue];
+        float sizeY = yfactor * [enhancement.height floatValue];
+        
+        NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
+        NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
+        // originX and originY are currently middle points. So changing it to origin.
+        originX = originX - sizeX/2;
+        originY = originY - sizeY/2;
+        [audioButton setFrame:CGRectMake(originX, originY, sizeX + sizeX/2, sizeY + sizeY/2)];
+//        [audioButton setBackgroundColor:[UIColor yellowColor]];
+//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 25)];
+//        imageView.image = [UIImage imageNamed:@"bubbleAudioPlay"];
+//        imageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
+//        [audioButton addSubview:imageView];
+        __weak __typeof(self)weakSelf = self;
+        __weak __typeof(audioButton)weakAudioButton = audioButton;
+        audioButton.playAudio = ^{
+            [weakSelf playAudio:weakAudioButton.tag];
+        };
+        audioButton.pauseAudio = ^{
+            [weakSelf pauseAudio];
+        };
+        [self.scrollView addSubview:audioButton];
     }
-
 }
 
 - (void)playAudio:(NSInteger)tag {
