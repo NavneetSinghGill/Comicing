@@ -411,6 +411,7 @@
 		168512131D3C052000A372E3 /* follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 168512111D3C052000A372E3 /* follow.png */; };
 		168512141D3C052000A372E3 /* followSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 168512121D3C052000A372E3 /* followSelected.png */; };
 		16AA8AE41D87334700FFD9DE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 16AA8AE31D87334700FFD9DE /* libz.tbd */; };
+		16DD56E11D8D3CF00036190E /* SubIndexpageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16DD56E01D8D3CF00036190E /* SubIndexpageCell.m */; };
 		1B00F6C21D450D3300514291 /* AnimatedGif.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B00F6BF1D450D3300514291 /* AnimatedGif.m */; };
 		1B00F6C31D450D3300514291 /* UIImageView+AnimatedGif.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B00F6C11D450D3300514291 /* UIImageView+AnimatedGif.m */; };
 		1B37C6F31D4123BF000A8C37 /* FrinedsUsingComicingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B37C6F11D4123BF000A8C37 /* FrinedsUsingComicingCell.m */; };
@@ -1161,6 +1162,8 @@
 		168512111D3C052000A372E3 /* follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = follow.png; sourceTree = "<group>"; };
 		168512121D3C052000A372E3 /* followSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followSelected.png; sourceTree = "<group>"; };
 		16AA8AE31D87334700FFD9DE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		16DD56DF1D8D3CF00036190E /* SubIndexpageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubIndexpageCell.h; sourceTree = "<group>"; };
+		16DD56E01D8D3CF00036190E /* SubIndexpageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubIndexpageCell.m; sourceTree = "<group>"; };
 		1B00F6BE1D450D3300514291 /* AnimatedGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedGif.h; sourceTree = "<group>"; };
 		1B00F6BF1D450D3300514291 /* AnimatedGif.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedGif.m; sourceTree = "<group>"; };
 		1B00F6C01D450D3300514291 /* UIImageView+AnimatedGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AnimatedGif.h"; sourceTree = "<group>"; };
@@ -2004,6 +2007,8 @@
 				0C6665CA1C84358500FEB11F /* MeCell.h */,
 				0C6665CB1C84358500FEB11F /* MeCell.m */,
 				0C6665CC1C84358500FEB11F /* MeCell.xib */,
+				16DD56DF1D8D3CF00036190E /* SubIndexpageCell.h */,
+				16DD56E01D8D3CF00036190E /* SubIndexpageCell.m */,
 				0C6665CD1C84358500FEB11F /* MePageDetailsVC.h */,
 				0C6665CE1C84358500FEB11F /* MePageDetailsVC.m */,
 				0C6665CF1C84358500FEB11F /* MePageVC.h */,
@@ -3587,6 +3592,7 @@
 				0C66682D1C84358600FEB11F /* Slides.m in Sources */,
 				0C6668261C84358600FEB11F /* Group.m in Sources */,
 				0C6668891C84358600FEB11F /* NSError+STTwitter.m in Sources */,
+				16DD56E11D8D3CF00036190E /* SubIndexpageCell.m in Sources */,
 				0C6667F91C84358600FEB11F /* PrivateConversationCell.m in Sources */,
 				0C6667FF1C84358600FEB11F /* AlphabetCollectionViewCell.m in Sources */,
 				0C6667DE1C84358600FEB11F /* ComicBubbleList.m in Sources */,
