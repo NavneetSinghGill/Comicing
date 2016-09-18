@@ -354,6 +354,10 @@
 		0CC9F3741CF653D100761F44 /* Segment7Standard.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0CC9F3731CF653D100761F44 /* Segment7Standard.otf */; };
 		0CDC2B991D4A81990088FDA5 /* ActiveInbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC2B961D4A81990088FDA5 /* ActiveInbox.m */; };
 		0CDD9A821C99B30B00D942D3 /* TermsServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */; };
+		1604B7991D8F0B960096E1DD /* 1slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604B7951D8F0B960096E1DD /* 1slidebook.png */; };
+		1604B79A1D8F0B960096E1DD /* 2slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604B7961D8F0B960096E1DD /* 2slidebook.png */; };
+		1604B79B1D8F0B960096E1DD /* 3slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604B7971D8F0B960096E1DD /* 3slidebook.png */; };
+		1604B79C1D8F0B960096E1DD /* 4slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604B7981D8F0B960096E1DD /* 4slidebook.png */; };
 		160DEF8C1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m in Sources */ = {isa = PBXBuildFile; fileRef = 160DEF8B1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m */; };
 		161A08171D3D54C500BF0F50 /* arielBlack.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 161A08161D3D546F00BF0F50 /* arielBlack.ttf */; };
 		161CAD4E1D840DD80034795C /* Bored-OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 161CAD421D840DD80034795C /* Bored-OFF.png */; };
@@ -1101,6 +1105,10 @@
 		0CDC2B961D4A81990088FDA5 /* ActiveInbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveInbox.m; sourceTree = "<group>"; };
 		0CDD9A801C99B30B00D942D3 /* TermsServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsServiceViewController.h; sourceTree = "<group>"; };
 		0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsServiceViewController.m; sourceTree = "<group>"; };
+		1604B7951D8F0B960096E1DD /* 1slidebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1slidebook.png; sourceTree = "<group>"; };
+		1604B7961D8F0B960096E1DD /* 2slidebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2slidebook.png; sourceTree = "<group>"; };
+		1604B7971D8F0B960096E1DD /* 3slidebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3slidebook.png; sourceTree = "<group>"; };
+		1604B7981D8F0B960096E1DD /* 4slidebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4slidebook.png; sourceTree = "<group>"; };
 		160DEF8A1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Multiplier.h"; sourceTree = "<group>"; };
 		160DEF8B1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Multiplier.m"; sourceTree = "<group>"; };
 		161A08161D3D546F00BF0F50 /* arielBlack.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arielBlack.ttf; sourceTree = "<group>"; };
@@ -2789,6 +2797,7 @@
 		0C6667291C84358600FEB11F /* ComicShareView */ = {
 			isa = PBXGroup;
 			children = (
+				1604B78C1D8F0B0D0096E1DD /* ImageResources */,
 				0C66672B1C84358600FEB11F /* ComicShareView.h */,
 				0C66672C1C84358600FEB11F /* ComicShareView.m */,
 				0C66672D1C84358600FEB11F /* ComicShareView.xib */,
@@ -2964,6 +2973,17 @@
 				0CBA37E41D3EA65B00610F20 /* SlidePreviewScrollView.m */,
 			);
 			path = ComicListView;
+			sourceTree = "<group>";
+		};
+		1604B78C1D8F0B0D0096E1DD /* ImageResources */ = {
+			isa = PBXGroup;
+			children = (
+				1604B7951D8F0B960096E1DD /* 1slidebook.png */,
+				1604B7961D8F0B960096E1DD /* 2slidebook.png */,
+				1604B7971D8F0B960096E1DD /* 3slidebook.png */,
+				1604B7981D8F0B960096E1DD /* 4slidebook.png */,
+			);
+			path = ImageResources;
 			sourceTree = "<group>";
 		};
 		167DDF331D7F39810090E8A5 /* AnimationCustomCells */ = {
@@ -3366,6 +3386,7 @@
 				84A5DFE51D3690070089D6BE /* Slide-10.gif in Resources */,
 				0C6667B11C84358600FEB11F /* Main_MainPage.storyboard in Resources */,
 				0C6667F81C84358600FEB11F /* GroupCell.xib in Resources */,
+				1604B79B1D8F0B960096E1DD /* 3slidebook.png in Resources */,
 				0C6667751C84358600FEB11F /* MYRIADPRO-BOLDCOND.OTF in Resources */,
 				0C6667961C84358600FEB11F /* flagImage.png in Resources */,
 				8466E7F41CB169500075727A /* InviteFriendsView.xib in Resources */,
@@ -3419,6 +3440,7 @@
 				84CEF1161D3ADF68009FCB1D /* indicator@3x.png in Resources */,
 				167DDFC81D7F40120090E8A5 /* cat4Anim2.gif in Resources */,
 				0C6667AF1C84358600FEB11F /* LaunchScreen.storyboard in Resources */,
+				1604B79A1D8F0B960096E1DD /* 2slidebook.png in Resources */,
 				167DDFCD1D7F40120090E8A5 /* cat5Anim1.gif in Resources */,
 				1BEB1FD81D43DD2700CC1304 /* openbox-10.gif in Resources */,
 				1B37C6FA1D414A9F000A8C37 /* right_indicator@3x.png in Resources */,
@@ -3429,6 +3451,7 @@
 				1BEB1FDA1D43DD2700CC1304 /* openbox-5.gif in Resources */,
 				0C66677B1C84358600FEB11F /* MYRIADPRO-SEMIBOLD.OTF in Resources */,
 				1BDDB7511D48A79400FA931F /* open_gift_box_flat@3x.png in Resources */,
+				1604B79C1D8F0B960096E1DD /* 4slidebook.png in Resources */,
 				0C6667A71C84358600FEB11F /* everyone.png in Resources */,
 				167DDFCA1D7F40120090E8A5 /* cat4Anim4.gif in Resources */,
 				167DDFCE1D7F40120090E8A5 /* cat5Anim2.gif in Resources */,
@@ -3453,6 +3476,7 @@
 				167DDFD31D7F40120090E8A5 /* cat6Anim1.gif in Resources */,
 				167DDFC31D7F40120090E8A5 /* cat3Anim3.gif in Resources */,
 				167DDFC61D7F40120090E8A5 /* cat3Anim6.gif in Resources */,
+				1604B7991D8F0B960096E1DD /* 1slidebook.png in Resources */,
 				0C66679E1C84358600FEB11F /* selectedImage.png in Resources */,
 				84CEF1211D3ADF68009FCB1D /* ModifiedBlueBoy.png in Resources */,
 				0C6668071C84358600FEB11F /* MeCell.xib in Resources */,
