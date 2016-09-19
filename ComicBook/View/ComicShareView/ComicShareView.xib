@@ -123,7 +123,7 @@
             <rect key="frame" x="0.0" y="0.0" width="450" height="600"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4slidebook.png" id="E66-Gc-rdl">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1slidebook.png" id="E66-Gc-rdl">
                     <rect key="frame" x="0.0" y="0.0" width="450" height="600"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -170,7 +170,6 @@
         <image name="1slidebook.png" width="452" height="603"/>
         <image name="2slidebook.png" width="600" height="600"/>
         <image name="3slidebook.png" width="600" height="600"/>
-        <image name="4slidebook.png" width="450" height="600"/>
         <image name="ComicShareLogo" width="367" height="404"/>
         <image name="Comicshare_Logo_Text" width="348" height="40"/>
         <image name="Glide-1" width="207" height="368"/>
