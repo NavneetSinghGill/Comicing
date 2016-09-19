@@ -357,7 +357,6 @@
 		1604B7991D8F0B960096E1DD /* 1slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604B7951D8F0B960096E1DD /* 1slidebook.png */; };
 		1604B79A1D8F0B960096E1DD /* 2slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604B7961D8F0B960096E1DD /* 2slidebook.png */; };
 		1604B79B1D8F0B960096E1DD /* 3slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604B7971D8F0B960096E1DD /* 3slidebook.png */; };
-		1604B79C1D8F0B960096E1DD /* 4slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604B7981D8F0B960096E1DD /* 4slidebook.png */; };
 		160DEF8C1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m in Sources */ = {isa = PBXBuildFile; fileRef = 160DEF8B1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m */; };
 		161A08171D3D54C500BF0F50 /* arielBlack.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 161A08161D3D546F00BF0F50 /* arielBlack.ttf */; };
 		161CAD4E1D840DD80034795C /* Bored-OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 161CAD421D840DD80034795C /* Bored-OFF.png */; };
@@ -372,6 +371,7 @@
 		161CAD571D840DD80034795C /* Happy-ON.png in Resources */ = {isa = PBXBuildFile; fileRef = 161CAD4B1D840DD80034795C /* Happy-ON.png */; };
 		161CAD581D840DD80034795C /* Love-OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 161CAD4C1D840DD80034795C /* Love-OFF.png */; };
 		161CAD591D840DD80034795C /* Love-ON.png in Resources */ = {isa = PBXBuildFile; fileRef = 161CAD4D1D840DD80034795C /* Love-ON.png */; };
+		165641981D907EBB00E3C9C7 /* 4slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 165641971D907EBB00E3C9C7 /* 4slidebook.png */; };
 		167DDF321D7F38570090E8A5 /* AnimationCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 167DDF311D7F38570090E8A5 /* AnimationCollectionVC.m */; };
 		167DDF361D7F39A00090E8A5 /* AnimationCategoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 167DDF351D7F39A00090E8A5 /* AnimationCategoryCollectionViewCell.m */; };
 		167DDF8F1D7F3D4C0090E8A5 /* AnimationsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 167DDF8E1D7F3D4C0090E8A5 /* AnimationsCollectionViewCell.m */; };
@@ -1108,7 +1108,6 @@
 		1604B7951D8F0B960096E1DD /* 1slidebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1slidebook.png; sourceTree = "<group>"; };
 		1604B7961D8F0B960096E1DD /* 2slidebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2slidebook.png; sourceTree = "<group>"; };
 		1604B7971D8F0B960096E1DD /* 3slidebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3slidebook.png; sourceTree = "<group>"; };
-		1604B7981D8F0B960096E1DD /* 4slidebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4slidebook.png; sourceTree = "<group>"; };
 		160DEF8A1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Multiplier.h"; sourceTree = "<group>"; };
 		160DEF8B1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Multiplier.m"; sourceTree = "<group>"; };
 		161A08161D3D546F00BF0F50 /* arielBlack.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arielBlack.ttf; sourceTree = "<group>"; };
@@ -1124,6 +1123,7 @@
 		161CAD4B1D840DD80034795C /* Happy-ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Happy-ON.png"; sourceTree = "<group>"; };
 		161CAD4C1D840DD80034795C /* Love-OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Love-OFF.png"; sourceTree = "<group>"; };
 		161CAD4D1D840DD80034795C /* Love-ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Love-ON.png"; sourceTree = "<group>"; };
+		165641971D907EBB00E3C9C7 /* 4slidebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4slidebook.png; sourceTree = "<group>"; };
 		167DDF301D7F38570090E8A5 /* AnimationCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationCollectionVC.h; sourceTree = "<group>"; };
 		167DDF311D7F38570090E8A5 /* AnimationCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationCollectionVC.m; sourceTree = "<group>"; };
 		167DDF341D7F39A00090E8A5 /* AnimationCategoryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationCategoryCollectionViewCell.h; sourceTree = "<group>"; };
@@ -2981,7 +2981,7 @@
 				1604B7951D8F0B960096E1DD /* 1slidebook.png */,
 				1604B7961D8F0B960096E1DD /* 2slidebook.png */,
 				1604B7971D8F0B960096E1DD /* 3slidebook.png */,
-				1604B7981D8F0B960096E1DD /* 4slidebook.png */,
+				165641971D907EBB00E3C9C7 /* 4slidebook.png */,
 			);
 			path = ImageResources;
 			sourceTree = "<group>";
@@ -3451,7 +3451,7 @@
 				1BEB1FDA1D43DD2700CC1304 /* openbox-5.gif in Resources */,
 				0C66677B1C84358600FEB11F /* MYRIADPRO-SEMIBOLD.OTF in Resources */,
 				1BDDB7511D48A79400FA931F /* open_gift_box_flat@3x.png in Resources */,
-				1604B79C1D8F0B960096E1DD /* 4slidebook.png in Resources */,
+				165641981D907EBB00E3C9C7 /* 4slidebook.png in Resources */,
 				0C6667A71C84358600FEB11F /* everyone.png in Resources */,
 				167DDFCA1D7F40120090E8A5 /* cat4Anim4.gif in Resources */,
 				167DDFCE1D7F40120090E8A5 /* cat5Anim2.gif in Resources */,

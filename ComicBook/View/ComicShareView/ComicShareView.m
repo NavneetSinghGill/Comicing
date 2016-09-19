@@ -365,10 +365,10 @@
 //    
 //    self.imgComicLogo4.transform=CGAffineTransformMakeRotation(M_PI / -30);
 
-    [self giveBorderToView:self.img1ComicSlide4 OfWidth:2];
-    [self giveBorderToView:self.img2ComicSlide4 OfWidth:2];
-    [self giveBorderToView:self.img3ComicSlide4 OfWidth:2];
-    [self giveBorderToView:self.img4ComicSlide4 OfWidth:2];
+    [self giveBorderToView:self.img1ComicSlide4 OfWidth:1.7f];
+    [self giveBorderToView:self.img2ComicSlide4 OfWidth:1.7f];
+    [self giveBorderToView:self.img3ComicSlide4 OfWidth:1.7f];
+    [self giveBorderToView:self.img4ComicSlide4 OfWidth:1.7f];
     
     return [self saveViewToImage:self.viewHolderSlide4];
 }

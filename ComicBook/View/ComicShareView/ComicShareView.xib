@@ -120,20 +120,20 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
         <view contentMode="scaleToFill" id="9gA-9g-KQh">
-            <rect key="frame" x="0.0" y="0.0" width="450" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="337" height="600"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1slidebook.png" id="E66-Gc-rdl">
-                    <rect key="frame" x="0.0" y="0.0" width="450" height="600"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4slidebook.png" id="E66-Gc-rdl">
+                    <rect key="frame" x="0.0" y="0.0" width="337" height="600"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Glide-1" id="ifX-73-ILG">
-                    <rect key="frame" x="46" y="9" width="160" height="257"/>
+                    <rect key="frame" x="15" y="22" width="137" height="240"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Glide-4" id="PcA-C9-pci">
-                    <rect key="frame" x="218" y="275" width="160" height="257"/>
+                    <rect key="frame" x="164" y="274" width="137" height="240"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
@@ -148,19 +148,19 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Glide-2" id="Mz4-1Y-ZR3">
-                    <rect key="frame" x="218" y="9" width="160" height="257"/>
+                    <rect key="frame" x="164" y="22" width="137" height="240"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Glide-3" id="pwZ-S8-E53">
-                    <rect key="frame" x="46" y="275" width="160" height="257"/>
+                    <rect key="frame" x="15" y="274" width="137" height="240"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-17" y="360"/>
+            <point key="canvasLocation" x="-73.5" y="360"/>
         </view>
     </objects>
     <resources>
@@ -170,6 +170,7 @@
         <image name="1slidebook.png" width="452" height="603"/>
         <image name="2slidebook.png" width="600" height="600"/>
         <image name="3slidebook.png" width="600" height="600"/>
+        <image name="4slidebook.png" width="337" height="600"/>
         <image name="ComicShareLogo" width="367" height="404"/>
         <image name="Comicshare_Logo_Text" width="348" height="40"/>
         <image name="Glide-1" width="207" height="368"/>
