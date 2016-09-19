@@ -4130,10 +4130,14 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                     [cmEng setObject:@"1" forKey:@"is_custom"];
                     [cmEng setObject:@"" forKey:@"enhancement_text"];
                 
-                    UIImage* imgGif = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+                   // UIImage* imgGif = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
                 
-                    CGDataProviderRef provider = CGImageGetDataProvider(imgGif.CGImage);
-                    NSData* gifData = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+                    //CGDataProviderRef provider = CGImageGetDataProvider(imgGif.CGImage);
+                    //NSData* gifData = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+                
+                NSString *filePath = [[NSBundle mainBundle] pathForResource:((ComicItemAnimatedSticker*)imageView).animatedStickerName ofType: @"gif"];
+                
+                NSData *gifData = [NSData dataWithContentsOfFile: filePath];
                 
                     [cmEng setObject:[gifData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]
                               forKey:@"enhancement_file"];
