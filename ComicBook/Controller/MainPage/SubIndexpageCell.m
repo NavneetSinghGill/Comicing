@@ -10,6 +10,8 @@
 #import "Enhancement.h"
 #import "AppDelegate.h"
 #import "UIImage+GIF.h"
+#import "YLImageView.h"
+#import "YLGIFImage.h"
 
 @implementation SubIndexpageCell
 -(void)setArrOfEnhancements:(NSMutableArray *)arrOfEnhancements
@@ -20,7 +22,7 @@
     {
         if ([enhancement.enhancementType isEqualToString:@"GIF"])
         {
-            UIImageView *animationImage = [[UIImageView alloc] init];
+            YLImageView *animationImage = [[YLImageView alloc] init];
             animationImage.backgroundColor = [UIColor redColor];
             //animationImage.tag = [arrOfEnhancements indexOfObject:enhancement];
             //        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
@@ -40,7 +42,7 @@
             NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
             [animationImage setFrame:CGRectMake(originX, originY, sizeX , sizeY )];
             
-            animationImage.image = [UIImage sd_animatedGIFNamed:@"cat1Anim1"];
+            animationImage.image = [YLGIFImage imageNamed:@"cat1Anim1.gif"];
             NSDictionary *objOn = @{
                                     @"Enhance":enhancement,
                                     @"subView":animationImage
@@ -61,7 +63,7 @@
     for (NSDictionary *obj in self.arrOfAnimationStickers)
     {
         Enhancement *enhancement = [obj valueForKey:@"Enhance"];
-        UIImageView *imgView = [obj valueForKey:@"subView"];
+        YLImageView *imgView = [obj valueForKey:@"subView"];
         CGFloat myWidth = self.frame.size.width;
         CGFloat myHeight = self.frame.size.height;
         float xfactor = myWidth/[AppDelegate application].dataManager.viewWidth;

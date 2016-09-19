@@ -9,6 +9,8 @@
 #import "Constants.h"
 #import "AppDelegate.h"
 #import "UIImage+GIF.h"
+#import "YLImageView.h"
+#import "YLGIFImage.h"
 
 @interface DataViewController () <AVAudioPlayerDelegate>
 {
@@ -79,7 +81,6 @@
                      *  setting comic book else pages
                      */
                     [self.scrollView setPage:[self.slidesArray objectAtIndex:self.pageNumber]];
-                    [self addAnimationImagesIfNotIndexPage:[self.slidesArray objectAtIndex:self.pageNumber]];
                 //    [self addAudioButton:[self.slidesArray objectAtIndex:self.pageNumber]];
                 }
             }
@@ -110,7 +111,6 @@
                      *  setting comic book else pages
                      */
                     [self.scrollView setPage:[self.slidesArray objectAtIndex:self.pageNumber]];
-                    [self addAnimationImagesIfNotIndexPage:[self.slidesArray objectAtIndex:self.pageNumber]];
                 //    [self addAudioButton:[self.slidesArray objectAtIndex:self.pageNumber]];
                 }
             }
@@ -138,7 +138,6 @@
                      *  setting comic book else pages
                      */
                     [self.scrollView setPage:[self.slidesArray objectAtIndex:self.pageNumber]];
-                    [self addAnimationImagesIfNotIndexPage:[self.slidesArray objectAtIndex:self.pageNumber]];
                     [self addAudioButton:[self.slidesArray objectAtIndex:self.pageNumber]];
                 }
             }
@@ -169,7 +168,6 @@
                      *  setting comic book else pages
                      */
                     [self.scrollView setPage:[self.slidesArray objectAtIndex:self.pageNumber]];
-                    [self addAnimationImagesIfNotIndexPage:[self.slidesArray objectAtIndex:self.pageNumber]];
                     [self addAudioButton:[self.slidesArray objectAtIndex:self.pageNumber]];
                 }
             }
@@ -183,7 +181,7 @@
     for (NSDictionary *obj in self.objOfSubviews)
     {
         Enhancement *enhancement = [obj valueForKey:@"Enhance"];
-        UIImageView *animationImage = [obj valueForKey:@"subView"];
+        YLImageView *animationImage = [obj valueForKey:@"subView"];
         CGFloat myWidth = self.view.frame.size.width;
         CGFloat myHeight = self.view.frame.size.height;
         float xfactor = myWidth/[UIScreen mainScreen].bounds.size.width;
@@ -193,7 +191,6 @@
         float originY = yfactor * [enhancement.yPos floatValue];
         float sizeX = xfactor * [enhancement.width floatValue];
         float sizeY = yfactor * [enhancement.height floatValue];
-        
         
         
         NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
@@ -314,7 +311,7 @@
         {
             
                 
-                UIImageView *animationImage = [[UIImageView alloc] init];
+                YLImageView *animationImage = [[YLImageView alloc] init];
                 animationImage.backgroundColor = [UIColor redColor];
                 //animationImage.tag = [arrOfEnhancements indexOfObject:enhancement];
                 //        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
@@ -334,7 +331,7 @@
                 NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
                 [animationImage setFrame:CGRectMake(originX, originY, sizeX , sizeY )];
                 
-                animationImage.image = [UIImage sd_animatedGIFNamed:@"cat1Anim1"];
+                animationImage.image = [YLGIFImage imageNamed:@"cat1Anim1.gif"];//[UIImage sd_animatedGIFNamed:@"cat1Anim1"];
                 NSDictionary *objOn = @{
                                         @"Enhance":enhancement,
                                         @"subView":animationImage
