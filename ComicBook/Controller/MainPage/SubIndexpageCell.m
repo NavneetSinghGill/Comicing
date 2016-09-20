@@ -12,6 +12,7 @@
 #import "UIImage+GIF.h"
 #import "YLImageView.h"
 #import "YLGIFImage.h"
+#import "UIImageView+WebCache.h"
 
 @implementation SubIndexpageCell
 -(void)setArrOfEnhancements:(NSMutableArray *)arrOfEnhancements
@@ -23,7 +24,6 @@
         if ([enhancement.enhancementType isEqualToString:@"GIF"])
         {
             YLImageView *animationImage = [[YLImageView alloc] init];
-            animationImage.backgroundColor = [UIColor redColor];
             //animationImage.tag = [arrOfEnhancements indexOfObject:enhancement];
             //        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
             CGFloat myWidth = self.img_MainImage.frame.size.width;
@@ -41,8 +41,9 @@
             NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
             NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
             [animationImage setFrame:CGRectMake(originX, originY, sizeX , sizeY )];
-            
-            animationImage.image = [YLGIFImage imageNamed:@"cat1Anim1.gif"];
+            [animationImage sd_setImageWithURL:[NSURL URLWithString:enhancement.enhancementFile]];
+
+           // animationImage.image = [YLGIFImage imageNamed:@"cat1Anim1.gif"];
             NSDictionary *objOn = @{
                                     @"Enhance":enhancement,
                                     @"subView":animationImage
