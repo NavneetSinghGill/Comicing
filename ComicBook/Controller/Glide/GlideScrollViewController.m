@@ -769,7 +769,7 @@ NSTimer* timerObject;
     if (isPopView)
     {
         [self.navigationController popViewControllerAnimated:YES];
-        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen withComicSlide:comicSlides];
+      
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             //Do background work
             @try {
@@ -821,6 +821,9 @@ NSTimer* timerObject;
                     data = nil;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self setComicSendButton];
+                        
+                        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen withComicSlide:comicSlides];
+                        
                         if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterSecondTimeGlideViewController] == YES)
                         {
                             

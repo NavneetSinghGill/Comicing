@@ -13,7 +13,7 @@
 {
     NSMutableArray *viewControllers;
 }
-@synthesize allSlideImages;
+@synthesize allSlideImages, isDelegateCalled;
 
 
 -(void)viewDidLoad
@@ -71,8 +71,6 @@
     {
        [viewControllers addObject:[self addPreviewView:slides]];
     }
-    
- 
 }
 
 #pragma mark method
@@ -148,15 +146,37 @@
 
 - (void)didFrameChange:(ComicSlidePreview *)view withFrame:(CGRect)frame
 {
-    CGRect viewFrame = self.view.frame;
+//    view.view.center = self.view.center;
     
+    self.view.backgroundColor = [UIColor redColor];
+
+    if(allSlideImages.count > 4)
+    {
+        if (frame.size.height > self.view.frame.size.height)
+        {
+            
+        }
+        else
+        {
+            if (isDelegateCalled)
+            {
+                isDelegateCalled = NO;
+                
+                return;
+            }
+        }
+    }
+    
+    isDelegateCalled = YES;
+    
+    CGRect viewFrame = self.view.frame;
     
     viewFrame.size.width = frame.size.width;
     viewFrame.size.height = frame.size.height;
-
     
     self.view.frame = viewFrame;
     
+   
 }
 
 @end

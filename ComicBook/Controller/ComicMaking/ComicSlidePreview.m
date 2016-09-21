@@ -198,11 +198,15 @@
     
     [self.view addSubview:self.viewWhiteBorder];
     
+    CGRect viewFrame = self.viewWhiteBorder.frame;
+
+    self.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(viewFrame));
+    
     self.viewWhiteBorder.center = self.view.center;
+    self.viewWhiteBorder.tag = 11111;
+    self.view.backgroundColor = [UIColor blueColor];
     
-    self.view.backgroundColor = [UIColor blackColor];
-    
-   // [self.delegate didFrameChange:self withFrame:self.viewWhiteBorder.frame];
+    [self.delegate didFrameChange:self withFrame:self.viewWhiteBorder.frame];
 }
 
 #pragma mark - ComicImage Layout methods

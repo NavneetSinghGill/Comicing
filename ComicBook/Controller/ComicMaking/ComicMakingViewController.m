@@ -2468,15 +2468,11 @@ static CGRect CaptionTextViewMinRect;
                 
             }
             
-
-            
             [self.delegate comicMakingViewControllerWithEditingDone:self
                                                       withImageView:imgvComic
                                                     withPrintScreen:printScreen
                                                        withNewSlide:isNewSlide
                                                         withPopView:YES withIsWideSlide:isWideSlide];
-            
-            
             
         }
         else

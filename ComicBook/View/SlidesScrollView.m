@@ -562,7 +562,6 @@ UILabel *mComicTitle;
                 imgvComic.image = [UIImage ScaletoFill:printScreen toSize:view.frame.size];
             }
             
-            
             [self updatePrivewListImage:index withComicSlide:printScreen];
         }
     }
