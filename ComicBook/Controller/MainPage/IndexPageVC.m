@@ -10,6 +10,8 @@
 #import "UIImageView+WebCache.h"
 #import "Slides.h"
 #import "Global.h"
+#import "AppDelegate.h"
+#import "SubIndexpageCell.h"
 
 @interface IndexPageVC ()
 
@@ -118,7 +120,7 @@
 {
     
     UIImageView *img=(UIImageView*)[cell viewWithTag:1];
-    
+    [[img viewWithTag:1001] removeFromSuperview];
     if(self.slidesArray.count == 2) {
         // logic for 2 items
         if(indexPath.row == 0 || indexPath.row == 3) {
@@ -126,7 +128,7 @@
                 Slides *slide = [self.slidesArray objectAtIndex:0];
                 [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 }];
-            } else if(indexPath.row == 3) {
+                    } else if(indexPath.row == 3) {
                 Slides *slide = [self.slidesArray objectAtIndex:1];
                 [img sd_setImageWithURL:[NSURL URLWithString:slide.slideImage] placeholderImage:GlobalObject.placeholder_comic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 }];
@@ -176,11 +178,41 @@
             [img.layer setMasksToBounds:true];
         }
     }
+    
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    
+    SubIndexpageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    UIImageView *img=(UIImageView*)[cell viewWithTag:1];
+    Slides *slide;
+    cell.arrOfEnhancements = [slide.enhancements mutableCopy];
+    if(self.slidesArray.count == 2) {
+        if(indexPath.row == 0 || indexPath.row == 3) {
+            if(indexPath.row == 0) {
+                slide = [self.slidesArray objectAtIndex:0];
+            } else if(indexPath.row == 3) {
+                slide = [self.slidesArray objectAtIndex:1];
+            }
+        } else {
+        }
+    } else if(self.slidesArray.count == 3) {
+        if(indexPath.section == 0) {
+            slide = [self.slidesArray objectAtIndex:indexPath.row];
+        } else {
+            slide = [self.slidesArray objectAtIndex:2];
+        }
+        
+    } else {
+        if(indexPath.row<self.slidesArray.count)
+        {
+            slide = [self.slidesArray objectAtIndex:indexPath.row];
+        }
+        else
+        {
+        }
+    }
+    cell.arrOfEnhancements = [slide.enhancements mutableCopy];
+    [cell layoutSubviews];
     return cell;
 }
 

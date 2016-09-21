@@ -536,22 +536,6 @@ UILabel *mComicTitle;
         {
             UIImageView *imgvComic = (UIImageView *)subview;
             imgvComic.contentMode = UIViewContentModeScaleAspectFit;
-            imgvComic.image = [UIImage ScaletoFill:printScreen toSize:view.frame.size];
-            
-            float scaleFactor = imgvComic.image.size.width / printScreen.size.width;
-            
-            //Remove all subviews
-            for (id subView in [imgvComic subviews]) {
-                [subView removeFromSuperview];
-            }
-            
-            ComicPage *comicPage = [NSKeyedUnarchiver unarchiveObjectWithData:[comicSlide objectAtIndex:index]];
-            for (int i = 0; i < comicPage.subviews.count; i ++)
-            {
-                id imageView = comicPage.subviews[i];
-                CGRect myRect = [comicPage.subviewData[i] CGRectValue];
-                [self addComicItem:imageView ItemImage:imgvComic rectValue:myRect ScaleValue:scaleFactor];
-            }
             
             if (printScreen.size.height < printScreen.size.width)
             {
@@ -560,11 +544,48 @@ UILabel *mComicTitle;
             else
             {
                 imgvComic.image = [UIImage ScaletoFill:printScreen toSize:view.frame.size];
+                
             }
             
             [self updatePrivewListImage:index withComicSlide:printScreen];
         }
     }
+    /**************New Code Commented because it crashes commented by Sanjay *******************/
+//    {
+//        if ([subview isKindOfClass:[UIImageView class]])
+//        {
+//            UIImageView *imgvComic = (UIImageView *)subview;
+//            imgvComic.contentMode = UIViewContentModeScaleAspectFit;
+//            imgvComic.image = [UIImage ScaletoFill:printScreen toSize:view.frame.size];
+//            
+//            float scaleFactor = imgvComic.image.size.width / printScreen.size.width;
+//            
+//            //Remove all subviews
+//            for (id subView in [imgvComic subviews]) {
+//                [subView removeFromSuperview];
+//            }
+//            
+//            ComicPage *comicPage = [NSKeyedUnarchiver unarchiveObjectWithData:[comicSlide objectAtIndex:index]];
+//            for (int i = 0; i < comicPage.subviews.count; i ++)
+//            {
+//                id imageView = comicPage.subviews[i];
+//                CGRect myRect = [comicPage.subviewData[i] CGRectValue];
+//                [self addComicItem:imageView ItemImage:imgvComic rectValue:myRect ScaleValue:scaleFactor];
+//            }
+//            
+//            if (printScreen.size.height < printScreen.size.width)
+//            {
+//                imgvComic.image = printScreen;
+//            }
+//            else
+//            {
+//                imgvComic.image = [UIImage ScaletoFill:printScreen toSize:view.frame.size];
+//            }
+//            
+//            
+//            [self updatePrivewListImage:index withComicSlide:printScreen];
+//        }
+//    }
 //    [self scrollRectToVisible:view.frame animated:NO];
 }
 

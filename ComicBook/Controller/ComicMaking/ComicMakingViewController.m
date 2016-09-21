@@ -3600,9 +3600,12 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotatePiece:)];
     [imageView addGestureRecognizer:rotationGesture];
     
-    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scalePiece:)];
-    [pinchGesture setDelegate:self];
-    [imageView addGestureRecognizer:pinchGesture];
+//    imageView.frame = CGRectMake(CGRectGetMinX(imageView.frame), CGRectGetMinY(imageView.frame), imageWidth, imageHeight);
+//    CGAffineTransform tt_1 = imageView.transform;
+//
+//    NSString * nn =  @"[1, 0, 0, 1, 0, 0]";
+//    CGAffineTransform tt= CGAffineTransformFromString(nn);
+//    imageView.transform = tt;
     
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureDetected:)];
     [panGestureRecognizer setDelegate:self];
@@ -4123,17 +4126,21 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                     [cmEng setObject:@"1" forKey:@"is_custom"];
                     [cmEng setObject:@"" forKey:@"enhancement_text"];
                 
-                    UIImage* imgGif = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+                   // UIImage* imgGif = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
                 
-                    CGDataProviderRef provider = CGImageGetDataProvider(imgGif.CGImage);
-                    NSData* gifData = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+                    //CGDataProviderRef provider = CGImageGetDataProvider(imgGif.CGImage);
+                    //NSData* gifData = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+                
+                NSString *filePath = [[NSBundle mainBundle] pathForResource:((ComicItemAnimatedSticker*)imageView).animatedStickerName ofType: @"gif"];
+                
+                NSData *gifData = [NSData dataWithContentsOfFile: filePath];
                 
                     [cmEng setObject:[gifData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]
                               forKey:@"enhancement_file"];
                     [cmEng setObject:@"gif" forKey:@"enhancement_file_type"];
                     
-                    CGFloat midPointX = myRect.origin.x + (myRect.size.width/2);
-                    CGFloat midPointY = myRect.origin.y + (myRect.size.height/2);
+                CGFloat midPointX = myRect.origin.x;
+                CGFloat midPointY = myRect.origin.y;
                     
                     [cmEng setObject:[NSString stringWithFormat:@"%f",midPointY] forKey:@"position_top"];
                     [cmEng setObject:[NSString stringWithFormat:@"%f",midPointX] forKey:@"position_left"];

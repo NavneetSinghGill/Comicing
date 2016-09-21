@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XO4-2R-B3p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XO4-2R-B3p">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -899,7 +899,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="JP4-6H-YSY">
+                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="JP4-6H-YSY" customClass="SubIndexpageCell">
                                         <rect key="frame" x="146" y="0.0" width="300" height="300"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -918,6 +918,9 @@
                                             <constraint firstAttribute="trailing" secondItem="F0E-DA-uK6" secondAttribute="trailing" constant="3" id="hZ9-8K-dL0"/>
                                             <constraint firstItem="F0E-DA-uK6" firstAttribute="leading" secondItem="JP4-6H-YSY" secondAttribute="leading" constant="3" id="spI-Yh-e6Y"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="img_MainImage" destination="F0E-DA-uK6" id="wCF-Ja-6Ib"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -2330,7 +2333,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ModifiedBlueBoy.png" translatesAutoresizingMaskIntoConstraints="NO" id="PPG-4V-yh6">
-                                <rect key="frame" x="10" y="-15" width="374" height="272.5"/>
+                                <rect key="frame" x="10" y="-15" width="374" height="273"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PPG-4V-yh6" secondAttribute="height" multiplier="103:75" id="dxP-bq-ues"/>
                                 </constraints>
@@ -2465,7 +2468,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AlphabetCell" id="gcU-KD-JZE" customClass="AlphabetCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="1.5" width="22" height="22"/>
+                                        <rect key="frame" x="0.0" y="2" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -2990,13 +2993,13 @@
                                     <constraint firstItem="oiX-aX-U5k" firstAttribute="top" secondItem="gAb-4z-u15" secondAttribute="bottom" id="xC6-Cq-SLt"/>
                                 </constraints>
                             </view>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-dI-brN">
+                            <view opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-dI-brN">
                                 <rect key="frame" x="-4" y="20" width="379" height="60"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDz-Gv-1eN">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDz-Gv-1eN">
                                         <rect key="frame" x="0.0" y="0.0" width="379" height="60"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Johnny" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfE-Hv-3BS">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Johnny" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfE-Hv-3BS">
                                                 <rect key="frame" x="87" y="13" width="239" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" red="0.33725490200000002" green="0.79215686269999996" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -3055,7 +3058,7 @@
                                     <constraint firstItem="ZDz-Gv-1eN" firstAttribute="leading" secondItem="AuI-dI-brN" secondAttribute="leading" id="pWf-vZ-rjn"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qSg-Ln-bFh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qSg-Ln-bFh">
                                 <rect key="frame" x="12" y="24" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="qSg-Ln-bFh" secondAttribute="height" multiplier="1:1" id="5l6-U7-lEK"/>

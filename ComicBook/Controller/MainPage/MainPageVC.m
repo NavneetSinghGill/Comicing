@@ -1954,7 +1954,8 @@ NSString * const BottomBarView = @"BottomBarView";
         
         
         [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"FACEBOOK" Label:@""];
-        [self doShareTo:FACEBOOK ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+        UIImage *image = [self.comicShareView getComicShareImage:imageArray];
+        [self doShareTo:FACEBOOK ShareImage:image];
     }
 }
 
@@ -1977,7 +1978,8 @@ NSString * const BottomBarView = @"BottomBarView";
         }
         
         [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"MainPage-ShareToSocialMedia" Action:@"TWITTER" Label:@""];
-        [self doShareTo:TWITTER ShareImage:[self.comicShareView getComicShareImage:imageArray]];
+        UIImage *image = [self.comicShareView getComicShareImage:imageArray];
+        [self doShareTo:TWITTER ShareImage:image];
     }
 }
 

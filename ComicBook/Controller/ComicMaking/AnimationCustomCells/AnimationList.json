@@ -1,0 +1,331 @@
+{
+    "stickercategories": [
+                          {
+                          "categoryid": "0",
+                          "name": "",
+                          "selected":"0",
+                          "imagename": "Bored-OFF",
+                          "imagename_selected": "Bored-ON"
+                          },{
+                          "categoryid": "1",
+                          "name": "ALL",
+                          "selected":"1",
+                          "imagename": "Cool-OFF",
+                          "imagename_selected": "Cool-ON"
+                          }, {
+                          "categoryid": "2",
+                          "name": "LOL",
+                          "selected":"0",
+                          "imagename": "FUN-OFF",
+                          "imagename_selected": "FUN-ON"
+                          },{
+                          "categoryid": "3",
+                          "name": "Mood",
+                          "selected":"0",
+                          "imagename": "Gloomy-OFF",
+                          "imagename_selected": "Gloomy-ON"
+                          },{
+                          "categoryid": "4",
+                          "name": "Cool",
+                          "selected":"0",
+                          "imagename": "Happy-OFF",
+                          "imagename_selected": "Happy-ON"
+                          },{
+                          "categoryid": "5",
+                          "name": "Hi",
+                          "selected":"0",
+                          "imagename": "Love-OFF",
+                          "imagename_selected": "Love-ON"
+                          }],
+    "stickeyimages": [{
+                      "stickeyid": "1",
+                      "name": "",
+                      "image_gif": "cat1Anim1",
+                      "image_thumbnail": "cat1Anim1",
+                      "image_share_gif": "cat1Anim1",
+                      "categoryid": "0",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "2",
+                      "name": "",
+                      "image_gif": "cat1Anim2",
+                      "image_thumbnail": "cat1Anim2",
+                      "image_share_gif": "cat1Anim2",
+                      "categoryid": "0",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "3",
+                      "name": "",
+                      "image_gif": "cat1Anim3",
+                      "image_thumbnail": "cat1Anim3",
+                      "image_share_gif": "cat1Anim3",
+                      "categoryid": "0",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "4",
+                      "name": "",
+                      "image_gif": "cat1Anim4",
+                      "image_thumbnail": "cat1Anim4",
+                      "image_share_gif": "cat1Anim4",
+                      "categoryid": "0",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "5",
+                      "name": "",
+                      "image_gif": "cat1Anim5",
+                      "image_thumbnail": "cat1Anim5",
+                      "image_share_gif": "cat1Anim5",
+                      "categoryid": "0",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "6",
+                      "name": "",
+                      "image_gif": "cat1Anim6",
+                      "image_thumbnail": "cat1Anim6",
+                      "image_share_gif": "cat1Anim6",
+                      "categoryid": "0",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "7",
+                      "name": "",
+                      "image_gif": "cat2Anim1",
+                      "image_thumbnail": "cat2Anim1",
+                      "image_share_gif": "cat2Anim1",
+                      "categoryid": "1",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "8",
+                      "name": "",
+                      "image_gif": "cat2Anim2",
+                      "image_thumbnail": "cat2Anim2",
+                      "image_share_gif": "cat2Anim2",
+                      "categoryid": "1",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "9",
+                      "name": "",
+                      "image_gif": "cat2Anim3",
+                      "image_thumbnail": "cat2Anim3",
+                      "image_share_gif": "cat2Anim3",
+                      "categoryid": "1",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "10",
+                      "name": "",
+                      "image_gif": "cat2Anim4",
+                      "image_thumbnail": "cat2Anim4",
+                      "image_share_gif": "cat2Anim4",
+                      "categoryid": "1",
+                      "accesslevel":"0"
+                      }, {
+                      "stickeyid": "11",
+                      "name": "",
+                      "image_gif": "cat2Anim5",
+                      "image_thumbnail": "cat2Anim5",
+                      "image_share_gif": "cat2Anim5",
+                      "categoryid": "1",
+                      "accesslevel":"0"
+                      }, {
+                      "stickeyid": "12",
+                      "name": "",
+                      "image_gif": "cat2Anim6",
+                      "image_thumbnail": "cat2Anim6",
+                      "image_share_gif": "cat2Anim6",
+                      "categoryid": "1",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "13",
+                      "name": "",
+                      "image_gif": "cat3Anim1",
+                      "image_thumbnail": "cat3Anim1",
+                      "image_share_gif": "cat3Anim1",
+                      "categoryid": "2",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "14",
+                      "name": "",
+                      "image_gif": "cat3Anim2",
+                      "image_thumbnail": "cat3Anim2",
+                      "image_share_gif": "cat3Anim2",
+                      "categoryid": "2",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "15",
+                      "name": "",
+                      "image_gif": "cat3Anim3",
+                      "image_thumbnail": "cat3Anim3",
+                      "image_share_gif": "cat3Anim3",
+                      "categoryid": "2",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "16",
+                      "name": "",
+                      "image_gif": "cat3Anim4",
+                      "image_thumbnail": "cat3Anim4",
+                      "image_share_gif": "cat3Anim4",
+                      "categoryid": "2",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "17",
+                      "name": "",
+                      "image_gif": "cat3Anim5",
+                      "image_thumbnail": "cat3Anim5",
+                      "image_share_gif": "cat3Anim5",
+                      "categoryid": "2",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "18",
+                      "name": "",
+                      "image_gif": "cat3Anim6",
+                      "image_thumbnail": "cat3Anim6",
+                      "image_share_gif": "cat3Anim6",
+                      "categoryid": "2",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "19",
+                      "name": "",
+                      "image_gif": "cat4Anim1",
+                      "image_thumbnail": "cat4Anim1",
+                      "image_share_gif": "cat4Anim1",
+                      "categoryid": "3",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "20",
+                      "name": "",
+                      "image_gif": "cat4Anim2",
+                      "image_thumbnail": "cat4Anim2",
+                      "image_share_gif": "cat4Anim2",
+                      "categoryid": "3",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "21",
+                      "name": "",
+                      "image_gif": "cat4Anim3",
+                      "image_thumbnail": "cat4Anim3",
+                      "image_share_gif": "cat4Anim3",
+                      "categoryid": "3",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "22",
+                      "name": "",
+                      "image_gif": "cat4Anim4",
+                      "image_thumbnail": "cat4Anim4",
+                      "image_share_gif": "cat4Anim4",
+                      "categoryid": "3",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "23",
+                      "name": "",
+                      "image_gif": "cat4Anim5",
+                      "image_thumbnail": "cat4Anim5",
+                      "image_share_gif": "cat4Anim5",
+                      "categoryid": "3",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "24",
+                      "name": "",
+                      "image_gif": "cat4Anim6",
+                      "image_thumbnail": "cat4Anim6",
+                      "image_share_gif": "cat4Anim6",
+                      "categoryid": "3",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "25",
+                      "name": "",
+                      "image_gif": "cat5Anim1",
+                      "image_thumbnail": "cat5Anim1",
+                      "image_share_gif": "cat5Anim1",
+                      "categoryid": "4",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "26",
+                      "name": "",
+                      "image_gif": "cat5Anim2",
+                      "image_thumbnail": "cat5Anim2",
+                      "image_share_gif": "cat5Anim2",
+                      "categoryid": "4",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "27",
+                      "name": "",
+                      "image_gif": "cat5Anim3",
+                      "image_thumbnail": "cat5Anim3",
+                      "image_share_gif": "cat5Anim3",
+                      "categoryid": "4",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "28",
+                      "name": "",
+                      "image_gif": "cat5Anim4",
+                      "image_thumbnail": "cat5Anim4",
+                      "image_share_gif": "cat5Anim4",
+                      "categoryid": "4",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "29",
+                      "name": "",
+                      "image_gif": "cat5Anim5",
+                      "image_thumbnail": "cat5Anim5",
+                      "image_share_gif": "cat5Anim5",
+                      "categoryid": "4",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "30",
+                      "name": "",
+                      "image_gif": "cat5Anim6",
+                      "image_thumbnail": "cat5Anim6",
+                      "image_share_gif": "cat5Anim6",
+                      "categoryid": "4",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "31",
+                      "name": "",
+                      "image_gif": "cat6Anim1",
+                      "image_thumbnail": "cat6Anim1",
+                      "image_share_gif": "cat6Anim1",
+                      "categoryid": "5",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "32",
+                      "name": "",
+                      "image_gif": "cat6Anim2",
+                      "image_thumbnail": "cat6Anim2",
+                      "image_share_gif": "cat6Anim2",
+                      "categoryid": "5",
+                      "accesslevel":"0"
+                      },
+                      {
+                      "stickeyid": "34",
+                      "name": "",
+                      "image_gif": "cat6Anim3",
+                      "image_thumbnail": "cat6Anim3",
+                      "image_share_gif": "cat6Anim3",
+                      "categoryid": "5",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "35",
+                      "name": "",
+                      "image_gif": "cat6Anim4",
+                      "image_thumbnail": "cat6Anim4",
+                      "image_share_gif": "cat6Anim4",
+                      "categoryid": "5",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "36",
+                      "name": "",
+                      "image_gif": "cat6Anim5",
+                      "image_thumbnail": "cat6Anim5",
+                      "image_share_gif": "cat6Anim5",
+                      "categoryid": "5",
+                      "accesslevel":"0"
+                      },{
+                      "stickeyid": "37",
+                      "name": "",
+                      "image_gif": "cat6Anim6",
+                      "image_thumbnail": "cat6Anim6",
+                      "image_share_gif": "cat6Anim6",
+                      "categoryid": "5",
+                      "accesslevel":"0"
+                      }]
+}
+

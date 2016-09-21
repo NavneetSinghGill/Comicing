@@ -8,6 +8,10 @@
 #import "CustomView.h"
 #import "Constants.h"
 #import "AppDelegate.h"
+#import "UIImage+GIF.h"
+#import "YLImageView.h"
+#import "YLGIFImage.h"
+#import "UIImageView+WebCache.h"
 
 @interface DataViewController () <AVAudioPlayerDelegate>
 {
@@ -22,6 +26,7 @@
 @property (strong, nonatomic) NSMutableArray *audioDurationSecondsArray;
 @property (strong, nonatomic) NSMutableArray *downloadedAudioDataArray;
 @property (strong, nonatomic) NSMutableArray *audioUrlArray;
+@property (strong, nonatomic) NSMutableArray *objOfSubviews;
 
 @end
 
@@ -32,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.objOfSubviews = [[NSMutableArray alloc]init];
     [self setAudioView];
     
     /**
@@ -170,7 +176,29 @@
 
     }
 }
-
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    for (NSDictionary *obj in self.objOfSubviews)
+    {
+        Enhancement *enhancement = [obj valueForKey:@"Enhance"];
+        YLImageView *animationImage = [obj valueForKey:@"subView"];
+        CGFloat myWidth = self.view.frame.size.width;
+        CGFloat myHeight = self.view.frame.size.height;
+        float xfactor = myWidth/[UIScreen mainScreen].bounds.size.width;
+        float yfactor = myHeight/[UIScreen mainScreen].bounds.size.height;
+        
+        float originX = xfactor * [enhancement.xPos floatValue];
+        float originY = yfactor * [enhancement.yPos floatValue];
+        float sizeX = xfactor * [enhancement.width floatValue];
+        float sizeY = yfactor * [enhancement.height floatValue];
+        
+        
+        NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
+        NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
+        [animationImage setFrame:CGRectMake(originX, originY, sizeX , sizeY )];
+    }
+}
 - (void)setAudioView
 {
     if(IS_IPHONE_5)
@@ -195,7 +223,11 @@
     [img setImage:[UIImage imageNamed:@"mic_play"]];
     [audioView addSubview:img];
 }
-
+-(void)addAnimationImagesIfNotIndexPage:(Slides *)slide
+{
+   
+   
+}
 - (void)addAudioButton:(Slides *)slide {
 
     /*
@@ -220,14 +252,24 @@
     // http://www.noiseaddicts.com/samples_1w72b820/4927.mp3
     // http://68.169.44.163/sounds/comics/slides/56dbc70542dba
     */
-    
-    self.audioUrlArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
-    self.audioDurationSecondsArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
-    self.downloadedAudioDataArray = [[NSMutableArray alloc] initWithCapacity:slide.enhancements.count];
-    for (int i = 0; i < slide.enhancements.count; i ++) {
+    int countOfAudio;
+    for (Enhancement *enhance in slide.enhancements)
+    {
+        if (![enhance.enhancementType isEqualToString:@"GIF"])
+        {
+            countOfAudio++;
+        }
+    }
+    self.audioUrlArray = [[NSMutableArray alloc] initWithCapacity:countOfAudio];
+    self.audioDurationSecondsArray = [[NSMutableArray alloc] initWithCapacity:countOfAudio];
+    self.downloadedAudioDataArray = [[NSMutableArray alloc] initWithCapacity:countOfAudio];
+    for (int i = 0; i < countOfAudio; i ++) {
         [self.downloadedAudioDataArray addObject:[NSNull null]];
     }
     for(Enhancement *enhancement in slide.enhancements) {
+        if (![enhancement.enhancementType isEqualToString:@"GIF"])
+        {
+       
         [self.audioUrlArray addObject:[NSURL URLWithString:enhancement.enhancementFile]];
         [self performSelectorInBackground:@selector(getTheAudioLength:) withObject:[NSNumber numberWithInteger:[slide.enhancements indexOfObject:enhancement]]];
         [self configureAudioPlayer:[slide.enhancements indexOfObject:enhancement]];
@@ -265,6 +307,39 @@
             [weakSelf pauseAudio];
         };
         [self.scrollView addSubview:audioButton];
+        }
+        else
+        {
+            
+                
+                YLImageView *animationImage = [[YLImageView alloc] init];
+                //animationImage.tag = [arrOfEnhancements indexOfObject:enhancement];
+                //        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
+                CGFloat myWidth = self.view.frame.size.width;
+                CGFloat myHeight = self.view.frame.size.height;
+                float xfactor = myWidth/[AppDelegate application].dataManager.viewWidth;
+                float yfactor = myHeight/[AppDelegate application].dataManager.viewHeight;
+                
+                float originX = xfactor * [enhancement.xPos floatValue];
+                float originY = yfactor * [enhancement.yPos floatValue];
+                float sizeX = xfactor * [enhancement.width floatValue];
+                float sizeY = yfactor * [enhancement.height floatValue];
+                
+                
+                
+                NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
+                NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
+                [animationImage setFrame:CGRectMake(originX, originY, sizeX , sizeY )];
+                [animationImage sd_setImageWithURL:[NSURL URLWithString:enhancement.enhancementFile]];
+                NSDictionary *objOn = @{
+                                        @"Enhance":enhancement,
+                                        @"subView":animationImage
+                                        };
+                [self.objOfSubviews addObject:objOn];
+                animationImage.tag = 1001;
+                [self.scrollView addSubview:animationImage];
+            
+        }
     }
 }
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DataViewController.h"
+#import "Enhancement.h"
 
 @interface IndexPageVC : UIViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)NSMutableArray *imageArray;
