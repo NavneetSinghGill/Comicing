@@ -3956,6 +3956,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PV7F3V653B;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3977,7 +3978,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "6e5ea8ab-d345-4029-957a-eab9d85ab624";
+				PROVISIONING_PROFILE = "47836a94-9a55-428d-8499-04cda266c580";
+				PROVISIONING_PROFILE_SPECIFIER = comicBookDevelopement;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -3992,6 +3994,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PV7F3V653B;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4013,7 +4016,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "6e5ea8ab-d345-4029-957a-eab9d85ab624";
+				PROVISIONING_PROFILE = "47836a94-9a55-428d-8499-04cda266c580";
+				PROVISIONING_PROFILE_SPECIFIER = comicBookDevelopement;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
