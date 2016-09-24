@@ -163,8 +163,14 @@ const NSInteger spaceBetweenSlide = 20;
     NSInteger columnCount = index % viewsInOneRow;
     NSInteger rowCount    = index / viewsInOneRow;
     
-    CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) - 20;
-    CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width) - 20;
+    CGFloat height = viewPreviewScrollSlide.view.frame.size.height;
+    
+    CGFloat y = (CGRectGetHeight(self.frame) - height + 20) / 2;
+    
+    CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) + 10;
+  //  CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width) ;
+    
+   // y = y + 50;
     
     /*//-------------------
     if (index > 1)
@@ -186,7 +192,42 @@ const NSInteger spaceBetweenSlide = 20;
     }
     //-------------------*/
     
-    return CGRectMake(x, y, 20, 20);
+    return CGRectMake(x, y, 84, 125);
+}
+
+- (CGRect)frameForPossitionWidePlusButton:(NSInteger)index
+{
+    NSInteger columnCount = index % viewsInOneRow;
+    NSInteger rowCount    = index / viewsInOneRow;
+
+    CGFloat height = viewPreviewScrollSlide.view.frame.size.height;
+    
+    CGFloat y = (CGRectGetHeight(self.frame) - height - 125) / 2;
+    
+    CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) + 10;
+  //  CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width);
+    
+    /*//-------------------
+     if (index > 1)
+     {
+     CGRect rect = textField.frame;
+     rect.size.width = viewSize.width*1.75;//
+     
+     textField.frame = rect;
+     mComicTitle.frame = rect;
+     }
+     else
+     {
+     CGRect rect = textField.frame;
+     rect.size.width = viewSize.width;
+     
+     textField.frame = rect;
+     mComicTitle.frame = rect;
+     
+     }
+     //-------------------*/
+    
+    return CGRectMake(x, y, 84, 60);
 }
 
 - (CGRect)frmaeForArrowImage:(NSInteger)index
@@ -199,7 +240,7 @@ const NSInteger spaceBetweenSlide = 20;
     
     CGFloat middlePoint = y / 2 + (viewSize.height / 2);
     
-    return CGRectMake(CGRectGetMinX(btnPlusSlide.frame) + 70, middlePoint + 10, 45 , 90);
+    return CGRectMake(CGRectGetMaxX(btnPlusSlide.frame) + 50, middlePoint + 10, 45 , 90);
 }
 
 - (void)setScrollViewContectSize
@@ -714,14 +755,17 @@ UILabel *mComicTitle;
     btnWidePlusSlide = [[UIButton alloc] init];
     
     btnPlusSlide.frame = [self frameForPossitionPlusButton:index];
-    btnWidePlusSlide.frame = [self frameForPossitionPlusButton:index];
-
-    [self setWideButtonFrame];
-
+    btnWidePlusSlide.frame = [self frameForPossitionWidePlusButton:index];
     
     // set wide button frame from btnaddslide
     
-    [btnPlusSlide setImage:[UIImage imageNamed:@"AddCoimicSlide"] forState:UIControlStateNormal];
+    [btnPlusSlide setImage:[UIImage imageNamed:@"add-tall-slide"] forState:UIControlStateNormal];
+    
+    
+    [btnWidePlusSlide setImage:[UIImage imageNamed:@"add-wide-slide"] forState:UIControlStateNormal];
+    
+    btnPlusSlide.backgroundColor = [UIColor yellowColor];
+    btnWidePlusSlide.backgroundColor = [UIColor orangeColor];
     
     [btnPlusSlide addTarget:self action:@selector(btnAddSlideTap:) forControlEvents:UIControlEventTouchUpInside];
     [btnWidePlusSlide addTarget:self action:@selector(btnAddSlideTap:) forControlEvents:UIControlEventTouchUpInside];
@@ -733,13 +777,13 @@ UILabel *mComicTitle;
     [self addSubview:btnWidePlusSlide];
 }
 //
-- (void)setWideButtonFrame
-{
-    CGRect wideButtonFrame = btnWidePlusSlide.frame;
-    wideButtonFrame.origin.y =  wideButtonFrame.origin.y  - wideButtonFrame.size.height - 15;
-    btnWidePlusSlide.frame = wideButtonFrame;
-    btnWidePlusSlide.backgroundColor = [UIColor redColor];
-}
+//- (void)setWideButtonFrame
+//{
+//    CGRect wideButtonFrame = btnWidePlusSlide.frame;
+//    wideButtonFrame.origin.y =  wideButtonFrame.origin.y  - wideButtonFrame.size.height - 15;
+//    btnWidePlusSlide.frame = wideButtonFrame;
+//    btnWidePlusSlide.backgroundColor = [UIColor redColor];
+//}
 
 - (void)addArrowImage:(NSInteger)index
 {
@@ -952,13 +996,17 @@ UILabel *mComicTitle;
                              }
                              
                              btnPlusSlide.tag = allSlidesView.count;
+                             
+                             btnWidePlusSlide.frame = [self frameForPossitionWidePlusButton:btnPlusSlide.tag];
                              btnPlusSlide.frame = [self frameForPossitionPlusButton:btnPlusSlide.tag];
+                             
+                             
                              viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:btnPlusSlide.tag];
                              
                              
-                             btnWidePlusSlide.tag = allSlidesView.count;
-                             btnWidePlusSlide.frame = btnPlusSlide.frame;
-                             [self setWideButtonFrame];
+                             btnWidePlusSlide.tag = btnPlusSlide.tag;
+//                             btnWidePlusSlide.frame = btnPlusSlide.frame;
+//                             [self setWideButtonFrame];
                              // set wide button frame
                              
                              [self setScrollViewContectSize];
@@ -1004,8 +1052,8 @@ UILabel *mComicTitle;
     
     sender.frame = [self frameForPossition:sender.tag];
     
-    btnWidePlusSlide.frame = [self frameForPossition:sender.tag];
-    [self setWideButtonFrame];
+    btnWidePlusSlide.frame = [self frameForPossitionWidePlusButton:sender.tag];
+    btnPlusSlide.frame = [self frameForPossitionPlusButton:sender.tag];
     
     //button wide frame
     //-------------------
@@ -1054,8 +1102,7 @@ UILabel *mComicTitle;
     btnWidePlusSlide.tag = sender.tag + 1;
 
     btnPlusSlide.frame = [self frameForPossitionPlusButton:sender.tag];
-    btnWidePlusSlide.frame = [self frameForPossitionPlusButton:sender.tag];
-    [self setWideButtonFrame];
+    btnWidePlusSlide.frame = [self frameForPossitionWidePlusButton:sender.tag];
     
     viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:sender.tag + 1];
     
@@ -1082,7 +1129,7 @@ UILabel *mComicTitle;
     
     sender.tag = sender.tag + 1;
     
-    sender.frame = [self frameForPossitionPlusButton:sender.tag];
+    sender.frame = [self frameForPossitionWidePlusButton:sender.tag];
     viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:sender.tag + 1];
     
     NSLog(@"sender count = %ld",(long)sender.tag);
@@ -1105,13 +1152,17 @@ UILabel *mComicTitle;
     [self.slidesScrollViewDelegate slidesScrollView:self didSelectAddButtonAtIndex:sender.tag withView:sender pusWithAnimation:NO];
     
     sender.tag = sender.tag + 1;
-    sender.frame = [self frameForPossitionPlusButton:sender.tag];
     viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:sender.tag + 1];
     
     [self setContentOffset:CGPointMake(sender.frame.origin.x,sender.frame.origin.y) animated:YES];
     
     NSLog(@"sender count = %ld",(long)sender.tag);
     
+    
+    btnWidePlusSlide.frame = [self frameForPossitionWidePlusButton:sender.tag];
+    btnPlusSlide.frame = [self frameForPossitionPlusButton:sender.tag];
+    sender.frame = [self frameForPossitionPlusButton:sender.tag];
+
     if (sender.tag == SLIDE_MAXCOUNT)
     {
         [btnPlusSlide removeFromSuperview];
