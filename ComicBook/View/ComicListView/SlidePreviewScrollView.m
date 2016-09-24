@@ -173,10 +173,17 @@
     
     viewFrame.size.width = frame.size.width;
     viewFrame.size.height = frame.size.height;
+    //self.view.frame = viewFrame;
     
+    // Added by Ramesh, adding center to main view
+    float superviewY = [UIApplication sharedApplication].keyWindow.frame.size.height/2;
+    float viewY = viewFrame.size.height/2;
+    float centerY = superviewY - viewY;
+    
+    CGRect viewRect = viewFrame;
+    viewRect.origin.y = centerY;
+    viewFrame = viewRect;
     self.view.frame = viewFrame;
-    
-   
 }
 
 @end
