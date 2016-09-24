@@ -178,9 +178,9 @@
     self.viewSlides = [[UIView alloc] initWithFrame:CGRectZero];
     self.viewWhiteBorder = [[UIView alloc] initWithFrame:CGRectZero];
     
-    wideSlideSize = CGSizeMake(self.view.frame.size.width - 20 + paddingX, 70);
-    normalSlideSize_big = CGSizeMake(self.view.frame.size.width- 20 + paddingX, 200);
-    normalSlideSize_small = CGSizeMake(self.view.frame.size.width/2 - 10, 130);
+    wideSlideSize = CGSizeMake(self.view.frame.size.width - 20 + paddingX, WIDE_SLIDE_HEIGHT);
+    normalSlideSize_big = CGSizeMake(self.view.frame.size.width- 20 + paddingX,TALL_BIG_SLIDE_HEIGHT);
+    normalSlideSize_small = CGSizeMake(self.view.frame.size.width/2 - 10, TALL_SMALL_SLIDE_HEIGHT);
     
     [self createComicImages];
     

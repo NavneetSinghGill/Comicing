@@ -96,3 +96,23 @@
 #define INVITE_POINT_50 50
 #define INVITE_POINT_100 100
 #define INVITE_POINT_200 200
+
+// **********************  Slide Dimension listview ***************
+#define WIDE_SLIDE_HEIGHT (IS_IPHONE_6P?100:IS_IPHONE_6?80:60)
+#define TALL_SMALL_SLIDE_HEIGHT (IS_IPHONE_6P?200:IS_IPHONE_6?180:160)
+#define TALL_BIG_SLIDE_HEIGHT (IS_IPHONE_6P?400:IS_IPHONE_6?350:300)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
