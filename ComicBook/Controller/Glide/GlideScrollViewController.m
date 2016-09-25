@@ -569,7 +569,7 @@ NSTimer* timerObject;
         
         NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        NSData *imageData = UIImageJPEGRepresentation([AppHelper getImageFile:cmPage.printScreenPath], 1);
+        NSData *imageData = UIImagePNGRepresentation([AppHelper getImageFile:cmPage.printScreenPath]);//UIImageJPEGRepresentation([AppHelper getImageFile:cmPage.printScreenPath], 1);
         
         [dataDic setObject:imageData forKey:@"SlideImage"];
         
@@ -738,8 +738,8 @@ NSTimer* timerObject;
                                [self setComicSendButton];
                            }
                            
-                           self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImageJPEGRepresentation(imageView.image,1) type:@"jpg"];
-                           self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImageJPEGRepresentation(printScreen, 1) type:@"jpg"];
+                           self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImagePNGRepresentation(imageView.image)/*UIImageJPEGRepresentation(imageView.image,1)*/ type:@"png"];
+                           self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImagePNGRepresentation(printScreen)/*UIImageJPEGRepresentation(printScreen, 1) */type:@"png"];
                            
                            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
                            
@@ -785,8 +785,8 @@ NSTimer* timerObject;
                         self.comicPageComicItems.subviews = self.dirtySubviews;
                     }
                     
-                    self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImageJPEGRepresentation(imageView.image,1) type:@"jpg"];
-                    self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImageJPEGRepresentation(printScreen, 1) type:@"jpg"];
+                    self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImagePNGRepresentation(imageView.image) type:@"png"];
+                    self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImagePNGRepresentation(printScreen) type:@"png"];
                     
                     //Add time line
                     NSDate *now = [NSDate date];
@@ -919,8 +919,8 @@ NSTimer* timerObject;
                     self.comicPageComicItems.subviews = self.dirtySubviews;
                 }
                 
-                self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImageJPEGRepresentation(imageView.image,1) type:@"jpg"];
-                self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImageJPEGRepresentation(printScreen, 1) type:@"jpg"];
+                self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImagePNGRepresentation(imageView.image)/*UIImageJPEGRepresentation(imageView.image,1)*/ type:@"png"];
+                self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImagePNGRepresentation(printScreen)/*UIImageJPEGRepresentation(printScreen, 1)*/ type:@"png"];
                 
                 //Add time line
                 NSDate *now = [NSDate date];
