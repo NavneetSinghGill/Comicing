@@ -330,7 +330,6 @@ NSTimer* timerObject;
     }else{
     [self.navigationController pushViewController:cmv animated:isPushAnimation];
     }
-    
 }
 
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didRemovedAtIndexPath:(NSInteger)index
@@ -407,10 +406,13 @@ NSTimer* timerObject;
     [comicMakeDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"]; // Hardcoded now
     [comicMakeDic setObject:@"" forKey:@"comic_title"];
     
-    if(self.comicType == ReplyComic) {
+    if(self.comicType == ReplyComic)
+    {
         [comicMakeDic setObject:@"CS" forKey:@"comic_type"];
         [comicMakeDic setObject:self.shareId forKey:@"share_id"];
-    } else {
+    }
+    else
+    {
         [comicMakeDic setObject:@"CM" forKey:@"comic_type"]; // COMIC MAKING yes it is hardcoded now
     }
     
@@ -425,7 +427,8 @@ NSTimer* timerObject;
     //Slide Array
     NSMutableArray* slides = [[NSMutableArray alloc] init];
     
-    for (int i=0; i< [comicSlides count]; i++) {
+    for (int i=0; i< [comicSlides count]; i++)
+    {
 //    for (NSData* data in comicSlides) {
         NSData* data = [comicSlides objectAtIndex:i];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -512,6 +515,18 @@ NSTimer* timerObject;
                 [cmSlide setObject:enhancements forKey:@"enhancements"];
             }
         }
+        
+        if ([cmPage.slideType isEqualToString:slideTypeWide])
+        {
+            [cmSlide setObject:@"1" forKey:@"slide_type"];
+            
+        }
+        else
+        {
+            [cmSlide setObject:@"0" forKey:@"slide_type"];
+            
+        }
+        
         [slides addObject:cmSlide];
         cmPage = nil;
         cmSlide = nil;
@@ -769,7 +784,7 @@ NSTimer* timerObject;
     if (isPopView)
     {
         [self.navigationController popViewControllerAnimated:YES];
-        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen withComicSlide:comicSlides];
+      
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             //Do background work
             @try {
@@ -821,6 +836,9 @@ NSTimer* timerObject;
                     data = nil;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self setComicSendButton];
+                        
+                        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen withComicSlide:comicSlides];
+                        
                         if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterSecondTimeGlideViewController] == YES)
                         {
                             

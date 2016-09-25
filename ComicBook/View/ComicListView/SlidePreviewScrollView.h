@@ -19,4 +19,7 @@
 
 - (void)setupBook;
 
+
+@property (nonatomic) BOOL isDelegateCalled;
+
 @end

@@ -2468,15 +2468,11 @@ static CGRect CaptionTextViewMinRect;
                 
             }
             
-
-            
             [self.delegate comicMakingViewControllerWithEditingDone:self
                                                       withImageView:imgvComic
                                                     withPrintScreen:printScreen
                                                        withNewSlide:isNewSlide
                                                         withPopView:YES withIsWideSlide:isWideSlide];
-            
-            
             
         }
         else
@@ -4064,7 +4060,8 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     //Slide Array
     NSMutableArray* slides = [[NSMutableArray alloc] init];
     
-    for (int i=0; i< [comicSlides count]; i++) {
+    for (int i=0; i< [comicSlides count]; i++)
+    {
         NSData* data = [comicSlides objectAtIndex:i];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
@@ -4159,6 +4156,20 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                 [cmSlide setObject:enhancements forKey:@"enhancements"];
             }
         }
+        
+        if ([cmPage.slideType isEqualToString:slideTypeWide])
+        {
+            [cmSlide setObject:@"1" forKey:@"slide_type"];
+
+        }
+        else
+        {
+            [cmSlide setObject:@"0" forKey:@"slide_type"];
+
+        }
+        
+
+        
         [slides addObject:cmSlide];
         cmPage = nil;
         cmSlide = nil;
