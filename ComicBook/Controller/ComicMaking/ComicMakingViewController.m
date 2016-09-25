@@ -3948,7 +3948,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         
         NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        NSData *imageData = UIImageJPEGRepresentation([AppHelper getImageFile:cmPage.printScreenPath], 1);
+        NSData *imageData = UIImagePNGRepresentation([AppHelper getImageFile:cmPage.printScreenPath]);//UIImageJPEGRepresentation([AppHelper getImageFile:cmPage.printScreenPath], 1);
         
         [dataDic setObject:imageData forKey:@"SlideImage"];
         
