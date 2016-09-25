@@ -161,11 +161,8 @@ const NSInteger spaceBetweenSlide = 20;
 - (CGRect)frameForPossitionPlusButton:(NSInteger)index
 {
     NSInteger columnCount = index % viewsInOneRow;
-    NSInteger rowCount    = index / viewsInOneRow;
     
-    CGFloat height = viewPreviewScrollSlide.view.frame.size.height;
-    
-    CGFloat y = (CGRectGetHeight(self.frame) - height + 20) / 2;
+    CGFloat y = (CGRectGetHeight(self.frame)  + 20) / 2;
     
     CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) + 10;
   //  CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width) ;
@@ -200,9 +197,9 @@ const NSInteger spaceBetweenSlide = 20;
     NSInteger columnCount = index % viewsInOneRow;
     NSInteger rowCount    = index / viewsInOneRow;
 
-    CGFloat height = viewPreviewScrollSlide.view.frame.size.height;
+//    CGFloat height = viewPreviewScrollSlide.view.frame.size.height;
     
-    CGFloat y = (CGRectGetHeight(self.frame) - height - 125) / 2;
+    CGFloat y = (CGRectGetHeight(self.frame) - 150) / 2;
     
     CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) + 10;
   //  CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width);
