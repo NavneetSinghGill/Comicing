@@ -46,7 +46,7 @@
 
 -(UIImage*)getComicShareImage:(NSArray*)shareImageArray{
     self.comicShareImage = [self getComicShareImages:shareImageArray];
-    self.comicShareImage = [UIImage ScaletoFill:self.comicShareImage toSize:CGSizeMake(self.comicShareImage.size.width*4, self.comicShareImage.size.height*4)];
+   // self.comicShareImage = [UIImage ScaletoFill:self.comicShareImage toSize:CGSizeMake(self.comicShareImage.size.width*4, self.comicShareImage.size.height*4)];
     return self.comicShareImage;
 }
 

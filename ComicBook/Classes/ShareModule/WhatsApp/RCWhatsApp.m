@@ -56,7 +56,7 @@ NSString* const kWhatsAppOnlyPhotoFileName = @"tmptmpimg.wai";
         return;
     }
     
-    [UIImageJPEGRepresentation(image, 1.0) writeToFile:[self photoFilePath] atomically:YES];
+    [UIImagePNGRepresentation(image)/*UIImageJPEGRepresentation(image, 1.0)*/ writeToFile:[self photoFilePath] atomically:YES];
     
     NSURL *fileURL = [NSURL fileURLWithPath:[self photoFilePath]];
     self.documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
