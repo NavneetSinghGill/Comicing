@@ -287,17 +287,17 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return stickers.count+1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return stickers.count + 1;
+    return 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.item == 0)
+    if(indexPath.item == 0 && indexPath.section == 0)
     {
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier1 forIndexPath:indexPath];
         
@@ -312,19 +312,19 @@ static NSString * const reuseIdentifier1 = @"Cell1";
         
 //        NSLog(@"indexpath = %ld",(long)indexPath.row);
         
-        if (addingSticker == YES && indexPath.row == 1)
+        /*if (addingSticker == YES && indexPath.row == 0)
         {
             cell.imgvSticker.image = nil;
         }
         else
-        {
-            NSDictionary *dict = stickers[indexPath.row - 1];
+        {*/
+            NSDictionary *dict = stickers[indexPath.section - 1];
             
 //            cell.imgvSticker.image =[UIImage imageWithData:[NSData dataWithContentsOfFile:dict[@"stickerPath"]]];
             cell.imgvSticker.image =    dict[@"stickerImage"];
             cell.imgvSticker.hidden = NO;
             
-        }
+        //}
         
         if (self.isQuivering)
         {
@@ -337,7 +337,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
             cell.btnDelete.hidden = YES;
         }
         
-        cell.btnDelete.tag = indexPath.row;
+        cell.btnDelete.tag = indexPath.section;
         
         [cell.btnDelete addTarget:self action:@selector(deleteSticker:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -356,7 +356,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     
-    NSInteger deletingIndex = indexPath.row - 1;
+    NSInteger deletingIndex = indexPath.section - 1;
     
     NSDictionary *dictSticker = stickers[deletingIndex];
     NSDictionary *dictStickerWithShadow = stickersWithShadow[deletingIndex];
@@ -457,7 +457,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
         }
         else
         {
-            NSDictionary *dict = stickersWithShadow[indexPath.row - 1];
+            NSDictionary *dict = stickersWithShadow[indexPath.section - 1];
             
             [parentViewController addStickerWithImage:dict[@"stickerImage"]];
 //            [parentViewController addStickerWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:dict[@"stickerPath"]]]];

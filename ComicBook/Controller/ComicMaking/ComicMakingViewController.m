@@ -41,6 +41,8 @@
 #import "UIImage+GIF.h"
 #import "ComicCropView.h"
 
+#import "ComicBubbleList.h"
+
 CGSize CGSizeAbsolute2(CGSize size) {
     return (CGSize){fabs(size.width), fabs(size.height)};
 }
@@ -153,6 +155,10 @@ static CGRect CaptionTextViewMinRect;
 @property (strong, nonatomic) ComicCropView *comicCropView;
 @property (nonatomic) BOOL isCameraOn;
 @property (nonatomic) BOOL isshrinkingEnd;
+
+@property (weak, nonatomic) IBOutlet UIView *bubbleContainerView;
+@property (weak, nonatomic) IBOutlet UIView *stickerlistContainerView;
+
 @end
 
 @implementation ComicMakingViewController
@@ -165,6 +171,8 @@ static CGRect CaptionTextViewMinRect;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self addBubbleListViewController];
+    [self addStickerListViewController];
     _captionHeightSmall = YES;
 
     frameImgvComic = imgvComic.frame;
@@ -366,7 +374,12 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)prepareView
 {
-    [self prepareCameraView];
+    dispatch_queue_t sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
+    [self setSessionQueue:sessionQueue];
+    
+    #if !TARGET_OS_SIMULATOR
+        [self prepareCameraView];
+    #endif
     [self prepareForSlide];
     
     [UIView animateWithDuration:0.4 animations:^{
@@ -629,10 +642,7 @@ static CGRect CaptionTextViewMinRect;
     // Check for device authorization
     [self checkDeviceAuthorizationStatus];
     
-    dispatch_queue_t sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
-    [self setSessionQueue:sessionQueue];
-    
-    dispatch_async(sessionQueue, ^{
+    dispatch_async([self sessionQueue], ^{
 
         
         [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
@@ -4550,4 +4560,35 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     return outputSize;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+}
+
+
+- (void)addBubbleListViewController
+{
+    // Get storyboard
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UICollectionViewController *bubbleList  = [storyBoard instantiateViewControllerWithIdentifier:@"bubblelistVC"];
+    
+    // lets add it to container view
+    [self.bubbleContainerView addSubview:bubbleList.view];
+    [self addChildViewController:bubbleList];
+    //[viewController didMoveToParentViewController:self];
+    // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
+    //self.containerViewController = viewController;
+}
+- (void)addStickerListViewController
+{
+    // Get storyboard
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UICollectionViewController *stickerlist  = [storyBoard instantiateViewControllerWithIdentifier:@"stickerlistVC"];
+    
+    // lets add it to container view
+    [self.stickerlistContainerView addSubview:stickerlist.view];
+    [self addChildViewController:stickerlist];
+    //[viewController didMoveToParentViewController:self];
+    // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
+    //self.containerViewController = viewController;
+}
 @end
