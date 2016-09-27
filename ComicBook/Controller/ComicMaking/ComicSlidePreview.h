@@ -21,6 +21,7 @@
 @interface ComicSlidePreview : UIViewController
 
 @property (nonatomic, assign) id<ComicSlidePreviewDelegate> delegate;
+@property (nonatomic, strong) UIView *viewWhiteBorder;
 
 -(id)initWithFrame:(CGRect)frame;
 - (void)setupComicSlidePreview:(NSArray *)slides;

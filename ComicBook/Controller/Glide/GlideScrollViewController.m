@@ -159,6 +159,8 @@ NSTimer* timerObject;
         if (comicSlides.count == SLIDE_MAXCOUNT && scrvComicSlide.btnPlusSlide) {
             [scrvComicSlide.btnPlusSlide setHidden:YES];
             [scrvComicSlide.btnPlusSlide removeFromSuperview];
+            [scrvComicSlide.btnWidePlusSlide removeFromSuperview];
+            
             [scrvComicSlide setScrollViewContectSizeByLastIndex:count-1];
         }
         

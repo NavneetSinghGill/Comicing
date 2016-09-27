@@ -71,6 +71,9 @@
     {
        [viewControllers addObject:[self addPreviewView:slides]];
     }
+    
+    [self setPageViewControllerFrame];
+    [self centreWhiteView];
 }
 
 #pragma mark method
@@ -95,6 +98,8 @@
         [self.view removeGestureRecognizer:tapRecognizer];
         [self.view removeGestureRecognizer:tapRecognizer];
     }
+    
+
 }
 
 #pragma mark Scrollviewdelegate
@@ -150,6 +155,7 @@
     
     self.view.backgroundColor = [UIColor redColor];
 
+    
     if(allSlideImages.count > 4)
     {
         if (frame.size.height > self.view.frame.size.height)
@@ -162,7 +168,21 @@
             {
                 isDelegateCalled = NO;
                 
+                
+                CGFloat y = (self.view.frame.size.height - view.view.frame.size.height) / 2;
+                
+                CGRect frame = view.view.frame;
+                
+                frame.origin.y = y;
+                view.viewWhiteBorder.frame = frame;
                 return;
+            }
+            else
+            {
+                if (allSlideImages.count > 4)
+                {
+                    isDelegateCalled = YES;
+                }
             }
         }
     }
@@ -184,6 +204,63 @@
     viewRect.origin.y = centerY;
     viewFrame = viewRect;
     self.view.frame = viewFrame;
+}
+
+
+- (void)setPageViewControllerFrame
+{
+ //   NSArray *allviewControllers = self.viewControllers;
+    
+    CGRect selfFrame = CGRectMake(0, 0, 0, 0);
+    
+    for (UIViewController *controller in viewControllers)
+    {
+        if ([controller isKindOfClass:[ComicSlidePreview class]])
+        {
+            ComicSlidePreview *comicSlide = (ComicSlidePreview *)controller;
+            
+            if(selfFrame.size.height < comicSlide.view.frame.size.height)
+            {
+                CGRect viewFrame = self.view.frame;
+                
+                viewFrame.size.width = comicSlide.viewWhiteBorder.frame.size.width;
+                viewFrame.size.height = comicSlide.viewWhiteBorder.frame.size.height;
+                //self.view.frame = viewFrame;
+                
+                // Added by Ramesh, adding center to main view
+                float superviewY = [UIApplication sharedApplication].keyWindow.frame.size.height/2;
+                float viewY = viewFrame.size.height/2;
+                float centerY = superviewY - viewY;
+                
+                CGRect viewRect = viewFrame;
+                viewRect.origin.y = centerY;
+                viewFrame = viewRect;
+                self.view.frame = viewFrame;
+                
+                selfFrame = viewFrame;
+            }
+        }
+    }
+}
+
+
+- (void)centreWhiteView
+{
+    for (UIViewController *controller in viewControllers)
+    {
+        if ([controller isKindOfClass:[ComicSlidePreview class]])
+        {
+            ComicSlidePreview *comicSlide = (ComicSlidePreview *)controller;
+            
+            CGFloat y = (self.view.frame.size.height - comicSlide.viewWhiteBorder.frame.size.height) / 2;
+            
+            CGRect frame = comicSlide.view.frame;
+            
+            frame.origin.y = y;
+            comicSlide.viewWhiteBorder.frame = frame;
+
+        }
+    }
 }
 
 @end

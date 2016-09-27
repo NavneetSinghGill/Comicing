@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/Glide/GlideScrollViewController.m"
-            timestampString = "496344417.528827"
+            timestampString = "496685588.047355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "787"
-            endingLineNumber = "787"
+            startingLineNumber = "789"
+            endingLineNumber = "789"
             landmarkName = "-comicMakingViewControllerWithEditingDone:withImageView:withPrintScreen:withNewSlide:withPopView:withIsWideSlide:"
             landmarkType = "5">
          </BreakpointContent>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/Glide/GlideScrollViewController.m"
-            timestampString = "496344417.528827"
+            timestampString = "496685588.047355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "930"
-            endingLineNumber = "930"
+            startingLineNumber = "932"
+            endingLineNumber = "932"
             landmarkName = "-comicMakingViewControllerWithEditingDone:withImageView:withPrintScreen:withNewSlide:withPopView:withIsWideSlide:"
             landmarkType = "5">
          </BreakpointContent>
@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/View/ComicListView/SlidePreviewScrollView.m"
-            timestampString = "495651198.673447"
+            timestampString = "496608534.952732"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "-didFrameChange:withFrame:"
             landmarkType = "5">
          </BreakpointContent>
@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/View/ComicListView/SlidePreviewScrollView.m"
-            timestampString = "495650851.45958"
+            timestampString = "496608534.952732"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "-didFrameChange:withFrame:"
             landmarkType = "5">
          </BreakpointContent>
@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/Glide/GlideScrollViewController.m"
-            timestampString = "496344388.466227"
+            timestampString = "496685588.047355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "537"
-            endingLineNumber = "537"
+            startingLineNumber = "539"
+            endingLineNumber = "539"
             landmarkName = "-createSendParams:"
             landmarkType = "5">
          </BreakpointContent>
@@ -192,15 +192,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/View/SlidesScrollView.m"
-            timestampString = "496489515.363619"
+            timestampString = "496682118.717591"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1064"
-            endingLineNumber = "1064"
+            startingLineNumber = "1084"
+            endingLineNumber = "1084"
             landmarkName = "-setAddButtonFrame:ButtonIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -208,16 +208,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ComicBook/View/SlidesScrollView.m"
-            timestampString = "496489515.363619"
+            filePath = "ComicBook/Controller/ComicMaking/ComicSlidePreview.m"
+            timestampString = "496603039.524506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "687"
-            endingLineNumber = "687"
-            landmarkName = "-refreshPreview:withImages:"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "-setupComicSlidePreview:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/ComicListView/SlidePreviewScrollView.m"
+            timestampString = "496608534.952732"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "-setPageViewControllerFrame"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -228,11 +244,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/View/SlidesScrollView.m"
-            timestampString = "496489515.363619"
+            timestampString = "496682804.364267"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "692"
-            endingLineNumber = "692"
+            startingLineNumber = "710"
+            endingLineNumber = "710"
             landmarkName = "-setPreviewForSlidesAtIndex:withImages:"
             landmarkType = "5">
          </BreakpointContent>
@@ -244,12 +260,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/View/SlidesScrollView.m"
-            timestampString = "496489515.363619"
+            timestampString = "496682812.434175"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1008"
-            endingLineNumber = "1008"
-            landmarkName = "-handleSwipeUpFrom:"
+            startingLineNumber = "785"
+            endingLineNumber = "785"
+            landmarkName = "-addPlusButton:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -260,12 +276,92 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicBook/View/SlidesScrollView.m"
-            timestampString = "496489515.363619"
+            timestampString = "496683935.491648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
-            landmarkName = "-frameForPossitionWidePlusButton:"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "-frameForPossitionPlusButton:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/SlidesScrollView.m"
+            timestampString = "496685437.871182"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1105"
+            endingLineNumber = "1105"
+            landmarkName = "-setAddButtonFrame:ButtonIndex:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/SlidesScrollView.m"
+            timestampString = "496685486.165221"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1144"
+            endingLineNumber = "1144"
+            landmarkName = "-btnAddSlideTap:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/SlidesScrollView.m"
+            timestampString = "496685489.313321"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1168"
+            endingLineNumber = "1168"
+            landmarkName = "-btnAddWideSlideTap:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/SlidesScrollView.m"
+            timestampString = "496685492.381605"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1199"
+            endingLineNumber = "1199"
+            landmarkName = "-pushAddSlideTap:animation:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComicBook/View/SlidesScrollView.m"
+            timestampString = "496685497.245036"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1142"
+            endingLineNumber = "1142"
+            landmarkName = "-btnAddSlideTap:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
