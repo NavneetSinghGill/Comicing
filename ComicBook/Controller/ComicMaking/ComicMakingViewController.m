@@ -4664,6 +4664,32 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         }
     }
 }
+- (void)addBubbleListViewController
+{
+    // Get storyboard
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UICollectionViewController *bubbleList  = [storyBoard instantiateViewControllerWithIdentifier:@"bubblelistVC"];
+    
+    // lets add it to container view
+    [self.bubbleContainerView addSubview:bubbleList.view];
+    [self addChildViewController:bubbleList];
+    //[viewController didMoveToParentViewController:self];
+    // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
+    //self.containerViewController = viewController;
+}
+- (void)addStickerListViewController
+{
+    // Get storyboard
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UICollectionViewController *stickerlist  = [storyBoard instantiateViewControllerWithIdentifier:@"stickerlistVC"];
+    
+    // lets add it to container view
+    [self.stickerlistContainerView addSubview:stickerlist.view];
+    [self addChildViewController:stickerlist];
+    //[viewController didMoveToParentViewController:self];
+    // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
+    //self.containerViewController = viewController;
+}
 -(CGRect)rectOntheBasisOfScreen:(CGRect)rect
 {
 // Default value of in json is of iPhone 6 so we will find rect for iphone 5 and 6p
@@ -4699,35 +4725,4 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     return boundry*yFactor;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-}
-
-
-- (void)addBubbleListViewController
-{
-    // Get storyboard
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    UICollectionViewController *bubbleList  = [storyBoard instantiateViewControllerWithIdentifier:@"bubblelistVC"];
-    
-    // lets add it to container view
-    [self.bubbleContainerView addSubview:bubbleList.view];
-    [self addChildViewController:bubbleList];
-    //[viewController didMoveToParentViewController:self];
-    // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
-    //self.containerViewController = viewController;
-}
-- (void)addStickerListViewController
-{
-    // Get storyboard
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    UICollectionViewController *stickerlist  = [storyBoard instantiateViewControllerWithIdentifier:@"stickerlistVC"];
-    
-    // lets add it to container view
-    [self.stickerlistContainerView addSubview:stickerlist.view];
-    [self addChildViewController:stickerlist];
-    //[viewController didMoveToParentViewController:self];
-    // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
-    //self.containerViewController = viewController;
-}
 @end
