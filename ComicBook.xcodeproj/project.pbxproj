@@ -358,6 +358,8 @@
 		1604B79A1D8F0B960096E1DD /* 2slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604B7961D8F0B960096E1DD /* 2slidebook.png */; };
 		1604B79B1D8F0B960096E1DD /* 3slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604B7971D8F0B960096E1DD /* 3slidebook.png */; };
 		160DEF8C1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m in Sources */ = {isa = PBXBuildFile; fileRef = 160DEF8B1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m */; };
+		161439E91D97F0EA00CF5A65 /* tab-forehead.png in Resources */ = {isa = PBXBuildFile; fileRef = 161439E81D97F0EA00CF5A65 /* tab-forehead.png */; };
+		161439EB1D98078600CF5A65 /* NewAnimationList.json in Resources */ = {isa = PBXBuildFile; fileRef = 161439EA1D98078600CF5A65 /* NewAnimationList.json */; };
 		161A08171D3D54C500BF0F50 /* arielBlack.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 161A08161D3D546F00BF0F50 /* arielBlack.ttf */; };
 		161CAD4E1D840DD80034795C /* Bored-OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 161CAD421D840DD80034795C /* Bored-OFF.png */; };
 		161CAD4F1D840DD80034795C /* Bored-ON.png in Resources */ = {isa = PBXBuildFile; fileRef = 161CAD431D840DD80034795C /* Bored-ON.png */; };
@@ -415,6 +417,7 @@
 		168512131D3C052000A372E3 /* follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 168512111D3C052000A372E3 /* follow.png */; };
 		168512141D3C052000A372E3 /* followSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 168512121D3C052000A372E3 /* followSelected.png */; };
 		16AA8AE41D87334700FFD9DE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 16AA8AE31D87334700FFD9DE /* libz.tbd */; };
+		16BBDA331D9A8F7A00722D5E /* drillAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 16BBDA321D9A8F7A00722D5E /* drillAnimation.gif */; };
 		16DD56E11D8D3CF00036190E /* SubIndexpageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16DD56E01D8D3CF00036190E /* SubIndexpageCell.m */; };
 		1B00F6C21D450D3300514291 /* AnimatedGif.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B00F6BF1D450D3300514291 /* AnimatedGif.m */; };
 		1B00F6C31D450D3300514291 /* UIImageView+AnimatedGif.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B00F6C11D450D3300514291 /* UIImageView+AnimatedGif.m */; };
@@ -1110,6 +1113,8 @@
 		1604B7971D8F0B960096E1DD /* 3slidebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3slidebook.png; sourceTree = "<group>"; };
 		160DEF8A1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Multiplier.h"; sourceTree = "<group>"; };
 		160DEF8B1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Multiplier.m"; sourceTree = "<group>"; };
+		161439E81D97F0EA00CF5A65 /* tab-forehead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-forehead.png"; sourceTree = "<group>"; };
+		161439EA1D98078600CF5A65 /* NewAnimationList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NewAnimationList.json; sourceTree = "<group>"; };
 		161A08161D3D546F00BF0F50 /* arielBlack.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arielBlack.ttf; sourceTree = "<group>"; };
 		161CAD421D840DD80034795C /* Bored-OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bored-OFF.png"; sourceTree = "<group>"; };
 		161CAD431D840DD80034795C /* Bored-ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bored-ON.png"; sourceTree = "<group>"; };
@@ -1170,6 +1175,7 @@
 		168512111D3C052000A372E3 /* follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = follow.png; sourceTree = "<group>"; };
 		168512121D3C052000A372E3 /* followSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followSelected.png; sourceTree = "<group>"; };
 		16AA8AE31D87334700FFD9DE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		16BBDA321D9A8F7A00722D5E /* drillAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = drillAnimation.gif; sourceTree = "<group>"; };
 		16DD56DF1D8D3CF00036190E /* SubIndexpageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubIndexpageCell.h; sourceTree = "<group>"; };
 		16DD56E01D8D3CF00036190E /* SubIndexpageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubIndexpageCell.m; sourceTree = "<group>"; };
 		1B00F6BE1D450D3300514291 /* AnimatedGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedGif.h; sourceTree = "<group>"; };
@@ -1910,6 +1916,7 @@
 		0C6665711C84358500FEB11F /* ComicMaking */ = {
 			isa = PBXGroup;
 			children = (
+				161439E61D97F0BA00CF5A65 /* Animation Customization */,
 				167DDF331D7F39810090E8A5 /* AnimationCustomCells */,
 				84E36C021D3BB18700D9B22B /* SlidePreviewView */,
 				0C9A3A2C1C8DE85500D75895 /* stickerCell.h */,
@@ -2986,10 +2993,28 @@
 			path = ImageResources;
 			sourceTree = "<group>";
 		};
+		161439E61D97F0BA00CF5A65 /* Animation Customization */ = {
+			isa = PBXGroup;
+			children = (
+				161439E71D97F0C900CF5A65 /* Drill */,
+			);
+			path = "Animation Customization";
+			sourceTree = "<group>";
+		};
+		161439E71D97F0C900CF5A65 /* Drill */ = {
+			isa = PBXGroup;
+			children = (
+				16BBDA321D9A8F7A00722D5E /* drillAnimation.gif */,
+				161439E81D97F0EA00CF5A65 /* tab-forehead.png */,
+			);
+			path = Drill;
+			sourceTree = "<group>";
+		};
 		167DDF331D7F39810090E8A5 /* AnimationCustomCells */ = {
 			isa = PBXGroup;
 			children = (
 				167DDFD91D7F401B0090E8A5 /* AnimationList.json */,
+				161439EA1D98078600CF5A65 /* NewAnimationList.json */,
 				167DDF901D7F40120090E8A5 /* Animations */,
 				167DDF371D7F3B990090E8A5 /* AnimationCategoryImages */,
 				167DDF341D7F39A00090E8A5 /* AnimationCategoryCollectionViewCell.h */,
@@ -3383,6 +3408,7 @@
 				0C6668B61C84358600FEB11F /* ProfilePicView.xib in Resources */,
 				161A08171D3D54C500BF0F50 /* arielBlack.ttf in Resources */,
 				0C6667A81C84358600FEB11F /* facebooklogo.png in Resources */,
+				161439EB1D98078600CF5A65 /* NewAnimationList.json in Resources */,
 				84A5DFE51D3690070089D6BE /* Slide-10.gif in Resources */,
 				0C6667B11C84358600FEB11F /* Main_MainPage.storyboard in Resources */,
 				0C6667F81C84358600FEB11F /* GroupCell.xib in Resources */,
@@ -3427,6 +3453,7 @@
 				0C6668A71C84358600FEB11F /* FriendsListTableViewCell.xib in Resources */,
 				0C6667871C84358600FEB11F /* parrotIcon.png in Resources */,
 				161CAD571D840DD80034795C /* Happy-ON.png in Resources */,
+				16BBDA331D9A8F7A00722D5E /* drillAnimation.gif in Resources */,
 				84CEF11D1D3ADF68009FCB1D /* FaceWithBubble-01.png in Resources */,
 				1BCD204E1D493E9900F2DECA /* openbox-15-flat.png in Resources */,
 				0C6667851C84358600FEB11F /* cameraButton.png in Resources */,
@@ -3509,6 +3536,7 @@
 				84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */,
 				0C6667711C84358600FEB11F /* Avenir Next LT W01 Ultra Light.ttf in Resources */,
 				0C66679F1C84358600FEB11F /* Search.png in Resources */,
+				161439E91D97F0EA00CF5A65 /* tab-forehead.png in Resources */,
 				0C66679D1C84358600FEB11F /* searchFriends.png in Resources */,
 				0C6668BF1C84358600FEB11F /* VerifyView.xib in Resources */,
 				0C66679A1C84358600FEB11F /* profilePicCut.png in Resources */,
