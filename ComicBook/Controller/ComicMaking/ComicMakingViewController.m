@@ -41,6 +41,8 @@
 #import "UIImage+GIF.h"
 #import "ComicCropView.h"
 
+#import "ComicBubbleList.h"
+
 CGSize CGSizeAbsolute2(CGSize size) {
     return (CGSize){fabs(size.width), fabs(size.height)};
 }
@@ -158,6 +160,10 @@ static CGRect CaptionTextViewMinRect;
 @property (strong, nonatomic) ComicCropView *comicCropView;
 @property (nonatomic) BOOL isCameraOn;
 @property (nonatomic) BOOL isshrinkingEnd;
+
+@property (weak, nonatomic) IBOutlet UIView *bubbleContainerView;
+@property (weak, nonatomic) IBOutlet UIView *stickerlistContainerView;
+
 @end
 
 @implementation ComicMakingViewController
@@ -170,6 +176,8 @@ static CGRect CaptionTextViewMinRect;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self addBubbleListViewController];
+    [self addStickerListViewController];
     _captionHeightSmall = YES;
 
     frameImgvComic = imgvComic.frame;
@@ -371,7 +379,12 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)prepareView
 {
-    [self prepareCameraView];
+    dispatch_queue_t sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
+    [self setSessionQueue:sessionQueue];
+    
+    #if !TARGET_OS_SIMULATOR
+        [self prepareCameraView];
+    #endif
     [self prepareForSlide];
     
     [UIView animateWithDuration:0.4 animations:^{
@@ -634,10 +647,7 @@ static CGRect CaptionTextViewMinRect;
     // Check for device authorization
     [self checkDeviceAuthorizationStatus];
     
-    dispatch_queue_t sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
-    [self setSessionQueue:sessionQueue];
-    
-    dispatch_async(sessionQueue, ^{
+    dispatch_async([self sessionQueue], ^{
 
         
         [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
@@ -2489,7 +2499,9 @@ static CGRect CaptionTextViewMinRect;
             self.ImgvComic2.image = printScreen;
             imgvComic.frame = self.ImgvComic2.frame;
             
-            [self shrinkAnimatedImages:(speedX/5) speedY:(speedY/5) speedWidth:(speedWidth/5) speedHeight:(speedHeight/5)];
+            [self shrinkAnimatedImages:speedX speedY:speedY speedWidth:speedWidth speedHeight:speedHeight];
+            
+            //[self shrinkAnimatedImages:(speedX/5) speedY:(speedY/5) speedWidth:(speedWidth/5) speedHeight:(speedHeight/5)];
         }
     }
 }
@@ -2509,9 +2521,9 @@ static CGRect CaptionTextViewMinRect;
 //                                               CGRectGetHeight(subview.frame)-speedY);
             
             subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + speedX,
-                                       CGRectGetMinY(subview.frame) - speedY,
-                                       CGRectGetWidth(subview.frame) - speedWidth,
-                                       CGRectGetHeight(subview.frame) - speedHeight);
+                                       CGRectGetMinY(subview.frame) + speedY,
+                                       CGRectGetWidth(subview.frame),// - speedWidth,
+                                       CGRectGetHeight(subview.frame));//-speedHeight);
         }
     }
     
@@ -2546,6 +2558,22 @@ static CGRect CaptionTextViewMinRect;
                 NSLog(@"cropped");
                 
             }
+            
+            /*for (UIView* subview in [self.view subviews]) {
+                if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
+                    
+                    float scaleFactor = self.ImgvComic2.image.size.width / printScreen.size.width;
+                    
+                    CGRect rectValue = subview.frame;
+                    rectValue.origin.x = rectValue.origin.x * scaleFactor;
+                    rectValue.origin.y = rectValue.origin.y * scaleFactor;
+                    rectValue.size.width = rectValue.size.width * scaleFactor;
+                    rectValue.size.height = rectValue.size.height * scaleFactor;
+                    subview.frame = rectValue;
+                    
+                    [self.ImgvComic2 addSubview:subview];
+                }
+            }*/
             
             [self.delegate comicMakingViewControllerWithEditingDone:self
                                                       withImageView:imgvComic
@@ -3678,6 +3706,9 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
   /*  UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotatePiece:)];
     [imageView addGestureRecognizer:rotationGesture];*/
     
+    if (!CGRectEqualToRect(((ComicItemAnimatedSticker*)imageView).objFrame,CGRectZero)) {
+        imageView.frame = ((ComicItemAnimatedSticker*)imageView).objFrame;
+    }
 //    imageView.frame = CGRectMake(CGRectGetMinX(imageView.frame), CGRectGetMinY(imageView.frame), imageWidth, imageHeight);
 //    CGAffineTransform tt_1 = imageView.transform;
 //
@@ -4668,4 +4699,35 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     return boundry*yFactor;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+}
+
+
+- (void)addBubbleListViewController
+{
+    // Get storyboard
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UICollectionViewController *bubbleList  = [storyBoard instantiateViewControllerWithIdentifier:@"bubblelistVC"];
+    
+    // lets add it to container view
+    [self.bubbleContainerView addSubview:bubbleList.view];
+    [self addChildViewController:bubbleList];
+    //[viewController didMoveToParentViewController:self];
+    // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
+    //self.containerViewController = viewController;
+}
+- (void)addStickerListViewController
+{
+    // Get storyboard
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UICollectionViewController *stickerlist  = [storyBoard instantiateViewControllerWithIdentifier:@"stickerlistVC"];
+    
+    // lets add it to container view
+    [self.stickerlistContainerView addSubview:stickerlist.view];
+    [self addChildViewController:stickerlist];
+    //[viewController didMoveToParentViewController:self];
+    // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
+    //self.containerViewController = viewController;
+}
 @end

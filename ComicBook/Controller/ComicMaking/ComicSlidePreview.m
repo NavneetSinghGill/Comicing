@@ -63,7 +63,6 @@
 @property (strong, nonatomic) NSMutableArray *comicImages;
 @property(nonatomic,assign) CGRect currentSlideFrame;
 @property (nonatomic, strong) UIView * viewSlides;
-@property (nonatomic, strong) UIView *viewWhiteBorder;
 
 @property (nonatomic) CGFloat totalHeight;
 @property (nonatomic) CGFloat paddingX;
@@ -204,7 +203,8 @@
     
     self.viewWhiteBorder.center = self.view.center;
     self.viewWhiteBorder.tag = 11111;
-    self.view.backgroundColor = [UIColor blueColor];
+    
+    self.view.backgroundColor = [UIColor blackColor];
     
     [self.delegate didFrameChange:self withFrame:self.viewWhiteBorder.frame];
 }
