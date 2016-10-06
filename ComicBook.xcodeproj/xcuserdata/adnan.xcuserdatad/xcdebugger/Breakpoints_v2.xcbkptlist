@@ -106,7 +106,7 @@
             startingLineNumber = "4181"
             endingLineNumber = "4181"
             landmarkName = "-createSendParams:comicSlides:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -218,7 +218,7 @@
             startingLineNumber = "204"
             endingLineNumber = "204"
             landmarkName = "-setupComicSlidePreview:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
