@@ -56,6 +56,8 @@ typedef enum {
 @property (assign, nonatomic) CGFloat tX;
 @property (assign, nonatomic) CGFloat tY;
 @property (assign, nonatomic) CGRect objFrame;
+@property (assign, nonatomic) CGRect frameOfInstruction;
+@property (assign, nonatomic) CGRect imageOfInstruction;
 @end
 
 #pragma mark - ComicItemExclamation

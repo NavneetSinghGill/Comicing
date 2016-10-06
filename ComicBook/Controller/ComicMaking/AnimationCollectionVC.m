@@ -49,10 +49,6 @@
 }
 -(void)adjustLayoutForAllThings
 {
-    NSLog(@"btn_Cross %@",NSStringFromCGRect(btn_Cross.frame));
-    NSLog(@"btn_Exclaimation %@",NSStringFromCGRect(btn_Exclaimation.frame));
-    NSLog(@"clc_Category %@",NSStringFromCGRect(clc_Category.frame));
-    NSLog(@"clc_Animations %@",NSStringFromCGRect(clc_Animations.frame));
     if (IS_IPHONE_5)
     {
         btn_Exclaimation.frame = CGRectMake(10, 63, 18, 42);
@@ -127,17 +123,17 @@
     
 }
 -(id)bindJson{
-    return [self bindJson:@"AnimationList"];
+    return [self bindJson:@"NewAnimationList"];
 }
 
 -(NSMutableArray*)getCategoryList{
     NSMutableDictionary* dicObj = [self bindJson];
-    return [dicObj objectForKey:@"stickercategories"];
+    return [dicObj objectForKey:@"animationcategories"];
 }
 
 -(NSMutableArray*)getAllStickeyList:(NSString *)strCategoryId{
     NSMutableDictionary* dicObj = [self bindJson];
-    NSMutableArray* arrayValue = [dicObj objectForKey:@"stickeyimages"];
+    NSMutableArray* arrayValue = [dicObj objectForKey:@"animationList"];
     
     //    NSMutableArray* stickeyArray = [[self getAllStickeyList:@"0" ArrayObje:arrayValue] mutableCopy];
     
@@ -193,7 +189,7 @@
         
         static NSString *identifier = @"AnimationsCollectionViewCell";
         AnimationsCollectionViewCell *cell =  [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-        cell.img_Animation.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.gif",[[arrOfAnimationTemp objectAtIndex:indexPath.row] valueForKey:@"image_gif"]]];
+        cell.img_Animation.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.gif",[[arrOfAnimationTemp objectAtIndex:indexPath.row] valueForKey:@"thumImage"]]];
         return cell;
     }
 }
@@ -224,8 +220,9 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (clc_Animations == collectionView)
-    {    
-        [self.parentViewController addAnimatedSticker:[NSString stringWithFormat:@"%@",[[arrOfAnimationTemp objectAtIndex:indexPath.row] valueForKey:@"image_gif"]]];
+    {
+        [self.parentViewController addAnimationWithInstructionForObj:[arrOfAnimationTemp objectAtIndex:indexPath.row]];
+        /*[self.parentViewController addAnimatedSticker:[NSString stringWithFormat:@"%@",[[arrOfAnimationTemp objectAtIndex:indexPath.row] valueForKey:@"image_gif"]]];*/
     }
     else
     {
