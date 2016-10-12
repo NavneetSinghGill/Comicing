@@ -185,7 +185,7 @@
     
     [self prepareSlides];
  
-    self.viewSlides.frame = CGRectMake(paddingX,0,self.currentSlideFrame.size.width,totalHeight);
+    self.viewSlides.frame = CGRectMake(paddingX,0,self.currentSlideFrame.size.width + paddingX,totalHeight + paddingY);
     
     self.viewWhiteBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.viewSlides.frame) + paddingX + paddingX, totalHeight + paddingY);
     
