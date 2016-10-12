@@ -13,4 +13,8 @@
 @interface AnimationCollectionVC : UIViewController
 @property (weak, nonatomic) UIPageControl *pageController;
 @property (nonatomic, strong) ComicMakingViewController *parentViewController;
+-(void)showGarbageBinForSomeMoment;
+-(void)hideGarbageBin;
+-(void)stopBeingExcutedAfterSomeMoment;
+-(void)showInstructionAndGarbageBinForSomeMoment;
 @end

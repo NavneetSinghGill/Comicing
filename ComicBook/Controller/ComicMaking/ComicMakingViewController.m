@@ -40,6 +40,7 @@
 #import "InstructionView.h"
 #import "UIImage+GIF.h"
 #import "ComicCropView.h"
+#import "AnimationCollectionVC.h"
 
 #import "ComicBubbleList.h"
 
@@ -81,6 +82,7 @@ static CGRect CaptionTextViewMinRect;
     UIImageView *currentAnimInstSubView;
     BOOL haveAnimationOnPage;
     ComicItemAnimatedSticker *refAnimatedSticker;
+    AnimationCollectionVC *animationCollection;
 //    CGRect temButtonFrame;
 //    CGRect temChatButtonFrame;
 //    CGRect temUploadButtonFrame;
@@ -308,7 +310,14 @@ static CGRect CaptionTextViewMinRect;
 {
 //    return imgvComic;
 //    return  imgvComic;
-    return (isSlideShrink ? self.ImgvComic2: imgvComic);
+    UIView *newView = (isSlideShrink ? self.ImgvComic2: imgvComic);
+    /*if (haveAnimationOnPage)
+    {
+        [newView addSubview:refAnimatedSticker];
+        [newView bringSubviewToFront:refAnimatedSticker];
+        
+    }*/
+    return newView;
 }
 
 #pragma mark - ComicCrop Methods
@@ -1693,6 +1702,18 @@ static CGRect CaptionTextViewMinRect;
 
 - (void)closeExclamationList
 {
+    
+    if (!haveAnimationOnPage)
+    {
+        if ([self.view.subviews containsObject:currentAnimInstSubView])
+        {
+            [currentAnimInstSubView removeFromSuperview];
+        }
+        if ([self.view.gestureRecognizers containsObject:currentAnimationInstructionTap])
+        {
+            [self.view removeGestureRecognizer:currentAnimationInstructionTap];
+        }
+    }
     [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         exclamationListView.center = CGPointMake(backupOtherViewCenter.x, backupOtherViewCenter.y );
@@ -1785,11 +1806,16 @@ static CGRect CaptionTextViewMinRect;
 {
     if (haveAnimationOnPage)
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Are you sure you want to remove current animation from this slide?" message:nil delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
-        alert.tag = 101;
-        [alert show];
+        [animationCollection showGarbageBinForSomeMoment];
         return;
     }
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Are you sure you want to remove current animation from this slide?" message:nil delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+//        alert.tag = 101;
+//        [alert show];
+//        return;
+        [animationCollection showInstructionAndGarbageBinForSomeMoment];
+       // return;
+    
     currentWorkingAnimation = animationObj;
     CGRect instructionRect = CGRectMake([[[[animationObj valueForKey:@"resources"] objectAtIndex:0] valueForKey:@"instructionPositionX"] floatValue],
                                         [[[[animationObj valueForKey:@"resources"] objectAtIndex:0] valueForKey:@"instructionPositionY"] floatValue],
@@ -1812,7 +1838,7 @@ static CGRect CaptionTextViewMinRect;
     CGPoint touchPoint = [gesture locationInView:self.view];
     [currentAnimInstSubView removeFromSuperview];
     [self.view removeGestureRecognizer:gesture];
-    
+    [animationCollection stopBeingExcutedAfterSomeMoment];
     
     //Get Boundries for Different Screen Size
     CGFloat boundryYA = [self DifferenceInYAxisFromPoint:[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:0] valueForKey:@"animationBoundryYA"] floatValue]];
@@ -2498,10 +2524,28 @@ static CGRect CaptionTextViewMinRect;
             
             self.ImgvComic2.image = printScreen;
             imgvComic.frame = self.ImgvComic2.frame;
+           
             
-            [self shrinkAnimatedImages:speedX speedY:speedY speedWidth:speedWidth speedHeight:speedHeight];
             
-            //[self shrinkAnimatedImages:(speedX/5) speedY:(speedY/5) speedWidth:(speedWidth/5) speedHeight:(speedHeight/5)];
+            [self shrinkAnimatedImages:speed speedY:speedY speedWidth:speedWidth speedHeight:speedHeight];
+            CGFloat diffX,diffY;
+            if (IS_IPHONE_5)
+            {
+                diffX = 3.3f;
+                diffY = 1.08f;
+            }
+            else if (IS_IPHONE_6)
+            {
+                diffX = 3.1f;
+                diffY = 1.05f;
+            }
+            else if (IS_IPHONE_6P)
+            {
+                diffX = 3.3f;
+                diffY = 1.15f;
+            }
+            
+           // [self shrinkAnimatedImages:(speedX/diffX) speedY:(speedY*diffY) speedWidth:(speedWidth/3) speedHeight:(speedHeight/3)];
         }
     }
 }
@@ -2510,6 +2554,7 @@ static CGRect CaptionTextViewMinRect;
                      speedY:(CGFloat)speedY
                  speedWidth:(CGFloat)speedWidth
                 speedHeight:(CGFloat)speedHeight{
+    
     
 //    CGFloat ff = 1;
     for (UIView* subview in [self.view subviews]) {
@@ -2520,10 +2565,58 @@ static CGRect CaptionTextViewMinRect;
 //                                               CGRectGetWidth(subview.frame)- speedX,
 //                                               CGRectGetHeight(subview.frame)-speedY);
             
-            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + speedX,
-                                       CGRectGetMinY(subview.frame) + speedY,
-                                       CGRectGetWidth(subview.frame),// - speedWidth,
-                                       CGRectGetHeight(subview.frame));//-speedHeight);
+            CGFloat multiplerX,multiplery;
+            /*if (subview.center.x>self.view.center.x  && subview.center.y>self.view.center.y)
+            {
+                multiplerX = (self.view.center.x-subview.center.x)/3;
+                multiplery = (self.view.center.y-subview.center.y)/3;
+            }
+            else if (subview.center.x<self.view.center.x  && subview.center.y>self.view.center.y)
+            {
+                multiplerX = (self.view.center.x-subview.center.x)/3;
+                multiplery = (self.view.center.y-subview.center.y)/3;
+                multiplerX = 1;
+                multiplery = -1;
+            }
+            else if (subview.center.x<self.view.center.x  && subview.center.y<self.view.center.y)
+            {
+                multiplerX = 1;
+                multiplery = 1;
+            }
+            else if (subview.center.x>self.view.center.x  && subview.center.y<self.view.center.y)
+            {
+                multiplerX = -1;
+                multiplery = 1;
+            }*/
+            speedWidth = (subview.frame.size.width*speedWidth)/imgvComic.frame.size.width;
+            speedHeight = (subview.frame.size.height*speedHeight)/imgvComic.frame.size.height;
+
+            multiplerX = (self.view.center.x-subview.center.x);
+            multiplery = (self.view.center.y-subview.center.y);
+            NSLog(@"multiplerX %f multiplery %f",multiplerX,multiplery);
+
+            if (multiplerX>0) {
+                multiplerX = multiplerX/(0.26*self.ImgvComic2.frame.size.width);
+            }
+            else
+            {
+                multiplerX = multiplerX/(0.9*self.ImgvComic2.frame.size.width);
+            }
+            if (multiplery>0)
+            {
+                multiplery = multiplery/(0.175*self.ImgvComic2.frame.size.height);
+            }
+            else
+            {
+                multiplery = multiplery/(0.4*self.ImgvComic2.frame.size.height);
+            }
+       
+            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + speedX*multiplerX ,
+                                       CGRectGetMinY(subview.frame) + speedX*multiplery ,
+                                       CGRectGetWidth(subview.frame) -  speedWidth,
+                                       CGRectGetHeight(subview.frame) - speedHeight);
+            
+            
         }
     }
     
@@ -3716,9 +3809,9 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 //    CGAffineTransform tt= CGAffineTransformFromString(nn);
 //    imageView.transform = tt;
     
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureDetected:)];
+    /*UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureDetected:)];
     [panGestureRecognizer setDelegate:self];
-    [imageView addGestureRecognizer:panGestureRecognizer];
+    [imageView addGestureRecognizer:panGestureRecognizer];*/
     
     imgvComic.userInteractionEnabled = YES;
     imgvComic.clipsToBounds = YES;
@@ -3729,8 +3822,15 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     haveAnimationOnPage = YES;
     ((ComicItemAnimatedSticker*)imageView).objFrame = imageView.frame;
     refAnimatedSticker = (ComicItemAnimatedSticker *)imageView;
-    [self.view addSubview:imageView];
-    [self.view bringSubviewToFront:imageView];
+    [self.view insertSubview:imageView atIndex:2];
+   // [self.view addSubview:imageView];
+    //[self.view bringSubviewToFront:imageView];
+    /*imgvComic.userInteractionEnabled = YES;
+    imgvComic.clipsToBounds = YES;
+    
+    [imgvComic addSubview:imageView];
+    [imgvComic bringSubviewToFront:imageView];*/
+
 }
 
 - (void)addBubbleWithImage:(ComicItemBubble *)bubbleHolderView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect
@@ -4724,5 +4824,45 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     CGFloat yFactor = [UIScreen mainScreen].bounds.size.height/heightOf6;
     return boundry*yFactor;
 }
-
+-(void)removeExstingAnimatedStickerFromComicPage
+{
+    [animationCollection hideGarbageBin];
+    [UIView animateWithDuration:1 animations:^ {
+        [refAnimatedSticker setUserInteractionEnabled:NO];
+        refAnimatedSticker.transform = CGAffineTransformMakeScale(0.0f, 0.0f);
+    } completion:^(BOOL finished) {
+        [refAnimatedSticker removeFromSuperview];
+    }];
+    /*[refAnimatedSticker setUserInteractionEnabled:NO];
+    [refAnimatedSticker removeFromSuperview];*/
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group = dispatch_group_create();
+    
+    // Add a task to the group
+    dispatch_group_async(group, queue, ^{
+        [self.delegate comicMakingItemSave:comicPage withImageView:refAnimatedSticker withPrintScreen:printScreen withRemove:YES withImageView:imgvComic];
+    });
+    [self doPrintScreen];
+    haveAnimationOnPage = NO;
+    refAnimatedSticker = nil;
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"animationSticker"])
+    {
+        animationCollection = (AnimationCollectionVC *)[segue destinationViewController];
+    }
+}
+-(void)notifyParentForCompletionOfInterval
+{
+    if ([self.view.gestureRecognizers containsObject:currentAnimationInstructionTap])
+    {
+        [currentAnimInstSubView removeFromSuperview];
+        [self.view removeGestureRecognizer:currentAnimationInstructionTap];
+    }
+    haveAnimationOnPage = NO;
+    refAnimatedSticker = nil;
+   
+}
 @end

@@ -39,6 +39,37 @@
                       "thumImage":"cat1Anim1",
                       "name": "Drill",
                       "categoryid": "0",
+                      },
+                      {
+                      "animationId": "1",
+                      "numberOfResources":"1",
+                      
+                      "type":{
+                      "animation":"ThumbAnimation",
+                      "instruction":"singleInstruction",
+                      },
+                      "resources":[
+                                   {
+                                   "animationGifName":"drillAnimation",
+                                   "animationSizeWidth":200,
+                                   "animationSizeHeight":178,
+                                   "animationCenterPointX":97,
+                                   "animationCenterPointY":137,
+                                   "instructionImageName":"tab-forehead.png",
+                                   "instructionPositionX":239,
+                                   "instructionPositionY":28,
+                                   "instructionSizeWidth":117,
+                                   "instructionSizeHeight":117,
+                                   "animationBoundryYA":80,
+                                   "animationBoundryYB":178,
+                                   "animationBoundryXB":0,
+                                   "animationBoundryXA":0,
+                                   "start_time":"0"
+                                   }
+                                   ],
+                      "thumImage":"cat1Anim1",
+                      "name": "Drill",
+                      "categoryid": "0",
                       }
                       ]
 }
