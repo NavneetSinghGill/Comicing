@@ -1929,8 +1929,7 @@
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="33" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AD9-kM-2hG">
-                                <rect key="frame" x="103" y="102" width="291" height="25"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="Mrh-d2-SXE"/>
                                     <constraint firstAttribute="width" constant="300" id="ee7-kr-sCY"/>
@@ -1944,7 +1943,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AlphabetCell" id="gcU-KD-JZE" customClass="AlphabetCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="1.5" width="22" height="22"/>
+                                        <rect key="frame" x="0.0" y="1.6666666666666667" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
