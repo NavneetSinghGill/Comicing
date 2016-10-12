@@ -460,7 +460,12 @@
 		1BEB1FDC1D43DD2700CC1304 /* stickers_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FD31D43DD2700CC1304 /* stickers_icon@2x.png */; };
 		1BEB1FDD1D43DD2700CC1304 /* stickers_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FD41D43DD2700CC1304 /* stickers_icon@3x.png */; };
 		1BEB20221D43FCA100CC1304 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB20211D43FCA100CC1304 /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		840439201DA9535D0020CA61 /* ComicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404391E1DA9535D0020CA61 /* ComicCell.m */; };
+		840439211DA9535D0020CA61 /* ComicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8404391F1DA9535D0020CA61 /* ComicCell.xib */; };
 		8405267E1D469D0B00639E0F /* Slide-12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8405267D1D469D0B00639E0F /* Slide-12.gif */; };
+		8409A8251DA6AE61002F38C3 /* ComicPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8409A8241DA6AE61002F38C3 /* ComicPageViewController.m */; };
+		8409A8281DA6AEDA002F38C3 /* ComicCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8409A8271DA6AEDA002F38C3 /* ComicCellViewController.m */; };
+		8409A82A1DA6B024002F38C3 /* ComicCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8409A8291DA6B024002F38C3 /* ComicCellViewController.xib */; };
 		842E385E1D566A0A00CD324F /* ComicCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 842E385D1D566A0A00CD324F /* ComicCropView.m */; };
 		8433BC941CC135D20073DE2A /* UIImage+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433BC931CC135D20073DE2A /* UIImage+Trim.m */; };
 		843561EB1D65EEC3002B9330 /* ComicImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 843561EA1D65EEC3002B9330 /* ComicImage.m */; };
@@ -1235,7 +1240,15 @@
 		1BEB1FD31D43DD2700CC1304 /* stickers_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stickers_icon@2x.png"; sourceTree = "<group>"; };
 		1BEB1FD41D43DD2700CC1304 /* stickers_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stickers_icon@3x.png"; sourceTree = "<group>"; };
 		1BEB20211D43FCA100CC1304 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		8404391D1DA9535D0020CA61 /* ComicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicCell.h; sourceTree = "<group>"; };
+		8404391E1DA9535D0020CA61 /* ComicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicCell.m; sourceTree = "<group>"; };
+		8404391F1DA9535D0020CA61 /* ComicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComicCell.xib; sourceTree = "<group>"; };
 		8405267D1D469D0B00639E0F /* Slide-12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Slide-12.gif"; sourceTree = "<group>"; };
+		8409A8231DA6AE61002F38C3 /* ComicPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicPageViewController.h; sourceTree = "<group>"; };
+		8409A8241DA6AE61002F38C3 /* ComicPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicPageViewController.m; sourceTree = "<group>"; };
+		8409A8261DA6AEDA002F38C3 /* ComicCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicCellViewController.h; sourceTree = "<group>"; };
+		8409A8271DA6AEDA002F38C3 /* ComicCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicCellViewController.m; sourceTree = "<group>"; };
+		8409A8291DA6B024002F38C3 /* ComicCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComicCellViewController.xib; sourceTree = "<group>"; };
 		842E385C1D566A0A00CD324F /* ComicCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicCropView.h; sourceTree = "<group>"; };
 		842E385D1D566A0A00CD324F /* ComicCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicCropView.m; sourceTree = "<group>"; };
 		8433BC921CC135D20073DE2A /* UIImage+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Trim.h"; sourceTree = "<group>"; };
@@ -2753,6 +2766,7 @@
 		0C66671C1C84358600FEB11F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8409A81F1DA6AA19002F38C3 /* ComicCellView */,
 				842E385B1D5669FD00CD324F /* ComicCropView */,
 				0CBA37E21D3EA53300610F20 /* ComicListView */,
 				84EFBCBF1D25851700647A88 /* InstructionView */,
@@ -3165,6 +3179,21 @@
 			path = Invite_GitBox;
 			sourceTree = "<group>";
 		};
+		8409A81F1DA6AA19002F38C3 /* ComicCellView */ = {
+			isa = PBXGroup;
+			children = (
+				8409A8231DA6AE61002F38C3 /* ComicPageViewController.h */,
+				8409A8241DA6AE61002F38C3 /* ComicPageViewController.m */,
+				8409A8261DA6AEDA002F38C3 /* ComicCellViewController.h */,
+				8409A8271DA6AEDA002F38C3 /* ComicCellViewController.m */,
+				8409A8291DA6B024002F38C3 /* ComicCellViewController.xib */,
+				8404391D1DA9535D0020CA61 /* ComicCell.h */,
+				8404391E1DA9535D0020CA61 /* ComicCell.m */,
+				8404391F1DA9535D0020CA61 /* ComicCell.xib */,
+			);
+			path = ComicCellView;
+			sourceTree = "<group>";
+		};
 		842E385B1D5669FD00CD324F /* ComicCropView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3499,6 +3528,7 @@
 				167DDFCA1D7F40120090E8A5 /* cat4Anim4.gif in Resources */,
 				167DDFCE1D7F40120090E8A5 /* cat5Anim2.gif in Resources */,
 				84F1613A1D3554B200DBF9E0 /* Slide-13.gif in Resources */,
+				840439211DA9535D0020CA61 /* ComicCell.xib in Resources */,
 				1BEB1FD61D43DD2700CC1304 /* box02.gif in Resources */,
 				0C6667701C84358600FEB11F /* american-typewriter.ttf in Resources */,
 				0C6667AA1C84358600FEB11F /* instagramlogo.png in Resources */,
@@ -3561,6 +3591,7 @@
 				84CEF1221D3ADF68009FCB1D /* top-bar-boy-icon-yellow.png in Resources */,
 				84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */,
 				0C6667A61C84358600FEB11F /* digup@2x.png in Resources */,
+				8409A82A1DA6B024002F38C3 /* ComicCellViewController.xib in Resources */,
 				0C6667D81C84358600FEB11F /* FindFriendsTableCell.xib in Resources */,
 				0C6667771C84358600FEB11F /* MYRIADPRO-BOLDIT.OTF in Resources */,
 				167DDFC11D7F40120090E8A5 /* cat3Anim1.gif in Resources */,
@@ -3660,6 +3691,7 @@
 				0C66682D1C84358600FEB11F /* Slides.m in Sources */,
 				0C6668261C84358600FEB11F /* Group.m in Sources */,
 				0C6668891C84358600FEB11F /* NSError+STTwitter.m in Sources */,
+				8409A8251DA6AE61002F38C3 /* ComicPageViewController.m in Sources */,
 				16DD56E11D8D3CF00036190E /* SubIndexpageCell.m in Sources */,
 				0C6667F91C84358600FEB11F /* PrivateConversationCell.m in Sources */,
 				0C6667FF1C84358600FEB11F /* AlphabetCollectionViewCell.m in Sources */,
@@ -3697,6 +3729,7 @@
 				0C66680B1C84358600FEB11F /* PrivateConversationViewController.m in Sources */,
 				0C6668021C84358600FEB11F /* InboxViewController.m in Sources */,
 				0C66681D1C84358600FEB11F /* ComicEnhancements.m in Sources */,
+				8409A8281DA6AEDA002F38C3 /* ComicCellViewController.m in Sources */,
 				0C66682B1C84358600FEB11F /* UserGroup.m in Sources */,
 				160DEF8C1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m in Sources */,
 				0C6667E81C84358600FEB11F /* GlideViewController.m in Sources */,
@@ -3870,6 +3903,7 @@
 				0C6667FB1C84358600FEB11F /* CustomScrollView.m in Sources */,
 				0C6668601C84358600FEB11F /* JSONKeyMapper.m in Sources */,
 				0C6667EB1C84358600FEB11F /* GroupsMembersSection.m in Sources */,
+				840439201DA9535D0020CA61 /* ComicCell.m in Sources */,
 				0C6667D61C84358600FEB11F /* CropRegisterViewController.m in Sources */,
 				0C6668481C84358600FEB11F /* UIColor+Color.m in Sources */,
 				0C6667FE1C84358600FEB11F /* FriendPageVC.m in Sources */,

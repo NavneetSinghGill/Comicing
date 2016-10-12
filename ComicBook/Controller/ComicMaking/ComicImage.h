@@ -20,5 +20,5 @@ typedef enum ComicImageType : NSUInteger {
 @property(nonatomic,strong) NSString* imageName;
 @property (strong, nonatomic) UIImage *image;
 @property(nonatomic,assign) ComicImageType comicImageType;
-
+@property (nonatomic, strong) NSString *imageURL;
 @end

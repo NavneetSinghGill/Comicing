@@ -66,6 +66,9 @@
 //    userProfilePic.layer.cornerRadius = CGRectGetHeight(userProfilePic.frame) / 2;
     userProfilePic.clipsToBounds = YES;*/
     
+    
+    [super awakeFromNib];
+    
     CGFloat heiWei;
     
     if (IS_IPHONE_5)

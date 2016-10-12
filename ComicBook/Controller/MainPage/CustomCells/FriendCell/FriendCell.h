@@ -12,4 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblComicTitle;
 
 @property (weak, nonatomic) IBOutlet UIView *viewComicBook;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicTitle;
+
 @end

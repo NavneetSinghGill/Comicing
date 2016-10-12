@@ -36,6 +36,10 @@
 #import "Constants.h"
 #import "TopSearchVC.h"
 #import "MePageVC.h"
+
+#import "ComicCell.h"
+#import "ComicPageViewController.h"
+
 @interface MainPageGroupViewController ()
 <UITableViewDataSource,
 UITableViewDelegate,
@@ -82,6 +86,11 @@ UICollectionViewDelegate>
 #pragma mark - UIViewController Methods
 - (void)viewDidLoad
 {
+    
+    UINib *cellNib = [UINib nibWithNibName:@"ComicCell" bundle:nil];
+    [self.tblvComics registerNib:cellNib forCellReuseIdentifier:@"comicCell"];
+
+    
     UIScreen *mainScreen = [UIScreen mainScreen];
     self.initialHeight = mainScreen.bounds.size.height - 20;
     
@@ -527,7 +536,7 @@ UICollectionViewDelegate>
     
     if ([mComicConversatinBook.conversationType isEqualToString:CONVERSTION_TYPE_COMIC])
     {
-        __block GroupCell* cell= (GroupCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+       /*__block GroupCell* cell= (GroupCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         
         cell = nil;
         if (cell == nil) {
@@ -606,6 +615,98 @@ UICollectionViewDelegate>
             
             [ComicBookDict setObject:comic forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
             
+        }
+        
+        return cell;
+        */
+        
+        static NSString *simpleTableIdentifier = @"comicCell";
+        
+        __block ComicCell* cell= (ComicCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        
+        cell = nil;
+        if (cell == nil)
+        {
+            cell = (ComicCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+            
+            if (nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
+            {
+                [ComicBookDict removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+            }
+            
+            
+            ComicBook *comicBook = (ComicBook *)mComicConversatinBook.coversation[0];
+
+            
+            [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
+            
+            [cell layoutIfNeeded];
+            
+            
+            
+            if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+            {
+                cell.lblComicTitle.hidden = YES;
+                cell.heightConstraintComicTitle.constant = 0;
+                
+            }
+            else
+            {
+                cell.lblComicTitle.hidden = NO;
+                cell.lblComicTitle.text = comicBook.comicTitle;
+                
+                cell.heightConstraintComicTitle.constant = 60;
+            }
+            
+            //dinesh
+            cell.mUserName.text = comicBook.userDetail.firstName;
+            cell.lblDate.text = [self dateFromString:comicBook.createdDate];
+            cell.lblTime.text = [self timeFromString:comicBook.createdDate];
+            
+            // New Code - Adnan
+            [cell layoutIfNeeded];
+            
+            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+            [slidesArray addObjectsFromArray:comicBook.slides];
+            
+            [cell.viewComicBook layoutIfNeeded];
+            [cell.viewComicCointainer layoutIfNeeded];
+            
+            ComicPageViewController *viewPreviewScrollSlide = [[ComicPageViewController alloc] init];
+            
+            CGFloat width = ComicWidthIPhone5;
+            
+            if (IS_IPHONE_5)
+            {
+                width = ComicWidthIPhone5;
+            }
+            else if (IS_IPHONE_6)
+            {
+                width = ComicWidthIPhone6;
+                
+            }
+            else if (IS_IPHONE_6P)
+            {
+                width = ComicWidthIPhone6plus;
+            }
+            
+            
+            viewPreviewScrollSlide.view.frame = CGRectMake(0, 0, width, CGRectGetHeight(cell.viewComicBook.frame));
+            
+            viewPreviewScrollSlide.allSlideImages = slidesArray;
+            [viewPreviewScrollSlide setupBook];
+            
+            [cell.viewComicBook addSubview:viewPreviewScrollSlide.view];
+            
+            CGRect frame = viewPreviewScrollSlide.view.frame;
+            frame.origin.y = 0;
+            //        frame.size.width = CGRectGetWidth(cell.viewComicBook.frame);
+            viewPreviewScrollSlide.view.frame = frame;
+        
+            cell.btnBubble.hidden = YES;
+            cell.btnTwitter.hidden = YES;
+            cell.btnFacebook.hidden = YES;
+
         }
         
         return cell;
@@ -707,40 +808,26 @@ UICollectionViewDelegate>
     
     if ([mComicConversatinBook.conversationType isEqualToString:CONVERSTION_TYPE_COMIC])
     {
-        int height=0;
+        NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+        [slidesArray addObjectsFromArray:comicBook.slides];
+        
+        ComicPageViewController *viewPreviewScrollSlide = [[ComicPageViewController alloc] init];
+        viewPreviewScrollSlide.view.frame = CGRectMake(0, 0, 0, 0);
+        
+        viewPreviewScrollSlide.allSlideImages = slidesArray;
+        [viewPreviewScrollSlide setupBook];
+        
+        viewPreviewScrollSlide.view.backgroundColor = [UIColor blueColor];
         
         if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
         {
-            if(IS_IPHONE_5)
-            {
-                height=161;
-            }
-            else if(IS_IPHONE_6)
-            {
-                height= 191;
-            }
-            else if(IS_IPHONE_6P)
-            {
-                height= 221;
-            }
+            return viewPreviewScrollSlide.view.bounds.size.height + 20;
         }
         else
         {
-            if(IS_IPHONE_5)
-            {
-                height=101;
-            }
-            else if(IS_IPHONE_6)
-            {
-                height= 131;
-            }
-            else if(IS_IPHONE_6P)
-            {
-                height= 161;
-            }
+            return viewPreviewScrollSlide.view.bounds.size.height + 60 + 20;
         }
-        
-        return self.initialHeight - height;
+
     }
     else if ([mComicConversatinBook.conversationType isEqualToString:CONVERSTION_TYPE_TEXT])
     {

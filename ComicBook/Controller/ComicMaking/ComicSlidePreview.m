@@ -210,7 +210,6 @@
 }
 
 #pragma mark - ComicImage Layout methods
-
 - (void)createComicImages
 {
     comicImages = [[NSMutableArray alloc] init];
