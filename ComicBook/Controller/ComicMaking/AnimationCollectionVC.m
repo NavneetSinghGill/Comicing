@@ -20,6 +20,7 @@
     IBOutlet UIButton *btn_Cross;
     NSMutableArray *arrOfContentOffset;
     BOOL doneFrameChanges;
+    IBOutlet UIButton *btn_Recycle;
 }
 @end
 
@@ -27,6 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    btn_Recycle.hidden = YES;
         // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -51,24 +53,30 @@
 {
     if (IS_IPHONE_5)
     {
-        btn_Exclaimation.frame = CGRectMake(10, 63, 18, 42);
-        btn_Cross.frame = CGRectMake(10, 42, 18, 27);
+        //btn_Exclaimation.frame = CGRectMake(10, 63, 18, 42);
+        btn_Cross.frame = CGRectMake(10, 55, 18, 27);
         clc_Category.frame = CGRectMake(43, 85, 277, 30);
         clc_Animations.frame = CGRectMake(43, 20, 277, 60);
+        btn_Recycle.frame = CGRectMake(5.5, 25, 28, 28);
+
     }
     else if (IS_IPHONE_6)
     {
-        btn_Exclaimation.frame = CGRectMake(11.5, 75.5, 23.5, 56);
-        btn_Cross.frame = CGRectMake(10, 54.5, 23.5, 37.5);
+        //btn_Exclaimation.frame = CGRectMake(11.5, 75.5, 23.5, 56);
+        btn_Cross.frame = CGRectMake(10, 58, 23.5, 37.5);
         clc_Category.frame = CGRectMake(43, 100, 332, 30);
         clc_Animations.frame = CGRectMake(43, 35, 332, 66);
+        btn_Recycle.frame = CGRectMake(7, 30, 30, 30);
+
     }
     else if (IS_IPHONE_6P)
     {
-        btn_Exclaimation.frame = CGRectMake(11.5, 78.5, 23.5, 56);
-        btn_Cross.frame = CGRectMake(10, 57.5, 23.5, 37.5);
+        //btn_Exclaimation.frame = CGRectMake(11.5, 78.5, 23.5, 56);
+        btn_Cross.frame = CGRectMake(10, 78, 23.5, 37.5);
         clc_Category.frame = CGRectMake(43, 105, 371, 38);
         clc_Animations.frame = CGRectMake(43, 40, 371, 77);
+        btn_Recycle.frame = CGRectMake(7, 43, 30, 30);
+
     }
 }
 -(void)viewDidLayoutSubviews
@@ -222,6 +230,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
     if (clc_Animations == collectionView)
     {
         [self.parentViewController addAnimationWithInstructionForObj:[arrOfAnimationTemp objectAtIndex:indexPath.row]];
+        
         /*[self.parentViewController addAnimatedSticker:[NSString stringWithFormat:@"%@",[[arrOfAnimationTemp objectAtIndex:indexPath.row] valueForKey:@"image_gif"]]];*/
     }
     else
@@ -296,6 +305,37 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
 }
 - (IBAction)closeAction:(id)sender {
     [self.parentViewController closeExclamationList];
+    [self stopBeingExcutedAfterSomeMoment];
+}
+- (IBAction)garbageAction:(id)sender {
+    [self.parentViewController removeExstingAnimatedStickerFromComicPage];
+}
+-(void)showGarbageBinForSomeMoment
+{
+    btn_Recycle.hidden = NO;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideGarbageBin) object:nil];
+    [self performSelector:@selector(hideGarbageBin) withObject:nil afterDelay:8];
+}
+-(void)hideGarbageBin
+{
+    btn_Recycle.hidden = YES;
+}
+-(void)stopBeingExcutedAfterSomeMoment
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideGarbageBinAndNotify) object:nil];
+    [self hideGarbageBin];
+}
+-(void)showInstructionAndGarbageBinForSomeMoment
+{
+    btn_Recycle.hidden = NO;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideGarbageBin) object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideGarbageBinAndNotify) object:nil];
+    [self performSelector:@selector(hideGarbageBinAndNotify) withObject:nil afterDelay:8];
+}
+-(void)hideGarbageBinAndNotify
+{
+    [self.parentViewController notifyParentForCompletionOfInterval];
+    [self hideGarbageBin];
 }
 /*
 #pragma mark - Navigation

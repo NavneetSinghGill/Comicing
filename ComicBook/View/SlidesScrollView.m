@@ -677,13 +677,31 @@ UILabel *mComicTitle;
     imageView.userInteractionEnabled = YES;
     imageView.userInteractionEnabled = YES;
     imageView.clipsToBounds = NO;
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    
     [imageView setBackgroundColor:[UIColor clearColor]];
     
+    CGFloat diffX,diffY;
+    if (IS_IPHONE_5)
+    {
+        diffX = 1.71f;
+        diffY = 3.2f;
+    }
+    else if (IS_IPHONE_6)
+    {
+        diffX = 1.65f;
+        diffY = 2.2f;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        diffX = 1.5f;
+        diffY = 2.5f;
+    }
     CGRect rectValue = imageView.frame;
-    rectValue.origin.x = rectValue.origin.x * ScaleValue;
-    rectValue.origin.y = rectValue.origin.y * ScaleValue;
-    rectValue.size.width = rectValue.size.width * ScaleValue;
-    rectValue.size.height = rectValue.size.height * ScaleValue;
+    rectValue.origin.x = rectValue.origin.x * ScaleValue/diffX;
+    rectValue.origin.y = rectValue.origin.y * ScaleValue/diffY;
+    rectValue.size.width = rectValue.size.width * ScaleValue*1.65;
+    rectValue.size.height = rectValue.size.height * ScaleValue*1.65;
     imageView.frame = rectValue;
     
     [itemImage addSubview:imageView];

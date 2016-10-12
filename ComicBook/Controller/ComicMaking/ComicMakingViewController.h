@@ -82,7 +82,10 @@
 //Handle Exclamation
 - (void)openExclamationList;
 - (void)closeExclamationList;
+-(void)removeExstingAnimatedStickerFromComicPage;
 - (void)addExclamationListImage:(NSString *)exclamationImageString;
+-(void)notifyParentForCompletionOfInterval;
+
 //END
 
 /* Comic slide handle : Ramesh */

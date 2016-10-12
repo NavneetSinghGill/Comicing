@@ -374,6 +374,7 @@
 		161CAD571D840DD80034795C /* Happy-ON.png in Resources */ = {isa = PBXBuildFile; fileRef = 161CAD4B1D840DD80034795C /* Happy-ON.png */; };
 		161CAD581D840DD80034795C /* Love-OFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 161CAD4C1D840DD80034795C /* Love-OFF.png */; };
 		161CAD591D840DD80034795C /* Love-ON.png in Resources */ = {isa = PBXBuildFile; fileRef = 161CAD4D1D840DD80034795C /* Love-ON.png */; };
+		16398FD11DAA782A004A6703 /* garbagebin.png in Resources */ = {isa = PBXBuildFile; fileRef = 16398FD01DAA782A004A6703 /* garbagebin.png */; };
 		165641981D907EBB00E3C9C7 /* 4slidebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 165641971D907EBB00E3C9C7 /* 4slidebook.png */; };
 		167DDF321D7F38570090E8A5 /* AnimationCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 167DDF311D7F38570090E8A5 /* AnimationCollectionVC.m */; };
 		167DDF361D7F39A00090E8A5 /* AnimationCategoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 167DDF351D7F39A00090E8A5 /* AnimationCategoryCollectionViewCell.m */; };
@@ -1130,6 +1131,7 @@
 		161CAD4B1D840DD80034795C /* Happy-ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Happy-ON.png"; sourceTree = "<group>"; };
 		161CAD4C1D840DD80034795C /* Love-OFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Love-OFF.png"; sourceTree = "<group>"; };
 		161CAD4D1D840DD80034795C /* Love-ON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Love-ON.png"; sourceTree = "<group>"; };
+		16398FD01DAA782A004A6703 /* garbagebin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = garbagebin.png; sourceTree = "<group>"; };
 		165641971D907EBB00E3C9C7 /* 4slidebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4slidebook.png; sourceTree = "<group>"; };
 		167DDF301D7F38570090E8A5 /* AnimationCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationCollectionVC.h; sourceTree = "<group>"; };
 		167DDF311D7F38570090E8A5 /* AnimationCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationCollectionVC.m; sourceTree = "<group>"; };
@@ -3007,6 +3009,7 @@
 		161439E61D97F0BA00CF5A65 /* Animation Customization */ = {
 			isa = PBXGroup;
 			children = (
+				16398FD01DAA782A004A6703 /* garbagebin.png */,
 				161439E71D97F0C900CF5A65 /* Drill */,
 			);
 			path = "Animation Customization";
@@ -3398,6 +3401,7 @@
 				161CAD591D840DD80034795C /* Love-ON.png in Resources */,
 				0C6668A31C84358600FEB11F /* FooterView.xib in Resources */,
 				161CAD521D840DD80034795C /* FUN-OFF.png in Resources */,
+				16398FD11DAA782A004A6703 /* garbagebin.png in Resources */,
 				84CEF11E1D3ADF68009FCB1D /* house-icon.png in Resources */,
 				0C66677A1C84358600FEB11F /* MYRIADPRO-REGULAR.OTF in Resources */,
 				0C6667921C84358600FEB11F /* accountPassword.png in Resources */,
