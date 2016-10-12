@@ -717,27 +717,6 @@ UILabel *mComicTitle;
         isAdd = YES;
     }
     
-//    if (slides.count == 3)
-//    {
-//        viewPreviewScrollSlide.view.frame = [self frameForPreview3Slide:self.btnPlusSlide.tag];
-//    }
-//    else if (slides.count == 4)
-//    {
-//        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
-//    }
-//    else if (slides.count == 1)
-//    {
-//        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
-//    }
-//    else if (slides.count == 2)
-//    {
-//        viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:self.btnPlusSlide.tag];
-//    }
-//    else
-//    {
-//        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
-//    }
-    
     viewPreviewScrollSlide.view.frame = [self frameForPreview3Slide:self.btnPlusSlide.tag];
     
     viewPreviewScrollSlide.allSlideImages = slides;

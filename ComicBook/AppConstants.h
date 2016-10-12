@@ -104,6 +104,17 @@
 
 
 
+// below height for cell
+
+#define WIDE_SLIDE_HEIGHT_CELL (IS_IPHONE_6P?110:IS_IPHONE_6?98:88)
+#define TALL_SMALL_SLIDE_HEIGHT_CELL (IS_IPHONE_6P?220:IS_IPHONE_6?207:195)
+#define TALL_BIG_SLIDE_HEIGHT_CELL (IS_IPHONE_6P?450:IS_IPHONE_6?428:408)
+
+#define ComicWidthIPhone5 195
+#define ComicWidthIPhone6 215
+#define ComicWidthIPhone6plus 237
+
+
 //
  //6plus height 414 × 736  375 × 667  320 × 480
 

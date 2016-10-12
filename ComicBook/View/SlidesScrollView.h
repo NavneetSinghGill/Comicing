@@ -11,6 +11,10 @@
 #import "ComicSlidePreview.h"
 #import "SlidePreviewScrollView.h"
 
+extern const CGFloat comicSlidePreviewWidth5;
+extern const CGFloat comicSlidePreviewWidth6;
+extern const CGFloat comicSlidePreviewWidth6plus;
+
 enum
 {
     AddButtonTypeWide,
