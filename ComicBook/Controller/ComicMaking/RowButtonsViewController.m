@@ -10,24 +10,34 @@
 #import "ComicMakingViewController.h"
 #import "Global.h"
 #import "JTAlertView.h"
+#import "YLGIFImage.h"
+#import "YLImageView.h"
 
 @interface RowButtonsViewController ()
 
 @property (nonatomic, strong) ComicMakingViewController *parentViewController;
 
-
+@property (nonatomic, strong) YLImageView *imgvExclamation;
 
 @end
 
 @implementation RowButtonsViewController
 
 @synthesize parentViewController;
-@synthesize btnBlackboard,btnBubble,btnCamera,btnExclamation,btnPen,btnSticker,btnText, isNewSlide;
+@synthesize btnBlackboard,btnBubble,btnCamera,btnExclamation,btnPen,btnSticker,btnText, isNewSlide, imgvExclamation;
 
 #pragma mark - UIViewController Methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [btnExclamation setImage:nil forState:UIControlStateNormal];
+    
+    imgvExclamation = [[YLImageView alloc] initWithFrame:btnExclamation.frame];
+    
+    imgvExclamation.image = [YLGIFImage imageNamed:@"Smiley-Button.gif"];
+    
+    [self.view insertSubview:imgvExclamation belowSubview:btnExclamation];
     
     if (isNewSlide)
     {
@@ -293,6 +303,7 @@
             btnBubble.alpha = 0;
             btnCamera.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
             btnPen.alpha = 0;
             btnSticker.alpha = 0;
             btnText.alpha = 0;
@@ -305,6 +316,7 @@
             btnBlackboard.alpha = 0;
             btnCamera.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
             btnPen.alpha = 0;
             btnSticker.alpha = 0;
             btnText.alpha = 0;
@@ -317,6 +329,7 @@
             btnBlackboard.alpha = 1;
             btnBubble.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
             btnPen.alpha = 0;
             btnSticker.alpha = 0;
             btnText.alpha = 0;
@@ -342,6 +355,8 @@
             btnBlackboard.alpha = 0;
             btnBubble.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
+
             btnSticker.alpha = 0;
             btnText.alpha = 0;
             
@@ -372,6 +387,8 @@
             btnBubble.alpha = 0;
             btnCamera.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
+
             btnPen.alpha = 0;
             btnText.alpha = 0;
         }];
@@ -384,6 +401,8 @@
             btnBubble.alpha = 0;
             btnCamera.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
+
             btnPen.alpha = 0;
             btnSticker.alpha = 0;
         }];
@@ -403,6 +422,8 @@
             btnBubble.alpha = 1;
             btnCamera.alpha = 1;
             btnExclamation.alpha = 1;
+            imgvExclamation.alpha = 1;
+
             btnPen.alpha = 1;
             btnSticker.alpha = 1;
             btnText.alpha = 1;
@@ -416,6 +437,8 @@
             btnBlackboard.alpha = 1;
             btnCamera.alpha = 1;
             btnExclamation.alpha = 1;
+            imgvExclamation.alpha = 1;
+
             btnPen.alpha = 1;
             btnSticker.alpha = 1;
             btnText.alpha = 1;
@@ -430,6 +453,8 @@
             btnBlackboard.alpha = 1;
             btnBubble.alpha = 1;
             btnExclamation.alpha = 1;
+            imgvExclamation.alpha = 1;
+
             btnPen.alpha = 1;
             btnSticker.alpha = 1;
             btnText.alpha = 1;
@@ -449,6 +474,8 @@
             btnSticker.alpha = 1;
             btnText.alpha = 1;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
+
             
         }];
     }
@@ -460,6 +487,8 @@
             btnBubble.alpha = 1;
             btnCamera.alpha = 1;
             btnExclamation.alpha = 1;
+            imgvExclamation.alpha = 1;
+
             btnSticker.alpha = 1;
             btnText.alpha = 1;
             btnPen.alpha = 1;

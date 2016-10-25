@@ -101,7 +101,7 @@ static CGRect CaptionTextViewMinRect;
 @property (weak, nonatomic) IBOutlet UIView *viewDrawing;
 @property (weak, nonatomic) IBOutlet UIButton *btnClose;
 @property (weak, nonatomic) IBOutlet UIView *glideViewHolder;
-
+@property (weak, nonatomic) IBOutlet UIButton *btnCloseComic;
 @property (weak, nonatomic) IBOutlet UIView *viewBlackBoard;
 @property CGRect frameBlackboardView;
 @property (strong, nonatomic) UIPinchGestureRecognizer *pinchGesture;
@@ -171,7 +171,7 @@ static CGRect CaptionTextViewMinRect;
 @implementation ComicMakingViewController
 
 @synthesize viewCameraPreview, viewCamera, imgvComic, uploadIcon, viewStickerList, viewRowButtons;
-@synthesize drawingColor,viewDrawing,frameDrawingView, drawView, centerImgvComic,lastScale, btnClose,bubbleListView,exclamationListView,shrinkHeight,viewFrame, shrinkCount, previousTimestamp, isNewSlide,viewBlackBoard,frameBlackboardView,onColor,isAlreadyDoubleDrawColor;
+@synthesize drawingColor,viewDrawing,frameDrawingView, drawView, centerImgvComic,lastScale, btnClose,btnCloseComic,bubbleListView,exclamationListView,shrinkHeight,viewFrame, shrinkCount, previousTimestamp, isNewSlide,viewBlackBoard,frameBlackboardView,onColor,isAlreadyDoubleDrawColor;
 @synthesize comicPage,printScreen, isSlideShrink,frameImgvComic,pinchGesture, isWideSlide,comicCropView, isCameraOn;
 
 #pragma mark - UIViewController Methods
@@ -472,6 +472,7 @@ static CGRect CaptionTextViewMinRect;
     {
         imgvComic.hidden = YES;
         btnClose.hidden = YES;
+        btnCloseComic.hidden = YES;
         self.rowButton.isNewSlide = YES;
         [self.btnSend setEnabled:NO];
         
@@ -503,6 +504,7 @@ static CGRect CaptionTextViewMinRect;
     {
         imgvComic.hidden = NO;
         btnClose.hidden = NO;
+        btnCloseComic.hidden = NO;
         viewCamera.hidden = YES;
         [self.mSendComicButton setHidden:NO];//dinesh
         self.rowButton.isNewSlide = NO;
@@ -611,6 +613,7 @@ static CGRect CaptionTextViewMinRect;
     
     viewStickerList.alpha = 0;
     btnClose.alpha = 1;
+    btnCloseComic.alpha = 1;
     viewRowButtons.alpha = 1;
     self.chatIcon.alpha = 0;
     self.uploadIcon.alpha = 1;
@@ -1135,7 +1138,7 @@ static CGRect CaptionTextViewMinRect;
     viewCamera.hidden = NO;
     [self.mSendComicButton setHidden:YES];//dinesh
     btnClose.hidden = YES;
-    
+    btnCloseComic.hidden = YES;
     GlobalObject.isTakePhoto = NO;
     isCameraOn = YES;
     
@@ -1144,6 +1147,59 @@ static CGRect CaptionTextViewMinRect;
         [self addComicCropViewWithImage:nil];
 
     }
+    
+}
+
+- (IBAction)btnCloseComicTap:(id)sender
+{
+    CGFloat height = [self getGlideItemHight];
+    CGFloat width = [self getGlideItemWidth];
+    
+    CGFloat x = self.view.frame.size.width /2 - width/2 ;
+    CGFloat y =  (self.view.frame.size.height /2 - height/2) + height/10 ;
+    
+    [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
+    //        imgvComic.autoresizesSubviews = YES;
+    for (UIView* subview in [imgvComic subviews]) {
+        subview.autoresizingMask = UIViewAutoresizingNone;
+    }
+
+    self.ImgvComic2.image = printScreen;
+   
+    isSlideShrink = YES;
+    [UIView animateWithDuration:0.5 animations:^{
+    
+        self.ImgvComic2.frame = CGRectMake(x, y, width, height);
+         imgvComic.frame = self.ImgvComic2.frame;
+        
+    }completion:^(BOOL finished) {
+        
+        
+        if (isWideSlide == YES)
+        {
+            UIImageView *cropImageView = [[UIImageView alloc] initWithFrame:temImagFrame];
+            cropImageView.image = printScreen;
+            cropImageView.contentMode = UIViewContentModeScaleAspectFit;
+            
+            //CGPoint center  = [self.view convertPoint:self.view.center fromView:parent.superview];
+            
+            CGFloat y = (CGRectGetMaxY(temImagFrame) - CGRectGetMinY(temImagFrame)) / 2;
+            
+            CGRect cropframe = CGRectMake(0, y - (wideBoxHeight / 2), temImagFrame.size.width, wideBoxHeight);
+            
+            UIImage *image = [self croppedImage:printScreen withImageView:cropImageView WithFrame:cropframe];
+            
+            printScreen = image;
+            
+            NSLog(@"cropped");
+        }
+        
+        [self.delegate comicMakingViewControllerWithEditingDone:self
+                                                  withImageView:imgvComic
+                                                withPrintScreen:printScreen
+                                                   withNewSlide:isNewSlide
+                                                    withPopView:YES withIsWideSlide:isWideSlide];
+    }];
     
 }
 
@@ -1228,6 +1284,7 @@ static CGRect CaptionTextViewMinRect;
     
     GlobalObject.isTakePhoto = YES;
     btnClose.hidden = NO;
+    btnCloseComic.hidden = NO;
     [self setComicImageViewSize];
     [self doAutoSave:nil];
     
@@ -1286,6 +1343,7 @@ static CGRect CaptionTextViewMinRect;
                 //remove Cropview
                 
                 btnClose.hidden = NO;
+                btnCloseComic.hidden = NO;
                 [self setComicImageViewSize];
                 [self doAutoSave:nil];
                 
@@ -1374,7 +1432,7 @@ static CGRect CaptionTextViewMinRect;
          GlobalObject.isTakePhoto = YES;
          
          btnClose.hidden = NO;
-         
+         btnCloseComic.hidden = NO;
          RowButtonsViewController *rowButtonsController;
          
          for (UIViewController *controller in self.childViewControllers)
@@ -1439,6 +1497,7 @@ static CGRect CaptionTextViewMinRect;
     
     [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         btnClose.alpha = 0;
+        btnCloseComic.alpha = 0;
         viewRowButtons.center = CGPointMake(backupToolCenter.x-100, backupToolCenter.y );
         viewRowButtons.alpha = 0;
     } completion:^(BOOL finished)
@@ -1568,6 +1627,7 @@ static CGRect CaptionTextViewMinRect;
         viewStickerList.alpha = 0;
         
         btnClose.alpha = 1;
+        btnCloseComic.alpha = 1;
     } completion:^(BOOL finished) {
         
     }];
@@ -1664,6 +1724,8 @@ static CGRect CaptionTextViewMinRect;
     
     [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         btnClose.alpha = 0;
+        btnCloseComic.alpha = 0;
+        
         viewRowButtons.center = CGPointMake(backupToolCenter.x-100, backupToolCenter.y );
         viewRowButtons.alpha = 0;
     } completion:^(BOOL finished) {
@@ -1721,6 +1783,7 @@ static CGRect CaptionTextViewMinRect;
         exclamationListView.alpha = 0;
         
         btnClose.alpha = 1;
+        btnCloseComic.alpha = 1;
     } completion:^(BOOL finished) {
         
     }];
@@ -1894,6 +1957,7 @@ static CGRect CaptionTextViewMinRect;
     
     [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         btnClose.alpha = 0;
+        btnCloseComic.alpha = 0;
         viewRowButtons.center = CGPointMake(backupToolCenter.x-100, backupToolCenter.y );
         viewRowButtons.alpha = 0;
     } completion:^(BOOL finished) {
@@ -1943,6 +2007,7 @@ static CGRect CaptionTextViewMinRect;
         bubbleListView.alpha = 0;
         
         btnClose.alpha = 1;
+        btnCloseComic.alpha = 1;
     } completion:^(BOOL finished) {
         
     }];
@@ -2443,6 +2508,28 @@ static CGRect CaptionTextViewMinRect;
         return 378;
     }
 }
+
+-(NSInteger)getGlideItemWidth
+{
+    if (IS_IPHONE_5)
+    {
+        return 195;
+    }
+    else if (IS_IPHONE_6)
+    {
+        return 225;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        return 250;
+    }
+    else
+    {
+        return 195;
+    }
+}
+
+
 -(NSInteger)getGlideSpeed{
     return 1;
 }
@@ -2516,7 +2603,8 @@ static CGRect CaptionTextViewMinRect;
                                        CGRectGetWidth(self.ImgvComic2.frame) - speedWidth,
                                        CGRectGetHeight(self.ImgvComic2.frame) - speedHeight);
         
-        if (comicFrame.size.height > [self getGlideItemHight]) {
+        if (comicFrame.size.height > [self getGlideItemHight])
+        {
             self.ImgvComic2.frame = CGRectMake(CGRectGetMinX(self.ImgvComic2.frame) + speedX,
                                                CGRectGetMinY(self.ImgvComic2.frame) + speedY ,
                                                CGRectGetWidth(self.ImgvComic2.frame) - speedWidth,
@@ -2550,10 +2638,11 @@ static CGRect CaptionTextViewMinRect;
     }
 }
 
--(void)shrinkAnimatedImages:(CGFloat)speedX
+- (void)shrinkAnimatedImages:(CGFloat)speedX
                      speedY:(CGFloat)speedY
                  speedWidth:(CGFloat)speedWidth
-                speedHeight:(CGFloat)speedHeight{
+                speedHeight:(CGFloat)speedHeight
+{
     
     
 //    CGFloat ff = 1;
@@ -2783,7 +2872,7 @@ static CGRect CaptionTextViewMinRect;
     viewCamera.hidden = YES;
     [self.mSendComicButton setHidden:NO];//dinesh
     btnClose.hidden = YES;
-    
+    btnCloseComic.hidden = YES;
     imgvComic.hidden = NO;
     imgvComic.frame =  frameImgvComic;
     
@@ -2894,7 +2983,7 @@ static CGRect CaptionTextViewMinRect;
     viewCamera.hidden = YES;
     [self.mSendComicButton setHidden:NO];//dinesh
     btnClose.hidden = YES;
-    
+    btnCloseComic.hidden = YES;
     drawView = [[ACEDrawingView alloc] init];
     drawView.delegate = self;
     
@@ -3041,6 +3130,7 @@ static CGRect CaptionTextViewMinRect;
         
         viewDrawing.alpha = 0;
         btnClose.hidden = NO;
+        btnCloseComic.hidden = NO;
 //        [drawView setHidden:YES];
         [drawView removeFromSuperview];
         
