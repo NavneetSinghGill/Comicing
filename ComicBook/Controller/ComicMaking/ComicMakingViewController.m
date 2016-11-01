@@ -1167,39 +1167,68 @@ static CGRect CaptionTextViewMinRect;
     self.ImgvComic2.image = printScreen;
    
     isSlideShrink = YES;
-    [UIView animateWithDuration:0.5 animations:^{
     
-        self.ImgvComic2.frame = CGRectMake(x, y, width, height);
-         imgvComic.frame = self.ImgvComic2.frame;
+    //Ramesh ****** Start ****
+    if (isWideSlide == YES)
+    {
+        UIImageView *cropImageView = [[UIImageView alloc] initWithFrame:temImagFrame];
+        cropImageView.image = printScreen;
+        cropImageView.contentMode = UIViewContentModeScaleAspectFit;
         
-    }completion:^(BOOL finished) {
+        //CGPoint center  = [self.view convertPoint:self.view.center fromView:parent.superview];
         
+        CGFloat y = (CGRectGetMaxY(temImagFrame) - CGRectGetMinY(temImagFrame)) / 2;
         
-        if (isWideSlide == YES)
-        {
-            UIImageView *cropImageView = [[UIImageView alloc] initWithFrame:temImagFrame];
-            cropImageView.image = printScreen;
-            cropImageView.contentMode = UIViewContentModeScaleAspectFit;
-            
-            //CGPoint center  = [self.view convertPoint:self.view.center fromView:parent.superview];
-            
-            CGFloat y = (CGRectGetMaxY(temImagFrame) - CGRectGetMinY(temImagFrame)) / 2;
-            
-            CGRect cropframe = CGRectMake(0, y - (wideBoxHeight / 2), temImagFrame.size.width, wideBoxHeight);
-            
-            UIImage *image = [self croppedImage:printScreen withImageView:cropImageView WithFrame:cropframe];
-            
-            printScreen = image;
-            
-            NSLog(@"cropped");
-        }
+        CGRect cropframe = CGRectMake(0, y - (wideBoxHeight / 2), temImagFrame.size.width, wideBoxHeight);
         
-        [self.delegate comicMakingViewControllerWithEditingDone:self
-                                                  withImageView:imgvComic
-                                                withPrintScreen:printScreen
-                                                   withNewSlide:isNewSlide
-                                                    withPopView:YES withIsWideSlide:isWideSlide];
-    }];
+        UIImage *image = [self croppedImage:printScreen withImageView:cropImageView WithFrame:cropframe];
+        
+        printScreen = image;
+        
+        NSLog(@"cropped");
+    }
+    
+    [self.delegate comicMakingViewControllerWithEditingDone:self
+                                              withImageView:imgvComic
+                                            withPrintScreen:printScreen
+                                               withNewSlide:isNewSlide
+                                                withPopView:YES withIsWideSlide:isWideSlide];
+    
+    //Ramesh ****** End ****
+    //Ramesh commented Adnan's Code
+//    [UIView animateWithDuration:0.5 animations:^{
+//    
+//        self.ImgvComic2.frame = CGRectMake(x, y, width, height);
+//        imgvComic.frame = self.ImgvComic2.frame;
+//        
+//    }completion:^(BOOL finished) {
+//        
+//        
+//        if (isWideSlide == YES)
+//        {
+//            UIImageView *cropImageView = [[UIImageView alloc] initWithFrame:temImagFrame];
+//            cropImageView.image = printScreen;
+//            cropImageView.contentMode = UIViewContentModeScaleAspectFit;
+//            
+//            //CGPoint center  = [self.view convertPoint:self.view.center fromView:parent.superview];
+//            
+//            CGFloat y = (CGRectGetMaxY(temImagFrame) - CGRectGetMinY(temImagFrame)) / 2;
+//            
+//            CGRect cropframe = CGRectMake(0, y - (wideBoxHeight / 2), temImagFrame.size.width, wideBoxHeight);
+//            
+//            UIImage *image = [self croppedImage:printScreen withImageView:cropImageView WithFrame:cropframe];
+//            
+//            printScreen = image;
+//            
+//            NSLog(@"cropped");
+//        }
+//        
+//        [self.delegate comicMakingViewControllerWithEditingDone:self
+//                                                  withImageView:imgvComic
+//                                                withPrintScreen:printScreen
+//                                                   withNewSlide:isNewSlide
+//                                                    withPopView:YES withIsWideSlide:isWideSlide];
+//    }];
     
 }
 
