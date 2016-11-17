@@ -57,6 +57,7 @@
 // Morethan 4 Slides
 @property (weak, nonatomic) IBOutlet UIView *viewComicBook;
 
+
 @property (strong, nonatomic) NSArray *slides;
 
 // New ComicImage Layout
@@ -67,6 +68,8 @@
 @property (nonatomic) CGFloat totalHeight;
 @property (nonatomic) CGFloat paddingX;
 @property (nonatomic) CGFloat paddingY;
+
+@property (nonatomic) NSInteger borderWidth;
 
 @end
 
@@ -79,7 +82,7 @@
 @synthesize imgv4Slide1, imgv4Slide2, imgv4Slide3, imgv4Slide4;
 @synthesize viewComicBook;
 @synthesize constWidth4Slides, constHeight4Slides;
-@synthesize constWidth1Slide, constHeight1Slide, comicImages, viewSlides, paddingX,paddingY, totalHeight;
+@synthesize constWidth1Slide, constHeight1Slide, comicImages, viewSlides, paddingX,paddingY, totalHeight, borderWidth;
 
 - (void)viewDidLoad
 {
@@ -114,6 +117,7 @@
        
         paddingX = 8;
         paddingY = 6;
+        borderWidth = 2;
         // Do whatever nonsense you'd like to do in init.
     }
     return self;
@@ -187,10 +191,14 @@
  
     self.viewSlides.frame = CGRectMake(paddingX,0,self.currentSlideFrame.size.width + paddingX,totalHeight + paddingY);
     
+    self.bookBackground = [[UIImageView  alloc] initWithFrame:CGRectMake(0, 0, self.currentSlideFrame.size.width + paddingX + paddingX + paddingX + 10, totalHeight + paddingY + paddingY + paddingY + paddingY / 3 + paddingY / 2)];
+    
+    self.bookBackground.image = [UIImage imageNamed:@"3slideImageBackground"];
+    
     self.viewWhiteBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.viewSlides.frame) + paddingX + paddingX, totalHeight + paddingY);
     
-    self.viewSlides.backgroundColor = [UIColor whiteColor];
     
+    [self.viewWhiteBorder addSubview:self.bookBackground];
     [self.viewWhiteBorder addSubview:self.viewSlides];
     
     self.viewWhiteBorder.backgroundColor = [UIColor whiteColor];
@@ -202,9 +210,8 @@
     self.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(viewFrame));
     
     self.viewWhiteBorder.center = self.view.center;
-    self.viewWhiteBorder.tag = 11111;
     
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor clearColor];
     
     [self.delegate didFrameChange:self withFrame:self.viewWhiteBorder.frame];
 }
@@ -313,6 +320,10 @@
     self.currentSlideFrame = CGRectMake(self.currentSlideFrame.origin.x,
                                         (self.currentSlideFrame.origin.y + wideSlideSize.height + paddingY),
                                         wideSlideSize.width, wideSlideSize.height);
+    
+    imgView.layer.borderColor = [UIColor blackColor].CGColor;
+    imgView.layer.borderWidth = borderWidth;
+    
     return imgView;
 }
 
@@ -321,7 +332,7 @@
     UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(self.currentSlideFrame.origin.x,
                                                                          self.currentSlideFrame.origin.y + paddingY,
                                                                          normalSlideSize_big.width, normalSlideSize_big.height)];
-    imgView.image =imgWideSilde;
+    imgView.image = imgWideSilde;
     
     totalHeight = totalHeight + normalSlideSize_big.height + paddingY;
 
@@ -329,6 +340,9 @@
     self.currentSlideFrame = CGRectMake(self.currentSlideFrame.origin.x,
                                         (self.currentSlideFrame.origin.y + normalSlideSize_big.height + paddingY),
                                         normalSlideSize_big.width, normalSlideSize_big.height);
+    
+    imgView.layer.borderColor = [UIColor blackColor].CGColor;
+    imgView.layer.borderWidth = borderWidth;
     
     return imgView;
 }
@@ -343,11 +357,21 @@
     
     UIImageView* imgView_1 = [[UIImageView alloc] initWithFrame:CGRectMake(0,paddingY,
                                                                            normalSlideSize_small.width, normalSlideSize_small.height)];
-    imgView_1.image =imgWideSilde1;
+    
+    
+    imgView_1.image = imgWideSilde1;
+    
+    imgView_1.layer.borderColor = [UIColor blackColor].CGColor;
+    imgView_1.layer.borderWidth = borderWidth;
+    
     
     UIImageView* imgView_2 = [[UIImageView alloc] initWithFrame:CGRectMake(normalSlideSize_small.width + paddingX,paddingY,
                                                                            normalSlideSize_small.width, normalSlideSize_small.height)];
     imgView_2.image =imgWideSilde2;
+    
+    imgView_2.layer.borderColor = [UIColor blackColor].CGColor;
+    imgView_2.layer.borderWidth = borderWidth;
+    
     
     [viewHolder addSubview:imgView_1];
     [viewHolder addSubview:imgView_2];

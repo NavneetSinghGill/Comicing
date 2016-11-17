@@ -19,7 +19,10 @@
 
 - (void)setupBook;
 
+@property (strong, nonatomic) UIImageView *bookBackground;
 
 @property (nonatomic) BOOL isDelegateCalled;
+
+@property (nonatomic) CGRect scrollViewFrame;
 
 @end
