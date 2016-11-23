@@ -87,6 +87,8 @@ static CGRect CaptionTextViewMinRect;
 //    CGRect temChatButtonFrame;
 //    CGRect temUploadButtonFrame;
     //END//
+    
+    CGRect comicImageFrame;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *viewCamera;
@@ -256,6 +258,8 @@ static CGRect CaptionTextViewMinRect;
             [self.view addSubview:instView];
         }
     });
+    
+    comicImageFrame = self.imgvComic.frame;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -2599,6 +2603,7 @@ static CGRect CaptionTextViewMinRect;
     }
 }
 
+CGFloat diffX,diffY;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
@@ -2627,10 +2632,14 @@ static CGRect CaptionTextViewMinRect;
         CGFloat speedWidth = speed * 2.4;
         CGFloat speedHeight = speed * 4.0;
         
+        NSLog(@"speed :  %f",speed);
+        
         CGRect comicFrame = CGRectMake(CGRectGetMinX(self.ImgvComic2.frame) + speedX,
                                        CGRectGetMinY(self.ImgvComic2.frame) + speedY ,
                                        CGRectGetWidth(self.ImgvComic2.frame) - speedWidth,
                                        CGRectGetHeight(self.ImgvComic2.frame) - speedHeight);
+        
+        comicImageFrame = self.imgvComic.frame;
         
         if (comicFrame.size.height > [self getGlideItemHight])
         {
@@ -2643,24 +2652,26 @@ static CGRect CaptionTextViewMinRect;
             imgvComic.frame = self.ImgvComic2.frame;
            
             
+//            diffX = imgvComic.frame.origin.x - comicImageFrame.origin.x;
+//            diffY = imgvComic.frame.origin.y - comicImageFrame.origin.y;
             
-            [self shrinkAnimatedImages:speed speedY:speedY speedWidth:speedWidth speedHeight:speedHeight];
-            CGFloat diffX,diffY;
-            if (IS_IPHONE_5)
-            {
-                diffX = 3.3f;
-                diffY = 1.08f;
-            }
-            else if (IS_IPHONE_6)
-            {
-                diffX = 3.1f;
-                diffY = 1.05f;
-            }
-            else if (IS_IPHONE_6P)
-            {
-                diffX = 3.3f;
-                diffY = 1.15f;
-            }
+            [self shrinkAnimatedImages:speedX speedY:speedY speedWidth:speedWidth speedHeight:speedHeight];
+//            CGFloat diffX,diffY;
+//            if (IS_IPHONE_5)
+//            {
+//                diffX = 3.3f;
+//                diffY = 1.08f;
+//            }
+//            else if (IS_IPHONE_6)
+//            {
+//                diffX = 3.1f;
+//                diffY = 1.05f;
+//            }
+//            else if (IS_IPHONE_6P)
+//            {
+//                diffX = 3.3f;
+//                diffY = 1.15f;
+//            }
             
            // [self shrinkAnimatedImages:(speedX/diffX) speedY:(speedY*diffY) speedWidth:(speedWidth/3) speedHeight:(speedHeight/3)];
         }
@@ -2678,41 +2689,44 @@ static CGRect CaptionTextViewMinRect;
     for (UIView* subview in [self.view subviews]) {
         if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
             
-//            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) - speedX,
-//                                               CGRectGetMinY(subview.frame) - speedY,
-//                                               CGRectGetWidth(subview.frame)- speedX,
-//                                               CGRectGetHeight(subview.frame)-speedY);
+            float ratioX = comicImageFrame.size.width / imgvComic.frame.size.width;
+            float ratioY = comicImageFrame.size.height / imgvComic.frame.size.height;
             
-            CGFloat multiplerX,multiplery;
-            /*if (subview.center.x>self.view.center.x  && subview.center.y>self.view.center.y)
-            {
-                multiplerX = (self.view.center.x-subview.center.x)/3;
-                multiplery = (self.view.center.y-subview.center.y)/3;
-            }
-            else if (subview.center.x<self.view.center.x  && subview.center.y>self.view.center.y)
-            {
-                multiplerX = (self.view.center.x-subview.center.x)/3;
-                multiplery = (self.view.center.y-subview.center.y)/3;
-                multiplerX = 1;
-                multiplery = -1;
-            }
-            else if (subview.center.x<self.view.center.x  && subview.center.y<self.view.center.y)
-            {
-                multiplerX = 1;
-                multiplery = 1;
-            }
-            else if (subview.center.x>self.view.center.x  && subview.center.y<self.view.center.y)
-            {
-                multiplerX = -1;
-                multiplery = 1;
-            }*/
+//            ratioX = 1.000178;
+//            ratioY = 1.000167;
+            
+//            NSLog(@"comicImageFrame %@",NSStringFromCGRect(imgvComic.frame));
+            
+            float newX = subview.frame.origin.x + ratioX;
+            float newY = subview.frame.origin.y + ratioY;
+            
+            float newWidth = subview.frame.size.width / ratioX;
+            float newHeight = subview.frame.size.height / ratioY;
+            
+//            subview.frame = CGRectMake(newX, newY, newWidth, newHeight);
+            
+            
+//            CGFloat multiplerX,multiplery;
             speedWidth = (subview.frame.size.width*speedWidth)/imgvComic.frame.size.width;
             speedHeight = (subview.frame.size.height*speedHeight)/imgvComic.frame.size.height;
-
+            
+            /*
+//            speedX = (speedX * subview.frame.origin.x)/imgvComic.frame.origin.x;
+//            speedY = (speedY * subview.frame.origin.y)/imgvComic.frame.origin.y;
+            `
+//            speedX =  self.view.frame.origin.x - imgvComic.frame.origin.x;
+//            speedY =  self.view.frame.origin.y - imgvComic.frame.origin.y;
+            
             multiplerX = (self.view.center.x-subview.center.x);
             multiplery = (self.view.center.y-subview.center.y);
-            NSLog(@"multiplerX %f multiplery %f",multiplerX,multiplery);
-
+            
+            int xx = self.view.frame.size.width /imgvComic.frame.size.width;
+            int yy = self.view.frame.size.height /imgvComic.frame.size.height;
+            
+            
+            xx = subview.frame.origin.x / xx;
+            yy = subview.frame.origin.x / yy;
+            
             if (multiplerX>0) {
                 multiplerX = multiplerX/(0.26*self.ImgvComic2.frame.size.width);
             }
@@ -2728,12 +2742,36 @@ static CGRect CaptionTextViewMinRect;
             {
                 multiplery = multiplery/(0.4*self.ImgvComic2.frame.size.height);
             }
-       
-            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + speedX*multiplerX ,
-                                       CGRectGetMinY(subview.frame) + speedX*multiplery ,
+            
+            NSLog(@"multiplerX %f multiplery %f",multiplerX,multiplery);
+
+//            subview.frame = CGRectMake((CGRectGetMinX(subview.frame) + speedX) -  (CGRectGetWidth(subview.frame) -  speedWidth),
+//                                       (CGRectGetMinY(subview.frame) - speedY) - (CGRectGetHeight(subview.frame) - speedHeight),
+//                                       CGRectGetWidth(subview.frame) -  speedWidth,
+//                                       CGRectGetHeight(subview.frame) - speedHeight);
+            
+//            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + speedX*multiplerX ,
+//                                       CGRectGetMinY(subview.frame) + speedY*multiplery ,
+//                                       CGRectGetWidth(subview.frame) -  speedWidth,
+//                                       CGRectGetHeight(subview.frame) - speedHeight);
+            
+//            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + speedX ,
+//                                       CGRectGetMinY(subview.frame) - speedY,
+//                                       CGRectGetWidth(subview.frame) -  speedWidth,
+//                                       CGRectGetHeight(subview.frame) - speedHeight);
+
+            subview.frame = CGRectMake(xx,
+                                       yy ,
                                        CGRectGetWidth(subview.frame) -  speedWidth,
                                        CGRectGetHeight(subview.frame) - speedHeight);
             
+            NSLog(@"X value :%d  Y Value %d", xx,yy);
+            */
+            
+            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + (speedX - 0.2),
+                                       CGRectGetMinY(subview.frame) + speedY,
+                                       CGRectGetWidth(subview.frame) -  speedWidth,
+                                       CGRectGetHeight(subview.frame) - speedHeight);
             
         }
     }
