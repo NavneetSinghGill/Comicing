@@ -95,17 +95,23 @@ NSString * const BottomBarView = @"BottomBarView";
 @property (nonatomic, strong) NSArray *iOSAccounts;
 @property (nonatomic, strong) accountChooserBlock_t accountChooserBlock;
 
+
+@property (strong, nonatomic) NSMutableArray *allCellFrameHeight;
+
 @property BOOL isAPICalling;
 
 @end
 
 @implementation MainPageVC
 @synthesize modelController = _modelController;
-@synthesize currentPoint,keyboardHeight, ComicBookDict, mainLoader, isAPICalling;
+@synthesize currentPoint,keyboardHeight, ComicBookDict, mainLoader, isAPICalling, allCellFrameHeight;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    allCellFrameHeight = [[NSMutableArray alloc] init];
+    
     [self.navigationController setNavigationBarHidden:YES];
 //    [self addNotifications];
     
@@ -1589,7 +1595,6 @@ NSString * const BottomBarView = @"BottomBarView";
 {
     ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
     
-    
     static NSString *simpleTableIdentifier = @"comicCell";
     
     __block ComicCell* cell= (ComicCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -1630,13 +1635,17 @@ NSString * const BottomBarView = @"BottomBarView";
         // New Code - Adnan
         [cell layoutIfNeeded];
         
-        NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
-        [slidesArray addObjectsFromArray:comicBook.slides];
+//        NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+//        [slidesArray addObjectsFromArray:comicBook.slides];
         
         [cell.viewComicBook layoutIfNeeded];
         [cell.viewComicCointainer layoutIfNeeded];
         
-        ComicPageViewController *viewPreviewScrollSlide = [[ComicPageViewController alloc] init];
+        
+        ComicBookVC *comic = [self.storyboard instantiateViewControllerWithIdentifier:@"ComicBookVC"];
+        
+        comic.delegate=self;
+        comic.Tag=(int)indexPath.row;
         
         CGFloat width = ComicWidthIPhone5;
         
@@ -1647,30 +1656,56 @@ NSString * const BottomBarView = @"BottomBarView";
         else if (IS_IPHONE_6)
         {
             width = ComicWidthIPhone6;
-
+            
         }
         else if (IS_IPHONE_6P)
         {
             width = ComicWidthIPhone6plus;
         }
         
+         comic.view.frame = CGRectMake(0, 0, width, CGRectGetHeight(cell.viewComicBook.frame));
+        
+      //  comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(container.frame), CGRectGetHeight(container.frame));
+        
+        //            [comic setImages: [self setupImages:indexPath]];
+        
+        ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+        // vishnu
+        NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+        [slidesArray addObjectsFromArray:comicBook.slides];
+        
+        // To repeat the cover image again on index page as the first slide.
+        if(slidesArray.count > 1) {
+            [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+            
+            // Adding a sample slide to array to maintain the logic
+            Slides *slides = [Slides new];
+            [slidesArray insertObject:slides atIndex:1];
+            
+            // vishnuvardhan logic for the second page
+            if(6<slidesArray.count) {
+                [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+            }
+        }
+        [comic setSlidesArray:slidesArray];
+        [comic setAllSlideImages:slidesArray];
+        [comic setupBook];
+        [self addChildViewController:comic];
+        [ comic.view setTranslatesAutoresizingMaskIntoConstraints:YES];
+        //[self setBoundary:0 :0 toView:container addView:comic.view];
+        
+        [ComicBookDict setObject:comic forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         
         
-        
-        
-        viewPreviewScrollSlide.view.frame = CGRectMake(0, 0, width, CGRectGetHeight(cell.viewComicBook.frame));
-        
-        viewPreviewScrollSlide.allSlideImages = slidesArray;
-        [viewPreviewScrollSlide setupBook];
-        
-        
-             
-        [cell.viewComicBook addSubview:viewPreviewScrollSlide.view];
-        
-        CGRect frame = viewPreviewScrollSlide.view.frame;
+        CGRect frame = comic.view.frame;
         frame.origin.y = 0;
-//        frame.size.width = CGRectGetWidth(cell.viewComicBook.frame);
-        viewPreviewScrollSlide.view.frame = frame;
+        frame.size.width = width;
+        
+        comic.view.frame = frame;
+
+       // comic.pageViewController.view.frame = CGRectMake(0, 0, 0, 0);
+        
+        [cell.viewComicBook addSubview:comic.view];
         
         //buttons events
         cell.btnBubble.tag = indexPath.row;
@@ -1687,26 +1722,56 @@ NSString * const BottomBarView = @"BottomBarView";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+//    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+//    
+//    NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+//    [slidesArray addObjectsFromArray:comicBook.slides];
+//    
+//    ComicPageViewController *viewPreviewScrollSlide = [[ComicPageViewController alloc] init];
+//    viewPreviewScrollSlide.view.frame = CGRectMake(0, 0, 0, 0);
+//    
+//    viewPreviewScrollSlide.allSlideImages = slidesArray;
+//    [viewPreviewScrollSlide setupBook];
+//    
+//    viewPreviewScrollSlide.view.backgroundColor = [UIColor blueColor];
+// 
+//    if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+//    {
+//        return viewPreviewScrollSlide.view.bounds.size.height + 20;
+//    }
+//    else
+//    {
+//        return viewPreviewScrollSlide.view.bounds.size.height + 60 + 20;
+//    }
+//    
     
-    NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
-    [slidesArray addObjectsFromArray:comicBook.slides];
     
-    ComicPageViewController *viewPreviewScrollSlide = [[ComicPageViewController alloc] init];
-    viewPreviewScrollSlide.view.frame = CGRectMake(0, 0, 0, 0);
     
-    viewPreviewScrollSlide.allSlideImages = slidesArray;
-    [viewPreviewScrollSlide setupBook];
     
-    viewPreviewScrollSlide.view.backgroundColor = [UIColor blueColor];
- 
-    if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+    // ****************************
+    
+    if (allCellFrameHeight.count == 0 || allCellFrameHeight == nil)
     {
-        return viewPreviewScrollSlide.view.bounds.size.height + 20;
+        return [self getHeightForCell:indexPath];
+    }
+    else if (allCellFrameHeight.count > 0)
+    {
+       // id height =  allCellFrameHeight[indexPath.row];
+        
+        if (allCellFrameHeight.count > indexPath.row + 1)
+        {
+            id height =  allCellFrameHeight[indexPath.row];
+            
+            return [height floatValue];
+        }
+        else
+        {
+            return [self getHeightForCell:indexPath];
+        }
     }
     else
     {
-        return viewPreviewScrollSlide.view.bounds.size.height + 60 + 20;
+        return [self getHeightForCell:indexPath];
     }
 }
 
@@ -1757,6 +1822,87 @@ NSString * const BottomBarView = @"BottomBarView";
 //        self.viewTransperant.alpha = 1-value/4;
 //    }
 //}
+
+
+#pragma mark - HELPER Methods
+
+- (CGFloat)getHeightForCell:(NSIndexPath *)indexPath
+{
+    ComicBookVC*comic=[self.storyboard instantiateViewControllerWithIdentifier:@"ComicBookVC"];
+    
+    comic.delegate=self;
+    comic.Tag=(int)indexPath.row;
+    
+    CGFloat width = ComicWidthIPhone5;
+    
+    if (IS_IPHONE_5)
+    {
+        width = ComicWidthIPhone5;
+    }
+    else if (IS_IPHONE_6)
+    {
+        width = ComicWidthIPhone6;
+        
+    }
+    else if (IS_IPHONE_6P)
+    {
+        width = ComicWidthIPhone6plus;
+    }
+    
+    comic.view.frame = CGRectMake(0, 0, width, 0);
+    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+    // vishnu
+    NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+    [slidesArray addObjectsFromArray:comicBook.slides];
+    
+    // To repeat the cover image again on index page as the first slide.
+    if(slidesArray.count > 1) {
+        [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+        
+        // Adding a sample slide to array to maintain the logic
+        Slides *slides = [Slides new];
+        [slidesArray insertObject:slides atIndex:1];
+        
+        // vishnuvardhan logic for the second page
+        if(6<slidesArray.count) {
+            [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+        }
+    }
+    [comic setSlidesArray:slidesArray];
+    [comic setAllSlideImages:slidesArray];
+    [comic setupBook];
+    [self addChildViewController:comic];
+    [ comic.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    //[self setBoundary:0 :0 toView:container addView:comic.view];
+    
+    
+    
+    
+    CGRect frame = comic.view.frame;
+    frame.origin.y = 0;
+    //        frame.size.width = CGRectGetWidth(cell.viewComicBook.frame);
+    comic.view.frame = frame;
+    
+    
+    if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+    {
+        double cellHeight = comic.view.bounds.size.height + 20;
+        
+        [allCellFrameHeight addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+        
+        return cellHeight;
+    }
+    else
+    {
+        double cellHeight = comic.view.bounds.size.height + 60 + 20;
+        
+        [allCellFrameHeight addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+        
+        return cellHeight;
+    }
+
+}
+
 
 #pragma mark - share button events
 - (void)btnFacebookTap:(UIButton *)sender

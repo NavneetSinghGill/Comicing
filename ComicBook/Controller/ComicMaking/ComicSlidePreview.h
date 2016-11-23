@@ -22,6 +22,7 @@
 
 @property (nonatomic, assign) id<ComicSlidePreviewDelegate> delegate;
 @property (nonatomic, strong) UIView *viewWhiteBorder;
+@property (strong, nonatomic) UIImageView *bookBackground;
 
 -(id)initWithFrame:(CGRect)frame;
 - (void)setupComicSlidePreview:(NSArray *)slides;

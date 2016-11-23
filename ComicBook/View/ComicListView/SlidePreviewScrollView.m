@@ -13,7 +13,7 @@
 {
     NSMutableArray *viewControllers;
 }
-@synthesize allSlideImages, isDelegateCalled;
+@synthesize allSlideImages, isDelegateCalled, scrollViewFrame;
 
 
 -(void)viewDidLoad
@@ -59,7 +59,7 @@
         [viewControllers removeAllObjects];
     }
     
-    if ([slides count] >4)
+    if ([slides count] > 4)
     {
         NSArray* firstArray = [slides subarrayWithRange:NSMakeRange(0, 4)];
         NSArray* secondArray = [slides subarrayWithRange:NSMakeRange(4, [slides count]-4)];
@@ -72,8 +72,11 @@
        [viewControllers addObject:[self addPreviewView:slides]];
     }
     
+    
+    
     [self setPageViewControllerFrame];
     [self centreWhiteView];
+    
 }
 
 #pragma mark method
@@ -153,9 +156,6 @@
 {
 //    view.view.center = self.view.center;
     
-    self.view.backgroundColor = [UIColor redColor];
-
-    
     if(allSlideImages.count > 4)
     {
         if (frame.size.height > self.view.frame.size.height)
@@ -196,16 +196,16 @@
     //self.view.frame = viewFrame;
     
     // Added by Ramesh, adding center to main view
-    float superviewY = [UIApplication sharedApplication].keyWindow.frame.size.height/2;
-    float viewY = viewFrame.size.height/2;
-    float centerY = superviewY - viewY;
+    //float superviewY = [UIApplication sharedApplication].keyWindow.frame.size.height/2;
+//    float superviewY = scrollViewFrame.size.height / 2;
+//    float viewY = viewFrame.size.height/2;
+//    float centerY = superviewY - viewY;
     
     CGRect viewRect = viewFrame;
-    viewRect.origin.y = centerY;
+    viewRect.origin.y = 0;
     viewFrame = viewRect;
     self.view.frame = viewFrame;
 }
-
 
 - (void)setPageViewControllerFrame
 {
@@ -228,12 +228,14 @@
                 //self.view.frame = viewFrame;
                 
                 // Added by Ramesh, adding center to main view
-                float superviewY = [UIApplication sharedApplication].keyWindow.frame.size.height/2;
-                float viewY = viewFrame.size.height/2;
-                float centerY = superviewY - viewY;
+                //float superviewY = [UIApplication sharedApplication].keyWindow.frame.size.height/2;
+                
+//                float superviewY = scrollViewFrame.size.height / 2;
+//                float viewY = viewFrame.size.height/2;
+//                float centerY = superviewY - viewY;
                 
                 CGRect viewRect = viewFrame;
-                viewRect.origin.y = centerY;
+                viewRect.origin.y = 0;
                 viewFrame = viewRect;
                 self.view.frame = viewFrame;
                 
@@ -242,7 +244,6 @@
         }
     }
 }
-
 
 - (void)centreWhiteView
 {
@@ -258,7 +259,20 @@
             
             frame.origin.y = y;
             comicSlide.viewWhiteBorder.frame = frame;
-
+        }
+    }
+    
+    // hide bookbackground of second viewcontrollers
+    
+    if (viewControllers.count >= 2)
+    {
+        id controller = viewControllers[1];
+        
+        if ([controller isKindOfClass:[ComicSlidePreview class]])
+        {
+            ComicSlidePreview *comicSlide = (ComicSlidePreview *)controller;
+            
+            comicSlide.bookBackground.hidden = YES;
         }
     }
 }

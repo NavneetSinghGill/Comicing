@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="Gtw-pU-Kh0">
+=======
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="Gtw-pU-Kh0">
+>>>>>>> origin/Dev
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -22,22 +27,31 @@
             <objects>
                 <viewController storyboardIdentifier="RowButtonsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8kh-jg-H0q" customClass="RowButtonsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oi7-Dp-FBu">
+<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="J0c-GN-bCl">
                                 <frame key="frameInset" minX="0.0%" minY="-8.45%" width="13.60%" height="108.45%"/>
+=======
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="J0c-GN-bCl">
+                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="13.87%" height="100.00%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="blackboard-icon"/>
-                                <connections>
-                                    <action selector="btnBlackboardTap:" destination="8kh-jg-H0q" eventType="touchUpInside" id="3Kc-6m-UHp"/>
-                                    <action selector="buttonTouchDown:" destination="8kh-jg-H0q" eventType="touchDown" id="j6y-ox-Zw3"/>
-                                    <action selector="buttonTouchUpOutside:" destination="8kh-jg-H0q" eventType="touchUpOutside" id="IiL-yu-CcL"/>
-                                </connections>
                             </button>
+<<<<<<< HEAD
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rxT-P3-3F9">
                                 <frame key="frameInset" minX="13.60%" minY="-2.82%" width="12.27%" height="108.45%"/>
+=======
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rxT-P3-3F9">
+                                <frame key="frameInset" minX="89.33%" minY="33.33%" width="10.67%" height="33.33%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="12" minY="5" maxX="12" maxY="5"/>
                                 <state key="normal" image="T-icon"/>
                                 <connections>
                                     <action selector="btnTextTap:" destination="8kh-jg-H0q" eventType="touchUpInside" id="h1y-e4-s6p"/>
@@ -45,9 +59,15 @@
                                     <action selector="buttonTouchUpOutside:" destination="8kh-jg-H0q" eventType="touchUpOutside" id="63G-SH-ZCr"/>
                                 </connections>
                             </button>
+<<<<<<< HEAD
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TPM-oq-nDm">
                                 <frame key="frameInset" minX="26.13%" minY="0.0%" width="12.53%" height="100.00%"/>
+=======
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TPM-oq-nDm">
+                                <frame key="frameInset" minX="2.00%" minY="52.50%" width="13.33%" height="41.67%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="8" minY="10" maxX="8" maxY="10"/>
                                 <state key="normal" image="!-icon"/>
                                 <connections>
                                     <action selector="btnExclamationTap:" destination="8kh-jg-H0q" eventType="touchUpInside" id="Nld-ow-qTV"/>
@@ -55,9 +75,15 @@
                                     <action selector="buttonTouchUpOutside:" destination="8kh-jg-H0q" eventType="touchUpOutside" id="PH0-L2-ClE"/>
                                 </connections>
                             </button>
+<<<<<<< HEAD
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6YO-hW-QH7">
                                 <frame key="frameInset" minX="58.67%" minY="0.0%" width="12.80%" height="100.00%"/>
+=======
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6YO-hW-QH7">
+                                <frame key="frameInset" minX="73.07%" minY="52.50%" width="13.33%" height="41.67%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="3" minY="8" maxX="3" maxY="8"/>
                                 <state key="normal" image="bubble-icon"/>
                                 <connections>
                                     <action selector="btnBubbleTap:" destination="8kh-jg-H0q" eventType="touchUpInside" id="hXR-wK-mNj"/>
@@ -65,9 +91,15 @@
                                     <action selector="buttonTouchUpOutside:" destination="8kh-jg-H0q" eventType="touchUpOutside" id="X7L-J6-cVT"/>
                                 </connections>
                             </button>
+<<<<<<< HEAD
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gm0-68-nyq">
                                 <frame key="frameInset" minX="73.07%" minY="1.41%" width="12.80%" height="90.14%"/>
+=======
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gm0-68-nyq">
+                                <frame key="frameInset" minX="89.33%" minY="66.67%" width="10.67%" height="33.33%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="10" minY="8" maxX="10" maxY="8"/>
                                 <state key="normal" image="pen-icon"/>
                                 <connections>
                                     <action selector="btnPenTap:" destination="8kh-jg-H0q" eventType="touchUpInside" id="IfW-N3-2dg"/>
@@ -75,9 +107,15 @@
                                     <action selector="buttonTouchUpOutside:" destination="8kh-jg-H0q" eventType="touchUpOutside" id="T78-e1-83a"/>
                                 </connections>
                             </button>
+<<<<<<< HEAD
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="faN-nY-Xpn">
                                 <frame key="frameInset" minX="85.87%" minY="1.41%" width="14.13%" height="98.59%"/>
+=======
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="faN-nY-Xpn">
+                                <frame key="frameInset" minX="89.33%" minY="0.0%" width="10.67%" height="33.33%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                 <state key="normal" image="sticker-icon"/>
                                 <connections>
                                     <action selector="btnStickerTap:" destination="8kh-jg-H0q" eventType="touchUpInside" id="jQJ-2e-2ee"/>
@@ -85,8 +123,13 @@
                                     <action selector="buttonTouchUpOutside:" destination="8kh-jg-H0q" eventType="touchUpOutside" id="jsz-hO-TSs"/>
                                 </connections>
                             </button>
+<<<<<<< HEAD
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xEu-Ba-6Qt">
                                 <frame key="frameInset" minX="42.40%" minY="-2.82%" width="14.67%" height="102.82%"/>
+=======
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xEu-Ba-6Qt">
+                                <frame key="frameInset" minX="42.40%" minY="47.92%" width="16.00%" height="50.00%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="camera-ON"/>
                                 <state key="selected" image="camera-OFF"/>
@@ -100,7 +143,6 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <outlet property="btnBlackboard" destination="J0c-GN-bCl" id="kRr-mW-ah0"/>
                         <outlet property="btnBubble" destination="6YO-hW-QH7" id="Tfg-Wj-iBT"/>
                         <outlet property="btnCamera" destination="xEu-Ba-6Qt" id="N2o-hG-gVA"/>
                         <outlet property="btnExclamation" destination="TPM-oq-nDm" id="F45-iE-sei"/>
@@ -111,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KOk-5f-B9D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-212" y="695"/>
+            <point key="canvasLocation" x="-423.5" y="665"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GMc-LK-1S2">
@@ -151,12 +193,20 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="T1K-d9-SYT">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="43.73%" minY="93.70%" width="11.73%" height="7.05%"/>
+=======
+                                <frame key="frameInset" minX="43.73%" minY="93.93%" width="12.13%" height="7.05%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="up"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JYf-47-56z">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="87.47%" minY="92.65%" width="12.53%" height="7.35%"/>
+=======
+                                <frame key="frameInset" minX="87.47%" minY="92.88%" width="12.53%" height="7.12%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="forward"/>
                                 <connections>
@@ -174,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ged-en-b5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-212" y="212"/>
+            <point key="canvasLocation" x="760" y="227"/>
         </scene>
         <!--Comic Making View Controller-->
         <scene sceneID="Cmj-sd-DE5">
@@ -185,12 +235,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="n6h-10-xPa">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.80%" minY="1.20%" width="97.87%" height="97.75%"/>
+=======
+                                <frame key="frameInset" minX="1.20%" minY="1.20%" width="97.47%" height="97.75%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="cb1-aT-3H3">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.80%" minY="1.20%" width="97.87%" height="97.75%"/>
+=======
+                                <frame key="frameInset" minX="1.20%" minY="1.20%" width="97.47%" height="97.75%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
@@ -204,7 +262,11 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="T9l-x1-I2M">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="82.40%" minY="1.68%" width="13.07%" height="8.10%"/>
+=======
+                                        <frame key="frameInset" minX="82.40%" minY="1.68%" width="13.47%" height="8.33%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="camera-reverse"/>
                                         <connections>
@@ -215,7 +277,11 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="kub-pR-LyG" userLabel="Bubble List View">
+<<<<<<< HEAD
                                 <frame key="frameInset" height="13.72%" maxY="40"/>
+=======
+                                <frame key="frameInset" height="13.64%" maxY="40"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" id="2yX-Va-hQT">
@@ -226,7 +292,11 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="Dj9-uN-iwq" userLabel="Exclamation List View">
+<<<<<<< HEAD
                                 <frame key="frameInset" height="25.84%" maxY="40"/>
+=======
+                                <frame key="frameInset" height="21.21%" maxY="40"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" id="Jz7-3n-2Yi">
@@ -237,7 +307,11 @@
                                         </connections>
                                     </containerView>
                                 </subviews>
+<<<<<<< HEAD
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+=======
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+>>>>>>> origin/Dev
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" id="8SD-8B-ddB">
                                 <frame key="frameInset" minY="254" width="66" height="60"/>
@@ -258,7 +332,11 @@
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.78039215689999997" blue="0.1058823529" alpha="0.70183171450000004" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="8DS-UF-ipQ" userLabel="StickerList View">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="79.91%" width="100.00%" height="12.74%"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="80.14%" width="100.00%" height="12.74%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" id="VbY-Yn-dPT">
@@ -268,8 +346,13 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+<<<<<<< HEAD
                             <view contentMode="scaleToFill" id="w4A-kj-dhW" userLabel="Row Buttons">
                                 <frame key="frameInset" minX="0.0%" minY="82.01%" width="100.00%" height="10.64%"/>
+=======
+                            <view contentMode="scaleToFill" misplaced="YES" id="w4A-kj-dhW" userLabel="Row Buttons">
+                                <frame key="frameInset" minX="0.0%" minY="74.51%" width="100.00%" height="17.99%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" id="dNh-GO-R0c">
@@ -312,7 +395,11 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="y2i-qr-Hr2">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="92.65%" width="11.73%" height="7.35%"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="92.88%" width="12.13%" height="7.12%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="upload"/>
                                 <connections>
@@ -320,12 +407,20 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Lmm-ei-kpX">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="43.73%" minY="93.70%" width="11.73%" height="7.05%"/>
+=======
+                                <frame key="frameInset" minX="43.73%" minY="93.93%" width="12.13%" height="7.05%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="up"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VJ3-52-k7o">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="87.47%" minY="92.65%" width="12.53%" height="7.35%"/>
+=======
+                                <frame key="frameInset" minX="87.47%" minY="92.88%" width="12.53%" height="7.12%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="forward"/>
                                 <connections>
@@ -333,19 +428,36 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bum-CF-q3f">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="92.65%" width="11.73%" height="7.35%"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="92.88%" width="12.13%" height="7.12%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="sticker-sharing-icon"/>
                                 <connections>
                                     <segue destination="zWT-dW-Mua" kind="push" id="d0d-zf-SBK"/>
                                 </connections>
                             </button>
+<<<<<<< HEAD
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1cE-LZ-1bH">
                                 <frame key="frameInset" minX="0.0%" minY="2.40%" width="13.33%" height="6.90%"/>
+=======
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1cE-LZ-1bH">
+                                <frame key="frameInset" minX="84.00%" minY="2.55%" width="13.33%" height="7.05%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="xbutton"/>
                                 <connections>
                                     <action selector="closeCamera:" destination="aEe-Ef-L5w" eventType="touchUpInside" id="H2U-FT-5qS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2oG-jX-y4B">
+                                <frame key="frameInset" minX="5" minY="17" width="50" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="close-comic"/>
+                                <connections>
+                                    <action selector="btnCloseComicTap:" destination="aEe-Ef-L5w" eventType="touchUpInside" id="79y-oJ-nBg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="u9N-TS-FJA">
@@ -363,6 +475,7 @@
                     <connections>
                         <outlet property="ImgvComic2" destination="n6h-10-xPa" id="KIT-bo-66f"/>
                         <outlet property="btnClose" destination="1cE-LZ-1bH" id="VZ5-i8-fFl"/>
+                        <outlet property="btnCloseComic" destination="2oG-jX-y4B" id="Q6W-tO-xJe"/>
                         <outlet property="btnRecord" destination="MG4-QG-nxH" id="3DJ-tY-T44"/>
                         <outlet property="btnSend" destination="VJ3-52-k7o" id="az1-n9-2GJ"/>
                         <outlet property="bubbleContainerView" destination="2yX-Va-hQT" id="P2h-SS-H7K"/>
@@ -384,7 +497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeJ-n6-zo1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="196" y="224"/>
+            <point key="canvasLocation" x="33" y="780"/>
         </scene>
         <!--Comic Bubble List-->
         <scene sceneID="2P3-ix-rD6">
@@ -483,7 +596,11 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="JCM-PA-Za2">
+<<<<<<< HEAD
                                 <rect key="frame" x="0.0" y="68" width="60" height="60"/>
+=======
+                                <rect key="frame" x="0.0" y="67.5" width="60" height="60"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -513,11 +630,19 @@
             <objects>
                 <viewController storyboardIdentifier="AnimationCollectionVC" id="KLI-vw-W7d" customClass="AnimationCollectionVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IzB-Uz-JQP">
+<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DEf-Rh-fZs">
                                 <frame key="frameInset" minX="10" width="6.03%" height="34.65%" maxY="35"/>
+=======
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="133"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DEf-Rh-fZs">
+                                <frame key="frameInset" minX="10" width="6.03%" height="33.16%" maxY="35"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <state key="normal" image="xbutton"/>
                                 <connections>
@@ -536,7 +661,11 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AnimationsCollectionViewCell" id="K2b-1w-j6X" customClass="AnimationsCollectionViewCell">
+<<<<<<< HEAD
                                         <rect key="frame" x="0.0" y="28.5" width="70" height="61"/>
+=======
+                                        <rect key="frame" x="0.0" y="14" width="70" height="61"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="70" height="61"/>
@@ -545,7 +674,11 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wu4-Ie-w7K">
                                                     <frame key="frameInset" width="70" height="61"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+<<<<<<< HEAD
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+=======
+                                                    <color key="backgroundColor" red="0.96078431369999995" green="0.84705882349999995" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+>>>>>>> origin/Dev
                                                 </imageView>
                                             </subviews>
                                         </view>
@@ -560,7 +693,11 @@
                                 </connections>
                             </collectionView>
                             <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JTP-7d-zbt">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="2.67%" minY="55.56%" width="5.87%" height="42.59%"/>
+=======
+                                <frame key="frameInset" minX="2.80%" minY="55.64%" width="6.13%" height="42.11%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="!-icon"/>
                                 <connections>
@@ -582,7 +719,11 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AnimationCategoryCollectionViewCell" id="orO-uu-W41" customClass="AnimationCategoryCollectionViewCell">
+<<<<<<< HEAD
                                         <rect key="frame" x="0.0" y="0.0" width="31" height="28"/>
+=======
+                                        <rect key="frame" x="0.0" y="15" width="31" height="28"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="31" height="28"/>
@@ -678,7 +819,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NMu-dj-p7o">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="11.73%" width="21.87%" height="14.21%" maxY="90"/>
+=======
+                                <frame key="frameInset" minX="12.13%" width="21.60%" height="14.13%" maxY="90"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="text_icon"/>
@@ -687,7 +832,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JJR-0l-8lN">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="40.53%" width="20.27%" height="13.72%" maxY="91"/>
+=======
+                                <frame key="frameInset" minX="40.53%" width="20.40%" height="13.63%" maxY="91"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="whatsapp_icon"/>
@@ -696,7 +845,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XdS-nN-PUM">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="65.60%" width="24.27%" height="15.84%" maxY="86"/>
+=======
+                                <frame key="frameInset" minX="65.60%" width="24.40%" height="15.75%" maxY="86"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="fb_icon"/>
@@ -771,7 +924,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="PVm-hD-DzG">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="30.44%" minY="75.05%" width="30" height="30"/>
+=======
+                                <frame key="frameInset" minX="32.61%" minY="75.15%" width="30" height="30"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="brown-square-unselected"/>
@@ -781,7 +938,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="m7E-aJ-VvJ">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="30.44%" minY="86.24%" width="30" height="31"/>
+=======
+                                <frame key="frameInset" minX="32.61%" minY="86.24%" width="30" height="31"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="black-square-unselected"/>
@@ -791,7 +952,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Pf0-yu-Ahk">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="30.44%" minY="32.11%" width="30" height="30"/>
+=======
+                                <frame key="frameInset" minX="32.61%" minY="32.11%" width="30" height="30"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="yellow-square-unselected"/>
@@ -801,7 +966,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="R7A-aA-Twd">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="30.44%" minY="21.47%" width="30" height="30"/>
+=======
+                                <frame key="frameInset" minX="32.61%" minY="21.47%" width="30" height="30"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="white-square-unselected"/>
@@ -811,7 +980,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="vaK-09-Pat">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="30.44%" minY="42.94%" width="30" height="30"/>
+=======
+                                <frame key="frameInset" minX="32.61%" minY="42.94%" width="30" height="30"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="green-square-unselected"/>
@@ -821,7 +994,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="f90-Jt-CeW">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="30.44%" minY="53.58%" width="30" height="30"/>
+=======
+                                <frame key="frameInset" minX="32.61%" minY="53.58%" width="30" height="30"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="pink-square-unselected"/>
@@ -831,7 +1008,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="nBm-eA-HJY">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="30.44%" minY="64.41%" width="30" height="30"/>
+=======
+                                <frame key="frameInset" minX="32.61%" minY="64.51%" width="30" height="30"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="blue-square-unselected"/>
@@ -991,7 +1172,11 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <view hidden="YES" contentMode="scaleToFill" id="bqb-N5-KTm" customClass="SignUp">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="31.78%" width="100.00%" height="67.32%"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="31.86%" width="100.00%" height="67.24%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -1001,7 +1186,11 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" id="TNg-yI-ldv" customClass="AccountView">
+<<<<<<< HEAD
                                 <frame key="frameInset" height="76.31%"/>
+=======
+                                <frame key="frameInset" height="76.09%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -1047,11 +1236,19 @@
                                 <color key="backgroundColor" red="0.027450980390000001" green="0.031372549020000001" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="faceSignUp.png" id="KvL-C7-BoL">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="35.73%" minY="16.19%" width="27.20%" height="14.99%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="My ID" minimumFontSize="17" id="sw1-mf-wwE">
                                 <frame key="frameInset" minX="29.60%" minY="35.53%" width="65.60%" height="4.05%"/>
+=======
+                                <frame key="frameInset" minX="36.13%" minY="16.19%" width="27.20%" height="15.22%"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="My ID" minimumFontSize="17" id="sw1-mf-wwE">
+                                <frame key="frameInset" minX="29.60%" minY="35.61%" width="65.60%" height="3.97%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" red="0.14901960780000001" green="0.23921568630000001" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1062,7 +1259,11 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="lzh-pt-9R7">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="25.60%" minY="43.03%" width="69.60%" height="4.20%"/>
+=======
+                                <frame key="frameInset" minX="25.60%" minY="43.10%" width="69.60%" height="4.12%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1078,7 +1279,11 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age" minimumFontSize="17" id="grv-JM-8eU">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="25.60%" minY="58.47%" width="69.60%" height="6.45%"/>
+=======
+                                <frame key="frameInset" minX="25.60%" minY="58.70%" width="69.60%" height="6.45%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1086,7 +1291,11 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your password should be at least 6 characters long" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z8E-RJ-9dO">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="51" minY="75.00%" width="312" height="67"/>
+=======
+                                <frame key="frameInset" minX="51" minY="75.25%" width="312" height="67"/>
+>>>>>>> origin/Dev
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1131,7 +1340,11 @@
                                 <color key="backgroundColor" red="0.027450980390000001" green="0.031372549020000001" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" id="My2-qP-4rm">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="2.40%" minY="37.63%" width="94.67%" height="53.52%"/>
+=======
+                                <frame key="frameInset" minX="2.40%" minY="37.71%" width="95.07%" height="53.52%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1141,7 +1354,11 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eb9-Xr-CGg">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="64.27%" minY="93.25%" width="31.20%" height="5.40%"/>
+=======
+                                <frame key="frameInset" minX="64.67%" minY="93.48%" width="31.20%" height="5.25%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="done-button"/>
                                 <connections>
@@ -1149,6 +1366,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="SbV-qR-vig">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="2.40%" minY="31.03%" width="94.67%" height="6.60%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -1158,6 +1376,17 @@
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dig up friends by name" minimumFontSize="14" clearButtonMode="whileEditing" id="Ldi-g5-MlO">
                                         <frame key="frameInset" minX="14.37%" minY="0.0%" width="85.63%" height="100.00%"/>
+=======
+                                <frame key="frameInset" minX="2.40%" minY="31.03%" width="95.07%" height="6.67%"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchFriends.png" id="qR5-5h-Xoh">
+                                        <frame key="frameInset" minX="2.24%" minY="12.36%" width="6.59%" height="74.16%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dig up friends by name" minimumFontSize="14" clearButtonMode="whileEditing" id="Ldi-g5-MlO">
+                                        <frame key="frameInset" minX="14.73%" minY="0.0%" width="85.27%" height="100.00%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
@@ -1169,23 +1398,39 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite your 6 best friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="54S-tU-YX5">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="2.40%" minY="11.39%" width="94.67%" height="3.60%"/>
+=======
+                                <frame key="frameInset" minX="2.40%" minY="11.39%" width="95.07%" height="3.60%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.1176470588" green="0.31764705879999999" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="S7T-O0-7SF">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="40.53%" minY="19.94%" width="18.40%" height="10.79%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="Ims-Fx-kVn" customClass="FriendsListView">
                                 <frame key="frameInset" minX="2.40%" minY="37.63%" width="94.67%" height="53.52%"/>
+=======
+                                <frame key="frameInset" minX="40.53%" minY="20.17%" width="18.40%" height="10.64%"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" id="Ims-Fx-kVn" customClass="FriendsListView">
+                                <frame key="frameInset" minX="2.40%" minY="37.71%" width="95.07%" height="53.52%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to show your photo comics" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OxL-bc-4iS">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="2.40%" minY="15.14%" width="94.67%" height="3.75%"/>
+=======
+                                <frame key="frameInset" minX="2.40%" minY="15.14%" width="95.07%" height="3.75%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.11764705882352941" green="0.31764705882352939" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1238,6 +1483,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainPageLogo" id="vQF-lP-3aU">
+<<<<<<< HEAD
                                 <frame key="frameInset" minY="12.44%" width="86.27%" height="22.49%" maxX="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -1247,6 +1493,17 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="S5h-Se-6Wa">
                                 <frame key="frameInset" minX="0.0%" minY="65.97%" width="100.00%" height="21.44%"/>
+=======
+                                <frame key="frameInset" minY="12.44%" width="85.82%" height="22.49%" maxX="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainPageLogo_Text" id="YaR-Hk-Cxi">
+                                <frame key="frameInset" minX="12.13%" minY="38.31%" width="75.33%" height="22.26%"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="S5h-Se-6Wa">
+                                <frame key="frameInset" minX="0.0%" minY="65.97%" width="100.00%" height="21.51%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.14901960784313725" green="0.66666666666666663" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNextLTW01-UltraLight" family="AvenirNextLTW01-UltraLight" pointSize="45"/>
@@ -1294,11 +1551,19 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainPageLogo" id="sR1-04-xIX">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="82" minY="48" height="54.60%" maxX="81"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainPageLogo_Text" id="m48-8K-zCR">
                                         <frame key="frameInset" minX="116" minY="66.95%" height="22.75%" maxX="117"/>
+=======
+                                        <frame key="frameInset" minX="82" minY="48" height="54.87%" maxX="81"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainPageLogo_Text" id="m48-8K-zCR">
+                                        <frame key="frameInset" minX="116" minY="67.17%" height="22.53%" maxX="117"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="login" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2lY-kh-8G4">
@@ -1312,7 +1577,11 @@
                                 <color key="backgroundColor" red="0.027450980390000001" green="0.031372549020000001" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="My ID" minimumFontSize="17" id="TXK-dW-gjb">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="16.80%" minY="40.33%" width="71.47%" height="5.25%"/>
+=======
+                                <frame key="frameInset" minX="16.80%" minY="40.41%" width="71.87%" height="5.17%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" red="0.14901960780000001" green="0.23921568630000001" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1323,7 +1592,11 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="h1h-yT-Eqw">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="13.60%" minY="48.88%" width="72.27%" height="5.85%"/>
+=======
+                                <frame key="frameInset" minX="13.73%" minY="48.95%" width="72.13%" height="5.77%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1355,7 +1628,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view tag="909" contentMode="scaleToFill" id="cWT-y5-qcy">
+<<<<<<< HEAD
                                 <frame key="frameInset" minY="-2" height="13.60%"/>
+=======
+                                <frame key="frameInset" minY="-2" height="13.83%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms and Services" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9N4-Px-pKH">
@@ -1413,7 +1690,11 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                     </textField>
                                     <textField autoresizesSubviews="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="O9J-Nl-eJ1">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="14.67%" minY="9.29%" width="65.33%" height="5.40%"/>
+=======
+                                        <frame key="frameInset" minX="14.67%" minY="9.37%" width="65.33%" height="5.40%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1421,7 +1702,11 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
                                     </textField>
                                     <textField autoresizesSubviews="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" id="3Oa-DR-rxu">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="14.67%" minY="18.89%" width="65.33%" height="5.40%"/>
+=======
+                                        <frame key="frameInset" minX="14.67%" minY="18.89%" width="65.33%" height="5.47%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1429,7 +1714,11 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                     </textField>
                                     <textField autoresizesSubviews="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age" minimumFontSize="17" id="S6V-36-GhW">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="14.67%" minY="28.04%" width="65.33%" height="8.55%"/>
+=======
+                                        <frame key="frameInset" minX="14.67%" minY="28.11%" width="65.33%" height="8.55%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1437,12 +1726,20 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="arx-Zl-f0R">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="2.67%" minY="254" width="94.13%" height="41.89%"/>
+=======
+                                        <frame key="frameInset" minX="3.07%" minY="254" width="93.73%" height="42.01%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="SignUpButton_Off"/>
                                     </button>
                                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qbx-vt-55c">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="2.67%" width="97.33%" height="16.01%" maxY="30"/>
+=======
+                                        <frame key="frameInset" minX="3.07%" width="96.93%" height="16.01%" maxY="30"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <string key="text">By Signing up, you agree to
 Comicing </string>
@@ -1451,7 +1748,11 @@ Comicing </string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XBX-A1-YeO">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="29.87%" width="62.13%" height="5.85%" maxY="35"/>
+=======
+                                        <frame key="frameInset" minX="30.27%" width="62.13%" height="5.85%" maxY="35"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="21"/>
                                         <state key="normal" title="Terms and Services"/>
@@ -1491,7 +1792,11 @@ Comicing </string>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QNk-xm-g9Q" userLabel="crop button">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="38.67%" minY="85.16%" width="22.13%" height="13.94%"/>
+=======
+                                <frame key="frameInset" minX="38.67%" minY="85.16%" width="22.53%" height="14.17%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="scissors-icon-white">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1501,7 +1806,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nTI-fM-YIK" userLabel="ok button">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="80.80%" minY="88.46%" width="15.73%" height="7.95%"/>
+=======
+                                <frame key="frameInset" minX="80.93%" minY="88.53%" width="15.60%" height="7.87%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crop-right-icon">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1511,7 +1820,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bdi-SW-ZZ7">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="25.60%" minY="88.46%" width="11.47%" height="7.95%"/>
+=======
+                                <frame key="frameInset" minX="25.60%" minY="88.53%" width="11.87%" height="7.87%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                                 <state key="normal" image="crop-camera-icon">
@@ -1523,7 +1836,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3cs-sS-Slw">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="64.27%" minY="88.46%" width="13.33%" height="7.50%"/>
+=======
+                                <frame key="frameInset" minX="64.27%" minY="88.53%" width="13.73%" height="7.65%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -1535,7 +1852,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AVW-Jp-Uoy">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="82.40%" minY="7.50%" width="13.07%" height="7.65%"/>
+=======
+                                <frame key="frameInset" minX="82.40%" minY="7.50%" width="13.47%" height="7.65%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="camera-reverse"/>
                                 <connections>
@@ -1543,7 +1864,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VQw-y2-psW">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="-1.07%" minY="88.91%" width="12.80%" height="6.45%"/>
+=======
+                                <frame key="frameInset" minX="-0.67%" minY="89.13%" width="12.53%" height="6.45%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crop-undo-icon">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1553,7 +1878,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="L5I-WS-QdS">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="13.60%" minY="88.91%" width="10.13%" height="7.05%"/>
+=======
+                                <frame key="frameInset" minX="13.73%" minY="88.91%" width="10.00%" height="7.12%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crop-upload-icon">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1612,14 +1941,18 @@ Comicing </string>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell1" id="dr5-RS-Mql">
-                                <rect key="frame" x="0.0" y="9" width="60" height="67"/>
+                                <rect key="frame" x="0.0" y="9" width="60" height="67.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="67"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="67.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oOI-2o-o74">
+<<<<<<< HEAD
                                             <frame key="frameInset" minX="20" height="32.14%" maxX="20" maxY="11"/>
+=======
+                                            <frame key="frameInset" minX="20" height="29.92%" maxX="20" maxY="9"/>
+>>>>>>> origin/Dev
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                             <state key="normal" image="xbutton"/>
                                             <connections>
@@ -1627,7 +1960,11 @@ Comicing </string>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UD5-oW-TUj">
+<<<<<<< HEAD
                                             <frame key="frameInset" minX="25.00%" minY="0.0%" width="50.00%" height="40.30%"/>
+=======
+                                            <frame key="frameInset" minX="25.00%" minY="0.0%" width="50.00%" height="44.44%"/>
+>>>>>>> origin/Dev
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="scissors"/>
                                             <connections>
@@ -1688,27 +2025,47 @@ Comicing </string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.85000002384185791" contentMode="scaleToFill" id="JPU-KT-B2q">
+<<<<<<< HEAD
                                 <frame key="frameInset" minY="-4" maxX="-1"/>
+=======
+                                <frame key="frameInset" minY="-2" maxX="-1"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="unu-zI-TNm">
+<<<<<<< HEAD
                                 <frame key="frameInset" minY="-4" maxX="-1"/>
+=======
+                                <frame key="frameInset" minY="-2" maxX="-1"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <view contentMode="scaleAspectFit" id="2nz-tv-szG" customClass="AVCamPreviewView">
+<<<<<<< HEAD
                                 <frame key="frameInset" minY="-4" maxX="-1"/>
+=======
+                                <frame key="frameInset" minY="-2" maxX="-1"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crop-background" id="Wfm-Ki-6mz">
+<<<<<<< HEAD
                                 <frame key="frameInset" minY="-6" maxX="-1"/>
+=======
+                                <frame key="frameInset" minY="-4" maxX="-1"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="myy-5t-bBE" userLabel="ok button">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="80.80%" minY="82.78%" width="14.93%" height="8.17%"/>
+=======
+                                <frame key="frameInset" minX="80.93%" minY="83.04%" width="15.20%" height="8.00%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crop-right-icon">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1718,7 +2075,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PKn-hw-zTU">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="40.80%" minY="82.09%" width="17.60%" height="9.91%"/>
+=======
+                                <frame key="frameInset" minX="40.93%" minY="82.35%" width="17.47%" height="9.65%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                                 <state key="normal" image="camera-ON">
@@ -1730,7 +2091,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6R4-X4-d7k">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="64.27%" minY="82.78%" width="13.07%" height="8.17%"/>
+=======
+                                <frame key="frameInset" minX="64.27%" minY="83.04%" width="13.47%" height="8.00%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -1742,7 +2107,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Gs0-1n-SbB">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="82.40%" minY="7.48%" width="12.80%" height="7.48%"/>
+=======
+                                <frame key="frameInset" minX="82.40%" minY="7.48%" width="13.47%" height="7.48%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="camera-reverse"/>
                                 <connections>
@@ -1750,7 +2119,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8Bl-RG-Cqz">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="-1.07%" minY="84.00%" width="12.53%" height="6.26%"/>
+=======
+                                <frame key="frameInset" minX="-0.67%" minY="84.00%" width="12.53%" height="6.52%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crop-undo-icon">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1760,7 +2133,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="C0Q-9o-aUR">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="13.60%" minY="83.48%" width="9.33%" height="6.78%"/>
+=======
+                                <frame key="frameInset" minX="13.73%" minY="83.57%" width="9.60%" height="6.96%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crop-upload-icon">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1771,7 +2148,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XcZ-HS-CGy" userLabel="crop button">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="25.87%" minY="83.48%" width="12.53%" height="6.96%"/>
+=======
+                                <frame key="frameInset" minX="25.87%" minY="83.74%" width="12.53%" height="7.30%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="scissors-icon-white">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1825,7 +2206,7 @@ Comicing </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pVI-48-FIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="339" y="1201"/>
+            <point key="canvasLocation" x="758" y="1365"/>
         </scene>
         <!--Crop Sticker View Controller-->
         <scene sceneID="LKR-jK-dZ0">
@@ -1841,11 +2222,19 @@ Comicing </string>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="kVq-27-jNj">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="2.13%" minY="6.60%" width="94.93%" height="80.81%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" id="1ry-9B-igd" customClass="AVCamPreviewView">
                                 <frame key="frameInset" minX="2.13%" minY="6.60%" width="94.93%" height="80.81%"/>
+=======
+                                <frame key="frameInset" minX="2.13%" minY="6.82%" width="95.33%" height="80.66%"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" id="1ry-9B-igd" customClass="AVCamPreviewView">
+                                <frame key="frameInset" minX="2.13%" minY="6.82%" width="95.33%" height="80.66%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -1854,7 +2243,11 @@ Comicing </string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DBe-Hi-77e" userLabel="ok button">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="80.80%" minY="83.06%" width="15.73%" height="8.10%"/>
+=======
+                                <frame key="frameInset" minX="80.93%" minY="83.28%" width="15.60%" height="7.95%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crop-right-icon">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1864,7 +2257,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pek-1x-Fts">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="40.80%" minY="82.46%" width="17.60%" height="9.75%"/>
+=======
+                                <frame key="frameInset" minX="41.20%" minY="82.46%" width="17.20%" height="9.82%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                                 <state key="normal" image="camera-ON">
@@ -1876,7 +2273,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Jov-kS-tRJ">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="64.27%" minY="83.06%" width="13.33%" height="8.10%"/>
+=======
+                                <frame key="frameInset" minX="64.27%" minY="83.28%" width="13.73%" height="7.95%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -1888,7 +2289,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="P8G-ll-F8C">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="82.40%" minY="7.50%" width="13.07%" height="7.65%"/>
+=======
+                                <frame key="frameInset" minX="82.40%" minY="7.50%" width="13.47%" height="7.65%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="camera-reverse"/>
                                 <connections>
@@ -1896,7 +2301,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5L9-x7-Bl1">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="-1.07%" minY="84.11%" width="12.80%" height="6.45%"/>
+=======
+                                <frame key="frameInset" minX="-0.67%" minY="84.11%" width="12.53%" height="6.45%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crop-undo-icon">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1906,7 +2315,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wBc-ro-2AK">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="13.60%" minY="83.66%" width="10.13%" height="7.35%"/>
+=======
+                                <frame key="frameInset" minX="13.73%" minY="83.73%" width="10.00%" height="7.27%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="crop-upload-icon">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1965,7 +2378,11 @@ Comicing </string>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.60784313729999995" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YjO-cj-oFh">
+<<<<<<< HEAD
                                 <frame key="frameInset" minY="14.62%" width="33" height="31"/>
+=======
+                                <frame key="frameInset" minY="14.86%" width="33" height="31"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="backbutton.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2000,7 +2417,11 @@ Comicing </string>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zHS-Z9-bP2">
+<<<<<<< HEAD
                                 <frame key="frameInset" width="17.18%" height="8.87%" maxX="20" maxY="2"/>
+=======
+                                <frame key="frameInset" width="16.76%" height="8.80%" maxX="20" maxY="2"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <state key="normal" image="blueCheckmark.png"/>
                                 <connections>
@@ -2037,11 +2458,19 @@ Comicing </string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="aLC-X2-HfW">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="3.45%" width="100.00%" height="42.28%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QkZ-wm-RfD">
                                         <frame key="frameInset" minX="34.93%" minY="52.07%" width="60.27%" height="40"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="3.52%" width="100.00%" height="42.28%"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QkZ-wm-RfD">
+                                        <frame key="frameInset" minX="34.93%" minY="52.07%" width="60.67%" height="40"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="35"/>
@@ -2049,23 +2478,39 @@ Comicing </string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" id="GJH-bS-PyK" customClass="GroupsMembersSection">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="0.0%" minY="75.53%" width="100.00%" height="20.92%"/>
+=======
+                                        <frame key="frameInset" minX="0.0%" minY="75.71%" width="100.00%" height="20.75%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yZg-JM-fCe">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="4.27%" minY="34.75%" width="25.33%" height="33.69%"/>
+=======
+                                        <frame key="frameInset" minX="4.27%" minY="34.93%" width="25.33%" height="33.51%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="btnGroupIconClick:" destination="rvj-eq-7Lb" eventType="touchUpInside" id="9jD-9Z-qqw"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="59q-I0-Zem">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="4.27%" minY="34.75%" width="25.33%" height="33.69%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Group Name" minimumFontSize="17" id="hYv-3I-Mmm">
                                         <frame key="frameInset" minX="34.93%" minY="52.07%" width="60.27%" height="40"/>
+=======
+                                        <frame key="frameInset" minX="4.27%" minY="34.93%" width="25.33%" height="33.51%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Group Name" minimumFontSize="17" id="hYv-3I-Mmm">
+                                        <frame key="frameInset" minX="34.93%" minY="52.07%" width="60.67%" height="40"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="30"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -2082,11 +2527,19 @@ Comicing </string>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="groupMemberSearch.png" id="3F4-Rs-4kc">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="9.87%" minY="7.50%" width="9.33%" height="5.40%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8hL-EE-qnL">
                                 <frame key="frameInset" minY="9.29%" width="9.87%" height="5.70%"/>
+=======
+                                <frame key="frameInset" minX="10.27%" minY="7.50%" width="9.33%" height="5.40%"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8hL-EE-qnL">
+                                <frame key="frameInset" minY="9.37%" width="10.27%" height="5.62%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="backbutton.png">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2096,7 +2549,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="search to add friends" placeholder="search to add friends" minimumFontSize="17" id="gJc-As-jLD">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="24.00%" minY="6.00%" width="62.40%" height="50"/>
+=======
+                                <frame key="frameInset" minX="24.00%" minY="6.24%" width="62.80%" height="50"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
@@ -2106,12 +2563,20 @@ Comicing </string>
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" id="Ikv-Kc-iA4" customClass="SectionDividerView">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="45.73%" width="100.00%" height="3.15%"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="45.80%" width="100.00%" height="3.30%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.65490196079999996" green="0.86666666670000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="Sqw-j3-ihP" customClass="FriendsListView">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="48.88%" width="100.00%" height="51.12%"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="49.10%" width="100.00%" height="50.90%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -2121,7 +2586,11 @@ Comicing </string>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dMA-K9-KgE">
+<<<<<<< HEAD
                                 <frame key="frameInset" width="17.18%" height="8.86%" maxX="20" maxY="1"/>
+=======
+                                <frame key="frameInset" width="16.76%" height="8.78%" maxX="20" maxY="1"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <state key="normal" image="blueCheckmark.png"/>
                                 <connections>
@@ -2129,7 +2598,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FXb-py-6vO">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="24.00%" minY="5.55%" width="62.40%" height="9.00%"/>
+=======
+                                <frame key="frameInset" minX="24.00%" minY="5.62%" width="62.80%" height="8.92%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
@@ -2171,16 +2644,28 @@ Comicing </string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="4Zp-Wy-8b0" customClass="ComicShareView">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="11.73%" minY="38.68%" width="75.73%" height="22.49%"/>
+=======
+                                <frame key="frameInset" minX="12.13%" minY="38.68%" width="75.33%" height="22.56%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="xtI-OX-ZjO" userLabel="publicView">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="39.58%" width="100.00%" height="7.65%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WpX-pB-Wot">
                                         <frame key="frameInset" minX="2.67%" minY="43.14%" width="25.33%" height="45.10%"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="39.58%" width="100.00%" height="7.87%"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WpX-pB-Wot">
+                                        <frame key="frameInset" minX="3.07%" minY="43.81%" width="24.93%" height="44.76%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="13"/>
                                         <inset key="titleEdgeInsets" minX="11" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -2193,7 +2678,11 @@ Comicing </string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="rPI-mM-VcN">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="60.53%" minY="87.50%" width="36.53%" height="27"/>
+=======
+                                        <frame key="frameInset" minX="60.53%" minY="90.20%" width="36.53%" height="27"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                         <state key="normal" title="Invite more friends to see your comic">
@@ -2204,11 +2693,19 @@ Comicing </string>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="4cs-lc-VZ0">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="37.26%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public" textAlignment="natural" lineBreakMode="tailTruncation" minimumFontSize="7" id="sRO-Ck-64h">
                                                 <frame key="frameInset" minX="15" minY="100.00%" width="305" height="15"/>
+=======
+                                        <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="39.05%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public" textAlignment="natural" lineBreakMode="tailTruncation" minimumFontSize="7" id="sRO-Ck-64h">
+                                                <frame key="frameInset" minX="15" minY="45.45%" width="305" height="15"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2221,11 +2718,19 @@ Comicing </string>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="G9V-SO-1sV" userLabel="shareView">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="26.39%" width="100.00%" height="7.50%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Mh-2T-JiX">
                                         <frame key="frameInset" minX="38.40%" minY="4.00%" width="10.93%" height="84.00%"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="26.39%" width="100.00%" height="7.72%"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Mh-2T-JiX">
+                                        <frame key="frameInset" minX="38.40%" minY="7.77%" width="10.93%" height="80.58%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="twitterlogo.png"/>
@@ -2234,7 +2739,11 @@ Comicing </string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uxs-dK-gEa">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="20.80%" minY="4.00%" width="10.93%" height="84.00%"/>
+=======
+                                        <frame key="frameInset" minX="20.93%" minY="7.77%" width="10.93%" height="80.58%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="imessageLogo"/>
@@ -2243,12 +2752,20 @@ Comicing </string>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="gAO-Bn-pAC">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="6.40%" minY="100.00%" width="76.27%" height="1"/>
+=======
+                                        <frame key="frameInset" minX="6.80%" minY="100.00%" width="76.27%" height="1"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yZq-g6-EGO">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="5.60%" minY="4.00%" width="10.93%" height="92.00%"/>
+=======
+                                        <frame key="frameInset" minX="5.60%" minY="7.77%" width="10.93%" height="89.32%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="facebooklogo"/>
@@ -2257,7 +2774,11 @@ Comicing </string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pak-Us-0B2">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="55.47%" minY="4.00%" width="10.67%" height="84.00%"/>
+=======
+                                        <frame key="frameInset" minX="55.60%" minY="7.77%" width="10.53%" height="80.58%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="instagramlogo.png"/>
@@ -2269,7 +2790,11 @@ Comicing </string>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="92i-u6-xyi" userLabel="searchView">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="33.88%" width="100.00%" height="5.40%"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="34.11%" width="100.00%" height="5.25%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dig up friends by name" textAlignment="natural" minimumFontSize="17" id="wmk-LF-xOy">
@@ -2286,7 +2811,11 @@ Comicing </string>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="4z4-me-8fs">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="96.40%" width="100.00%" height="48.73%"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="96.40%" width="100.00%" height="48.95%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="Zko-z3-IF9" userLabel="invite friends" customClass="InviteFriendsView">
@@ -2295,7 +2824,11 @@ Comicing </string>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8tp-R9-I4U">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="82.67%" minY="1.23%" width="12.53%" height="14.46%"/>
+=======
+                                        <frame key="frameInset" minX="83.07%" minY="1.69%" width="12.53%" height="14.40%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                         <state key="normal" image="up-arrow-icon"/>
@@ -2307,23 +2840,39 @@ Comicing </string>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" id="7Pb-2M-i9Q" userLabel="privateView">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="0.0%" minY="47.23%" width="100.00%" height="49.18%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Groups" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mmH-k5-2vr">
                                         <frame key="frameInset" minX="9.38%" minY="8.12%" width="215" height="20"/>
+=======
+                                <frame key="frameInset" minX="0.0%" minY="47.45%" width="100.00%" height="49.18%"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Groups" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mmH-k5-2vr">
+                                        <frame key="frameInset" minX="9.38%" minY="8.77%" width="215" height="20"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" id="bd1-oW-jSi" customClass="GroupsSection">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="0.0%" minY="19.75%" width="100.00%" height="85"/>
+=======
+                                        <frame key="frameInset" minX="0.0%" minY="20.37%" width="100.00%" height="85"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W81-tR-PVM">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="9.38%" minY="50.33%" width="215" height="20"/>
+=======
+                                        <frame key="frameInset" minX="9.38%" minY="50.81%" width="215" height="20"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2331,11 +2880,19 @@ Comicing </string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" id="agF-BQ-ygy">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="5.79%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="neR-De-JnV">
                                                 <frame key="frameInset" minX="15" minY="50.00%" width="73" height="17"/>
+=======
+                                        <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="6.25%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="neR-De-JnV">
+                                                <frame key="frameInset" minX="15" minY="100.00%" width="73" height="17"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2345,7 +2902,11 @@ Comicing </string>
                                         <color key="backgroundColor" red="0.1647058824" green="0.65490196079999996" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="yin-Dd-spQ" customClass="FriendsListView">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="0.0%" minY="52.44%" width="100.00%" height="47.56%"/>
+=======
+                                        <frame key="frameInset" minX="0.0%" minY="52.90%" width="100.00%" height="47.10%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
@@ -2363,7 +2924,11 @@ Comicing </string>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.1215686275" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="M09-eP-NQU">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="82.67%" minY="92.65%" width="10.93%" height="6.00%"/>
+=======
+                                <frame key="frameInset" minX="82.80%" minY="92.65%" width="10.93%" height="6.07%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="CheckButton.png"/>
                                 <connections>
@@ -2371,7 +2936,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FsF-hN-USS">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="6.13%" minY="92.65%" width="10.93%" height="6.00%"/>
+=======
+                                <frame key="frameInset" minX="6.13%" minY="92.65%" width="10.93%" height="6.07%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="GobackButton.png"/>
                                 <connections>
@@ -2412,7 +2981,11 @@ Comicing </string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="q5U-Gs-yBO">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="33.33%" minY="53.01%" width="15" height="15"/>
+=======
+                                <frame key="frameInset" minX="40.91%" minY="53.01%" width="15" height="15"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.066666666669999999" green="0.52156862749999999" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -2420,7 +2993,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="O65-RI-Zkm">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="33.33%" minY="61.09%" width="15" height="15"/>
+=======
+                                <frame key="frameInset" minX="40.91%" minY="61.09%" width="15" height="15"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8980392157" green="0.0" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -2428,7 +3005,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aa1-Jw-M7T">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="33.33%" minY="78.76%" width="15" height="15"/>
+=======
+                                <frame key="frameInset" minX="40.91%" minY="78.76%" width="15" height="15"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.41960784309999999" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -2436,7 +3017,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pKI-dH-Qn1">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="33.33%" minY="87.22%" width="15" height="15"/>
+=======
+                                <frame key="frameInset" minX="40.91%" minY="87.22%" width="15" height="15"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.3803921569" green="0.23137254900000001" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -2444,7 +3029,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="K5Y-QE-hKn">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="33.33%" minY="95.87%" width="15" height="15"/>
+=======
+                                <frame key="frameInset" minX="40.91%" minY="95.87%" width="15" height="15"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -2452,7 +3041,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Vd-RT-im9">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="33.33%" minY="9.21%" width="15" height="15"/>
+=======
+                                <frame key="frameInset" minX="40.91%" minY="9.49%" width="15" height="15"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -2460,7 +3053,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pXq-zJ-nJg">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="33.33%" minY="17.86%" width="15" height="15"/>
+=======
+                                <frame key="frameInset" minX="40.91%" minY="17.95%" width="15" height="15"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.76470588240000004" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -2468,7 +3065,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QW2-fo-fea">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="16.67%" minY="-2.01%" width="52.08%" height="9.51%"/>
+=======
+                                <frame key="frameInset" minX="16.67%" minY="-2.01%" width="58.33%" height="9.51%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="undo-drawing-icon"/>
                                 <connections>
@@ -2476,7 +3077,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hYG-F0-hUy">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="33.33%" minY="26.88%" width="15" height="15"/>
+=======
+                                <frame key="frameInset" minX="40.91%" minY="26.88%" width="15" height="15"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.51372549020000002" green="0.81568627449999997" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -2484,7 +3089,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dER-yF-5CZ">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="33.33%" minY="43.61%" width="15" height="15"/>
+=======
+                                <frame key="frameInset" minX="40.91%" minY="43.98%" width="15" height="15"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.52156862749999999" green="0.37254901959999998" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -2492,7 +3101,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3sH-FB-UqT">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="33.33%" minY="69.74%" width="15" height="15"/>
+=======
+                                <frame key="frameInset" minX="40.91%" minY="69.83%" width="15" height="15"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.1333333333" green="0.1215686275" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -2500,7 +3113,11 @@ Comicing </string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FxS-4g-Doj">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="33.33%" minY="35.53%" width="15" height="15"/>
+=======
+                                <frame key="frameInset" minX="40.91%" minY="35.62%" width="15" height="15"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.92549019610000005" green="0.49803921569999998" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -2567,7 +3184,11 @@ Comicing </string>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="4jU-92-c0J">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="10.93%" minY="19.94%" width="77.33%" height="72.26%"/>
+=======
+                                <frame key="frameInset" minX="10.93%" minY="20.17%" width="77.73%" height="72.26%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="round-rectangular-area.png" id="loH-af-jtq">
@@ -2575,6 +3196,7 @@ Comicing </string>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" id="mqP-k2-Tm7" userLabel="GiftBox50">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="21.58%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -2584,39 +3206,70 @@ Comicing </string>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CBx-e4-jVq">
                                                 <frame key="frameInset" minX="20.69%" minY="39.42%" width="11.03%" height="44.23%"/>
+=======
+                                        <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="21.89%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InviteTrophy" id="SvX-cV-Chf">
+                                                <frame key="frameInset" minX="6.35%" minY="40.76%" width="12.01%" height="41.71%"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CBx-e4-jVq">
+                                                <frame key="frameInset" minX="21.27%" minY="40.76%" width="10.81%" height="41.71%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="21"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.29803921570000003" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nice" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dye-DC-ouT">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="0.0%" minY="15.39%" width="100.00%" height="23.08%"/>
+=======
+                                                <frame key="frameInset" minX="0.0%" minY="15.64%" width="100.00%" height="22.28%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="17"/>
                                                 <color key="textColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GifBox_50" id="iCs-1t-Vt0" customClass="YLImageView">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="66.90%" minY="20" width="21.72%" height="66.67%"/>
+=======
+                                                <frame key="frameInset" minX="66.55%" minY="20" width="22.13%" height="67.84%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 cute stickers" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3bS-lR-ML2">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="94.15%" minY="93.98%" width="102" height="21"/>
+=======
+                                                <frame key="frameInset" minX="94.46%" minY="94.08%" width="102" height="21"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
                                                 <color key="textColor" red="0.3803921569" green="0.3803921569" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="im6-LV-YjV">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="94.23%"/>
+=======
+                                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="94.31%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <connections>
                                                     <action selector="btnGiftBoxClick50:" destination="erY-Xy-9Qk" eventType="touchUpInside" id="DFQ-H9-2hz"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vOD-kd-bwI">
+<<<<<<< HEAD
                                                 <frame key="frameInset" height="1"/>
+=======
+                                                <frame key="frameInset" height="1" maxY="1"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                 <color key="backgroundColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -2627,6 +3280,7 @@ Comicing </string>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="bpg-ph-wDu" userLabel="GiftBox100">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="0.0%" minY="21.99%" width="100.00%" height="21.99%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -2636,32 +3290,59 @@ Comicing </string>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tRS-tV-Knm">
                                                 <frame key="frameInset" minX="20.69%" minY="41.51%" width="16.21%" height="42.45%"/>
+=======
+                                        <frame key="frameInset" minX="0.0%" minY="22.41%" width="100.00%" height="21.89%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InviteTrophy" id="epe-iZ-ohL">
+                                                <frame key="frameInset" minX="6.35%" minY="41.71%" width="12.01%" height="43.60%"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tRS-tV-Knm">
+                                                <frame key="frameInset" minX="21.27%" minY="41.71%" width="15.95%" height="43.60%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="21"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.29803921570000003" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="awesome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="boY-RW-Sib">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="3.10%" minY="7.55%" width="93.45%" height="20.76%"/>
+=======
+                                                <frame key="frameInset" minX="3.09%" minY="7.58%" width="93.65%" height="21.33%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="17"/>
                                                 <color key="textColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GifBox_100" id="6UL-dh-0oC" customClass="YLImageView">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="62.07%" minY="18" width="28.62%" height="71.59%"/>
+=======
+                                                <frame key="frameInset" minX="62.09%" minY="18" width="28.65%" height="72.00%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 cute stickers" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uGe-s6-0Br">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="93.04%" minY="94.12%" width="132" height="21"/>
+=======
+                                                <frame key="frameInset" minX="93.10%" minY="95.86%" width="132" height="21"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
                                                 <color key="textColor" red="0.3803921569" green="0.3803921569" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="q7Q-2s-vSZ">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="90.57%"/>
+=======
+                                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="91.94%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <connections>
                                                     <action selector="btnGiftBox100Click:" destination="erY-Xy-9Qk" eventType="touchUpInside" id="mxp-U9-r56"/>
@@ -2679,6 +3360,7 @@ Comicing </string>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="Q9a-bq-oUy" userLabel="GiftBox200">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="0.0%" minY="44.19%" width="100.00%" height="22.20%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -2688,25 +3370,48 @@ Comicing </string>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KHJ-DE-DEc">
                                                 <frame key="frameInset" minX="21.72%" minY="40.19%" width="15.17%" height="41.12%"/>
+=======
+                                        <frame key="frameInset" minX="0.0%" minY="44.61%" width="100.00%" height="22.20%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InviteTrophy" id="91B-sc-PVR">
+                                                <frame key="frameInset" minX="6.35%" minY="40.19%" width="12.01%" height="42.52%"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KHJ-DE-DEc">
+                                                <frame key="frameInset" minX="21.61%" minY="40.19%" width="15.61%" height="42.52%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="21"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.29803921570000003" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="exotic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xjg-Lq-a8s">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="0.0%" minY="10.28%" width="96.55%" height="20.56%"/>
+=======
+                                                <frame key="frameInset" minX="0.0%" minY="10.28%" width="96.74%" height="21.96%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="17"/>
                                                 <color key="textColor" red="0.024953124760000001" green="0.30939449270000002" blue="0.6678109217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GifBox_200" id="sTG-P0-EtN" customClass="YLImageView">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="57.59%" minY="4" width="38.28%" height="80.58%"/>
+=======
+                                                <frame key="frameInset" minX="57.80%" minY="4" width="38.08%" height="82.04%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 cute stickers" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hhz-hn-clH">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="92.00%" minY="97.67%" width="140" height="21"/>
+=======
+                                                <frame key="frameInset" minX="92.41%" minY="97.67%" width="140" height="21"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
                                                 <color key="textColor" red="0.3803921569" green="0.3803921569" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2731,7 +3436,11 @@ Comicing </string>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="L6T-1y-UvC">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="0.0%" minY="66.18%" width="100.00%" height="20.95%"/>
+=======
+                                        <frame key="frameInset" minX="0.0%" minY="66.49%" width="100.00%" height="21.06%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ihX-KE-hFi">
@@ -2764,7 +3473,11 @@ Comicing </string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite David Jocelyn!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CGh-5S-dsg">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="30" minY="8" width="95.39%" height="29.03%"/>
+=======
+                                                <frame key="frameInset" minX="30" minY="8" width="95.41%" height="30.48%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
@@ -2772,18 +3485,30 @@ Comicing </string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bgm-IK-QAb">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="6" minY="10" width="22" height="25.28%"/>
+=======
+                                                <frame key="frameInset" minX="6" minY="10" width="22" height="25.14%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InviteTrophy" id="zFX-pV-H3h">
+<<<<<<< HEAD
                                                 <frame key="frameInset" minX="70.00%" minY="32.67%" width="9.31%" height="43.56%"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x5p-Pp-QXz" customClass="UICountingLabel">
                                                 <frame key="frameInset" minX="82.41%" minY="32.67%" width="14.14%" height="43.56%"/>
+=======
+                                                <frame key="frameInset" minX="70.15%" minY="33.99%" width="9.26%" height="42.37%"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x5p-Pp-QXz" customClass="UICountingLabel">
+                                                <frame key="frameInset" minX="82.68%" minY="33.99%" width="14.07%" height="42.37%"/>
+>>>>>>> origin/Dev
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="21"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.29803921570000003" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2801,7 +3526,11 @@ Comicing </string>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="EDq-3V-sHA">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="0.0%" minY="88.17%" width="100.00%" height="11.83%"/>
+=======
+                                        <frame key="frameInset" minX="0.0%" minY="88.38%" width="100.00%" height="11.62%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Friends on Comicing" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QDU-6S-Knv">
@@ -2900,7 +3629,11 @@ Comicing </string>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="9Hk-hV-irk">
+<<<<<<< HEAD
                                 <frame key="frameInset" minX="10.93%" minY="19.94%" width="77.33%" height="72.26%"/>
+=======
+                                <frame key="frameInset" minX="10.93%" minY="20.17%" width="77.73%" height="72.26%"/>
+>>>>>>> origin/Dev
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="round-rectangular-area.png" id="c0Z-Wd-Q1D">
@@ -2924,7 +3657,11 @@ Comicing </string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tap_to_open.png" id="AlK-QO-s4T">
+<<<<<<< HEAD
                                         <frame key="frameInset" minX="3.10%" minY="34.86%" width="93.45%" height="14.52%"/>
+=======
+                                        <frame key="frameInset" minX="3.09%" minY="35.06%" width="93.65%" height="14.73%"/>
+>>>>>>> origin/Dev
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
@@ -2975,7 +3712,7 @@ Comicing </string>
         </scene>
     </scenes>
     <resources>
-        <image name="!-icon" width="12" height="26"/>
+        <image name="!-icon" width="64" height="54"/>
         <image name="CheckButton.png" width="42" height="42"/>
         <image name="GifBox_100" width="70" height="70"/>
         <image name="GifBox_200" width="80" height="80"/>
@@ -2988,7 +3725,11 @@ Comicing </string>
         <image name="Scissor.png" width="40" height="48"/>
         <image name="SignUpButton_Off" width="299" height="75"/>
         <image name="StickerSelectionBg" width="60" height="86"/>
+<<<<<<< HEAD
         <image name="T-icon" width="16" height="30"/>
+=======
+        <image name="T-icon" width="19" height="40"/>
+>>>>>>> origin/Dev
         <image name="backButton" width="42" height="66"/>
         <image name="backbutton.png" width="15" height="24"/>
         <image name="black-square-selected" width="30" height="30"/>
@@ -3000,10 +3741,11 @@ Comicing </string>
         <image name="boyIcon" width="30" height="32"/>
         <image name="brown-square-selected" width="30" height="30"/>
         <image name="brown-square-unselected" width="16" height="16"/>
-        <image name="bubble-icon" width="26" height="19"/>
+        <image name="bubble-icon" width="70" height="53"/>
         <image name="camera-OFF" width="30" height="30"/>
         <image name="camera-ON" width="38" height="39"/>
         <image name="camera-reverse" width="26" height="27"/>
+        <image name="close-comic" width="34" height="37"/>
         <image name="crop-background" width="376" height="668"/>
         <image name="crop-camera-icon" width="29" height="25"/>
         <image name="crop-close-icon" width="18" height="16"/>
@@ -3028,14 +3770,14 @@ Comicing </string>
         <image name="leftarrow" width="56" height="57"/>
         <image name="mic" width="50" height="50"/>
         <image name="openClose" width="30" height="50"/>
-        <image name="pen-icon" width="16" height="22"/>
+        <image name="pen-icon" width="21" height="29"/>
         <image name="pink-square-selected" width="30" height="30"/>
         <image name="pink-square-unselected" width="17" height="16"/>
         <image name="round-rectangular-area.png" width="250" height="419"/>
         <image name="scissors" width="77" height="95"/>
         <image name="scissors-icon-white" width="25" height="28"/>
         <image name="searchFriends.png" width="48" height="63"/>
-        <image name="sticker-icon" width="17" height="21"/>
+        <image name="sticker-icon" width="34" height="33"/>
         <image name="sticker-sharing-icon" width="36" height="32"/>
         <image name="stickers_icon.png" width="486" height="430"/>
         <image name="tap_to_open.png" width="737" height="198"/>
