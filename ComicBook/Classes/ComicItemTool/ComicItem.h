@@ -16,6 +16,7 @@
 #import "AppConstants.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <CoreAudio/CoreAudioTypes.h>
+#import "YLImageView.h"
 
 
 typedef enum {
@@ -47,9 +48,11 @@ typedef enum {
 
 #pragma mark - ComicItem Animated Sticker
 
-@interface ComicItemAnimatedSticker : UIImageView<ComicItem> {}
+@interface ComicItemAnimatedSticker : YLImageView<ComicItem> {}
 
 @property (strong, nonatomic) NSString* animatedStickerName;
+@property (assign, nonatomic) CGFloat startDelay;
+@property (assign, nonatomic) CGFloat endDelay;
 @property (assign, nonatomic) CGFloat angle;
 @property (assign, nonatomic) CGFloat scaleValueX;
 @property (assign, nonatomic) CGFloat scaleValueY;

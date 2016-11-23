@@ -48,7 +48,6 @@ inline static NSTimeInterval CGImageSourceGetGifFrameDelay(CGImageSourceRef imag
 #endif
     return frameDuration;
 }
-
 inline static BOOL CGImageSourceContainsAnimatedGif(CGImageSourceRef imageSource)
 {
     return imageSource && UTTypeConformsTo(CGImageSourceGetType(imageSource), kUTTypeGIF) && CGImageSourceGetCount(imageSource) > 1;
@@ -182,7 +181,7 @@ static NSUInteger _prefetchedNum = 10;
     NSNull *aNull = [NSNull null];
     for (NSUInteger i = 0; i < numberOfFrames; ++i) {
         [self.images addObject:aNull];
-        NSTimeInterval frameDuration = CGImageSourceGetGifFrameDelay(imageSource, i);
+        NSTimeInterval frameDuration = [self sd_frameDurationAtIndex:i source:imageSource];//CGImageSourceGetGifFrameDelay(imageSource, i);
         self.frameDurations[i] = frameDuration;
         self.totalDuration += frameDuration;
     }
@@ -207,6 +206,36 @@ static NSUInteger _prefetchedNum = 10;
     readFrameQueue = dispatch_queue_create("com.ronnie.gifreadframe", DISPATCH_QUEUE_SERIAL);
     
     return self;
+}
+-(float)sd_frameDurationAtIndex:(NSUInteger)index source:(CGImageSourceRef)source {
+    float frameDuration = 0.1f;
+    CFDictionaryRef cfFrameProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil);
+    NSDictionary *frameProperties = (__bridge NSDictionary *)cfFrameProperties;
+    NSDictionary *gifProperties = frameProperties[(NSString *)kCGImagePropertyGIFDictionary];
+    
+    NSNumber *delayTimeUnclampedProp = gifProperties[(NSString *)kCGImagePropertyGIFUnclampedDelayTime];
+    if (delayTimeUnclampedProp) {
+        frameDuration = [delayTimeUnclampedProp floatValue];
+    }
+    else {
+        
+        NSNumber *delayTimeProp = gifProperties[(NSString *)kCGImagePropertyGIFDelayTime];
+        if (delayTimeProp) {
+            frameDuration = [delayTimeProp floatValue];
+        }
+    }
+    
+    // Many annoying ads specify a 0 duration to make an image flash as quickly as possible.
+    // We follow Firefox's behavior and use a duration of 100 ms for any frames that specify
+    // a duration of <= 10 ms. See <rdar://problem/7689300> and <http://webkit.org/b/36082>
+    // for more information.
+    
+    if (frameDuration < 0.011f) {
+        frameDuration = 0.100f;
+    }
+    
+    CFRelease(cfFrameProperties);
+    return frameDuration/2;
 }
 
 - (UIImage*)getFrameWithIndex:(NSUInteger)idx

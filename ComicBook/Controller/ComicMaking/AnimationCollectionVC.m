@@ -131,7 +131,7 @@
     
 }
 -(id)bindJson{
-    return [self bindJson:@"NewAnimationList"];
+    return [self bindJson:@"latestAnimationList"];
 }
 
 -(NSMutableArray*)getCategoryList{
@@ -197,7 +197,7 @@
         
         static NSString *identifier = @"AnimationsCollectionViewCell";
         AnimationsCollectionViewCell *cell =  [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-        cell.img_Animation.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.gif",[[arrOfAnimationTemp objectAtIndex:indexPath.row] valueForKey:@"thumImage"]]];
+        cell.img_Animation.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[[arrOfAnimationTemp objectAtIndex:indexPath.row] valueForKey:@"thumImage"]]];
         return cell;
     }
 }

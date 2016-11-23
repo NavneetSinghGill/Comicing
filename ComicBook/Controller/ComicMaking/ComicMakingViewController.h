@@ -115,7 +115,7 @@
 @property (nonatomic) NSString *friendOrGroupId;
 @property (nonatomic) NSString *shareId;
 @property (strong, nonatomic) NSString *fileNameToSave;
-
+@property (nonatomic) NSTimer* timerAnimation;
 @property BOOL isWideSlide;
 
 

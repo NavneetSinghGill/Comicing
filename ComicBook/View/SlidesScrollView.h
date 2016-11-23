@@ -42,6 +42,7 @@ typedef NSUInteger AddButtonType;
 @property NSUInteger maximumComicCount;
 @property NSInteger setAddButtonIndex;
 @property BOOL isStillSaving;
+@property (strong, nonatomic) UIScrollView *previewScrollView;
 @property (nonatomic, strong) SlidePreviewScrollView *viewPreviewScrollSlide;
 @property (nonatomic, strong) ComicSlidePreview *viewPreviewSlide;
 @property (nonatomic, strong) UIButton *btnPlusSlide;
