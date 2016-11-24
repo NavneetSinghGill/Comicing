@@ -19,7 +19,7 @@
                                     {
                                     "type": "plug&play",
                                     "instraction": {
-                                    "imagename": "tab-forehead.png",
+                                    "imagename": "Forehead",
                                     "type": "forehead",
                                     "position": {
                                     "x": 239,
@@ -34,26 +34,22 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 80,
-                                    "topB": 178,
                                     "leftA": 50,
-                                    "leftB": 100,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
-                                    "x": 97,
-                                    "y": 137
+                                    "x": 184.9,
+                                    "y": 124.8
                                     },
                                     "face": {
                                     "type": "single",
-                                    "imageA": "drillAnimation",
+                                    "imageA": "DRILL_FINAL02",
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 200,
-                                    "height": 178
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0,
                                     "endInterval": 0
@@ -86,17 +82,13 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 80,
-                                    "topB": 178,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
-                                    "x": 148,
-                                    "y": 536
+                                    "x": 188,
+                                    "y": 584
                                     },
                                     "face": {
                                     "type": "single",
@@ -104,10 +96,15 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 294,
-                                    "height": 612
+                                    "width": 375,
+                                    "height": 667
                                     },
-                                    "timeInterval": 0.6,
+                                    "combinePositionPoints":
+                                    {
+                                    "x":0,
+                                    "y":0
+                                    },
+                                    "timeInterval": 0,
                                     "endInterval": 3
                                     }
                                     },
@@ -116,13 +113,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 27,
@@ -146,13 +139,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 0,
@@ -185,13 +174,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 0,
@@ -224,13 +209,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 0,
@@ -276,17 +257,13 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
-                                    "x": 198,
-                                    "y": 166
+                                    "x": 148.6,
+                                    "y": 124.7
                                     },
                                     "face": {
                                     "type": "single",
@@ -294,8 +271,8 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 373,
-                                    "height": 663
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0,
                                     "endInterval": 3
@@ -319,17 +296,13 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
-                                    "x": 288,
-                                    "y": 168
+                                    "x": 218.7,
+                                    "y": 124.7
                                     },
                                     "face": {
                                     "type": "single",
@@ -337,8 +310,8 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 373,
-                                    "height": 663
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0.6,
                                     "endInterval": 3
@@ -349,13 +322,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 0,
@@ -388,13 +357,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 0,
@@ -427,13 +392,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 0,
@@ -479,13 +440,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 80,
-                                    "topB": 178,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 155,
@@ -522,13 +479,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 229,
@@ -565,13 +518,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 73,
@@ -595,13 +544,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 0,
@@ -647,13 +592,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 31,
@@ -690,13 +631,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 28,
@@ -720,13 +657,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 0,
@@ -772,17 +705,13 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
-                                    "x": 89,
-                                    "y": 100
+                                    "x": 260.7,
+                                    "y": 437.4
                                     },
                                     "face": {
                                     "type": "single",
@@ -790,8 +719,8 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 133,
-                                    "height": 133
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0,
                                     "endInterval": 0
@@ -815,17 +744,13 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
-                                    "x": 36,
-                                    "y": 97
+                                    "x": 92.4,
+                                    "y": 437.4
                                     },
                                     "face": {
                                     "type": "single",
@@ -833,8 +758,8 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 133,
-                                    "height": 133
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0,
                                     "endInterval": 0
@@ -858,17 +783,13 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
-                                    "x": 163,
-                                    "y": 124
+                                    "x": 327.4,
+                                    "y": 363.4
                                     },
                                     "face": {
                                     "type": "single",
@@ -876,8 +797,8 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 186,
-                                    "height": 217
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0,
                                     "endInterval": 3
@@ -901,17 +822,13 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
-                                    "x": 23,
-                                    "y": 122
+                                    "x": 47.1,
+                                    "y": 363.4
                                     },
                                     "face": {
                                     "type": "single",
@@ -919,8 +836,8 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 186,
-                                    "height": 217
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0.0,
                                     "endInterval": 2
@@ -940,13 +857,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 0,
@@ -992,13 +905,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 192,
@@ -1035,13 +944,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 58,
@@ -1078,13 +983,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 0,
@@ -1108,13 +1009,9 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "topB": 0,
                                     "leftA": 0,
-                                    "leftB": 0,
                                     "rightA": 0,
-                                    "rightB": 0,
                                     "downA": 0,
-                                    "downB": 0
                                     },
                                     "centerPoint": {
                                     "x": 0,

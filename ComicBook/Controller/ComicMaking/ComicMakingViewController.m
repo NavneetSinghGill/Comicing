@@ -46,6 +46,8 @@
 #import "UIImage+animatedGIF.h"
 #import "ComicBubbleList.h"
 #import "CombineGifImages.h"
+#import "YYImage.h"
+
 CGSize CGSizeAbsolute2(CGSize size) {
     return (CGSize){fabs(size.width), fabs(size.height)};
 }
@@ -92,6 +94,8 @@ static CGRect CaptionTextViewMinRect;
     UIImageView *mainAnimationGifView;
     BOOL hasStartedBezierForAnimation;
     NSMutableArray *allPointsForRedFace;
+    BOOL haveCreateMainGif;
+
 //    CGRect temButtonFrame;
 //    CGRect temChatButtonFrame;
 //    CGRect temUploadButtonFrame;
@@ -1889,8 +1893,8 @@ static CGRect CaptionTextViewMinRect;
     
     [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"AnimatedSticker" Action:@"AddAnimatedSticker" Label:@""];
     
-//    UIImage* animatedImage = [UIImage imageNamed:exclamationImageString];
-   // UIImage* animatedImage = [UIImage sd_animatedGIFNamed:exclamationImageString];
+    //    UIImage* animatedImage = [UIImage imageNamed:exclamationImageString];
+    // UIImage* animatedImage = [UIImage sd_animatedGIFNamed:exclamationImageString];
     
     ComicItemAnimatedSticker* imageView = [self getComicItems:ComicAnimatedSticker];
     imageView.frame = rect;
@@ -1898,15 +1902,15 @@ static CGRect CaptionTextViewMinRect;
     imageView.animatedStickerName = exclamationImageString;
     
     imageView.startDelay = [[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"timeInterval"] floatValue];
-     imageView.endDelay = [[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"endInterval"] floatValue];
+    imageView.endDelay = [[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"endInterval"] floatValue];
     /*float widthRatio = imageView.bounds.size.width / imageView.image.size.width;
-    float heightRatio = imageView.bounds.size.height / imageView.image.size.height;
-    float scale = MIN(widthRatio, heightRatio);
-    float imageWidth = scale * imageView.image.size.width;
-    float imageHeight = scale * imageView.image.size.height;*/
+     float heightRatio = imageView.bounds.size.height / imageView.image.size.height;
+     float scale = MIN(widthRatio, heightRatio);
+     float imageWidth = scale * imageView.image.size.width;
+     float imageHeight = scale * imageView.image.size.height;*/
     mainAnimationGifView = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    [self.view insertSubview:mainAnimationGifView atIndex:0];
-    
+    imgvComic.clipsToBounds = YES;
+    [imgvComic addSubview:mainAnimationGifView];
     imageView.frame = CGRectMake(rect.origin.x, rect.origin.y, imageView.frame.size.width, imageView.frame.size.height);
     [self addComicItem:imageView ItemImage:nil];
     
@@ -1995,52 +1999,52 @@ static CGRect CaptionTextViewMinRect;
 }
 -(void)addAnimatedStickerFromStartAtIndex:(NSInteger)index
 {
-        if ([[currentWorkingAnimation valueForKey:@"resources"] count]>index)
+    if ([[currentWorkingAnimation valueForKey:@"resources"] count]>index)
+    {
+        if ([[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"type"] isEqualToString:@"filter"])
         {
-            if ([[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"type"] isEqualToString:@"filter"])
-            {
-                [animationCollection stopBeingExcutedAfterSomeMoment];
-                [self proceedToAddRealAnimationWithPoint:CGPointZero andCurrentIndex:index];
-                /* [self addAnimatedSticker:[[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"animation"] valueForKey:@"face"] valueForKey:@"imageA"] AtRect:rectForAnimation];*/
-                //NSInteger newInt = index+1;
-                //[self addAnimatedStickerFromStartAtIndex:newInt];
-                return;
-            }
-            else if ([[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"type"] isEqualToString:@"Noplug&play"])
-            {
-                [self proceedToAddRealAnimationWithPoint:currentAnimationTouchPoint andCurrentIndex:index];
-                return;
-            }
-            else if ([[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"type"] isEqualToString:@"round&play"])
-            {
-                NSDictionary *instctionObj = [[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"instraction"];
-                CGRect instructionRect = CGRectMake([[[instctionObj valueForKey:@"position"] valueForKey:@"x"] floatValue],
-                                                    [[[instctionObj valueForKey:@"position"] valueForKey:@"y"] floatValue],
-                                                    [[[instctionObj valueForKey:@"size"] valueForKey:@"width"] floatValue],
-                                                    [[[instctionObj valueForKey:@"size"] valueForKey:@"height"] floatValue]);
-                currentAnimInstSubView = [[YLImageView alloc]initWithFrame:[self rectOntheBasisOfScreen:instructionRect]];
-                currentAnimInstSubView.image  = [YLGIFImage imageNamed:[NSString stringWithFormat:@"%@.gif",[instctionObj valueForKey:@"imagename"]]];
-                [self.view addSubview:currentAnimInstSubView];
-                [self.view bringSubviewToFront:currentAnimInstSubView];
-                [self addBeizerSquarewithIndex:currentTapIndex];
-                //[self addTouchEventwithIndex:index];
-            }
-            else
-            {
-                NSDictionary *instctionObj = [[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"instraction"];
-                CGRect instructionRect = CGRectMake([[[instctionObj valueForKey:@"position"] valueForKey:@"x"] floatValue],
-                                                    [[[instctionObj valueForKey:@"position"] valueForKey:@"y"] floatValue],
-                                                    [[[instctionObj valueForKey:@"size"] valueForKey:@"width"] floatValue],
-                                                    [[[instctionObj valueForKey:@"size"] valueForKey:@"height"] floatValue]);
-                currentAnimInstSubView = [[YLImageView alloc]initWithFrame:[self rectOntheBasisOfScreen:instructionRect]];
-                currentAnimInstSubView.image  = [YLGIFImage imageNamed:[NSString stringWithFormat:@"%@.gif",[instctionObj valueForKey:@"imagename"]]];
-                [self.view addSubview:currentAnimInstSubView];
-                [self.view bringSubviewToFront:currentAnimInstSubView];
-                [self addTouchEventwithIndex:index];
-            }
+            [animationCollection stopBeingExcutedAfterSomeMoment];
+            [self proceedToAddRealAnimationWithPoint:CGPointZero andCurrentIndex:index];
+            /* [self addAnimatedSticker:[[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"animation"] valueForKey:@"face"] valueForKey:@"imageA"] AtRect:rectForAnimation];*/
+            //NSInteger newInt = index+1;
+            //[self addAnimatedStickerFromStartAtIndex:newInt];
+            return;
         }
+        else if ([[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"type"] isEqualToString:@"Noplug&play"])
+        {
+            [self proceedToAddRealAnimationWithPoint:currentAnimationTouchPoint andCurrentIndex:index];
+            return;
+        }
+        else if ([[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"type"] isEqualToString:@"round&play"])
+        {
+            NSDictionary *instctionObj = [[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"instraction"];
+            CGRect instructionRect = CGRectMake([[[instctionObj valueForKey:@"position"] valueForKey:@"x"] floatValue],
+                                                [[[instctionObj valueForKey:@"position"] valueForKey:@"y"] floatValue],
+                                                [[[instctionObj valueForKey:@"size"] valueForKey:@"width"] floatValue],
+                                                [[[instctionObj valueForKey:@"size"] valueForKey:@"height"] floatValue]);
+            currentAnimInstSubView = [[YLImageView alloc]initWithFrame:[self rectOntheBasisOfScreen:instructionRect]];
+            currentAnimInstSubView.image  = [YLGIFImage imageNamed:[NSString stringWithFormat:@"%@.gif",[instctionObj valueForKey:@"imagename"]]];
+            [self.view addSubview:currentAnimInstSubView];
+            [self.view bringSubviewToFront:currentAnimInstSubView];
+            [self addBeizerSquarewithIndex:currentTapIndex];
+            //[self addTouchEventwithIndex:index];
+        }
+        else
+        {
+            NSDictionary *instctionObj = [[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"instraction"];
+            CGRect instructionRect = CGRectMake([[[instctionObj valueForKey:@"position"] valueForKey:@"x"] floatValue],
+                                                [[[instctionObj valueForKey:@"position"] valueForKey:@"y"] floatValue],
+                                                [[[instctionObj valueForKey:@"size"] valueForKey:@"width"] floatValue],
+                                                [[[instctionObj valueForKey:@"size"] valueForKey:@"height"] floatValue]);
+            currentAnimInstSubView = [[YLImageView alloc]initWithFrame:[self rectOntheBasisOfScreen:instructionRect]];
+            currentAnimInstSubView.image  = [YLGIFImage imageNamed:[NSString stringWithFormat:@"%@.gif",[instctionObj valueForKey:@"imagename"]]];
+            [self.view addSubview:currentAnimInstSubView];
+            [self.view bringSubviewToFront:currentAnimInstSubView];
+            [self addTouchEventwithIndex:index];
+        }
+    }
 }
-    
+
     -(void)addBeizerSquarewithIndex:(NSInteger)index
     {
         hasStartedBezierForAnimation = YES;
@@ -2082,18 +2086,18 @@ static CGRect CaptionTextViewMinRect;
      "rightB":0,
      "downA":0,
      "downB":0
-
+     
      */
     //Get Boundries for Different Screen Size
     CGFloat boundrytopA = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"topA"] floatValue]];
-    CGFloat boundrytopB = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"topB"] floatValue]];
+    // CGFloat boundrytopB = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"topB"] floatValue]];
     CGFloat boundrybottomA = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"downA"] floatValue]];
-    CGFloat boundrybottomB = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"downB"] floatValue]];
+    // CGFloat boundrybottomB = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"downB"] floatValue]];
     CGFloat boundryleftA = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"leftA"] floatValue]];
-    CGFloat boundryleftB = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"leftB"] floatValue]];
+    //  CGFloat boundryleftB = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"leftB"] floatValue]];
     CGFloat boundryrightA = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"rightA"] floatValue]];
-    CGFloat boundryrightB = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"rightB"] floatValue]];
-
+    // CGFloat boundryrightB = [self DifferenceInYAxisFromPoint:[[currentBoundry valueForKey:@"rightB"] floatValue]];
+    
     
     
     NSDictionary *currentAnimationSize = [[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"animation"] valueForKey:@"sizeDefault"];
@@ -2102,76 +2106,76 @@ static CGRect CaptionTextViewMinRect;
     CGFloat widthFromJson = [self DifferenceInXAxisFromPoint:[[currentAnimationSize valueForKey:@"width"] floatValue]];
     CGFloat heightFromJson = [self DifferenceInYAxisFromPoint:[[currentAnimationSize valueForKey:@"height"] floatValue]];
     NSDictionary *centerPointObj = [[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"animation"] valueForKey:@"centerPoint"];
-    if (touchPoint.y<boundrytopA||touchPoint.x<boundryleftA||(touchPoint.x>boundryrightB && boundryrightB != 0)||(touchPoint.y>boundrybottomB && boundrybottomB != 0)) {
+    if (touchPoint.y<boundrytopA||touchPoint.x<boundryleftA || (touchPoint.x>boundryrightA && boundryrightA != 0) ||(touchPoint.y>boundrybottomA && boundrybottomA != 0)) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"There isn’t any room!" message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
         
         return;
     }
-   
-    if (touchPoint.y>boundrytopA && touchPoint.y<boundrytopB)
-    {
-        //Checking for the point inside the top boundries.
-        // Should Shrink because we have big gif frame
-        
-        CGFloat newSizeHeight = heightFromJson - boundrytopB+touchPoint.y;
-        CGFloat newSizeWidth = (widthFromJson/heightFromJson)*newSizeHeight;
-        rectForAnimation = CGRectMake(touchPoint.x, touchPoint.y,
-                                      newSizeWidth,
-                                      newSizeHeight);
-        CGFloat xFactor = newSizeWidth/widthFromJson;
-        CGFloat yFactor = newSizeHeight/heightFromJson;
-        
-        rectForAnimation.origin = [self pointFromAnimationsRealPoint:touchPoint fromCenterX:[[centerPointObj valueForKey:@"x"] floatValue]*xFactor fromCenterY:[[centerPointObj valueForKey:@"y"] floatValue]*yFactor];
-    }
-    else if (touchPoint.y>boundrybottomA && touchPoint.y<boundrybottomB)
-    {
-        //Checking for the point inside the bottom boundries.
-        // Should Shrink because we have big gif frame
-        
-        CGFloat newSizeHeight = heightFromJson - boundrybottomA+touchPoint.y;
-        CGFloat newSizeWidth = (widthFromJson/heightFromJson)*newSizeHeight;
-        rectForAnimation = CGRectMake(touchPoint.x, touchPoint.y,
-                                      newSizeWidth,
-                                      newSizeHeight);
-        CGFloat xFactor = newSizeWidth/widthFromJson;
-        CGFloat yFactor = newSizeHeight/heightFromJson;
-        
-        rectForAnimation.origin = [self pointFromAnimationsRealPoint:touchPoint fromCenterX:[[centerPointObj valueForKey:@"x"] floatValue]*xFactor fromCenterY:[[centerPointObj valueForKey:@"y"] floatValue]*yFactor];
-    }
-    else if (touchPoint.x>boundryleftA && touchPoint.x<boundryleftB)
-    {
-        //Checking for the point inside the left boundries.
-        // Should Shrink because we have big gif frame
-        
-        
-        
-        CGFloat newSizeWidth = widthFromJson - boundryleftB+touchPoint.x;
-        CGFloat newSizeHeight = (widthFromJson/heightFromJson)*newSizeWidth;
-        rectForAnimation = CGRectMake(touchPoint.x, touchPoint.y,
-                                      newSizeWidth,
-                                      newSizeHeight);
-        CGFloat xFactor = newSizeWidth/widthFromJson;
-        CGFloat yFactor = newSizeHeight/heightFromJson;
-        
-        rectForAnimation.origin = [self pointFromAnimations2RealPoint:touchPoint fromCenterX:[[centerPointObj valueForKey:@"x"] floatValue]*xFactor fromCenterY:[[centerPointObj valueForKey:@"y"] floatValue]*yFactor];
-    }
-    else if (touchPoint.x>boundryrightA && touchPoint.x<boundryrightB)
-    {
-        //Checking for the point inside the right boundries.
-        // Should Shrink because we have big gif frame
-        
-        CGFloat newSizeWidth = widthFromJson - boundryrightA+touchPoint.x;
-        CGFloat newSizeHeight = (widthFromJson/heightFromJson)*newSizeWidth;
-        rectForAnimation = CGRectMake(touchPoint.x, touchPoint.y,
-                                      newSizeWidth,
-                                      newSizeHeight);
-        CGFloat xFactor = newSizeWidth/widthFromJson;
-        CGFloat yFactor = newSizeHeight/heightFromJson;
-        
-        rectForAnimation.origin = [self pointFromAnimationsRealPoint:touchPoint fromCenterX:[[centerPointObj valueForKey:@"x"] floatValue]*xFactor fromCenterY:[[centerPointObj valueForKey:@"y"] floatValue]*yFactor];
-    }
+    /************Shrinking logic has been discarded - Sanjay*********/
+    /*if (touchPoint.y>boundrytopA && touchPoint.y<boundrytopB)
+     {
+     //Checking for the point inside the top boundries.
+     // Should Shrink because we have big gif frame
+     
+     CGFloat newSizeHeight = heightFromJson - boundrytopB+touchPoint.y;
+     CGFloat newSizeWidth = (widthFromJson/heightFromJson)*newSizeHeight;
+     rectForAnimation = CGRectMake(touchPoint.x, touchPoint.y,
+     newSizeWidth,
+     newSizeHeight);
+     CGFloat xFactor = newSizeWidth/widthFromJson;
+     CGFloat yFactor = newSizeHeight/heightFromJson;
+     
+     rectForAnimation.origin = [self pointFromAnimationsRealPoint:touchPoint fromCenterX:[[centerPointObj valueForKey:@"x"] floatValue]*xFactor fromCenterY:[[centerPointObj valueForKey:@"y"] floatValue]*yFactor];
+     }
+     else if (touchPoint.y>boundrybottomA && touchPoint.y<boundrybottomB)
+     {
+     //Checking for the point inside the bottom boundries.
+     // Should Shrink because we have big gif frame
+     
+     CGFloat newSizeHeight = heightFromJson - boundrybottomA+touchPoint.y;
+     CGFloat newSizeWidth = (widthFromJson/heightFromJson)*newSizeHeight;
+     rectForAnimation = CGRectMake(touchPoint.x, touchPoint.y,
+     newSizeWidth,
+     newSizeHeight);
+     CGFloat xFactor = newSizeWidth/widthFromJson;
+     CGFloat yFactor = newSizeHeight/heightFromJson;
+     
+     rectForAnimation.origin = [self pointFromAnimationsRealPoint:touchPoint fromCenterX:[[centerPointObj valueForKey:@"x"] floatValue]*xFactor fromCenterY:[[centerPointObj valueForKey:@"y"] floatValue]*yFactor];
+     }
+     else if (touchPoint.x>boundryleftA && touchPoint.x<boundryleftB)
+     {
+     //Checking for the point inside the left boundries.
+     // Should Shrink because we have big gif frame
+     
+     
+     
+     CGFloat newSizeWidth = widthFromJson - boundryleftB+touchPoint.x;
+     CGFloat newSizeHeight = (widthFromJson/heightFromJson)*newSizeWidth;
+     rectForAnimation = CGRectMake(touchPoint.x, touchPoint.y,
+     newSizeWidth,
+     newSizeHeight);
+     CGFloat xFactor = newSizeWidth/widthFromJson;
+     CGFloat yFactor = newSizeHeight/heightFromJson;
+     
+     rectForAnimation.origin = [self pointFromAnimations2RealPoint:touchPoint fromCenterX:[[centerPointObj valueForKey:@"x"] floatValue]*xFactor fromCenterY:[[centerPointObj valueForKey:@"y"] floatValue]*yFactor];
+     }
+     else if (touchPoint.x>boundryrightA && touchPoint.x<boundryrightB)
+     {
+     //Checking for the point inside the right boundries.
+     // Should Shrink because we have big gif frame
+     
+     CGFloat newSizeWidth = widthFromJson - boundryrightA+touchPoint.x;
+     CGFloat newSizeHeight = (widthFromJson/heightFromJson)*newSizeWidth;
+     rectForAnimation = CGRectMake(touchPoint.x, touchPoint.y,
+     newSizeWidth,
+     newSizeHeight);
+     CGFloat xFactor = newSizeWidth/widthFromJson;
+     CGFloat yFactor = newSizeHeight/heightFromJson;
+     
+     rectForAnimation.origin = [self pointFromAnimationsRealPoint:touchPoint fromCenterX:[[centerPointObj valueForKey:@"x"] floatValue]*xFactor fromCenterY:[[centerPointObj valueForKey:@"y"] floatValue]*yFactor];
+     }*/
     else
     {
         // else create particular rect.
@@ -5251,7 +5255,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
             [self doPrintScreen];
             haveAnimationOnPage = NO;
             refAnimatedSticker = nil;
-
+            
         }
     }
 }
@@ -5283,10 +5287,10 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 }
 -(CGRect)rectOntheBasisOfScreen:(CGRect)rect
 {
-// Default value of in json is of iPhone 6 so we will find rect for iphone 5 and 6p
+    // Default value of in json is of iPhone 6 so we will find rect for iphone 5 and 6p
     CGFloat widthOf6 = 375;
     CGFloat heightOf6 = 667;
-   // CGFloat x,y,width,height;
+    // CGFloat x,y,width,height;
     CGFloat xFactor = [UIScreen mainScreen].bounds.size.width/widthOf6;
     CGFloat yFactor = [UIScreen mainScreen].bounds.size.height/heightOf6;
     return CGRectMake(rect.origin.x*xFactor, rect.origin.y*yFactor, rect.size.width*xFactor, rect.size.height*xFactor);
@@ -5335,7 +5339,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         [refAnimatedSticker removeFromSuperview];
     }];
     /*[refAnimatedSticker setUserInteractionEnabled:NO];
-    [refAnimatedSticker removeFromSuperview];*/
+     [refAnimatedSticker removeFromSuperview];*/
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
@@ -5364,72 +5368,68 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     }
     haveAnimationOnPage = NO;
     refAnimatedSticker = nil;
-   
+    
 }
 
 -(void)startAnimatingAfterDelay
 {
     
-   /* NSArray *arrOfTimes = @[@0,@1,@4];
-    [self.timerAnimation invalidate];
-    self.timerAnimation = nil;
-   __block CGFloat maxDuration = 0.0;
-   __block int passedTime = 0;*/
-   /* self.timerAnimation = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        
-        
-        if ([arrOfTimes containsObject:[NSNumber numberWithInteger:timer.timeInterval]])
-        {
-            passedTime++;
-            if ([arrOfTimes containsObject:[NSNumber numberWithInteger:passedTime]])
-            {
-                NSInteger index = [arrOfTimes indexOfObject:[NSNumber numberWithInteger:passedTime]];
-                ComicItemAnimatedSticker * imageView = [arrOfActiveAnimations objectAtIndex:index];
-                
-                YLGIFImage *imgin = [YLGIFImage imageNamed:[NSString stringWithFormat:@"%@.gif",imageView.animatedStickerName]];
-                imageView.image = imgin;
-                imageView.hidden = NO;
-                //[imageView stopAnimating];
-                CGFloat duration = imgin.duration;
-                if (maxDuration<duration+imageView.startDelay)
-                {
-                    maxDuration = duration+imageView.startDelay;
-                    indexMaxRun = index;
-                   // NSLog(@"majored index %ld",(long)indexMaxRun);
-                }
-                [self performSelector:@selector(stopImageViewWithArray:) withObject:@[imageView,[NSNumber numberWithInt:index]] afterDelay:imageView.startDelay+duration];
-            }
-        }
-    }];*/
-//    self.timerAnimation = [NSTimer timerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-//        
-//            }];
     
     
     
     
+    /***New Code By Ramesh**/
     ComicItemAnimatedSticker *imageView;
     CGFloat maxDuration = 0.0;
     for (int j=0; j<arrOfActiveAnimations.count; j++)
     {
         imageView = [arrOfActiveAnimations objectAtIndex:j];
-        //UIImage *newImage = [UIImage sd_animatedGIFNamed:imageView.animatedStickerName];
-        YLGIFImage   *imgin = [YLGIFImage imageNamed:[NSString stringWithFormat:@"%@.gif",imageView.animatedStickerName]];
-        imageView.image = imgin;
+        YYImage *image = [YYImage imageNamed:imageView.animatedStickerName];
+        imageView.image = image;
+        NSString* path= [[NSBundle mainBundle] pathForResource:imageView.animatedStickerName ofType:@"gif"];
+        NSData *data = [[NSFileManager defaultManager] contentsAtPath:path];
+        UIImage *im =  [UIImage animatedImageWithAnimatedGIFData:data];
         imageView.hidden = NO;
-        [imageView stopAnimating];
-        CGFloat duration = imgin.duration*2.5;
         
+        [imageView stopAnimating];
+        CGFloat duration = im.duration;//*2.5;
+        data = nil;
+        im = nil;
         if (maxDuration<duration+imageView.startDelay)
         {
             maxDuration = duration+imageView.startDelay;
             indexMaxRun = j;
             NSLog(@"majored index %ld",(long)indexMaxRun);
         }
-     
         [self performSelector:@selector(startImageView:) withObject:imageView afterDelay:imageView.startDelay];
         [self performSelector:@selector(stopImageViewWithArray:) withObject:@[imageView,[NSNumber numberWithInt:j]] afterDelay:imageView.startDelay+duration];
     }
+    
+    /*** Old Code By Sanjay
+     
+     ComicItemAnimatedSticker *imageView;
+     CGFloat maxDuration = 0.0;
+     for (int j=0; j<arrOfActiveAnimations.count; j++)
+     {
+     imageView = [arrOfActiveAnimations objectAtIndex:j];
+     //UIImage *newImage = [UIImage sd_animatedGIFNamed:imageView.animatedStickerName];
+     YLGIFImage   *imgin = [YLGIFImage imageNamed:[NSString stringWithFormat:@"%@.gif",imageView.animatedStickerName]];
+     imageView.image = imgin;
+     imageView.hidden = NO;
+     [imageView stopAnimating];
+     CGFloat duration = imgin.duration*2.5;
+     
+     if (maxDuration<duration+imageView.startDelay)
+     {
+     maxDuration = duration+imageView.startDelay;
+     indexMaxRun = j;
+     NSLog(@"majored index %ld",(long)indexMaxRun);
+     }
+     
+     [self performSelector:@selector(startImageView:) withObject:imageView afterDelay:imageView.startDelay];
+     [self performSelector:@selector(stopImageViewWithArray:) withObject:@[imageView,[NSNumber numberWithInt:j]] afterDelay:imageView.startDelay+duration];
+     }
+     **/
     
 }
 -(void)createOneGifInBackgroundFromCurrentArray:(NSMutableArray *)array
@@ -5439,15 +5439,16 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     {
         ComicItemAnimatedSticker *imageView;
         imageView = [arrOfActiveAnimations objectAtIndex:i];
-    NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] init];
-    NSString *path= @"";
-    NSData *data = nil;
-    path=[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",imageView.animatedStickerName] ofType:@"gif"];
-    data = [[NSFileManager defaultManager] contentsAtPath:path];
-    [tempDict setObject:data forKey:@"GifData"];
-    [tempDict setObject:[NSString stringWithFormat:@"%f",imageView.startDelay] forKey:@"StartTime"];
-    [tempDict setObject:NSStringFromCGPoint(imageView.frame.origin) forKey:@"Position"];
-
+        NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] init];
+        NSString *path= @"";
+        NSData *data = nil;
+        path=[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",imageView.animatedStickerName] ofType:@"gif"];
+        data = [[NSFileManager defaultManager] contentsAtPath:path];
+        [tempDict setObject:data forKey:@"GifData"];
+        [tempDict setObject:[NSString stringWithFormat:@"%f",imageView.startDelay] forKey:@"StartTime"];
+        
+        [tempDict setObject:NSStringFromCGPoint([self convertedPointsForCurrentPoints:imageView.frame.origin]) forKey:@"Position"];
+        
         [passingArray addObject:tempDict];
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -5459,21 +5460,56 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
             // This will be called on the main thread, so that
             // you can update the UI, for example.
             //            self.animatedImage.image = [UIImage imageWithContentsOfFile:[cg doImageCombine:tempArray]];
-            mainAnimationGifView.image = [cg doImageCombine:passingArray];
-            [self.view bringSubviewToFront:mainAnimationGifView];
+            [cg doImageCombine:passingArray SavedFileName:@"NewFile" completion:^(BOOL finished, UIImage *outImage, NSString *outSavedPath) {
+                if (finished)
+                {
+                    haveCreateMainGif = YES;
+                    mainAnimationGifView.hidden = YES;
+                    mainAnimationGifView.image = outImage;
+                    refAnimatedSticker = mainAnimationGifView;
+                }
+            }];
+            
         });
     });
+}
+-(void)stopArrayOfGifInLoopAndRemoveExtraGifs
+{
+    
+    for (int j=0; j<arrOfActiveAnimations.count; j++)
+    {
+        ComicItemAnimatedSticker *imageView = [arrOfActiveAnimations objectAtIndex:j];
+        [imageView removeFromSuperview];
+    }
+    
+}
+-(CGPoint)convertedPointsForCurrentPoints:(CGPoint)currentPoint
+{
+    CGFloat xFactor = 1242/[UIScreen mainScreen].bounds.size.width;
+    CGFloat yFactor = 2208/[UIScreen mainScreen].bounds.size.height;
+    CGFloat diffy = -9*yFactor;
+    CGFloat diffx = -4*xFactor;
+    
+    CGFloat xPoint = currentPoint.x*xFactor;
+    CGFloat yPoint = currentPoint.y*yFactor;
+    
+    return  CGPointMake(xPoint+diffx,yPoint+diffy);
 }
 -(void)stopImageViewWithArray:(NSArray *)objects
 {
     
     ComicItemAnimatedSticker *imageview =(ComicItemAnimatedSticker *)[objects firstObject];
     NSNumber *index = (NSNumber *)[objects objectAtIndex:1];
-   // NSLog(@"stopped %@ gifName",imageview.animatedStickerName);
+    // NSLog(@"stopped %@ gifName",imageview.animatedStickerName);
     [imageview stopAnimating];
-   // imageview.hidden = YES;
+    // imageview.hidden = YES;
     int ind = [index intValue];
-    if (ind==indexMaxRun && haveAnimationOnPage)
+    if (ind==indexMaxRun && haveAnimationOnPage && haveCreateMainGif)
+    {
+        mainAnimationGifView.hidden = NO;
+        [self stopArrayOfGifInLoopAndRemoveExtraGifs];
+    }
+    else if (ind==indexMaxRun && haveAnimationOnPage)
     {
         [self startAnimatingAfterDelay];
     }

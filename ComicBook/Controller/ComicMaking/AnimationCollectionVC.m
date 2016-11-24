@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     btn_Recycle.hidden = YES;
-        // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -38,15 +38,15 @@
 {
     if (IS_IPHONE_6)
     {
-        return 20;
+        return 19.5;
     }
     else if (IS_IPHONE_6P)
     {
-        return 25;
+        return 23.8;
     }
     else
     {
-        return 17;
+        return 4.25;
     }
 }
 -(void)adjustLayoutForAllThings
@@ -54,29 +54,28 @@
     if (IS_IPHONE_5)
     {
         //btn_Exclaimation.frame = CGRectMake(10, 63, 18, 42);
-        btn_Cross.frame = CGRectMake(10, 55, 18, 27);
-        clc_Category.frame = CGRectMake(43, 85, 277, 30);
-        clc_Animations.frame = CGRectMake(43, 20, 277, 60);
-        btn_Recycle.frame = CGRectMake(5.5, 25, 28, 28);
-
+        btn_Cross.frame = CGRectMake(20, 106, 20, 17.2);
+        clc_Category.frame = CGRectMake(85, 102, 235, 35);
+        clc_Animations.frame = CGRectMake(69, 23, 251, 78);
+        btn_Recycle.frame = CGRectMake(20, 70, 25, 25);
+        
     }
     else if (IS_IPHONE_6)
     {
         //btn_Exclaimation.frame = CGRectMake(11.5, 75.5, 23.5, 56);
-        btn_Cross.frame = CGRectMake(10, 58, 23.5, 37.5);
-        clc_Category.frame = CGRectMake(43, 100, 332, 30);
-        clc_Animations.frame = CGRectMake(43, 35, 332, 66);
-        btn_Recycle.frame = CGRectMake(7, 30, 30, 30);
-
+        btn_Cross.frame = CGRectMake(20, 116, 25, 21.42);
+        clc_Category.frame = CGRectMake(88, 110, 290, 40);
+        clc_Animations.frame = CGRectMake(72, 25, 302, 80);
+        btn_Recycle.frame = CGRectMake(20, 73, 28, 28);
+        
     }
     else if (IS_IPHONE_6P)
     {
         //btn_Exclaimation.frame = CGRectMake(11.5, 78.5, 23.5, 56);
-        btn_Cross.frame = CGRectMake(10, 78, 23.5, 37.5);
-        clc_Category.frame = CGRectMake(43, 105, 371, 38);
-        clc_Animations.frame = CGRectMake(43, 40, 371, 77);
-        btn_Recycle.frame = CGRectMake(7, 43, 30, 30);
-
+        btn_Cross.frame = CGRectMake(23, 129, 27, 23.13);
+        clc_Category.frame = CGRectMake(98, 123, 316, 40);
+        clc_Animations.frame = CGRectMake(83, 30, 331, 79);
+        btn_Recycle.frame = CGRectMake(23, 78, 29, 29);
     }
 }
 -(void)viewDidLayoutSubviews
@@ -109,7 +108,7 @@
         }];
         
     }
-
+    
 }
 -(id)bindJson:(NSString*)fileName{
     
@@ -145,11 +144,11 @@
     
     //    NSMutableArray* stickeyArray = [[self getAllStickeyList:@"0" ArrayObje:arrayValue] mutableCopy];
     
-   // float scoreValue = [AppHelper getCurrentScoreFromDB];
-   // NSMutableArray* stickeyArray = [[self getAllStickeyList:[NSString stringWithFormat:@"%.f", scoreValue]
-   //                                               ArrayObje:arrayValue] mutableCopy];
-   // NSMutableArray *arrBefore = [self addOtherStickersByConditions];
-   // [arrBefore addObjectsFromArray:stickeyArray];
+    // float scoreValue = [AppHelper getCurrentScoreFromDB];
+    // NSMutableArray* stickeyArray = [[self getAllStickeyList:[NSString stringWithFormat:@"%.f", scoreValue]
+    //                                               ArrayObje:arrayValue] mutableCopy];
+    // NSMutableArray *arrBefore = [self addOtherStickersByConditions];
+    // [arrBefore addObjectsFromArray:stickeyArray];
     
     
     
@@ -158,11 +157,11 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
                               @"categoryid CONTAINS[cd] %@", strCategoryId];
     NSArray *matchingDicts = [arrayValue filteredArrayUsingPredicate:predicate];
-   NSMutableArray* stickeyArray = [matchingDicts mutableCopy];
+    NSMutableArray* stickeyArray = [matchingDicts mutableCopy];
     
     
     
-   
+    
     
     return stickeyArray;
 }
@@ -187,7 +186,7 @@
     if (clc_Category == collectionView)
     {
         NSLog(@"%ld",(long)indexPath.row);
-    static NSString *identifier = @"AnimationCategoryCollectionViewCell";
+        static NSString *identifier = @"AnimationCategoryCollectionViewCell";
         AnimationCategoryCollectionViewCell *cell =  [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
         cell.img_Category.image = [UIImage imageNamed:[[arrOfCategoryList objectAtIndex:indexPath.row] valueForKey:@"imagename"]];
         return cell;
@@ -251,7 +250,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
         cell.img_Category.image = [UIImage imageNamed:[[arrOfCategoryList objectAtIndex:row] valueForKey:@"imagename_selected"]];
         [self makeCategorySelected:previousSelected ForBool:NO];
         previousSelected = row;
-
+        
     }
     else
     {
@@ -279,9 +278,9 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     /*CGFloat pageWidth = scrollView.frame.size.width; // you need to have a **iVar** with getter for scrollView
-    float fractionalPage = scrollView.contentOffset.x / ((clc_Animations.frame.size.height+[self spacingInAnimations])*6);
-    NSInteger page = lround(fractionalPage);
-    //self.pageController.currentPage = page;*/
+     float fractionalPage = scrollView.contentOffset.x / ((clc_Animations.frame.size.height+[self spacingInAnimations])*6);
+     NSInteger page = lround(fractionalPage);
+     //self.pageController.currentPage = page;*/
     NSInteger page = [self indexFromOffset:scrollView.contentOffset.x];
     if (previousSelected == page || page <0 || page>5)
     {
@@ -338,13 +337,13 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
     [self hideGarbageBin];
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
