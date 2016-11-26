@@ -341,6 +341,7 @@
 		0C66E6061C95756A005E4548 /* Enhancement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C66E6051C95756A005E4548 /* Enhancement.m */; };
 		0C66E60A1C957605005E4548 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C66E6091C957605005E4548 /* CustomView.m */; };
 		0C76AF241CB2E83700EBB61D /* FabricAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C76AF231CB2E83700EBB61D /* FabricAnalytics.m */; };
+		0C7A89871DE8B6C400CF4E8D /* RecentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A89861DE8B6C400CF4E8D /* RecentAnimation.m */; };
 		0C7DCF541D52907500ABAEAD /* animation_1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0C7DCF531D52907500ABAEAD /* animation_1.gif */; };
 		0C857BFB1C9352D000F0B911 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C857BFA1C9352D000F0B911 /* countries.json */; };
 		0C857C171C94BEAA00F0B911 /* countries_images.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C857C161C94BEAA00F0B911 /* countries_images.json */; };
@@ -1106,6 +1107,8 @@
 		0C66E6091C957605005E4548 /* CustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
 		0C76AF221CB2E83700EBB61D /* FabricAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FabricAnalytics.h; sourceTree = "<group>"; };
 		0C76AF231CB2E83700EBB61D /* FabricAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FabricAnalytics.m; sourceTree = "<group>"; };
+		0C7A89851DE8B6C400CF4E8D /* RecentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentAnimation.h; sourceTree = "<group>"; };
+		0C7A89861DE8B6C400CF4E8D /* RecentAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentAnimation.m; sourceTree = "<group>"; };
 		0C7DCF531D52907500ABAEAD /* animation_1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = animation_1.gif; sourceTree = "<group>"; };
 		0C857BFA1C9352D000F0B911 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
 		0C857C161C94BEAA00F0B911 /* countries_images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries_images.json; sourceTree = "<group>"; };
@@ -1426,6 +1429,8 @@
 				0C32C99A1CB0B067001DA121 /* Stickers.m */,
 				0C8C61EB1CB14445008073FA /* ComicSlidesData.h */,
 				0C8C61EC1CB14445008073FA /* ComicSlidesData.m */,
+				0C7A89851DE8B6C400CF4E8D /* RecentAnimation.h */,
+				0C7A89861DE8B6C400CF4E8D /* RecentAnimation.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -3983,6 +3988,7 @@
 				0C6668951C84358600FEB11F /* STHTTPRequest.m in Sources */,
 				0C6668191C84358600FEB11F /* main.m in Sources */,
 				0C6667BC1C84358600FEB11F /* RCFaceBook.m in Sources */,
+				0C7A89871DE8B6C400CF4E8D /* RecentAnimation.m in Sources */,
 				0C6668BC1C84358600FEB11F /* SlidesScrollView.m in Sources */,
 				0C66688C1C84358600FEB11F /* STTwitterAPI.m in Sources */,
 				0C6668381C84358600FEB11F /* Constants.m in Sources */,
