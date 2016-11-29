@@ -195,16 +195,20 @@
         self.image = [UIImage imageWithData:[decoder decodeObjectForKey:@"animatedStickerimage"]];
         self.frame = CGRectFromString([decoder decodeObjectForKey:@"animatedStickerObjFrame"]);
         self.bounds = CGRectFromString([decoder decodeObjectForKey:@"animatedStickerBounds"]);
-        self.angle = [[decoder decodeObjectForKey:@"animatedStickerAngle"] floatValue];
-        self.scaleValueX = [[decoder decodeObjectForKey:@"animatedStickerScaleX"] floatValue];
-        self.scaleValueY = [[decoder decodeObjectForKey:@"animatedStickerScaleY"] floatValue];
-        self.tX = [[decoder decodeObjectForKey:@"animatedStickerTX"] floatValue];
-        self.tY = [[decoder decodeObjectForKey:@"animatedStickerTY"] floatValue];
-        self.animatedStickerName  = [decoder decodeObjectForKey:@"animatedStickerName"];
-        self.startDelay = [[decoder decodeObjectForKey:@"startDelay"] floatValue];
-        self.endDelay = [[decoder decodeObjectForKey:@"endDelay"] floatValue];
-
         self.objFrame = CGRectFromString([decoder decodeObjectForKey:@"animatedStickerObjFrame"]);
+        self.combineAnimationFileName = [decoder decodeObjectForKey:@"combineAnimationFileName"];
+        
+//        self.angle = [[decoder decodeObjectForKey:@"animatedStickerAngle"] floatValue];
+//        self.scaleValueX = [[decoder decodeObjectForKey:@"animatedStickerScaleX"] floatValue];
+//        self.scaleValueY = [[decoder decodeObjectForKey:@"animatedStickerScaleY"] floatValue];
+//        self.tX = [[decoder decodeObjectForKey:@"animatedStickerTX"] floatValue];
+//        self.tY = [[decoder decodeObjectForKey:@"animatedStickerTY"] floatValue];
+//        self.animatedStickerName  = [decoder decodeObjectForKey:@"animatedStickerName"];
+//        self.startDelay = [[decoder decodeObjectForKey:@"startDelay"] floatValue];
+//        self.endDelay = [[decoder decodeObjectForKey:@"endDelay"] floatValue];
+    }
+    for (ComicItemAnimatedComponent* objComp in [self subviews]) {
+        [objComp removeFromSuperview];
     }
     
     return [self initWithFrame:[self frame]];
@@ -212,18 +216,21 @@
 -(void)encodeWithCoder:(NSCoder *)aCoder{
 //    self.objFrame = self.frame;
     [super encodeWithCoder:aCoder];
-    [aCoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"animatedStickerimage"];
     [aCoder encodeObject:NSStringFromCGRect(self.frame) forKey:@"animatedStickerFrame"];
     [aCoder encodeObject:NSStringFromCGRect(self.bounds) forKey:@"animatedStickerBounds"];
     [aCoder encodeObject:NSStringFromCGRect(self.objFrame) forKey:@"animatedStickerObjFrame"];
-    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self rotation]] forKey:@"animatedStickerAngle"];
-    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.startDelay] forKey:@"startDelay"];
-    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.endDelay] forKey:@"startDelay"];
-    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self xscale]] forKey:@"animatedStickerScaleX"];
-    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self yscale]] forKey:@"animatedStickerScaleY"];
-    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.tx] forKey:@"animatedStickerTX"];
-    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.ty] forKey:@"animatedStickerTY"];
-    [aCoder encodeObject:self.animatedStickerName forKey:@"animatedStickerName"];
+    [aCoder encodeObject:self.combineAnimationFileName forKey:@"combineAnimationFileName"];
+    [aCoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"animatedStickerimage"];
+    
+//    [aCoder encodeObject:self.animatedStickerName forKey:@"animatedStickerName"];
+//    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self rotation]] forKey:@"animatedStickerAngle"];
+//    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.startDelay] forKey:@"startDelay"];
+//    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.endDelay] forKey:@"startDelay"];
+//    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self xscale]] forKey:@"animatedStickerScaleX"];
+//    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self yscale]] forKey:@"animatedStickerScaleY"];
+//    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.tx] forKey:@"animatedStickerTX"];
+//    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.ty] forKey:@"animatedStickerTY"];
+//    [aCoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"animatedStickerimage"];
 }
 
 - (CGFloat) xscale
@@ -254,6 +261,68 @@
 {
     CGAffineTransform t = self.transform;
     return t.ty;
+}
+
+@end
+
+#pragma mark - ComicItemAnimatedComponent
+
+@implementation ComicItemAnimatedComponent
+
+- (id)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self != nil) {
+        self.frame = frame;
+    }
+    return self;
+}
+
+-(id)addItemWithImage:(id)sticker{
+    self.contentMode = UIViewContentModeScaleAspectFit;
+    self.image = sticker;
+    
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder{
+    self = [super initWithCoder:decoder];
+    if (self)
+    {
+        self.image = [UIImage imageWithData:[decoder decodeObjectForKey:@"animatedStickerimage"]];
+        self.frame = CGRectFromString([decoder decodeObjectForKey:@"animatedStickerObjFrame"]);
+        self.bounds = CGRectFromString([decoder decodeObjectForKey:@"animatedStickerBounds"]);
+        self.objFrame = CGRectFromString([decoder decodeObjectForKey:@"animatedStickerObjFrame"]);
+        
+        
+        //        self.angle = [[decoder decodeObjectForKey:@"animatedStickerAngle"] floatValue];
+        //        self.scaleValueX = [[decoder decodeObjectForKey:@"animatedStickerScaleX"] floatValue];
+        //        self.scaleValueY = [[decoder decodeObjectForKey:@"animatedStickerScaleY"] floatValue];
+        //        self.tX = [[decoder decodeObjectForKey:@"animatedStickerTX"] floatValue];
+        //        self.tY = [[decoder decodeObjectForKey:@"animatedStickerTY"] floatValue];
+                self.animatedStickerName  = [decoder decodeObjectForKey:@"animatedStickerName"];
+                self.startDelay = [[decoder decodeObjectForKey:@"startDelay"] floatValue];
+                self.endDelay = [[decoder decodeObjectForKey:@"endDelay"] floatValue];
+    }
+    
+    return [self initWithFrame:[self frame]];
+}
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    //    self.objFrame = self.frame;
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeObject:NSStringFromCGRect(self.frame) forKey:@"animatedStickerFrame"];
+    [aCoder encodeObject:NSStringFromCGRect(self.bounds) forKey:@"animatedStickerBounds"];
+    [aCoder encodeObject:NSStringFromCGRect(self.objFrame) forKey:@"animatedStickerObjFrame"];
+    [aCoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"animatedStickerimage"];
+    
+        [aCoder encodeObject:self.animatedStickerName forKey:@"animatedStickerName"];
+    //    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self rotation]] forKey:@"animatedStickerAngle"];
+        [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.startDelay] forKey:@"startDelay"];
+        [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.endDelay] forKey:@"startDelay"];
+    //    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self xscale]] forKey:@"animatedStickerScaleX"];
+    //    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self yscale]] forKey:@"animatedStickerScaleY"];
+    //    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.tx] forKey:@"animatedStickerTX"];
+    //    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.ty] forKey:@"animatedStickerTY"];
+    //    [aCoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"animatedStickerimage"];
 }
 
 @end

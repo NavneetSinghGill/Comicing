@@ -12,6 +12,7 @@
 #import "UIColor+colorWithHexString.h"
 #import "ComicItem.h"
 #import "UIImage+GIF.h"
+#import "YYImage.h"
 
 const CGSize viewSizeForIPhone5            = {195, 330};//{214, 378};
 const CGSize viewSizeForIPhone6            = {225, 385};//{250, 444};
@@ -678,7 +679,17 @@ UILabel *mComicTitle;
                    rectValue:(CGRect)rect
                   ScaleValue:(float)ScaleValue
 {
-    imageView.image = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+    imageView = (ComicItemAnimatedSticker*)imageView;
+    if (((ComicItemAnimatedSticker*)imageView).combineAnimationFileName) {
+        //it had image,
+        NSString *animationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        animationPath = [[animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName] stringByAppendingString:@".gif"];
+        imageView.image = [YYImage imageWithContentsOfFile:animationPath];
+    }
+    
+//    YYImage *image = [YYImage imageNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+//    imageView.image = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+//    imageView.image = image;
     imageView.userInteractionEnabled = YES;
     imageView.userInteractionEnabled = YES;
     imageView.clipsToBounds = NO;

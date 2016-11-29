@@ -487,7 +487,6 @@ CGColorSpaceRef NYXGetRGBColorSpace(void)
 
 + (UIImage *) imageWithView:(UIView *)view paque:(BOOL)isOpaque
 {
-//    UIGraphicsBeginImageContext(cgsi);
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, isOpaque, 1);
     [[UIColor clearColor] set];
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];

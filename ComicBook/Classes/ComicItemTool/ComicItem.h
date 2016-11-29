@@ -16,15 +16,15 @@
 #import "AppConstants.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <CoreAudio/CoreAudioTypes.h>
-#import "YLImageView.h"
-
+#import "YYAnimatedImageView.h"
 
 typedef enum {
     ComicSticker,
     ComicExclamation,
     ComicBubble,
     ComicCaption,
-    ComicAnimatedSticker
+    ComicAnimatedSticker,
+    ComicAnimatedComponent
 } ComicItemType;
 
 @protocol ComicItem <NSObject>
@@ -48,19 +48,33 @@ typedef enum {
 
 #pragma mark - ComicItem Animated Sticker
 
-@interface ComicItemAnimatedSticker : YLImageView<ComicItem> {}
+@interface ComicItemAnimatedSticker : YYAnimatedImageView<ComicItem> {}
+
+//@property (strong, nonatomic) NSString* animatedStickerName;
+//@property (assign, nonatomic) CGFloat startDelay;
+//@property (assign, nonatomic) CGFloat endDelay;
+//@property (assign, nonatomic) CGFloat angle;
+//@property (assign, nonatomic) CGFloat scaleValueX;
+//@property (assign, nonatomic) CGFloat scaleValueY;
+//@property (assign, nonatomic) CGFloat tX;
+//@property (assign, nonatomic) CGFloat tY;
+@property (assign, nonatomic) CGRect objFrame;
+//@property (assign, nonatomic) CGRect frameOfInstruction;
+//@property (assign, nonatomic) CGRect imageOfInstruction;
+@property (strong, nonatomic) NSString* combineAnimationFileName;
+@property (strong, nonatomic) NSString* bubbleString;
+@property (strong, nonatomic) NSMutableArray* animatedComponentArray;
+@end
+
+#pragma mark - ComicItem Animated Sticker
+
+@interface ComicItemAnimatedComponent : YYAnimatedImageView<ComicItem> {}
 
 @property (strong, nonatomic) NSString* animatedStickerName;
 @property (assign, nonatomic) CGFloat startDelay;
 @property (assign, nonatomic) CGFloat endDelay;
-@property (assign, nonatomic) CGFloat angle;
-@property (assign, nonatomic) CGFloat scaleValueX;
-@property (assign, nonatomic) CGFloat scaleValueY;
-@property (assign, nonatomic) CGFloat tX;
-@property (assign, nonatomic) CGFloat tY;
 @property (assign, nonatomic) CGRect objFrame;
-@property (assign, nonatomic) CGRect frameOfInstruction;
-@property (assign, nonatomic) CGRect imageOfInstruction;
+
 @end
 
 #pragma mark - ComicItemExclamation

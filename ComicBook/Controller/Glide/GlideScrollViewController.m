@@ -492,14 +492,18 @@ NSTimer* timerObject;
                 [cmEng setObject:@"1" forKey:@"is_custom"];
                 [cmEng setObject:@"" forKey:@"enhancement_text"];
                 
-                NSString *filePath = [[NSBundle mainBundle] pathForResource:((ComicItemAnimatedSticker*)imageView).animatedStickerName
-                                                                     ofType: @"gif"];
-                
-                NSData *gifData = [NSData dataWithContentsOfFile: filePath];
-                
-                [cmEng setObject:[gifData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]
-                          forKey:@"enhancement_file"];
-                [cmEng setObject:@"gif" forKey:@"enhancement_file_type"];
+                if (((ComicItemAnimatedSticker*)imageView).combineAnimationFileName) {
+                    //it had image,
+                    NSString *animationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                    animationPath = [[animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName] stringByAppendingString:@".gif"];
+                    
+                    NSData *gifData = [NSData dataWithContentsOfFile:animationPath];
+                    
+                    [cmEng setObject:[gifData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]
+                              forKey:@"enhancement_file"];
+                    [cmEng setObject:@"gif" forKey:@"enhancement_file_type"];
+                    
+                }
                 
                 CGFloat midPointX = myRect.origin.x;
                 CGFloat midPointY = myRect.origin.y;
