@@ -92,12 +92,34 @@
         CGFloat lastFloat = 0;
         for (int i=0; i<arrOfCategoryList.count; i++)
         {
-            NSMutableArray *arrIgot = [self getAllStickeyList:[[arrOfCategoryList objectAtIndex:i] valueForKey:@"categoryid"]];
+            NSMutableArray *arrIgot = [[NSMutableArray alloc] init];
+            //Binding Recent one.
+            if ([[[arrOfCategoryList objectAtIndex:i] valueForKey:@"categoryid"] isEqualToString:@"-1"]) {
+                NSMutableArray* recentArray = [self getRecentAnimationfromDB];
+                NSMutableArray* temRecentArray = [[NSMutableArray alloc] init];
+                for (NSDictionary* dictRecent in recentArray) {
+                    if (dictRecent && [dictRecent objectForKey:@"animationId"]) {
+                        for (NSDictionary* temDict in [self getRecentStickeyList:[dictRecent objectForKey:@"animationId"]]) {
+                            [temRecentArray addObject:temDict];
+                        }
+                    }
+                }
+                arrIgot = temRecentArray;
+            }else{
+            arrIgot = [self getAllStickeyList:[[arrOfCategoryList objectAtIndex:i] valueForKey:@"categoryid"]];
+//            [arrOfContentOffset addObject:@{
+//                                            @"from":[NSString stringWithFormat:@"%f",lastFloat],
+//                                            @"to":[NSString stringWithFormat:@"%f",lastFloat+(arrIgot.count*(clc_Animations.frame.size.height+[self spacingInAnimations]))]
+//                                            }];
+//            lastFloat += (arrIgot.count*(clc_Animations.frame.size.height+[self spacingInAnimations])) +1;
+            }
+            
             [arrOfContentOffset addObject:@{
                                             @"from":[NSString stringWithFormat:@"%f",lastFloat],
                                             @"to":[NSString stringWithFormat:@"%f",lastFloat+(arrIgot.count*(clc_Animations.frame.size.height+[self spacingInAnimations]))]
                                             }];
             lastFloat += (arrIgot.count*(clc_Animations.frame.size.height+[self spacingInAnimations])) +1;
+            
             [arrOfAnimationTemp addObjectsFromArray:arrIgot];
         }
         [clc_Animations performBatchUpdates:^{
@@ -135,7 +157,23 @@
 
 -(NSMutableArray*)getCategoryList{
     NSMutableDictionary* dicObj = [self bindJson];
-    return [dicObj objectForKey:@"animationcategories"];
+    NSMutableArray* catList = [[dicObj objectForKey:@"animationcategories"] mutableCopy];
+    
+    if ([self getRecentAnimationCount] > 0) {
+        [catList insertObject:[self setRecentObj] atIndex:0];
+    }
+    
+    return catList;
+}
+
+-(NSMutableDictionary*)setRecentObj{
+    NSMutableDictionary* dicRectObj = [[NSMutableDictionary  alloc] init];
+    [dicRectObj setObject:@"-1" forKey:@"categoryid"];
+    [dicRectObj setObject:@"FUN-ON" forKey:@"imagename"];
+    [dicRectObj setObject:@"FUN-ON" forKey:@"imagename_selected"];
+    [dicRectObj setObject:@"Recent" forKey:@"name"];
+    [dicRectObj setObject:@"0" forKey:@"selected"];
+    return dicRectObj;
 }
 
 -(NSMutableArray*)getAllStickeyList:(NSString *)strCategoryId{
@@ -165,6 +203,22 @@
     
     return stickeyArray;
 }
+-(NSMutableArray*)getRecentStickeyList:(NSString *)strAnimationId{
+    NSMutableDictionary* dicObj = [self bindJson];
+    NSMutableArray* arrayValue = [dicObj objectForKey:@"animationList"];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"animationId ==[c] %@", strAnimationId];
+    NSArray *matchingDicts = [arrayValue filteredArrayUsingPredicate:predicate];
+    NSMutableArray* stickeyArray = [matchingDicts mutableCopy];
+    
+    
+    
+    
+    
+    return stickeyArray;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -229,7 +283,8 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
     if (clc_Animations == collectionView)
     {
         [self.parentViewController addAnimationWithInstructionForObj:[arrOfAnimationTemp objectAtIndex:indexPath.row]];
-        
+        //Save to Recent
+        [self saveRecent:[[arrOfAnimationTemp objectAtIndex:indexPath.row] objectForKey:@"animationId"]];
         /*[self.parentViewController addAnimatedSticker:[NSString stringWithFormat:@"%@",[[arrOfAnimationTemp objectAtIndex:indexPath.row] valueForKey:@"image_gif"]]];*/
     }
     else
@@ -336,6 +391,74 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
     [self.parentViewController notifyParentForCompletionOfInterval];
     [self hideGarbageBin];
 }
+
+#pragma DataBase
+
+-(NSInteger)getRecentAnimationCount{
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"RecentAnimation"];
+    fetchRequest.resultType = NSDictionaryResultType;
+    
+    NSError *error      = nil;
+    NSInteger count = [context countForFetchRequest:fetchRequest /*the one you have above but without limit */ error:&error];
+    return count;
+}
+
+//Get
+NSUInteger size = 5;
+-(NSMutableArray*)getRecentAnimationfromDB{
+    
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"RecentAnimation"];
+    fetchRequest.resultType = NSDictionaryResultType;
+    
+    NSError *error      = nil;
+    NSInteger count = [context countForFetchRequest:fetchRequest /*the one you have above but without limit */ error:&error];
+    
+    count -= size;
+    [fetchRequest setFetchOffset:count>0?count:0];
+    [fetchRequest setFetchLimit:size];
+    NSArray *results    = [context executeFetchRequest:fetchRequest error:&error];
+    results = [[results reverseObjectEnumerator] allObjects];
+    
+    return [results mutableCopy];
+}
+
+-(void)saveRecent:(NSString*)AnimationId{
+    
+    [self deleteRecentAnimationById:AnimationId];
+    
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSManagedObject *stickersList = [NSEntityDescription insertNewObjectForEntityForName:@"RecentAnimation" inManagedObjectContext:context];
+    [stickersList setValue:AnimationId forKey:@"animationId"];
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+}
+-(void)deleteRecentAnimationById:(NSString*)idValue{
+    
+    NSManagedObjectContext *context = [[AppHelper initAppHelper] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"RecentAnimation"];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"animationId == %@", idValue];
+    NSError *error      = nil;
+    NSArray *results    = [context executeFetchRequest:fetchRequest error:&error];
+    
+    for (NSManagedObject *managedObject in results) {
+        [context deleteObject:managedObject];
+    }
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+}
+
 /*
  #pragma mark - Navigation
  

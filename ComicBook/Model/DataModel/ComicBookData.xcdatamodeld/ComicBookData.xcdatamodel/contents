@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2657" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="1.1">
     <entity name="ActiveInbox" representedClassName="ActiveInbox" syncable="YES">
         <attribute name="comic_delivery_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isRead" optional="YES" attributeType="String" syncable="YES"/>
@@ -9,12 +9,16 @@
     <entity name="InviteScore" representedClassName="InviteScore" syncable="YES">
         <attribute name="scoreValue" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="RecentAnimation" syncable="YES">
+        <attribute name="animationId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Stickers" representedClassName="" syncable="YES">
         <attribute name="stickerImagePath" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
+        <element name="ActiveInbox" positionX="-63" positionY="-9" width="128" height="103"/>
         <element name="InviteScore" positionX="-63" positionY="-9" width="128" height="60"/>
         <element name="Stickers" positionX="-63" positionY="-18" width="128" height="60"/>
-        <element name="ActiveInbox" positionX="-63" positionY="-9" width="128" height="103"/>
+        <element name="RecentAnimation" positionX="-54" positionY="27" width="128" height="60"/>
     </elements>
 </model>
