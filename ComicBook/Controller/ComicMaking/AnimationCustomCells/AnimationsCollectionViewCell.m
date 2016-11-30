@@ -9,5 +9,9 @@
 #import "AnimationsCollectionViewCell.h"
 
 @implementation AnimationsCollectionViewCell
-
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+    _img_Animation.contentMode = UIViewContentModeScaleAspectFit;
+}
 @end

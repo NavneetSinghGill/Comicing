@@ -33,14 +33,14 @@
                                     },
                                     "animation": {
                                     "boundry": {
-                                    "topA": 80,
-                                    "leftA": 50,
+                                    "topA": 125.3,
+                                    "leftA": 0,
                                     "rightA": 0,
                                     "downA": 0,
                                     },
                                     "centerPoint": {
-                                    "x": 184.9,
-                                    "y": 124.8
+                                    "x": 184.8,
+                                    "y": 125.3
                                     },
                                     "face": {
                                     "type": "single",
@@ -81,14 +81,14 @@
                                     },
                                     "animation": {
                                     "boundry": {
-                                    "topA": 80,
+                                    "topA": 0,
                                     "leftA": 0,
                                     "rightA": 0,
                                     "downA": 0,
                                     },
                                     "centerPoint": {
-                                    "x": 188,
-                                    "y": 584
+                                    "x": 90,
+                                    "y": 323.2
                                     },
                                     "face": {
                                     "type": "single",
@@ -118,8 +118,8 @@
                                     "downA": 0,
                                     },
                                     "centerPoint": {
-                                    "x": 27,
-                                    "y": 396
+                                    "x": 29,
+                                    "y": 165.5
                                     },
                                     "face": {
                                     "type": "single",
@@ -439,14 +439,14 @@
                                     },
                                     "animation": {
                                     "boundry": {
-                                    "topA": 80,
+                                    "topA": 151.9,
                                     "leftA": 0,
                                     "rightA": 0,
                                     "downA": 0,
                                     },
                                     "centerPoint": {
-                                    "x": 155,
-                                    "y": 200
+                                    "x": 141.0,
+                                    "y": 151.9
                                     },
                                     "face": {
                                     "type": "single",
@@ -454,8 +454,8 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 300,
-                                    "height": 290
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0,
                                     "endInterval": 0
@@ -479,7 +479,7 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "leftA": 0,
+                                    "leftA": 229,
                                     "rightA": 0,
                                     "downA": 0,
                                     },
@@ -493,8 +493,8 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 300,
-                                    "height": 314
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0,
                                     "endInterval": 0
@@ -532,8 +532,8 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 300,
-                                    "height": 314
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0,
                                     "endInterval": 3
@@ -570,7 +570,7 @@
                       {
                       "animationId": "9",
                       "numberOfResources": "3",
-                      "thumImage": "cupidButton",
+                      "thumImage": "spiral glasses 2",
                       "name": "Dizzy",
                       "categoryid": "0",
                       "resources": [
@@ -597,8 +597,8 @@
                                     "downA": 0,
                                     },
                                     "centerPoint": {
-                                    "x": 31,
-                                    "y": 30
+                                    "x": 56.5,
+                                    "y": 52.2
                                     },
                                     "face": {
                                     "type": "single",
@@ -606,8 +606,8 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 93,
-                                    "height": 39
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0,
                                     "endInterval": 3
@@ -636,8 +636,8 @@
                                     "downA": 0,
                                     },
                                     "centerPoint": {
-                                    "x": 28,
-                                    "y": 30
+                                    "x": 49.8,
+                                    "y": 52.2
                                     },
                                     "face": {
                                     "type": "single",
@@ -645,8 +645,8 @@
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 57,
-                                    "height": 59
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0.6,
                                     "endInterval": 3
@@ -667,7 +667,7 @@
                                     },
                                     "face": {
                                     "type": "single",
-                                    "imageA": "Bird_01",
+                                    "imageA": "Bird_02",
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
@@ -683,8 +683,8 @@
                       {
                       "animationId": "10",
                       "numberOfResources": "4",
-                      "thumImage": "angel-01",
-                      "name": "angel",
+                      "thumImage": "devil",
+                      "name": "Devil",
                       "categoryid": "0",
                       "resources": [
                                     {
@@ -704,14 +704,14 @@
                                     },
                                     "animation": {
                                     "boundry": {
-                                    "topA": 0,
-                                    "leftA": 0,
+                                    "topA": 93.3,
+                                    "leftA": 84.5,
                                     "rightA": 0,
                                     "downA": 0,
                                     },
                                     "centerPoint": {
-                                    "x": 260.7,
-                                    "y": 437.4
+                                    "x": 84.5,
+                                    "y": 93.3
                                     },
                                     "face": {
                                     "type": "single",
@@ -743,14 +743,14 @@
                                     },
                                     "animation": {
                                     "boundry": {
-                                    "topA": 0,
+                                    "topA": 93.3,
                                     "leftA": 0,
-                                    "rightA": 0,
+                                    "rightA": 290.5,
                                     "downA": 0,
                                     },
                                     "centerPoint": {
-                                    "x": 92.4,
-                                    "y": 437.4
+                                    "x": 29.6,
+                                    "y": 93.3
                                     },
                                     "face": {
                                     "type": "single",
@@ -783,13 +783,13 @@
                                     "animation": {
                                     "boundry": {
                                     "topA": 0,
-                                    "leftA": 0,
+                                    "leftA": 148,
                                     "rightA": 0,
                                     "downA": 0,
                                     },
                                     "centerPoint": {
-                                    "x": 327.4,
-                                    "y": 363.4
+                                    "x": 148,
+                                    "y": 110.5
                                     },
                                     "face": {
                                     "type": "single",
@@ -823,12 +823,12 @@
                                     "boundry": {
                                     "topA": 0,
                                     "leftA": 0,
-                                    "rightA": 0,
+                                    "rightA": 227,
                                     "downA": 0,
                                     },
                                     "centerPoint": {
-                                    "x": 47.1,
-                                    "y": 363.4
+                                    "x": 21.1,
+                                    "y": 110.5
                                     },
                                     "face": {
                                     "type": "single",
@@ -848,7 +848,7 @@
                       {
                       "animationId": "11",
                       "numberOfResources": "1",
-                      "thumImage": "angel-01",
+                      "thumImage": "sticker question mark-01",
                       "name": "Curious",
                       "categoryid": "0",
                       "resources": [
@@ -884,7 +884,7 @@
                       "animationId": "12",
                       "numberOfResources": "1",
                       "thumImage": "angel-01",
-                      "name": "Curious",
+                      "name": "Angry",
                       "categoryid": "0",
                       "resources": [
                                     {
@@ -975,6 +975,10 @@
                                     "y": 28,
                                     
                                     },
+                                    "originalRect":{
+                                    "width":789
+                                    "heighr":789
+                                    }
                                     "size": {
                                     "width": 117,
                                     "height": 117
@@ -988,17 +992,17 @@
                                     "downA": 0,
                                     },
                                     "centerPoint": {
-                                    "x": 0,
-                                    "y": 0
+                                    "x": 50,
+                                    "y": 50
                                     },
                                     "face": {
                                     "type": "single",
-                                    "imageA": "Red-Face",
+                                    "imageA": "easy",
                                     "imageB": ""
                                     },
                                     "sizeDefault": {
-                                    "width": 200,
-                                    "height": 200
+                                    "width": 375,
+                                    "height": 667
                                     },
                                     "timeInterval": 0,
                                     "endInterval": 3
@@ -1028,6 +1032,152 @@
                                     },
                                     "timeInterval": 0.0,
                                     "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "13",
+                      "numberOfResources": "1",
+                      "thumImage": "hamburger-01",
+                      "name": "Hungry",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 184.8,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 193.3,
+                                    "y": 192.1
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "Hungry",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "14",
+                      "numberOfResources": "3",
+                      "thumImage": "NIGHT-01",
+                      "name": "Sleepy",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 81.5,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 89.4,
+                                    "y": 81.5
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "sheep",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    
+                                    "timeInterval": 0,
+                                    "endInterval": 3
+                                    }
+                                    },
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Lip",
+                                    "type": "nosy",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 52.2,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "boundry2": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 322.8,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 52.2,
+                                    "y": 32.3
+                                    },
+                                    "centerPoint2": {
+                                    "x": 27.2,
+                                    "y": 39.8
+                                    },
+                                    "face": {
+                                    "type": "duel",
+                                    "imageA": "nose-bubble-left",
+                                    "imageB": "nose-bubble-right"
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 3
                                     }
                                     }
                                     ]

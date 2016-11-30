@@ -95,6 +95,8 @@ static CGRect CaptionTextViewMinRect;
     BOOL hasStartedBezierForAnimation;
     NSMutableArray *allPointsForRedFace;
     BOOL haveCreateMainGif;
+    NSInteger tempIndexForFace;
+    CGPoint tempTouchPointForFace;
 
 //    CGRect temButtonFrame;
 //    CGRect temChatButtonFrame;
@@ -2044,15 +2046,14 @@ static CGRect CaptionTextViewMinRect;
         }
     }
 }
-
-    -(void)addBeizerSquarewithIndex:(NSInteger)index
-    {
+-(void)addBeizerSquarewithIndex:(NSInteger)index
+{
         hasStartedBezierForAnimation = YES;
         currentTapIndex = index;
         self.croppingPath = [[UIBezierPath alloc] init];
-        [self.croppingPath setLineJoinStyle:kCGLineJoinRound];
+        [self.croppingPath setLineJoinStyle:kCGLineJoinBevel];
         
-    }
+}
 -(void)addTouchEventwithIndex:(NSInteger)index
 {
     currentAnimationInstructionTap = [[UITapGestureRecognizer alloc]init];
@@ -2073,7 +2074,37 @@ static CGRect CaptionTextViewMinRect;
 }
 -(void)proceedToAddRealAnimationWithPoint:(CGPoint)touchPoint andCurrentIndex:(NSInteger)index
 {
-    NSDictionary *currentBoundry  = [[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"animation"] valueForKey:@"boundry"];
+    
+    if (![[[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"face"] valueForKey:@"type"] isEqualToString:@"single"])
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"Is user nose facing right or left?" delegate:self cancelButtonTitle:@"Left" otherButtonTitles:@"Right", nil];
+        alert.tag = 301;
+        tempIndexForFace = index;
+        tempTouchPointForFace = touchPoint;
+        [alert show];
+        
+        return;
+    }
+    [self proceedAgainForTheAnsweredFaceisLeft:YES ForPoints:touchPoint AndIndex:index];
+}
+-(void)proceedAgainForTheAnsweredFaceisLeft:(BOOL)isLeft ForPoints:(CGPoint)touchPoint AndIndex:(NSInteger)index
+{
+    NSString *boundryKey;
+    NSString *imageNameKey;
+    NSString *centerPointKey;
+    if (isLeft)
+    {
+        boundryKey = @"boundry";
+        imageNameKey = @"imageA";
+        centerPointKey = @"centerPoint";
+    }
+    else
+    {
+        boundryKey = @"boundry2";
+        imageNameKey = @"imageB";
+        centerPointKey = @"centerPoint2";
+    }
+    NSDictionary *currentBoundry  = [[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"animation"] valueForKey:boundryKey];
     
     
     /*
@@ -2105,7 +2136,7 @@ static CGRect CaptionTextViewMinRect;
     CGRect rectForAnimation;
     CGFloat widthFromJson = [self DifferenceInXAxisFromPoint:[[currentAnimationSize valueForKey:@"width"] floatValue]];
     CGFloat heightFromJson = [self DifferenceInYAxisFromPoint:[[currentAnimationSize valueForKey:@"height"] floatValue]];
-    NSDictionary *centerPointObj = [[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"animation"] valueForKey:@"centerPoint"];
+    NSDictionary *centerPointObj = [[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"animation"] valueForKey:centerPointKey];
     if (touchPoint.y<boundrytopA||touchPoint.x<boundryleftA || (touchPoint.x>boundryrightA && boundryrightA != 0) ||(touchPoint.y>boundrybottomA && boundrybottomA != 0)) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"There isn’t any room!" message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
@@ -2187,19 +2218,12 @@ static CGRect CaptionTextViewMinRect;
     
     
     //// choose face to add alert and change name..
-    if ([[[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"face"] valueForKey:@"type"] isEqualToString:@"single"])
-    {
-        [self addAnimatedSticker:[[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"face"] valueForKey:@"imageA"] AtRect:rectForAnimation];
-    }
-    else
-    {
-        [self addAnimatedSticker:[[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"face"] valueForKey:@"imageB"] AtRect:rectForAnimation];
-    }
+    
+    [self addAnimatedSticker:[[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"face"] valueForKey:imageNameKey] AtRect:rectForAnimation];
     currentAnimationTouchPoint = touchPoint;
     currentTapIndex++;
     [self addAnimatedStickerFromStartAtIndex:currentTapIndex];
-}
-//END
+}//END
 
 /*Ramesh */
 //Handle Bubble Methods
@@ -3089,10 +3113,13 @@ CGFloat diffX,diffY;
         
        /* [[NSNotificationCenter defaultCenter] postNotificationName:@"cropFinished"
                                                             object:self];*/
+        NSLog(@"%@",self.croppingPath);
         
         hasStartedBezierForAnimation = NO;
         [currentAnimInstSubView removeFromSuperview];
+        
         [self addAnimatedSticker:[[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"face"] valueForKey:@"imageA"] AtRect:self.croppingPath.bounds];
+         currentAnimationTouchPoint = self.croppingPath.bounds.origin;
         currentTapIndex++;
         [self addAnimatedStickerFromStartAtIndex:currentTapIndex];
         
@@ -3162,7 +3189,14 @@ CGFloat diffX,diffY;
     }
     }
 }
-
+-(CGRect)originalRectFromRectGot:(CGRect)rectGot
+{
+    CGFloat x = rectGot.origin.x;
+    CGFloat y = rectGot.origin.y;
+    CGFloat width = (1242*rectGot.size.width)/[[[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"originalRect"] valueForKey:@"width"] floatValue];
+    CGFloat height = (2208*rectGot.size.height)/[[[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"originalRect"] valueForKey:@"height"] floatValue];
+    return CGRectMake(x, y, width, height);
+}
 #pragma mark - CropStickerViewControllerDelegate Methods
 - (void)cropStickerViewController:(CropStickerViewController *)controll didSelectDoneWithImage:(UIImageView *)stickerImageView withBorderImage:(UIImage *)imageWithBorder
 {
@@ -3183,7 +3217,7 @@ CGFloat diffX,diffY;
                 stickerController = (StickerList *)controller;
             }
         }
-        
+         
         stickerController.addingSticker = YES;
         
         [stickerController.collectionView performBatchUpdates:^
@@ -5256,6 +5290,20 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
             haveAnimationOnPage = NO;
             refAnimatedSticker = nil;
             
+        }
+    }
+    else if (alertView.tag == 301)
+    {
+        if (buttonIndex == 0)
+        {
+            NSLog(@"Left");
+            [self proceedAgainForTheAnsweredFaceisLeft:YES ForPoints:tempTouchPointForFace AndIndex:tempIndexForFace];
+        }
+        else
+        {
+            NSLog(@"Right");
+            [self proceedAgainForTheAnsweredFaceisLeft:NO ForPoints:tempTouchPointForFace AndIndex:tempIndexForFace];
+
         }
     }
 }
