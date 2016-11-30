@@ -494,7 +494,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="JCM-PA-Za2">
-                                <rect key="frame" x="0.0" y="67" width="60" height="60"/>
+                                <rect key="frame" x="0.0" y="68" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -530,7 +530,7 @@
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DEf-Rh-fZs">
                                 <rect key="frame" x="10" y="87" width="22" height="47"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                <state key="normal" image="xbutton"/>
+                                <state key="normal" image="LeftArrowButton.png"/>
                                 <connections>
                                     <action selector="closeAction:" destination="KLI-vw-W7d" eventType="touchUpInside" id="1wA-3B-SwD"/>
                                 </connections>
@@ -1623,10 +1623,10 @@ Comicing </string>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell1" id="dr5-RS-Mql">
-                                <rect key="frame" x="0.0" y="9" width="60" height="67.5"/>
+                                <rect key="frame" x="0.0" y="9" width="60" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="67.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="68"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oOI-2o-o74">
