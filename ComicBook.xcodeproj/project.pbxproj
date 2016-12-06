@@ -548,6 +548,17 @@
 		84F1613A1D3554B200DBF9E0 /* Slide-13.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84F161391D3554B200DBF9E0 /* Slide-13.gif */; };
 		84F1B4411CB2E41A0096F79C /* InviteFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */; };
 		84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */; };
+		91BEABF31DF720EA00710D3C /* CBBaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABE91DF720EA00710D3C /* CBBaseCollectionViewCell.m */; };
+		91BEABF41DF720EA00710D3C /* CBBaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABEC1DF720EA00710D3C /* CBBaseCollectionViewController.m */; };
+		91BEABF51DF720EA00710D3C /* CBBaseCollectionViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABEF1DF720EA00710D3C /* CBBaseCollectionViewSection.m */; };
+		91BEABF61DF720EA00710D3C /* CBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABF21DF720EA00710D3C /* CBBaseViewController.m */; };
+		91BEAC041DF7211300710D3C /* CBComicPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABF91DF7211300710D3C /* CBComicPreviewVC.m */; };
+		91BEAC051DF7211300710D3C /* CBComicImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABFC1DF7211300710D3C /* CBComicImageCell.m */; };
+		91BEAC061DF7211300710D3C /* CBComicImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91BEABFD1DF7211300710D3C /* CBComicImageCell.xib */; };
+		91BEAC081DF7211300710D3C /* CBComicImageSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEAC011DF7211300710D3C /* CBComicImageSection.m */; };
+		91BEAC0C1DF7216C00710D3C /* CBComicItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEAC0B1DF7216C00710D3C /* CBComicItemModel.m */; };
+		91BEAC101DF722C700710D3C /* hor_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91BEAC0E1DF722C700710D3C /* hor_image.jpg */; };
+		91BEAC111DF722C700710D3C /* ver_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91BEAC0F1DF722C700710D3C /* ver_image.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1395,6 +1406,25 @@
 		84F1B43E1CB2E41A0096F79C /* InviteFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendCell.h; sourceTree = "<group>"; };
 		84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendCell.m; sourceTree = "<group>"; };
 		84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendCell.xib; sourceTree = "<group>"; };
+		91BEABE81DF720EA00710D3C /* CBBaseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseCollectionViewCell.h; sourceTree = "<group>"; };
+		91BEABE91DF720EA00710D3C /* CBBaseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBaseCollectionViewCell.m; sourceTree = "<group>"; };
+		91BEABEB1DF720EA00710D3C /* CBBaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseCollectionViewController.h; sourceTree = "<group>"; };
+		91BEABEC1DF720EA00710D3C /* CBBaseCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBaseCollectionViewController.m; sourceTree = "<group>"; };
+		91BEABEE1DF720EA00710D3C /* CBBaseCollectionViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseCollectionViewSection.h; sourceTree = "<group>"; };
+		91BEABEF1DF720EA00710D3C /* CBBaseCollectionViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBaseCollectionViewSection.m; sourceTree = "<group>"; };
+		91BEABF11DF720EA00710D3C /* CBBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseViewController.h; sourceTree = "<group>"; };
+		91BEABF21DF720EA00710D3C /* CBBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBaseViewController.m; sourceTree = "<group>"; };
+		91BEABF81DF7211300710D3C /* CBComicPreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicPreviewVC.h; sourceTree = "<group>"; };
+		91BEABF91DF7211300710D3C /* CBComicPreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicPreviewVC.m; sourceTree = "<group>"; };
+		91BEABFB1DF7211300710D3C /* CBComicImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicImageCell.h; sourceTree = "<group>"; };
+		91BEABFC1DF7211300710D3C /* CBComicImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicImageCell.m; sourceTree = "<group>"; };
+		91BEABFD1DF7211300710D3C /* CBComicImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBComicImageCell.xib; sourceTree = "<group>"; };
+		91BEAC001DF7211300710D3C /* CBComicImageSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicImageSection.h; sourceTree = "<group>"; };
+		91BEAC011DF7211300710D3C /* CBComicImageSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicImageSection.m; sourceTree = "<group>"; };
+		91BEAC0A1DF7216C00710D3C /* CBComicItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicItemModel.h; sourceTree = "<group>"; };
+		91BEAC0B1DF7216C00710D3C /* CBComicItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicItemModel.m; sourceTree = "<group>"; };
+		91BEAC0E1DF722C700710D3C /* hor_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hor_image.jpg; sourceTree = "<group>"; };
+		91BEAC0F1DF722C700710D3C /* ver_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ver_image.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1572,6 +1602,7 @@
 		0C6664BD1C84358500FEB11F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				91BEAC0D1DF722A700710D3C /* ComicPreview */,
 				0C7DCF521D52907500ABAEAD /* AnimatedImage */,
 				1BEB1FCA1D43DD2700CC1304 /* Invite */,
 				1685120C1D3C02C100A372E3 /* FriendPage */,
@@ -1687,6 +1718,10 @@
 		0C6664FD1C84358500FEB11F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				91BEABE71DF720EA00710D3C /* BaseCollectionViewCell */,
+				91BEABEA1DF720EA00710D3C /* BaseCollectionViewController */,
+				91BEABED1DF720EA00710D3C /* BaseCollectionViewSection */,
+				91BEABF01DF720EA00710D3C /* BaseViewController */,
 				84EFD9FB1D340E2C005B5FB0 /* YLGIFImage */,
 				0C2235411C889C9800D1B4F2 /* PullableView */,
 				0C6664FE1C84358500FEB11F /* AppHelper.h */,
@@ -1966,6 +2001,7 @@
 		0C66655A1C84358500FEB11F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				91BEABF71DF7211300710D3C /* ComicPreview */,
 				0C66655B1C84358500FEB11F /* Auth */,
 				0C66656E1C84358500FEB11F /* Blackboard */,
 				0C6665711C84358500FEB11F /* ComicMaking */,
@@ -2323,6 +2359,8 @@
 		0C6665F31C84358600FEB11F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				91BEAC0A1DF7216C00710D3C /* CBComicItemModel.h */,
+				91BEAC0B1DF7216C00710D3C /* CBComicItemModel.m */,
 				1BAF30581D3027DC00815495 /* ComicConversationBook.h */,
 				1BAF30591D3027DC00815495 /* ComicConversationBook.m */,
 				1BAF305A1D3027DC00815495 /* ComicConversationModel.h */,
@@ -3590,6 +3628,89 @@
 			path = "Instruction GIF";
 			sourceTree = "<group>";
 		};
+		91BEABE71DF720EA00710D3C /* BaseCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				91BEABE81DF720EA00710D3C /* CBBaseCollectionViewCell.h */,
+				91BEABE91DF720EA00710D3C /* CBBaseCollectionViewCell.m */,
+			);
+			path = BaseCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		91BEABEA1DF720EA00710D3C /* BaseCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				91BEABEB1DF720EA00710D3C /* CBBaseCollectionViewController.h */,
+				91BEABEC1DF720EA00710D3C /* CBBaseCollectionViewController.m */,
+			);
+			path = BaseCollectionViewController;
+			sourceTree = "<group>";
+		};
+		91BEABED1DF720EA00710D3C /* BaseCollectionViewSection */ = {
+			isa = PBXGroup;
+			children = (
+				91BEABEE1DF720EA00710D3C /* CBBaseCollectionViewSection.h */,
+				91BEABEF1DF720EA00710D3C /* CBBaseCollectionViewSection.m */,
+			);
+			path = BaseCollectionViewSection;
+			sourceTree = "<group>";
+		};
+		91BEABF01DF720EA00710D3C /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				91BEABF11DF720EA00710D3C /* CBBaseViewController.h */,
+				91BEABF21DF720EA00710D3C /* CBBaseViewController.m */,
+			);
+			path = BaseViewController;
+			sourceTree = "<group>";
+		};
+		91BEABF71DF7211300710D3C /* ComicPreview */ = {
+			isa = PBXGroup;
+			children = (
+				91BEABFA1DF7211300710D3C /* Cells */,
+				91BEABFF1DF7211300710D3C /* Sections */,
+				91BEAC031DF7211300710D3C /* Views */,
+				91BEABF81DF7211300710D3C /* CBComicPreviewVC.h */,
+				91BEABF91DF7211300710D3C /* CBComicPreviewVC.m */,
+			);
+			path = ComicPreview;
+			sourceTree = "<group>";
+		};
+		91BEABFA1DF7211300710D3C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				91BEABFB1DF7211300710D3C /* CBComicImageCell.h */,
+				91BEABFC1DF7211300710D3C /* CBComicImageCell.m */,
+				91BEABFD1DF7211300710D3C /* CBComicImageCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		91BEABFF1DF7211300710D3C /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				91BEAC001DF7211300710D3C /* CBComicImageSection.h */,
+				91BEAC011DF7211300710D3C /* CBComicImageSection.m */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
+		91BEAC031DF7211300710D3C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		91BEAC0D1DF722A700710D3C /* ComicPreview */ = {
+			isa = PBXGroup;
+			children = (
+				91BEAC0E1DF722C700710D3C /* hor_image.jpg */,
+				91BEAC0F1DF722C700710D3C /* ver_image.jpg */,
+			);
+			path = ComicPreview;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3838,6 +3959,7 @@
 				1BDDB74D1D489C0800FA931F /* open_gift_box_flat.png in Resources */,
 				167DACC81DE75FC3001F42BD /* HEART.gif in Resources */,
 				0C6667AD1C84358600FEB11F /* Default-568h@2x.png in Resources */,
+				91BEAC101DF722C700710D3C /* hor_image.jpg in Resources */,
 				84CEF1201D3ADF68009FCB1D /* Me.png in Resources */,
 				1663533B1DEA1CC800BB068D /* nose-bubble-right.gif in Resources */,
 				84CEF1191D3ADF68009FCB1D /* AddUser.png in Resources */,
@@ -3866,6 +3988,7 @@
 				0C380E471CF4F096003DDBA6 /* introvideo.mp4 in Resources */,
 				0C6667821C84358600FEB11F /* searchBlueIcon.png in Resources */,
 				16161C121DE8C39700E8FDD7 /* hamburger-01.png in Resources */,
+				91BEAC061DF7211300710D3C /* CBComicImageCell.xib in Resources */,
 				84CEF1221D3ADF68009FCB1D /* top-bar-boy-icon-yellow.png in Resources */,
 				84592D691CC94E2B00C52C06 /* HeaderView.xib in Resources */,
 				16161C261DE8CB7C00E8FDD7 /* hammer-01.png in Resources */,
@@ -3887,6 +4010,7 @@
 				16A602781DE7150600D13F5C /* Leye.gif in Resources */,
 				0C66678D1C84358600FEB11F /* checkMark.png in Resources */,
 				166353351DEA1C1D00BB068D /* Sweat.gif in Resources */,
+				91BEAC111DF722C700710D3C /* ver_image.jpg in Resources */,
 				1BEB1FDB1D43DD2700CC1304 /* stickers_icon.png in Resources */,
 				0C6667FA1C84358600FEB11F /* PrivateConversationCell.xib in Resources */,
 				84CEF11A1D3ADF68009FCB1D /* Boy.png in Resources */,
@@ -4046,18 +4170,23 @@
 				0C6667CC1C84358600FEB11F /* ComicsAPIManager.m in Sources */,
 				0C66682A1C84358600FEB11F /* GroupUserItems.m in Sources */,
 				0C9A3A2E1C8DE85500D75895 /* stickerCell.m in Sources */,
+				91BEAC0C1DF7216C00710D3C /* CBComicItemModel.m in Sources */,
 				0C66686E1C84358600FEB11F /* NSError+MTLModelException.m in Sources */,
 				0C66681F1C84358600FEB11F /* ComicPage.m in Sources */,
 				0C66685C1C84358600FEB11F /* NSArray+JSONModel.m in Sources */,
 				0C6667E31C84358600FEB11F /* RowButtonsViewController.m in Sources */,
 				1B9B7C181D3A9C5F003B04F1 /* InviteViewController.m in Sources */,
+				91BEABF51DF720EA00710D3C /* CBBaseCollectionViewSection.m in Sources */,
 				167DDF8F1D7F3D4C0090E8A5 /* AnimationsCollectionViewCell.m in Sources */,
+				91BEAC041DF7211300710D3C /* CBComicPreviewVC.m in Sources */,
+				91BEAC051DF7211300710D3C /* CBComicImageCell.m in Sources */,
 				0C6667F11C84358600FEB11F /* ComicCommentPeopleVC.m in Sources */,
 				0C6668501C84358600FEB11F /* AFHTTPRequestOperationManager.m in Sources */,
 				0C6668631C84358600FEB11F /* EXTScope.m in Sources */,
 				0C66676E1C84358600FEB11F /* AppDelegate.m in Sources */,
 				1B9B7C221D3A9E03003B04F1 /* EmojiHelper.m in Sources */,
 				0C66689B1C84358600FEB11F /* AvatarView.m in Sources */,
+				91BEAC081DF7211300710D3C /* CBComicImageSection.m in Sources */,
 				0C6667C11C84358600FEB11F /* RCiMessage.m in Sources */,
 				167DDF361D7F39A00090E8A5 /* AnimationCategoryCollectionViewCell.m in Sources */,
 				0C6668561C84358600FEB11F /* AFURLResponseSerialization.m in Sources */,
@@ -4123,6 +4252,7 @@
 				0C6668931C84358600FEB11F /* BAVPlistNode.m in Sources */,
 				0C6668851C84358600FEB11F /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				1BAF305C1D3027DD00815495 /* ComicConversationBook.m in Sources */,
+				91BEABF41DF720EA00710D3C /* CBBaseCollectionViewController.m in Sources */,
 				0C66684F1C84358600FEB11F /* AFHTTPRequestOperation.m in Sources */,
 				0C6668761C84358600FEB11F /* Reachability.m in Sources */,
 				0C66684B1C84358600FEB11F /* UIImage+resize.m in Sources */,
@@ -4165,6 +4295,7 @@
 				0C6668AB1C84358600FEB11F /* GroupItem.m in Sources */,
 				0C66687D1C84358600FEB11F /* SDWebImageDownloaderOperation.m in Sources */,
 				0C66680F1C84358600FEB11F /* TopSearchVC.m in Sources */,
+				91BEABF61DF720EA00710D3C /* CBBaseViewController.m in Sources */,
 				0C8C61ED1CB14445008073FA /* ComicSlidesData.m in Sources */,
 				0C6667D21C84358600FEB11F /* PrivateConversationAPIManager.m in Sources */,
 				0C66688F1C84358600FEB11F /* STTwitterOAuth.m in Sources */,
@@ -4185,6 +4316,7 @@
 				0C6667F61C84358600FEB11F /* FriendCell.m in Sources */,
 				1B9B7C251D3A9E03003B04F1 /* UICountingLabel.m in Sources */,
 				0C6668751C84358600FEB11F /* UIColor+BFPaperColors.m in Sources */,
+				91BEABF31DF720EA00710D3C /* CBBaseCollectionViewCell.m in Sources */,
 				0C32C99B1CB0B067001DA121 /* Stickers.m in Sources */,
 				0C6667B51C84358600FEB11F /* ComicItem.m in Sources */,
 				0C66E6061C95756A005E4548 /* Enhancement.m in Sources */,
