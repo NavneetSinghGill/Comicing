@@ -208,7 +208,8 @@ static CGRect CaptionTextViewMinRect;
     frameDrawingView = viewDrawing.frame;
     centerImgvComic = imgvComic.center;
     viewRowButtons.alpha = 0;
-    
+    self.chatIcon.alpha = 0;
+
     
     if (isWideSlide == YES)
     {
