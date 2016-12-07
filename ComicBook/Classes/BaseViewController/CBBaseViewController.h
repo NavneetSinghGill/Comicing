@@ -12,4 +12,6 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray* sectionArray;
 @property (nonatomic, strong) NSMutableArray* dataArray;
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, weak) CBBaseViewController* parentController;
 @end

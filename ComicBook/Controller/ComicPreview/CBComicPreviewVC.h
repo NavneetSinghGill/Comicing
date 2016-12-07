@@ -6,8 +6,8 @@
 //  Copyright © 2016 Comic Book. All rights reserved.
 //
 
-#import "CBBaseCollectionViewController.h"
+#import "CBBasePageViewController.h"
 
-@interface CBComicPreviewVC : CBBaseCollectionViewController
+@interface CBComicPreviewVC : CBBasePageViewController
 
 @end

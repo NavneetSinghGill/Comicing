@@ -548,6 +548,8 @@
 		84F1613A1D3554B200DBF9E0 /* Slide-13.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84F161391D3554B200DBF9E0 /* Slide-13.gif */; };
 		84F1B4411CB2E41A0096F79C /* InviteFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */; };
 		84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */; };
+		913B64021DF73E870003E9D1 /* CBComicPreviewItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 913B64001DF73E870003E9D1 /* CBComicPreviewItemVC.m */; };
+		913B64031DF73E870003E9D1 /* CBComicPreviewItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 913B64011DF73E870003E9D1 /* CBComicPreviewItemVC.xib */; };
 		91BEABF31DF720EA00710D3C /* CBBaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABE91DF720EA00710D3C /* CBBaseCollectionViewCell.m */; };
 		91BEABF41DF720EA00710D3C /* CBBaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABEC1DF720EA00710D3C /* CBBaseCollectionViewController.m */; };
 		91BEABF51DF720EA00710D3C /* CBBaseCollectionViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABEF1DF720EA00710D3C /* CBBaseCollectionViewSection.m */; };
@@ -559,6 +561,9 @@
 		91BEAC0C1DF7216C00710D3C /* CBComicItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEAC0B1DF7216C00710D3C /* CBComicItemModel.m */; };
 		91BEAC101DF722C700710D3C /* hor_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91BEAC0E1DF722C700710D3C /* hor_image.jpg */; };
 		91BEAC111DF722C700710D3C /* ver_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91BEAC0F1DF722C700710D3C /* ver_image.jpg */; };
+		91BEAC151DF7372900710D3C /* CBBasePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEAC141DF7372900710D3C /* CBBasePageViewController.m */; };
+		91BEAC191DF737C500710D3C /* CBPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEAC181DF737C500710D3C /* CBPageViewController.m */; };
+		91BEAC1C1DF738A900710D3C /* UIView+CBConstraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEAC1B1DF738A900710D3C /* UIView+CBConstraints.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1406,6 +1411,9 @@
 		84F1B43E1CB2E41A0096F79C /* InviteFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendCell.h; sourceTree = "<group>"; };
 		84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendCell.m; sourceTree = "<group>"; };
 		84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendCell.xib; sourceTree = "<group>"; };
+		913B63FF1DF73E870003E9D1 /* CBComicPreviewItemVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicPreviewItemVC.h; sourceTree = "<group>"; };
+		913B64001DF73E870003E9D1 /* CBComicPreviewItemVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicPreviewItemVC.m; sourceTree = "<group>"; };
+		913B64011DF73E870003E9D1 /* CBComicPreviewItemVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBComicPreviewItemVC.xib; sourceTree = "<group>"; };
 		91BEABE81DF720EA00710D3C /* CBBaseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseCollectionViewCell.h; sourceTree = "<group>"; };
 		91BEABE91DF720EA00710D3C /* CBBaseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBaseCollectionViewCell.m; sourceTree = "<group>"; };
 		91BEABEB1DF720EA00710D3C /* CBBaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseCollectionViewController.h; sourceTree = "<group>"; };
@@ -1425,6 +1433,12 @@
 		91BEAC0B1DF7216C00710D3C /* CBComicItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicItemModel.m; sourceTree = "<group>"; };
 		91BEAC0E1DF722C700710D3C /* hor_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hor_image.jpg; sourceTree = "<group>"; };
 		91BEAC0F1DF722C700710D3C /* ver_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ver_image.jpg; sourceTree = "<group>"; };
+		91BEAC131DF7372900710D3C /* CBBasePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBasePageViewController.h; sourceTree = "<group>"; };
+		91BEAC141DF7372900710D3C /* CBBasePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBasePageViewController.m; sourceTree = "<group>"; };
+		91BEAC171DF737C500710D3C /* CBPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPageViewController.h; sourceTree = "<group>"; };
+		91BEAC181DF737C500710D3C /* CBPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPageViewController.m; sourceTree = "<group>"; };
+		91BEAC1A1DF738A900710D3C /* UIView+CBConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CBConstraints.h"; sourceTree = "<group>"; };
+		91BEAC1B1DF738A900710D3C /* UIView+CBConstraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CBConstraints.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1718,6 +1732,7 @@
 		0C6664FD1C84358500FEB11F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				91BEAC121DF7370000710D3C /* BasePageViewController */,
 				91BEABE71DF720EA00710D3C /* BaseCollectionViewCell */,
 				91BEABEA1DF720EA00710D3C /* BaseCollectionViewController */,
 				91BEABED1DF720EA00710D3C /* BaseCollectionViewSection */,
@@ -2481,6 +2496,8 @@
 		0C6666331C84358600FEB11F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				91BEAC1A1DF738A900710D3C /* UIView+CBConstraints.h */,
+				91BEAC1B1DF738A900710D3C /* UIView+CBConstraints.m */,
 				16F48B2F1DE6363600F86EDE /* UIImage+animatedGIF.h */,
 				16F48B301DE6363600F86EDE /* UIImage+animatedGIF.m */,
 				1B9B7C191D3A9E03003B04F1 /* Emoji */,
@@ -3672,6 +3689,9 @@
 				91BEAC031DF7211300710D3C /* Views */,
 				91BEABF81DF7211300710D3C /* CBComicPreviewVC.h */,
 				91BEABF91DF7211300710D3C /* CBComicPreviewVC.m */,
+				913B63FF1DF73E870003E9D1 /* CBComicPreviewItemVC.h */,
+				913B64001DF73E870003E9D1 /* CBComicPreviewItemVC.m */,
+				913B64011DF73E870003E9D1 /* CBComicPreviewItemVC.xib */,
 			);
 			path = ComicPreview;
 			sourceTree = "<group>";
@@ -3711,6 +3731,17 @@
 			path = ComicPreview;
 			sourceTree = "<group>";
 		};
+		91BEAC121DF7370000710D3C /* BasePageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				91BEAC131DF7372900710D3C /* CBBasePageViewController.h */,
+				91BEAC141DF7372900710D3C /* CBBasePageViewController.m */,
+				91BEAC171DF737C500710D3C /* CBPageViewController.h */,
+				91BEAC181DF737C500710D3C /* CBPageViewController.m */,
+			);
+			path = BasePageViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3738,8 +3769,9 @@
 		8450906D1C2B1343004DAE99 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = CB;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "ADNAN THATHIYA";
+				ORGANIZATIONNAME = Providence;
 				TargetAttributes = {
 					845090741C2B1343004DAE99 = {
 						CreatedOnToolsVersion = 7.2;
@@ -3946,6 +3978,7 @@
 				0C66679E1C84358600FEB11F /* selectedImage.png in Resources */,
 				84CEF1211D3ADF68009FCB1D /* ModifiedBlueBoy.png in Resources */,
 				0C6668071C84358600FEB11F /* MeCell.xib in Resources */,
+				913B64031DF73E870003E9D1 /* CBComicPreviewItemVC.xib in Resources */,
 				0C66678F1C84358600FEB11F /* accountAge.png in Resources */,
 				167DACC31DE75E1A001F42BD /* DRILL_FINAL02.gif in Resources */,
 				0C6667A51C84358600FEB11F /* digup.png in Resources */,
@@ -4091,6 +4124,7 @@
 				0C6668651C84358600FEB11F /* MTLModel+NSCoding.m in Sources */,
 				0C6668961C84358600FEB11F /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				846F3D961D2ECE93001191E6 /* MainPage2SlideCell.m in Sources */,
+				91BEAC1C1DF738A900710D3C /* UIView+CBConstraints.m in Sources */,
 				0C6668541C84358600FEB11F /* AFURLConnectionOperation.m in Sources */,
 				0C6668011C84358600FEB11F /* GroupsCollectionViewCell.m in Sources */,
 				84EFDA011D340E2C005B5FB0 /* YLGIFImage.m in Sources */,
@@ -4285,11 +4319,13 @@
 				0C6668BE1C84358600FEB11F /* VerifyView.m in Sources */,
 				0C6668131C84358600FEB11F /* ComicImageListView.m in Sources */,
 				843ABB781D1FAA730078B7A8 /* MainPageCell.m in Sources */,
+				913B64021DF73E870003E9D1 /* CBComicPreviewItemVC.m in Sources */,
 				0C6667E71C84358600FEB11F /* GlideScrollViewController.m in Sources */,
 				0C66685D1C84358600FEB11F /* JSONAPI.m in Sources */,
 				0C6668491C84358600FEB11F /* UIColor+colorWithHexString.m in Sources */,
 				0C6668B51C84358600FEB11F /* ProfilePicView.m in Sources */,
 				0C76AF241CB2E83700EBB61D /* FabricAnalytics.m in Sources */,
+				91BEAC151DF7372900710D3C /* CBBasePageViewController.m in Sources */,
 				0C6667E01C84358600FEB11F /* CropStickerViewController.m in Sources */,
 				0C66680E1C84358600FEB11F /* TopBarViewController.m in Sources */,
 				0C6668AB1C84358600FEB11F /* GroupItem.m in Sources */,
@@ -4301,6 +4337,7 @@
 				0C66688F1C84358600FEB11F /* STTwitterOAuth.m in Sources */,
 				0C66685F1C84358600FEB11F /* JSONModel+networking.m in Sources */,
 				0C6668921C84358600FEB11F /* STTwitterStreamParser.m in Sources */,
+				91BEAC191DF737C500710D3C /* CBPageViewController.m in Sources */,
 				1B00F6C21D450D3300514291 /* AnimatedGif.m in Sources */,
 				0C6668B11C84358600FEB11F /* HeaderView.m in Sources */,
 				0C66686C1C84358600FEB11F /* NSDictionary+MTLManipulationAdditions.m in Sources */,
