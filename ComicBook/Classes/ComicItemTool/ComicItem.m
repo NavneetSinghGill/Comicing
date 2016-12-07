@@ -317,7 +317,7 @@
         [aCoder encodeObject:self.animatedStickerName forKey:@"animatedStickerName"];
     //    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self rotation]] forKey:@"animatedStickerAngle"];
         [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.startDelay] forKey:@"startDelay"];
-        [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.endDelay] forKey:@"startDelay"];
+        [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.endDelay] forKey:@"endDelay"];
     //    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self xscale]] forKey:@"animatedStickerScaleX"];
     //    [aCoder encodeObject:[NSString stringWithFormat:@"%f", [self yscale]] forKey:@"animatedStickerScaleY"];
     //    [aCoder encodeObject:[NSString stringWithFormat:@"%f", self.transform.tx] forKey:@"animatedStickerTX"];

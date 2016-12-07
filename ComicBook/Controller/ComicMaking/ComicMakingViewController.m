@@ -83,10 +83,14 @@ static CGRect CaptionTextViewMinRect;
     CGPoint shinkLimit;
     NSDictionary *currentWorkingAnimation;
     UITapGestureRecognizer *currentAnimationInstructionTap;
+    UIPanGestureRecognizer *currentAnimationPan;
+
     YYAnimatedImageView *currentAnimInstSubView;
     BOOL haveAnimationOnPage;
     BOOL pauseAnimation;
     ComicItemAnimatedComponent *refAnimatedSticker;
+    ComicItemAnimatedSticker *refToCombineAnimatedSticker;
+
     AnimationCollectionVC *animationCollection;
     NSInteger currentTapIndex;
     CGPoint currentAnimationTouchPoint;
@@ -2075,6 +2079,12 @@ static CGRect CaptionTextViewMinRect;
             [self addBeizerSquarewithIndex:currentTapIndex];
             //[self addTouchEventwithIndex:index];
         }
+        else if ([[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"type"] isEqualToString:@"Movableplug&play"])
+        {
+            [animationCollection stopBeingExcutedAfterSomeMoment];
+            CGPoint newPoinnt=  [self pointFromAnimationsRealPoint:self.view.center fromCenterX:[[[currentWorkingAnimation valueForKey:@"centerPoint"] valueForKey:@"x"] floatValue] fromCenterY:[[[currentWorkingAnimation valueForKey:@"centerPoint"] valueForKey:@"y"] floatValue]];
+            [self proceedToAddRealAnimationWithPoint:newPoinnt andCurrentIndex:index];
+        }
         else
         {
             NSDictionary *instctionObj = [[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:index] valueForKey:@"instraction"];
@@ -2104,6 +2114,12 @@ static CGRect CaptionTextViewMinRect;
     currentTapIndex = index;
     [currentAnimationInstructionTap addTarget:self action:@selector(didTapOnAnimationPage:)];
     [self.view addGestureRecognizer:currentAnimationInstructionTap];
+}
+-(void)addPanEventWithIndexFor:(ComicItemAnimatedSticker *)componenet
+{
+    currentAnimationPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureForAnimatedStickerDetected:)];
+    [currentAnimationPan setDelegate:self];
+    [componenet addGestureRecognizer:currentAnimationPan];
 }
 -(void)didTapOnAnimationPage:(UITapGestureRecognizer *)gesture
 {
@@ -2707,6 +2723,34 @@ static CGRect CaptionTextViewMinRect;
             [self doRemoveItem:recognizer.view];
         }
     }];
+    if (state == UIGestureRecognizerStateEnded) {
+        [self doAutoSave:recognizer.view];
+    }
+}
+- (void)panGestureForAnimatedStickerDetected:(UIPanGestureRecognizer *)recognizer
+{
+    UIGestureRecognizerState state = [recognizer state];
+    
+    if (state == UIGestureRecognizerStateBegan || state == UIGestureRecognizerStateChanged)
+    {
+        CGPoint translation = [recognizer translationInView:imgvComic];
+        recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
+                                             recognizer.view.center.y + translation.y);
+        
+        [recognizer setTranslation:CGPointMake(0, 0) inView:imgvComic];
+        
+        ((ComicItemAnimatedComponent*)recognizer.view).objFrame = recognizer.view.frame;
+    }
+    
+    //Handle remove items
+   /* [self isEndOfPan:recognizer.view success:^(bool isOutOfFrame) {
+        if (isOutOfFrame) {
+            [recognizer.view setUserInteractionEnabled:NO];
+            [recognizer.view removeFromSuperview];
+            
+            [self doRemoveItem:recognizer.view];
+        }
+    }];*/
     if (state == UIGestureRecognizerStateEnded) {
         [self doAutoSave:recognizer.view];
     }
@@ -4416,6 +4460,10 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 //        [arrOfActiveAnimations addObject:((ComicItemAnimatedSticker*)imageView)];
         if (currentTapIndex==[[currentWorkingAnimation valueForKey:@"resources"] count]-1)
         {
+            if ([currentWorkingAnimation valueForKey:@"isMovable"])
+            {
+                [self addPanEventWithIndexFor:imageView];
+            }
             [self createOneGifInBackgroundFromCurrentArray:((ComicItemAnimatedSticker*)imageView).animatedComponentArray
                                   ComicItemAnimatedSticker:((ComicItemAnimatedSticker*)imageView)];
             [self startAnimatingAfterDelay];
@@ -5389,7 +5437,6 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         {
             NSLog(@"Right");
             [self proceedAgainForTheAnsweredFaceisLeft:NO ForPoints:tempTouchPointForFace AndIndex:tempIndexForFace];
-
         }
     }
 }
@@ -5467,10 +5514,10 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 {
     [animationCollection hideGarbageBin];
     [UIView animateWithDuration:1 animations:^ {
-        [refAnimatedSticker setUserInteractionEnabled:NO];
-        refAnimatedSticker.transform = CGAffineTransformMakeScale(0.0f, 0.0f);
+        [refToCombineAnimatedSticker setUserInteractionEnabled:NO];
+        refToCombineAnimatedSticker.transform = CGAffineTransformMakeScale(0.0f, 0.0f);
     } completion:^(BOOL finished) {
-        [refAnimatedSticker removeFromSuperview];
+        [refToCombineAnimatedSticker removeFromSuperview];
     }];
     /*[refAnimatedSticker setUserInteractionEnabled:NO];
      [refAnimatedSticker removeFromSuperview];*/
@@ -5480,7 +5527,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
-        [self.delegate comicMakingItemSave:comicPage withImageView:refAnimatedSticker withPrintScreen:printScreen withRemove:YES withImageView:imgvComic];
+        [self.delegate comicMakingItemSave:comicPage withImageView:refToCombineAnimatedSticker withPrintScreen:printScreen withRemove:YES withImageView:imgvComic];
     });
     [self doPrintScreen];
     haveAnimationOnPage = NO;
@@ -5582,11 +5629,8 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         data = [[NSFileManager defaultManager] contentsAtPath:path];
         [tempDict setObject:data forKey:@"GifData"];
         [tempDict setObject:[NSString stringWithFormat:@"%f",imageView.startDelay] forKey:@"StartTime"];
-        
         [tempDict setObject:NSStringFromCGPoint([self convertedPointsForCurrentPoints:imageView.frame.origin]) forKey:@"Position"];
-        
         [passingArray addObject:tempDict];
-        
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // No explicit autorelease pool needed here.
@@ -5604,10 +5648,10 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                 if (finished)
                 {
                     animatedSticker.combineAnimationFileName = gifFileName;
-//                    haveCreateMainGif = YES;
+                    haveCreateMainGif = YES;
 //                    mainAnimationGifView.hidden = YES;
 //                    mainAnimationGifView.image = outImage;
-//                    refAnimatedSticker = mainAnimationGifView;
+                    refToCombineAnimatedSticker = animatedSticker;
                     [self doAutoSave:nil];
                 }
             }];
