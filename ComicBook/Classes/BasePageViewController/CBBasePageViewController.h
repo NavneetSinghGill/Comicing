@@ -18,6 +18,7 @@
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, assign) CGFloat topMargin;
 - (void)reloadPageViewController;
+- (void)addViewControllers:(NSArray*)viewControllers;
 - (void)changePageToIndex:(NSInteger)index;
 - (void)pageChangedToIndex:(NSInteger)index;
 - (BOOL)scrollPageViewToLeft;

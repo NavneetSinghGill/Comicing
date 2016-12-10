@@ -548,13 +548,20 @@
 		84F1613A1D3554B200DBF9E0 /* Slide-13.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84F161391D3554B200DBF9E0 /* Slide-13.gif */; };
 		84F1B4411CB2E41A0096F79C /* InviteFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */; };
 		84F1B4421CB2E41A0096F79C /* InviteFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */; };
-		913B64021DF73E870003E9D1 /* CBComicPreviewItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 913B64001DF73E870003E9D1 /* CBComicPreviewItemVC.m */; };
-		913B64031DF73E870003E9D1 /* CBComicPreviewItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 913B64011DF73E870003E9D1 /* CBComicPreviewItemVC.xib */; };
+		913B64141DF86A1B0003E9D1 /* CBBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 913B640D1DF86A1B0003E9D1 /* CBBaseTableViewCell.m */; };
+		913B64151DF86A1B0003E9D1 /* CBBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 913B64101DF86A1B0003E9D1 /* CBBaseTableViewController.m */; };
+		913B64161DF86A1B0003E9D1 /* CBBaseTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 913B64131DF86A1B0003E9D1 /* CBBaseTableViewSection.m */; };
+		913B64191DF86BDA0003E9D1 /* CBComicPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 913B64181DF86BDA0003E9D1 /* CBComicPreviewVC.m */; };
+		913B641C1DF86D970003E9D1 /* CBPreviewHeaderSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 913B641B1DF86D970003E9D1 /* CBPreviewHeaderSection.m */; };
+		913B641F1DF86DB30003E9D1 /* CBComicPreviewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 913B641E1DF86DB30003E9D1 /* CBComicPreviewSection.m */; };
+		913B64221DF86DE60003E9D1 /* CBPreviewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 913B64211DF86DE60003E9D1 /* CBPreviewHeaderCell.m */; };
+		913B64251DF86E9E0003E9D1 /* CBComicPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 913B64241DF86E9E0003E9D1 /* CBComicPreviewCell.m */; };
+		913B64271DF86EA80003E9D1 /* CBComicPreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 913B64261DF86EA80003E9D1 /* CBComicPreviewCell.xib */; };
+		913B64291DF86EB20003E9D1 /* CBPreviewHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 913B64281DF86EB20003E9D1 /* CBPreviewHeaderCell.xib */; };
 		91BEABF31DF720EA00710D3C /* CBBaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABE91DF720EA00710D3C /* CBBaseCollectionViewCell.m */; };
 		91BEABF41DF720EA00710D3C /* CBBaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABEC1DF720EA00710D3C /* CBBaseCollectionViewController.m */; };
 		91BEABF51DF720EA00710D3C /* CBBaseCollectionViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABEF1DF720EA00710D3C /* CBBaseCollectionViewSection.m */; };
 		91BEABF61DF720EA00710D3C /* CBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABF21DF720EA00710D3C /* CBBaseViewController.m */; };
-		91BEAC041DF7211300710D3C /* CBComicPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABF91DF7211300710D3C /* CBComicPreviewVC.m */; };
 		91BEAC051DF7211300710D3C /* CBComicImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEABFC1DF7211300710D3C /* CBComicImageCell.m */; };
 		91BEAC061DF7211300710D3C /* CBComicImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91BEABFD1DF7211300710D3C /* CBComicImageCell.xib */; };
 		91BEAC081DF7211300710D3C /* CBComicImageSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEAC011DF7211300710D3C /* CBComicImageSection.m */; };
@@ -564,6 +571,10 @@
 		91BEAC151DF7372900710D3C /* CBBasePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEAC141DF7372900710D3C /* CBBasePageViewController.m */; };
 		91BEAC191DF737C500710D3C /* CBPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEAC181DF737C500710D3C /* CBPageViewController.m */; };
 		91BEAC1C1DF738A900710D3C /* UIView+CBConstraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BEAC1B1DF738A900710D3C /* UIView+CBConstraints.m */; };
+		91F338D61DF894600017193C /* CBComicPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F338D41DF894600017193C /* CBComicPageViewController.m */; };
+		91F338D71DF894600017193C /* CBComicPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91F338D51DF894600017193C /* CBComicPageViewController.xib */; };
+		91F338DB1DF8953E0017193C /* CBComicPageCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F338D91DF8953E0017193C /* CBComicPageCollectionVC.m */; };
+		91F338DC1DF8953E0017193C /* CBComicPageCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91F338DA1DF8953E0017193C /* CBComicPageCollectionVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1411,9 +1422,24 @@
 		84F1B43E1CB2E41A0096F79C /* InviteFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendCell.h; sourceTree = "<group>"; };
 		84F1B43F1CB2E41A0096F79C /* InviteFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendCell.m; sourceTree = "<group>"; };
 		84F1B4401CB2E41A0096F79C /* InviteFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendCell.xib; sourceTree = "<group>"; };
-		913B63FF1DF73E870003E9D1 /* CBComicPreviewItemVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicPreviewItemVC.h; sourceTree = "<group>"; };
-		913B64001DF73E870003E9D1 /* CBComicPreviewItemVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicPreviewItemVC.m; sourceTree = "<group>"; };
-		913B64011DF73E870003E9D1 /* CBComicPreviewItemVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBComicPreviewItemVC.xib; sourceTree = "<group>"; };
+		913B640C1DF86A1B0003E9D1 /* CBBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseTableViewCell.h; sourceTree = "<group>"; };
+		913B640D1DF86A1B0003E9D1 /* CBBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBaseTableViewCell.m; sourceTree = "<group>"; };
+		913B640F1DF86A1B0003E9D1 /* CBBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseTableViewController.h; sourceTree = "<group>"; };
+		913B64101DF86A1B0003E9D1 /* CBBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBaseTableViewController.m; sourceTree = "<group>"; };
+		913B64121DF86A1B0003E9D1 /* CBBaseTableViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseTableViewSection.h; sourceTree = "<group>"; };
+		913B64131DF86A1B0003E9D1 /* CBBaseTableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBaseTableViewSection.m; sourceTree = "<group>"; };
+		913B64171DF86BDA0003E9D1 /* CBComicPreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicPreviewVC.h; sourceTree = "<group>"; };
+		913B64181DF86BDA0003E9D1 /* CBComicPreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicPreviewVC.m; sourceTree = "<group>"; };
+		913B641A1DF86D970003E9D1 /* CBPreviewHeaderSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPreviewHeaderSection.h; sourceTree = "<group>"; };
+		913B641B1DF86D970003E9D1 /* CBPreviewHeaderSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPreviewHeaderSection.m; sourceTree = "<group>"; };
+		913B641D1DF86DB30003E9D1 /* CBComicPreviewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicPreviewSection.h; sourceTree = "<group>"; };
+		913B641E1DF86DB30003E9D1 /* CBComicPreviewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicPreviewSection.m; sourceTree = "<group>"; };
+		913B64201DF86DE60003E9D1 /* CBPreviewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPreviewHeaderCell.h; sourceTree = "<group>"; };
+		913B64211DF86DE60003E9D1 /* CBPreviewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPreviewHeaderCell.m; sourceTree = "<group>"; };
+		913B64231DF86E9E0003E9D1 /* CBComicPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicPreviewCell.h; sourceTree = "<group>"; };
+		913B64241DF86E9E0003E9D1 /* CBComicPreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicPreviewCell.m; sourceTree = "<group>"; };
+		913B64261DF86EA80003E9D1 /* CBComicPreviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBComicPreviewCell.xib; sourceTree = "<group>"; };
+		913B64281DF86EB20003E9D1 /* CBPreviewHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBPreviewHeaderCell.xib; sourceTree = "<group>"; };
 		91BEABE81DF720EA00710D3C /* CBBaseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseCollectionViewCell.h; sourceTree = "<group>"; };
 		91BEABE91DF720EA00710D3C /* CBBaseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBaseCollectionViewCell.m; sourceTree = "<group>"; };
 		91BEABEB1DF720EA00710D3C /* CBBaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseCollectionViewController.h; sourceTree = "<group>"; };
@@ -1422,8 +1448,6 @@
 		91BEABEF1DF720EA00710D3C /* CBBaseCollectionViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBaseCollectionViewSection.m; sourceTree = "<group>"; };
 		91BEABF11DF720EA00710D3C /* CBBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBaseViewController.h; sourceTree = "<group>"; };
 		91BEABF21DF720EA00710D3C /* CBBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBaseViewController.m; sourceTree = "<group>"; };
-		91BEABF81DF7211300710D3C /* CBComicPreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicPreviewVC.h; sourceTree = "<group>"; };
-		91BEABF91DF7211300710D3C /* CBComicPreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicPreviewVC.m; sourceTree = "<group>"; };
 		91BEABFB1DF7211300710D3C /* CBComicImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicImageCell.h; sourceTree = "<group>"; };
 		91BEABFC1DF7211300710D3C /* CBComicImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicImageCell.m; sourceTree = "<group>"; };
 		91BEABFD1DF7211300710D3C /* CBComicImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBComicImageCell.xib; sourceTree = "<group>"; };
@@ -1439,6 +1463,12 @@
 		91BEAC181DF737C500710D3C /* CBPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPageViewController.m; sourceTree = "<group>"; };
 		91BEAC1A1DF738A900710D3C /* UIView+CBConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CBConstraints.h"; sourceTree = "<group>"; };
 		91BEAC1B1DF738A900710D3C /* UIView+CBConstraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CBConstraints.m"; sourceTree = "<group>"; };
+		91F338D31DF894600017193C /* CBComicPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicPageViewController.h; sourceTree = "<group>"; };
+		91F338D41DF894600017193C /* CBComicPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicPageViewController.m; sourceTree = "<group>"; };
+		91F338D51DF894600017193C /* CBComicPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBComicPageViewController.xib; sourceTree = "<group>"; };
+		91F338D81DF8953E0017193C /* CBComicPageCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicPageCollectionVC.h; sourceTree = "<group>"; };
+		91F338D91DF8953E0017193C /* CBComicPageCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicPageCollectionVC.m; sourceTree = "<group>"; };
+		91F338DA1DF8953E0017193C /* CBComicPageCollectionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBComicPageCollectionVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1732,6 +1762,9 @@
 		0C6664FD1C84358500FEB11F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				913B640B1DF86A1B0003E9D1 /* BaseTableViewCell */,
+				913B640E1DF86A1B0003E9D1 /* BaseTableViewController */,
+				913B64111DF86A1B0003E9D1 /* BaseTableViewSection */,
 				91BEAC121DF7370000710D3C /* BasePageViewController */,
 				91BEABE71DF720EA00710D3C /* BaseCollectionViewCell */,
 				91BEABEA1DF720EA00710D3C /* BaseCollectionViewController */,
@@ -3645,6 +3678,33 @@
 			path = "Instruction GIF";
 			sourceTree = "<group>";
 		};
+		913B640B1DF86A1B0003E9D1 /* BaseTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				913B640C1DF86A1B0003E9D1 /* CBBaseTableViewCell.h */,
+				913B640D1DF86A1B0003E9D1 /* CBBaseTableViewCell.m */,
+			);
+			path = BaseTableViewCell;
+			sourceTree = "<group>";
+		};
+		913B640E1DF86A1B0003E9D1 /* BaseTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				913B640F1DF86A1B0003E9D1 /* CBBaseTableViewController.h */,
+				913B64101DF86A1B0003E9D1 /* CBBaseTableViewController.m */,
+			);
+			path = BaseTableViewController;
+			sourceTree = "<group>";
+		};
+		913B64111DF86A1B0003E9D1 /* BaseTableViewSection */ = {
+			isa = PBXGroup;
+			children = (
+				913B64121DF86A1B0003E9D1 /* CBBaseTableViewSection.h */,
+				913B64131DF86A1B0003E9D1 /* CBBaseTableViewSection.m */,
+			);
+			path = BaseTableViewSection;
+			sourceTree = "<group>";
+		};
 		91BEABE71DF720EA00710D3C /* BaseCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -3687,11 +3747,14 @@
 				91BEABFA1DF7211300710D3C /* Cells */,
 				91BEABFF1DF7211300710D3C /* Sections */,
 				91BEAC031DF7211300710D3C /* Views */,
-				91BEABF81DF7211300710D3C /* CBComicPreviewVC.h */,
-				91BEABF91DF7211300710D3C /* CBComicPreviewVC.m */,
-				913B63FF1DF73E870003E9D1 /* CBComicPreviewItemVC.h */,
-				913B64001DF73E870003E9D1 /* CBComicPreviewItemVC.m */,
-				913B64011DF73E870003E9D1 /* CBComicPreviewItemVC.xib */,
+				913B64171DF86BDA0003E9D1 /* CBComicPreviewVC.h */,
+				913B64181DF86BDA0003E9D1 /* CBComicPreviewVC.m */,
+				91F338D31DF894600017193C /* CBComicPageViewController.h */,
+				91F338D41DF894600017193C /* CBComicPageViewController.m */,
+				91F338D51DF894600017193C /* CBComicPageViewController.xib */,
+				91F338D81DF8953E0017193C /* CBComicPageCollectionVC.h */,
+				91F338D91DF8953E0017193C /* CBComicPageCollectionVC.m */,
+				91F338DA1DF8953E0017193C /* CBComicPageCollectionVC.xib */,
 			);
 			path = ComicPreview;
 			sourceTree = "<group>";
@@ -3702,6 +3765,12 @@
 				91BEABFB1DF7211300710D3C /* CBComicImageCell.h */,
 				91BEABFC1DF7211300710D3C /* CBComicImageCell.m */,
 				91BEABFD1DF7211300710D3C /* CBComicImageCell.xib */,
+				913B64201DF86DE60003E9D1 /* CBPreviewHeaderCell.h */,
+				913B64211DF86DE60003E9D1 /* CBPreviewHeaderCell.m */,
+				913B64281DF86EB20003E9D1 /* CBPreviewHeaderCell.xib */,
+				913B64231DF86E9E0003E9D1 /* CBComicPreviewCell.h */,
+				913B64241DF86E9E0003E9D1 /* CBComicPreviewCell.m */,
+				913B64261DF86EA80003E9D1 /* CBComicPreviewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -3711,6 +3780,10 @@
 			children = (
 				91BEAC001DF7211300710D3C /* CBComicImageSection.h */,
 				91BEAC011DF7211300710D3C /* CBComicImageSection.m */,
+				913B641A1DF86D970003E9D1 /* CBPreviewHeaderSection.h */,
+				913B641B1DF86D970003E9D1 /* CBPreviewHeaderSection.m */,
+				913B641D1DF86DB30003E9D1 /* CBComicPreviewSection.h */,
+				913B641E1DF86DB30003E9D1 /* CBComicPreviewSection.m */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -3856,6 +3929,7 @@
 				84EFBCC41D25A2A700647A88 /* InstructionView.xib in Resources */,
 				161CAD541D840DD80034795C /* Gloomy-OFF.png in Resources */,
 				16161C221DE8C52A00E8FDD7 /* Bird_02.gif in Resources */,
+				913B64271DF86EA80003E9D1 /* CBComicPreviewCell.xib in Resources */,
 				16A5FAED1DE70BBD009757B0 /* latestAnimationList.json in Resources */,
 				0C6668371C84358600FEB11F /* c4.jpg in Resources */,
 				16A602771DE7150600D13F5C /* Lear.gif in Resources */,
@@ -3900,6 +3974,7 @@
 				167DACE51DE77A68001F42BD /* AngelWings-Effects.gif in Resources */,
 				1BEB1FD91D43DD2700CC1304 /* openbox-15.gif in Resources */,
 				161CAD561D840DD80034795C /* Happy-OFF.png in Resources */,
+				913B64291DF86EB20003E9D1 /* CBPreviewHeaderCell.xib in Resources */,
 				0C6668B81C84358600FEB11F /* SectionDividerView.xib in Resources */,
 				84F161341D35387400DBF9E0 /* Slide-7.gif in Resources */,
 				0C6667981C84358600FEB11F /* profilePicCamera.png in Resources */,
@@ -3951,10 +4026,12 @@
 				0C66677B1C84358600FEB11F /* MYRIADPRO-SEMIBOLD.OTF in Resources */,
 				1BDDB7511D48A79400FA931F /* open_gift_box_flat@3x.png in Resources */,
 				165641981D907EBB00E3C9C7 /* 4slidebook.png in Resources */,
+				91F338D71DF894600017193C /* CBComicPageViewController.xib in Resources */,
 				16161C0F1DE8C39700E8FDD7 /* devil.png in Resources */,
 				1663532B1DE9EC5800BB068D /* DevilWingLft.gif in Resources */,
 				0C6667A71C84358600FEB11F /* everyone.png in Resources */,
 				84F1613A1D3554B200DBF9E0 /* Slide-13.gif in Resources */,
+				91F338DC1DF8953E0017193C /* CBComicPageCollectionVC.xib in Resources */,
 				840439211DA9535D0020CA61 /* ComicCell.xib in Resources */,
 				1BEB1FD61D43DD2700CC1304 /* box02.gif in Resources */,
 				0C6667701C84358600FEB11F /* american-typewriter.ttf in Resources */,
@@ -3978,7 +4055,6 @@
 				0C66679E1C84358600FEB11F /* selectedImage.png in Resources */,
 				84CEF1211D3ADF68009FCB1D /* ModifiedBlueBoy.png in Resources */,
 				0C6668071C84358600FEB11F /* MeCell.xib in Resources */,
-				913B64031DF73E870003E9D1 /* CBComicPreviewItemVC.xib in Resources */,
 				0C66678F1C84358600FEB11F /* accountAge.png in Resources */,
 				167DACC31DE75E1A001F42BD /* DRILL_FINAL02.gif in Resources */,
 				0C6667A51C84358600FEB11F /* digup.png in Resources */,
@@ -4091,6 +4167,7 @@
 				0C6668721C84358600FEB11F /* DACircularProgressView.m in Sources */,
 				0C6668B71C84358600FEB11F /* SectionDividerView.m in Sources */,
 				0C66688A1C84358600FEB11F /* NSString+STTwitter.m in Sources */,
+				913B64151DF86A1B0003E9D1 /* CBBaseTableViewController.m in Sources */,
 				0C6667DF1C84358600FEB11F /* ComicMakingViewController.m in Sources */,
 				84ED581C1D2956AF004E257F /* MainPage3SlideCell.m in Sources */,
 				0C6668791C84358600FEB11F /* SDImageCache.m in Sources */,
@@ -4099,6 +4176,7 @@
 				0C6667C61C84358600FEB11F /* RCWhatsApp.m in Sources */,
 				0C66689F1C84358600FEB11F /* ComicShareView.m in Sources */,
 				0C6668701C84358600FEB11F /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
+				913B64221DF86DE60003E9D1 /* CBPreviewHeaderCell.m in Sources */,
 				0C6667D31C84358600FEB11F /* ComicNetworking.m in Sources */,
 				0C6668AF1C84358600FEB11F /* GroupsSection.m in Sources */,
 				0C66687C1C84358600FEB11F /* SDWebImageDownloader.m in Sources */,
@@ -4110,6 +4188,7 @@
 				0C66681B1C84358600FEB11F /* CMCUser.m in Sources */,
 				1B9B7C241D3A9E03003B04F1 /* MyEmojiCategory.m in Sources */,
 				0C6668571C84358600FEB11F /* AFURLSessionManager.m in Sources */,
+				91F338DB1DF8953E0017193C /* CBComicPageCollectionVC.m in Sources */,
 				0C66681A1C84358600FEB11F /* CMCComic.m in Sources */,
 				0C6668081C84358600FEB11F /* MePageDetailsVC.m in Sources */,
 				0C6667D71C84358600FEB11F /* FindFriendsTableCell.m in Sources */,
@@ -4147,6 +4226,7 @@
 				0C6667B71C84358600FEB11F /* UIBezierPath-Points.m in Sources */,
 				0C6668901C84358600FEB11F /* STTwitterOS.m in Sources */,
 				0C66686D1C84358600FEB11F /* NSDictionary+MTLMappingAdditions.m in Sources */,
+				913B64251DF86E9E0003E9D1 /* CBComicPreviewCell.m in Sources */,
 				0C6668A61C84358600FEB11F /* FriendsListTableViewCell.m in Sources */,
 				0C6667B91C84358600FEB11F /* ACEDrawingTools.m in Sources */,
 				0C6668061C84358600FEB11F /* MeCell.m in Sources */,
@@ -4157,6 +4237,7 @@
 				0C66682F1C84358600FEB11F /* FriendSearchResult.m in Sources */,
 				0C6668101C84358600FEB11F /* SearchViewController.m in Sources */,
 				16A5FAE71DE70AC4009757B0 /* YYAnimatedImageView.m in Sources */,
+				913B641F1DF86DB30003E9D1 /* CBComicPreviewSection.m in Sources */,
 				0C6667B81C84358600FEB11F /* UIView+draggable.m in Sources */,
 				0CBF90B81CA3143D004007DF /* UIImage+ImageCompress.m in Sources */,
 				0CBF90B41CA313A5004007DF /* UIImage+Alpha.m in Sources */,
@@ -4193,6 +4274,7 @@
 				0C66682C1C84358600FEB11F /* Pagination.m in Sources */,
 				0C6667F01C84358600FEB11F /* ComicBookVC.m in Sources */,
 				0C6668111C84358600FEB11F /* ComicImageCollectionCell.m in Sources */,
+				913B64141DF86A1B0003E9D1 /* CBBaseTableViewCell.m in Sources */,
 				16A5FAEB1DE70AC4009757B0 /* YYSpriteSheetImage.m in Sources */,
 				0CDD9A821C99B30B00D942D3 /* TermsServiceViewController.m in Sources */,
 				0C6668821C84358600FEB11F /* UIImage+MultiFormat.m in Sources */,
@@ -4212,7 +4294,6 @@
 				1B9B7C181D3A9C5F003B04F1 /* InviteViewController.m in Sources */,
 				91BEABF51DF720EA00710D3C /* CBBaseCollectionViewSection.m in Sources */,
 				167DDF8F1D7F3D4C0090E8A5 /* AnimationsCollectionViewCell.m in Sources */,
-				91BEAC041DF7211300710D3C /* CBComicPreviewVC.m in Sources */,
 				91BEAC051DF7211300710D3C /* CBComicImageCell.m in Sources */,
 				0C6667F11C84358600FEB11F /* ComicCommentPeopleVC.m in Sources */,
 				0C6668501C84358600FEB11F /* AFHTTPRequestOperationManager.m in Sources */,
@@ -4273,6 +4354,7 @@
 				0C6668211C84358600FEB11F /* ComicsModel.m in Sources */,
 				0C6668991C84358600FEB11F /* AccountView.m in Sources */,
 				0C6668831C84358600FEB11F /* UIImage+WebP.m in Sources */,
+				913B64161DF86A1B0003E9D1 /* CBBaseTableViewSection.m in Sources */,
 				0C6668041C84358600FEB11F /* MainPageGroupViewController.m in Sources */,
 				0C6667EE1C84358600FEB11F /* BottomBarViewController.m in Sources */,
 				0C6668BA1C84358600FEB11F /* SignUp.m in Sources */,
@@ -4319,7 +4401,7 @@
 				0C6668BE1C84358600FEB11F /* VerifyView.m in Sources */,
 				0C6668131C84358600FEB11F /* ComicImageListView.m in Sources */,
 				843ABB781D1FAA730078B7A8 /* MainPageCell.m in Sources */,
-				913B64021DF73E870003E9D1 /* CBComicPreviewItemVC.m in Sources */,
+				913B641C1DF86D970003E9D1 /* CBPreviewHeaderSection.m in Sources */,
 				0C6667E71C84358600FEB11F /* GlideScrollViewController.m in Sources */,
 				0C66685D1C84358600FEB11F /* JSONAPI.m in Sources */,
 				0C6668491C84358600FEB11F /* UIColor+colorWithHexString.m in Sources */,
@@ -4335,10 +4417,12 @@
 				0C8C61ED1CB14445008073FA /* ComicSlidesData.m in Sources */,
 				0C6667D21C84358600FEB11F /* PrivateConversationAPIManager.m in Sources */,
 				0C66688F1C84358600FEB11F /* STTwitterOAuth.m in Sources */,
+				913B64191DF86BDA0003E9D1 /* CBComicPreviewVC.m in Sources */,
 				0C66685F1C84358600FEB11F /* JSONModel+networking.m in Sources */,
 				0C6668921C84358600FEB11F /* STTwitterStreamParser.m in Sources */,
 				91BEAC191DF737C500710D3C /* CBPageViewController.m in Sources */,
 				1B00F6C21D450D3300514291 /* AnimatedGif.m in Sources */,
+				91F338D61DF894600017193C /* CBComicPageViewController.m in Sources */,
 				0C6668B11C84358600FEB11F /* HeaderView.m in Sources */,
 				0C66686C1C84358600FEB11F /* NSDictionary+MTLManipulationAdditions.m in Sources */,
 				0C6667CE1C84358600FEB11F /* FriendsAPIManager.m in Sources */,

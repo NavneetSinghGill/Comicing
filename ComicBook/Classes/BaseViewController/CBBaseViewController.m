@@ -35,6 +35,7 @@
 }
 
 - (void)dealloc{
+    self.tableView.delegate= nil;
     self.collectionView.delegate= nil;
 }
 @end

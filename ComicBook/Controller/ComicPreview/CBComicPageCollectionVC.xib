@@ -9,9 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CBComicPreviewItemVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CBComicPageCollectionVC">
             <connections>
-                <outlet property="collectionView" destination="s4D-Bf-G9p" id="S2J-dB-ZnO"/>
+                <outlet property="collectionView" destination="rBf-Kd-2ev" id="LqE-Gk-u1t"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,10 +20,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="s4D-Bf-G9p">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="rBf-Kd-2ev">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="T8E-ww-9tP">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cZx-cX-RJa">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -33,12 +33,14 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="s4D-Bf-G9p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4Y9-yI-uCY"/>
-                <constraint firstItem="s4D-Bf-G9p" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aWi-rE-kF9"/>
-                <constraint firstAttribute="trailing" secondItem="s4D-Bf-G9p" secondAttribute="trailing" id="e1g-3G-dJ3"/>
-                <constraint firstAttribute="bottom" secondItem="s4D-Bf-G9p" secondAttribute="bottom" id="wZ5-Os-VOA"/>
+                <constraint firstItem="rBf-Kd-2ev" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SH3-SP-pDX"/>
+                <constraint firstAttribute="bottom" secondItem="rBf-Kd-2ev" secondAttribute="bottom" id="Sos-Rb-52J"/>
+                <constraint firstItem="rBf-Kd-2ev" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Sw4-dc-4Eb"/>
+                <constraint firstAttribute="trailing" secondItem="rBf-Kd-2ev" secondAttribute="trailing" id="b1U-Dx-WYJ"/>
             </constraints>
-            <point key="canvasLocation" x="299.5" y="62.5"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-69" y="39"/>
         </view>
     </objects>
 </document>

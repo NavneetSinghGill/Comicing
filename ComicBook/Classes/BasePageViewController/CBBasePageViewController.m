@@ -82,17 +82,15 @@
 }
 
 - (void)addViewControllers:(NSArray*)viewControllers{
-    {
-        if(viewControllers && viewControllers.count>0){
-            for(CBBaseViewController* viewController in viewControllers){
-                [self.viewControllers addObject:viewController];
-                viewController.index= [self.viewControllers indexOfObject:viewController];
-                viewController.parentController= self;
-            }
+    if(viewControllers && viewControllers.count>0){
+        for(CBBaseViewController* viewController in viewControllers){
+            [self.viewControllers addObject:viewController];
+            viewController.index= [self.viewControllers indexOfObject:viewController];
+            viewController.parentController= self;
         }
-        self.currentViewController= [self.viewControllers objectAtIndex:self.currentIndex];
-        [self.pageController setViewControllers:[NSArray arrayWithObject:self.currentViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }
+    self.currentViewController= [self.viewControllers objectAtIndex:self.currentIndex];
+    [self.pageController setViewControllers:[NSArray arrayWithObject:self.currentViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
 
 - (void)addPageControllerView{

@@ -10,6 +10,7 @@
 
 @interface CBBaseViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray* sectionArray;
 @property (nonatomic, strong) NSMutableArray* dataArray;
 @property (nonatomic, assign) NSInteger index;

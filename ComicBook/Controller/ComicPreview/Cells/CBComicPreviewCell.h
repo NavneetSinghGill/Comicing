@@ -1,13 +1,13 @@
 //
-//  CBComicLandingVC.h
+//  CBComicPreviewCell.h
 //  ComicBook
 //
 //  Created by Atul Khatri on 07/12/16.
 //  Copyright © 2016 Providence. All rights reserved.
 //
 
-#import "CBBaseTableViewController.h"
+#import "CBBaseTableViewCell.h"
 
-@interface CBComicPreviewVC : CBBaseTableViewController
+@interface CBComicPreviewCell : CBBaseTableViewCell
 
 @end

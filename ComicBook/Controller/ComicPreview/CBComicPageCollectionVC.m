@@ -1,25 +1,25 @@
 //
-//  CBComicPreviewItemVC.m
+//  CBComicPageCollectionVC.m
 //  ComicBook
 //
 //  Created by Atul Khatri on 07/12/16.
 //  Copyright © 2016 Providence. All rights reserved.
 //
 
-#import "CBComicPreviewItemVC.h"
+#import "CBComicPageCollectionVC.h"
 #import "CBComicImageSection.h"
 #import "CBComicImageCell.h"
 #import "ZoomInteractiveTransition.h"
 
 #define kMaxCellCount 100000
 
-@interface CBComicPreviewItemVC () <UIGestureRecognizerDelegate>
+@interface CBComicPageCollectionVC () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) ZoomInteractiveTransition * transition;
 @property (nonatomic, strong) NSIndexPath * selectedIndexPath;
 @property (nonatomic, strong) UILongPressGestureRecognizer* longPressRecognizer;
 @end
 
-@implementation CBComicPreviewItemVC
+@implementation CBComicPageCollectionVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,13 +32,15 @@
     
     self.dataArray= [NSMutableArray new];
     
-    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE]];
-    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"ver_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT]];
-    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"ver_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT]];
-    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE]];
-    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE]];
-    [self refreshImageOrientation];
-
+//    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE]];
+//    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"ver_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT]];
+//    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"ver_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT]];
+//    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE]];
+//    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE]];
+//    [self refreshImageOrientation];
+    
+//    self.collectionView.scrollEnabled= NO;
+    
     [self setupSections];
 }
 
@@ -48,6 +50,10 @@
     section.dataArray= self.dataArray;
     [self.sectionArray addObject:section];
     [self.collectionView reloadData];
+}
+
+- (CGFloat)contentHeight{
+    return self.collectionView.collectionViewLayout.collectionViewContentSize.height;
 }
 
 - (NSNumber*)currentTimestmap{
@@ -74,9 +80,15 @@
 - (void)showDeleteAlertForIndexPath:(NSIndexPath*)indexPath{
     UIAlertController* alertController= [UIAlertController alertControllerWithTitle:@"Delete" message:@"Are you sure you want to delete this image?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* deleteAction= [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        CBComicItemModel* deletedItem= [self.dataArray objectAtIndex:indexPath.row];
         [self.dataArray removeObjectAtIndex:indexPath.row];
         [self refreshImageOrientation];
         [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+        if(self.delegate && [self.delegate conformsToProtocol:@protocol(CBComicPageCollectionDelegate)]){
+            if([self.delegate respondsToSelector:@selector(didDeleteComicItem:inComicPage:)]){
+                [self.delegate didDeleteComicItem:deletedItem inComicPage:self];
+            }
+        }
     }];
     UIAlertAction* cancelAction= [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     [alertController addAction:deleteAction];
