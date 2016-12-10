@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="Gtw-pU-Kh0">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="Gtw-pU-Kh0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -125,7 +125,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="W5W-cF-pda" kind="relationship" relationship="rootViewController" id="6sg-SA-m8W"/>
+                        <segue destination="tHu-HW-1tc" kind="relationship" relationship="rootViewController" id="Zod-F8-7Zi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3x6-gy-KbS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -176,46 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ged-en-b5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="57" y="109"/>
-        </scene>
-        <!--Comic PreviewVC-->
-        <scene sceneID="AAm-Mf-hzF">
-            <objects>
-                <viewController id="W5W-cF-pda" customClass="CBComicPreviewVC" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xYn-nD-sIS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="9C8-Ou-yab">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OLb-ON-Edt">
-                                <rect key="frame" x="290" y="20" width="69" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="+"/>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hm3-1J-tL3">
-                                <rect key="frame" x="290" y="75" width="69" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="+"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="55s-GI-b69"/>
-                    <connections>
-                        <outlet property="tableView" destination="9C8-Ou-yab" id="oQn-xL-TDo"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pdq-Lb-R2O" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-342.5" y="123.5"/>
+            <point key="canvasLocation" x="760" y="227"/>
         </scene>
         <!--Comic Making View Controller-->
         <scene sceneID="Cmj-sd-DE5">
@@ -373,10 +334,10 @@
                                     <action selector="btnComicSendButtonClick:" destination="aEe-Ef-L5w" eventType="touchUpInside" id="OL6-I0-njr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bum-CF-q3f">
-                                <rect key="frame" x="0.0" y="619" width="44" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="sticker-sharing-icon"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bum-CF-q3f">
+                                <rect key="frame" x="15" y="635" width="11" height="25"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <state key="normal" image="text166.png"/>
                                 <connections>
                                     <segue destination="zWT-dW-Mua" kind="push" id="d0d-zf-SBK"/>
                                 </connections>
@@ -533,7 +494,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="JCM-PA-Za2">
-                                <rect key="frame" x="0.0" y="67.5" width="60" height="60"/>
+                                <rect key="frame" x="0.0" y="67" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -1662,14 +1623,14 @@ Comicing </string>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell1" id="dr5-RS-Mql">
-                                <rect key="frame" x="0.0" y="9" width="60" height="67.5"/>
+                                <rect key="frame" x="0.0" y="9" width="60" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="67.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="68"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oOI-2o-o74">
-                                            <rect key="frame" x="20" y="34.5" width="20" height="18"/>
+                                            <rect key="frame" x="20" y="34" width="20" height="18"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                             <state key="normal" image="xbutton"/>
                                             <connections>
@@ -1677,7 +1638,7 @@ Comicing </string>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UD5-oW-TUj">
-                                            <rect key="frame" x="12" y="-4" width="30" height="27.5"/>
+                                            <rect key="frame" x="12" y="-5" width="30" height="28"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="scissors"/>
                                             <connections>
@@ -1862,7 +1823,6 @@ Comicing </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2W5-84-llT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="308" y="532"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="98t-35-VzC">
@@ -3089,9 +3049,9 @@ Comicing </string>
         <image name="scissors-icon-white" width="25" height="28"/>
         <image name="searchFriends.png" width="48" height="63"/>
         <image name="sticker-icon" width="34" height="33"/>
-        <image name="sticker-sharing-icon" width="36" height="32"/>
         <image name="stickers_icon.png" width="486" height="430"/>
         <image name="tap_to_open.png" width="737" height="198"/>
+        <image name="text166.png" width="50" height="109"/>
         <image name="text_icon" width="90" height="91"/>
         <image name="twitterlogo.png" width="63" height="66"/>
         <image name="undo-drawing-icon" width="15" height="19"/>

@@ -45,6 +45,10 @@
 			</dict>
 		</array>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs to access device camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs to access device microphone</string>
 	<key>FacebookAppID</key>
 	<string>1552142461773416</string>
 	<key>LSApplicationQueriesSchemes</key>

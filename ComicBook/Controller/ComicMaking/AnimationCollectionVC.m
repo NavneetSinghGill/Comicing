@@ -262,7 +262,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
     {
         if (IS_IPHONE_6)
         {
-            return 27;
+            return 20;
         }
         else if (IS_IPHONE_6P)
         {
@@ -270,7 +270,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
         }
         else
         {
-            return 17;
+            return 11;
         }
     }
     else
