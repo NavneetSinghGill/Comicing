@@ -30,7 +30,7 @@
     self.longPressRecognizer.delaysTouchesBegan= YES;
     [self.collectionView addGestureRecognizer:self.longPressRecognizer];
     
-    self.dataArray= [NSMutableArray new];
+//    self.dataArray= [NSMutableArray new];
     
 //    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE]];
 //    [self.dataArray addObject:[[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"ver_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT]];
@@ -41,7 +41,12 @@
     
 //    self.collectionView.scrollEnabled= NO;
     
-    [self setupSections];
+    if(!self.dataArray){
+        self.dataArray= [NSMutableArray new];
+    }
+    if(self.sectionArray.count == 0){
+        [self setupSections];
+    }
 }
 
 - (void)setupSections{
@@ -118,10 +123,16 @@
 }
 
 - (void)addComicItem:(CBComicItemModel*)comicItem {
+    if(!self.dataArray){
+        self.dataArray= [NSMutableArray new];
+    }
+    if(self.sectionArray.count == 0){
+        [self setupSections];
+    }
     [self.dataArray addObject:comicItem];
     [self refreshImageOrientation];
     [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataArray indexOfObject:comicItem] inSection:0]]];
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.dataArray indexOfObject:comicItem] inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+//    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.dataArray indexOfObject:comicItem] inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
 }
 
 #pragma mark- UICollectionViewDataSource helper methods

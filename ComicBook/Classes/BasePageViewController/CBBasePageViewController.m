@@ -114,15 +114,28 @@
     [self.pageController.view layoutIfNeeded];
 }
 
-- (void)navigateToPageAtIndex:(NSInteger)index{
+- (void)navigateToPageAtIndex:(NSInteger)index completion:(void (^)(BOOL finished))completion{
     self.currentViewController = [self.pageController.viewControllers lastObject];
     
     if([self.viewControllers indexOfObject:self.currentViewController] < index){
-        [self pageControllerSetViewControllers:[NSArray arrayWithObject:[self.viewControllers objectAtIndex:index]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        [self pageControllerSetViewControllers:[NSArray arrayWithObject:[self.viewControllers objectAtIndex:index]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL success) {
+            if(completion){
+                completion(success);
+            }
+            if(success){
+                [self pageChangedToIndex:index];
+            }
+        }];
     }else{
-        [self pageControllerSetViewControllers:[NSArray arrayWithObject:[self.viewControllers objectAtIndex:index]] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+        [self pageControllerSetViewControllers:[NSArray arrayWithObject:[self.viewControllers objectAtIndex:index]] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:^(BOOL success) {
+            if(completion){
+                completion(success);
+            }
+            if(success){
+                [self pageChangedToIndex:index];
+            }
+        }];
     }
-    [self pageChangedToIndex:index];
 }
 
 - (void)pageChangedToIndex:(NSInteger)index{
@@ -130,41 +143,64 @@
 }
 
 // -- Handled pageViewController InternalConsistencyException --- //
-- (void)pageControllerSetViewControllers:(NSArray*)array direction:(UIPageViewControllerNavigationDirection)transitionStyle animated:(BOOL)animated completion:(void (^ _Nullable)(BOOL))completion{
+- (void)pageControllerSetViewControllers:(NSArray*)array direction:(UIPageViewControllerNavigationDirection)transitionStyle animated:(BOOL)animated completion:(void (^ _Nullable)(BOOL success))completion{
     __weak CBBasePageViewController *blocksafeSelf = self;
     [self.pageController setViewControllers:array direction:transitionStyle animated:YES completion:^(BOOL finished){
-        if(finished)
-        {
+        if(finished){
             dispatch_async(dispatch_get_main_queue(), ^{
-                [blocksafeSelf.pageController setViewControllers:array direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];// bug fix for uipageview controller
+                [blocksafeSelf.pageController setViewControllers:array direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:^(BOOL finished) {
+                    if(completion){
+                        completion(finished);
+                    }
+                }];// bug fix for uipageview controller
             });
         }
     }];
 }
 
-- (BOOL)scrollPageViewToLeft{
+- (void)scrollPageViewToLeft:(void (^)(BOOL sucess))completed{
     if(self.currentIndex != 0){
-        [self navigateToPageAtIndex:self.currentIndex-1];
-        return YES;
+        [self navigateToPageAtIndex:self.currentIndex-1 completion:^(BOOL finished) {
+            if(completed){
+                completed(finished);
+            }
+        }];
+    }else{
+        if(completed){
+            completed(NO);
+        }
     }
-    return NO;
 }
 
-- (BOOL)scrollPageViewToRight{
+- (void)scrollPageViewToRight:(void (^)(BOOL sucess))completed{
     if(self.currentIndex+1 < self.viewControllers.count){
-        [self navigateToPageAtIndex:self.currentIndex+1];
-        return YES;
+        [self navigateToPageAtIndex:self.currentIndex+1 completion:^(BOOL finished) {
+            if(completed){
+                completed(finished);
+            }
+        }];
+    }else{
+        if(completed){
+            completed(NO);
+        }
     }
-    return NO;
 }
 
 - (void)handleNavigationToController:(UIViewController*)vc{
-    [self navigateToPageAtIndex:[self.viewControllers indexOfObject:vc]];
+    [self navigateToPageAtIndex:[self.viewControllers indexOfObject:vc] completion:nil];
 }
 
-- (void)changePageToIndex:(NSInteger)index{
-    self.currentIndex= index;
-    [self navigateToPageAtIndex:index];
+- (void)changePageToIndex:(NSInteger)index completed:(void (^)(BOOL success))completed{
+    if(self.currentIndex == index){
+        completed(YES);
+    }else{
+        self.currentIndex= index;
+        [self navigateToPageAtIndex:index completion:^(BOOL finished) {
+            if(completed){
+                completed(finished);
+            }
+        }];
+    }
 }
 
 #pragma mark - UIPageViewControllerDataSource methods

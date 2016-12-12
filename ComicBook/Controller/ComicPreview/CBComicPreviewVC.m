@@ -41,6 +41,16 @@
     [self.sectionArray addObject:previewSection];
 }
 
+- (CGFloat)maxPageHeight{
+    CGFloat maxHeight= 0.0f;
+    for(CBBaseViewController* vc in self.previewVC.viewControllers){
+        if(vc.collectionView.collectionViewLayout.collectionViewContentSize.height > maxHeight){
+            maxHeight= vc.collectionView.collectionViewLayout.collectionViewContentSize.height;
+        }
+    }
+    return ceilf(maxHeight);
+}
+
 #pragma mark- UITableViewDataSource handler methods
 - (UITableViewCell*)ta_tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell* cell= [super ta_tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -59,18 +69,39 @@
     return cell;
 }
 
+- (CGFloat)ta_tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat height= [super ta_tableView:tableView heightForRowAtIndexPath:indexPath];
+    UITableViewCell* cell= [super ta_tableView:tableView cellForRowAtIndexPath:indexPath];
+    if([cell isKindOfClass:[CBComicPreviewCell class]]){
+        height= [self maxPageHeight];
+    }
+    return height;
+}
+
 #pragma mark- 
 
 - (void)didTapHorizontalButton{
     // Show Comic Making for Horizontal image
     CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE];
-    [self.previewVC addComicItem:model];
+    [self.dataArray addObject:model];
+    __block CBComicPreviewVC* weekSelf= self;
+    [self.previewVC addComicItem:model completion:^(BOOL finished) {
+        if(finished){
+            [weekSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }];
 }
 
 - (void)didTapVerticalButton{
     // Show Comic Making for Vertical image
     CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"ver_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT];
-    [self.previewVC addComicItem:model];
+    [self.dataArray addObject:model];
+    __block CBComicPreviewVC* weekSelf= self;
+    [self.previewVC addComicItem:model completion:^(BOOL finished) {
+        if(finished){
+            [weekSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+        }
+    }];
 }
 
 - (NSNumber*)currentTimestmap{
@@ -78,8 +109,8 @@
 }
 
 #pragma mark- CBComicPageViewControllerDelegate method
-- (void)didDeleteComicItemInPage:(CBComicPageCollectionVC *)pageVC{
-    
+- (void)didDeleteComicItem:(CBComicItemModel *)comicItem inPage:(CBComicPageCollectionVC *)pageVC{
+    [self.dataArray removeObject:comicItem];
 }
 
 - (void)didReceiveMemoryWarning {

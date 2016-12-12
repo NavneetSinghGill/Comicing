@@ -10,7 +10,6 @@
 #import "CBComicPreviewCell.h"
 
 #define kCellIdentifier @"ComicPreviewCell"
-#define kCellHeight [UIScreen mainScreen].bounds.size.height
 
 @implementation CBComicPreviewSection
 - (CBBaseTableViewCell*)cellWithTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath{
@@ -21,10 +20,6 @@
         cell = [nibs objectAtIndex:0];
     }
     return cell;
-}
-
-- (CGFloat)heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return kCellHeight;
 }
 
 - (NSInteger)numberOfRowsInSection{

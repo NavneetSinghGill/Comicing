@@ -19,8 +19,8 @@
 @property (nonatomic, assign) CGFloat topMargin;
 - (void)reloadPageViewController;
 - (void)addViewControllers:(NSArray*)viewControllers;
-- (void)changePageToIndex:(NSInteger)index;
+- (void)changePageToIndex:(NSInteger)index completed:(void (^)(BOOL success))completed;
 - (void)pageChangedToIndex:(NSInteger)index;
-- (BOOL)scrollPageViewToLeft;
-- (BOOL)scrollPageViewToRight;
+- (void)scrollPageViewToLeft:(void (^)(BOOL sucess))completed;
+- (void)scrollPageViewToRight:(void (^)(BOOL sucess))completed;
 @end
