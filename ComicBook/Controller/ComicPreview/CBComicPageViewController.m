@@ -7,12 +7,11 @@
 //
 
 #import "CBComicPageViewController.h"
+#import "AppConstants.h"
 
 #define kMaxCellCount 100000
-#define kMaxItemsInComic 4
 
 @interface CBComicPageViewController () <CBComicPageCollectionDelegate>
-
 @end
 
 @implementation CBComicPageViewController
@@ -66,6 +65,49 @@
     }
 }
 
+- (void)refreshPageContentAfterIndex:(NSInteger)index{
+    BOOL shouldRemoveLastPage= NO;
+    for(NSInteger i=index+1; i < self.viewControllers.count; i++){
+        CBComicPageCollectionVC* collectionVC= [self.viewControllers objectAtIndex:i];
+        NSMutableArray* comicItems= [NSMutableArray new];
+        NSInteger offset= collectionVC.index*kMaxItemsInComic;
+        for(NSInteger j=offset; j < offset+kMaxItemsInComic; j++){
+            if(j < self.dataArray.count){
+                [comicItems addObject:[self.dataArray objectAtIndex:j]];
+            }
+        }
+        [collectionVC refreshDataArray:comicItems];
+        if(comicItems.count == 0){
+            shouldRemoveLastPage= YES;
+        }
+    }
+    if(shouldRemoveLastPage && self.currentIndex != self.viewControllers.count-1){
+        // Add next view controller's first comic item into current page
+        NSInteger itemToAdd= self.index+1*kMaxItemsInComic;
+        if(itemToAdd-1 < self.dataArray.count){
+            CBComicPageCollectionVC* currentVC= [self.viewControllers objectAtIndex:index];
+            [currentVC addComicItem:[self.dataArray objectAtIndex:itemToAdd-1]];
+        }
+    }
+    if(shouldRemoveLastPage && self.viewControllers.count>1){
+        if(self.viewControllers.count>1){
+            if(self.currentIndex == [(CBComicPageCollectionVC*)[self.viewControllers lastObject] index]){
+                // Scroll to left and delete last index
+                [self scrollPageViewToLeft:^(BOOL sucess) {
+                    if(sucess){
+                        [self.viewControllers removeLastObject];
+                    }
+                }];
+            }else{
+                // Remove last index
+                [self.viewControllers removeLastObject];
+            }
+        }else if(self.viewControllers.count>0){
+            // Do nothing
+        }
+    }
+}
+
 #pragma mark- CBComicPageCollectionDelegate method
 - (void)didDeleteComicItem:(CBComicItemModel *)comicItem inComicPage:(CBComicPageCollectionVC *)comicPage{
     [self.dataArray removeObject:comicItem];
@@ -74,6 +116,7 @@
             [self.delegate didDeleteComicItem:comicItem inPage:comicPage];
         }
     }
+    [self refreshPageContentAfterIndex:comicPage.index];
 }
 
 - (void)didReceiveMemoryWarning {

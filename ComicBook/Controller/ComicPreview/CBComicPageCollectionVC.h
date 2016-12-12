@@ -18,4 +18,5 @@
 @property (nonatomic, weak) id <CBComicPageCollectionDelegate> delegate;
 - (void)addComicItem:(CBComicItemModel*)comicItem;
 - (CGFloat)contentHeight;
+- (void)refreshDataArray:(NSMutableArray*)dataArray;
 @end

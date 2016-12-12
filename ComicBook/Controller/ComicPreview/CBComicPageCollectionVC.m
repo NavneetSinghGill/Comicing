@@ -10,6 +10,7 @@
 #import "CBComicImageSection.h"
 #import "CBComicImageCell.h"
 #import "ZoomInteractiveTransition.h"
+#import "AppConstants.h"
 
 #define kMaxCellCount 100000
 
@@ -54,6 +55,12 @@
     CBComicImageSection* section= [CBComicImageSection new];
     section.dataArray= self.dataArray;
     [self.sectionArray addObject:section];
+    [self.collectionView reloadData];
+}
+
+- (void)refreshDataArray:(NSMutableArray*)dataArray{
+    [self.dataArray removeAllObjects];
+    [self.dataArray addObjectsFromArray:dataArray];
     [self.collectionView reloadData];
 }
 
@@ -130,6 +137,7 @@
         [self setupSections];
     }
     [self.dataArray addObject:comicItem];
+//    [[[self.sectionArray objectAtIndex:0] dataArray] addObject:comicItem];
     [self refreshImageOrientation];
     [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataArray indexOfObject:comicItem] inSection:0]]];
 //    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.dataArray indexOfObject:comicItem] inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
