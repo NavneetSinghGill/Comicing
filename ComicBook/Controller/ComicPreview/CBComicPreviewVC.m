@@ -13,24 +13,41 @@
 #import "CBPreviewHeaderCell.h"
 #import "CBComicPageViewController.h"
 #import "UIView+CBConstraints.h"
+#import "ZoomInteractiveTransition.h"
+#import "ZoomTransitionProtocol.h"
 
 #define kPreviewViewTag 12001
 
-@interface CBComicPreviewVC () <CBComicPageViewControllerDelegate>
+@interface CBComicPreviewVC () <CBComicPageViewControllerDelegate, ZoomTransitionProtocol>
 @property (nonatomic, strong) CBComicPageViewController* previewVC;
+@property (nonatomic, strong) ZoomInteractiveTransition * transition;
+@property (strong, nonatomic) UIView *transitionView;
 @end
 
 @implementation CBComicPreviewVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.transition = [[ZoomInteractiveTransition alloc] initWithNavigationController:self.navigationController];
+    self.transition.handleEdgePanBackGesture = NO;
+    self.transition.transitionDuration = 0.4;
+
     // Do any additional setup after loading the view.
+    self.tableView.backgroundColor= [UIColor blackColor];
+    self.tableView.separatorStyle= UITableViewCellSeparatorStyleNone;
     self.dataArray= [NSMutableArray new];
     self.previewVC= [[CBComicPageViewController alloc] initWithNibName:@"CBComicPageViewController" bundle:nil];
     self.previewVC.view.tag= kPreviewViewTag;
     self.previewVC.delegate= self;
     [self setupSections];
     [self.tableView reloadData];
+}
+
+#pragma mark - ZoomTransitionProtocol
+
+- (UIView *)viewForZoomTransition:(BOOL)isSource
+{
+    return self.transitionView;
 }
 
 - (void)setupSections{
@@ -64,6 +81,10 @@
             [cell.contentView addSubview:self.previewVC.view];
             [self.previewVC.view setTranslatesAutoresizingMaskIntoConstraints:NO];
             [cell.contentView constrainSubviewToAllEdges:self.previewVC.view withMargin:0.0f];
+//            [cell.contentView constrainSubviewToLeftEdge:self.previewVC.view withMargin:8.0f];
+//            [cell.contentView constrainSubviewToRightEdge:self.previewVC.view withMargin:20.0f];
+//            [cell.contentView constrainSubviewToTopEdge:self.previewVC.view withMargin:8.0f];
+//            [cell.contentView constrainSubviewToBottomEdge:self.previewVC.view withMargin:20.0f];
         }
     }
     return cell;

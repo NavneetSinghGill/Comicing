@@ -19,6 +19,8 @@
         NSArray* nibs = [[NSBundle mainBundle] loadNibNamed:@"CBComicPreviewCell" owner:self options:nil];
         cell = [nibs objectAtIndex:0];
     }
+    cell.selectionStyle= UITableViewCellSelectionStyleNone;
+    cell.contentView.backgroundColor= [UIColor blackColor];
     return cell;
 }
 

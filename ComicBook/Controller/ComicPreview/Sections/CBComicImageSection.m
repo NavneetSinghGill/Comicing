@@ -10,6 +10,18 @@
 #import "CBComicImageCell.h"
 #import "CBComicItemModel.h"
 
+#define kHorizontalMargin 8.0f
+#define kVerticalMargin 11.0f
+
+#define kCollectionViewLeftMargin 8.0f
+#define kCollectionViewRightMargin 20.0f
+#define kCollectionViewMiddleMargin 4.0f
+
+#define kLandscapeCellHeight 106.0f
+#define kPortraitCellHeight 228.0f
+
+#define kVerticalCellMultiplier 1.65f
+
 #define kCellIdentifier @"ComicImageCell"
 
 @implementation CBComicImageSection
@@ -35,13 +47,21 @@
 
 - (CGSize)sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGSize screenSize= [UIScreen mainScreen].bounds.size;
+    CGFloat width= floorf(screenSize.width-(kCollectionViewLeftMargin+kCollectionViewRightMargin+ (kHorizontalMargin*2)));
     CBComicItemModel* model= [self.dataArray objectAtIndex:indexPath.row];
     if(model.imageOrientation == COMIC_IMAGE_ORIENTATION_LANDSCAPE){
-        return CGSizeMake(screenSize.width, 100.0f);
+        return CGSizeMake(width, kLandscapeCellHeight);
     }else if(model.imageOrientation == COMIC_IMAGE_ORIENTATION_PORTRAIT_HALF){
-        return CGSizeMake(screenSize.width/2, screenSize.width);
+        CGFloat cellWidth= floorf((width-kCollectionViewMiddleMargin)/2 -1);
+        return CGSizeMake(cellWidth, floorf(cellWidth*kVerticalCellMultiplier));
     }else {
-        return CGSizeMake(screenSize.width, screenSize.width);
+        return CGSizeMake(width, floorf(width*kVerticalCellMultiplier));
     }
 }
+
+- (UIEdgeInsets)insetForSection{
+    return UIEdgeInsetsMake(kHorizontalMargin, kVerticalMargin, kHorizontalMargin, kVerticalMargin);
+}
+
+
 @end

@@ -15,6 +15,8 @@
 #define kMaxCellCount 100000
 
 @interface CBComicPageCollectionVC () <UIGestureRecognizerDelegate>
+@property (weak, nonatomic) IBOutlet UIImageView *verticalShadowImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *horizontalShadowImageView;
 @property (nonatomic, strong) ZoomInteractiveTransition * transition;
 @property (nonatomic, strong) NSIndexPath * selectedIndexPath;
 @property (nonatomic, strong) UILongPressGestureRecognizer* longPressRecognizer;
@@ -65,7 +67,7 @@
 }
 
 - (CGFloat)contentHeight{
-    return self.collectionView.collectionViewLayout.collectionViewContentSize.height;
+    return self.collectionView.collectionViewLayout.collectionViewContentSize.height+22.0f+78.0f;
 }
 
 - (NSNumber*)currentTimestmap{
