@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0C69161E216E5600FEC707 /* ARGH.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0C0C690B1E216E5600FEC707 /* ARGH.gif */; };
+		0C0C69171E216E5600FEC707 /* OMG.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0C0C690C1E216E5600FEC707 /* OMG.gif */; };
+		0C0C69181E216E5600FEC707 /* OOPPS.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0C0C690D1E216E5600FEC707 /* OOPPS.gif */; };
+		0C0C69191E216E5600FEC707 /* WOW.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0C0C690E1E216E5600FEC707 /* WOW.gif */; };
+		0C0C691A1E216E5600FEC707 /* WTF.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0C0C690F1E216E5600FEC707 /* WTF.gif */; };
 		0C154E1F1CEFDC7F005116A4 /* Comicing_Terms_of_Service.html in Resources */ = {isa = PBXBuildFile; fileRef = 0C154E1E1CEFDC7F005116A4 /* Comicing_Terms_of_Service.html */; };
 		0C2125B71C98946700B6BAB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C2125B61C98946700B6BAB5 /* Assets.xcassets */; };
 		0C2235461C889C9800D1B4F2 /* PullableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2235431C889C9800D1B4F2 /* PullableView.m */; };
@@ -352,6 +357,11 @@
 		0CBF90B41CA313A5004007DF /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B11CA313A5004007DF /* UIImage+Alpha.m */; };
 		0CBF90B51CA313A5004007DF /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B31CA313A5004007DF /* UIImage+ColorAtPixel.m */; };
 		0CBF90B81CA3143D004007DF /* UIImage+ImageCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */; };
+		0CC8171E1E22B28A0091CA33 /* ARGH.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC817191E22B28A0091CA33 /* ARGH.png */; };
+		0CC8171F1E22B28A0091CA33 /* OMG.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC8171A1E22B28A0091CA33 /* OMG.png */; };
+		0CC817201E22B28A0091CA33 /* OOPPS.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC8171B1E22B28A0091CA33 /* OOPPS.png */; };
+		0CC817211E22B28A0091CA33 /* WOW.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC8171C1E22B28A0091CA33 /* WOW.png */; };
+		0CC817221E22B28A0091CA33 /* WTF.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CC8171D1E22B28A0091CA33 /* WTF.png */; };
 		0CC9F3741CF653D100761F44 /* Segment7Standard.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0CC9F3731CF653D100761F44 /* Segment7Standard.otf */; };
 		0CDC2B991D4A81990088FDA5 /* ActiveInbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC2B961D4A81990088FDA5 /* ActiveInbox.m */; };
 		0CDD9A821C99B30B00D942D3 /* TermsServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD9A811C99B30B00D942D3 /* TermsServiceViewController.m */; };
@@ -586,6 +596,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C0C690B1E216E5600FEC707 /* ARGH.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ARGH.gif; sourceTree = "<group>"; };
+		0C0C690C1E216E5600FEC707 /* OMG.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = OMG.gif; sourceTree = "<group>"; };
+		0C0C690D1E216E5600FEC707 /* OOPPS.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = OOPPS.gif; sourceTree = "<group>"; };
+		0C0C690E1E216E5600FEC707 /* WOW.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = WOW.gif; sourceTree = "<group>"; };
+		0C0C690F1E216E5600FEC707 /* WTF.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = WTF.gif; sourceTree = "<group>"; };
 		0C154E1E1CEFDC7F005116A4 /* Comicing_Terms_of_Service.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Comicing_Terms_of_Service.html; sourceTree = "<group>"; };
 		0C2125B61C98946700B6BAB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C2235421C889C9800D1B4F2 /* PullableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullableView.h; sourceTree = "<group>"; };
@@ -1186,6 +1201,11 @@
 		0CBF90B31CA313A5004007DF /* UIImage+ColorAtPixel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorAtPixel.m"; sourceTree = "<group>"; };
 		0CBF90B61CA3143D004007DF /* UIImage+ImageCompress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageCompress.h"; sourceTree = "<group>"; };
 		0CBF90B71CA3143D004007DF /* UIImage+ImageCompress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageCompress.m"; sourceTree = "<group>"; };
+		0CC817191E22B28A0091CA33 /* ARGH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARGH.png; sourceTree = "<group>"; };
+		0CC8171A1E22B28A0091CA33 /* OMG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OMG.png; sourceTree = "<group>"; };
+		0CC8171B1E22B28A0091CA33 /* OOPPS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OOPPS.png; sourceTree = "<group>"; };
+		0CC8171C1E22B28A0091CA33 /* WOW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WOW.png; sourceTree = "<group>"; };
+		0CC8171D1E22B28A0091CA33 /* WTF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WTF.png; sourceTree = "<group>"; };
 		0CC9F3731CF653D100761F44 /* Segment7Standard.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Segment7Standard.otf; sourceTree = "<group>"; };
 		0CDC2B951D4A81990088FDA5 /* ActiveInbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveInbox.h; sourceTree = "<group>"; };
 		0CDC2B961D4A81990088FDA5 /* ActiveInbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveInbox.m; sourceTree = "<group>"; };
@@ -1517,6 +1537,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C0C69091E216E5600FEC707 /* AnimationGif */ = {
+			isa = PBXGroup;
+			children = (
+				0CC817181E22B28A0091CA33 /* StaticImage */,
+				0C0C690A1E216E5600FEC707 /* Gif */,
+			);
+			path = AnimationGif;
+			sourceTree = "<group>";
+		};
+		0C0C690A1E216E5600FEC707 /* Gif */ = {
+			isa = PBXGroup;
+			children = (
+				0C0C690B1E216E5600FEC707 /* ARGH.gif */,
+				0C0C690C1E216E5600FEC707 /* OMG.gif */,
+				0C0C690D1E216E5600FEC707 /* OOPPS.gif */,
+				0C0C690E1E216E5600FEC707 /* WOW.gif */,
+				0C0C690F1E216E5600FEC707 /* WTF.gif */,
+			);
+			path = Gif;
+			sourceTree = "<group>";
+		};
 		0C2235411C889C9800D1B4F2 /* PullableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2124,6 +2165,7 @@
 		0C6665711C84358500FEB11F /* ComicMaking */ = {
 			isa = PBXGroup;
 			children = (
+				0C0C69091E216E5600FEC707 /* AnimationGif */,
 				16F48B321DE6369700F86EDE /* CombineGifImages.h */,
 				16F48B331DE6369700F86EDE /* CombineGifImages.m */,
 				161439E61D97F0BA00CF5A65 /* Animation Customization */,
@@ -3201,6 +3243,18 @@
 			path = ComicListView;
 			sourceTree = "<group>";
 		};
+		0CC817181E22B28A0091CA33 /* StaticImage */ = {
+			isa = PBXGroup;
+			children = (
+				0CC817191E22B28A0091CA33 /* ARGH.png */,
+				0CC8171A1E22B28A0091CA33 /* OMG.png */,
+				0CC8171B1E22B28A0091CA33 /* OOPPS.png */,
+				0CC8171C1E22B28A0091CA33 /* WOW.png */,
+				0CC8171D1E22B28A0091CA33 /* WTF.png */,
+			);
+			path = StaticImage;
+			sourceTree = "<group>";
+		};
 		0CFA71991D9871FE00219C2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -4002,6 +4056,7 @@
 				84EFBCC41D25A2A700647A88 /* InstructionView.xib in Resources */,
 				161CAD541D840DD80034795C /* Gloomy-OFF.png in Resources */,
 				16161C221DE8C52A00E8FDD7 /* Bird_02.gif in Resources */,
+				0C0C69161E216E5600FEC707 /* ARGH.gif in Resources */,
 				913B64271DF86EA80003E9D1 /* CBComicPreviewCell.xib in Resources */,
 				16A5FAED1DE70BBD009757B0 /* latestAnimationList.json in Resources */,
 				0C6668371C84358600FEB11F /* c4.jpg in Resources */,
@@ -4015,6 +4070,7 @@
 				8405267E1D469D0B00639E0F /* Slide-12.gif in Resources */,
 				0C6668A01C84358600FEB11F /* ComicShareView.xib in Resources */,
 				0C6668B41C84358600FEB11F /* KeyboardView.xib in Resources */,
+				0CC817211E22B28A0091CA33 /* WOW.png in Resources */,
 				1BEB1FDC1D43DD2700CC1304 /* stickers_icon@2x.png in Resources */,
 				0C6668B61C84358600FEB11F /* ProfilePicView.xib in Resources */,
 				161A08171D3D54C500BF0F50 /* arielBlack.ttf in Resources */,
@@ -4065,6 +4121,7 @@
 				16BE28001DECDE75003C756E /* easy.gif in Resources */,
 				0C6667B01C84358600FEB11F /* Main.storyboard in Resources */,
 				161CAD581D840DD80034795C /* Love-OFF.png in Resources */,
+				0CC8171F1E22B28A0091CA33 /* OMG.png in Resources */,
 				16BE27FB1DECD96B003C756E /* LEarSmoke.gif in Resources */,
 				0C154E1F1CEFDC7F005116A4 /* Comicing_Terms_of_Service.html in Resources */,
 				0C6667801C84358600FEB11F /* arrow@2x.png in Resources */,
@@ -4084,6 +4141,7 @@
 				16161C241DE8C52A00E8FDD7 /* Right_eye.gif in Resources */,
 				84592D671CC94E1200C52C06 /* AvatarView.xib in Resources */,
 				84CEF1161D3ADF68009FCB1D /* indicator@3x.png in Resources */,
+				0CC817221E22B28A0091CA33 /* WTF.png in Resources */,
 				0C6667AF1C84358600FEB11F /* LaunchScreen.storyboard in Resources */,
 				16161C1B1DE8C39700E8FDD7 /* T-01.png in Resources */,
 				1604B79A1D8F0B960096E1DD /* 2slidebook.png in Resources */,
@@ -4091,9 +4149,11 @@
 				16A602801DE7153000D13F5C /* LeftArrowButton.png in Resources */,
 				1B37C6FA1D414A9F000A8C37 /* right_indicator@3x.png in Resources */,
 				0C6668B01C84358600FEB11F /* GroupsSection.xib in Resources */,
+				0CC817201E22B28A0091CA33 /* OOPPS.png in Resources */,
 				16A602791DE7150600D13F5C /* Lip.gif in Resources */,
 				16BE27FD1DECD96B003C756E /* Red-Face.gif in Resources */,
 				0C6668171C84358600FEB11F /* Info.plist in Resources */,
+				0CC8171E1E22B28A0091CA33 /* ARGH.png in Resources */,
 				84CEF1181D3ADF68009FCB1D /* private_conversation_input_background@3x.png in Resources */,
 				84CEF11F1D3ADF68009FCB1D /* Mag Glass.png in Resources */,
 				16B94F4F1DF497D100226C6C /* bubble_oopps.gif in Resources */,
@@ -4101,6 +4161,7 @@
 				0C66677B1C84358600FEB11F /* MYRIADPRO-SEMIBOLD.OTF in Resources */,
 				1BDDB7511D48A79400FA931F /* open_gift_box_flat@3x.png in Resources */,
 				165641981D907EBB00E3C9C7 /* 4slidebook.png in Resources */,
+				0C0C69181E216E5600FEC707 /* OOPPS.gif in Resources */,
 				91F338D71DF894600017193C /* CBComicPageViewController.xib in Resources */,
 				16161C0F1DE8C39700E8FDD7 /* devil.png in Resources */,
 				1663532B1DE9EC5800BB068D /* DevilWingLft.gif in Resources */,
@@ -4122,6 +4183,7 @@
 				84CEF1131D3ADF68009FCB1D /* group_conversation_input_background@3x.png in Resources */,
 				16161C181DE8C39700E8FDD7 /* spiral glasses 2.png in Resources */,
 				0C66677F1C84358600FEB11F /* arrow.png in Resources */,
+				0C0C691A1E216E5600FEC707 /* WTF.gif in Resources */,
 				16161C0E1DE8C39700E8FDD7 /* bulb-01.png in Resources */,
 				0C6668AE1C84358600FEB11F /* GroupSectionCell.xib in Resources */,
 				84ECE64B1CB5778B007AF54E /* searchFriendView.xib in Resources */,
@@ -4190,6 +4252,7 @@
 				161CAD4E1D840DD80034795C /* Bored-OFF.png in Resources */,
 				0C6667831C84358600FEB11F /* searchByID.png in Resources */,
 				0C6668BB1C84358600FEB11F /* SignUp.xib in Resources */,
+				0C0C69191E216E5600FEC707 /* WOW.gif in Resources */,
 				16161C1C1DE8C39700E8FDD7 /* thermostat-01.png in Resources */,
 				168512131D3C052000A372E3 /* follow.png in Resources */,
 				16A602761DE7150600D13F5C /* Lbrain.gif in Resources */,
@@ -4207,6 +4270,7 @@
 				0C5D11391C87DE5600FEC6DA /* Settings.bundle in Resources */,
 				84CEF1231D3ADF68009FCB1D /* top-bar-me-icon-yellow.png in Resources */,
 				16161C1D1DE8C39700E8FDD7 /* thunder clouds-01.png in Resources */,
+				0C0C69171E216E5600FEC707 /* OMG.gif in Resources */,
 				0C857BFB1C9352D000F0B911 /* countries.json in Resources */,
 				166353341DEA1C1D00BB068D /* Spiral.gif in Resources */,
 				1695AEEC1DEF67D5007B352B /* KingCrown.gif in Resources */,

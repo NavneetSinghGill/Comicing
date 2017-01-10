@@ -13,7 +13,7 @@
 @end
 
 @implementation ExclamationList
-@synthesize parentViewController,exclamationLargeListArray,exclamationSmallListArray;
+@synthesize parentViewController,animationListArray;
 
 static NSString * const reuseIdentifier = @"Cell";
 static NSString * const reuseIdentifier1 = @"Cell1";
@@ -33,64 +33,21 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 //        [exclamationListArray removeAllObjects];
 //        exclamationListArray = nil;
 //    }
-    if (exclamationLargeListArray) {
-        [exclamationLargeListArray removeAllObjects];
-        exclamationLargeListArray = nil;
-    }
+//    if (exclamationLargeListArray) {
+//        [exclamationLargeListArray removeAllObjects];
+//        exclamationLargeListArray = nil;
+//    }
     
     
 //    exclamationListArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"01 Regular"],[UIImage imageNamed:@"02 Eh"],[UIImage imageNamed:@"03 Thinking"],[UIImage imageNamed:@"04 Love"],[UIImage imageNamed:@"05 Scared"],[UIImage imageNamed:@"06 Angry_yelling"],[UIImage imageNamed:@"07 Great_Awesome"],[UIImage imageNamed:@"08 Strong_Powerful"],[UIImage imageNamed:@"09 Angry"],[UIImage imageNamed:@"10 Ohno"], nil];
 
-    exclamationLargeListArray = [[NSMutableArray alloc] initWithObjects:
-                                 //@"-.. bubble",
-                                 @"animation_1",
-                                 @"A$AP",@"BOOOM",
-                                 @"BoOoOoOo!!",
-                                 @"DKM",
-                                 @"GOOD VIBE",
-                                 @"HUH",
-                                 @"JKS",
-                                 @"LOL",
-                                 @"NoOoOoOo!!",
-                                 @"OH",
-                                 @"OMG!",
-                                 @"SLAAYY",
-                                 @"thumbs down",
-                                 @"thumbs up",
-                                 @"WoOoOoOo!!",
-                                 @"WOW",
-                                 @"WTF coloured",
+    
+    animationListArray = [[NSMutableArray alloc] initWithObjects:
                                  @"WTF",
-                                 @"XO",
-                                 @"YAAS",
-                                 @"YOLO",
-                                 @"YOO",nil];
-    
-    
-    exclamationSmallListArray = [[NSMutableArray alloc] initWithObjects:
-                                 @"-.. bubble_low",
-                                 @"A$AP_low",
-                                 @"BOOOM_low",
-                                 @"BoOoOoOo!!_low",
-                                 @"DKM_low",
-                                 @"GOOD VIBE_low",
-                                 @"HUH_low",
-                                 @"JKS_low",
-                                 @"LOL_low",
-                                 @"NoOoOoOo!!_low",
-                                 @"OH_low",
-                                 @"OMG!_low",
-                                 @"SLAAYY_low",
-                                 @"thumbs down_low",
-                                 @"thumbs up_low",
-                                 @"WoOoOoOo!!_low",
-                                 @"WOW_low",
-                                 @"WTF coloured_low",
-                                 @"WTF_low",
-                                 @"XO_low",
-                                 @"YAAS_low",
-                                 @"YOLO_low",
-                                 @"YOO_low",nil];
+                                 @"WOW",
+                                 @"OOPPS",
+                                 @"OMG",
+                                 @"ARGH",nil];
     
     
     
@@ -118,6 +75,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 
 - (CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+
     if (IS_IPHONE_5)
     {
         return CGSizeMake(72, 72);
@@ -136,18 +94,17 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     }
     
 }
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return animationListArray.count + 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return exclamationSmallListArray.count + 1;
+    return 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.item == 0)
+    if(indexPath.item == 0 && indexPath.section == 0)
     {
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier1 forIndexPath:indexPath];
         return cell;
@@ -158,7 +115,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
         
         // Configure the cell
         UIImageView *img = (UIImageView*)[cell viewWithTag:1];
-        img.image = [UIImage imageNamed:exclamationSmallListArray[indexPath.row -1]];
+        img.image = [UIImage imageNamed:animationListArray[indexPath.section -1]];
         
         return cell;
     }
@@ -168,14 +125,14 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.item == 0)
+    if(indexPath.item == 0 && indexPath.section == 0)
     {
         
     }
     else
     {
 //        [parentViewController addExclamationListImage:exclamationLargeListArray[indexPath.row - 1]];
-        [parentViewController addAnimatedSticker:exclamationLargeListArray[indexPath.row - 1]];
+        [parentViewController addAnimation:animationListArray[indexPath.section - 1]];
     }
 }
 

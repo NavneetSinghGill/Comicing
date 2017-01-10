@@ -57,6 +57,7 @@ static void * RecordingContext = &RecordingContext;
 static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDeviceAuthorizedContext;
 static int CaptionViewTextViewTag = 9191;
 static CGRect CaptionTextViewMinRect;
+static RowButtonCallBack _completionHandler ;
 
 @interface ComicMakingViewController ()<ACEDrawingViewDelegate,CropStickerViewControllerDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,AVAudioRecorderDelegate,UITextViewDelegate,ZoomTransitionProtocol,UINavigationControllerDelegate,UIImagePickerControllerDelegate,InstructionViewDelegate,ComicCropViewDelegate,UIAlertViewDelegate>
 {
@@ -185,6 +186,7 @@ static CGRect CaptionTextViewMinRect;
 @property (weak, nonatomic) IBOutlet UIView *bubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIView *stickerlistContainerView;
     @property (nonatomic, strong) UIBezierPath *croppingPath;
+@property (weak, nonatomic) IBOutlet UIView *animationContainerView;
 
 @end
 
@@ -200,6 +202,7 @@ static CGRect CaptionTextViewMinRect;
     [super viewDidLoad];
     [self addBubbleListViewController];
     [self addStickerListViewController];
+    [self addAnimationListViewController];
     _captionHeightSmall = YES;
 
     frameImgvComic = imgvComic.frame;
@@ -1769,8 +1772,10 @@ static CGRect CaptionTextViewMinRect;
 
 /*Ramesh */
 //Handle Exclamation
-- (void)openExclamationList
+- (void)openExclamationList :(RowButtonCallBack)completionHandler
 {
+    _completionHandler = completionHandler;
+    
     backupToolCenter = viewRowButtons.center;
     backupOtherViewCenter = exclamationListView.center;
     
@@ -1778,10 +1783,10 @@ static CGRect CaptionTextViewMinRect;
         btnClose.alpha = 0;
         btnCloseComic.alpha = 0;
         
-        viewRowButtons.center = CGPointMake(backupToolCenter.x-100, backupToolCenter.y );
-        viewRowButtons.alpha = 0;
+//        viewRowButtons.center = CGPointMake(backupToolCenter.x-100, backupToolCenter.y );
+//        viewRowButtons.alpha = 0;
     } completion:^(BOOL finished) {
-        
+        _completionHandler(YES);
     }];
     
     exclamationListView.alpha = 0;
@@ -1957,6 +1962,44 @@ static CGRect CaptionTextViewMinRect;
         [imgvComic addSubview:imageView];
         [imgvComic bringSubviewToFront:imageView];
     }
+    [self addComicItem:imageView ItemImage:nil];
+    
+    imgvComic.clipsToBounds = YES;
+    imageView.center = imageView.center;
+    [self doAutoSave:imageView];
+}
+- (void)addAnimation:(NSString *)gifImageName {
+    
+    [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"AnimatedSticker" Action:@"AddAnimatedSticker" Label:@""];
+    
+    ComicItemAnimatedSticker* imageView = [self getComicItems:ComicAnimatedSticker];
+    //Checking if ComicItemAnimatedSticker already exiting, if that so no need to create
+    // Just add the gif component to ComicItemAnimatedSticker.
+    
+//    if (imageView == nil) {
+//        imageView = [self getComicItems:ComicAnimatedSticker];
+//        imageView.animatedComponentArray = [[NSMutableArray alloc] init];
+//        imageView.frame = CGRectMake(0, 0, imgvComic.frame.size.width, imgvComic.frame.size.height);
+//    }
+    
+    
+//    ComicItemAnimatedComponent* animatedComponent = [self getComicItems:ComicAnimatedComponent];
+//    
+//    animatedComponent.frame = rect;
+//    animatedComponent.animatedStickerName = exclamationImageString;
+    
+    imageView.combineAnimationFileName = [gifImageName stringByAppendingString:@".gif"];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapAnimation:)];
+    tapGesture.numberOfTapsRequired = 1;
+    [imageView addGestureRecognizer:tapGesture];
+    
+//    [imageView.animatedComponentArray addObject:animatedComponent];
+    
+//    if([self getAnimatesStickerFromComic] == nil){
+//        [imgvComic addSubview:imageView];
+//        [imgvComic bringSubviewToFront:imageView];
+//    }
+    imageView.frame = CGRectMake(0, 0, 150, 150);
     [self addComicItem:imageView ItemImage:nil];
     
     imgvComic.clipsToBounds = YES;
@@ -4429,47 +4472,61 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     tapGesture.numberOfTapsRequired = 1;
     [imageView addGestureRecognizer:tapGesture];
     
+    UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotatePiece:)];
+    [imageView addGestureRecognizer:rotationGesture];
+    
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scalePiece:)];
+    [pinchGesture setDelegate:self];
+    [imageView addGestureRecognizer:pinchGesture];
+    
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureDetected:)];
+    [panGestureRecognizer setDelegate:self];
+    [imageView addGestureRecognizer:panGestureRecognizer];
+    
+    
     imgvComic.userInteractionEnabled = YES;
     imgvComic.clipsToBounds = YES;
     
     haveAnimationOnPage = YES;
     imageView.objFrame = imageView.frame;
     
-    if (imageView.combineAnimationFileName) {
-        //it had image,
-        NSString *animationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        animationPath = [[animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName] stringByAppendingString:@".gif"];
-
-//        animationPath = [animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName];
-        
-//        YYImage *image = [YYImage imageNamed:@"Animation_Curious_CC_02"];
-        ((ComicItemAnimatedSticker*)imageView).image = [YYImage imageWithContentsOfFile:animationPath];
-//        imageView.image = [YYImage imageWithContentsOfFile:animationPath];;
-//        [imageView startAnimating];
-        
-//        NSData *imgData = [[NSData alloc] initWithContentsOfURL:[NSURL fileURLWithPath:animationPath]];
-//        imageView.image = [[UIImage alloc] initWithData:imgData];
-//        imageView.image = [YYImage imageWithData:imgData];
-        
-        refAnimatedSticker = (ComicItemAnimatedComponent*)[imageView.animatedComponentArray lastObject];
-    }else{
-//        refAnimatedSticker = (ComicItemAnimatedSticker *)imageView;
-        if (currentTapIndex==0)
-        {
-//            arrOfActiveAnimations = [[NSMutableArray alloc]init];
-        }
-//        [arrOfActiveAnimations addObject:((ComicItemAnimatedSticker*)imageView)];
-        if (currentTapIndex==[[currentWorkingAnimation valueForKey:@"resources"] count]-1)
-        {
-            if ([currentWorkingAnimation valueForKey:@"isMovable"])
-            {
-                [self addPanEventWithIndexFor:imageView];
-            }
-            [self createOneGifInBackgroundFromCurrentArray:((ComicItemAnimatedSticker*)imageView).animatedComponentArray
-                                  ComicItemAnimatedSticker:((ComicItemAnimatedSticker*)imageView)];
-            [self startAnimatingAfterDelay];
-        }
-    }
+    ((ComicItemAnimatedSticker*)imageView).image = [YYImage imageNamed:imageView.combineAnimationFileName];
+    
+//    if (imageView.combineAnimationFileName) {
+//        //it had image,
+//        NSString *animationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//        animationPath = [[animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName] stringByAppendingString:@".gif"];
+//
+////        animationPath = [animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName];
+//        
+////        YYImage *image = [YYImage imageNamed:@"Animation_Curious_CC_02"];
+//        ((ComicItemAnimatedSticker*)imageView).image = [YYImage imageWithContentsOfFile:animationPath];
+////        imageView.image = [YYImage imageWithContentsOfFile:animationPath];;
+////        [imageView startAnimating];
+//        
+////        NSData *imgData = [[NSData alloc] initWithContentsOfURL:[NSURL fileURLWithPath:animationPath]];
+////        imageView.image = [[UIImage alloc] initWithData:imgData];
+////        imageView.image = [YYImage imageWithData:imgData];
+//        
+//        refAnimatedSticker = (ComicItemAnimatedComponent*)[imageView.animatedComponentArray lastObject];
+//    }else{
+////        refAnimatedSticker = (ComicItemAnimatedSticker *)imageView;
+//        if (currentTapIndex==0)
+//        {
+////            arrOfActiveAnimations = [[NSMutableArray alloc]init];
+//        }
+////        [arrOfActiveAnimations addObject:((ComicItemAnimatedSticker*)imageView)];
+//        if (currentTapIndex==[[currentWorkingAnimation valueForKey:@"resources"] count]-1)
+//        {
+//            if ([currentWorkingAnimation valueForKey:@"isMovable"])
+//            {
+//                [self addPanEventWithIndexFor:imageView];
+//            }
+//            [self createOneGifInBackgroundFromCurrentArray:((ComicItemAnimatedSticker*)imageView).animatedComponentArray
+//                                  ComicItemAnimatedSticker:((ComicItemAnimatedSticker*)imageView)];
+//            [self startAnimatingAfterDelay];
+//        }
+//    }
 
 //    [self.view insertSubview:imageView atIndex:currentTapIndex+0];
 //    [self.view bringSubviewToFront:imageView];
@@ -4478,10 +4535,10 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     [imgvComic addSubview:imageView];
     [imgvComic bringSubviewToFront:imageView];*/
-    if([self getAnimatesStickerFromComic] == nil){
+//    if([self getAnimatesStickerFromComic] == nil){
         [imgvComic addSubview:imageView];
         [imgvComic bringSubviewToFront:imageView];
-    }
+//    }
 }
 
 - (void)addBubbleWithImage:(ComicItemBubble *)bubbleHolderView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect
@@ -5463,6 +5520,19 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     // lets add it to container view
     [self.stickerlistContainerView addSubview:stickerlist.view];
     [self addChildViewController:stickerlist];
+    //[viewController didMoveToParentViewController:self];
+    // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
+    //self.containerViewController = viewController;
+}
+- (void)addAnimationListViewController
+{
+    // Get storyboard
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UICollectionViewController *animationlist  = [storyBoard instantiateViewControllerWithIdentifier:@"animationListVC"];
+    
+    // lets add it to container view
+    [self.animationContainerView addSubview:animationlist.view];
+    [self addChildViewController:animationlist];
     //[viewController didMoveToParentViewController:self];
     // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
     //self.containerViewController = viewController;

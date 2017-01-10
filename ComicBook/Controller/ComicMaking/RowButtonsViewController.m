@@ -134,7 +134,19 @@
      }
                      completion:^(BOOL finished) {
                          [self checkStatusForBlackBoardWithButton:sender];
-                         [parentViewController openExclamationList];
+                         [parentViewController openExclamationList:^(BOOL success) {
+                            
+                             [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                 
+                                 [self.btnExclamation setEnabled:NO];
+                                 [self.btnBubble setEnabled:NO];
+                                 self.imgvExclamation.alpha = 0;
+                                 self.btnCamera.alpha = 0;
+                             } completion:^(BOOL finished) {
+                                 
+                             }];
+                             
+                         }];
                      }];
 }
 

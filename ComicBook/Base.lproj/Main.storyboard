@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="Gtw-pU-Kh0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="Gtw-pU-Kh0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -100,7 +100,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="btnBubble" destination="6YO-hW-QH7" id="Tfg-Wj-iBT"/>
@@ -125,7 +125,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="74C-IR-2Ju" kind="relationship" relationship="rootViewController" id="lBl-u5-lh7"/>
+                        <segue destination="tHu-HW-1tc" kind="relationship" relationship="rootViewController" id="eHK-xm-7XJ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3x6-gy-KbS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -216,6 +216,20 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" misplaced="YES" id="w4A-kj-dhW" userLabel="Row Buttons">
+                                <rect key="frame" x="0.0" y="497" width="375" height="119"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" id="dNh-GO-R0c">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                        <connections>
+                                            <segue destination="8kh-jg-H0q" kind="embed" identifier="rowButtons" id="ReF-h6-Cw9"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" id="kub-pR-LyG" userLabel="Bubble List View">
                                 <rect key="frame" x="0.0" y="541" width="375" height="86"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
@@ -227,16 +241,13 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" id="Dj9-uN-iwq" userLabel="Exclamation List View">
-                                <rect key="frame" x="0.0" y="458" width="375" height="169"/>
+                            <view contentMode="scaleToFill" misplaced="YES" id="Dj9-uN-iwq" userLabel="Exclamation List View">
+                                <rect key="frame" x="0.0" y="541.5" width="375" height="85.5"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" id="Jz7-3n-2Yi">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                        <connections>
-                                            <segue destination="KLI-vw-W7d" kind="embed" identifier="animationSticker" id="b94-hR-bV2"/>
-                                        </connections>
                                     </containerView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -266,20 +277,6 @@
                                     <containerView opaque="NO" contentMode="scaleToFill" id="VbY-Yn-dPT">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </containerView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" misplaced="YES" id="w4A-kj-dhW" userLabel="Row Buttons">
-                                <rect key="frame" x="0.0" y="497" width="375" height="119"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" id="dNh-GO-R0c">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                        <connections>
-                                            <segue destination="8kh-jg-H0q" kind="embed" identifier="rowButtons" id="ReF-h6-Cw9"/>
-                                        </connections>
                                     </containerView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -372,6 +369,7 @@
                     <navigationItem key="navigationItem" id="p3M-M5-uGV"/>
                     <connections>
                         <outlet property="ImgvComic2" destination="n6h-10-xPa" id="KIT-bo-66f"/>
+                        <outlet property="animationContainerView" destination="Jz7-3n-2Yi" id="6yT-1u-bIX"/>
                         <outlet property="btnClose" destination="1cE-LZ-1bH" id="VZ5-i8-fFl"/>
                         <outlet property="btnCloseComic" destination="2oG-jX-y4B" id="Q6W-tO-xJe"/>
                         <outlet property="btnRecord" destination="MG4-QG-nxH" id="3DJ-tY-T44"/>
@@ -395,7 +393,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeJ-n6-zo1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33" y="780"/>
+            <point key="canvasLocation" x="32.5" y="779.5"/>
         </scene>
         <!--Comic Bubble List-->
         <scene sceneID="2P3-ix-rD6">
@@ -462,12 +460,12 @@
         <!--Exclamation List-->
         <scene sceneID="cQF-hz-5Pw">
             <objects>
-                <collectionViewController id="5Lo-xq-Wim" customClass="ExclamationList" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="QpF-7r-XEW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <collectionViewController storyboardIdentifier="animationListVC" id="5Lo-xq-Wim" customClass="ExclamationList" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="QpF-7r-XEW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="Ktw-X5-Um2">
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="Ktw-X5-Um2">
                             <size key="itemSize" width="60" height="60"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -475,7 +473,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell1" id="2sA-DT-sGO">
-                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                <rect key="frame" x="0.0" y="13" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -494,7 +492,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="JCM-PA-Za2">
-                                <rect key="frame" x="0.0" y="67.5" width="60" height="60"/>
+                                <rect key="frame" x="68" y="13" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -514,21 +512,23 @@
                             <outlet property="delegate" destination="5Lo-xq-Wim" id="zkB-pw-dhg"/>
                         </connections>
                     </collectionView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="85.5"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TpQ-oe-IXc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172" y="1689"/>
+            <point key="canvasLocation" x="163" y="1406"/>
         </scene>
         <!--Animation CollectionVC-->
         <scene sceneID="LLz-kz-eDc">
             <objects>
                 <viewController storyboardIdentifier="AnimationCollectionVC" id="KLI-vw-W7d" customClass="AnimationCollectionVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IzB-Uz-JQP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DEf-Rh-fZs">
-                                <rect key="frame" x="10" y="87" width="22" height="47"/>
+                                <rect key="frame" x="10" y="410.5" width="22" height="221.5"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <state key="normal" image="LeftArrowButton.png"/>
                                 <connections>
@@ -536,7 +536,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="r27-I9-5IM">
-                                <rect key="frame" x="43" y="0.0" width="332" height="125"/>
+                                <rect key="frame" x="43" y="0.0" width="332" height="623"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hZf-mf-AFf">
@@ -547,7 +547,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AnimationsCollectionViewCell" id="K2b-1w-j6X" customClass="AnimationsCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="32" width="70" height="61"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="61"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="70" height="61"/>
@@ -571,7 +571,7 @@
                                 </connections>
                             </collectionView>
                             <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JTP-7d-zbt">
-                                <rect key="frame" x="10" y="93" width="21" height="71"/>
+                                <rect key="frame" x="10" y="367" width="21" height="280.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="LeftArrowButton.png"/>
                                 <connections>
@@ -582,7 +582,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" id="xTk-d6-dR1">
-                                <rect key="frame" x="43" y="75" width="332" height="94"/>
+                                <rect key="frame" x="43" y="75" width="332" height="592"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cVq-Gh-F3w">
@@ -1713,7 +1713,7 @@ Comicing </string>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9XU-bA-0aG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420" y="766"/>
+            <point key="canvasLocation" x="346" y="1236"/>
         </scene>
         <!--Crop Sticker View Controller-->
         <scene sceneID="nai-Yb-onK">
@@ -3041,7 +3041,7 @@ Comicing </string>
         <image name="camera-OFF" width="30" height="30"/>
         <image name="camera-ON" width="38" height="39"/>
         <image name="camera-reverse" width="26" height="27"/>
-        <image name="close-comic" width="34" height="37"/>
+        <image name="close-comic" width="113" height="165"/>
         <image name="crop-background" width="376" height="668"/>
         <image name="crop-camera-icon" width="29" height="25"/>
         <image name="crop-close-icon" width="18" height="16"/>
@@ -3066,14 +3066,14 @@ Comicing </string>
         <image name="leftarrow" width="56" height="57"/>
         <image name="mic" width="50" height="50"/>
         <image name="openClose" width="30" height="50"/>
-        <image name="pen-icon" width="21" height="29"/>
+        <image name="pen-icon" width="16" height="16"/>
         <image name="pink-square-selected" width="30" height="30"/>
         <image name="pink-square-unselected" width="17" height="16"/>
         <image name="round-rectangular-area.png" width="250" height="419"/>
         <image name="scissors" width="77" height="95"/>
         <image name="scissors-icon-white" width="25" height="28"/>
         <image name="searchFriends.png" width="48" height="63"/>
-        <image name="sticker-icon" width="34" height="33"/>
+        <image name="sticker-icon" width="26" height="23"/>
         <image name="stickers_icon.png" width="486" height="430"/>
         <image name="tap_to_open.png" width="737" height="198"/>
         <image name="text166.png" width="50" height="109"/>
@@ -3086,7 +3086,7 @@ Comicing </string>
         <image name="whatsapp_icon" width="90" height="91"/>
         <image name="white-square-selected" width="30" height="30"/>
         <image name="white-square-unselected" width="16" height="16"/>
-        <image name="xbutton" width="18" height="16"/>
+        <image name="xbutton" width="23" height="23"/>
         <image name="yellow-square-selected" width="30" height="30"/>
         <image name="yellow-square-unselected" width="16" height="16"/>
     </resources>

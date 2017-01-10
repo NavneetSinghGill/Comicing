@@ -43,6 +43,7 @@
 - (void)comicMakingItemRemoveAll:(ComicPage *)comicPage removeAll:(BOOL)isRemoveAll;
 
 @end
+typedef void (^RowButtonCallBack)(BOOL success);
 
 @interface ComicMakingViewController : UIViewController
 {
@@ -72,6 +73,7 @@
 - (void)addAnimatedSticker:(NSString *)exclamationImageString;
 -(void)addAnimationWithInstructionForObj:(NSDictionary *)animationObj;
 -(void)openComicEditMode:(BOOL)isAddnew;
+- (void)addAnimation:(NSString *)gifImageName;
 //End
 
 - (void)closeBlackBoardColors;
@@ -80,7 +82,7 @@
 
 /*Ramesh */
 //Handle Exclamation
-- (void)openExclamationList;
+- (void)openExclamationList :(RowButtonCallBack)completionHandler;
 - (void)closeExclamationList;
 -(void)removeExstingAnimatedStickerFromComicPage;
 - (void)addExclamationListImage:(NSString *)exclamationImageString;
