@@ -102,6 +102,10 @@
 #pragma mark- 
 
 - (void)didTapHorizontalButton{
+    if (self.dataArray.count == 8) {
+        return;
+    }
+    
     // Show Comic Making for Horizontal image
     CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE];
     [self.dataArray addObject:model];
@@ -114,6 +118,10 @@
 }
 
 - (void)didTapVerticalButton{
+    if (self.dataArray.count == 8) {
+        return;
+    }
+    
     // Show Comic Making for Vertical image
     CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"ver_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT];
     [self.dataArray addObject:model];
@@ -132,6 +140,7 @@
 #pragma mark- CBComicPageViewControllerDelegate method
 - (void)didDeleteComicItem:(CBComicItemModel *)comicItem inPage:(CBComicPageCollectionVC *)pageVC{
     [self.dataArray removeObject:comicItem];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,11 +11,11 @@
 #import "CBComicItemModel.h"
 
 #define kHorizontalMargin 8.0f
-#define kVerticalMargin 11.0f
+#define kVerticalMargin 5.0f
 
 #define kCollectionViewLeftMargin 8.0f
-#define kCollectionViewRightMargin 20.0f
-#define kCollectionViewMiddleMargin 4.0f
+#define kCollectionViewRightMargin 14.0f
+#define kCollectionViewMiddleMargin 0.0f
 
 #define kLandscapeCellHeight 106.0f
 #define kPortraitCellHeight 228.0f
@@ -60,7 +60,7 @@
 }
 
 - (UIEdgeInsets)insetForSection{
-    return UIEdgeInsetsMake(kHorizontalMargin, kVerticalMargin, kHorizontalMargin, kVerticalMargin);
+    return UIEdgeInsetsMake(kHorizontalMargin, kVerticalMargin, kHorizontalMargin + 3*kHorizontalMargin, kVerticalMargin);
 }
 
 
