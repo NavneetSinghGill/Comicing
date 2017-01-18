@@ -18,6 +18,9 @@
 #import "AppDelegate.h"
 #import "CBComicTitleFontDropdownViewController.h"
 #import "ComicBookColorCBViewController.h"
+#import "ShareHelper.h"
+#import "UIImage+Image.h"
+#import "AppHelper.h"
 
 #define kPreviewViewTag 12001
 
@@ -49,6 +52,7 @@
     self.previewVC.delegate= self;
     [self setupSections];
     [self.tableView reloadData];
+    [self addButtons];
 }
 
 #pragma mark - ZoomTransitionProtocol
@@ -114,10 +118,15 @@
     CGFloat height= [super ta_tableView:tableView heightForRowAtIndexPath:indexPath];
     UITableViewCell* cell= [super ta_tableView:tableView cellForRowAtIndexPath:indexPath];
     if([cell isKindOfClass:[CBComicPreviewCell class]]){
-        height= [self maxPageHeight];
+        if (self.previewVC.dataArray.count == 0) {
+            height = 0;
+        } else {
+            height= [self maxPageHeight] + 45;
+            //45 is the sum of top and bottom constraint of collectionview in comic page
+        }
     }
     if ([cell isKindOfClass:[CBPreviewHeaderCell class]]) {
-        height = 110;
+        height = 105;
     }
     return height;
 }
@@ -239,6 +248,40 @@
     return YES;
 }
 
+- (void)addButtons {
+    NSInteger widthHeightOfButtons = 40;
+    CGRect viewFrame = self.view.frame;
+    
+    UIButton *twitterButton = [[UIButton alloc] initWithFrame:CGRectMake(0, viewFrame.size.height - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
+    [twitterButton setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
+    [twitterButton addTarget:self action:@selector(twitterButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *facebookButton = [[UIButton alloc] initWithFrame:CGRectMake(0, twitterButton.frame.origin.y - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
+    [facebookButton setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
+    [facebookButton addTarget:self action:@selector(facebookButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *instagramButton = [[UIButton alloc] initWithFrame:CGRectMake(0, facebookButton.frame.origin.y - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
+    [instagramButton setImage:[UIImage imageNamed:@"instagram"] forState:UIControlStateNormal];
+    [instagramButton addTarget:self action:@selector(instagramButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *tagsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, instagramButton.frame.origin.y - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
+    [tagsButton setImage:[UIImage imageNamed:@"tag"] forState:UIControlStateNormal];
+    
+    UIButton *arrowButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - widthHeightOfButtons, self.view.frame.size.height - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
+    [arrowButton setImage:[UIImage imageNamed:@"arrow"] forState:UIControlStateNormal];
+    
+    UIButton *middleButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - widthHeightOfButtons/2, self.view.frame.size.height - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
+    [middleButton setImage:[UIImage imageNamed:@"baby"] forState:UIControlStateNormal];
+    [middleButton addTarget:self action:@selector(openMainScreen) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:twitterButton];
+    [self.view addSubview:facebookButton];
+    [self.view addSubview:instagramButton];
+    [self.view addSubview:tagsButton];
+    [self.view addSubview:arrowButton];
+    [self.view addSubview:middleButton];
+}
+
 #pragma mark - TitleFontDelegate methods
 
 - (void)getSelectedFontName:(NSString *)fontName andTitle:(NSString *)title {
@@ -250,7 +293,10 @@
 #pragma mark- CBComicPageViewControllerDelegate method
 - (void)didDeleteComicItem:(CBComicItemModel *)comicItem inPage:(CBComicPageCollectionVC *)pageVC{
     [self.dataArray removeObject:comicItem];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+//    if (self.previewVC.dataArray.count == 0 && [self.previewVC viewControllers].count == 1) {
+//        self.previewVC.view.hidden = YES;
+//    }
 }
 
 #pragma mark - ComicBookColorCBViewControllerDelegate method
@@ -261,6 +307,119 @@
         [((CBComicPageCollectionVC *)[[self.previewVC viewControllers] lastObject]).collectionView setBackgroundColor:color];
     }
     [self.tableView reloadData];
+}
+
+#pragma mark - Button actions
+
+- (void)openMainScreen {
+    [AppHelper openMainPageviewController:self];
+}
+
+- (void)twitterButtonTapped:(UIButton *)sender {
+    [self doShareTo:TWITTER ShareImage:[UIImage imageNamed:@"comicBookBackground"]];
+}
+
+- (void)facebookButtonTapped:(UIButton *)sender {
+    [self doShareTo:FACEBOOK ShareImage:[UIImage imageNamed:@"comicBookBackground"]];
+}
+
+- (void)instagramButtonTapped:(UIButton *)sender {
+    [self doShareTo:INSTAGRAM ShareImage:[UIImage imageNamed:@"comicBookBackground"]];
+}
+
+-(void)doShareTo :(ShapeType)type ShareImage:(UIImage*)imgShareto{
+    
+    //    UIImage* imgProcessShareImage = [self createImageWithLogo:imgShareto];
+    
+    imgShareto = [self createImageWithLogo:imgShareto];
+    
+    //    NSData *imageData = UIImagePNGRepresentation(imgShareto);
+    //    UIImage *image =[UIImage imageWithData:imageData];
+    
+    //    UIImage* img = [self getnewImage:image];
+    //Just to test
+    
+    //    UIBezierPath *path = [UIBezierPath bezierPath];
+    //        UIGraphicsBeginImageContextWithOptions([image size], YES, [image scale]);
+    //
+    //        [image drawAtPoint:CGPointZero];
+    //
+    //        CGContextRef ctx = UIGraphicsGetCurrentContext();
+    //        CGContextSetBlendMode(ctx, kCGBlendModeNormal);
+    //        [path fill];
+    //
+    //
+    //        UIImage *final = UIGraphicsGetImageFromCurrentImageContext();
+    //        UIGraphicsEndImageContext();
+    
+    //        UIImageWriteToSavedPhotosAlbum(imgShareto, nil, nil, nil);
+    //        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //        NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+    //        NSString *filePath = [documentsPath stringByAppendingPathComponent:@"image.png"]; //Add the file name
+    //        [imageData writeToFile:filePath atomically:YES]; //Write the file
+    //        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    //        NSLog(@"File Path :%@",filePath);
+    
+    /* Commented for testing*/
+    ShareHelper* sHelper = [ShareHelper shareHelperInit];
+    sHelper.parentviewcontroller = self;
+    [sHelper shareAction:type ShareText:@""
+              ShareImage:imgShareto
+              completion:^(BOOL status) {
+              }];
+    
+}
+
+-(UIImage*)createImageWithLogo:(UIImage*)imgActualImage{
+    
+    //lets fix the share sticker size
+    //w = 110;
+    //h = 155;
+    
+    //Selected image adding to imageview
+    UIImageView *imageViewSticker = [[UIImageView alloc] initWithImage:imgActualImage];
+    imageViewSticker.frame = CGRectMake(50, 50, 110, 155);
+    [imageViewSticker setContentMode:UIViewContentModeScaleAspectFit];
+    
+    //get logo
+    UIImage* imgStickerLogo = [UIImage imageNamed:@"ShareStickerLogo"];
+    
+    
+    //lets fix the share footer logo size
+    //w = 133;
+    //h = 28;
+    
+    //Selected image adding to imageview
+    UIImageView *imageViewStLogo = [[UIImageView alloc] initWithImage:imgStickerLogo];
+    imageViewStLogo.frame = CGRectMake(38, 225, 133, 28);
+    [imageViewStLogo setContentMode:UIViewContentModeScaleAspectFit];
+    
+    //Calculating Framesize
+    UIView* viewHolder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 210, 293)];
+    [viewHolder setClipsToBounds:YES];
+    
+    [viewHolder setBackgroundColor:[UIColor clearColor]];
+    [viewHolder addSubview:imageViewSticker];
+    [viewHolder addSubview:imageViewStLogo];
+    
+    //Generating image
+    UIImage* imgShareTo = [UIImage imageWithView:viewHolder paque:NO];
+    
+    viewHolder = nil;
+    imageViewSticker = nil;
+    
+    //---------------------
+    //uncomment to check the file type and quality
+    /*NSData *pngData = UIImagePNGRepresentation(imgShareTo);
+     
+     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+     NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+     NSString *filePath = [documentsPath stringByAppendingPathComponent:@"wa_image.png"]; //Add the file name
+     [pngData writeToFile:filePath atomically:YES]; //Write the file*/
+    //---------------------
+    
+    
+    return imgShareTo;
 }
 
 - (NSString *)freeFromNewLine:(NSString *)text {

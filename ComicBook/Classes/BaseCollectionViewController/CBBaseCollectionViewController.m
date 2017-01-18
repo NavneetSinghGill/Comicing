@@ -58,6 +58,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CBBaseCollectionViewSection* section= [self.sectionArray objectAtIndex:indexPath.section];
+    section.collectionView = collectionView;
     return [section sizeForItemAtIndexPath:indexPath];
 }
 

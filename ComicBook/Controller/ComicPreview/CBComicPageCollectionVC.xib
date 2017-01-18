@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comicBookBackground" translatesAutoresizingMaskIntoConstraints="NO" id="On3-yt-olx"/>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="rBf-Kd-2ev">
+                <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="rBf-Kd-2ev">
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cZx-cX-RJa">
                         <size key="itemSize" width="50" height="50"/>
@@ -30,14 +30,14 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="On3-yt-olx" firstAttribute="trailing" secondItem="rBf-Kd-2ev" secondAttribute="trailing" constant="20" id="8QG-Q0-62k"/>
+                <constraint firstItem="On3-yt-olx" firstAttribute="trailing" secondItem="rBf-Kd-2ev" secondAttribute="trailing" constant="25" id="8QG-Q0-62k"/>
                 <constraint firstItem="On3-yt-olx" firstAttribute="leading" secondItem="rBf-Kd-2ev" secondAttribute="leading" id="H4q-ey-AOa"/>
-                <constraint firstItem="rBf-Kd-2ev" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="SH3-SP-pDX"/>
-                <constraint firstItem="rBf-Kd-2ev" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Sw4-dc-4Eb"/>
-                <constraint firstItem="On3-yt-olx" firstAttribute="top" secondItem="rBf-Kd-2ev" secondAttribute="top" constant="-12" id="di4-KY-USM"/>
-                <constraint firstAttribute="trailing" secondItem="rBf-Kd-2ev" secondAttribute="trailing" constant="20" id="t2H-bo-Ifs"/>
+                <constraint firstItem="rBf-Kd-2ev" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="SH3-SP-pDX"/>
+                <constraint firstItem="rBf-Kd-2ev" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Sw4-dc-4Eb"/>
+                <constraint firstItem="On3-yt-olx" firstAttribute="top" secondItem="rBf-Kd-2ev" secondAttribute="top" constant="-15" id="di4-KY-USM"/>
+                <constraint firstAttribute="trailing" secondItem="rBf-Kd-2ev" secondAttribute="trailing" constant="32" id="t2H-bo-Ifs"/>
                 <constraint firstItem="On3-yt-olx" firstAttribute="bottom" secondItem="rBf-Kd-2ev" secondAttribute="bottom" constant="30" id="wqT-cn-a5c"/>
-                <constraint firstAttribute="bottom" secondItem="rBf-Kd-2ev" secondAttribute="bottom" constant="20" id="yoz-Vi-0yO"/>
+                <constraint firstAttribute="bottom" secondItem="rBf-Kd-2ev" secondAttribute="bottom" constant="30" id="yoz-Vi-0yO"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -18,7 +18,7 @@
         <scene sceneID="8jx-4p-wSb">
             <objects>
                 <navigationController storyboardIdentifier="mainPageNavigation" id="XO4-2R-B3p" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3fK-Ap-hKo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3fK-Ap-hKo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -929,10 +929,10 @@
                                 <exclude reference="Ve7-79-YTY"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="fCX-ac-Jbc"/>
                                 <exclude reference="8DK-Sq-Glg"/>
                                 <exclude reference="Lcv-4d-0pa"/>
                                 <exclude reference="bM0-e7-TaG"/>
-                                <exclude reference="fCX-ac-Jbc"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -940,10 +940,10 @@
                                 <include reference="Ve7-79-YTY"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="fCX-ac-Jbc"/>
                                 <include reference="8DK-Sq-Glg"/>
                                 <include reference="Lcv-4d-0pa"/>
                                 <include reference="bM0-e7-TaG"/>
-                                <include reference="fCX-ac-Jbc"/>
                             </mask>
                         </variation>
                     </view>
@@ -3498,7 +3498,7 @@
                             <constraint firstItem="Vx9-TX-InV" firstAttribute="trailing" secondItem="wxP-Fh-tGv" secondAttribute="trailing" id="RQS-xY-cAf"/>
                             <constraint firstItem="Uke-sF-Iik" firstAttribute="trailing" secondItem="wxP-Fh-tGv" secondAttribute="trailing" id="SiM-5C-kyz"/>
                             <constraint firstItem="Vx9-TX-InV" firstAttribute="top" secondItem="wxP-Fh-tGv" secondAttribute="top" id="acL-ye-mz6"/>
-                            <constraint firstAttribute="trailing" secondItem="wxP-Fh-tGv" secondAttribute="trailing" constant="12" id="b1A-dy-yjb"/>
+                            <constraint firstAttribute="trailing" secondItem="wxP-Fh-tGv" secondAttribute="trailing" constant="7" id="b1A-dy-yjb"/>
                             <constraint firstItem="bzC-0s-oVF" firstAttribute="top" secondItem="Pys-uz-cry" secondAttribute="bottom" id="bbd-OD-Uix"/>
                             <constraint firstItem="TgH-Yj-fTk" firstAttribute="trailing" secondItem="wxP-Fh-tGv" secondAttribute="trailing" id="dr2-Z3-MZ6"/>
                             <constraint firstItem="bzC-0s-oVF" firstAttribute="leading" secondItem="vrx-Yd-s94" secondAttribute="leading" id="gIE-eI-SnX"/>
