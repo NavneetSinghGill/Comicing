@@ -12,7 +12,6 @@
 
 @protocol CBComicPageViewControllerDelegate <NSObject>
 - (void)didDeleteComicItem:(CBComicItemModel*)comicItem inPage:(CBComicPageCollectionVC*)pageVC;
-- (void)colorCircleButtonTapped;
 @end
 
 @interface CBComicPageViewController : CBBasePageViewController
