@@ -339,7 +339,9 @@
     NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
     
     [userDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"];
-    [userDic setObject:contactList forKey:@"contacts"];
+    if (contactList != nil) {
+        [userDic setObject:contactList forKey:@"contacts"];
+    }
     [dataDic setObject:userDic forKey:@"data"];
     
     userDic = nil;
