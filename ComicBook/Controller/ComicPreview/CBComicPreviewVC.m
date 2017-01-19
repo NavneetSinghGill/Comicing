@@ -15,10 +15,18 @@
 #import "UIView+CBConstraints.h"
 #import "ZoomInteractiveTransition.h"
 #import "ZoomTransitionProtocol.h"
+#import "AppDelegate.h"
+#import "CBComicTitleFontDropdownViewController.h"
+#import "ComicBookColorCBViewController.h"
 
 #define kPreviewViewTag 12001
 
-@interface CBComicPreviewVC () <CBComicPageViewControllerDelegate, ZoomTransitionProtocol>
+@interface CBComicPreviewVC () <CBComicPageViewControllerDelegate, ZoomTransitionProtocol, UIGestureRecognizerDelegate, TitleFontDelegate, UITextFieldDelegate, ComicBookColorCBViewControllerDelegate> {
+    UILabel *headerTitleLabel;
+    NSString *comicTitle;
+    NSString *titleFontName;
+    UIColor *comicBackgroundColor;
+}
 @property (nonatomic, strong) CBComicPageViewController* previewVC;
 @property (nonatomic, strong) ZoomInteractiveTransition * transition;
 @property (strong, nonatomic) UIView *transitionView;
@@ -75,6 +83,18 @@
         CBPreviewHeaderCell* headerCell= (CBPreviewHeaderCell*)cell;
         [headerCell.horizontalAddButton addTarget:self action:@selector(didTapHorizontalButton) forControlEvents:UIControlEventTouchUpInside];
         [headerCell.verticalAddButton addTarget:self action:@selector(didTapVerticalButton) forControlEvents:UIControlEventTouchUpInside];
+        [headerCell.rainbowColorCircleButton addTarget:self action:@selector(rainbowCircleTapped:) forControlEvents:UIControlEventTouchUpInside];
+        
+        headerCell.titleLabel.text = comicTitle;
+        headerTitleLabel = headerCell.titleLabel;
+        
+        if (titleFontName.length != 0) {
+            UIFont *font = [UIFont fontWithName:titleFontName size:30.f];
+            [headerCell.titleLabel setFont:font];
+        }
+        [headerCell.titleLabel setTextColor:[UIColor whiteColor]];
+        headerCell.titleLabel.userInteractionEnabled = YES;
+        [self addGestureToCellLabel:headerCell.titleLabel];
     }else if([cell isKindOfClass:[CBComicPreviewCell class]]){
         // Add pageViewController view as a subview
         if(![cell.contentView viewWithTag:kPreviewViewTag]){
@@ -95,6 +115,9 @@
     UITableViewCell* cell= [super ta_tableView:tableView cellForRowAtIndexPath:indexPath];
     if([cell isKindOfClass:[CBComicPreviewCell class]]){
         height= [self maxPageHeight];
+    }
+    if ([cell isKindOfClass:[CBPreviewHeaderCell class]]) {
+        height = 110;
     }
     return height;
 }
@@ -133,14 +156,115 @@
     }];
 }
 
+- (void)rainbowCircleTapped:(UIButton *)rainbowButton {
+    CGRect frameOfRainbowCircle = [rainbowButton convertRect:rainbowButton.frame toView:self.view];
+    UIStoryboard *mainPageStoryBoard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil];
+    ComicBookColorCBViewController *comicBookColorCBViewController = [mainPageStoryBoard instantiateViewControllerWithIdentifier:@"ComicBookColorCBViewController"];
+    comicBookColorCBViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    comicBookColorCBViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    comicBookColorCBViewController.delegate = self;
+    comicBookColorCBViewController.frameOfRainbowCircle = frameOfRainbowCircle;
+    [self presentViewController:comicBookColorCBViewController animated:NO completion:nil];
+}
+
 - (NSNumber*)currentTimestmap{
     return @([[NSDate date] timeIntervalSince1970]);
+}
+
+- (void)addGestureToCellLabel:(UILabel *)label {
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(openFontDropDown:)];
+    longPressGesture.delegate = self;
+    [label addGestureRecognizer:longPressGesture];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(makeTextFieldAvailable:)];
+    tapGesture.delegate = self;
+    [label addGestureRecognizer:tapGesture];
+}
+
+- (void)openFontDropDown:(UILongPressGestureRecognizer *)gesture {
+    
+    UILabel *gestureLabel = (UILabel *)gesture.view;
+    if (gestureLabel.text.length == 0) {
+        return;
+    }
+    
+    UIStoryboard *mainPageStoryBoard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil];
+    CBComicTitleFontDropdownViewController *cbComicTitleFontDropdownViewController = [mainPageStoryBoard instantiateViewControllerWithIdentifier:@"CBComicTitleFontDropdownViewController"];
+    cbComicTitleFontDropdownViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    cbComicTitleFontDropdownViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    cbComicTitleFontDropdownViewController.delegate = self;
+    cbComicTitleFontDropdownViewController.titleText = gestureLabel.text;
+    [self presentViewController:cbComicTitleFontDropdownViewController animated:NO completion:nil];
+}
+
+- (void)makeTextFieldAvailable:(UITapGestureRecognizer *)gesture {
+    //Add textfield
+    UITextField *textField = [[UITextField alloc]initWithFrame:gesture.view.frame];
+    UILabel *gestureLabel = ((UILabel *)gesture.view);
+    textField.text = [self freeFromNewLine:gestureLabel.text];
+    textField.font = gestureLabel.font;
+    textField.textColor = [UIColor whiteColor];
+    textField.returnKeyType = UIReturnKeyDone;
+    textField.delegate = self;
+    [textField addTarget:self action:@selector(doneTapped:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [textField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
+    
+    headerTitleLabel.hidden = YES;
+    [gestureLabel.superview addSubview:textField];
+    [textField becomeFirstResponder];
+}
+
+- (void)doneTapped:(UITextField *)textField {
+    
+    NSString *textFieldText = [self freeFromNewLine:textField.text];
+    if (textFieldText.length > 20) {
+        headerTitleLabel.text = [textFieldText stringByReplacingCharactersInRange:NSMakeRange(20, 0) withString:@"\n"];
+    } else {
+        headerTitleLabel.text = textField.text;
+    }
+    [textField resignFirstResponder];
+    [textField removeFromSuperview];
+    textField.delegate = nil;
+    headerTitleLabel.hidden = NO;
+}
+
+- (void)textFieldValueChanged:(UITextField *)textField {
+    headerTitleLabel.text = textField.text;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([textField.text stringByReplacingCharactersInRange:range withString:string].length >= 29 && ![string isEqualToString:@"\n"]) {
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark - TitleFontDelegate methods
+
+- (void)getSelectedFontName:(NSString *)fontName andTitle:(NSString *)title {
+    titleFontName = fontName;
+    comicTitle = title;
+    [self.tableView reloadData];
 }
 
 #pragma mark- CBComicPageViewControllerDelegate method
 - (void)didDeleteComicItem:(CBComicItemModel *)comicItem inPage:(CBComicPageCollectionVC *)pageVC{
     [self.dataArray removeObject:comicItem];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+#pragma mark - ComicBookColorCBViewControllerDelegate method
+
+- (void)getSelectedColor:(UIColor *)color {
+    comicBackgroundColor = color;
+    if ([self.previewVC viewControllers].count != 0) {
+        [((CBComicPageCollectionVC *)[[self.previewVC viewControllers] lastObject]).collectionView setBackgroundColor:color];
+    }
+    [self.tableView reloadData];
+}
+
+- (NSString *)freeFromNewLine:(NSString *)text {
+    return [text stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 }
 
 - (void)didReceiveMemoryWarning {

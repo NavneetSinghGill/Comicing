@@ -130,6 +130,14 @@
     [self refreshPageContentAfterIndex:comicPage.index];
 }
 
+- (void)colorCircleTapped {
+    if(self.delegate && [self.delegate conformsToProtocol:@protocol(CBComicPageViewControllerDelegate)]){
+        if([self.delegate respondsToSelector:@selector(colorCircleButtonTapped)]){
+            [self.delegate colorCircleButtonTapped];
+        }
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
