@@ -16,6 +16,8 @@
 
 @interface CBComicPageCollectionVC : CBBaseCollectionViewController
 @property (nonatomic, weak) id <CBComicPageCollectionDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIImageView *comicBookBackground;
+@property (weak, nonatomic) IBOutlet UIButton *rainbowColorCircleButton;
 - (void)addComicItem:(CBComicItemModel*)comicItem;
 - (CGFloat)contentHeight;
 - (void)refreshDataArray:(NSMutableArray*)dataArray;

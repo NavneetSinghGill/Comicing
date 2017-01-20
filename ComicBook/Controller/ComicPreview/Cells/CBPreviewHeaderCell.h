@@ -12,7 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *horizontalAddButton;
 @property (weak, nonatomic) IBOutlet UIButton *verticalAddButton;
-@property (weak, nonatomic) IBOutlet UIButton *rainbowColorCircleButton;
 
 @property (strong, nonatomic) NSString *fontName;
 

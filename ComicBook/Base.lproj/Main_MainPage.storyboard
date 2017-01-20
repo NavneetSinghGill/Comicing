@@ -18,7 +18,7 @@
         <scene sceneID="8jx-4p-wSb">
             <objects>
                 <navigationController storyboardIdentifier="mainPageNavigation" id="XO4-2R-B3p" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3fK-Ap-hKo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3fK-Ap-hKo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3125,6 +3125,9 @@
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RuD-D9-jo1">
                                 <subviews>
+                                    <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHL-f5-v91" userLabel="GradientView">
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tYe-Fh-Omu">
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3139,9 +3142,6 @@
                                                     <frame key="frameInset" width="322" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHL-f5-v91" userLabel="GradientView">
-                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83m-9b-aWD">
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" name="Centuma" family="Centuma" pointSize="15"/>
@@ -3152,12 +3152,8 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="83m-9b-aWD" secondAttribute="trailing" id="3It-5o-6Bz"/>
-                                                        <constraint firstAttribute="trailing" secondItem="mHL-f5-v91" secondAttribute="trailing" id="7gG-Mm-fwD"/>
-                                                        <constraint firstItem="mHL-f5-v91" firstAttribute="top" secondItem="qLd-sj-6xT" secondAttribute="top" id="HUT-5I-tRK"/>
-                                                        <constraint firstAttribute="bottom" secondItem="mHL-f5-v91" secondAttribute="bottom" id="Q8f-lH-29a"/>
                                                         <constraint firstAttribute="bottom" secondItem="83m-9b-aWD" secondAttribute="bottom" id="X8e-4M-Qfr"/>
                                                         <constraint firstItem="83m-9b-aWD" firstAttribute="leading" secondItem="qLd-sj-6xT" secondAttribute="leading" constant="25" id="nEU-dq-t8l"/>
-                                                        <constraint firstItem="mHL-f5-v91" firstAttribute="leading" secondItem="qLd-sj-6xT" secondAttribute="leading" id="woV-W1-kpo"/>
                                                         <constraint firstItem="83m-9b-aWD" firstAttribute="top" secondItem="qLd-sj-6xT" secondAttribute="top" id="xCb-rR-vNQ"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
@@ -3168,17 +3164,21 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="mHL-f5-v91" firstAttribute="top" secondItem="RuD-D9-jo1" secondAttribute="top" id="42F-eJ-vXX"/>
                                     <constraint firstItem="tYe-Fh-Omu" firstAttribute="leading" secondItem="RuD-D9-jo1" secondAttribute="leading" id="OZg-Wm-Axw"/>
+                                    <constraint firstItem="mHL-f5-v91" firstAttribute="leading" secondItem="RuD-D9-jo1" secondAttribute="leading" id="VOk-5p-yvX"/>
                                     <constraint firstAttribute="bottom" secondItem="tYe-Fh-Omu" secondAttribute="bottom" id="fLs-pa-96h"/>
+                                    <constraint firstAttribute="bottom" secondItem="mHL-f5-v91" secondAttribute="bottom" id="iyM-8M-Zec"/>
                                     <constraint firstAttribute="trailing" secondItem="tYe-Fh-Omu" secondAttribute="trailing" constant="-7" id="kz3-ZL-znK"/>
                                     <constraint firstItem="tYe-Fh-Omu" firstAttribute="top" secondItem="RuD-D9-jo1" secondAttribute="top" id="oEP-BD-gJ1"/>
+                                    <constraint firstAttribute="trailing" secondItem="mHL-f5-v91" secondAttribute="trailing" id="oxZ-h5-niA"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FQD-SF-7tP" firstAttribute="top" secondItem="vmu-zA-FQq" secondAttribute="bottom" id="0xs-jB-iAz"/>
-                            <constraint firstItem="RuD-D9-jo1" firstAttribute="top" secondItem="vmu-zA-FQq" secondAttribute="bottom" constant="84" id="8Ch-K2-AP2"/>
+                            <constraint firstItem="RuD-D9-jo1" firstAttribute="top" secondItem="vmu-zA-FQq" secondAttribute="bottom" constant="64" id="8Ch-K2-AP2"/>
                             <constraint firstItem="ofk-O7-2ND" firstAttribute="top" secondItem="FQD-SF-7tP" secondAttribute="bottom" id="Mib-iY-OMi"/>
                             <constraint firstItem="FQD-SF-7tP" firstAttribute="leading" secondItem="U7z-Dx-E3x" secondAttribute="leading" id="aYK-bc-TY9"/>
                             <constraint firstAttribute="trailing" secondItem="FQD-SF-7tP" secondAttribute="trailing" id="hLV-zS-mHJ"/>
@@ -3221,7 +3221,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdP-UB-aDT" userLabel="Purple View">
                                 <subviews>
                                     <view tag="150" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ic3-QV-You">
-                                        <color key="backgroundColor" red="0.61568627450980395" green="0.50196078431372548" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.50980392156862742" green="0.38431372549019605" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="Fwb-Ba-KKZ"/>
                                             <constraint firstAttribute="height" constant="25" id="aAk-dP-Ffq"/>
@@ -3254,7 +3254,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gaw-Gh-zEG" userLabel="Green View">
                                 <subviews>
                                     <view tag="150" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifd-sK-wSO">
-                                        <color key="backgroundColor" red="0.38039215686274508" green="0.72156862745098038" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.32549019607843138" green="0.67843137254901964" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="DHC-YN-IN6"/>
                                             <constraint firstAttribute="width" constant="25" id="i7n-Fw-HJH"/>
@@ -3320,7 +3320,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20f-c8-NQf" userLabel="Orange View">
                                 <subviews>
                                     <view tag="150" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3mh-A4-LKn">
-                                        <color key="backgroundColor" red="0.96470588235294119" green="0.53725490196078429" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.92156862745098034" green="0.42352941176470588" blue="0.039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="Ni8-NP-9h1"/>
                                             <constraint firstAttribute="height" constant="25" id="bzN-1J-4Gj"/>
@@ -3353,7 +3353,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etz-os-grM" userLabel="Dark blue View">
                                 <subviews>
                                     <view tag="150" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9v-SJ-8kx">
-                                        <color key="backgroundColor" red="0.062745098039215685" green="0.41568627450980389" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.12941176470588234" green="0.30196078431372547" blue="0.63529411764705879" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="kpZ-oN-3SI"/>
                                             <constraint firstAttribute="width" constant="25" id="pMj-NW-fL5"/>
@@ -3386,7 +3386,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vx9-TX-InV" userLabel="Blue View">
                                 <subviews>
                                     <view tag="150" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8h-Am-sQY">
-                                        <color key="backgroundColor" red="0.0" green="0.69803921568627447" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.0" green="0.61176470588235299" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="mp6-H8-1Mn"/>
                                             <constraint firstAttribute="height" constant="25" id="uQT-0Z-WGU"/>
@@ -3452,7 +3452,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uke-sF-Iik" userLabel="Pink View">
                                 <subviews>
                                     <view tag="150" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L6z-UE-TpS">
-                                        <color key="backgroundColor" red="0.92549019607843142" green="0.30588235294117649" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.86274509803921573" green="0.15294117647058825" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="M3V-rb-0tK"/>
                                             <constraint firstAttribute="height" constant="25" id="elf-dl-BKa"/>
@@ -3519,6 +3519,7 @@
                         <outlet property="innerCircle4TopConstraint" destination="GKJ-em-jGZ" id="HbW-wN-k4G"/>
                         <outlet property="innerCircle4TrailingConstraint" destination="8JF-fE-NcD" id="7Qs-vc-TT3"/>
                         <outlet property="originTopConstraint" destination="HNr-v5-Zpt" id="Ecw-39-GnK"/>
+                        <outlet property="originTrailingConstraint" destination="b1A-dy-yjb" id="u3p-EY-6BW"/>
                         <outlet property="outerCircle1TopConstraint" destination="4hz-ge-ccL" id="wsg-Kt-0DD"/>
                         <outlet property="outerCircle1TrailingConstraint" destination="OVy-KN-zb8" id="wSS-AX-cFA"/>
                         <outlet property="outerCircle2TopConstraint" destination="acL-ye-mz6" id="3QK-yC-2DD"/>

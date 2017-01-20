@@ -87,7 +87,6 @@
         CBPreviewHeaderCell* headerCell= (CBPreviewHeaderCell*)cell;
         [headerCell.horizontalAddButton addTarget:self action:@selector(didTapHorizontalButton) forControlEvents:UIControlEventTouchUpInside];
         [headerCell.verticalAddButton addTarget:self action:@selector(didTapVerticalButton) forControlEvents:UIControlEventTouchUpInside];
-        [headerCell.rainbowColorCircleButton addTarget:self action:@selector(rainbowCircleTapped:) forControlEvents:UIControlEventTouchUpInside];
         
         headerCell.titleLabel.text = comicTitle;
         headerTitleLabel = headerCell.titleLabel;
@@ -105,6 +104,9 @@
             [cell.contentView addSubview:self.previewVC.view];
             [self.previewVC.view setTranslatesAutoresizingMaskIntoConstraints:NO];
             [cell.contentView constrainSubviewToAllEdges:self.previewVC.view withMargin:0.0f];
+            
+            [((CBComicPageCollectionVC *)[self.previewVC.viewControllers lastObject]).rainbowColorCircleButton addTarget:self action:@selector(rainbowCircleTapped:) forControlEvents:UIControlEventTouchUpInside];
+            
 //            [cell.contentView constrainSubviewToLeftEdge:self.previewVC.view withMargin:8.0f];
 //            [cell.contentView constrainSubviewToRightEdge:self.previewVC.view withMargin:20.0f];
 //            [cell.contentView constrainSubviewToTopEdge:self.previewVC.view withMargin:8.0f];
@@ -126,7 +128,7 @@
         }
     }
     if ([cell isKindOfClass:[CBPreviewHeaderCell class]]) {
-        height = 105;
+        height = 84;
     }
     return height;
 }
@@ -167,6 +169,8 @@
 
 - (void)rainbowCircleTapped:(UIButton *)rainbowButton {
     CGRect frameOfRainbowCircle = [rainbowButton convertRect:rainbowButton.frame toView:self.view];
+    frameOfRainbowCircle.origin.y+=10;
+    
     UIStoryboard *mainPageStoryBoard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil];
     ComicBookColorCBViewController *comicBookColorCBViewController = [mainPageStoryBoard instantiateViewControllerWithIdentifier:@"ComicBookColorCBViewController"];
     comicBookColorCBViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -301,10 +305,11 @@
 
 #pragma mark - ComicBookColorCBViewControllerDelegate method
 
-- (void)getSelectedColor:(UIColor *)color {
+- (void)getSelectedColor:(UIColor *)color andComicBackgroundImageName:(NSString *)backgroundImageName {
     comicBackgroundColor = color;
     if ([self.previewVC viewControllers].count != 0) {
         [((CBComicPageCollectionVC *)[[self.previewVC viewControllers] lastObject]).collectionView setBackgroundColor:color];
+        ((CBComicPageCollectionVC *)[[self.previewVC viewControllers] lastObject]).comicBookBackground.image = [UIImage imageNamed:backgroundImageName];
     }
     [self.tableView reloadData];
 }

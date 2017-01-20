@@ -16,9 +16,12 @@
 
 #define ColorViewTag 150
 
-@interface ComicBookColorCBViewController ()
+@interface ComicBookColorCBViewController () {
+    NSArray *imageNames;
+}
 
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *originTopConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *originTrailingConstraint;
 
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *innerCircle1TopConstraint;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *innerCircle1TrailingConstraint;
@@ -46,6 +49,8 @@
     [super viewDidLoad];
 
     _originTopConstraint.constant = _frameOfRainbowCircle.origin.y - 20; //20 is status bar length
+    _originTrailingConstraint.constant = 20;
+    imageNames = [NSArray arrayWithObjects:@"ComicBookPurple", @"ComicBookGreen", @"ComicBookYellow", @"ComicBookOrange", @"ComicBookNBlue", @"ComicBookLBlue", @"ComicBookWhite", @"ComicBookPink", nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -96,10 +101,13 @@
 - (IBAction)someColorCircleButtonTapped:(id)sender {
     UIView *superViewOfButton = ((UIButton *)sender).superview;
     UIView *colorView = [superViewOfButton viewWithTag:ColorViewTag];
+    
+    NSString *imageName = [imageNames objectAtIndex:((UIView *)sender).tag - 201];
+    
     if (colorView) {
         if (self.delegate && [self.delegate conformsToProtocol:@protocol(ComicBookColorCBViewControllerDelegate)]) {
-            if ([self.delegate respondsToSelector:@selector(getSelectedColor:)]) {
-                [self.delegate getSelectedColor:[colorView.backgroundColor copy]];
+            if ([self.delegate respondsToSelector:@selector(getSelectedColor:andComicBackgroundImageName:)]) {
+                [self.delegate getSelectedColor:[colorView.backgroundColor copy] andComicBackgroundImageName:imageName];
             }
         }
     }
