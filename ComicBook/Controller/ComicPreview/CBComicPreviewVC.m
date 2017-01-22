@@ -127,7 +127,8 @@
         }
     }
     if ([cell isKindOfClass:[CBPreviewHeaderCell class]]) {
-        height = 84;
+        //Same calculation in ComicTitleFontDropDownViewController
+        height = IS_IPHONE_5?84: (IS_IPHONE_6?94: (IS_IPHONE_6P?104: 114));
     }
     return height;
 }
@@ -213,7 +214,7 @@
     //Add textfield
     UITextField *textField = [[UITextField alloc]initWithFrame:gesture.view.frame];
     UILabel *gestureLabel = ((UILabel *)gesture.view);
-    textField.text = [self freeFromNewLine:gestureLabel.text];
+    textField.text = gestureLabel.text;
     textField.font = gestureLabel.font;
     textField.textColor = [UIColor whiteColor];
     textField.returnKeyType = UIReturnKeyDone;
@@ -227,13 +228,8 @@
 }
 
 - (void)doneTapped:(UITextField *)textField {
-    
-    NSString *textFieldText = [self freeFromNewLine:textField.text];
-    if (textFieldText.length > 20) {
-        headerTitleLabel.text = [textFieldText stringByReplacingCharactersInRange:NSMakeRange(20, 0) withString:@"\n"];
-    } else {
-        headerTitleLabel.text = textField.text;
-    }
+
+    headerTitleLabel.text = textField.text;
     [textField resignFirstResponder];
     [textField removeFromSuperview];
     textField.delegate = nil;
@@ -403,10 +399,6 @@
     
     
     return imgShareTo;
-}
-
-- (NSString *)freeFromNewLine:(NSString *)text {
-    return [text stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 }
 
 - (void)didReceiveMemoryWarning {
