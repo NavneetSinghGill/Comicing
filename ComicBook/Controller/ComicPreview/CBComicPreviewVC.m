@@ -21,6 +21,7 @@
 #import "ShareHelper.h"
 #import "UIImage+Image.h"
 #import "AppHelper.h"
+#import "ComicTagViewController.h"
 
 #define kPreviewViewTag 12001
 
@@ -291,7 +292,11 @@
 }
 
 - (IBAction)tagButtonTapped:(id)sender {
-    
+    UIStoryboard *mainPageStoryBoard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil];
+    ComicTagViewController *comicTagViewController = [mainPageStoryBoard instantiateViewControllerWithIdentifier:@"ComicTagViewController"];
+    comicTagViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    comicTagViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:comicTagViewController animated:YES completion:nil];
 }
 
 - (IBAction)twitterButtonTapped:(UIButton *)sender {

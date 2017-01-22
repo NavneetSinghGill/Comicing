@@ -517,6 +517,7 @@
 		1BEB1FDC1D43DD2700CC1304 /* stickers_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FD31D43DD2700CC1304 /* stickers_icon@2x.png */; };
 		1BEB1FDD1D43DD2700CC1304 /* stickers_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FD41D43DD2700CC1304 /* stickers_icon@3x.png */; };
 		1BEB20221D43FCA100CC1304 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB20211D43FCA100CC1304 /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5C0405591E38818D003F203A /* ComicSansMSRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C0405581E38818D003F203A /* ComicSansMSRegular.ttf */; };
 		5C7024671E2DE99300E3CE2B /* Auther Typeface.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024661E2DE99300E3CE2B /* Auther Typeface.ttf */; };
 		5C70246A1E2DE9A700E3CE2B /* Be Bright Swashes.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024681E2DE9A700E3CE2B /* Be Bright Swashes.ttf */; };
 		5C70246B1E2DE9A700E3CE2B /* Be Bright.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024691E2DE9A700E3CE2B /* Be Bright.ttf */; };
@@ -610,6 +611,7 @@
 		91F338D71DF894600017193C /* CBComicPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91F338D51DF894600017193C /* CBComicPageViewController.xib */; };
 		91F338DB1DF8953E0017193C /* CBComicPageCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F338D91DF8953E0017193C /* CBComicPageCollectionVC.m */; };
 		91F338DC1DF8953E0017193C /* CBComicPageCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91F338DA1DF8953E0017193C /* CBComicPageCollectionVC.xib */; };
+		F15063F91E353E7A00029323 /* ComicTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F15063F81E353E7A00029323 /* ComicTagViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1410,6 +1412,7 @@
 		1BEB1FD31D43DD2700CC1304 /* stickers_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stickers_icon@2x.png"; sourceTree = "<group>"; };
 		1BEB1FD41D43DD2700CC1304 /* stickers_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stickers_icon@3x.png"; sourceTree = "<group>"; };
 		1BEB20211D43FCA100CC1304 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		5C0405581E38818D003F203A /* ComicSansMSRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComicSansMSRegular.ttf; sourceTree = "<group>"; };
 		5C7024661E2DE99300E3CE2B /* Auther Typeface.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Auther Typeface.ttf"; sourceTree = "<group>"; };
 		5C7024681E2DE9A700E3CE2B /* Be Bright Swashes.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Be Bright Swashes.ttf"; sourceTree = "<group>"; };
 		5C7024691E2DE9A700E3CE2B /* Be Bright.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Be Bright.ttf"; sourceTree = "<group>"; };
@@ -1545,6 +1548,8 @@
 		91F338D81DF8953E0017193C /* CBComicPageCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicPageCollectionVC.h; sourceTree = "<group>"; };
 		91F338D91DF8953E0017193C /* CBComicPageCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicPageCollectionVC.m; sourceTree = "<group>"; };
 		91F338DA1DF8953E0017193C /* CBComicPageCollectionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBComicPageCollectionVC.xib; sourceTree = "<group>"; };
+		F15063F71E353E7A00029323 /* ComicTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicTagViewController.h; sourceTree = "<group>"; };
+		F15063F81E353E7A00029323 /* ComicTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicTagViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1713,6 +1718,7 @@
 				5C70247E1E2DEB6F00E3CE2B /* Edinburgh-Regular.ttf */,
 				5C70247F1E2DEB6F00E3CE2B /* Sweet Sucker Punch.ttf */,
 				5C7024801E2DEB6F00E3CE2B /* The Sweetest Thing.ttf */,
+				5C0405581E38818D003F203A /* ComicSansMSRegular.ttf */,
 				5C70246C1E2DEB0E00E3CE2B /* Blackhawk */,
 				5C7024731E2DEB2A00E3CE2B /* Centuma */,
 				0C6664B21C84358500FEB11F /* Myriad-pro */,
@@ -3966,6 +3972,8 @@
 				5CC038111E28BAC00065B04C /* CBComicTitleFontDropdownViewController.m */,
 				5C7024921E2E1F7B00E3CE2B /* ComicBookColorCBViewController.h */,
 				5C7024931E2E1F7B00E3CE2B /* ComicBookColorCBViewController.m */,
+				F15063F71E353E7A00029323 /* ComicTagViewController.h */,
+				F15063F81E353E7A00029323 /* ComicTagViewController.m */,
 			);
 			path = ComicPreview;
 			sourceTree = "<group>";
@@ -4361,6 +4369,7 @@
 				91BEAC111DF722C700710D3C /* ver_image.jpg in Resources */,
 				1BEB1FDB1D43DD2700CC1304 /* stickers_icon.png in Resources */,
 				0C6667FA1C84358600FEB11F /* PrivateConversationCell.xib in Resources */,
+				5C0405591E38818D003F203A /* ComicSansMSRegular.ttf in Resources */,
 				84CEF11A1D3ADF68009FCB1D /* Boy.png in Resources */,
 				0C6667AB1C84358600FEB11F /* savelogo.png in Resources */,
 				166353321DEA1C1D00BB068D /* Nhietke-A.gif in Resources */,
@@ -4502,6 +4511,7 @@
 				0C6668021C84358600FEB11F /* InboxViewController.m in Sources */,
 				0C66681D1C84358600FEB11F /* ComicEnhancements.m in Sources */,
 				8409A8281DA6AEDA002F38C3 /* ComicCellViewController.m in Sources */,
+				F15063F91E353E7A00029323 /* ComicTagViewController.m in Sources */,
 				0C66682B1C84358600FEB11F /* UserGroup.m in Sources */,
 				160DEF8C1D28FA6000A2C0C9 /* NSLayoutConstraint+Multiplier.m in Sources */,
 				0C6667E81C84358600FEB11F /* GlideViewController.m in Sources */,
