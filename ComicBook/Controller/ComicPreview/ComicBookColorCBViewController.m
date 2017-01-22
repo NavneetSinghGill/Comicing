@@ -59,9 +59,9 @@
 
     _originTopConstraint.constant = _frameOfRainbowCircle.origin.y - 20; //20 is status bar length
     _originTrailingConstraint.constant = 20;
-    imageNames = [NSArray arrayWithObjects:@"ComicBookPurple", @"ComicBookGreen", @"ComicBookYellow", @"ComicBookOrange", @"ComicBookNBlue", @"ComicBookLBlue", @"ComicBookWhite", @"ComicBookPink", nil];
-    
+
     [self setComicColorViewsWidthAndHeightTo:0];
+    imageNames = [NSArray arrayWithObjects:@"Purple", @"Green", @"Yellow", @"Orange", @"NBlue", @"LBlue", @"White", @"Pink", nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -11,7 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CBComicPageCollectionVC">
             <connections>
                 <outlet property="collectionView" destination="rBf-Kd-2ev" id="LqE-Gk-u1t"/>
-                <outlet property="comicBookBackground" destination="On3-yt-olx" id="yaD-vO-8mb"/>
+                <outlet property="comicBookBackgroundBottom" destination="7IN-eD-Kyw" id="Pyb-g6-8vp"/>
+                <outlet property="comicBookBackgroundLeft" destination="eHk-yI-A96" id="Y3L-71-S0G"/>
+                <outlet property="comicBookBackgroundRight" destination="USo-PP-7v7" id="t3Y-ND-nSJ"/>
+                <outlet property="comicBookBackgroundTop" destination="y4Q-kq-wJA" id="h4L-ai-a3o"/>
                 <outlet property="rainbowColorCircleButton" destination="qcS-Y8-jac" id="abx-V9-YoV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,7 +24,10 @@
             <rect key="frame" x="0.0" y="0.0" width="346" height="460"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ComicBookWhite" translatesAutoresizingMaskIntoConstraints="NO" id="On3-yt-olx"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteTop" translatesAutoresizingMaskIntoConstraints="NO" id="y4Q-kq-wJA" userLabel="TopImageView"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteLeft" translatesAutoresizingMaskIntoConstraints="NO" id="eHk-yI-A96" userLabel="LeftImageView"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteRight" translatesAutoresizingMaskIntoConstraints="NO" id="USo-PP-7v7"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteBottom" translatesAutoresizingMaskIntoConstraints="NO" id="7IN-eD-Kyw" userLabel="BottomImageView"/>
                 <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="rBf-Kd-2ev">
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cZx-cX-RJa">
@@ -46,17 +52,29 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="On3-yt-olx" firstAttribute="trailing" secondItem="rBf-Kd-2ev" secondAttribute="trailing" constant="25" id="8QG-Q0-62k"/>
-                <constraint firstItem="On3-yt-olx" firstAttribute="leading" secondItem="rBf-Kd-2ev" secondAttribute="leading" constant="-3" id="H4q-ey-AOa"/>
+                <constraint firstItem="y4Q-kq-wJA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5Mp-XP-9Z5"/>
+                <constraint firstItem="USo-PP-7v7" firstAttribute="top" secondItem="y4Q-kq-wJA" secondAttribute="bottom" id="6eC-DZ-IEE"/>
+                <constraint firstItem="eHk-yI-A96" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6sD-9k-IER"/>
+                <constraint firstAttribute="trailing" secondItem="7IN-eD-Kyw" secondAttribute="trailing" id="8Ft-jV-LPj"/>
+                <constraint firstItem="7IN-eD-Kyw" firstAttribute="top" secondItem="eHk-yI-A96" secondAttribute="bottom" id="EEE-YU-hvW"/>
+                <constraint firstAttribute="trailing" secondItem="USo-PP-7v7" secondAttribute="trailing" id="FT4-Ai-xFC"/>
+                <constraint firstItem="7IN-eD-Kyw" firstAttribute="top" secondItem="USo-PP-7v7" secondAttribute="bottom" id="OfP-gJ-pxy"/>
+                <constraint firstItem="eHk-yI-A96" firstAttribute="top" secondItem="y4Q-kq-wJA" secondAttribute="bottom" id="RUG-Uj-jiF"/>
                 <constraint firstItem="rBf-Kd-2ev" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="SH3-SP-pDX"/>
                 <constraint firstItem="rBf-Kd-2ev" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Sw4-dc-4Eb"/>
-                <constraint firstItem="On3-yt-olx" firstAttribute="top" secondItem="rBf-Kd-2ev" secondAttribute="top" constant="-15" id="di4-KY-USM"/>
+                <constraint firstItem="y4Q-kq-wJA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TI8-Ng-T4i"/>
                 <constraint firstItem="qcS-Y8-jac" firstAttribute="centerX" secondItem="Za5-5C-u2L" secondAttribute="centerX" id="dtc-w4-vu4"/>
+                <constraint firstItem="USo-PP-7v7" firstAttribute="width" secondItem="7IN-eD-Kyw" secondAttribute="width" multiplier="0.123" id="dvS-qa-UiP"/>
+                <constraint firstItem="eHk-yI-A96" firstAttribute="width" secondItem="7IN-eD-Kyw" secondAttribute="width" multiplier="0.05" id="ff7-oP-QGx"/>
+                <constraint firstItem="7IN-eD-Kyw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hwO-Gi-Upg"/>
+                <constraint firstAttribute="bottom" secondItem="7IN-eD-Kyw" secondAttribute="bottom" id="kyR-Py-ObM"/>
+                <constraint firstItem="rBf-Kd-2ev" firstAttribute="top" secondItem="y4Q-kq-wJA" secondAttribute="bottom" id="nwK-yG-Udp"/>
                 <constraint firstItem="Za5-5C-u2L" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.06" id="ogK-mG-rvz"/>
                 <constraint firstItem="qcS-Y8-jac" firstAttribute="centerY" secondItem="Za5-5C-u2L" secondAttribute="centerY" id="omW-pX-BWQ"/>
+                <constraint firstItem="7IN-eD-Kyw" firstAttribute="top" secondItem="rBf-Kd-2ev" secondAttribute="bottom" id="qBd-Uh-ehV"/>
                 <constraint firstItem="qcS-Y8-jac" firstAttribute="top" secondItem="rBf-Kd-2ev" secondAttribute="top" constant="-25" id="sol-3r-pe0"/>
                 <constraint firstAttribute="trailing" secondItem="rBf-Kd-2ev" secondAttribute="trailing" constant="32" id="t2H-bo-Ifs"/>
-                <constraint firstItem="On3-yt-olx" firstAttribute="bottom" secondItem="rBf-Kd-2ev" secondAttribute="bottom" constant="30" id="wqT-cn-a5c"/>
+                <constraint firstAttribute="trailing" secondItem="y4Q-kq-wJA" secondAttribute="trailing" id="u1F-8y-vM1"/>
                 <constraint firstItem="qcS-Y8-jac" firstAttribute="trailing" secondItem="rBf-Kd-2ev" secondAttribute="trailing" constant="15" id="xa7-cM-UTz"/>
                 <constraint firstAttribute="bottom" secondItem="rBf-Kd-2ev" secondAttribute="bottom" constant="30" id="yoz-Vi-0yO"/>
             </constraints>
@@ -66,7 +84,10 @@
         </view>
     </objects>
     <resources>
-        <image name="ComicBookWhite" width="1220" height="1908"/>
+        <image name="WhiteBottom" width="1220" height="81"/>
+        <image name="WhiteLeft" width="40" height="1768"/>
+        <image name="WhiteRight" width="150" height="1768"/>
+        <image name="WhiteTop" width="1220" height="60"/>
         <image name="colorCircle" width="18" height="18"/>
     </resources>
 </document>
