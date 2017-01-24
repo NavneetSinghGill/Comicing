@@ -22,9 +22,11 @@ typedef enum {
 }ComicImageOrientation;
 
 @interface CBComicItemModel : NSObject
-- (instancetype)initWithTimestamp:(NSNumber*)timestamp image:(UIImage*)image orientation:(ComicItemOrientation)orientation;
+- (instancetype)initWithTimestamp:(NSNumber*)timestamp baseLayer:(ComicSlideLayerType)comicSlideLayerType staticImage:(UIImage*)image animatedImage:(UIImage*)animatedImage orientation:(ComicItemOrientation)orientation;
 @property (nonatomic, strong) NSNumber* timestamp;
-@property (nonatomic, strong) UIImage* image;
+@property (nonatomic, strong) UIImage* staticImage;
+@property (nonatomic, strong) UIImage* animatedImage;
+@property (nonatomic, assign) ComicSlideLayerType comicSlideLayerType;
 @property (nonatomic, assign) ComicItemOrientation itemOrientation;
 @property (nonatomic, assign) ComicImageOrientation imageOrientation;
 @end

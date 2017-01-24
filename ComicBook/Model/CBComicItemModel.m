@@ -9,13 +9,26 @@
 #import "CBComicItemModel.h"
 
 @implementation CBComicItemModel
-- (instancetype)initWithTimestamp:(NSNumber*)timestamp image:(UIImage*)image orientation:(ComicItemOrientation)orientation{
+
+- (instancetype)initWithTimestamp:(NSNumber *)timestamp baseLayer:(ComicSlideLayerType)comicSlideLayerType staticImage:(UIImage *)image animatedImage:(UIImage *)animatedImage orientation:(ComicItemOrientation)orientation {
     self = [super init];
     if (self) {
         _timestamp= timestamp;
-        _image= image;
+        _staticImage = image;
+        _animatedImage = animatedImage;
+        _comicSlideLayerType = comicSlideLayerType;
         _itemOrientation= orientation;
     }
     return self;
 }
+
+//- (instancetype)initWithTimestamp:(NSNumber*)timestamp image:(UIImage*)image orientation:(ComicItemOrientation)orientation{
+//    self = [super init];
+//    if (self) {
+//        _timestamp= timestamp;
+//        _image= image;
+//        _itemOrientation= orientation;
+//    }
+//    return self;
+//}
 @end

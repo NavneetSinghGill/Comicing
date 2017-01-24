@@ -1431,6 +1431,7 @@
 		5C7024931E2E1F7B00E3CE2B /* ComicBookColorCBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicBookColorCBViewController.m; sourceTree = "<group>"; };
 		5C7024961E2E45D500E3CE2B /* UIView+LayerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LayerOperation.h"; sourceTree = "<group>"; };
 		5C7024971E2E45D500E3CE2B /* UIView+LayerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LayerOperation.m"; sourceTree = "<group>"; };
+		5CBAD39E1E3738C8002B0D61 /* ComicBookPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComicBookPrefixHeader.pch; sourceTree = "<group>"; };
 		5CC038101E28BAC00065B04C /* CBComicTitleFontDropdownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicTitleFontDropdownViewController.h; sourceTree = "<group>"; };
 		5CC038111E28BAC00065B04C /* CBComicTitleFontDropdownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicTitleFontDropdownViewController.m; sourceTree = "<group>"; };
 		8404391D1DA9535D0020CA61 /* ComicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicCell.h; sourceTree = "<group>"; };
@@ -1668,6 +1669,7 @@
 				0C6664A91C84358500FEB11F /* AppDelegate.h */,
 				0C6664AA1C84358500FEB11F /* AppDelegate.m */,
 				0C6665F21C84358600FEB11F /* main.m */,
+				5CBAD39E1E3738C8002B0D61 /* ComicBookPrefixHeader.pch */,
 				0C6665F01C84358500FEB11F /* Info.plist */,
 				0C2125B61C98946700B6BAB5 /* Assets.xcassets */,
 				84EFDA031D34139F005B5FB0 /* Instruction GIF */,
@@ -4846,6 +4848,7 @@
 					"$(PROJECT_DIR)/ComicBook/Utils/ShareModule/Framework",
 					"$(PROJECT_DIR)/ComicBook/Vendors/YYImage",
 				);
+				GCC_PREFIX_HEADER = ComicBook/ComicBookPrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ComicBook/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4885,6 +4888,7 @@
 					"$(PROJECT_DIR)/ComicBook/Utils/ShareModule/Framework",
 					"$(PROJECT_DIR)/ComicBook/Vendors/YYImage",
 				);
+				GCC_PREFIX_HEADER = ComicBook/ComicBookPrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ComicBook/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

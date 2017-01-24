@@ -122,7 +122,10 @@
  //6plus height 414 × 736  375 × 667  320 × 480
 
 
-
+typedef enum {
+    Gif = 101,
+    StaticImage = 102
+} ComicSlideLayerType;
 
 
 
