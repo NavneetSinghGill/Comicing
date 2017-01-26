@@ -103,6 +103,10 @@ typedef void (^RowButtonCallBack)(BOOL success);
 
 //// END //////
 
+// Ramesh P ///
+//Bubble Method
+-(void)addStandardBubbleOnFirstTime;
+
 @property (strong, nonatomic) ComicPage *comicPage;
 
 @property (nonatomic) BOOL isNewSlide;
