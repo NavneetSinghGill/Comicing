@@ -1,3 +1,4 @@
+
 //
 //  CBComicPageViewController.m
 //  ComicBook
@@ -26,13 +27,23 @@
 }
 
 - (void)addComicItem:(CBComicItemModel*)comicItem completion:(void (^)(BOOL finished))completion{
+    if (self.dataArray.count == kMaxItemsInComic) {
+        completion(NO);
+        return;
+    }
+    
     [self.dataArray addObject:comicItem];
     
     if(self.dataArray.count%kMaxItemsInComic == 1){
         // Add a new page
-        CBComicPageCollectionVC* vc= [[CBComicPageCollectionVC alloc] initWithNibName:@"CBComicPageCollectionVC" bundle:nil];
-        vc.delegate= self;
-        [self addViewControllers:@[vc]];
+        CBComicPageCollectionVC* vc;
+        if (self.viewControllers.count == 0) {
+            vc = [[CBComicPageCollectionVC alloc] initWithNibName:@"CBComicPageCollectionVC" bundle:nil];
+            vc.delegate= self;
+            [self addViewControllers:@[vc]];
+        } else {
+            vc = [self.viewControllers lastObject];
+        }
         [self changePageToIndex:self.viewControllers.count-1 completed:^(BOOL success) {
             if(success){
                 [vc addComicItem:comicItem];

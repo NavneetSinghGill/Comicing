@@ -517,6 +517,23 @@
 		1BEB1FDC1D43DD2700CC1304 /* stickers_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FD31D43DD2700CC1304 /* stickers_icon@2x.png */; };
 		1BEB1FDD1D43DD2700CC1304 /* stickers_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB1FD41D43DD2700CC1304 /* stickers_icon@3x.png */; };
 		1BEB20221D43FCA100CC1304 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB20211D43FCA100CC1304 /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5C7024671E2DE99300E3CE2B /* Auther Typeface.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024661E2DE99300E3CE2B /* Auther Typeface.ttf */; };
+		5C70246A1E2DE9A700E3CE2B /* Be Bright Swashes.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024681E2DE9A700E3CE2B /* Be Bright Swashes.ttf */; };
+		5C70246B1E2DE9A700E3CE2B /* Be Bright.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024691E2DE9A700E3CE2B /* Be Bright.ttf */; };
+		5C7024701E2DEB0E00E3CE2B /* BLACKHAWK Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C70246D1E2DEB0E00E3CE2B /* BLACKHAWK Italic.ttf */; };
+		5C7024711E2DEB0E00E3CE2B /* BLACKHAWK Swash.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C70246E1E2DEB0E00E3CE2B /* BLACKHAWK Swash.ttf */; };
+		5C7024721E2DEB0E00E3CE2B /* BLACKHAWK.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C70246F1E2DEB0E00E3CE2B /* BLACKHAWK.ttf */; };
+		5C7024791E2DEB2A00E3CE2B /* Centuma-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024741E2DEB2A00E3CE2B /* Centuma-Black.ttf */; };
+		5C70247A1E2DEB2A00E3CE2B /* Centuma-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024751E2DEB2A00E3CE2B /* Centuma-Bold.ttf */; };
+		5C70247B1E2DEB2A00E3CE2B /* Centuma-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024761E2DEB2A00E3CE2B /* Centuma-Light.ttf */; };
+		5C70247C1E2DEB2A00E3CE2B /* Centuma-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024771E2DEB2A00E3CE2B /* Centuma-Regular.ttf */; };
+		5C70247D1E2DEB2A00E3CE2B /* Centuma-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024781E2DEB2A00E3CE2B /* Centuma-Thin.ttf */; };
+		5C7024811E2DEB6F00E3CE2B /* Edinburgh-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C70247E1E2DEB6F00E3CE2B /* Edinburgh-Regular.ttf */; };
+		5C7024821E2DEB6F00E3CE2B /* Sweet Sucker Punch.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C70247F1E2DEB6F00E3CE2B /* Sweet Sucker Punch.ttf */; };
+		5C7024831E2DEB6F00E3CE2B /* The Sweetest Thing.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C7024801E2DEB6F00E3CE2B /* The Sweetest Thing.ttf */; };
+		5C7024941E2E1F7B00E3CE2B /* ComicBookColorCBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7024931E2E1F7B00E3CE2B /* ComicBookColorCBViewController.m */; };
+		5C7024981E2E45D500E3CE2B /* UIView+LayerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7024971E2E45D500E3CE2B /* UIView+LayerOperation.m */; };
+		5CC038121E28BAC00065B04C /* CBComicTitleFontDropdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC038111E28BAC00065B04C /* CBComicTitleFontDropdownViewController.m */; };
 		840439201DA9535D0020CA61 /* ComicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404391E1DA9535D0020CA61 /* ComicCell.m */; };
 		840439211DA9535D0020CA61 /* ComicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8404391F1DA9535D0020CA61 /* ComicCell.xib */; };
 		8405267E1D469D0B00639E0F /* Slide-12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8405267D1D469D0B00639E0F /* Slide-12.gif */; };
@@ -1393,6 +1410,26 @@
 		1BEB1FD31D43DD2700CC1304 /* stickers_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stickers_icon@2x.png"; sourceTree = "<group>"; };
 		1BEB1FD41D43DD2700CC1304 /* stickers_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stickers_icon@3x.png"; sourceTree = "<group>"; };
 		1BEB20211D43FCA100CC1304 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		5C7024661E2DE99300E3CE2B /* Auther Typeface.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Auther Typeface.ttf"; sourceTree = "<group>"; };
+		5C7024681E2DE9A700E3CE2B /* Be Bright Swashes.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Be Bright Swashes.ttf"; sourceTree = "<group>"; };
+		5C7024691E2DE9A700E3CE2B /* Be Bright.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Be Bright.ttf"; sourceTree = "<group>"; };
+		5C70246D1E2DEB0E00E3CE2B /* BLACKHAWK Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BLACKHAWK Italic.ttf"; sourceTree = "<group>"; };
+		5C70246E1E2DEB0E00E3CE2B /* BLACKHAWK Swash.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BLACKHAWK Swash.ttf"; sourceTree = "<group>"; };
+		5C70246F1E2DEB0E00E3CE2B /* BLACKHAWK.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BLACKHAWK.ttf; sourceTree = "<group>"; };
+		5C7024741E2DEB2A00E3CE2B /* Centuma-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Centuma-Black.ttf"; sourceTree = "<group>"; };
+		5C7024751E2DEB2A00E3CE2B /* Centuma-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Centuma-Bold.ttf"; sourceTree = "<group>"; };
+		5C7024761E2DEB2A00E3CE2B /* Centuma-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Centuma-Light.ttf"; sourceTree = "<group>"; };
+		5C7024771E2DEB2A00E3CE2B /* Centuma-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Centuma-Regular.ttf"; sourceTree = "<group>"; };
+		5C7024781E2DEB2A00E3CE2B /* Centuma-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Centuma-Thin.ttf"; sourceTree = "<group>"; };
+		5C70247E1E2DEB6F00E3CE2B /* Edinburgh-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Edinburgh-Regular.ttf"; sourceTree = "<group>"; };
+		5C70247F1E2DEB6F00E3CE2B /* Sweet Sucker Punch.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sweet Sucker Punch.ttf"; sourceTree = "<group>"; };
+		5C7024801E2DEB6F00E3CE2B /* The Sweetest Thing.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Sweetest Thing.ttf"; sourceTree = "<group>"; };
+		5C7024921E2E1F7B00E3CE2B /* ComicBookColorCBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicBookColorCBViewController.h; sourceTree = "<group>"; };
+		5C7024931E2E1F7B00E3CE2B /* ComicBookColorCBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicBookColorCBViewController.m; sourceTree = "<group>"; };
+		5C7024961E2E45D500E3CE2B /* UIView+LayerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LayerOperation.h"; sourceTree = "<group>"; };
+		5C7024971E2E45D500E3CE2B /* UIView+LayerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LayerOperation.m"; sourceTree = "<group>"; };
+		5CC038101E28BAC00065B04C /* CBComicTitleFontDropdownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicTitleFontDropdownViewController.h; sourceTree = "<group>"; };
+		5CC038111E28BAC00065B04C /* CBComicTitleFontDropdownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicTitleFontDropdownViewController.m; sourceTree = "<group>"; };
 		8404391D1DA9535D0020CA61 /* ComicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicCell.h; sourceTree = "<group>"; };
 		8404391E1DA9535D0020CA61 /* ComicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicCell.m; sourceTree = "<group>"; };
 		8404391F1DA9535D0020CA61 /* ComicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComicCell.xib; sourceTree = "<group>"; };
@@ -1670,6 +1707,14 @@
 				0C6664AD1C84358500FEB11F /* AmericanTypeWriter */,
 				0C6664B01C84358500FEB11F /* Avenir Next LT W01 Ultra Light.ttf */,
 				0C6664B11C84358500FEB11F /* Myriad Roman.ttf */,
+				5C7024661E2DE99300E3CE2B /* Auther Typeface.ttf */,
+				5C7024681E2DE9A700E3CE2B /* Be Bright Swashes.ttf */,
+				5C7024691E2DE9A700E3CE2B /* Be Bright.ttf */,
+				5C70247E1E2DEB6F00E3CE2B /* Edinburgh-Regular.ttf */,
+				5C70247F1E2DEB6F00E3CE2B /* Sweet Sucker Punch.ttf */,
+				5C7024801E2DEB6F00E3CE2B /* The Sweetest Thing.ttf */,
+				5C70246C1E2DEB0E00E3CE2B /* Blackhawk */,
+				5C7024731E2DEB2A00E3CE2B /* Centuma */,
 				0C6664B21C84358500FEB11F /* Myriad-pro */,
 			);
 			path = Font;
@@ -2591,6 +2636,8 @@
 				91BEAC1B1DF738A900710D3C /* UIView+CBConstraints.m */,
 				16F48B2F1DE6363600F86EDE /* UIImage+animatedGIF.h */,
 				16F48B301DE6363600F86EDE /* UIImage+animatedGIF.m */,
+				5C7024961E2E45D500E3CE2B /* UIView+LayerOperation.h */,
+				5C7024971E2E45D500E3CE2B /* UIView+LayerOperation.m */,
 				1B9B7C191D3A9E03003B04F1 /* Emoji */,
 				1B9B7C201D3A9E03003B04F1 /* UICountingLabel.h */,
 				1B9B7C211D3A9E03003B04F1 /* UICountingLabel.m */,
@@ -3662,6 +3709,28 @@
 			path = Invite_GitBox;
 			sourceTree = "<group>";
 		};
+		5C70246C1E2DEB0E00E3CE2B /* Blackhawk */ = {
+			isa = PBXGroup;
+			children = (
+				5C70246D1E2DEB0E00E3CE2B /* BLACKHAWK Italic.ttf */,
+				5C70246E1E2DEB0E00E3CE2B /* BLACKHAWK Swash.ttf */,
+				5C70246F1E2DEB0E00E3CE2B /* BLACKHAWK.ttf */,
+			);
+			path = Blackhawk;
+			sourceTree = "<group>";
+		};
+		5C7024731E2DEB2A00E3CE2B /* Centuma */ = {
+			isa = PBXGroup;
+			children = (
+				5C7024741E2DEB2A00E3CE2B /* Centuma-Black.ttf */,
+				5C7024751E2DEB2A00E3CE2B /* Centuma-Bold.ttf */,
+				5C7024761E2DEB2A00E3CE2B /* Centuma-Light.ttf */,
+				5C7024771E2DEB2A00E3CE2B /* Centuma-Regular.ttf */,
+				5C7024781E2DEB2A00E3CE2B /* Centuma-Thin.ttf */,
+			);
+			path = Centuma;
+			sourceTree = "<group>";
+		};
 		8409A81F1DA6AA19002F38C3 /* ComicCellView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3893,6 +3962,10 @@
 				91F338D81DF8953E0017193C /* CBComicPageCollectionVC.h */,
 				91F338D91DF8953E0017193C /* CBComicPageCollectionVC.m */,
 				91F338DA1DF8953E0017193C /* CBComicPageCollectionVC.xib */,
+				5CC038101E28BAC00065B04C /* CBComicTitleFontDropdownViewController.h */,
+				5CC038111E28BAC00065B04C /* CBComicTitleFontDropdownViewController.m */,
+				5C7024921E2E1F7B00E3CE2B /* ComicBookColorCBViewController.h */,
+				5C7024931E2E1F7B00E3CE2B /* ComicBookColorCBViewController.m */,
 			);
 			path = ComicPreview;
 			sourceTree = "<group>";
@@ -3986,10 +4059,10 @@
 				TargetAttributes = {
 					845090741C2B1343004DAE99 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = PV7F3V653B;
+						DevelopmentTeam = BK9SLXL3BD;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -4026,6 +4099,7 @@
 				16A602B11DE7158400D13F5C /* cupidButton.png in Resources */,
 				84CEF1121D3ADF68009FCB1D /* group_conversation_input_background@2x.png in Resources */,
 				0C6667A41C84358600FEB11F /* CheckButton.png in Resources */,
+				5C7024811E2DEB6F00E3CE2B /* Edinburgh-Regular.ttf in Resources */,
 				84E36C071D3BB26800D9B22B /* ComicSlidePreview.xib in Resources */,
 				167DACD31DE7658E001F42BD /* CryingTearRight.gif in Resources */,
 				16A602BC1DE7158400D13F5C /* CHARACTER.gif in Resources */,
@@ -4049,13 +4123,16 @@
 				0C6668351C84358600FEB11F /* c2.jpg in Resources */,
 				0C66678C1C84358600FEB11F /* blueCheckmark.png in Resources */,
 				0C6668361C84358600FEB11F /* c3.jpg in Resources */,
+				5C70247B1E2DEB2A00E3CE2B /* Centuma-Light.ttf in Resources */,
 				0C857C171C94BEAA00F0B911 /* countries_images.json in Resources */,
 				16161C151DE8C39700E8FDD7 /* ice cube-01.png in Resources */,
 				161CAD591D840DD80034795C /* Love-ON.png in Resources */,
+				5C70247D1E2DEB2A00E3CE2B /* Centuma-Thin.ttf in Resources */,
 				1663533C1DEA1CC800BB068D /* sheep.gif in Resources */,
 				0C6668A31C84358600FEB11F /* FooterView.xib in Resources */,
 				1663532A1DE9EC5800BB068D /* DevilHornRgt.gif in Resources */,
 				161CAD521D840DD80034795C /* FUN-OFF.png in Resources */,
+				5C7024701E2DEB0E00E3CE2B /* BLACKHAWK Italic.ttf in Resources */,
 				84C7132D1DBBBA64009612A5 /* Smiley-Button.gif in Resources */,
 				16398FD11DAA782A004A6703 /* garbagebin.png in Resources */,
 				84CEF11E1D3ADF68009FCB1D /* house-icon.png in Resources */,
@@ -4126,6 +4203,7 @@
 				161CAD511D840DD80034795C /* Cool-ON.png in Resources */,
 				0C66679C1C84358600FEB11F /* profilePicUpload.png in Resources */,
 				0C6668A51C84358600FEB11F /* FindFriendsView.xib in Resources */,
+				5C70246B1E2DE9A700E3CE2B /* Be Bright.ttf in Resources */,
 				16161C141DE8C39700E8FDD7 /* hi icon with grey line-01.png in Resources */,
 				0C6668A11C84358600FEB11F /* CropStickerViewController.xib in Resources */,
 				16A6027E1DE7150700D13F5C /* Rshoulder.gif in Resources */,
@@ -4140,6 +4218,7 @@
 				1B7E51FF1D36DEF60038199E /* camera.png in Resources */,
 				0C6668A71C84358600FEB11F /* FriendsListTableViewCell.xib in Resources */,
 				0C6667871C84358600FEB11F /* parrotIcon.png in Resources */,
+				5C7024721E2DEB0E00E3CE2B /* BLACKHAWK.ttf in Resources */,
 				161CAD571D840DD80034795C /* Happy-ON.png in Resources */,
 				84CEF11D1D3ADF68009FCB1D /* FaceWithBubble-01.png in Resources */,
 				16161C101DE8C39700E8FDD7 /* face-01.png in Resources */,
@@ -4156,6 +4235,7 @@
 				0CC817221E22B28A0091CA33 /* WTF.png in Resources */,
 				0C6667AF1C84358600FEB11F /* LaunchScreen.storyboard in Resources */,
 				16161C1B1DE8C39700E8FDD7 /* T-01.png in Resources */,
+				5C70246A1E2DE9A700E3CE2B /* Be Bright Swashes.ttf in Resources */,
 				1604B79A1D8F0B960096E1DD /* 2slidebook.png in Resources */,
 				1BEB1FD81D43DD2700CC1304 /* openbox-10.gif in Resources */,
 				16A602801DE7153000D13F5C /* LeftArrowButton.png in Resources */,
@@ -4175,6 +4255,7 @@
 				165641981D907EBB00E3C9C7 /* 4slidebook.png in Resources */,
 				0C0C69181E216E5600FEC707 /* OOPPS.gif in Resources */,
 				91F338D71DF894600017193C /* CBComicPageViewController.xib in Resources */,
+				5C7024831E2DEB6F00E3CE2B /* The Sweetest Thing.ttf in Resources */,
 				16161C0F1DE8C39700E8FDD7 /* devil.png in Resources */,
 				1663532B1DE9EC5800BB068D /* DevilWingLft.gif in Resources */,
 				0C6667A71C84358600FEB11F /* everyone.png in Resources */,
@@ -4184,6 +4265,7 @@
 				1BEB1FD61D43DD2700CC1304 /* box02.gif in Resources */,
 				1625E5FE1DF8182F0002D513 /* text166.png in Resources */,
 				0C6667701C84358600FEB11F /* american-typewriter.ttf in Resources */,
+				5C7024791E2DEB2A00E3CE2B /* Centuma-Black.ttf in Resources */,
 				16161C231DE8C52A00E8FDD7 /* Left_eye.gif in Resources */,
 				0C6667AA1C84358600FEB11F /* instagramlogo.png in Resources */,
 				0C66689A1C84358600FEB11F /* AccountView.xib in Resources */,
@@ -4207,7 +4289,9 @@
 				0C6668071C84358600FEB11F /* MeCell.xib in Resources */,
 				0C66678F1C84358600FEB11F /* accountAge.png in Resources */,
 				167DACC31DE75E1A001F42BD /* DRILL_FINAL02.gif in Resources */,
+				5C70247C1E2DEB2A00E3CE2B /* Centuma-Regular.ttf in Resources */,
 				0C6667A51C84358600FEB11F /* digup.png in Resources */,
+				5C70247A1E2DEB2A00E3CE2B /* Centuma-Bold.ttf in Resources */,
 				0C6668121C84358600FEB11F /* ComicImageCollectionCell.xib in Resources */,
 				1663533A1DEA1CC800BB068D /* nose-bubble-left.gif in Resources */,
 				0C6667761C84358600FEB11F /* MYRIADPRO-BOLDCONDIT.OTF in Resources */,
@@ -4266,6 +4350,7 @@
 				0C6668BB1C84358600FEB11F /* SignUp.xib in Resources */,
 				0C0C69191E216E5600FEC707 /* WOW.gif in Resources */,
 				16161C1C1DE8C39700E8FDD7 /* thermostat-01.png in Resources */,
+				5C7024821E2DEB6F00E3CE2B /* Sweet Sucker Punch.ttf in Resources */,
 				168512131D3C052000A372E3 /* follow.png in Resources */,
 				16A602761DE7150600D13F5C /* Lbrain.gif in Resources */,
 				84A5DFEB1D3697A30089D6BE /* Slide-E.gif in Resources */,
@@ -4280,11 +4365,13 @@
 				0C6667AB1C84358600FEB11F /* savelogo.png in Resources */,
 				166353321DEA1C1D00BB068D /* Nhietke-A.gif in Resources */,
 				0C5D11391C87DE5600FEC6DA /* Settings.bundle in Resources */,
+				5C7024711E2DEB0E00E3CE2B /* BLACKHAWK Swash.ttf in Resources */,
 				84CEF1231D3ADF68009FCB1D /* top-bar-me-icon-yellow.png in Resources */,
 				16161C1D1DE8C39700E8FDD7 /* thunder clouds-01.png in Resources */,
 				0C0C69171E216E5600FEC707 /* OMG.gif in Resources */,
 				0C857BFB1C9352D000F0B911 /* countries.json in Resources */,
 				166353341DEA1C1D00BB068D /* Spiral.gif in Resources */,
+				5C7024671E2DE99300E3CE2B /* Auther Typeface.ttf in Resources */,
 				1695AEEC1DEF67D5007B352B /* KingCrown.gif in Resources */,
 				84A5DFE91D3697770089D6BE /* Slide-2B.gif in Resources */,
 				0C6667781C84358600FEB11F /* MYRIADPRO-COND.OTF in Resources */,
@@ -4406,6 +4493,7 @@
 				0C6667D11C84358600FEB11F /* MeAPIManager.m in Sources */,
 				0C66687B1C84358600FEB11F /* SDWebImageDecoder.m in Sources */,
 				0C6668221C84358600FEB11F /* CommentModel.m in Sources */,
+				5C7024981E2E45D500E3CE2B /* UIView+LayerOperation.m in Sources */,
 				0C6667E91C84358600FEB11F /* GroupsMembersCell.m in Sources */,
 				0C6667E11C84358600FEB11F /* DrawingColorsViewController.m in Sources */,
 				0C66681E1C84358600FEB11F /* ComicMaking.m in Sources */,
@@ -4558,6 +4646,7 @@
 				0C6668131C84358600FEB11F /* ComicImageListView.m in Sources */,
 				843ABB781D1FAA730078B7A8 /* MainPageCell.m in Sources */,
 				913B641C1DF86D970003E9D1 /* CBPreviewHeaderSection.m in Sources */,
+				5C7024941E2E1F7B00E3CE2B /* ComicBookColorCBViewController.m in Sources */,
 				0C6667E71C84358600FEB11F /* GlideScrollViewController.m in Sources */,
 				0C66685D1C84358600FEB11F /* JSONAPI.m in Sources */,
 				0C6668491C84358600FEB11F /* UIColor+colorWithHexString.m in Sources */,
@@ -4566,6 +4655,7 @@
 				91BEAC151DF7372900710D3C /* CBBasePageViewController.m in Sources */,
 				0C6667E01C84358600FEB11F /* CropStickerViewController.m in Sources */,
 				0C66680E1C84358600FEB11F /* TopBarViewController.m in Sources */,
+				5CC038121E28BAC00065B04C /* CBComicTitleFontDropdownViewController.m in Sources */,
 				0C6668AB1C84358600FEB11F /* GroupItem.m in Sources */,
 				0C66687D1C84358600FEB11F /* SDWebImageDownloaderOperation.m in Sources */,
 				0C66680F1C84358600FEB11F /* TopSearchVC.m in Sources */,
@@ -4731,11 +4821,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Namrata S (WW3QCH7XKV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Namrata S (WW3QCH7XKV)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = PV7F3V653B;
+				DEVELOPMENT_TEAM = BK9SLXL3BD;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4755,7 +4845,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
+				PRODUCT_BUNDLE_IDENTIFIER = com.16G.16G;
 				PRODUCT_NAME = Comicing;
 				PROVISIONING_PROFILE = "30a904c1-cae8-460a-99d5-ca79956b127f";
 				PROVISIONING_PROFILE_SPECIFIER = comicBookDevelopement;
@@ -4770,11 +4860,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Namrata S (WW3QCH7XKV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Namrata S (WW3QCH7XKV)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = PV7F3V653B;
+				DEVELOPMENT_TEAM = BK9SLXL3BD;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4794,7 +4884,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
+				PRODUCT_BUNDLE_IDENTIFIER = com.16G.16G;
 				PRODUCT_NAME = Comicing;
 				PROVISIONING_PROFILE = "30a904c1-cae8-460a-99d5-ca79956b127f";
 				PROVISIONING_PROFILE_SPECIFIER = comicBookDevelopement;

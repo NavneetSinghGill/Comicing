@@ -116,7 +116,7 @@
 #define ComicWidthIPhone6 385
 #define ComicWidthIPhone6plus 425
 
-#define kMaxItemsInComic 4
+#define kMaxItemsInComic 8
 
 //
  //6plus height 414 × 736  375 × 667  320 × 480
