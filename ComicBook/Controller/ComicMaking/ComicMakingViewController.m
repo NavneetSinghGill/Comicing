@@ -47,7 +47,7 @@
 #import "ComicBubbleList.h"
 #import "CombineGifImages.h"
 #import "YYImage.h"
-
+#import "ComicBubbleView.h"
 CGSize CGSizeAbsolute2(CGSize size) {
     return (CGSize){fabs(size.width), fabs(size.height)};
 }
@@ -200,7 +200,8 @@ static RowButtonCallBack _completionHandler ;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self addBubbleListViewController];
+    
+  //  [self addBubbleListViewController];
     [self addStickerListViewController];
     [self addAnimationListViewController];
     _captionHeightSmall = YES;
@@ -2334,6 +2335,18 @@ static RowButtonCallBack _completionHandler ;
 /*Ramesh */
 //Handle Bubble Methods
 #pragma mark - Bubble Methods
+-(void)addStandardBubbleOnFirstTime
+{
+    ComicBubbleView *view=[[ComicBubbleView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    view.lowerLeftStandardBubbleView.frame=CGRectMake(120, 90, view.lowerLeftStandardBubbleView.frame.size.width, view.lowerLeftStandardBubbleView.frame.size.height);
+    view.lowerRightStandardBubbleView.frame=CGRectMake(20, 300, view.lowerRightStandardBubbleView.frame.size.width, view.lowerRightStandardBubbleView.frame.size.height);
+    view.upperLeftStandardBubbleView.frame=CGRectMake(120, 300, view.upperLeftStandardBubbleView.frame.size.width, view.upperLeftStandardBubbleView.frame.size.height);
+     view.upperRightStandardBubbleView.frame=CGRectMake(10, 90, view.upperRightStandardBubbleView.frame.size.width, view.upperRightStandardBubbleView.frame.size.height);
+  //  [imgvComic addSubview:view.lowerLeftStandardBubbleView];
+   // [imgvComic addSubview:view.lowerRightStandardBubbleView];
+   // [imgvComic addSubview:view.upperRightStandardBubbleView];
+    [imgvComic addSubview:view.upperRightStandardBubbleView];
+}
 - (void)openBubbleList
 {
     backupToolCenter = viewRowButtons.center;
@@ -5502,19 +5515,19 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         }
     }
 }
-- (void)addBubbleListViewController
-{
-    // Get storyboard
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    UICollectionViewController *bubbleList  = [storyBoard instantiateViewControllerWithIdentifier:@"bubblelistVC"];
-    
-    // lets add it to container view
-    [self.bubbleContainerView addSubview:bubbleList.view];
-    [self addChildViewController:bubbleList];
-    //[viewController didMoveToParentViewController:self];
-    // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
-    //self.containerViewController = viewController;
-}
+//- (void)addBubbleListViewController
+//{
+//    // Get storyboard
+//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+//    UICollectionViewController *bubbleList  = [storyBoard instantiateViewControllerWithIdentifier:@"bubblelistVC"];
+//    
+//    // lets add it to container view
+//    [self.bubbleContainerView addSubview:bubbleList.view];
+//    [self addChildViewController:bubbleList];
+//    //[viewController didMoveToParentViewController:self];
+//    // keep reference of viewController which may be useful when you need to remove it from container view, lets consider you have a property name as containerViewController
+//    //self.containerViewController = viewController;
+//}
 - (void)addStickerListViewController
 {
     // Get storyboard
