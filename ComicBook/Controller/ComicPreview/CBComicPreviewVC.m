@@ -52,7 +52,6 @@
     self.previewVC.delegate= self;
     [self setupSections];
     [self.tableView reloadData];
-    [self addButtons];
 }
 
 #pragma mark - ZoomTransitionProtocol
@@ -252,40 +251,6 @@
     return YES;
 }
 
-- (void)addButtons {
-    NSInteger widthHeightOfButtons = 40;
-    CGRect viewFrame = self.view.frame;
-    
-    UIButton *twitterButton = [[UIButton alloc] initWithFrame:CGRectMake(0, viewFrame.size.height - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
-    [twitterButton setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
-    [twitterButton addTarget:self action:@selector(twitterButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *facebookButton = [[UIButton alloc] initWithFrame:CGRectMake(0, twitterButton.frame.origin.y - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
-    [facebookButton setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
-    [facebookButton addTarget:self action:@selector(facebookButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *instagramButton = [[UIButton alloc] initWithFrame:CGRectMake(0, facebookButton.frame.origin.y - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
-    [instagramButton setImage:[UIImage imageNamed:@"instagram"] forState:UIControlStateNormal];
-    [instagramButton addTarget:self action:@selector(instagramButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *tagsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, instagramButton.frame.origin.y - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
-    [tagsButton setImage:[UIImage imageNamed:@"tag"] forState:UIControlStateNormal];
-    
-    UIButton *arrowButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - widthHeightOfButtons, self.view.frame.size.height - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
-    [arrowButton setImage:[UIImage imageNamed:@"arrow"] forState:UIControlStateNormal];
-    
-    UIButton *middleButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - widthHeightOfButtons/2, self.view.frame.size.height - widthHeightOfButtons, widthHeightOfButtons, widthHeightOfButtons)];
-    [middleButton setImage:[UIImage imageNamed:@"baby"] forState:UIControlStateNormal];
-    [middleButton addTarget:self action:@selector(openMainScreen) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:twitterButton];
-    [self.view addSubview:facebookButton];
-    [self.view addSubview:instagramButton];
-    [self.view addSubview:tagsButton];
-    [self.view addSubview:arrowButton];
-    [self.view addSubview:middleButton];
-}
-
 #pragma mark - TitleFontDelegate methods
 
 - (void)getSelectedFontName:(NSString *)fontName andTitle:(NSString *)title {
@@ -316,19 +281,27 @@
 
 #pragma mark - Button actions
 
-- (void)openMainScreen {
+- (IBAction)openMainScreen {
     [AppHelper openMainPageviewController:self];
 }
 
-- (void)twitterButtonTapped:(UIButton *)sender {
+- (IBAction)arrowButtonTapped:(id)sender {
+    
+}
+
+- (IBAction)tagButtonTapped:(id)sender {
+    
+}
+
+- (IBAction)twitterButtonTapped:(UIButton *)sender {
     [self doShareTo:TWITTER ShareImage:[UIImage imageNamed:@"comicBookBackground"]];
 }
 
-- (void)facebookButtonTapped:(UIButton *)sender {
+- (IBAction)facebookButtonTapped:(UIButton *)sender {
     [self doShareTo:FACEBOOK ShareImage:[UIImage imageNamed:@"comicBookBackground"]];
 }
 
-- (void)instagramButtonTapped:(UIButton *)sender {
+- (IBAction)instagramButtonTapped:(UIButton *)sender {
     [self doShareTo:INSTAGRAM ShareImage:[UIImage imageNamed:@"comicBookBackground"]];
 }
 
