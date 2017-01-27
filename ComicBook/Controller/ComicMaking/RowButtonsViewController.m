@@ -200,7 +200,7 @@
          sender.layer.transform = CATransform3DIdentity;
      }
                      completion:^(BOOL finished) {
-                         [parentViewController openBubbleList];
+                         [parentViewController addStandardBubbleOnFirstTime];
                          [self checkStatusForBlackBoardWithButton:sender];
                      }];
 }
