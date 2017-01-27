@@ -51,6 +51,8 @@
         
         [self allButtonsFadeIn:btnCamera];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeExclamation:) name:@"closeExclamation" object:nil];
 }
 
 - (IBAction)btnBlackboardTap:(UIButton *)sender
@@ -566,5 +568,12 @@
     }
 }
 
-
+-(void)closeExclamation:(NSNotification *)notification
+{
+    [self.btnExclamation setEnabled:YES];
+    [self.btnBubble setEnabled:YES];
+    self.imgvExclamation.alpha = 1;
+    self.btnCamera.alpha = 1;
+    
+}
 @end

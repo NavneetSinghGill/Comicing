@@ -682,9 +682,9 @@ UILabel *mComicTitle;
     imageView = (ComicItemAnimatedSticker*)imageView;
     if (((ComicItemAnimatedSticker*)imageView).combineAnimationFileName) {
         //it had image,
-        NSString *animationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        animationPath = [[animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName] stringByAppendingString:@".gif"];
-        imageView.image = [YYImage imageWithContentsOfFile:animationPath];
+//        NSString *animationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//        animationPath = [[animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName] stringByAppendingString:@".gif"];
+        imageView.image = [YYImage imageNamed:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName];
     }
     
 //    YYImage *image = [YYImage imageNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
@@ -713,12 +713,27 @@ UILabel *mComicTitle;
         diffX = 1.5f;
         diffY = 2.5f;
     }
+    
+    CGSize newSize = imageView.frame.size;
+    CGSize imgSize = itemImage.frame.size;
+    
+    CGRect scaledImageRect = CGRectZero;
+    
+    CGFloat aspectWidth = imgSize.width / newSize.width;
+    CGFloat aspectHeight = imgSize.height / newSize.height;
+    CGFloat aspectRatio = MIN ( aspectWidth, aspectHeight );
+    
+    scaledImageRect.size.width = newSize.width * ScaleValue;
+    scaledImageRect.size.height = newSize.height * ScaleValue;
+    scaledImageRect.origin.x = (imgSize.width - scaledImageRect.size.width) / 3.0f;
+    scaledImageRect.origin.y = (imgSize.height - scaledImageRect.size.height) / 3.0f;
+    
     CGRect rectValue = imageView.frame;
-    rectValue.origin.x = rectValue.origin.x * ScaleValue/diffX;
-    rectValue.origin.y = rectValue.origin.y * ScaleValue/diffY;
-    rectValue.size.width = rectValue.size.width * ScaleValue*1.65;
-    rectValue.size.height = rectValue.size.height * ScaleValue*1.65;
-    imageView.frame = rectValue;
+    rectValue.origin.x = rectValue.origin.x * ScaleValue;// /diffX;
+    rectValue.origin.y = rectValue.origin.y * ScaleValue;///diffY;
+    rectValue.size.width = rectValue.size.width * ScaleValue;//*1.65;
+    rectValue.size.height = rectValue.size.height * ScaleValue;//*1.65;
+    imageView.frame = scaledImageRect;
     
     [itemImage addSubview:imageView];
 }

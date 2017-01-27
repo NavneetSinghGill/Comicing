@@ -1821,6 +1821,8 @@ static RowButtonCallBack _completionHandler ;
 
 - (void)closeExclamationList
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"closeExclamation" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"closeExclamation" object:nil];
     
     if (!haveAnimationOnPage)
     {
@@ -4536,9 +4538,11 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     [imgvComic addSubview:imageView];
     [imgvComic bringSubviewToFront:imageView];*/
 //    if([self getAnimatesStickerFromComic] == nil){
-        [imgvComic addSubview:imageView];
-        [imgvComic bringSubviewToFront:imageView];
+//        [imgvComic addSubview:imageView];
+//        [imgvComic bringSubviewToFront:imageView];
 //    }
+    [self.view addSubview:imageView];
+    [self.view bringSubviewToFront:imageView];
 }
 
 - (void)addBubbleWithImage:(ComicItemBubble *)bubbleHolderView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect
