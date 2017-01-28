@@ -330,7 +330,8 @@ NSTimer* timerObject;
         
         [self.navigation pushViewController:cmv animated:isPushAnimation];
     }else{
-    [self.navigationController pushViewController:cmv animated:isPushAnimation];
+    //[self.navigationController pushViewController:cmv animated:isPushAnimation];
+        [self.navigationController pushViewController:cmv animated:YES];
     }
 }
 

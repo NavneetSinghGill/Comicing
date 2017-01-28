@@ -70,10 +70,39 @@
     self.txtPassword.delegate = self;
     
 //    [self.txtLoginId becomeFirstResponder];
+    
+    [self backButtonCreate];
+}
+
+#pragma mark- Method for back button Create
+
+-(void)backButtonCreate {
+    
+    UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [backBtn setFrame:CGRectMake(10, 30, 15, 24)];
+    [self.view addSubview:backBtn];
+    [backBtn setImage:[UIImage imageNamed:@"backbutton.png"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(backButtonCliked) forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark- Method for back button clicked
+
+-(void)backButtonCliked {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark- touchesBegan method to dismiss the keypad
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    [self.txtLoginId resignFirstResponder];
+    [self.txtPassword resignFirstResponder];
+    
 }
 
 #pragma method Action
 - (IBAction)textFieldFinished:(id)sender{
+    [self.txtPassword resignFirstResponder];
     [self btnDoneClick:nil];
 }
 
@@ -94,6 +123,12 @@
     return YES;
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if(textField==self.txtLoginId)
+        [self.txtLoginId resignFirstResponder];
+    return YES;
+}
 #pragma mark methods
 
 -(void)clearPlaceHolder:(UITextField*)txtField{
@@ -140,7 +175,8 @@
     
     //Validate is any filed are empty
     if ([self isTextEmpty:self.txtLoginId] || [self isTextEmpty:self.txtPassword]) {
-        [self showAlertMessage:@"Please fill the details."];
+        [self performSelector:@selector(showAlertMessage:) withObject:@"Please fill the details." afterDelay:0.6];
+        //[self showAlertMessage:@"Please fill the details."];
         return NO;
     }
     

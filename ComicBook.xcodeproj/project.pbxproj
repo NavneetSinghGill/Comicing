@@ -610,6 +610,14 @@
 		91F338D71DF894600017193C /* CBComicPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91F338D51DF894600017193C /* CBComicPageViewController.xib */; };
 		91F338DB1DF8953E0017193C /* CBComicPageCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F338D91DF8953E0017193C /* CBComicPageCollectionVC.m */; };
 		91F338DC1DF8953E0017193C /* CBComicPageCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91F338DA1DF8953E0017193C /* CBComicPageCollectionVC.xib */; };
+		D9D426861E3B9ABC00FAC732 /* NSGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D426761E3B9ABC00FAC732 /* NSGIF.m */; };
+		D9D426871E3B9ABC00FAC732 /* RSSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D426791E3B9ABC00FAC732 /* RSSliderView.m */; };
+		D9D426881E3B9ABC00FAC732 /* PBJGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D4267C1E3B9ABC00FAC732 /* PBJGLProgram.m */; };
+		D9D426891E3B9ABC00FAC732 /* PBJMediaWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D4267E1E3B9ABC00FAC732 /* PBJMediaWriter.m */; };
+		D9D4268A1E3B9ABC00FAC732 /* PBJVision.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D426801E3B9ABC00FAC732 /* PBJVision.m */; };
+		D9D4268B1E3B9ABC00FAC732 /* PBJVisionUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D426821E3B9ABC00FAC732 /* PBJVisionUtilities.m */; };
+		D9D4268C1E3B9ABC00FAC732 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D9D426841E3B9ABC00FAC732 /* Shader.fsh */; };
+		D9D4268D1E3B9ABC00FAC732 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D9D426851E3B9ABC00FAC732 /* Shader.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1545,6 +1553,20 @@
 		91F338D81DF8953E0017193C /* CBComicPageCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBComicPageCollectionVC.h; sourceTree = "<group>"; };
 		91F338D91DF8953E0017193C /* CBComicPageCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBComicPageCollectionVC.m; sourceTree = "<group>"; };
 		91F338DA1DF8953E0017193C /* CBComicPageCollectionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBComicPageCollectionVC.xib; sourceTree = "<group>"; };
+		D9D426751E3B9ABC00FAC732 /* NSGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSGIF.h; sourceTree = "<group>"; };
+		D9D426761E3B9ABC00FAC732 /* NSGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSGIF.m; sourceTree = "<group>"; };
+		D9D426781E3B9ABC00FAC732 /* RSSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSliderView.h; sourceTree = "<group>"; };
+		D9D426791E3B9ABC00FAC732 /* RSSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSliderView.m; sourceTree = "<group>"; };
+		D9D4267B1E3B9ABC00FAC732 /* PBJGLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBJGLProgram.h; sourceTree = "<group>"; };
+		D9D4267C1E3B9ABC00FAC732 /* PBJGLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBJGLProgram.m; sourceTree = "<group>"; };
+		D9D4267D1E3B9ABC00FAC732 /* PBJMediaWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBJMediaWriter.h; sourceTree = "<group>"; };
+		D9D4267E1E3B9ABC00FAC732 /* PBJMediaWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBJMediaWriter.m; sourceTree = "<group>"; };
+		D9D4267F1E3B9ABC00FAC732 /* PBJVision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBJVision.h; sourceTree = "<group>"; };
+		D9D426801E3B9ABC00FAC732 /* PBJVision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBJVision.m; sourceTree = "<group>"; };
+		D9D426811E3B9ABC00FAC732 /* PBJVisionUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBJVisionUtilities.h; sourceTree = "<group>"; };
+		D9D426821E3B9ABC00FAC732 /* PBJVisionUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBJVisionUtilities.m; sourceTree = "<group>"; };
+		D9D426841E3B9ABC00FAC732 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		D9D426851E3B9ABC00FAC732 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2152,6 +2174,9 @@
 		0C66655A1C84358500FEB11F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D9D426741E3B9ABC00FAC732 /* NSGIF */,
+				D9D426771E3B9ABC00FAC732 /* Slider */,
+				D9D4267A1E3B9ABC00FAC732 /* videoRecording */,
 				91BEABF71DF7211300710D3C /* ComicPreview */,
 				0C66655B1C84358500FEB11F /* Auth */,
 				0C66656E1C84358500FEB11F /* Blackboard */,
@@ -4026,6 +4051,49 @@
 			path = BasePageViewController;
 			sourceTree = "<group>";
 		};
+		D9D426741E3B9ABC00FAC732 /* NSGIF */ = {
+			isa = PBXGroup;
+			children = (
+				D9D426751E3B9ABC00FAC732 /* NSGIF.h */,
+				D9D426761E3B9ABC00FAC732 /* NSGIF.m */,
+			);
+			path = NSGIF;
+			sourceTree = "<group>";
+		};
+		D9D426771E3B9ABC00FAC732 /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+				D9D426781E3B9ABC00FAC732 /* RSSliderView.h */,
+				D9D426791E3B9ABC00FAC732 /* RSSliderView.m */,
+			);
+			path = Slider;
+			sourceTree = "<group>";
+		};
+		D9D4267A1E3B9ABC00FAC732 /* videoRecording */ = {
+			isa = PBXGroup;
+			children = (
+				D9D4267B1E3B9ABC00FAC732 /* PBJGLProgram.h */,
+				D9D4267C1E3B9ABC00FAC732 /* PBJGLProgram.m */,
+				D9D4267D1E3B9ABC00FAC732 /* PBJMediaWriter.h */,
+				D9D4267E1E3B9ABC00FAC732 /* PBJMediaWriter.m */,
+				D9D4267F1E3B9ABC00FAC732 /* PBJVision.h */,
+				D9D426801E3B9ABC00FAC732 /* PBJVision.m */,
+				D9D426811E3B9ABC00FAC732 /* PBJVisionUtilities.h */,
+				D9D426821E3B9ABC00FAC732 /* PBJVisionUtilities.m */,
+				D9D426831E3B9ABC00FAC732 /* Shaders */,
+			);
+			path = videoRecording;
+			sourceTree = "<group>";
+		};
+		D9D426831E3B9ABC00FAC732 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				D9D426841E3B9ABC00FAC732 /* Shader.fsh */,
+				D9D426851E3B9ABC00FAC732 /* Shader.vsh */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4059,7 +4127,7 @@
 				TargetAttributes = {
 					845090741C2B1343004DAE99 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = BK9SLXL3BD;
+						DevelopmentTeam = 5FY97ZSGS3;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -4280,6 +4348,7 @@
 				0C0C691A1E216E5600FEC707 /* WTF.gif in Resources */,
 				16161C0E1DE8C39700E8FDD7 /* bulb-01.png in Resources */,
 				0C6668AE1C84358600FEB11F /* GroupSectionCell.xib in Resources */,
+				D9D4268C1E3B9ABC00FAC732 /* Shader.fsh in Resources */,
 				84ECE64B1CB5778B007AF54E /* searchFriendView.xib in Resources */,
 				0C6667911C84358600FEB11F /* accountId.png in Resources */,
 				1BEB1FD51D43DD2700CC1304 /* box01.gif in Resources */,
@@ -4328,6 +4397,7 @@
 				0C66679F1C84358600FEB11F /* Search.png in Resources */,
 				16161C161DE8C39700E8FDD7 /* NIGHT-01.png in Resources */,
 				0C66679D1C84358600FEB11F /* searchFriends.png in Resources */,
+				D9D4268D1E3B9ABC00FAC732 /* Shader.vsh in Resources */,
 				16A602741DE7150600D13F5C /* Circle-the-head.gif in Resources */,
 				0C6668BF1C84358600FEB11F /* VerifyView.xib in Resources */,
 				0C66679A1C84358600FEB11F /* profilePicCut.png in Resources */,
@@ -4403,6 +4473,7 @@
 			files = (
 				0C6667DA1C84358600FEB11F /* LoginViewController.m in Sources */,
 				0C6668771C84358600FEB11F /* MKAnnotationView+WebCache.m in Sources */,
+				D9D4268A1E3B9ABC00FAC732 /* PBJVision.m in Sources */,
 				0C66684D1C84358600FEB11F /* UIImageView+Downloader.m in Sources */,
 				0C6668711C84358600FEB11F /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				0C66685E1C84358600FEB11F /* JSONHTTPClient.m in Sources */,
@@ -4449,6 +4520,7 @@
 				91BEAC1C1DF738A900710D3C /* UIView+CBConstraints.m in Sources */,
 				0C6668541C84358600FEB11F /* AFURLConnectionOperation.m in Sources */,
 				0C6668011C84358600FEB11F /* GroupsCollectionViewCell.m in Sources */,
+				D9D426861E3B9ABC00FAC732 /* NSGIF.m in Sources */,
 				84EFDA011D340E2C005B5FB0 /* YLGIFImage.m in Sources */,
 				0C6668311C84358600FEB11F /* UserFriends.m in Sources */,
 				0C6667C31C84358600FEB11F /* RCInstagram.m in Sources */,
@@ -4620,7 +4692,9 @@
 				0C6668201C84358600FEB11F /* ComicSlides.m in Sources */,
 				0C6668511C84358600FEB11F /* AFHTTPSessionManager.m in Sources */,
 				0C6668391C84358600FEB11F /* DataManager.m in Sources */,
+				D9D426871E3B9ABC00FAC732 /* RSSliderView.m in Sources */,
 				0C6667FD1C84358600FEB11F /* DataViewController.m in Sources */,
+				D9D4268B1E3B9ABC00FAC732 /* PBJVisionUtilities.m in Sources */,
 				0C6668A41C84358600FEB11F /* FindFriendsView.m in Sources */,
 				0C2235471C889C9800D1B4F2 /* StyledPullableView.m in Sources */,
 				0C6668281C84358600FEB11F /* GroupMember.m in Sources */,
@@ -4634,6 +4708,7 @@
 				0C6668241C84358600FEB11F /* Friend.m in Sources */,
 				0C6668971C84358600FEB11F /* UIScrollView+SVPullToRefresh.m in Sources */,
 				0C32C9981CB0B053001DA121 /* ComicBookData.xcdatamodeld in Sources */,
+				D9D426881E3B9ABC00FAC732 /* PBJGLProgram.m in Sources */,
 				0C66687A1C84358600FEB11F /* SDWebImageCompat.m in Sources */,
 				0C6668951C84358600FEB11F /* STHTTPRequest.m in Sources */,
 				0C6668191C84358600FEB11F /* main.m in Sources */,
@@ -4686,6 +4761,7 @@
 				91BEABF31DF720EA00710D3C /* CBBaseCollectionViewCell.m in Sources */,
 				0C32C99B1CB0B067001DA121 /* Stickers.m in Sources */,
 				0C6667B51C84358600FEB11F /* ComicItem.m in Sources */,
+				D9D426891E3B9ABC00FAC732 /* PBJMediaWriter.m in Sources */,
 				0C66E6061C95756A005E4548 /* Enhancement.m in Sources */,
 				0C6667DC1C84358600FEB11F /* RegistrationViewController.m in Sources */,
 				0C66684A1C84358600FEB11F /* UIImage+Image.m in Sources */,
@@ -4747,8 +4823,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sachin Hallad (4KYT626B6Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sachin Hallad (4KYT626B6Y)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4770,7 +4846,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "3310ace2-2422-4dc8-9c40-7a06b8ad71f5";
+				PROVISIONING_PROFILE = "84dae10a-5062-4426-a8dc-204f4f9d843a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4794,8 +4870,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Antony Ouseph (GE4LGJE4RN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sachin Hallad (4KYT626B6Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sachin Hallad (4KYT626B6Y)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -4810,7 +4886,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "3310ace2-2422-4dc8-9c40-7a06b8ad71f5";
+				PROVISIONING_PROFILE = "84dae10a-5062-4426-a8dc-204f4f9d843a";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4821,11 +4897,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Namrata S (WW3QCH7XKV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Namrata S (WW3QCH7XKV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sachin Hallad (4KYT626B6Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sachin Hallad (4KYT626B6Y)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = BK9SLXL3BD;
+				DEVELOPMENT_TEAM = 5FY97ZSGS3;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4845,10 +4921,10 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.16G.16G;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workllama.workllamatest;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "30a904c1-cae8-460a-99d5-ca79956b127f";
-				PROVISIONING_PROFILE_SPECIFIER = comicBookDevelopement;
+				PROVISIONING_PROFILE = "84dae10a-5062-4426-a8dc-204f4f9d843a";
+				PROVISIONING_PROFILE_SPECIFIER = "workllama dev profile";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
@@ -4860,11 +4936,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Namrata S (WW3QCH7XKV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Namrata S (WW3QCH7XKV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sachin Hallad (4KYT626B6Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sachin Hallad (4KYT626B6Y)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = BK9SLXL3BD;
+				DEVELOPMENT_TEAM = 5FY97ZSGS3;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4884,10 +4960,10 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.16G.16G;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workllama.workllamatest;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "30a904c1-cae8-460a-99d5-ca79956b127f";
-				PROVISIONING_PROFILE_SPECIFIER = comicBookDevelopement;
+				PROVISIONING_PROFILE = "84dae10a-5062-4426-a8dc-204f4f9d843a";
+				PROVISIONING_PROFILE_SPECIFIER = "workllama dev profile";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
