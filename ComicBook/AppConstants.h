@@ -8,7 +8,7 @@
 //#define SERVER_PREFERENCE @"dev"
 
 
-#define SERVER_URL ([SERVER_PREFERENCE isEqualToString:@"production"] ? @"http://162.244.67.15/" : @"http://68.169.44.163/")
+#define SERVER_URL ([SERVER_PREFERENCE isEqualToString:@"production"] ? @"http://162.244.67.15/" : @"http://staging.comicing.cc/")
 #define BASE_URL [SERVER_URL stringByAppendingFormat:@"api/"]
 
 #define USER_BY_LOGINID  [BASE_URL stringByAppendingFormat:@"users/id/"]
@@ -95,3 +95,39 @@
 #define INVITE_POINT_50 50
 #define INVITE_POINT_100 100
 #define INVITE_POINT_200 200
+
+// **********************  Slide Dimension listview ***************
+#define WIDE_SLIDE_HEIGHT (IS_IPHONE_6P?100:IS_IPHONE_6?76:58)
+//#define TALL_SMALL_SLIDE_HEIGHT (IS_IPHONE_6P?140:IS_IPHONE_6?127:115)
+
+#define TALL_SMALL_SLIDE_HEIGHT (IS_IPHONE_6P?185:IS_IPHONE_6?162:130)
+#define TALL_BIG_SLIDE_HEIGHT (IS_IPHONE_6P?425:IS_IPHONE_6?385:330)
+
+
+
+// below height for cell
+
+#define WIDE_SLIDE_HEIGHT_CELL (IS_IPHONE_6P?110:IS_IPHONE_6?98:88)
+#define TALL_SMALL_SLIDE_HEIGHT_CELL (IS_IPHONE_6P?220:IS_IPHONE_6?207:195)
+#define TALL_BIG_SLIDE_HEIGHT_CELL (IS_IPHONE_6P?450:IS_IPHONE_6?428:408)
+
+#define ComicWidthIPhone5 330
+#define ComicWidthIPhone6 385
+#define ComicWidthIPhone6plus 425
+
+#define kMaxItemsInComic 8
+
+//
+ //6plus height 414 × 736  375 × 667  320 × 480
+
+
+
+
+
+
+
+
+
+
+
+

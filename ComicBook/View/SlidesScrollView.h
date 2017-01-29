@@ -11,12 +11,24 @@
 #import "ComicSlidePreview.h"
 #import "SlidePreviewScrollView.h"
 
+extern const CGFloat comicSlidePreviewWidth5;
+extern const CGFloat comicSlidePreviewWidth6;
+extern const CGFloat comicSlidePreviewWidth6plus;
+
+enum
+{
+    AddButtonTypeWide,
+    AddButtonTypeLong
+};
+
+typedef NSUInteger AddButtonType;
+
 @class SlidesScrollView;
 
 @protocol SlidesScrollViewDelegate <NSObject>
 
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAtIndexPath:(NSInteger)index withView:(UIView *)view;
-- (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAddButtonAtIndex:(NSInteger)index withView:(UIView *)view;
+- (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAddButtonAtIndex:(NSInteger)index withView:(UIView *)view withType:(AddButtonType)type;
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAddButtonAtIndex:(NSInteger)index withView:(UIView *)view pusWithAnimation:(BOOL)isPushAnimation;
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didRemovedAtIndexPath:(NSInteger)index;
 - (void)returnAddedView:(UIView *)view;
@@ -30,9 +42,12 @@
 @property NSUInteger maximumComicCount;
 @property NSInteger setAddButtonIndex;
 @property BOOL isStillSaving;
+@property (strong, nonatomic) UIScrollView *previewScrollView;
 @property (nonatomic, strong) SlidePreviewScrollView *viewPreviewScrollSlide;
 @property (nonatomic, strong) ComicSlidePreview *viewPreviewSlide;
 @property (nonatomic, strong) UIButton *btnPlusSlide;
+@property (nonatomic, strong) UIButton *btnWidePlusSlide;
+
 @property (strong, nonatomic) NSMutableArray *listViewImages;
 @property (strong, nonatomic) NSMutableArray *allSlidesView;
 @property (strong, nonatomic) NSMutableArray *timelineTimeArray;
@@ -42,7 +57,8 @@
 
 - (void)addViewAtIndex:(NSInteger)index withComicSlide:(ComicPage *)comicSlide;
 - (void)reloadComicAtIndex:(NSInteger)index withComicSlide:(ComicPage *)comicSlide;
-- (void)reloadComicImageAtIndex:(NSInteger)index withComicSlide:(UIImage *)printScreen;
+//- (void)reloadComicImageAtIndex:(NSInteger)index withComicSlide:(UIImage *)printScreen;
+- (void)reloadComicImageAtIndex:(NSInteger)index withComicSlide:(UIImage *)printScreen withComicSlide:(NSMutableArray *)comicSlide;
 //- (void)addSlideButtonAtIndex:(NSInteger)index;
 - (void)btnAddSlideTap:(UIButton *)sender;
 - (void)addPlusButton :(NSInteger)index;

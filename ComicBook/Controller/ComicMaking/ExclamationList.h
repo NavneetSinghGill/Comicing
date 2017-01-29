@@ -13,8 +13,8 @@
 @interface ExclamationList : UICollectionViewController
 
 //@property(nonatomic,strong) NSMutableArray *exclamationListArray;
-@property(nonatomic,strong) NSMutableArray *exclamationLargeListArray;
+//@property(nonatomic,strong) NSMutableArray *exclamationLargeListArray;
 @property (nonatomic, strong) ComicMakingViewController *parentViewController;
-@property (nonatomic, strong) NSMutableArray *exclamationSmallListArray;
+@property (nonatomic, strong) NSMutableArray *animationListArray;
 
 @end

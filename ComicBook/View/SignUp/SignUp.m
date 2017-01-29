@@ -267,7 +267,7 @@
                            stringByReplacingOccurrencesOfString:@")" withString:@""]
                           stringByReplacingOccurrencesOfString:@"-" withString:@""]
                          stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if (mNumber.length != 10) {
+    if (mNumber.length <= 6) {
         [self showAlertMessage:@"Please enter valid mobile number"];
         return;
     }

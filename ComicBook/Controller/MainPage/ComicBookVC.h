@@ -21,8 +21,11 @@
 @property(nonatomic,strong) NSArray *slidesArray;
 
 @property BOOL isSlidesContainImages;
+@property (strong, atomic) UIPageViewController *pageViewController;
 
 @property(nonatomic,strong)id<BookChangeDelegate>delegate;
+@property (strong, nonatomic) NSArray *allSlideImages;
+@property (nonatomic) BOOL isDelegateCalled;
 
 - (void)ResetBook;
 

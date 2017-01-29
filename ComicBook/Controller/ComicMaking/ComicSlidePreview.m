@@ -9,11 +9,17 @@
 #import "ComicSlidePreview.h"
 #import "ComicBookVC.h"
 #import "AppConstants.h"
+#import "ComicImage.h"
+
 
 @interface ComicSlidePreview()<BookChangeDelegate>
 {
     int TagRecord;
     ComicBookVC *comic;
+    CGSize wideSlideSize;
+    CGSize normalSlideSize_big;
+    CGSize normalSlideSize_small;
+    int currentIndex;
 }
 
 //@property (strong, nonatomic) IBOutlet UIView *view;
@@ -51,7 +57,19 @@
 // Morethan 4 Slides
 @property (weak, nonatomic) IBOutlet UIView *viewComicBook;
 
+
 @property (strong, nonatomic) NSArray *slides;
+
+// New ComicImage Layout
+@property (strong, nonatomic) NSMutableArray *comicImages;
+@property(nonatomic,assign) CGRect currentSlideFrame;
+@property (nonatomic, strong) UIView * viewSlides;
+
+@property (nonatomic) CGFloat totalHeight;
+@property (nonatomic) CGFloat paddingX;
+@property (nonatomic) CGFloat paddingY;
+
+@property (nonatomic) NSInteger borderWidth;
 
 @end
 
@@ -64,18 +82,20 @@
 @synthesize imgv4Slide1, imgv4Slide2, imgv4Slide3, imgv4Slide4;
 @synthesize viewComicBook;
 @synthesize constWidth4Slides, constHeight4Slides;
-@synthesize constWidth1Slide, constHeight1Slide;
+@synthesize constWidth1Slide, constHeight1Slide, comicImages, viewSlides, paddingX,paddingY, totalHeight, borderWidth;
 
-- (void)viewDidLoad {
-    
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -91,8 +111,13 @@
 -(id)initWithFrame:(CGRect)frame
 {
     self = [super initWithNibName:@"ComicSlidePreview" bundle:nil];
-    if (self) {
+    if (self)
+    {
         self.view.frame = frame;
+       
+        paddingX = 8;
+        paddingY = 6;
+        borderWidth = 2;
         // Do whatever nonsense you'd like to do in init.
     }
     return self;
@@ -123,28 +148,244 @@
     [self setup];
     slides = slidesImages;
     
-    if (slides.count == 1)
+// ******************** old code *****************
+//    if (slides.count == 1)
+//    {
+//        [self setup1SlideComicPreview];
+//    }
+//    else if (slides.count == 2)
+//    {
+//        [self setup2SlideComicPreview];
+//    }
+//    else if (slides.count == 3)
+//    {
+//        [self setup3SlideComicPreview];
+//    }
+//    else if (slides.count == 4)
+//    {
+//        [self setup4SlideComicPreview];
+//    }
+//    else
+//    {
+//        [self setupComicBook];
+//    }
+// 
+//    self.viewComicLayout.hidden = YES;
+    
+//*****************************************************************************
+    
+    currentIndex = 0;
+  
+    self.currentSlideFrame = CGRectZero;
+
+    self.viewSlides = [[UIView alloc] initWithFrame:CGRectZero];
+    self.viewWhiteBorder = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    wideSlideSize = CGSizeMake(self.view.frame.size.width - 20 + paddingX, WIDE_SLIDE_HEIGHT);
+    normalSlideSize_big = CGSizeMake(self.view.frame.size.width- 20 + paddingX,TALL_BIG_SLIDE_HEIGHT);
+    normalSlideSize_small = CGSizeMake(self.view.frame.size.width/2 - 10, TALL_SMALL_SLIDE_HEIGHT);
+    
+    [self createComicImages];
+    
+    [self prepareSlides];
+ 
+    self.viewSlides.frame = CGRectMake(paddingX,0,self.currentSlideFrame.size.width + paddingX,totalHeight + paddingY);
+    
+    self.bookBackground = [[UIImageView  alloc] initWithFrame:CGRectMake(0, 0, self.currentSlideFrame.size.width + paddingX + paddingX + paddingX + 10, totalHeight + paddingY + paddingY + paddingY + paddingY / 3 + paddingY / 2)];
+    
+    self.bookBackground.image = [UIImage imageNamed:@"3slideImageBackground"];
+    
+    self.viewWhiteBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.viewSlides.frame) + paddingX + paddingX, totalHeight + paddingY);
+    
+    
+    [self.viewWhiteBorder addSubview:self.bookBackground];
+    [self.viewWhiteBorder addSubview:self.viewSlides];
+    
+    self.viewWhiteBorder.backgroundColor = [UIColor whiteColor];
+    
+    [self.view addSubview:self.viewWhiteBorder];
+    
+    CGRect viewFrame = self.viewWhiteBorder.frame;
+
+    self.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(viewFrame));
+    
+    self.viewWhiteBorder.center = self.view.center;
+    
+    self.view.backgroundColor = [UIColor clearColor];
+    
+    [self.delegate didFrameChange:self withFrame:self.viewWhiteBorder.frame];
+}
+
+#pragma mark - ComicImage Layout methods
+- (void)createComicImages
+{
+    comicImages = [[NSMutableArray alloc] init];
+    
+    for (UIImage *img in slides)
     {
-        [self setup1SlideComicPreview];
-    }
-    else if (slides.count == 2)
-    {
-        [self setup2SlideComicPreview];
-    }
-    else if (slides.count == 3)
-    {
-        [self setup3SlideComicPreview];
-    }
-    else if (slides.count == 4)
-    {
-        [self setup4SlideComicPreview];
-    }
-    else
-    {
-        [self setupComicBook];
+        ComicImage *obj = [[ComicImage alloc] init];
+        obj.image = img;
+        
+        if (img.size.width > img.size.height)
+        {
+            // wide
+            obj.comicImageType = WIDE;
+        }
+        else
+        {
+            // tall
+            obj.comicImageType = NORMAL;
+        }
+    
+        [comicImages addObject:obj];
     }
 }
 
+-(void)prepareSlides
+{
+    
+    [self addSlide:currentIndex];
+    
+    if ([self isNextSlideAvailble:currentIndex]) {
+        [self prepareSlides];
+    }
+    
+    //Add default Slide
+}
+
+-(void)addSlide:(int)indexValue
+{
+    if([comicImages count] == 0)
+        return;
+    
+    if (indexValue == 0)
+        self.currentSlideFrame = CGRectZero;
+    
+    if (((ComicImage*)comicImages[indexValue]).comicImageType == WIDE)
+    {
+        ComicImage* comicImage = (ComicImage*)comicImages[indexValue];
+        [self.viewSlides addSubview:[self createWideSlide:comicImage.image]];
+    }
+    else if (((ComicImage*)comicImages[indexValue]).comicImageType == NORMAL &&
+              [self isNextSlideAvailble:indexValue + 1]  &&
+              ((ComicImage*)comicImages[indexValue + 1]).comicImageType == NORMAL)
+    {
+        
+        ComicImage* comicImage1 = (ComicImage*)comicImages[indexValue];
+        ComicImage* comicImage2 = (ComicImage*)comicImages[indexValue + 1];
+        
+        [self.viewSlides addSubview:[self createSplitSlide:comicImage1.image
+                                                    image2:comicImage2.image]];
+        
+        currentIndex = currentIndex + 1;
+    }
+    else if (((ComicImage*)comicImages[indexValue]).comicImageType == NORMAL &&
+              [self isNextSlideAvailble:indexValue + 1]  &&
+              ((ComicImage*)comicImages[indexValue + 1]).comicImageType == WIDE)
+    {
+        
+        ComicImage* comicImage = (ComicImage*)comicImages[indexValue];
+        [self.viewSlides addSubview:[self createNormalSlide:comicImage.image]];
+    }
+    else if (((ComicImage*)comicImages[indexValue]).comicImageType == NORMAL)
+    {
+        
+        ComicImage* comicImage = (ComicImage*)comicImages[indexValue];
+        [self.viewSlides addSubview:[self createNormalSlide:comicImage.image]];
+        
+    }
+    
+    currentIndex = currentIndex + 1;
+}
+
+
+- (BOOL)isNextSlideAvailble:(int)indexValue
+{
+    if([comicImages count] > indexValue)
+        return YES;
+    
+    return NO;
+}
+
+#pragma mark - ComicSlide Different Layout Methods
+-(UIImageView*)createWideSlide :(UIImage*)imgWideSilde{
+    
+    UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(self.currentSlideFrame.origin.x,
+                                                                         self.currentSlideFrame.origin.y + paddingY,
+                                                                         wideSlideSize.width, wideSlideSize.height)];
+    imgView.image =imgWideSilde;
+    
+    totalHeight = totalHeight + wideSlideSize.height + paddingY;
+    
+    self.currentSlideFrame = CGRectMake(self.currentSlideFrame.origin.x,
+                                        (self.currentSlideFrame.origin.y + wideSlideSize.height + paddingY),
+                                        wideSlideSize.width, wideSlideSize.height);
+    
+    imgView.layer.borderColor = [UIColor blackColor].CGColor;
+    imgView.layer.borderWidth = borderWidth;
+    
+    return imgView;
+}
+
+-(UIImageView*)createNormalSlide :(UIImage*)imgWideSilde{
+    
+    UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(self.currentSlideFrame.origin.x,
+                                                                         self.currentSlideFrame.origin.y + paddingY,
+                                                                         normalSlideSize_big.width, normalSlideSize_big.height)];
+    imgView.image = imgWideSilde;
+    
+    totalHeight = totalHeight + normalSlideSize_big.height + paddingY;
+
+    
+    self.currentSlideFrame = CGRectMake(self.currentSlideFrame.origin.x,
+                                        (self.currentSlideFrame.origin.y + normalSlideSize_big.height + paddingY),
+                                        normalSlideSize_big.width, normalSlideSize_big.height);
+    
+    imgView.layer.borderColor = [UIColor blackColor].CGColor;
+    imgView.layer.borderWidth = borderWidth;
+    
+    return imgView;
+}
+
+-(UIView*)createSplitSlide :(UIImage*)imgWideSilde1 image2:(UIImage*)imgWideSilde2{
+    
+    UIView* viewHolder = [[UIView alloc] initWithFrame:CGRectMake(self.currentSlideFrame.origin.x,
+                                                                  self.currentSlideFrame.origin.y,
+                                                                  normalSlideSize_big.width,
+                                                                  normalSlideSize_small.height)];
+    
+    
+    UIImageView* imgView_1 = [[UIImageView alloc] initWithFrame:CGRectMake(0,paddingY,
+                                                                           normalSlideSize_small.width, normalSlideSize_small.height)];
+    
+    
+    imgView_1.image = imgWideSilde1;
+    
+    imgView_1.layer.borderColor = [UIColor blackColor].CGColor;
+    imgView_1.layer.borderWidth = borderWidth;
+    
+    
+    UIImageView* imgView_2 = [[UIImageView alloc] initWithFrame:CGRectMake(normalSlideSize_small.width + paddingX,paddingY,
+                                                                           normalSlideSize_small.width, normalSlideSize_small.height)];
+    imgView_2.image =imgWideSilde2;
+    
+    imgView_2.layer.borderColor = [UIColor blackColor].CGColor;
+    imgView_2.layer.borderWidth = borderWidth;
+    
+    
+    [viewHolder addSubview:imgView_1];
+    [viewHolder addSubview:imgView_2];
+    
+    totalHeight = totalHeight + normalSlideSize_small.height + paddingY;
+
+    
+    self.currentSlideFrame = CGRectMake(self.currentSlideFrame.origin.x,
+                                        (self.currentSlideFrame.origin.y + viewHolder.frame.size.height + paddingY),
+                                        wideSlideSize.width, wideSlideSize.height);
+    return viewHolder;
+}
+
+// ******************************************************************
 - (void)hideAllPreviewViews
 {
     view3Slide.hidden = YES;

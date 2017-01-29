@@ -10,10 +10,17 @@
 #import "AppConstants.h"
 #import "UIImage+Image.h"
 #import "UIColor+colorWithHexString.h"
+#import "ComicItem.h"
+#import "UIImage+GIF.h"
+#import "YYImage.h"
 
 const CGSize viewSizeForIPhone5            = {195, 330};//{214, 378};
 const CGSize viewSizeForIPhone6            = {225, 385};//{250, 444};
 const CGSize viewSizeForIPhone6Plus        = {250, 425};//{300, 650};
+
+const CGFloat comicSlidePreviewWidth5 = 195;
+const CGFloat comicSlidePreviewWidth6 = 225;
+const CGFloat comicSlidePreviewWidth6plus = 250;
 
 const CGSize viewPreviewSlideSizeForIPhone5            = {195, 330};//{214, 378};
 const CGSize viewPreviewSlideSizeForIPhone6            = {225, 385};//{250, 444};
@@ -31,6 +38,7 @@ const NSInteger spaceBetweenSlide = 20;
 
 @property (nonatomic) CGSize viewSize;
 @property (nonatomic) CGSize viewPreviewSize;
+@property (nonatomic) CGFloat comicPreviewWidth;
 
 @property (strong,nonatomic) UIImageView *arrowImage;
 
@@ -39,8 +47,9 @@ const NSInteger spaceBetweenSlide = 20;
 @implementation SlidesScrollView
 
 @synthesize slideView;
-@synthesize setAddButtonIndex, allSlidesView, viewSize,viewPreviewSize,btnPlusSlide,viewPreviewScrollSlide;
-@synthesize listViewImages;
+@synthesize setAddButtonIndex, allSlidesView, viewSize,viewPreviewSize,btnPlusSlide,btnWidePlusSlide,viewPreviewScrollSlide, previewScrollView;
+@synthesize listViewImages, comicPreviewWidth;
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
@@ -57,31 +66,37 @@ const NSInteger spaceBetweenSlide = 20;
     {
         allSlidesView = [[NSMutableArray alloc] init];
         listViewImages = [[NSMutableArray alloc] init];
+        
         if (IS_IPHONE_5)
         {
             viewSize = viewSizeForIPhone5;
             viewPreviewSize = viewPreviewSlideSizeForIPhone5;
+            comicPreviewWidth = comicSlidePreviewWidth5;
         }
         else if (IS_IPHONE_6)
         {
             viewSize = viewSizeForIPhone6;
             viewPreviewSize = viewPreviewSlideSizeForIPhone6;
+            comicPreviewWidth = comicSlidePreviewWidth6;
+
         }
         else if (IS_IPHONE_6P)
         {
             viewSize = viewSizeForIPhone6Plus;
             viewPreviewSize = viewPreviewSlideSizeForIPhone6Plus;
+            comicPreviewWidth = comicSlidePreviewWidth6plus;
+
         }
         else
         {
             viewSize = viewSizeForIPhone5;
             viewPreviewSize = viewSizeForIPhone5;
+            comicPreviewWidth = comicSlidePreviewWidth5;
+
         }
     }
     
-    
     self.delegate = self;
-    
     return self;
 }
 
@@ -124,7 +139,26 @@ const NSInteger spaceBetweenSlide = 20;
 
 - (CGRect)frameForPreview3Slide:(NSInteger)index
 {
-    return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50, 0, viewSize.width + 20, self.frame.size.height - 80);
+    return CGRectMake(0, 0, comicPreviewWidth, self.frame.size.height - 50);
+}
+
+- (CGRect)frameForPreviewScrollView:(NSInteger)index
+{
+    return CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50, 0, comicPreviewWidth + 20, self.frame.size.height - 80);
+}
+
+- (void)setContectSizOfPreviewScrollView
+{
+    previewScrollView.contentSize = CGSizeMake(comicPreviewWidth + 20, viewPreviewScrollSlide.view.frame.size.height + 30);
+}
+
+- (void)setFrameForViewPreviewScrollSlide
+{
+    CGFloat height = viewPreviewScrollSlide.view.frame.size.height;
+    
+    CGFloat y = (CGRectGetHeight(self.frame) - height) / 2;
+    
+    viewPreviewScrollSlide.view.frame = CGRectMake(CGRectGetMaxX(self.arrowImage.frame) + 50, y, viewSize.width, height);
 }
 
 - (CGRect)frameForPreview4Slide:(NSInteger)index
@@ -151,10 +185,13 @@ const NSInteger spaceBetweenSlide = 20;
 - (CGRect)frameForPossitionPlusButton:(NSInteger)index
 {
     NSInteger columnCount = index % viewsInOneRow;
-    NSInteger rowCount    = index / viewsInOneRow;
     
-    CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) - 20;
-    CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width) - 20;
+    CGFloat y = (CGRectGetHeight(self.frame)  + 20) / 2;
+    
+    CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) + 10;
+  //  CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width) ;
+    
+   // y = y + 50;
     
     /*//-------------------
     if (index > 1)
@@ -176,7 +213,42 @@ const NSInteger spaceBetweenSlide = 20;
     }
     //-------------------*/
     
-    return CGRectMake(x, y, 20, 20);
+    return CGRectMake(x, y, 84, 125);
+}
+
+- (CGRect)frameForPossitionWidePlusButton:(NSInteger)index
+{
+    NSInteger columnCount = index % viewsInOneRow;
+  //  NSInteger rowCount    = index / viewsInOneRow;
+
+//    CGFloat height = viewPreviewScrollSlide.view.frame.size.height;
+    
+    CGFloat y = (CGRectGetHeight(self.frame) - 150) / 2;
+    
+    CGFloat x = ( spaceBetweenSlide * (columnCount + 1)) + (columnCount * viewSize.width) + 10;
+  //  CGFloat y = ( [self getSpaceFromTop] * (rowCount +  1)) + (rowCount * viewSize.width);
+    
+    /*//-------------------
+     if (index > 1)
+     {
+     CGRect rect = textField.frame;
+     rect.size.width = viewSize.width*1.75;//
+     
+     textField.frame = rect;
+     mComicTitle.frame = rect;
+     }
+     else
+     {
+     CGRect rect = textField.frame;
+     rect.size.width = viewSize.width;
+     
+     textField.frame = rect;
+     mComicTitle.frame = rect;
+     
+     }
+     //-------------------*/
+    
+    return CGRectMake(x, y, 84, 60);
 }
 
 - (CGRect)frmaeForArrowImage:(NSInteger)index
@@ -189,12 +261,12 @@ const NSInteger spaceBetweenSlide = 20;
     
     CGFloat middlePoint = y / 2 + (viewSize.height / 2);
     
-    return CGRectMake(CGRectGetMinX(btnPlusSlide.frame) + 70, middlePoint + 10, 45 , 90);
+    return CGRectMake(CGRectGetMaxX(btnPlusSlide.frame) + 50, middlePoint + 10, 45 , 90);
 }
 
 - (void)setScrollViewContectSize
 {
-    self.contentSize = CGSizeMake(CGRectGetMaxX(viewPreviewScrollSlide.view.frame) + spaceBetweenSlide , CGRectGetHeight(viewPreviewScrollSlide.view.frame));
+    self.contentSize = CGSizeMake(CGRectGetMaxX(previewScrollView.frame) + spaceBetweenSlide , CGRectGetHeight(previewScrollView.frame));
 }
 
 - (void)setScrollViewContectSizeForEmptySlide
@@ -204,8 +276,8 @@ const NSInteger spaceBetweenSlide = 20;
 
 - (void)setScrollViewContectSizeByLastIndex:(NSInteger)index
 {
-    CGRect rectSize = [self frameForPossition:index];
-    self.contentSize = CGSizeMake(CGRectGetMaxX(rectSize) + spaceBetweenSlide , CGRectGetHeight(rectSize));
+  //  CGRect rectSize = [self frameForPossition:index];
+  //  self.contentSize = CGSizeMake(CGRectGetMaxX(rectSize) + spaceBetweenSlide , CGRectGetHeight(rectSize));
 }
 
 
@@ -275,9 +347,33 @@ UILabel *mComicTitle;
     
     UIImageView *imgvComic = [[UIImageView alloc] initWithFrame:view.bounds];
     
-    imgvComic.image =  [self getImageFile:comicSlide.printScreenPath];
-    imgvComic.image = [UIImage ScaletoFill:imgvComic.image toSize:view.frame.size];
+    UIImage* printScreenImage =  [self getImageFile:comicSlide.printScreenPath];
+    imgvComic.image = [UIImage ScaletoFill:printScreenImage toSize:view.frame.size];
+
+   // imgvComic.image =
+    
+    UIImage *image = [self getImageFile:comicSlide.printScreenPath];
+    
+    if (image.size.height < image.size.width)
+    {
+        imgvComic.image = image;
+    }
+    else
+    {
+        imgvComic.image = [UIImage ScaletoFill:image toSize:view.frame.size];
+
+    }
     imgvComic.contentMode = UIViewContentModeScaleAspectFit;
+    
+    
+    float scaleFactor = imgvComic.image.size.width / printScreenImage.size.width;
+    for (int i = 0; i < comicSlide.subviews.count; i ++)
+    {
+        id imageView = comicSlide.subviews[i];
+        CGRect myRect = [comicSlide.subviewData[i] CGRectValue];
+        [self addComicItem:imageView ItemImage:imgvComic rectValue:myRect ScaleValue:scaleFactor];
+    }
+    
     
     UIButton *slideButton = [[UIButton alloc] initWithFrame:view.bounds];
     
@@ -469,14 +565,28 @@ UILabel *mComicTitle;
         {
             UIImageView *imgvComic = (UIImageView *)subview;
             imgvComic.contentMode = UIViewContentModeScaleAspectFit;
-            imgvComic.image = [self getImageFile:comicSlide.printScreenPath];  //[UIImage imageWithData:comicSlide.printScreen];
+            
+            UIImage *image = [self getImageFile:comicSlide.printScreenPath];
+            
+            if (image.size.height < image.size.width)
+            {
+                imgvComic.image = image;
+            }
+            else
+            {
+                imgvComic.image = [UIImage ScaletoFill:image toSize:view.frame.size];
+                imgvComic.image = [UIImage ScaletoFill:imgvComic.image toSize:view.frame.size];
+            }
+            
+            imgvComic.contentMode = UIViewContentModeScaleAspectFit;
+            
+              //[UIImage imageWithData:comicSlide.printScreen];
             [self updatePrivewListImage:index withComicSlide:imgvComic.image];
-            imgvComic.image = [UIImage ScaletoFill:imgvComic.image toSize:view.frame.size];
         }
     }
 }
 
-- (void)reloadComicImageAtIndex:(NSInteger)index withComicSlide:(UIImage *)printScreen
+- (void)reloadComicImageAtIndex:(NSInteger)index withComicSlide:(UIImage *)printScreen withComicSlide:(NSMutableArray *)comicSlide
 {
     UIView *view = allSlidesView[index];
     
@@ -488,11 +598,144 @@ UILabel *mComicTitle;
         {
             UIImageView *imgvComic = (UIImageView *)subview;
             imgvComic.contentMode = UIViewContentModeScaleAspectFit;
-            imgvComic.image = [UIImage ScaletoFill:printScreen toSize:view.frame.size];
+            
+            float scaleFactor = imgvComic.image.size.width / printScreen.size.width;
+            
+            //Remove all subviews
+            for (id subView in [imgvComic subviews]) {
+                [subView removeFromSuperview];
+            }
+            
+            ComicPage *comicPage = [NSKeyedUnarchiver unarchiveObjectWithData:[comicSlide objectAtIndex:index]];
+            for (int i = 0; i < comicPage.subviews.count; i ++)
+            {
+                id imageView = comicPage.subviews[i];
+                CGRect myRect = [comicPage.subviewData[i] CGRectValue];
+                [self addComicItem:imageView ItemImage:imgvComic rectValue:myRect ScaleValue:scaleFactor];
+            }
+            
+            if (printScreen.size.height < printScreen.size.width)
+            {
+                imgvComic.image = printScreen;
+            }
+            else
+            {
+                imgvComic.image = [UIImage ScaletoFill:printScreen toSize:view.frame.size];
+            }
+            
             [self updatePrivewListImage:index withComicSlide:printScreen];
         }
     }
+    /**************New Code Commented because it crashes commented by Sanjay *******************/
+//    {
+//        if ([subview isKindOfClass:[UIImageView class]])
+//        {
+//            UIImageView *imgvComic = (UIImageView *)subview;
+//            imgvComic.contentMode = UIViewContentModeScaleAspectFit;
+//            imgvComic.image = [UIImage ScaletoFill:printScreen toSize:view.frame.size];
+//            
+//            float scaleFactor = imgvComic.image.size.width / printScreen.size.width;
+//            
+//            //Remove all subviews
+//            for (id subView in [imgvComic subviews]) {
+//                [subView removeFromSuperview];
+//            }
+//            
+//            ComicPage *comicPage = [NSKeyedUnarchiver unarchiveObjectWithData:[comicSlide objectAtIndex:index]];
+//            for (int i = 0; i < comicPage.subviews.count; i ++)
+//            {
+//                id imageView = comicPage.subviews[i];
+//                CGRect myRect = [comicPage.subviewData[i] CGRectValue];
+//                [self addComicItem:imageView ItemImage:imgvComic rectValue:myRect ScaleValue:scaleFactor];
+//            }
+//            
+//            if (printScreen.size.height < printScreen.size.width)
+//            {
+//                imgvComic.image = printScreen;
+//            }
+//            else
+//            {
+//                imgvComic.image = [UIImage ScaletoFill:printScreen toSize:view.frame.size];
+//            }
+//            
+//            
+//            [self updatePrivewListImage:index withComicSlide:printScreen];
+//        }
+//    }
 //    [self scrollRectToVisible:view.frame animated:NO];
+}
+
+
+- (void)addComicItem:(id)comicItemView ItemImage:(UIImageView*)itemImage rectValue:(CGRect)rect ScaleValue:(float)scaleValue
+{
+    if([comicItemView isKindOfClass:[ComicItemAnimatedSticker class]])
+    {
+        [self addAnimatedImageView:comicItemView ComicItemImage:itemImage rectValue:rect ScaleValue:scaleValue];
+    }
+}
+
+- (void)addAnimatedImageView:(UIImageView *)imageView
+              ComicItemImage:(UIImageView*)itemImage
+                   rectValue:(CGRect)rect
+                  ScaleValue:(float)ScaleValue
+{
+    imageView = (ComicItemAnimatedSticker*)imageView;
+    if (((ComicItemAnimatedSticker*)imageView).combineAnimationFileName) {
+        //it had image,
+//        NSString *animationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//        animationPath = [[animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName] stringByAppendingString:@".gif"];
+        imageView.image = [YYImage imageNamed:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName];
+    }
+    
+//    YYImage *image = [YYImage imageNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+//    imageView.image = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+//    imageView.image = image;
+    imageView.userInteractionEnabled = YES;
+    imageView.userInteractionEnabled = YES;
+    imageView.clipsToBounds = NO;
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    [imageView setBackgroundColor:[UIColor clearColor]];
+    
+    CGFloat diffX,diffY;
+    if (IS_IPHONE_5)
+    {
+        diffX = 1.71f;
+        diffY = 3.2f;
+    }
+    else if (IS_IPHONE_6)
+    {
+        diffX = 1.65f;
+        diffY = 2.2f;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        diffX = 1.5f;
+        diffY = 2.5f;
+    }
+    
+    CGSize newSize = imageView.frame.size;
+    CGSize imgSize = itemImage.frame.size;
+    
+    CGRect scaledImageRect = CGRectZero;
+    
+    CGFloat aspectWidth = imgSize.width / newSize.width;
+    CGFloat aspectHeight = imgSize.height / newSize.height;
+    CGFloat aspectRatio = MIN ( aspectWidth, aspectHeight );
+    
+    scaledImageRect.size.width = newSize.width * ScaleValue;
+    scaledImageRect.size.height = newSize.height * ScaleValue;
+    scaledImageRect.origin.x = (imgSize.width - scaledImageRect.size.width) / 3.0f;
+    scaledImageRect.origin.y = (imgSize.height - scaledImageRect.size.height) / 3.0f;
+    
+    CGRect rectValue = imageView.frame;
+    rectValue.origin.x = rectValue.origin.x * ScaleValue;// /diffX;
+    rectValue.origin.y = rectValue.origin.y * ScaleValue;///diffY;
+    rectValue.size.width = rectValue.size.width * ScaleValue;//*1.65;
+    rectValue.size.height = rectValue.size.height * ScaleValue;//*1.65;
+    imageView.frame = scaledImageRect;
+    
+    [itemImage addSubview:imageView];
 }
 
 -(void)updatePrivewListImage:(NSInteger)index withComicSlide:(UIImage *)printScreen
@@ -514,45 +757,52 @@ UILabel *mComicTitle;
 - (void)setPreviewForSlidesAtIndex:(NSInteger)index withImages:(NSArray *)slides
 {
     [self addArrowImage:self.btnPlusSlide.tag];
+   
     BOOL isAdd = NO;
+    
     if (viewPreviewScrollSlide == nil)
     {
+        previewScrollView = [[UIScrollView alloc] init];
+        
         viewPreviewScrollSlide = [[SlidePreviewScrollView alloc] init];
+        
+        
         isAdd = YES;
     }
     
-    if (slides.count == 3)
-    {
-        viewPreviewScrollSlide.view.frame = [self frameForPreview3Slide:self.btnPlusSlide.tag];
-    }
-    else if (slides.count == 4)
-    {
-        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
-    }
-    else if (slides.count == 1)
-    {
-        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
-    }
-    else if (slides.count == 2)
-    {
-        viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:self.btnPlusSlide.tag];
-    }
-    else
-    {
-        viewPreviewScrollSlide.view.frame = [self frameForPreview4Slide:self.btnPlusSlide.tag];
-    }
+    viewPreviewScrollSlide.view.frame =
+    [self frameForPreview3Slide:self.btnPlusSlide.tag];
     
+    previewScrollView.frame = [self frameForPreviewScrollView:self.btnPlusSlide.tag];
+    
+    viewPreviewScrollSlide.scrollViewFrame = previewScrollView.frame;
     viewPreviewScrollSlide.allSlideImages = slides;
     [viewPreviewScrollSlide setupBook];
-
-    if (isAdd) {
-        [self addSubview:viewPreviewScrollSlide.view];
+    
+    if (isAdd)
+    {
+       // previewScrollView.backgroundColor = [UIColor redColor];
+        
+        [previewScrollView addSubview:viewPreviewScrollSlide.view];
+        [self addSubview:previewScrollView];
     }
+    
+//    for (id subview in viewPreviewScrollSlide.view.subviews)
+//    {
+//        if ([subview isKindOfClass:[ComicSlidePreview class]])
+//        {
+//            ComicSlidePreview *view = (ComicSlidePreview *)subview;
+//            
+//            NSLog(@"%@",view);
+//        }
+//    }
+    
     
     [self.arrowImage setAlpha:1];
     [viewPreviewScrollSlide.view setAlpha:1];
     //Handle empty slide
-    if ([slides count] == 0) {
+    if ([slides count] == 0)
+    {
         //fade in
         [UIView animateWithDuration:1.0f animations:^{
             [self.arrowImage setAlpha:0];
@@ -560,26 +810,50 @@ UILabel *mComicTitle;
         } completion:^(BOOL finished) {
         }];
         [self setScrollViewContectSizeForEmptySlide];
-    }else{
-     [self setScrollViewContectSize];
+    }
+    else
+    {
+        [self setScrollViewContectSize];
+        [self setContectSizOfPreviewScrollView];
     }
 }
 
 
--(void)addPlusButton :(NSInteger)index{
+-(void)addPlusButton :(NSInteger)index
+{
     btnPlusSlide = [[UIButton alloc] init];
+    btnWidePlusSlide = [[UIButton alloc] init];
+  
+    btnWidePlusSlide.frame = [self frameForPossitionWidePlusButton:index];
     btnPlusSlide.frame = [self frameForPossitionPlusButton:index];
     
+    // set wide button frame from btnaddslide
     
-    [btnPlusSlide setImage:[UIImage imageNamed:@"AddCoimicSlide"] forState:UIControlStateNormal];
+    [btnPlusSlide setImage:[UIImage imageNamed:@"add-tall-slide"] forState:UIControlStateNormal];
     
+    
+    [btnWidePlusSlide setImage:[UIImage imageNamed:@"add-wide-slide"] forState:UIControlStateNormal];
+    
+//    btnPlusSlide.backgroundColor = [UIColor yellowColor];
+//    btnWidePlusSlide.backgroundColor = [UIColor orangeColor];
+//    
     [btnPlusSlide addTarget:self action:@selector(btnAddSlideTap:) forControlEvents:UIControlEventTouchUpInside];
+    [btnWidePlusSlide addTarget:self action:@selector(btnAddSlideTap:) forControlEvents:UIControlEventTouchUpInside];
     
     btnPlusSlide.tag = index;
+    btnWidePlusSlide.tag = index;
     
     [self addSubview:btnPlusSlide];
-    
+    [self addSubview:btnWidePlusSlide];
 }
+//
+//- (void)setWideButtonFrame
+//{
+//    CGRect wideButtonFrame = btnWidePlusSlide.frame;
+//    wideButtonFrame.origin.y =  wideButtonFrame.origin.y  - wideButtonFrame.size.height - 15;
+//    btnWidePlusSlide.frame = wideButtonFrame;
+//    btnWidePlusSlide.backgroundColor = [UIColor redColor];
+//}
 
 - (void)addArrowImage:(NSInteger)index
 {
@@ -721,7 +995,9 @@ UILabel *mComicTitle;
     gestureIndex = viewGesture.tag;
     itemToRemove = [allSlidesView objectAtIndex:gestureIndex];
     [allSlidesView removeObjectAtIndex:gestureIndex];
-    [self.listViewImages removeObjectAtIndex:gestureIndex];
+    if ([self.listViewImages count] > gestureIndex) {
+        [self.listViewImages removeObjectAtIndex:gestureIndex];
+    }
     
     if (allSlidesView.count == 0)
     {
@@ -734,8 +1010,10 @@ UILabel *mComicTitle;
     //-------------------
     
     //Adding back the Plus Button
-    if ([allSlidesView count] == (SLIDE_MAXCOUNT - 1)) {
+    if ([allSlidesView count] == (SLIDE_MAXCOUNT - 1))
+    {
         [self addSubview:btnPlusSlide];
+        [self addSubview:btnWidePlusSlide];
     }
     
     if (itemToRemove != nil){
@@ -788,8 +1066,19 @@ UILabel *mComicTitle;
                              }
                              
                              btnPlusSlide.tag = allSlidesView.count;
+                             btnWidePlusSlide.tag = allSlidesView.count;
+                             
+                             btnWidePlusSlide.frame = [self frameForPossitionWidePlusButton:btnWidePlusSlide.tag];
                              btnPlusSlide.frame = [self frameForPossitionPlusButton:btnPlusSlide.tag];
+                             
+                             
                              viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:btnPlusSlide.tag];
+                             
+                             
+//                             btnWidePlusSlide.frame = btnPlusSlide.frame;
+//                             [self setWideButtonFrame];
+                             // set wide button frame
+                             
                              [self setScrollViewContectSize];
                              [self refreshPreview:itemIndex withImages:self.listViewImages];
                              [self addTimeLineView: (spaceBetweenSlide + btnPlusSlide.frame.size.width)];
@@ -831,8 +1120,12 @@ UILabel *mComicTitle;
 - (void)setAddButtonFrame:(UIButton *)sender ButtonIndex:(int)btnIndex
 {
     
-    sender.frame = [self frameForPossition:sender.tag];
+    //sender.frame = [self frameForPossition:sender.tag];
     
+    btnWidePlusSlide.frame = [self frameForPossitionWidePlusButton:sender.tag];
+    btnPlusSlide.frame = [self frameForPossitionPlusButton:sender.tag];
+    
+    //button wide frame
     //-------------------
     CGSize comicTitleSize = [mComicTitle.text sizeWithAttributes:@{NSFontAttributeName:[mComicTitle font]}];
     
@@ -851,6 +1144,7 @@ UILabel *mComicTitle;
     if (btnIndex == SLIDE_MAXCOUNT)
     {
         [btnPlusSlide removeFromSuperview];
+        [btnWidePlusSlide removeFromSuperview];
     }
     else
     {
@@ -865,11 +1159,21 @@ UILabel *mComicTitle;
     
     NSLog(@"sender count = %ld",(long)sender.tag);
     
-    [self.slidesScrollViewDelegate slidesScrollView:self didSelectAddButtonAtIndex:sender.tag withView:sender];
+    if (sender == btnPlusSlide)
+    {
+        [self.slidesScrollViewDelegate slidesScrollView:self didSelectAddButtonAtIndex:sender.tag withView:sender withType:AddButtonTypeLong];
+    }
+    else
+    {
+        [self.slidesScrollViewDelegate slidesScrollView:self didSelectAddButtonAtIndex:sender.tag withView:sender withType:AddButtonTypeWide];
+    }
+   
+    btnPlusSlide.tag = sender.tag + 1;
+    btnWidePlusSlide.tag = sender.tag + 1;
 
-    sender.tag = sender.tag + 1;
+    btnWidePlusSlide.frame = [self frameForPossitionWidePlusButton:sender.tag];
+    btnPlusSlide.frame = [self frameForPossitionPlusButton:sender.tag];
     
-    sender.frame = [self frameForPossitionPlusButton:sender.tag];
     viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:sender.tag + 1];
     
     NSLog(@"sender count = %ld",(long)sender.tag);
@@ -877,10 +1181,33 @@ UILabel *mComicTitle;
     if (sender.tag == SLIDE_MAXCOUNT)
     {
         [btnPlusSlide removeFromSuperview];
+        [btnWidePlusSlide removeFromSuperview];
     }
     else
     {
         [self setScrollViewContectSize];
+    }
+}
+
+- (void)btnAddWideSlideTap:(UIButton *)sender
+{
+    if (self.isStillSaving)
+        return;
+    
+    NSLog(@"sender count = %ld",(long)sender.tag);
+    
+    
+    sender.tag = sender.tag + 1;
+    
+    sender.frame = [self frameForPossitionWidePlusButton:sender.tag];
+    viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:sender.tag + 1];
+    
+    NSLog(@"sender count = %ld",(long)sender.tag);
+    
+    if (sender.tag == SLIDE_MAXCOUNT)
+    {
+        [btnPlusSlide removeFromSuperview];
+        [btnWidePlusSlide removeFromSuperview];
     }
 }
 
@@ -894,16 +1221,21 @@ UILabel *mComicTitle;
     [self.slidesScrollViewDelegate slidesScrollView:self didSelectAddButtonAtIndex:sender.tag withView:sender pusWithAnimation:NO];
     
     sender.tag = sender.tag + 1;
-    sender.frame = [self frameForPossitionPlusButton:sender.tag];
     viewPreviewScrollSlide.view.frame = [self frameForPreviewSlide:sender.tag + 1];
     
     [self setContentOffset:CGPointMake(sender.frame.origin.x,sender.frame.origin.y) animated:YES];
     
     NSLog(@"sender count = %ld",(long)sender.tag);
     
+    
+    btnWidePlusSlide.frame = [self frameForPossitionWidePlusButton:sender.tag];
+    btnPlusSlide.frame = [self frameForPossitionPlusButton:sender.tag];
+   // sender.frame = [self frameForPossitionPlusButton:sender.tag];
+
     if (sender.tag == SLIDE_MAXCOUNT)
     {
         [btnPlusSlide removeFromSuperview];
+        [btnWidePlusSlide removeFromSuperview];
     }
     else
     {
@@ -920,5 +1252,50 @@ UILabel *mComicTitle;
     
     return imgFinal;
 }
+
+- (void)setPageViewControllerFrame
+{
+    //   NSArray *allviewControllers = self.viewControllers;
+    CGRect selfFrame = CGRectMake(0, 0, 0, 0);
+    
+    for (UIViewController *controller in viewPreviewScrollSlide.viewControllers)
+    {
+        if ([controller isKindOfClass:[ComicSlidePreview class]])
+        {
+            ComicSlidePreview *comicSlide = (ComicSlidePreview *)controller;
+            
+            if(selfFrame.size.height < comicSlide.view.frame.size.height)
+            {
+                CGRect viewFrame = controller.view.frame;
+                
+                viewFrame.size.width = comicSlide.viewWhiteBorder.frame.size.width;
+                viewFrame.size.height = comicSlide.viewWhiteBorder.frame.size.height;
+                //self.view.frame = viewFrame;
+                
+                // Added by Ramesh, adding center to main view
+                float superviewY = [UIApplication sharedApplication].keyWindow.frame.size.height/2;
+                float viewY = viewFrame.size.height/2;
+                float centerY = superviewY - viewY;
+                
+                CGRect viewRect = viewFrame;
+                viewRect.origin.y = centerY;
+                viewFrame = viewRect;
+                controller.view.frame = viewFrame;
+                
+                selfFrame = viewFrame;
+            }
+            
+            CGFloat y = (controller.view.frame.size.height - comicSlide.view.frame.size.height) / 2;
+            
+            CGRect frame = comicSlide.view.frame;
+            
+            frame.origin.y = y;
+            comicSlide.viewWhiteBorder.frame = frame;
+            
+            NSLog(@"%@",controller.view);
+        }
+    }
+}
+
 
 @end

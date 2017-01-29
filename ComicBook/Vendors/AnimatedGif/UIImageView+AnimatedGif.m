@@ -54,12 +54,21 @@ static void *UIViewAnimationKey;
     }
     return self;
 }
--(void)setAnimatedGif:(AnimatedGif *)animatedGif {
+-(void)setAnimatedGif:(AnimatedGif *)animatedGif
+{
+  
+    if (animatedGif == nil)
+    {
+        return;
+    }
+   
+    
     //This is workaround for subclasses of UIImageView
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         swizzledClasses = [NSMutableDictionary new];
     });
+    
     if (!swizzledClasses[NSStringFromClass(self.class)]) {
         Swizzle([self class], @selector(willMoveToSuperview:), @selector(willMoveToSuperviewGif:));
         swizzledClasses[NSStringFromClass(self.class)] = @YES;

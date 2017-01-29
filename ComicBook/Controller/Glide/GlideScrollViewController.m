@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "InstructionView.h"
+#import "UIImage+GIF.h"
 @interface GlideScrollViewController () <SlidesScrollViewDelegate,ZoomTransitionProtocol,InstructionViewDelegate>
 //
 //@property (weak, nonatomic) IBOutlet SlidesScrollView *scrvComicSlide;
@@ -32,6 +33,8 @@
 @property (strong, nonatomic) NSMutableArray *dirtySubviews;
 @property (strong, nonatomic) NSMutableArray *dirtysubviewData;
 @property (strong, nonatomic) NSString *fileNameToSave;
+
+@property (nonatomic) BOOL isWideSlide;
 
 @end
 
@@ -156,6 +159,8 @@ NSTimer* timerObject;
         if (comicSlides.count == SLIDE_MAXCOUNT && scrvComicSlide.btnPlusSlide) {
             [scrvComicSlide.btnPlusSlide setHidden:YES];
             [scrvComicSlide.btnPlusSlide removeFromSuperview];
+            [scrvComicSlide.btnWidePlusSlide removeFromSuperview];
+            
             [scrvComicSlide setScrollViewContectSizeByLastIndex:count-1];
         }
         
@@ -264,6 +269,22 @@ NSTimer* timerObject;
     [self slidesScrollView:scrollview didSelectAddButtonAtIndex:index withView:view pusWithAnimation:YES];
 }
 
+
+- (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAddButtonAtIndex:(NSInteger)index withView:(UIView *)view withType:(AddButtonType)type
+{
+    if (type == AddButtonTypeWide)
+    {
+        self.isWideSlide = YES;
+    }
+    else
+    {
+        self.isWideSlide = NO;
+
+    }
+     [self slidesScrollView:scrollview didSelectAddButtonAtIndex:index withView:view pusWithAnimation:YES];
+    
+}
+
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didSelectAddButtonAtIndex:(NSInteger)index withView:(UIView *)view pusWithAnimation:(BOOL)isPushAnimation
 {
     if (self.scrvComicSlide.isStillSaving)
@@ -281,6 +302,17 @@ NSTimer* timerObject;
     [scrvComicSlide addViewAtIndex:newSlideIndex withComicSlide:nil];
     
     ComicMakingViewController *cmv = [self.storyboard instantiateViewControllerWithIdentifier:@"ComicMakingViewController"];
+    
+    if (self.isWideSlide == YES)
+    {
+        cmv.isWideSlide = YES;
+    }
+    else
+    {
+        cmv.isWideSlide = NO;
+        
+    }
+    
     cmv.isNewSlide = YES;
     
     cmv.comicType = self.comicType;
@@ -298,14 +330,14 @@ NSTimer* timerObject;
         
         [self.navigation pushViewController:cmv animated:isPushAnimation];
     }else{
-    [self.navigationController pushViewController:cmv animated:isPushAnimation];
+    //[self.navigationController pushViewController:cmv animated:isPushAnimation];
+        [self.navigationController pushViewController:cmv animated:YES];
     }
-    
 }
 
 - (void)slidesScrollView:(SlidesScrollView *)scrollview didRemovedAtIndexPath:(NSInteger)index
 {
-    if (index >= 0) {
+    if (index >= 0 && [comicSlides count] > 0) {
         [comicSlides removeObjectAtIndex:index];
         [self saveDataToFile:comicSlides];
     }
@@ -377,10 +409,13 @@ NSTimer* timerObject;
     [comicMakeDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"]; // Hardcoded now
     [comicMakeDic setObject:@"" forKey:@"comic_title"];
     
-    if(self.comicType == ReplyComic) {
+    if(self.comicType == ReplyComic)
+    {
         [comicMakeDic setObject:@"CS" forKey:@"comic_type"];
         [comicMakeDic setObject:self.shareId forKey:@"share_id"];
-    } else {
+    }
+    else
+    {
         [comicMakeDic setObject:@"CM" forKey:@"comic_type"]; // COMIC MAKING yes it is hardcoded now
     }
     
@@ -395,7 +430,8 @@ NSTimer* timerObject;
     //Slide Array
     NSMutableArray* slides = [[NSMutableArray alloc] init];
     
-    for (int i=0; i< [comicSlides count]; i++) {
+    for (int i=0; i< [comicSlides count]; i++)
+    {
 //    for (NSData* data in comicSlides) {
         NSData* data = [comicSlides objectAtIndex:i];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -449,10 +485,55 @@ NSTimer* timerObject;
                     [enhancements addObject:cmEng];
                 }
             }
+            if([imageView isKindOfClass:[ComicItemAnimatedSticker class]])
+            {
+                NSMutableDictionary* cmEng = [[NSMutableDictionary alloc] init];
+                [cmEng setObject:@"GIF" forKey:@"enhancement_type"];
+                [cmEng setObject:@"1" forKey:@"enhancement_type_id"];
+                [cmEng setObject:@"1" forKey:@"is_custom"];
+                [cmEng setObject:@"" forKey:@"enhancement_text"];
+                
+                if (((ComicItemAnimatedSticker*)imageView).combineAnimationFileName) {
+                    //it had image,
+                    NSString *animationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                    animationPath = [[animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName] stringByAppendingString:@".gif"];
+                    
+                    NSData *gifData = [NSData dataWithContentsOfFile:animationPath];
+                    
+                    [cmEng setObject:[gifData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]
+                              forKey:@"enhancement_file"];
+                    [cmEng setObject:@"gif" forKey:@"enhancement_file_type"];
+                    
+                }
+                
+                CGFloat midPointX = myRect.origin.x;
+                CGFloat midPointY = myRect.origin.y;
+                
+                [cmEng setObject:[NSString stringWithFormat:@"%f",midPointY] forKey:@"position_top"];
+                [cmEng setObject:[NSString stringWithFormat:@"%f",midPointX] forKey:@"position_left"];
+                [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.width] forKey:@"width"];
+                [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.height] forKey:@"height"];
+                [cmEng setObject:@"1" forKey:@"z_index"];
+                
+                [enhancements addObject:cmEng];
+                //                }
+            }
             if (enhancements && [enhancements count] > 0) {
                 [cmSlide setObject:enhancements forKey:@"enhancements"];
             }
         }
+        
+        if ([cmPage.slideType isEqualToString:slideTypeWide])
+        {
+            [cmSlide setObject:@"1" forKey:@"slide_type"];
+            
+        }
+        else
+        {
+            [cmSlide setObject:@"0" forKey:@"slide_type"];
+            
+        }
+        
         [slides addObject:cmSlide];
         cmPage = nil;
         cmSlide = nil;
@@ -510,7 +591,7 @@ NSTimer* timerObject;
         
         NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
         ComicPage* cmPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        NSData *imageData = UIImageJPEGRepresentation([AppHelper getImageFile:cmPage.printScreenPath], 1);
+        NSData *imageData = UIImagePNGRepresentation([AppHelper getImageFile:cmPage.printScreenPath]);//UIImageJPEGRepresentation([AppHelper getImageFile:cmPage.printScreenPath], 1);
         
         [dataDic setObject:imageData forKey:@"SlideImage"];
         
@@ -615,7 +696,8 @@ NSTimer* timerObject;
               withImageView:(id)comicItemData
             withPrintScreen:(UIImage *)printScreen
                  withRemove:(BOOL)remove
-              withImageView:(UIImageView *)imageView{
+              withImageView:(UIImageView *)imageView
+{
     
     if (self.comicPageComicItems == nil) {
         self.comicPageComicItems = [[ComicPage alloc] init];
@@ -678,8 +760,8 @@ NSTimer* timerObject;
                                [self setComicSendButton];
                            }
                            
-                           self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImageJPEGRepresentation(imageView.image,1) type:@"jpg"];
-                           self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImageJPEGRepresentation(printScreen, 1) type:@"jpg"];
+                           self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImagePNGRepresentation(imageView.image)/*UIImageJPEGRepresentation(imageView.image,1)*/ type:@"png"];
+                           self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImagePNGRepresentation(printScreen)/*UIImageJPEGRepresentation(printScreen, 1) */type:@"png"];
                            
                            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
                            
@@ -700,16 +782,16 @@ NSTimer* timerObject;
     
 }
 
+
 - (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll
                                    withImageView:(UIImageView *)imageView
                                  withPrintScreen:(UIImage *)printScreen
-                                    withNewSlide:(BOOL)newslide
-                                     withPopView:(BOOL)isPopView
+                                    withNewSlide:(BOOL)newslide withPopView:(BOOL)isPopView withIsWideSlide:(BOOL)isWideSlide
 {
     if (isPopView)
     {
         [self.navigationController popViewControllerAnimated:YES];
-        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen];
+      
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             //Do background work
             @try {
@@ -725,8 +807,8 @@ NSTimer* timerObject;
                         self.comicPageComicItems.subviews = self.dirtySubviews;
                     }
                     
-                    self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImageJPEGRepresentation(imageView.image,1) type:@"jpg"];
-                    self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImageJPEGRepresentation(printScreen, 1) type:@"jpg"];
+                    self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImagePNGRepresentation(imageView.image) type:@"png"];
+                    self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImagePNGRepresentation(printScreen) type:@"png"];
                     
                     //Add time line
                     NSDate *now = [NSDate date];
@@ -735,6 +817,16 @@ NSTimer* timerObject;
                     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
                     self.comicPageComicItems.timelineString = [dateFormatter stringFromDate:now];
                     dateFormatter = nil;
+                    
+                    if (isWideSlide)
+                    {
+                        self.comicPageComicItems.slideType = slideTypeWide;
+                    }
+                    else
+                    {
+                        self.comicPageComicItems.slideType = slideTypeTall;
+                    }
+
                     
                     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
                     if (newslide)
@@ -751,6 +843,9 @@ NSTimer* timerObject;
                     data = nil;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self setComicSendButton];
+                        
+                        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen withComicSlide:comicSlides];
+                        
                         if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterSecondTimeGlideViewController] == YES)
                         {
                             
@@ -838,7 +933,7 @@ NSTimer* timerObject;
     else
     {
         //Doing main thread
-        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen];
+        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen withComicSlide:comicSlides];
         @try {
             self.scrvComicSlide.isStillSaving = YES;
             @autoreleasepool {
@@ -849,8 +944,8 @@ NSTimer* timerObject;
                     self.comicPageComicItems.subviews = self.dirtySubviews;
                 }
                 
-                self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImageJPEGRepresentation(imageView.image,1) type:@"jpg"];
-                self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImageJPEGRepresentation(printScreen, 1) type:@"jpg"];
+                self.comicPageComicItems.containerImagePath =  [self SaveImageFile:UIImagePNGRepresentation(imageView.image)/*UIImageJPEGRepresentation(imageView.image,1)*/ type:@"png"];
+                self.comicPageComicItems.printScreenPath = [self SaveImageFile:UIImagePNGRepresentation(printScreen)/*UIImageJPEGRepresentation(printScreen, 1)*/ type:@"png"];
                 
                 //Add time line
                 NSDate *now = [NSDate date];
@@ -859,6 +954,15 @@ NSTimer* timerObject;
                 [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
                 self.comicPageComicItems.timelineString = [dateFormatter stringFromDate:now];
                 dateFormatter = nil;
+                
+                if (isWideSlide)
+                {
+                    self.comicPageComicItems.slideType = slideTypeWide;
+                }
+                else
+                {
+                    self.comicPageComicItems.slideType = slideTypeTall;
+                }
                 
                 NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
                 

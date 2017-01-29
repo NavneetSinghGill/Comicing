@@ -10,7 +10,7 @@
 #import "AppConstants.h"
 
 @implementation MainPageCell
-@synthesize widthconstraint,btnUser, profileImageView, lblComicTitle, btnBubble, btnTwitter, btnFacebook, btnBubbleBottomConstraint,btnTwitterBottomConstraint,btnFacebookBottomConstraint;
+@synthesize widthconstraint,btnUser, profileImageView, lblComicTitle, btnBubble, btnTwitter, btnFacebook;
 
 -(void)layoutSubviews
 {
@@ -65,9 +65,9 @@
     profileImageView.layer.cornerRadius = heiWei / 2;
     profileImageView.layer.masksToBounds = YES;
     
-    btnBubbleBottomConstraint.constant = 56;
-    btnTwitterBottomConstraint.constant = 56;
-    btnFacebookBottomConstraint.constant = 56;
+//    btnBubbleBottomConstraint.constant = 56;
+//    btnTwitterBottomConstraint.constant = 56;
+//    btnFacebookBottomConstraint.constant = 56;
     
 }
 

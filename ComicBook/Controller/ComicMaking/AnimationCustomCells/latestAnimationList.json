@@ -1,0 +1,1525 @@
+{
+    "animationcategories": [
+                            {
+                            "categoryid": "0",
+                            "name": "",
+                            "selected": "0",
+                            "imagename": "Bored-OFF",
+                            "imagename_selected": "Bored-ON"
+                            },
+                            {
+                            "categoryid": "1",
+                            "name": "",
+                            "selected": "0",
+                            "imagename": "Cool-OFF",
+                            "imagename_selected": "Cool-ON"
+                            },
+                            {
+                            "categoryid": "2",
+                            "name": "",
+                            "selected": "0",
+                            "imagename": "FUN-OFF",
+                            "imagename_selected": "FUN-ON"
+                            }
+                            ,
+                            {
+                            "categoryid": "3",
+                            "name": "",
+                            "selected": "0",
+                            "imagename": "Gloomy-OFF",
+                            "imagename_selected": "Gloomy-ON"
+                            }
+                            ],
+    "animationList": [{
+                      "animationId": "1",
+                      "isMovable":"1",
+                      "numberOfResources": "1",
+                      "thumImage": "hammer-01",
+                      "name": "Wow",
+                      "categoryid": "1",
+                      "resources": [
+                                    {
+                                    "type": "Movableplug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 92.5,
+                                    "y": 92.5
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "bubble_WOW",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 185.1,
+                                    "height": 185.1
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "2",
+                      "isMovable":"1",
+                      "numberOfResources": "1",
+                      "thumImage": "hammer-01",
+                      "name": "Oops",
+                      "categoryid": "1",
+                      "resources": [
+                                    {
+                                    "type": "Movableplug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 75.5,
+                                    "y": 60.4
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "bubble_oopps",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 151,
+                                    "height": 120.8
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "3",
+                      "isMovable":"1",
+                      "numberOfResources": "1",
+                      "thumImage": "hammer-01",
+                      "name": "Argh",
+                      "categoryid": "2",
+                      "resources": [
+                                    {
+                                    "type": "Movableplug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 90.6,
+                                    "y": 60.4
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "ARGH",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 181.2,
+                                    "height": 120.8
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "4",
+                      "isMovable":"1",
+                      "numberOfResources": "1",
+                      "thumImage": "hammer-01",
+                      "name": "OMG",
+                      "categoryid": "3",
+                      "resources": [
+                                    {
+                                    "type": "Movableplug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 75.5,
+                                    "y": 60.4
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "bubble_omg",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 151,
+                                    "height": 120.8
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "5",
+                      "isMovable":"1",
+                      "numberOfResources": "1",
+                      "thumImage": "hammer-01",
+                      "name": "WTF",
+                      "categoryid": "4",
+                      "resources": [
+                                    {
+                                    "type": "Movableplug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 92.5,
+                                    "y": 92.5
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "bubble_WTF",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 185.1,
+                                    "height": 185.1
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "1",
+                      "numberOfResources": "1",
+                      "thumImage": "hammer-01",
+                      "name": "Drill",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 125.3,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 184.8,
+                                    "y": 125.3
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "DRILL_FINAL02",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "2",
+                      "numberOfResources": "3",
+                      "thumImage": "heart with arrow-01",
+                      "name": "Cupid",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 90,
+                                    "y": 323.2
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "TARGET",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "combinePositionPoints":
+                                    {
+                                    "x":0,
+                                    "y":0
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 3
+                                    }
+                                    },
+                                    {
+                                    "type": "Noplug&play",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 29,
+                                    "y": 165.5
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "Cupid",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 4.5
+                                    }
+                                    },
+                                    {
+                                    "type": "filter",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 0,
+                                    "y": 0
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "HEART",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "3",
+                      "numberOfResources": "1",
+                      "thumImage": "spider-01",
+                      "name": "ghost",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "filter",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 0,
+                                    "y": 0
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "Ghost",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "4",
+                      "numberOfResources": "1",
+                      "thumImage": "cupidButton",
+                      "name": "superman",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "filter",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 0,
+                                    "y": 0
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "CHARACTER",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "5",
+                      "numberOfResources": "3",
+                      "thumImage": "face-01",
+                      "name": "Crying",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Leye",
+                                    "type": "leftEye",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 148.6,
+                                    "y": 124.7
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "CryingTearLeft",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 3
+                                    }
+                                    },
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Reye",
+                                    "type": "rightEye",
+                                    "position": {
+                                    "x": 0,
+                                    "y": 0,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 218.7,
+                                    "y": 124.7
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "CryingTearRight",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.6,
+                                    "endInterval": 3
+                                    }
+                                    },
+                                    {
+                                    "type": "filter",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 0,
+                                    "y": 0
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "CryingWaterFish",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "6",
+                      "numberOfResources": "1",
+                      "thumImage": "camera-01",
+                      "name": "famouse",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "filter",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 0,
+                                    "y": 0
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "Famouss",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "7",
+                      "numberOfResources": "1",
+                      "thumImage": "SUN-01",
+                      "name": "sunshine",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "filter",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 0,
+                                    "y": 0
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "sunshine filter 2",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "8",
+                      "numberOfResources": "4",
+                      "thumImage": "angel-01",
+                      "name": "angel",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 151.9,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 141.0,
+                                    "y": 151.9
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "AngelWings-Halo",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    },
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Lshoulder",
+                                    "type": "leftShoulder",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 229,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 229,
+                                    "y": 214
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "Angel-LWing",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    },
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Rshoulder",
+                                    "type": "rightShoulder",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 73,
+                                    "y": 208
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "Angel-RWing",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 3
+                                    }
+                                    },
+                                    {
+                                    "type": "filter",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 0,
+                                    "y": 0
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "AngelWings-Effects",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "9",
+                      "numberOfResources": "3",
+                      "thumImage": "spiral glasses 2",
+                      "name": "Dizzy",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Leye",
+                                    "type": "leftEye",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 56.5,
+                                    "y": 52.2
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "Left_eye",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 3
+                                    }
+                                    },
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Reye",
+                                    "type": "rightEye",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 49.8,
+                                    "y": 52.2
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "Right_eye",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 3
+                                    }
+                                    },
+                                    {
+                                    "type": "filter",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 0,
+                                    "y": 0
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "Bird_02",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "10",
+                      "numberOfResources": "4",
+                      "thumImage": "devil",
+                      "name": "Devil",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Lbrain",
+                                    "type": "leftBrain",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 93.3,
+                                    "leftA": 84.5,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 84.5,
+                                    "y": 93.3
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "DevilHornLft",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    },
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Rbrain",
+                                    "type": "rightBrain",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 93.3,
+                                    "leftA": 0,
+                                    "rightA": 290.5,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 29.6,
+                                    "y": 93.3
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "DevilHornRgt",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    },
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Lshoulder",
+                                    "type": "leftShoulder",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 148,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 148,
+                                    "y": 110.5
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "DevilWingRgt",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 3
+                                    }
+                                    },
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Rshoulder",
+                                    "type": "rightShoulder",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 227,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 21.1,
+                                    "y": 110.5
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "DevilWingLft",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "11",
+                      "numberOfResources": "1",
+                      "thumImage": "sticker question mark-01",
+                      "name": "Curious",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "filter",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 0,
+                                    "y": 0
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "Animation_Curious_CC_02",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "12",
+                      "numberOfResources": "1",
+                      "thumImage": "angel-01",
+                      "name": "Angry",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Lear",
+                                    "type": "leftEar",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 192,
+                                    "y": 98
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "LEarSmoke",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 250,
+                                    "height": 200
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    },
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Rear",
+                                    "type": "rightEar",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 58,
+                                    "y": 105
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "REarSmoke",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 250,
+                                    "height": 200
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    },
+                                    {
+                                    "type": "round&play",
+                                    "instraction": {
+                                    "imagename": "Circle-the-head",
+                                    "type": "circleHead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "originalRect":{
+                                    "width":789,
+                                    "height":789
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 50,
+                                    "y": 50
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "easy",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 3
+                                    }
+                                    },
+                                    {
+                                    "type": "filter",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 0,
+                                    "y": 0
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "ScreenSmoke",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0.0,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "13",
+                      "numberOfResources": "1",
+                      "thumImage": "hamburger-01",
+                      "name": "Hungry",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 184.8,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 193.3,
+                                    "y": 192.1
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "Hungry",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 0
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "14",
+                      "numberOfResources": "3",
+                      "thumImage": "NIGHT-01",
+                      "name": "Sleepy",
+                      "categoryid": "0",
+                      "resources": [
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 81.5,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 89.4,
+                                    "y": 81.5
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "sheep",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    
+                                    "timeInterval": 0,
+                                    "endInterval": 3
+                                    }
+                                    },
+                                    {
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Lip",
+                                    "type": "nosy",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 52.2,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "boundry2": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 322.8,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 52.2,
+                                    "y": 32.3
+                                    },
+                                    "centerPoint2": {
+                                    "x": 27.2,
+                                    "y": 39.8
+                                    },
+                                    "face": {
+                                    "type": "duel",
+                                    "imageA": "nose-bubble-left",
+                                    "imageB": "nose-bubble-right"
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 0,
+                                    "endInterval": 3
+                                    }
+                                    }
+                                    ]
+                      },
+                      {
+                      "animationId": "15",
+                      "numberOfResources": "1",
+                      "thumImage": "sticker question mark-01",
+                      "name": "King",
+                      "categoryid": "0",
+                      "resources": [{
+                                    "type": "plug&play",
+                                    "instraction": {
+                                    "imagename": "Forehead",
+                                    "type": "forehead",
+                                    "position": {
+                                    "x": 239,
+                                    "y": 28,
+                                    
+                                    },
+                                    "size": {
+                                    "width": 117,
+                                    "height": 117
+                                    }
+                                    },
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 81.5,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 107.5,
+                                    "y": 116.3
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "KingCrown",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    
+                                    "timeInterval": 0,
+                                    "endInterval": 3
+                                    }
+                                    },
+                                    {
+                                    "type": "filter",
+                                    "animation": {
+                                    "boundry": {
+                                    "topA": 0,
+                                    "leftA": 0,
+                                    "rightA": 0,
+                                    "downA": 0,
+                                    },
+                                    "centerPoint": {
+                                    "x": 0,
+                                    "y": 0
+                                    },
+                                    "face": {
+                                    "type": "single",
+                                    "imageA": "KingShines",
+                                    "imageB": ""
+                                    },
+                                    "sizeDefault": {
+                                    "width": 375,
+                                    "height": 667
+                                    },
+                                    "timeInterval": 3,
+                                    "endInterval": 2
+                                    }
+                                    }
+                                    ]
+                      }
+                      ]
+}

@@ -107,15 +107,16 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return bubbleListArray.count+1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return bubbleListArray.count + 1;
+    return 1;
+    //return bubbleListArray.count + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.item == 0)
+    if(indexPath.item == 0 && indexPath.section == 0)
     {
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier1 forIndexPath:indexPath];
         return cell;
@@ -126,7 +127,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
         
         // Configure the cell
         UIImageView *img = (UIImageView*)[cell viewWithTag:1];
-        img.image = [UIImage imageNamed:bubbleListArray[indexPath.row  -1]];
+        img.image = [UIImage imageNamed:bubbleListArray[indexPath.section  -1]];
         
         return cell;
     }
@@ -136,14 +137,14 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.item == 0)
+    if(indexPath.item == 0 && indexPath.section == 0)
     {
         
     }
     else
     {
-        [parentViewController addBubbleWithImage:bubbleLargeListArray[indexPath.row - 1]
-                                   TextFiledRect:[self.bubbleLargeListTextFieldArray[indexPath.row - 1] CGRectValue]];
+        [parentViewController addBubbleWithImage:bubbleLargeListArray[indexPath.section - 1]
+                                   TextFiledRect:[self.bubbleLargeListTextFieldArray[indexPath.section - 1] CGRectValue]];
     }
 }
 

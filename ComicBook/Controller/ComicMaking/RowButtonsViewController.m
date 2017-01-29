@@ -10,24 +10,34 @@
 #import "ComicMakingViewController.h"
 #import "Global.h"
 #import "JTAlertView.h"
+#import "YLGIFImage.h"
+#import "YLImageView.h"
 
 @interface RowButtonsViewController ()
 
 @property (nonatomic, strong) ComicMakingViewController *parentViewController;
 
-
+@property (nonatomic, strong) YLImageView *imgvExclamation;
 
 @end
 
 @implementation RowButtonsViewController
 
 @synthesize parentViewController;
-@synthesize btnBlackboard,btnBubble,btnCamera,btnExclamation,btnPen,btnSticker,btnText, isNewSlide;
+@synthesize btnBlackboard,btnBubble,btnCamera,btnExclamation,btnPen,btnSticker,btnText, isNewSlide, imgvExclamation;
 
 #pragma mark - UIViewController Methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [btnExclamation setImage:nil forState:UIControlStateNormal];
+    
+    imgvExclamation = [[YLImageView alloc] initWithFrame:btnExclamation.frame];
+    
+    imgvExclamation.image = [YLGIFImage imageNamed:@"Smiley-Button.gif"];
+    
+    [self.view insertSubview:imgvExclamation belowSubview:btnExclamation];
     
     if (isNewSlide)
     {
@@ -41,6 +51,8 @@
         
         [self allButtonsFadeIn:btnCamera];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeExclamation:) name:@"closeExclamation" object:nil];
 }
 
 - (IBAction)btnBlackboardTap:(UIButton *)sender
@@ -124,7 +136,19 @@
      }
                      completion:^(BOOL finished) {
                          [self checkStatusForBlackBoardWithButton:sender];
-                         [parentViewController openExclamationList];
+                         [parentViewController openExclamationList:^(BOOL success) {
+                            
+                             [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                 
+                                 [self.btnExclamation setEnabled:NO];
+                                 [self.btnBubble setEnabled:NO];
+                                 self.imgvExclamation.alpha = 0;
+                                 self.btnCamera.alpha = 0;
+                             } completion:^(BOOL finished) {
+                                 
+                             }];
+                             
+                         }];
                      }];
 }
 
@@ -178,7 +202,7 @@
          sender.layer.transform = CATransform3DIdentity;
      }
                      completion:^(BOOL finished) {
-                         [parentViewController openBubbleList];
+                         [parentViewController addStandardBubbleOnFirstTime];
                          [self checkStatusForBlackBoardWithButton:sender];
                      }];
 }
@@ -293,6 +317,7 @@
             btnBubble.alpha = 0;
             btnCamera.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
             btnPen.alpha = 0;
             btnSticker.alpha = 0;
             btnText.alpha = 0;
@@ -305,6 +330,7 @@
             btnBlackboard.alpha = 0;
             btnCamera.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
             btnPen.alpha = 0;
             btnSticker.alpha = 0;
             btnText.alpha = 0;
@@ -317,6 +343,7 @@
             btnBlackboard.alpha = 1;
             btnBubble.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
             btnPen.alpha = 0;
             btnSticker.alpha = 0;
             btnText.alpha = 0;
@@ -342,6 +369,8 @@
             btnBlackboard.alpha = 0;
             btnBubble.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
+
             btnSticker.alpha = 0;
             btnText.alpha = 0;
             
@@ -372,6 +401,8 @@
             btnBubble.alpha = 0;
             btnCamera.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
+
             btnPen.alpha = 0;
             btnText.alpha = 0;
         }];
@@ -384,6 +415,8 @@
             btnBubble.alpha = 0;
             btnCamera.alpha = 0;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
+
             btnPen.alpha = 0;
             btnSticker.alpha = 0;
         }];
@@ -403,6 +436,8 @@
             btnBubble.alpha = 1;
             btnCamera.alpha = 1;
             btnExclamation.alpha = 1;
+            imgvExclamation.alpha = 1;
+
             btnPen.alpha = 1;
             btnSticker.alpha = 1;
             btnText.alpha = 1;
@@ -416,6 +451,8 @@
             btnBlackboard.alpha = 1;
             btnCamera.alpha = 1;
             btnExclamation.alpha = 1;
+            imgvExclamation.alpha = 1;
+
             btnPen.alpha = 1;
             btnSticker.alpha = 1;
             btnText.alpha = 1;
@@ -430,6 +467,8 @@
             btnBlackboard.alpha = 1;
             btnBubble.alpha = 1;
             btnExclamation.alpha = 1;
+            imgvExclamation.alpha = 1;
+
             btnPen.alpha = 1;
             btnSticker.alpha = 1;
             btnText.alpha = 1;
@@ -449,6 +488,8 @@
             btnSticker.alpha = 1;
             btnText.alpha = 1;
             btnExclamation.alpha = 0;
+            imgvExclamation.alpha = 0;
+
             
         }];
     }
@@ -460,6 +501,8 @@
             btnBubble.alpha = 1;
             btnCamera.alpha = 1;
             btnExclamation.alpha = 1;
+            imgvExclamation.alpha = 1;
+
             btnSticker.alpha = 1;
             btnText.alpha = 1;
             btnPen.alpha = 1;
@@ -525,5 +568,12 @@
     }
 }
 
-
+-(void)closeExclamation:(NSNotification *)notification
+{
+    [self.btnExclamation setEnabled:YES];
+    [self.btnBubble setEnabled:YES];
+    self.imgvExclamation.alpha = 1;
+    self.btnCamera.alpha = 1;
+    
+}
 @end

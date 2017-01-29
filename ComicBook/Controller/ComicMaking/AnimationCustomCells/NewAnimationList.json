@@ -1,0 +1,150 @@
+{
+    "animationcategories": [
+                            {
+                            "categoryid": "0",
+                            "name": "",
+                            "selected":"0",
+                            "imagename": "Bored-OFF",
+                            "imagename_selected": "Bored-ON"
+                            }
+                            ],
+    "animationList": [
+                      {
+                      "animationId": "1",
+                      "numberOfResources":"1",
+
+                      "type":{
+                      "animation":"ThumbAnimation",
+                      "instruction":"singleInstruction",
+                      },
+                      "resources":[
+                                   {
+                                   "animationGifName":"drillAnimation",
+                                   "animationSizeWidth":200,
+                                   "animationSizeHeight":178,
+                                   "animationCenterPointX":97,
+                                   "animationCenterPointY":137,
+                                   "instructionImageName":"tab-forehead.png",
+                                   "instructionPositionX":239,
+                                   "instructionPositionY":28,
+                                   "instructionSizeWidth":117,
+                                   "instructionSizeHeight":117,
+                                   "animationBoundryYA":80,
+                                   "animationBoundryYB":178,
+                                   "animationBoundryXB":0,
+                                   "animationBoundryXA":0,
+                                   "start_time":"0"
+                                   }
+                                   ],
+                      "thumImage":"cat1Anim1",
+                      "name": "Drill",
+                      "categoryid": "0",
+                      },
+                      {
+                      "animationId": "1",
+                      "numberOfResources":"1",
+                      
+                      "type":{
+                      "animation":"ThumbAnimation",
+                      "instruction":"singleInstruction",
+                      },
+                      "resources":[
+                                   {
+                                   "animationGifName":"drillAnimation",
+                                   "animationSizeWidth":200,
+                                   "animationSizeHeight":178,
+                                   "animationCenterPointX":97,
+                                   "animationCenterPointY":137,
+                                   "instructionImageName":"tab-forehead.png",
+                                   "instructionPositionX":239,
+                                   "instructionPositionY":28,
+                                   "instructionSizeWidth":117,
+                                   "instructionSizeHeight":117,
+                                   "animationBoundryYA":80,
+                                   "animationBoundryYB":178,
+                                   "animationBoundryXB":0,
+                                   "animationBoundryXA":0,
+                                   "start_time":"0"
+                                   }
+                                   ],
+                      "thumImage":"cat1Anim1",
+                      "name": "Drill",
+                      "categoryid": "0",
+                      }
+                      ]
+}
+,
+{
+    "type":"Noplug&play",
+    
+    "animation":
+    {
+        "boundry":
+        {
+            "topA":0,
+            "topB":0,
+            "leftA":0,
+            "leftB":0,
+            "rightA":0,
+            "rightB":0,
+            "downA":0,
+            "downB":0
+        },
+        "centerPoint":
+        {
+            "x":25,
+            "y":140
+        },
+        "face":
+        {
+            "type":"single",
+            "imageA":"cupidn",
+            "imageB":""
+        },
+        "sizeDefault":
+        {
+            "width":322,
+            "height":170
+        },
+        "timeInterval":0.1,
+        "endInterval":4.5
+    }
+    
+},
+{
+    "type":"filter",
+    
+    "animation":
+    {
+        "boundry":
+        {
+            "topA":0,
+            "topB":0,
+            "leftA":0,
+            "leftB":0,
+            "rightA":0,
+            "rightB":0,
+            "downA":0,
+            "downB":0
+        },
+        "centerPoint":
+        {
+            "x":0,
+            "y":0
+        },
+        "face":
+        {
+            "type":"single",
+            "imageA":"heartn",
+            "imageB":""
+        },
+        "sizeDefault":
+        {
+            "width":0,
+            "height":0
+        },
+        "timeInterval":2,
+        "endInterval":2
+    }
+    
+}

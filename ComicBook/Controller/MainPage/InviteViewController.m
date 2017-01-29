@@ -67,11 +67,9 @@
     [self.mHolderView.layer setCornerRadius:10];
     
     [self getPhoneContact];
-    //[self getFriendsByUserId];
-    [self getContactListFromServer];
+     // // // [self getContactListFromServer]; commented by sandeep
     
     [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"InviteView" Attributes:nil];
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -339,7 +337,9 @@
     NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
     
     [userDic setObject:[AppHelper getCurrentLoginId] forKey:@"user_id"];
-    [userDic setObject:contactList forKey:@"contacts"];
+    if (contactList != nil) {
+        [userDic setObject:contactList forKey:@"contacts"];
+    }
     [dataDic setObject:userDic forKey:@"data"];
     
     userDic = nil;
@@ -358,7 +358,9 @@
      
      }];*/
     
-    self.friendsUsingComicing = nil;
+    if(self.friendsUsingComicing)
+        self.friendsUsingComicing = nil;
+    self.friendsUsingComicing=[[NSArray alloc] init];
     
     [cmNetWorking postPhoneContactList:dataDic Id:[AppHelper getCurrentLoginId]
                             completion:^(id json,id jsonResposeHeader) {
@@ -369,7 +371,9 @@
                                 [cmNetWorking getComicingFriendsList:nil Id:[AppHelper getCurrentLoginId] completion:^(id json, id jsonResponse) {
                                     //NSLog(@"json : %@", json);
                                     
-                                    self.friendsUsingComicing = json[@"data"];
+                                    if([json objectForKey:@"json"])
+                                        self.friendsUsingComicing = json[@"data"];
+                                    
                                     [self.mCollectionView reloadData];
                                     
                                 } ErrorBlock:^(JSONModelError *error) {
@@ -531,6 +535,8 @@
             [self setContactName];
             //[self startTitleAutoLoad];
             [self enableScoreRow];
+            
+            [self getContactListFromServer];
         }
     }
 }

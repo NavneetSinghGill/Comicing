@@ -19,14 +19,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *mUserName;
 @property (weak, nonatomic) IBOutlet UILabel *lblComicTitle;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicTitle;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintCointainerView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpacingComicView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnBubbleBottomConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnFacebookBottomConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnTwitterBottomConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraintComicView;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicTitle;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintCointainerView;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpacingComicView;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicView;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnBubbleBottomConstraint;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnFacebookBottomConstraint;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnTwitterBottomConstraint;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraintComicView;
+@property (weak, nonatomic) IBOutlet UIView *viewComicCointainer;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnBubble;
 @property (weak, nonatomic) IBOutlet UIButton *btnFacebook;

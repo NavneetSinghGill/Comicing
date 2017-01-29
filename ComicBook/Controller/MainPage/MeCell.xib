@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,32 +12,31 @@
             <rect key="frame" x="0.0" y="0.0" width="540" height="534"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="540" height="533.5"/>
+                <frame key="frameInset" width="540" height="533.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3d-YU-Y3L">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="534"/>
                         <subviews>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dia-wN-KoL">
-                                <rect key="frame" x="12" y="71" width="520" height="396"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QxL-XP-9yB">
-                                <rect key="frame" x="12" y="469" width="520" height="60"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="G4H-eN-8qO"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Tuh-YT-aTZ">
-                                <rect key="frame" x="12" y="8" width="520" height="60"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="cOt-8k-Q6U"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="35"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="QxL-XP-9yB" secondAttribute="bottom" constant="5" id="FTd-aa-Cpm"/>
                             <constraint firstAttribute="trailing" secondItem="dia-wN-KoL" secondAttribute="trailing" constant="8" id="GKP-yg-BzA"/>
@@ -46,14 +45,13 @@
                             <constraint firstItem="Tuh-YT-aTZ" firstAttribute="top" secondItem="I3d-YU-Y3L" secondAttribute="top" constant="8" id="SfK-0v-jJV"/>
                             <constraint firstItem="QxL-XP-9yB" firstAttribute="top" secondItem="dia-wN-KoL" secondAttribute="bottom" constant="2" id="Z5a-Ix-Sov"/>
                             <constraint firstItem="Tuh-YT-aTZ" firstAttribute="trailing" secondItem="dia-wN-KoL" secondAttribute="trailing" id="Zqz-lX-TPL"/>
-                            <constraint firstItem="Tuh-YT-aTZ" firstAttribute="height" secondItem="I3d-YU-Y3L" secondAttribute="height" multiplier="0.1123" id="eKg-iC-oKP"/>
                             <constraint firstItem="dia-wN-KoL" firstAttribute="width" secondItem="QxL-XP-9yB" secondAttribute="width" id="j1r-Nf-iF7"/>
                             <constraint firstItem="dia-wN-KoL" firstAttribute="top" secondItem="Tuh-YT-aTZ" secondAttribute="bottom" constant="3" id="pkL-7e-Pmu"/>
                             <constraint firstItem="dia-wN-KoL" firstAttribute="leading" secondItem="I3d-YU-Y3L" secondAttribute="leading" constant="12" id="x6c-dR-UMq"/>
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="I3d-YU-Y3L" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="I87-5T-9IE"/>
                     <constraint firstItem="I3d-YU-Y3L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="L7s-zf-EeJ"/>
@@ -61,10 +59,10 @@
                     <constraint firstAttribute="trailing" secondItem="I3d-YU-Y3L" secondAttribute="trailing" id="z4t-UN-DZ7"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="heightConstraintComicTitle" destination="cOt-8k-Q6U" id="xl3-yv-cVU"/>
                 <outlet property="lblComicTitle" destination="Tuh-YT-aTZ" id="EIK-uz-v2A"/>
-                <outlet property="topSpacingComicView" destination="pkL-7e-Pmu" id="lCU-fE-55T"/>
             </connections>
             <point key="canvasLocation" x="158" y="282"/>
         </tableViewCell>

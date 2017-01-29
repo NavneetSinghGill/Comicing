@@ -20,7 +20,7 @@
 - (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll withComicPage:(ComicPage *)comicPage withNewSlide:(BOOL)newSlide withAnimationSpeed:(CGFloat)speed;
 
 - (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll withImageView:(UIImageView *)imageView withPrintScreen:(UIImage *)printScreen withNewSlide:(BOOL)newslide
- withPopView:(BOOL)isPopView;
+ withPopView:(BOOL)isPopView withIsWideSlide:(BOOL)isWideSlide;
 
 
 //- (void)comicMakingItemSave:(ComicPage *)comicPage
@@ -43,6 +43,7 @@
 - (void)comicMakingItemRemoveAll:(ComicPage *)comicPage removeAll:(BOOL)isRemoveAll;
 
 @end
+typedef void (^RowButtonCallBack)(BOOL success);
 
 @interface ComicMakingViewController : UIViewController
 {
@@ -69,7 +70,10 @@
 -(void)closeBubbleList;
 //- (void)addBubbleWithImage:(NSString *)bubbleImageString;
 - (void)addBubbleWithImage:(NSString *)bubbleImageString TextFiledRect:(CGRect)textViewSize;
+- (void)addAnimatedSticker:(NSString *)exclamationImageString;
+-(void)addAnimationWithInstructionForObj:(NSDictionary *)animationObj;
 -(void)openComicEditMode:(BOOL)isAddnew;
+- (void)addAnimation:(NSString *)gifImageName;
 //End
 
 - (void)closeBlackBoardColors;
@@ -78,9 +82,12 @@
 
 /*Ramesh */
 //Handle Exclamation
-- (void)openExclamationList;
+- (void)openExclamationList :(RowButtonCallBack)completionHandler;
 - (void)closeExclamationList;
+-(void)removeExstingAnimatedStickerFromComicPage;
 - (void)addExclamationListImage:(NSString *)exclamationImageString;
+-(void)notifyParentForCompletionOfInterval;
+
 //END
 
 /* Comic slide handle : Ramesh */
@@ -96,6 +103,10 @@
 
 //// END //////
 
+// Ramesh P ///
+//Bubble Method
+-(void)addStandardBubbleOnFirstTime;
+
 @property (strong, nonatomic) ComicPage *comicPage;
 
 @property (nonatomic) BOOL isNewSlide;
@@ -110,6 +121,9 @@
 @property (nonatomic) NSString *friendOrGroupId;
 @property (nonatomic) NSString *shareId;
 @property (strong, nonatomic) NSString *fileNameToSave;
+@property (nonatomic) NSTimer* timerAnimation;
+@property BOOL isWideSlide;
+
 
 @end
 

@@ -42,6 +42,7 @@
 #import "ComicConversationBook.h"
 #import "PrivateConversationTextCell.h"
 #import "TopSearchVC.h"
+#import "ComicPageViewController.h"
 
 @interface PrivateConversationViewController () {
     int TagRecord;
@@ -71,6 +72,7 @@
 @property (nonatomic,weak) IBOutlet NSLayoutConstraint *HolderViewBottomConstraint;
 @property (nonatomic,weak) IBOutlet NSLayoutConstraint *HolderViewHeightConstraint;
 @property (nonatomic, assign) int initialHeight;
+@property (strong, nonatomic) NSMutableArray *allCellFrameHeight;
 
 
 @property CGRect saveTableViewFrame;
@@ -80,7 +82,7 @@
 @implementation PrivateConversationViewController
 
 @synthesize saveTableViewFrame, viewTransperant, tblvComics, comics;
-@synthesize btnMe,btnFriend, viewPen, imgvPinkDots,ComicBookDict;
+@synthesize btnMe,btnFriend, viewPen, imgvPinkDots,ComicBookDict, allCellFrameHeight;
 
 
 
@@ -90,6 +92,8 @@
     
     UIScreen *mainScreen = [UIScreen mainScreen];
     self.initialHeight = mainScreen.bounds.size.height - 25;
+    
+    allCellFrameHeight = [[NSMutableArray alloc] init];
     
     [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"PrivateConversation" Attributes:nil];
     [super viewDidLoad];
@@ -721,16 +725,19 @@
 #define CONVERSTION_TYPE_TEXT  @"text"
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *simpleTableIdentifier = @"Cell";
+    static NSString *simpleTableIdentifier = @"PrivateConversationCell";
     
     ComicConversationBook *mComicConversatinBook = (ComicConversationBook *)[comicsArray[indexPath.section] objectAtIndex:indexPath.row];
 
     if ([mComicConversatinBook.conversationType isEqualToString:CONVERSTION_TYPE_COMIC])
     {
+        
+        
+        
         __block PrivateConversationCell* cell= (PrivateConversationCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         
         cell = nil;
-        
+
         if (cell == nil)
         {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PrivateConversationCell" owner:self options:nil];
@@ -747,7 +754,7 @@
             comic.Tag=(int)indexPath.row;
             
             ComicBook *comicBook = (ComicBook *)mComicConversatinBook.coversation[0];
-         
+
             [cell.userProfilePic sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
             
             //dinesh
@@ -761,36 +768,49 @@
             
             cell.lblDate.text = dateStr;
             
-            CGRect lblFrame = cell.lblComicTitle.frame;
-            
             if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
             {
-                cell.lblComicTitle.text = @"";
                 cell.lblComicTitle.hidden = YES;
-
-                cell.topConstraintComicView.constant = -cell.lblComicTitle.frame.size.height + 8;
-                cell.heightConstraintComicView.constant = cell.lblComicTitle.frame.size.height - 10;
-                [cell layoutIfNeeded];
+                cell.heightConstraintComicTitle.constant = 0;
                 
             }
             else
             {
-                cell.lblComicTitle.text = comicBook.comicTitle;
                 cell.lblComicTitle.hidden = NO;
+                cell.lblComicTitle.text = comicBook.comicTitle;
                 
-                cell.lblComicTitle.frame = lblFrame;
-                
-                cell.topConstraintComicView.constant = 5;
-                
-                cell.heightConstraintComicView.constant = 0;
-
-                [cell layoutIfNeeded];
+                cell.heightConstraintComicTitle.constant = 60;
             }
             
+            //dinesh
+            cell.mUserName.text = comicBook.userDetail.firstName;
+  
             
-            comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+            // New Code - Adnan
+            [cell layoutIfNeeded];
+           
             
-            [cell.viewComicBook addSubview:comic.view];
+            CGFloat width = ComicWidthIPhone5;
+            
+            if (IS_IPHONE_5)
+            {
+                width = ComicWidthIPhone5;
+            }
+            else if (IS_IPHONE_6)
+            {
+                width = ComicWidthIPhone6;
+                
+            }
+            else if (IS_IPHONE_6P)
+            {
+                width = ComicWidthIPhone6plus;
+            }
+            
+            comic.view.frame = CGRectMake(0, 0, width, CGRectGetHeight(cell.viewComicBook.frame));
+            
+            //  comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(container.frame), CGRectGetHeight(container.frame));
+            
+            //            [comic setImages: [self setupImages:indexPath]];
             
             // vishnu
             NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
@@ -809,12 +829,26 @@
                     [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
                 }
             }
-            
-            //        [comic setImages: [self setupImages:indexPath]];
             [comic setSlidesArray:slidesArray];
+            [comic setAllSlideImages:slidesArray];
             [comic setupBook];
             [self addChildViewController:comic];
+            [ comic.view setTranslatesAutoresizingMaskIntoConstraints:YES];
+            //[self setBoundary:0 :0 toView:container addView:comic.view];
             
+            [ComicBookDict setObject:comic forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+            
+            
+            CGRect frame = comic.view.frame;
+            frame.origin.y = 0;
+            frame.size.width = width;
+            
+            comic.view.frame = frame;
+            
+            // comic.pageViewController.view.frame = CGRectMake(0, 0, 0, 0);
+            
+            [cell.viewComicBook addSubview:comic.view];
+
             [ComicBookDict setObject:comic forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
             
             if ([comicBook.userDetail.userId isEqualToString:[AppHelper getCurrentLoginId]])
@@ -828,14 +862,62 @@
                     cell.mChatStatus.text = @"Unread";
                 }
             }
-            
         }
         
-        ComicBookVC *comic=[self.storyboard instantiateViewControllerWithIdentifier:@"ComicBookVC"];
-        comic.delegate=self;
-        comic.Tag=(int)indexPath.row;
+//        __block PrivateConversationCell* cell= (PrivateConversationCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+//        
+//        cell = nil;
+//        
+//        if (cell == nil)
+//        {
+//            
+//            
+//            if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+//            {
+//                cell.lblComicTitle.hidden = YES;
+//                cell.heightConstraintComicTitle.constant = 0;
+//                
+//            }
+//            else
+//            {
+//                cell.lblComicTitle.hidden = NO;
+//                cell.lblComicTitle.text = comicBook.comicTitle;
+//                
+//                cell.heightConstraintComicTitle.constant = 60;
+//            }
+//            
+//            
+//            comic.view.frame = CGRectMake(0, 0, CGRectGetWidth(cell.viewComicBook.frame), CGRectGetHeight(cell.viewComicBook.frame));
+//            
+//            [cell.viewComicBook addSubview:comic.view];
+//            
+//            // vishnu
+//            NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+//            [slidesArray addObjectsFromArray:comicBook.slides];
+//            
+//            // To repeat the cover image again on index page as the first slide.
+//            if(slidesArray.count > 1) {
+//                [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+//                
+//                // Adding a sample slide to array to maintain the logic
+//                Slides *slides = [Slides new];
+//                [slidesArray insertObject:slides atIndex:1];
+//                
+//                // vishnuvardhan logic for the second page
+//                if(6<slidesArray.count) {
+//                    [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+//                }
+//            }
+//            
+//            //        [comic setImages: [self setupImages:indexPath]];
+//            [comic setSlidesArray:slidesArray];
+//            [comic setupBook];
+//            [self addChildViewController:comic];
+//            
+//            
+//        }
         
-        
+             
         return cell;
     }
     else
@@ -948,47 +1030,29 @@
     
     if ([mComicConversatinBook.conversationType isEqualToString:CONVERSTION_TYPE_COMIC])
     {
-        
-        int height=0;
-        
-        if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+        if (allCellFrameHeight.count == 0 || allCellFrameHeight == nil)
         {
-            if(IS_IPHONE_5)
+            return [self getHeightForCell:indexPath withComic:comicBook];
+        }
+        else if (allCellFrameHeight.count > 0)
+        {
+            // id height =  allCellFrameHeight[indexPath.row];
+            
+            if (allCellFrameHeight.count > indexPath.row + 1)
             {
-                height=149;
+                id height =  allCellFrameHeight[indexPath.row];
+                
+                return [height floatValue];
             }
-            else if(IS_IPHONE_6)
+            else
             {
-                height= 179;
-            }
-            else if(IS_IPHONE_6P)
-            {
-                height= 209;
+                return [self getHeightForCell:indexPath withComic:comicBook];
             }
         }
         else
         {
-            if(IS_IPHONE_5)
-            {
-                height=89;
-            }
-            else if(IS_IPHONE_6)
-            {
-                height= 119;
-            }
-            else if(IS_IPHONE_6P)
-            {
-                height= 149;
-            }
+            return [self getHeightForCell:indexPath withComic:comicBook];
         }
-        
-        if (![comicBook.userDetail.userId isEqualToString:[AppHelper getCurrentLoginId]])
-        {
-            height = height - 20;
-        }
-        
-        
-        return self.initialHeight - height;
     }
     else if ([mComicConversatinBook.conversationType isEqualToString:CONVERSTION_TYPE_TEXT])
     {
@@ -1049,6 +1113,83 @@
     
     
 }
+
+- (CGFloat)getHeightForCell:(NSIndexPath *)indexPath withComic:(ComicBook *)comicBook
+{
+    ComicBookVC*comic=[self.storyboard instantiateViewControllerWithIdentifier:@"ComicBookVC"];
+    
+    comic.delegate=self;
+    comic.Tag=(int)indexPath.row;
+    
+    CGFloat width = ComicWidthIPhone5;
+    
+    if (IS_IPHONE_5)
+    {
+        width = ComicWidthIPhone5;
+    }
+    else if (IS_IPHONE_6)
+    {
+        width = ComicWidthIPhone6;
+        
+    }
+    else if (IS_IPHONE_6P)
+    {
+        width = ComicWidthIPhone6plus;
+    }
+    
+    comic.view.frame = CGRectMake(0, 0, width, 0);
+   // ComicBook *comicBook = [comicArray objectAtIndex:indexPath.row];
+    // vishnu
+    NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+    [slidesArray addObjectsFromArray:comicBook.slides];
+    
+    // To repeat the cover image again on index page as the first slide.
+    if(slidesArray.count > 1) {
+        [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+        
+        // Adding a sample slide to array to maintain the logic
+        Slides *slides = [Slides new];
+        [slidesArray insertObject:slides atIndex:1];
+        
+        // vishnuvardhan logic for the second page
+        if(6<slidesArray.count) {
+            [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+        }
+    }
+    [comic setSlidesArray:slidesArray];
+    [comic setAllSlideImages:slidesArray];
+    [comic setupBook];
+    [self addChildViewController:comic];
+    [ comic.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    //[self setBoundary:0 :0 toView:container addView:comic.view];
+    
+    
+    
+    
+    CGRect frame = comic.view.frame;
+    frame.origin.y = 0;
+    //        frame.size.width = CGRectGetWidth(cell.viewComicBook.frame);
+    comic.view.frame = frame;
+   
+    if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+    {
+        double cellHeight = comic.view.bounds.size.height + 20 + 15;
+        
+        [allCellFrameHeight addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+        
+        return cellHeight;
+    }
+    else
+    {
+        double cellHeight = comic.view.bounds.size.height + 60 + 20 + 15;
+        
+        [allCellFrameHeight addObject:[NSString stringWithFormat:@"%f",cellHeight]];
+        
+        return cellHeight;
+    }
+    
+}
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -1282,6 +1423,12 @@
     [PrivateConversationAPIManager getPrivateConversationWithFriendId:self.friendObj.friendId
                                                         currentUserId:[AppHelper getCurrentLoginId]
                                                          SuccessBlock:^(id object) {
+                                                             
+                                                             
+                                                             
+                                                             
+                                                             
+                                                             
                                                              NSLog(@"%@", object);
                                                              NSError *error;
                                                              /*ComicsModel *comicsModel = [MTLJSONAdapter modelOfClass:ComicsModel.class fromJSONDictionary:[object valueForKey:@"data"] error:&error];*/

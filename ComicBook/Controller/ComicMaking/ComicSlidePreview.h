@@ -8,8 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@class ComicSlidePreview;
+
+@protocol ComicSlidePreviewDelegate <NSObject>
+
+@optional
+
+- (void)didFrameChange:(ComicSlidePreview*)view withFrame:(CGRect)frame;
+
+@end
+
 @interface ComicSlidePreview : UIViewController
 
+@property (nonatomic, assign) id<ComicSlidePreviewDelegate> delegate;
+@property (nonatomic, strong) UIView *viewWhiteBorder;
+@property (strong, nonatomic) UIImageView *bookBackground;
 
 -(id)initWithFrame:(CGRect)frame;
 - (void)setupComicSlidePreview:(NSArray *)slides;
