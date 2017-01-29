@@ -32,7 +32,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (self.fontNames.count <= 6) {
+    if (self.fontNames.count <= 7) {
         self.tableViewHeightConstraint.constant = self.fontNames.count * TitleFontTableViewCellHeight;
     } else {
         self.tableViewHeightConstraint.constant = 6 * TitleFontTableViewCellHeight; //6 is max number of visible cells
