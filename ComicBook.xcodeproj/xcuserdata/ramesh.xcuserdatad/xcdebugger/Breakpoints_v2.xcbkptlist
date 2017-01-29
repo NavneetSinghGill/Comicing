@@ -120,7 +120,7 @@
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/Auth/CropRegisterViewController.m"
-                  timestampString = "506612742.545471"
+                  timestampString = "507410743.502189"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "318"
@@ -135,7 +135,7 @@
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/Auth/CropRegisterViewController.m"
-                  timestampString = "506612742.547481"
+                  timestampString = "507410743.505203"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "318"
@@ -150,7 +150,7 @@
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/Auth/CropRegisterViewController.m"
-                  timestampString = "506612742.549421"
+                  timestampString = "507410743.508706"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "318"
@@ -165,7 +165,7 @@
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/Auth/CropRegisterViewController.m"
-                  timestampString = "506612742.551344"
+                  timestampString = "507410743.511649"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "320"
@@ -213,22 +213,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ComicBook/Controller/ComicMaking/RowButtonsViewController.m"
-            timestampString = "506008784.05241"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
-            landmarkName = "-btnBubbleTap:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
             timestampString = "506607427.16711"
             startingColumnNumber = "9223372036854775807"
@@ -237,99 +221,66 @@
             endingLineNumber = "2436"
             landmarkName = "-closeBubbleList"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "506607427.16711"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5254"
-            endingLineNumber = "5254"
-            landmarkName = "-addComicItem:ItemImage:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "506607427.16711"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5249"
-            endingLineNumber = "5249"
-            landmarkName = "-addComicItem:ItemImage:rectValue:TranformData:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "506607427.16711"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5230"
-            endingLineNumber = "5230"
-            landmarkName = "-doRemoveItem:"
-            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__42-[ComicMakingViewController doRemoveItem:]_block_invoke"
+                  symbolName = "__44-[ComicMakingViewController closeBubbleList]_block_invoke_2.1057"
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-                  timestampString = "506612742.578209"
+                  timestampString = "507410743.532057"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "5230"
-                  endingLineNumber = "5230"
-                  offsetFromSymbolStart = "176">
+                  startingLineNumber = "2437"
+                  endingLineNumber = "2437"
+                  offsetFromSymbolStart = "220">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.1943"
+                  symbolName = "__copy_helper_block_.1058"
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-                  timestampString = "506612742.581056"
+                  timestampString = "507410743.535239"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "5230"
-                  endingLineNumber = "5230"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.1944"
-                  moduleName = "Comicing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-                  timestampString = "506612742.583391"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "5230"
-                  endingLineNumber = "5230"
+                  startingLineNumber = "2437"
+                  endingLineNumber = "2437"
                   offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.1059"
+                  moduleName = "Comicing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+                  timestampString = "507410743.538105"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2437"
+                  endingLineNumber = "2437"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__44-[ComicMakingViewController closeBubbleList]_block_invoke.1061"
+                  moduleName = "Comicing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+                  timestampString = "507410743.541701"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2439"
+                  endingLineNumber = "2439"
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -344,26 +295,10 @@
             timestampString = "506607427.16711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4553"
-            endingLineNumber = "4553"
-            landmarkName = "-addAnimatedImageView:ComicItemImage:rectValue:Tranform:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-            timestampString = "506607427.16711"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2647"
             endingLineNumber = "2647"
-            landmarkName = "@implementation ComicMakingViewController"
-            landmarkType = "3">
+            landmarkName = "-handleBubbleTextFrame:frame:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -433,16 +368,16 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__54-[ComicMakingViewController panGestureBubbleDetected:]_block_invoke"
+                  symbolName = "-[ComicMakingViewController panGestureBubbleDetected:]"
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-                  timestampString = "506612742.610399"
+                  timestampString = "507410743.602126"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2830"
                   endingLineNumber = "2830"
-                  offsetFromSymbolStart = "84">
+                  offsetFromSymbolStart = "468">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -452,12 +387,12 @@
                   moduleName = "Comicing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-                  timestampString = "506612742.613018"
+                  timestampString = "507410743.605307"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2830"
-                  endingLineNumber = "2830"
-                  offsetFromSymbolStart = "100">
+                  startingLineNumber = "2831"
+                  endingLineNumber = "2831"
+                  offsetFromSymbolStart = "48">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -476,85 +411,6 @@
             endingLineNumber = "2841"
             landmarkName = "-panGestureBubbleDetected:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__54-[ComicMakingViewController panGestureBubbleDetected:]_block_invoke"
-                  moduleName = "Comicing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-                  timestampString = "506612742.617166"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2842"
-                  endingLineNumber = "2842"
-                  offsetFromSymbolStart = "784">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.1216"
-                  moduleName = "Comicing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-                  timestampString = "506612742.61913"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2842"
-                  endingLineNumber = "2842"
-                  offsetFromSymbolStart = "116">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.1217"
-                  moduleName = "Comicing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-                  timestampString = "506612742.621049"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2842"
-                  endingLineNumber = "2842"
-                  offsetFromSymbolStart = "64">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ComicBook/Controller/Glide/GlideScrollViewController.m"
-            timestampString = "506107845.107477"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "694"
-            endingLineNumber = "694"
-            landmarkName = "-comicMakingItemSave:withImageView:withPrintScreen:withRemove:withImageView:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ComicBook/Controller/Glide/GlideScrollViewController.m"
-            timestampString = "506107890.573976"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "711"
-            endingLineNumber = "711"
-            landmarkName = "-comicMakingItemSave:withImageView:withPrintScreen:withRemove:withImageView:"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -571,38 +427,6 @@
             endingLineNumber = "2352"
             landmarkName = "-openBubbleList"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ComicMakingViewController openBubbleList]"
-                  moduleName = "Comicing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-                  timestampString = "506612742.632592"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2353"
-                  endingLineNumber = "2353"
-                  offsetFromSymbolStart = "296">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__43-[ComicMakingViewController openBubbleList]_block_invoke"
-                  moduleName = "Comicing"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
-                  timestampString = "506612742.634783"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2354"
-                  endingLineNumber = "2354"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -667,6 +491,68 @@
             endingLineNumber = "2561"
             landmarkName = "-openSpeach:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__40-[ComicMakingViewController openSpeach:]_block_invoke.1142"
+                  moduleName = "Comicing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+                  timestampString = "507410743.645299"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2561"
+                  endingLineNumber = "2561"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_.1143"
+                  moduleName = "Comicing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+                  timestampString = "507410743.648105"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2561"
+                  endingLineNumber = "2561"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.1144"
+                  moduleName = "Comicing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+                  timestampString = "507410743.651689"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2561"
+                  endingLineNumber = "2561"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__40-[ComicMakingViewController openSpeach:]_block_invoke.1146"
+                  moduleName = "Comicing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/Comicing/ComicBook/Controller/ComicMaking/ComicMakingViewController.m"
+                  timestampString = "507410743.654726"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2562"
+                  endingLineNumber = "2562"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
