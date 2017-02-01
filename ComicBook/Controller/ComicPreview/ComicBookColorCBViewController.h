@@ -10,7 +10,8 @@
 
 @protocol ComicBookColorCBViewControllerDelegate <NSObject>
 
-- (void)getSelectedColor:(UIColor *)color;
+//- (void)getSelectedColor:(UIColor *)color;
+- (void)getSelectedColor:(UIColor *)color andComicBackgroundImageName:(NSString *)backgroundImageName;
 
 @end
 

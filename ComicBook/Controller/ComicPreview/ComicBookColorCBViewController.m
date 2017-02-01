@@ -16,9 +16,21 @@
 
 #define ColorViewTag 150
 
-@interface ComicBookColorCBViewController ()
+@interface ComicBookColorCBViewController () {
+    NSArray *imageNames;
+}
+
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *circle1WidthConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *circle2WidthConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *circle3WidthConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *circle4WidthConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *circle5WidthConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *circle6WidthConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *circle7WidthConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *circle8WidthConstraint;
 
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *originTopConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *originTrailingConstraint;
 
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *innerCircle1TopConstraint;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *innerCircle1TrailingConstraint;
@@ -46,6 +58,10 @@
     [super viewDidLoad];
 
     _originTopConstraint.constant = _frameOfRainbowCircle.origin.y - 20; //20 is status bar length
+    _originTrailingConstraint.constant = 20;
+
+    [self setComicColorViewsWidthAndHeightTo:0];
+    imageNames = [NSArray arrayWithObjects:@"Purple", @"Green", @"Yellow", @"Orange", @"NBlue", @"LBlue", @"White", @"Pink", nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -73,6 +89,8 @@
     self.outerCircle4TopConstraint.constant = OuterCircleDistanceFromOrigin;
     self.outerCircle4TrailingConstraint.constant = 0;
     
+    [self setComicColorViewsWidthAndHeightTo:25];
+    
     [UIView animateWithDuration:0.5f animations:^{
         [self.view layoutIfNeeded];
     }];
@@ -85,7 +103,9 @@
 
 - (void)dismissControllerWithBounceInAnimation {
     self.innerCircle1TopConstraint.constant = self.innerCircle1TrailingConstraint.constant = self.innerCircle2TopConstraint.constant = self.innerCircle2TrailingConstraint.constant = self.innerCircle3TopConstraint.constant = self.innerCircle3TrailingConstraint.constant = self.innerCircle4TopConstraint.constant = self.innerCircle4TrailingConstraint.constant = self.outerCircle1TopConstraint.constant = self.outerCircle1TrailingConstraint.constant = self.outerCircle2TopConstraint.constant = self.outerCircle2TrailingConstraint.constant = self.outerCircle3TopConstraint.constant = self.outerCircle3TrailingConstraint.constant = self.outerCircle4TopConstraint.constant = self.outerCircle4TrailingConstraint.constant = 0;
-    
+
+    [self setComicColorViewsWidthAndHeightTo:0];
+
     [UIView animateWithDuration:0.5f animations:^{
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
@@ -96,14 +116,20 @@
 - (IBAction)someColorCircleButtonTapped:(id)sender {
     UIView *superViewOfButton = ((UIButton *)sender).superview;
     UIView *colorView = [superViewOfButton viewWithTag:ColorViewTag];
+    
+    NSString *imageName = [imageNames objectAtIndex:((UIView *)sender).tag - 201];
+    
     if (colorView) {
         if (self.delegate && [self.delegate conformsToProtocol:@protocol(ComicBookColorCBViewControllerDelegate)]) {
-            if ([self.delegate respondsToSelector:@selector(getSelectedColor:)]) {
-                [self.delegate getSelectedColor:[colorView.backgroundColor copy]];
+            if ([self.delegate respondsToSelector:@selector(getSelectedColor:andComicBackgroundImageName:)]) {
+                [self.delegate getSelectedColor:[colorView.backgroundColor copy] andComicBackgroundImageName:imageName];
             }
         }
     }
     [self dismissControllerWithBounceInAnimation];
 }
-
+- (void)setComicColorViewsWidthAndHeightTo:(NSInteger)widthHeight {
+    //Width Height are the same
+    _circle1WidthConstraint.constant = _circle2WidthConstraint.constant = _circle3WidthConstraint.constant = _circle4WidthConstraint.constant = _circle5WidthConstraint.constant = _circle6WidthConstraint.constant = _circle7WidthConstraint.constant = _circle8WidthConstraint.constant = widthHeight;
+}
 @end

@@ -12,8 +12,11 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    self.imageView.clipsToBounds= YES;
-    self.imageView.layer.borderColor= [UIColor blackColor].CGColor;
-    self.imageView.layer.borderWidth= 3.0f;
+    self.staticImageView.clipsToBounds = self.animatedImageView.clipsToBounds= YES;
+    self.staticImageView.layer.borderColor = self.animatedImageView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.staticImageView.layer.borderWidth = self.animatedImageView.layer.borderWidth = 3.0f;
+    
+    [self.contentView bringSubviewToFront:(self.comicSlideLayerType == Gif? self.staticImageView: self.animatedImageView)];
 }
+
 @end

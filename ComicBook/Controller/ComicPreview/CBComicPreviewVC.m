@@ -21,6 +21,7 @@
 #import "ShareHelper.h"
 #import "UIImage+Image.h"
 #import "AppHelper.h"
+#import "ComicTagViewController.h"
 
 #define kPreviewViewTag 12001
 
@@ -88,7 +89,6 @@
         [headerCell.horizontalAddButton addTarget:self action:@selector(didTapHorizontalButton) forControlEvents:UIControlEventTouchUpInside];
         [headerCell.verticalAddButton addTarget:self action:@selector(didTapVerticalButton) forControlEvents:UIControlEventTouchUpInside];
         [headerCell.rainbowColorCircleButton addTarget:self action:@selector(rainbowCircleTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
         headerCell.titleLabel.text = comicTitle;
         headerTitleLabel = headerCell.titleLabel;
         
@@ -105,6 +105,9 @@
             [cell.contentView addSubview:self.previewVC.view];
             [self.previewVC.view setTranslatesAutoresizingMaskIntoConstraints:NO];
             [cell.contentView constrainSubviewToAllEdges:self.previewVC.view withMargin:0.0f];
+            
+            [((CBComicPageCollectionVC *)[self.previewVC.viewControllers lastObject]).rainbowColorCircleButton addTarget:self action:@selector(rainbowCircleTapped:) forControlEvents:UIControlEventTouchUpInside];
+            
 //            [cell.contentView constrainSubviewToLeftEdge:self.previewVC.view withMargin:8.0f];
 //            [cell.contentView constrainSubviewToRightEdge:self.previewVC.view withMargin:20.0f];
 //            [cell.contentView constrainSubviewToTopEdge:self.previewVC.view withMargin:8.0f];
@@ -127,6 +130,8 @@
     }
     if ([cell isKindOfClass:[CBPreviewHeaderCell class]]) {
         height = 105;
+        //Same calculation in ComicTitleFontDropDownViewController
+        height = IS_IPHONE_5?84: (IS_IPHONE_6?94: (IS_IPHONE_6P?104: 114));
     }
     return height;
 }
@@ -139,7 +144,9 @@
     }
     
     // Show Comic Making for Horizontal image
-    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE];
+//    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE];
+    NSString *animationPath = [[NSBundle mainBundle] pathForResource:@"OOPPS" ofType:@"gif"];
+    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] baseLayer:Gif staticImage:[UIImage imageNamed:@"WOW"] animatedImage:[YYImage imageWithContentsOfFile:animationPath] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE];
     [self.dataArray addObject:model];
     __block CBComicPreviewVC* weekSelf= self;
     [self.previewVC addComicItem:model completion:^(BOOL finished) {
@@ -155,7 +162,9 @@
     }
     
     // Show Comic Making for Vertical image
-    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"ver_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT];
+//    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"ver_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT];
+    NSString *animationPath = [[NSBundle mainBundle] pathForResource:@"OMG" ofType:@"gif"];
+    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] baseLayer:StaticImage staticImage:[UIImage imageNamed:@"StickerSelectionBg"] animatedImage:[YYImage imageWithContentsOfFile:animationPath] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT];
     [self.dataArray addObject:model];
     __block CBComicPreviewVC* weekSelf= self;
     [self.previewVC addComicItem:model completion:^(BOOL finished) {
@@ -167,6 +176,7 @@
 
 - (void)rainbowCircleTapped:(UIButton *)rainbowButton {
     CGRect frameOfRainbowCircle = [rainbowButton convertRect:rainbowButton.frame toView:self.view];
+    frameOfRainbowCircle.origin.y+=10;
     UIStoryboard *mainPageStoryBoard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil];
     ComicBookColorCBViewController *comicBookColorCBViewController = [mainPageStoryBoard instantiateViewControllerWithIdentifier:@"ComicBookColorCBViewController"];
     comicBookColorCBViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -210,7 +220,7 @@
     //Add textfield
     UITextField *textField = [[UITextField alloc]initWithFrame:gesture.view.frame];
     UILabel *gestureLabel = ((UILabel *)gesture.view);
-    textField.text = [self freeFromNewLine:gestureLabel.text];
+    textField.text = gestureLabel.text;
     textField.font = gestureLabel.font;
     textField.textColor = [UIColor whiteColor];
     textField.returnKeyType = UIReturnKeyDone;
@@ -224,13 +234,7 @@
 }
 
 - (void)doneTapped:(UITextField *)textField {
-    
-    NSString *textFieldText = [self freeFromNewLine:textField.text];
-    if (textFieldText.length > 20) {
-        headerTitleLabel.text = [textFieldText stringByReplacingCharactersInRange:NSMakeRange(20, 0) withString:@"\n"];
-    } else {
-        headerTitleLabel.text = textField.text;
-    }
+    headerTitleLabel.text = textField.text;
     [textField resignFirstResponder];
     [textField removeFromSuperview];
     textField.delegate = nil;
@@ -301,29 +305,48 @@
 
 #pragma mark - ComicBookColorCBViewControllerDelegate method
 
-- (void)getSelectedColor:(UIColor *)color {
+
+- (void)getSelectedColor:(UIColor *)color andComicBackgroundImageName:(NSString *)backgroundImageName {
     comicBackgroundColor = color;
     if ([self.previewVC viewControllers].count != 0) {
         [((CBComicPageCollectionVC *)[[self.previewVC viewControllers] lastObject]).collectionView setBackgroundColor:color];
+        
+        CBComicPageCollectionVC *comicPage = ((CBComicPageCollectionVC *)[[self.previewVC viewControllers] lastObject]);
+        comicPage.comicBookBackgroundTop.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@Top",backgroundImageName]];
+        comicPage.comicBookBackgroundLeft.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@Left",backgroundImageName]];
+        comicPage.comicBookBackgroundRight.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@Right",backgroundImageName]];
+        comicPage.comicBookBackgroundBottom.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@Bottom",backgroundImageName]];
     }
     [self.tableView reloadData];
 }
 
 #pragma mark - Button actions
 
-- (void)openMainScreen {
+- (IBAction)openMainScreen {
     [AppHelper openMainPageviewController:self];
 }
 
-- (void)twitterButtonTapped:(UIButton *)sender {
+- (IBAction)arrowButtonTapped:(id)sender {
+    
+}
+
+- (IBAction)tagButtonTapped:(id)sender {
+    UIStoryboard *mainPageStoryBoard = [UIStoryboard storyboardWithName:@"Main_MainPage" bundle:nil];
+    ComicTagViewController *comicTagViewController = [mainPageStoryBoard instantiateViewControllerWithIdentifier:@"ComicTagViewController"];
+    comicTagViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    comicTagViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:comicTagViewController animated:YES completion:nil];
+}
+
+- (IBAction)twitterButtonTapped:(UIButton *)sender {
     [self doShareTo:TWITTER ShareImage:[UIImage imageNamed:@"comicBookBackground"]];
 }
 
-- (void)facebookButtonTapped:(UIButton *)sender {
+- (IBAction)facebookButtonTapped:(UIButton *)sender {
     [self doShareTo:FACEBOOK ShareImage:[UIImage imageNamed:@"comicBookBackground"]];
 }
 
-- (void)instagramButtonTapped:(UIButton *)sender {
+- (IBAction)instagramButtonTapped:(UIButton *)sender {
     [self doShareTo:INSTAGRAM ShareImage:[UIImage imageNamed:@"comicBookBackground"]];
 }
 

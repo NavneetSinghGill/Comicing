@@ -16,4 +16,6 @@
 
 @property (strong, nonatomic) NSString *fontName;
 
+@property (strong, nonatomic) NSString *fontName;
+
 @end
