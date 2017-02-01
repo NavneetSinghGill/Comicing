@@ -82,13 +82,13 @@
 		<string>Myriad Roman.ttf</string>
 		<string>ARLRDBD.TTF</string>
 		<string>arielBlack.ttf</string>
-        <string>Be Bright.ttf</string>
-        <string>BLACKHAWK.ttf</string>
-        <string>Centuma-Regular.ttf</string>
-        <string>Auther Typeface.ttf</string>
-        <string>Edinburgh-Regular.ttf</string>
-        <string>Sweet Sucker Punch.ttf</string>
-        <string>The Sweetest Thing.ttf</string>
+		<string>Be Bright.ttf</string>
+		<string>BLACKHAWK.ttf</string>
+		<string>Centuma-Regular.ttf</string>
+		<string>Auther Typeface.ttf</string>
+		<string>Edinburgh-Regular.ttf</string>
+		<string>Sweet Sucker Punch.ttf</string>
+		<string>The Sweetest Thing.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

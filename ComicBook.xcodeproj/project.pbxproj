@@ -4069,7 +4069,7 @@
 				TargetAttributes = {
 					845090741C2B1343004DAE99 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = BK9SLXL3BD;
+						DevelopmentTeam = PV7F3V653B;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -4837,7 +4837,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = BK9SLXL3BD;
+				DEVELOPMENT_TEAM = PV7F3V653B;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4858,9 +4858,9 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.16G.16G;
+				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "30a904c1-cae8-460a-99d5-ca79956b127f";
+				PROVISIONING_PROFILE = "7a16a47a-f61f-492d-b36e-1b0e5adefb76";
 				PROVISIONING_PROFILE_SPECIFIER = comicBookDevelopement;
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4877,7 +4877,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = BK9SLXL3BD;
+				DEVELOPMENT_TEAM = PV7F3V653B;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4898,9 +4898,9 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.16G.16G;
+				PRODUCT_BUNDLE_IDENTIFIER = com.victor.comicbook;
 				PRODUCT_NAME = Comicing;
-				PROVISIONING_PROFILE = "30a904c1-cae8-460a-99d5-ca79956b127f";
+				PROVISIONING_PROFILE = "7a16a47a-f61f-492d-b36e-1b0e5adefb76";
 				PROVISIONING_PROFILE_SPECIFIER = comicBookDevelopement;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
