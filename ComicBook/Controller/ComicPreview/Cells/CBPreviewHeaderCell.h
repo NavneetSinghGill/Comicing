@@ -12,6 +12,7 @@
 
 - (void)holdGesture:(UIView *)view;
 - (void)tapGesture:(UIView *)view;
+- (void)textUpdated:(NSString *)text;
 
 @end
 

@@ -202,7 +202,6 @@
 
 - (void)getSelectedFontName:(NSString *)fontName andTitle:(NSString *)title {
     titleFontName = fontName;
-    comicTitle = title;
     [self.tableView reloadData];
 }
 
@@ -240,6 +239,10 @@
 
 - (void)holdGesture:(UIView *)view {
     [self openFontDropDown:view];
+}
+
+- (void)textUpdated:(NSString *)text {
+    comicTitle = text;
 }
 
 #pragma mark - Button actions

@@ -65,6 +65,9 @@
     if ([text isEqualToString:@"\n"]) {
         _gestureButton.hidden = NO;
         [textView resignFirstResponder];
+        if (_delegate && [_delegate respondsToSelector:@selector(textUpdated:)]) {
+            [_delegate textUpdated:_titleTextView.text];
+        }
         return NO;
     }
     
