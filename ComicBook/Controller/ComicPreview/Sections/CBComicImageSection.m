@@ -35,7 +35,15 @@
     }
     
     CBComicItemModel* model= [self.dataArray objectAtIndex:indexPath.row];
-    cell.imageView.image= model.image;
+    cell.staticImageView.image = model.staticImage;
+    cell.animatedImageView.image = model.animatedImage;
+    cell.comicSlideLayerType = model.comicSlideLayerType;
+    
+    if (model.comicSlideLayerType == Gif) {
+        [cell.contentView bringSubviewToFront:cell.staticImageView];
+    } else {
+        [cell.contentView bringSubviewToFront:cell.animatedImageView];
+    }
     
     return cell;
 }

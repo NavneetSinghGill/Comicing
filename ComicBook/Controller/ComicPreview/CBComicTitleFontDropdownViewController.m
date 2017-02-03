@@ -7,11 +7,13 @@
 //
 
 #import "CBComicTitleFontDropdownViewController.h"
+#import "AppConstants.h"
 
 @interface CBComicTitleFontDropdownViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property(strong, nonatomic) NSMutableArray *fontNames;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *viewTopConstraint;
 
 @end
 
@@ -24,12 +26,13 @@
     [super viewDidLoad];
     
     _fontNames = [NSMutableArray arrayWithObjects:@"Be Bright", @"BLACKHAWK", @"Centuma", @"Auther Typeface", @"Edinburgh-Regular", @"Sweet Sucker Punch", @"The Sweetest Thing", nil];
+    _viewTopConstraint.constant = IS_IPHONE_5?84: (IS_IPHONE_6?94: (IS_IPHONE_6P?104: 114));;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (self.fontNames.count <= 6) {
+    if (self.fontNames.count <= 7) {
         self.tableViewHeightConstraint.constant = self.fontNames.count * TitleFontTableViewCellHeight;
     } else {
         self.tableViewHeightConstraint.constant = 6 * TitleFontTableViewCellHeight; //6 is max number of visible cells

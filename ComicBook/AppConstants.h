@@ -4,9 +4,8 @@
 //
 
 /* API Calles */
-
-//#define SERVER_PREFERENCE @"production"
-#define SERVER_PREFERENCE @"dev"
+#define SERVER_PREFERENCE @"production"
+//#define SERVER_PREFERENCE @"dev"
 
 
 #define SERVER_URL ([SERVER_PREFERENCE isEqualToString:@"production"] ? @"http://162.244.67.15/" : @"http://staging.comicing.cc/")
@@ -122,8 +121,10 @@
  //6plus height 414 × 736  375 × 667  320 × 480
 
 
-
-
+typedef enum {
+    Gif = 101,
+    StaticImage = 102
+} ComicSlideLayerType;
 
 
 
