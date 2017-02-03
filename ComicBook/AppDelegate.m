@@ -73,8 +73,6 @@
     {
         //Already register
     }
-    
-    
     self.dataManager = [[DataManager alloc] init];
 
     [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"AppStart" Attributes:nil];
