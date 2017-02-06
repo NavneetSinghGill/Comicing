@@ -34,6 +34,8 @@
 @property (nonatomic, strong) CBComicPageViewController* previewVC;
 @property (nonatomic, strong) ZoomInteractiveTransition * transition;
 @property (strong, nonatomic) UIView *transitionView;
+@property (strong, nonatomic) NSString *fileNameToSave;
+
 @end
 
 @implementation CBComicPreviewVC
@@ -53,6 +55,21 @@
     self.previewVC.delegate= self;
     [self setupSections];
     [self.tableView reloadData];
+    
+    if(self.comicType == ReplyComic && self.replyType == FriendReply) {
+        self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_F%@", self.friendOrGroupId];
+    } else if(self.comicType == ReplyComic && self.replyType == GroupReply) {
+        self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_G%@", self.friendOrGroupId];
+    } else {
+        self.fileNameToSave = @"ComicSlide";
+    }
+    
+//    [self prepareView];
+    
+    if (self.comicSlides == nil || self.comicSlides.count == 0) {
+        [self pushAddSlideTap:NO];
+    }
+    
 }
 
 #pragma mark - ZoomTransitionProtocol
@@ -377,6 +394,31 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - handle 
+- (void)pushAddSlideTap:(BOOL)isWideSlide
+{
+    
+    ComicMakingViewController *cmv = [self.storyboard instantiateViewControllerWithIdentifier:@"ComicMakingViewController"];
+    
+    if (isWideSlide == YES)
+    {
+        cmv.isWideSlide = YES;
+    }
+    else
+    {
+        cmv.isWideSlide = NO;
+        
+    }
+    
+    cmv.isNewSlide = YES;
+    
+    cmv.comicType = self.comicType;
+    cmv.replyType = self.replyType;
+    cmv.friendOrGroupId = self.friendOrGroupId;
+    cmv.shareId = self.shareId;
+    [self.navigationController pushViewController:cmv animated:NO];
 }
 
 @end

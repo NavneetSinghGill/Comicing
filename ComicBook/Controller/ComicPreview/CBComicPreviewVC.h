@@ -7,7 +7,19 @@
 //
 
 #import "CBBaseTableViewController.h"
+#import "ComicMakingViewController.h"
+#import "ZoomInteractiveTransition.h"
+#import "ZoomTransitionProtocol.h"
+#import "Utilities.h"
+#import "SlidePreviewScrollView.h"
 
 @interface CBComicPreviewVC : CBBaseTableViewController
+
+
+@property (nonatomic) ComicType comicType;
+@property (nonatomic) ReplyType replyType;
+@property (nonatomic) NSString *friendOrGroupId;
+@property (nonatomic) NSString *shareId;
+@property (strong, nonatomic) NSMutableArray *comicSlides;
 
 @end
