@@ -53,9 +53,8 @@
     self.previewVC= [[CBComicPageViewController alloc] initWithNibName:@"CBComicPageViewController" bundle:nil];
     self.previewVC.view.tag= kPreviewViewTag;
     self.previewVC.delegate= self;
-    [self setupSections];
-    [self.tableView reloadData];
     
+    //Added By ramesh-> for handle slide type
     if(self.comicType == ReplyComic && self.replyType == FriendReply) {
         self.fileNameToSave = [NSString stringWithFormat:@"ComicSlide_F%@", self.friendOrGroupId];
     } else if(self.comicType == ReplyComic && self.replyType == GroupReply) {
@@ -64,12 +63,20 @@
         self.fileNameToSave = @"ComicSlide";
     }
     
-//    [self prepareView];
+    [self prepareView];
     
-    if (self.comicSlides == nil || self.comicSlides.count == 0) {
+    if (self.dataArray == nil || self.dataArray.count == 0) {
         [self pushAddSlideTap:NO];
     }
+    //End
     
+    [self setupSections];
+    [self.tableView reloadData];
+}
+
+- (void)prepareView
+{
+    self.dataArray = [self getDataFromFile];
 }
 
 #pragma mark - ZoomTransitionProtocol
@@ -152,36 +159,34 @@
     if (self.dataArray.count == 8) {
         return;
     }
-    
+    [self pushAddSlideTap:YES];
     // Show Comic Making for Horizontal image
-//    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"hor_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE];
-    NSString *animationPath = [[NSBundle mainBundle] pathForResource:@"OOPPS" ofType:@"gif"];
-    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] baseLayer:Gif staticImage:[UIImage imageNamed:@"WOW"] animatedImage:[YYImage imageWithContentsOfFile:animationPath] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE];
-    [self.dataArray addObject:model];
-    __block CBComicPreviewVC* weekSelf= self;
-    [self.previewVC addComicItem:model completion:^(BOOL finished) {
-        if(finished){
-            [weekSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-        }
-    }];
+//    NSString *animationPath = [[NSBundle mainBundle] pathForResource:@"OOPPS" ofType:@"gif"];
+//    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] baseLayer:Gif staticImage:[UIImage imageNamed:@"WOW"] animatedImage:[YYImage imageWithContentsOfFile:animationPath] orientation:COMIC_ITEM_ORIENTATION_LANDSCAPE];
+//    [self.dataArray addObject:model];
+//    __block CBComicPreviewVC* weekSelf= self;
+//    [self.previewVC addComicItem:model completion:^(BOOL finished) {
+//        if(finished){
+//            [weekSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+//        }
+//    }];
 }
 
 - (void)didTapVerticalButton{
     if (self.dataArray.count == 8) {
         return;
     }
-    
+    [self pushAddSlideTap:NO];
     // Show Comic Making for Vertical image
-//    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] image:[UIImage imageNamed:@"ver_image.jpg"] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT];
-    NSString *animationPath = [[NSBundle mainBundle] pathForResource:@"OMG" ofType:@"gif"];
-    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] baseLayer:StaticImage staticImage:[UIImage imageNamed:@"StickerSelectionBg"] animatedImage:[YYImage imageWithContentsOfFile:animationPath] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT];
-    [self.dataArray addObject:model];
-    __block CBComicPreviewVC* weekSelf= self;
-    [self.previewVC addComicItem:model completion:^(BOOL finished) {
-        if(finished){
-            [weekSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
-        }
-    }];
+//    NSString *animationPath = [[NSBundle mainBundle] pathForResource:@"OMG" ofType:@"gif"];
+//    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] baseLayer:StaticImage staticImage:[UIImage imageNamed:@"StickerSelectionBg"] animatedImage:[YYImage imageWithContentsOfFile:animationPath] orientation:COMIC_ITEM_ORIENTATION_PORTRAIT];
+//    [self.dataArray addObject:model];
+//    __block CBComicPreviewVC* weekSelf= self;
+//    [self.previewVC addComicItem:model completion:^(BOOL finished) {
+//        if(finished){
+//            [weekSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+//        }
+//    }];
 }
 
 - (void)rainbowCircleTapped:(UIButton *)rainbowButton {
@@ -396,7 +401,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - handle 
+#pragma mark - handle // Ramesh Methods
+
 - (void)pushAddSlideTap:(BOOL)isWideSlide
 {
     
@@ -419,6 +425,10 @@
     cmv.friendOrGroupId = self.friendOrGroupId;
     cmv.shareId = self.shareId;
     [self.navigationController pushViewController:cmv animated:NO];
+}
+
+-(NSMutableArray*)getDataFromFile{
+    return [AppHelper getDataFromFile:self.fileNameToSave];
 }
 
 @end
