@@ -542,7 +542,16 @@ static AppHelper *_appHelper = nil;
     timer==nil?nil:[timer invalidate];
     timer = nil;
 }
-
++(NSString*)SaveImageFile:(NSData*)imageDataObj type:(NSString*)fileType{
+    NSString *UUID = [[NSUUID UUID] UUIDString];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@",UUID,fileType] ]; //Add the file name
+    [imageDataObj writeToFile:filePath atomically:YES]; //Write the file
+    imageDataObj = nil;
+    return [NSString stringWithFormat:@"%@.%@",UUID,fileType];
+}
 
 #pragma mark DB
 

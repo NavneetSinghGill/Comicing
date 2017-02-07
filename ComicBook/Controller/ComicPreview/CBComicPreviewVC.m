@@ -25,7 +25,7 @@
 
 #define kPreviewViewTag 12001
 
-@interface CBComicPreviewVC () <CBComicPageViewControllerDelegate, ZoomTransitionProtocol, UIGestureRecognizerDelegate, TitleFontDelegate, ComicBookColorCBViewControllerDelegate, CBPreviewHeaderDelegate> {
+@interface CBComicPreviewVC () <CBComicPageViewControllerDelegate, ZoomTransitionProtocol, UIGestureRecognizerDelegate, TitleFontDelegate, ComicBookColorCBViewControllerDelegate, CBPreviewHeaderDelegate,ComicMakingViewControllerDelegate> {
     UILabel *headerTitleTextView;
     NSString *comicTitle;
     NSString *titleFontName;
@@ -35,7 +35,8 @@
 @property (nonatomic, strong) ZoomInteractiveTransition * transition;
 @property (strong, nonatomic) UIView *transitionView;
 @property (strong, nonatomic) NSString *fileNameToSave;
-
+@property (strong, nonatomic) NSMutableArray *dirtySubviews;
+@property (strong, nonatomic) NSMutableArray *dirtysubviewData;
 @end
 
 @implementation CBComicPreviewVC
@@ -419,7 +420,7 @@
     }
     
     cmv.isNewSlide = YES;
-    
+    cmv.delegate = self;
     cmv.comicType = self.comicType;
     cmv.replyType = self.replyType;
     cmv.friendOrGroupId = self.friendOrGroupId;
@@ -429,6 +430,312 @@
 
 -(NSMutableArray*)getDataFromFile{
     return [AppHelper getDataFromFile:self.fileNameToSave];
+}
+
+#pragma mark - ComicMakingViewControllerDelegate
+
+- (void)comicMakingItemRemoveAll:(ComicPage *)comicPage removeAll:(BOOL)isRemoveAll{
+    
+    if (self.comicPageComicItems != nil) {
+        //Remove subviews
+        [self.comicPageComicItems.subviews removeAllObjects];
+        [self.comicPageComicItems.subviewData removeAllObjects];
+    }
+    
+}
+- (void)comicMakingItemSave:(ComicPage *)comicPage
+              withImageView:(id)comicItemData
+            withPrintScreen:(UIImage *)printScreen
+                 withRemove:(BOOL)remove
+              withImageView:(UIImageView *)imageView
+{
+    
+    if (self.comicPageComicItems == nil) {
+        self.comicPageComicItems = [[ComicPage alloc] init];
+    }
+    if (imageView == nil)
+        return;
+    
+    dispatch_queue_t autoSaveCurrentDrawQueue  = dispatch_queue_create("comicItem_AutoSave", NULL);
+    dispatch_async( autoSaveCurrentDrawQueue ,
+                   ^ {
+                       @try {
+                           self.dirtysubviewData = nil;
+                           self.dirtySubviews = nil;
+                           
+                           //Removing existign data
+                           if (self.comicPageComicItems.subviews == nil) {
+                               self.comicPageComicItems.subviews = [[NSMutableArray alloc] init];
+                           }
+                           if (self.comicPageComicItems.subviewData == nil) {
+                               self.comicPageComicItems.subviewData = [[NSMutableArray alloc] init];
+                           }
+                           if (self.comicPageComicItems.subviewTranformData == nil) {
+                               self.comicPageComicItems.subviewTranformData = [[NSMutableArray alloc] init];
+                           }
+                           
+                           if (remove) {
+                               if ([self.comicPageComicItems.subviews containsObject:comicItemData]) {
+                                   
+                                   NSInteger anIndex = [self.comicPageComicItems.subviews indexOfObject:comicItemData];
+                                   if (anIndex >= 0 && [self.comicPageComicItems.subviewData count] > anIndex) {
+                                       [self.comicPageComicItems.subviewData removeObjectAtIndex:anIndex];
+                                   }
+                                   if (anIndex >= 0 && [self.comicPageComicItems.subviewTranformData count] > anIndex) {
+                                       [self.comicPageComicItems.subviewTranformData removeObjectAtIndex:anIndex];
+                                   }
+                                   [self.comicPageComicItems.subviews removeObject:comicItemData];
+                               }
+                           }else{
+                               
+                               if ([self.comicPageComicItems.subviews containsObject:comicItemData]) {
+                                   
+                                   NSInteger anIndex = [self.comicPageComicItems.subviews indexOfObject:comicItemData];
+                                   if (anIndex >= 0 && [self.comicPageComicItems.subviewData count] > anIndex) {
+                                       [self.comicPageComicItems.subviewData removeObjectAtIndex:anIndex];
+                                   }
+                                   if (anIndex >= 0 && [self.comicPageComicItems.subviewTranformData count] > anIndex) {
+                                       [self.comicPageComicItems.subviewTranformData removeObjectAtIndex:anIndex];
+                                   }
+                                   
+                                   [self.comicPageComicItems.subviews removeObject:comicItemData];
+                               }
+                               
+                               [self.comicPageComicItems.subviews addObject:comicItemData];
+                               [self.comicPageComicItems.subviewData addObject:[NSValue valueWithCGRect:((UIView*)comicItemData).frame]];
+                               [self.comicPageComicItems.subviewTranformData addObject:[NSValue valueWithCGAffineTransform:((UIView*)comicItemData).transform]];
+                               
+                               self.dirtysubviewData  =  self.comicPageComicItems.subviewData;
+                               self.dirtySubviews = self.comicPageComicItems.subviews;
+                               
+                           }
+                           
+                           self.comicPageComicItems.containerImagePath =  [AppHelper SaveImageFile:UIImagePNGRepresentation(imageView.image)/*UIImageJPEGRepresentation(imageView.image,1)*/ type:@"png"];
+                           self.comicPageComicItems.printScreenPath = [AppHelper SaveImageFile:UIImagePNGRepresentation(printScreen)/*UIImageJPEGRepresentation(printScreen, 1) */type:@"png"];
+                           
+                           NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
+                           
+                           
+                           if ([self.comicSlides count ] > self.editSlideIndex) {
+                               [self.comicSlides replaceObjectAtIndex:self.editSlideIndex withObject:data];
+                               [AppHelper saveDataToFile:self.comicSlides fileName:self.fileNameToSave];
+                           }else{
+                               [self.comicSlides addObject:data];
+                               [AppHelper saveDataToFile:self.comicSlides fileName:self.fileNameToSave];
+                           }
+                       }
+                       @catch (NSException *exception) {
+                       }
+                       @finally {
+                       }
+                   });
+    
+}
+
+
+- (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll
+                                   withImageView:(UIImageView *)imageView
+                                 withPrintScreen:(UIImage *)printScreen
+                                    withNewSlide:(BOOL)newslide withPopView:(BOOL)isPopView withIsWideSlide:(BOOL)isWideSlide
+{
+    if (isPopView)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            //Do background work
+            @try {
+                
+//                self.scrvComicSlide.isStillSaving = YES;
+                @autoreleasepool {
+                    //                    self.comicPageComicItems = nil;
+                    if (self.comicPageComicItems == nil)
+                    {
+                        self.comicPageComicItems = [[ComicPage alloc] init];
+                        
+                        self.comicPageComicItems.subviewData = self.dirtysubviewData;
+                        self.comicPageComicItems.subviews = self.dirtySubviews;
+                    }
+                    
+                    self.comicPageComicItems.containerImagePath =  [AppHelper SaveImageFile:UIImagePNGRepresentation(imageView.image) type:@"png"];
+                    self.comicPageComicItems.printScreenPath = [AppHelper SaveImageFile:UIImagePNGRepresentation(printScreen) type:@"png"];
+                    
+                    //Add time line
+                    NSDate *now = [NSDate date];
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    dateFormatter.dateFormat = @"h.mm a";
+                    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+                    self.comicPageComicItems.timelineString = [dateFormatter stringFromDate:now];
+                    dateFormatter = nil;
+                    
+                    if (isWideSlide)
+                    {
+                        self.comicPageComicItems.slideType = slideTypeWide;
+                    }
+                    else
+                    {
+                        self.comicPageComicItems.slideType = slideTypeTall;
+                    }
+                    
+                    
+                    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
+                    if (newslide)
+                    {
+                        [self.comicSlides addObject:data];
+                        [AppHelper saveDataToFile:self.comicSlides fileName:self.fileNameToSave];
+                    }
+                    else
+                    {
+                        [self.comicSlides replaceObjectAtIndex:self.editSlideIndex withObject:data];
+                        [AppHelper saveDataToFile:self.comicSlides fileName:self.fileNameToSave];
+                    }
+//                    self.scrvComicSlide.isStillSaving = NO;
+                    data = nil;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterSecondTimeGlideViewController] == YES)
+                        {
+                            // below code for slide 16
+                            if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == YES)
+                            {
+                                // open "delete a comic" Instruction
+                                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC));
+                                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                                    NSLog(@"Do some work");
+                                    
+                                    if ([InstructionView getBoolValueForSlide:kInstructionSlideE] == NO)
+                                    {
+                                        InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                                        instView.delegate = self;
+                                        [instView showInstructionWithSlideNumber:SlideNumberE withType:InstructionGIFType];
+                                        [instView setTrueForSlide:kInstructionSlideE];
+                                        
+                                        [self.view addSubview:instView];
+                                    }
+                                });
+                            }
+                        }
+                        // second time gif animation
+                        
+                        
+                        if ([InstructionView getBoolValueForSlide:kInstructionSlide14] == YES)
+                        {
+                            // "send it to friends" slide16
+                            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+                            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                                NSLog(@"Do some work");
+                                
+                                if ([InstructionView getBoolValueForSlide:kInstructionSlide16] == NO)
+                                {
+                                    InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                                    instView.delegate = self;
+                                    [instView showInstructionWithSlideNumber:SlideNumber16 withType:InstructionBubbleType];
+                                    [instView setTrueForSlide:kInstructionSlide16];
+                                    
+                                    [self.view addSubview:instView];
+                                }
+                            });
+                        }
+                        
+                        
+                        if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeGlideViewController] == YES)
+                        {
+                            // second time
+                            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsUserEnterSecondTimeGlideViewController];
+                            [[NSUserDefaults standardUserDefaults] synchronize];
+                        }
+                        
+                        // first time
+                        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsUserEnterFirstTimeGlideViewController];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        
+                        // open Instruction
+                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC));
+                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                            NSLog(@"Do some work");
+                            
+                            if ([InstructionView getBoolValueForSlide:kInstructionSlide13] == NO)
+                            {
+                                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                                instView.delegate = self;
+                                [instView showInstructionWithSlideNumber:SlideNumber13 withType:InstructionGIFType];
+                                [instView setTrueForSlide:kInstructionSlide13];
+                                
+                                [self.view addSubview:instView];
+                            }
+                        });
+                        
+                        
+                    });
+                }
+            }
+            @catch (NSException *exception) {
+            }
+            @finally {
+            }
+        });
+    }
+    else
+    {
+        //Doing main thread
+//        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen withComicSlide:comicSlides];
+        @try {
+//            self.scrvComicSlide.isStillSaving = YES;
+            @autoreleasepool {
+                if (self.comicPageComicItems == nil) {
+                    self.comicPageComicItems = [[ComicPage alloc] init];
+                    
+                    self.comicPageComicItems.subviewData = self.dirtysubviewData;
+                    self.comicPageComicItems.subviews = self.dirtySubviews;
+                }
+                
+                self.comicPageComicItems.containerImagePath =  [AppHelper SaveImageFile:UIImagePNGRepresentation(imageView.image)/*UIImageJPEGRepresentation(imageView.image,1)*/ type:@"png"];
+                self.comicPageComicItems.printScreenPath = [AppHelper SaveImageFile:UIImagePNGRepresentation(printScreen)/*UIImageJPEGRepresentation(printScreen, 1)*/ type:@"png"];
+                
+                //Add time line
+                NSDate *now = [NSDate date];
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                dateFormatter.dateFormat = @"h.mm a";
+                [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+                self.comicPageComicItems.timelineString = [dateFormatter stringFromDate:now];
+                dateFormatter = nil;
+                
+                if (isWideSlide)
+                {
+                    self.comicPageComicItems.slideType = slideTypeWide;
+                }
+                else
+                {
+                    self.comicPageComicItems.slideType = slideTypeTall;
+                }
+                
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
+                
+                if (newslide)
+                {
+                    [self.comicSlides addObject:data];
+                    [AppHelper saveDataToFile:self.comicSlides fileName:self.fileNameToSave];
+                }
+                else
+                {
+                    [self.comicSlides replaceObjectAtIndex:self.editSlideIndex withObject:data];
+                    [AppHelper saveDataToFile:self.comicSlides fileName:self.fileNameToSave];
+                }
+                
+                //                NSLog(@"************* editSlideIndex ***************");
+                //                ComicPage * sample = [NSKeyedUnarchiver unarchiveObjectWithData:comicSlides[editSlideIndex]];
+                //                NSLog(@"%@",sample.subviews);
+                //                NSLog(@"************* editSlideIndex ***************");
+                
+                self.comicPageComicItems = nil;
+                data = nil;
+            }
+        }
+        @catch (NSException *exception) {
+        }
+        @finally {
+        }
+    }
 }
 
 @end

@@ -73,6 +73,7 @@
 //-(void)AddToMainView: (UIViewController*) parentViewContent;
 +(void)openMainPageviewController:(UIViewController*)vc;
 +(void)closeMainPageviewController:(UIViewController*)vc;
++(NSString*)SaveImageFile:(NSData*)imageDataObj type:(NSString*)fileType;
 
 #pragma mark Core Data
 

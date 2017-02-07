@@ -125,7 +125,7 @@
             <objects>
                 <navigationController storyboardIdentifier="glidenavigation" navigationBarHidden="YES" id="Gtw-pU-Kh0" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="erw-YJ-ZwX"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="l5V-dE-erB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l5V-dE-erB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -267,7 +267,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dj9-uN-iwq" userLabel="Exclamation List View">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dj9-uN-iwq" userLabel="Exclamation List View">
                                 <rect key="frame" x="0.0" y="555" width="375" height="72"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jz7-3n-2Yi">
@@ -515,7 +515,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="DYK-Qv-QGQ">
-                                <rect key="frame" x="0.0" y="67" width="60" height="60"/>
+                                <rect key="frame" x="0.0" y="67.5" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -1371,7 +1371,7 @@
         <scene sceneID="3fu-be-5b5">
             <objects>
                 <navigationController navigationBarHidden="YES" id="uIc-v5-cRz" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kF0-5W-zSM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kF0-5W-zSM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1800,7 +1800,7 @@ Comicing </string>
                                 <size key="customSize" width="60" height="67.5"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="ZYm-jK-fPc" customClass="stickerCell">
-                                <rect key="frame" x="0.0" y="76" width="60" height="60"/>
+                                <rect key="frame" x="0.0" y="75.5" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>

@@ -12,6 +12,7 @@
 #import "ZoomTransitionProtocol.h"
 #import "Utilities.h"
 #import "SlidePreviewScrollView.h"
+#import "InstructionView.h"
 
 @interface CBComicPreviewVC : CBBaseTableViewController
 
@@ -21,5 +22,6 @@
 @property (nonatomic) NSString *friendOrGroupId;
 @property (nonatomic) NSString *shareId;
 @property (strong, nonatomic) NSMutableArray *comicSlides;
-
+@property (nonatomic,strong) ComicPage *comicPageComicItems;
+@property (nonatomic) NSInteger editSlideIndex;
 @end
