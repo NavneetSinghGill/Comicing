@@ -18,6 +18,7 @@
 @property (nonatomic, strong) ComicMakingViewController *parentViewController;
 
 @property (nonatomic, strong) YLImageView *imgvExclamation;
+@property (nonatomic) UISwipeGestureRecognizer *swipeDirection;
 
 @end
 
@@ -26,10 +27,13 @@
 @synthesize parentViewController;
 @synthesize btnBlackboard,btnBubble,btnCamera,btnExclamation,btnPen,btnSticker,btnText, isNewSlide, imgvExclamation;
 
+CGPoint startLocation;
+
 #pragma mark - UIViewController Methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     
     [btnExclamation setImage:nil forState:UIControlStateNormal];
     
@@ -53,7 +57,84 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeExclamation:) name:@"closeExclamation" object:nil];
+    
+    [self AddGestureToCameraButton];
 }
+
+#pragma mark- UISwipgesture implementation in camera button
+
+-(void)AddGestureToCameraButton {
+    
+    startLocation.x=self.btnCameraViewContainer.frame.origin.x;
+    startLocation.y=self.btnCameraViewContainer.frame.origin.y;
+    
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                                action:@selector(handleSwipe:)];
+    [swipe setDirection:(UISwipeGestureRecognizerDirectionUp | UISwipeGestureRecognizerDirectionDown )];
+    [self.btnCameraViewContainer addGestureRecognizer:swipe];
+    [btnCamera addGestureRecognizer:swipe];
+}
+
+-(void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
+    
+    NSLog(@"btnCamera----->%@",btnCamera);
+    // NSLog(@"swipe----->%@",swipe);
+    CGPoint location = [swipe locationInView:self.view];
+    NSLog(@"location.y----->%f",location.y);
+    //    CGFloat yOffset = self.view.frame.size.height - location.y;
+    //    NSLog(@"yOffset----->%f",yOffset);
+    //    if(yOffset > btnCamera.frame.size.height)
+    //    {
+    //        yOffset = btnCamera.frame.size.height+self.btnCamera.frame.origin.y;
+    //        NSLog(@"yOffset after----->%f",yOffset);
+    //    }
+    
+    //    CGRect frame=btnCamera.frame;
+    //    frame.origin.y=location.y;
+    //    btnCamera.frame=frame;
+    
+    
+    //  btnCamera.frame = CGRectMake(btnCamera.frame.origin.x, self.view.frame.size.height-yOffset, btnCamera.frame.size.width, btnCamera.frame.size.height);
+    
+    //    UIGestureRecognizer *recognizer = (UIGestureRecognizer*) swipe;
+    //    NSLog(@"recognizer.state------>%ld",(long)recognizer.state);
+    //    if (recognizer.state == UIGestureRecognizerStateChanged) {
+    //
+    //        CGPoint point = [recognizer locationInView:self.view];
+    //     //   btnCamera.center=point;
+    //    }
+    
+    if (swipe.direction == UISwipeGestureRecognizerDirectionUp) { // this is just for testing
+        self.swipeDirection = swipe;
+        NSLog(@"Gesture = %@", swipe);
+    }
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    for (UITouch *touch in touches ) {
+        CGPoint currentLocalation = [touch locationInView:touch.view];
+        //  if (self.swipeDirection.direction == UISwipeGestureRecognizerDirectionUp) {
+        NSLog(@"Swipe Left");
+        if (currentLocalation.y < startLocation.y) { // Startlocation is a global CGPoint.
+            NSLog(@"Current Y = %f, starting Y = %f", currentLocalation.y, startLocation.y);
+            
+            CGFloat distance =  currentLocalation.y-startLocation.y;
+            CGPoint newPosition = CGPointMake(160 - distance, 170);
+            CGPoint labelPosition = CGPointMake(160 - distance, 390);
+            self.btnCameraViewContainer.center = newPosition;
+            
+        }
+        
+        //        } else {
+        //            NSLog(@"Other direction");
+        //        }
+        
+    }
+}
+
+
+#pragma mark- End of swip Method
 
 - (IBAction)btnBlackboardTap:(UIButton *)sender
 {
@@ -137,7 +218,7 @@
                      completion:^(BOOL finished) {
                          [self checkStatusForBlackBoardWithButton:sender];
                          [parentViewController openExclamationList:^(BOOL success) {
-                            
+                             
                              [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                                  
                                  [self.btnExclamation setEnabled:NO];
@@ -370,7 +451,7 @@
             btnBubble.alpha = 0;
             btnExclamation.alpha = 0;
             imgvExclamation.alpha = 0;
-
+            
             btnSticker.alpha = 0;
             btnText.alpha = 0;
             
@@ -402,7 +483,7 @@
             btnCamera.alpha = 0;
             btnExclamation.alpha = 0;
             imgvExclamation.alpha = 0;
-
+            
             btnPen.alpha = 0;
             btnText.alpha = 0;
         }];
@@ -416,7 +497,7 @@
             btnCamera.alpha = 0;
             btnExclamation.alpha = 0;
             imgvExclamation.alpha = 0;
-
+            
             btnPen.alpha = 0;
             btnSticker.alpha = 0;
         }];
@@ -437,7 +518,7 @@
             btnCamera.alpha = 1;
             btnExclamation.alpha = 1;
             imgvExclamation.alpha = 1;
-
+            
             btnPen.alpha = 1;
             btnSticker.alpha = 1;
             btnText.alpha = 1;
@@ -452,7 +533,7 @@
             btnCamera.alpha = 1;
             btnExclamation.alpha = 1;
             imgvExclamation.alpha = 1;
-
+            
             btnPen.alpha = 1;
             btnSticker.alpha = 1;
             btnText.alpha = 1;
@@ -468,7 +549,7 @@
             btnBubble.alpha = 1;
             btnExclamation.alpha = 1;
             imgvExclamation.alpha = 1;
-
+            
             btnPen.alpha = 1;
             btnSticker.alpha = 1;
             btnText.alpha = 1;
@@ -489,7 +570,7 @@
             btnText.alpha = 1;
             btnExclamation.alpha = 0;
             imgvExclamation.alpha = 0;
-
+            
             
         }];
     }
@@ -502,7 +583,7 @@
             btnCamera.alpha = 1;
             btnExclamation.alpha = 1;
             imgvExclamation.alpha = 1;
-
+            
             btnSticker.alpha = 1;
             btnText.alpha = 1;
             btnPen.alpha = 1;
