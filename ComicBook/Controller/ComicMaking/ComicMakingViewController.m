@@ -334,7 +334,7 @@ int sliderViewWidthDeltaChange;
         });
     }
     
-    [self setUpCameraPreview];
+//    [self setUpCameraPreview];
     
     [self prepareGlideView];
     
