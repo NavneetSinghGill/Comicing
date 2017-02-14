@@ -48,9 +48,66 @@
 #import "CombineGifImages.h"
 #import "YYImage.h"
 #import "ComicBubbleView.h"
+#import <ImageIO/ImageIO.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "NSGIF.h"
+#import "PBJVision.h"
+
+#import <Photos/Photos.h>
+#import <GLKit/GLKit.h>
+#import <ImageIO/ImageIO.h>
+#import "RSSliderView.h"
+
+static NSString * const PBJViewControllerPhotoAlbum = @"Comicing";
+
 CGSize CGSizeAbsolute2(CGSize size) {
     return (CGSize){fabs(size.width), fabs(size.height)};
 }
+
+////////////
+
+#pragma mark - UIImage Additions
+
+@interface UIImage (SecretAddition)
+
++ (NSData *)writeMetadataIntoImageData:(NSData *)imageData metadata:(NSDictionary *)metadata;
+
+@end
+
+@implementation UIImage (SecretAddition)
+
++ (NSData *)writeMetadataIntoImageData:(NSData *)imageData metadata:(NSDictionary *)metadata {
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)imageData, NULL);
+    CFStringRef sourceType = CGImageSourceGetType(source);
+    
+    NSMutableData *imageDataWithMetadata = [NSMutableData data];
+    
+    CGImageDestinationRef destination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)imageDataWithMetadata, sourceType, 1, NULL);
+    if (!destination) {
+        NSLog(@"could not create image destination");
+    }
+    
+    CGImageDestinationAddImageFromSource(destination, source, 0, (__bridge CFDictionaryRef) metadata);
+    BOOL success = NO;
+    success = CGImageDestinationFinalize(destination);
+    if (!success) {
+        NSLog(@"could not finalize image at destination");
+    }
+    
+    if (destination)
+        CFRelease(destination);
+    
+    if (source)
+        CFRelease(source);
+    
+    return imageDataWithMetadata;
+}
+
+@end
+
+
+/////////////
+
 
 static void * CapturingStillImageContext = &CapturingStillImageContext;
 static void * RecordingContext = &RecordingContext;
@@ -59,7 +116,10 @@ static int CaptionViewTextViewTag = 9191;
 static CGRect CaptionTextViewMinRect;
 static RowButtonCallBack _completionHandler ;
 
-@interface ComicMakingViewController ()<ACEDrawingViewDelegate,CropStickerViewControllerDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,AVAudioRecorderDelegate,UITextViewDelegate,ZoomTransitionProtocol,UINavigationControllerDelegate,UIImagePickerControllerDelegate,InstructionViewDelegate,ComicCropViewDelegate,UIAlertViewDelegate>
+//static NSURL *videoURLForGIF;
+//static int videoFrameIndex=1;
+
+@interface ComicMakingViewController ()<ACEDrawingViewDelegate,CropStickerViewControllerDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate,AVAudioRecorderDelegate,UITextViewDelegate,ZoomTransitionProtocol,UINavigationControllerDelegate,UIImagePickerControllerDelegate,InstructionViewDelegate,ComicCropViewDelegate,UIAlertViewDelegate,PBJVisionDelegate,RSliderViewDelegate>
 {
     CGPoint backupOtherViewCenter;
     CGPoint backupToolCenter;
@@ -85,31 +145,33 @@ static RowButtonCallBack _completionHandler ;
     NSDictionary *currentWorkingAnimation;
     UITapGestureRecognizer *currentAnimationInstructionTap;
     UIPanGestureRecognizer *currentAnimationPan;
-
+    
     YYAnimatedImageView *currentAnimInstSubView;
     BOOL haveAnimationOnPage;
     BOOL pauseAnimation;
     ComicItemAnimatedComponent *refAnimatedSticker;
     ComicItemAnimatedSticker *refToCombineAnimatedSticker;
-
+    
     AnimationCollectionVC *animationCollection;
     NSInteger currentTapIndex;
     CGPoint currentAnimationTouchPoint;
-//    NSMutableArray *arrOfActiveAnimations;
+    //    NSMutableArray *arrOfActiveAnimations;
     NSInteger indexMaxRun;
-//    ComicItemAnimatedSticker *mainAnimationGifView;
+    //    ComicItemAnimatedSticker *mainAnimationGifView;
     BOOL hasStartedBezierForAnimation;
     NSMutableArray *allPointsForRedFace;
     BOOL haveCreateMainGif;
     NSInteger tempIndexForFace;
     CGPoint tempTouchPointForFace;
-
+    
     
     CGRect comicImageFrame;
+    GLKViewController *_effectsViewController;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *viewCamera;
-@property (weak, nonatomic) IBOutlet AVCamPreviewView *viewCameraPreview;
+//@property (weak, nonatomic) IBOutlet AVCamPreviewView *viewCameraPreview;
+@property (strong, nonatomic) IBOutlet UIView *viewCameraPreview;
 @property (strong, nonatomic) YLGIFImage *imageIn;
 
 @property (weak, nonatomic) IBOutlet UIView *viewRowButtons;
@@ -185,14 +247,27 @@ static RowButtonCallBack _completionHandler ;
 
 @property (weak, nonatomic) IBOutlet UIView *bubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIView *stickerlistContainerView;
-    @property (nonatomic, strong) UIBezierPath *croppingPath;
+@property (nonatomic, strong) UIBezierPath *croppingPath;
 @property (weak, nonatomic) IBOutlet UIView *animationContainerView;
+
+@property (assign, nonatomic) BOOL startRecordingFlag;
+@property (assign, nonatomic) BOOL pauseRecordingFlag;
+@property (assign, nonatomic) int videoDuration;
+@property (strong,nonatomic) IBOutlet UIView *sliderView;
+@property (strong,nonatomic) NSURL *outputVideoURL;
+@property (strong,nonatomic) UIImageView *videoImg;
+@property (strong,nonatomic) UIImageView *stillPicImg;
+@property (strong,nonatomic) IBOutlet RSSliderView *vertSlider;
+@property (strong,nonatomic) UIButton *crossSegmentBtn;
 
 @end
 
+int sliderViewWidthDeltaChange;
+
+
 @implementation ComicMakingViewController
 
-@synthesize viewCameraPreview, viewCamera, imgvComic, uploadIcon, viewStickerList, viewRowButtons;
+@synthesize viewCameraPreview, viewCamera, imgvComic, uploadIcon, viewStickerList, viewRowButtons,cameraPreviewLayer;
 @synthesize drawingColor,viewDrawing,frameDrawingView, drawView, centerImgvComic,lastScale, btnClose,btnCloseComic,bubbleListView,exclamationListView,shrinkHeight,viewFrame, shrinkCount, previousTimestamp, isNewSlide,viewBlackBoard,frameBlackboardView,onColor,isAlreadyDoubleDrawColor;
 @synthesize comicPage,printScreen, isSlideShrink,frameImgvComic,pinchGesture, isWideSlide,comicCropView, isCameraOn;
 
@@ -202,10 +277,13 @@ static RowButtonCallBack _completionHandler ;
     [super viewDidLoad];
     
   //  [self addBubbleListViewController];
+    [self _setup];
+    sliderViewWidthDeltaChange=[UIScreen mainScreen].bounds.size.width/7;
+   // [self addBubbleListViewController];
     [self addStickerListViewController];
     [self addAnimationListViewController];
     _captionHeightSmall = YES;
-
+    
     frameImgvComic = imgvComic.frame;
     frameBlackboardView = viewBlackBoard.frame;
     
@@ -213,7 +291,7 @@ static RowButtonCallBack _completionHandler ;
     centerImgvComic = imgvComic.center;
     viewRowButtons.alpha = 0;
     self.chatIcon.alpha = 0;
-
+    
     
     if (isWideSlide == YES)
     {
@@ -255,7 +333,8 @@ static RowButtonCallBack _completionHandler ;
             }
         });
     }
-
+    
+    [self setUpCameraPreview];
     
     [self prepareGlideView];
     
@@ -264,15 +343,13 @@ static RowButtonCallBack _completionHandler ;
     [self prepareVoiceView];
     
     
-    viewCameraPreview.hidden = YES;
-    
     // open Instruction
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         NSLog(@"Do some work");
         
-       if ([InstructionView getBoolValueForSlide:kInstructionSlide1] == NO)
-       {
+        if ([InstructionView getBoolValueForSlide:kInstructionSlide1] == NO)
+        {
             InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
             instView.delegate = self;
             [instView showInstructionWithSlideNumber:SlideNumber1 withType:InstructionBoxType];
@@ -283,22 +360,530 @@ static RowButtonCallBack _completionHandler ;
     });
     
     comicImageFrame = self.imgvComic.frame;
+    
+    self.switchToToggle.transform=CGAffineTransformRotate(self.switchToToggle.transform,270.0/180*M_PI);
+    
 }
+
+#pragma mark- setting preview for camera
+
+-(void) setUpCameraPreview {
+    
+    // preview and AV layer
+    viewCameraPreview = [[UIView alloc] initWithFrame:CGRectZero];
+    viewCameraPreview.backgroundColor = [UIColor blackColor];//CGRectGetHeight
+    CGRect previewFrame = CGRectMake(0, 60.0f, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds)-100);
+    viewCameraPreview.frame = previewFrame;
+    cameraPreviewLayer = [[PBJVision sharedInstance] previewLayer];
+    cameraPreviewLayer.frame = viewCameraPreview.bounds;
+    cameraPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    [viewCameraPreview.layer addSublayer:cameraPreviewLayer];
+    
+    // onion skin
+    _effectsViewController = [[GLKViewController alloc] init];
+    _effectsViewController.preferredFramesPerSecond = 60;
+    
+    GLKView *view = (GLKView *)_effectsViewController.view;
+    CGRect viewFrame1 = viewCameraPreview.bounds;
+    view.frame = viewFrame1;
+    view.context = [[PBJVision sharedInstance] context];
+    view.contentScaleFactor = [[UIScreen mainScreen] scale];
+    view.alpha = 0.5f;
+    view.hidden = YES;
+    [[PBJVision sharedInstance] setPresentationFrame:viewCameraPreview.frame];
+    [viewCameraPreview addSubview:_effectsViewController.view];
+    [self setUpSliderView];
+}
+
+-(void) setUpCameraPreviewForPhoto {
+    
+    // preview and AV layer
+    viewCameraPreview = [[UIView alloc] initWithFrame:CGRectZero];
+    viewCameraPreview.backgroundColor = [UIColor blackColor];//CGRectGetHeight
+    CGRect previewFrame = CGRectMake(0, 60.0f, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds)-100);
+    viewCameraPreview.frame = previewFrame;
+    cameraPreviewLayer = [[PBJVision sharedInstance] previewLayer];
+    cameraPreviewLayer.frame = viewCameraPreview.bounds;
+    [viewCameraPreview.layer addSublayer:cameraPreviewLayer];
+    
+    // onion skin
+    _effectsViewController = [[GLKViewController alloc] init];
+    _effectsViewController.preferredFramesPerSecond = 60;
+    
+    GLKView *view = (GLKView *)_effectsViewController.view;
+    CGRect viewFrame1 = viewCameraPreview.bounds;
+    view.frame = viewFrame1;
+    view.context = [[PBJVision sharedInstance] context];
+    view.contentScaleFactor = [[UIScreen mainScreen] scale];
+    view.alpha = 0.5f;
+    view.hidden = YES;
+    [[PBJVision sharedInstance] setPresentationFrame:viewCameraPreview.frame];
+    [viewCameraPreview addSubview:_effectsViewController.view];
+    [self setUpSliderView];
+}
+
+
+#pragma mark- method for slider view
+
+-(void)setUpSliderView {
+    
+    // top slider
+    self.sliderView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 50)];
+    [viewCameraPreview addSubview:self.sliderView];
+    [self.sliderView setBackgroundColor:[UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:239.0/255.0 alpha:1.0]];
+    
+    
+    // toggel Slider for video and image
+    
+    self.vertSlider = [[RSSliderView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-35, viewCameraPreview.frame.size.height-190, 70, 170) andOrientation:Vertical];
+    self.vertSlider.delegate = self;
+    
+    [self.vertSlider setColorsForBackground:[UIColor clearColor]
+                                 foreground:[UIColor clearColor]
+                                     handle:[UIColor clearColor]
+                                     border:[UIColor colorWithRed:159.0/255.0 green:220.0/255.0 blue:249.0/255.0 alpha:1.0]];
+    
+    [viewCameraPreview addSubview:self.vertSlider];
+    
+    // image for video and still picture  video-tape-icon.png
+    
+    self.videoImg=[[UIImageView alloc] initWithFrame:CGRectMake(self.vertSlider.frame.origin.x+self.vertSlider.frame.size.width+20, self.vertSlider.frame.origin.y+20, 30, 30)];
+    [self.videoImg setImage:[UIImage imageNamed:@"video-tape-icon.png"]];
+    [viewCameraPreview addSubview:self.videoImg];
+    
+    self.stillPicImg=[[UIImageView alloc] initWithFrame:CGRectMake(self.vertSlider.frame.origin.x+self.vertSlider.frame.size.width+20, self.vertSlider.frame.origin.y+self.vertSlider.frame.size.height-50, 30, 30)];
+    [self.stillPicImg setImage:[UIImage imageNamed:@"camera-icon.png"]];
+    [viewCameraPreview addSubview:self.stillPicImg];
+    
+    
+    // done button created
+    UIButton *doneVideoBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [doneVideoBtn setImage:[UIImage imageNamed:@"tick-button.png"] forState:UIControlStateNormal];
+    [doneVideoBtn setFrame:CGRectMake(viewCameraPreview.frame.origin.x+viewCameraPreview.frame.size.width-50, viewCameraPreview.frame.size.height+viewCameraPreview.frame.origin.y-130, 40, 40)];
+    [viewCameraPreview addSubview:doneVideoBtn];
+    [doneVideoBtn addTarget:self action:@selector(doneVideoBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+    // cross button
+    
+    self.crossSegmentBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [self.crossSegmentBtn setImage:[UIImage imageNamed:@"profilePicClose.png"] forState:UIControlStateNormal];
+    [self.crossSegmentBtn setFrame:CGRectMake(viewCameraPreview.frame.origin.x+20, self.sliderView.frame.origin.y+self.sliderView.frame.size.height+30, 21, 19)];
+    [viewCameraPreview addSubview:self.crossSegmentBtn];
+    [self.crossSegmentBtn addTarget:self action:@selector(crossButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.crossSegmentBtn setHidden:YES];
+    
+    
+}
+
+#pragma mark- done video button method
+
+-(void)doneVideoBtnClicked {
+    
+    [NSGIF createGIFfromURL:self.outputVideoURL withFrameCount:30 delayTime:.010 loopCount:0 completion:^(NSURL *GifURL) {
+        NSLog(@"Finished generating GIF: %@", GifURL);
+    }];
+    
+    // [viewCameraPreview removeFromSuperview];
+    
+}
+
+#pragma mark- cross button clicked
+-(void)crossButtonClicked {
+    
+    [self.crossSegmentBtn setHidden:NO];
+    CGRect frame=self.sliderView.frame;
+    frame.size.width=0.0;
+    self.sliderView.frame=frame;
+    self.videoDuration=0;
+    NSError *error;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL success = [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@",self.outputVideoURL] error:&error];
+    
+}
+
+#pragma mark- delegate method for RSSlider View
+
+-(void)sliderValueChanged:(RSSliderView *)sender {
+    
+    [self methodForProgressBar];
+    if(!self.startRecordingFlag) {
+        if(!self.vertSlider.slideDownFlag) {
+            [self.crossSegmentBtn setHidden:NO];
+            [self.stillPicImg setHidden:YES];
+            [self startVideoRecording];
+            self.startRecordingFlag=YES;
+            
+        }
+        
+    }
+    else {
+        
+        if(self.pauseRecordingFlag) {
+            self.pauseRecordingFlag=NO;
+            [[PBJVision sharedInstance] resumeVideoCapture];
+        }
+    }
+    
+}
+
+-(void)sliderValueChangeEnded:(RSSliderView *)sender {
+    
+    if(self.videoDuration<7)
+        [[PBJVision sharedInstance] pauseVideoCapture];
+    else {
+        [[PBJVision sharedInstance] endVideoCapture];
+        [self.stillPicImg setHidden:NO];
+        self.vertSlider.slideDownFlag=YES;
+        [self.vertSlider setValue:0.0 withAnimation:NO completion:nil];
+        
+    }
+    
+    self.pauseRecordingFlag=YES;
+}
+
+-(void)tapToStillPicture {
+    
+    [self _setupForStillImage];
+    [self setUpCameraPreviewForPhoto];
+//    [self btnCameraTap:nil];
+    //if([[PBJVision sharedInstance] canCapturePhoto])
+        [[PBJVision sharedInstance] capturePhoto];
+}
+
+#pragma mark- method for handling switch to toggle button clicked
+
+//-(IBAction)switchToToggleButtonClicked:(id)sender {
+//
+//    NSLog(@"******switchToToggleButtonClicked******* %f",self.switchToToggle.value);
+//
+//    if(self.switchToToggle.value>0.5) {
+//
+//        if(!self.startRecordingFlag) {
+//            [self startVideoRecording];
+//            self.startRecordingFlag=YES;
+//        }
+//        [self methodForProgressBar];
+//    }
+//}
+
+#pragma mark- method for playing video for 7 sec
+
+-(void)startVideoRecording {
+    
+    [[PBJVision sharedInstance] startVideoCapture];
+}
+
+
+-(void) methodForProgressBar {
+    
+    self.videoDuration+=1;
+    [self performSelector:@selector(progressBarValueChanged) withObject:nil afterDelay:1.0];
+}
+-(void)progressBarValueChanged {
+    
+    // if(self.videoDuration<=7) {
+    
+    [UIView animateWithDuration:1.0
+                          delay:0
+                        options:UIViewAnimationCurveEaseInOut
+                     animations:^ {
+                         self.sliderView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.sliderView.frame.size.width+2.0, 50);
+                         
+                     }completion:^(BOOL finished) {
+                         
+                     }];
+    
+    
+    if(!self.pauseRecordingFlag)
+        [self methodForProgressBar];
+    else
+        self.videoDuration=0;
+    //    }
+    //    else {
+    //
+    //        self.videoDuration=0;
+    //
+    //    }
+    
+}
+
+- (void)_setup
+{
+    
+    
+    [PBJVision sharedInstance].delegate = self;
+    [PBJVision sharedInstance].cameraMode = PBJCameraModeVideo;
+    // [PBJVision sharedInstance].cameraMode = PBJCameraModePhoto; // PHOTO: uncomment to test photo capture
+    [PBJVision sharedInstance].cameraOrientation = PBJCameraOrientationPortrait;
+    [PBJVision sharedInstance].focusMode = PBJFocusModeContinuousAutoFocus;
+    [PBJVision sharedInstance].outputFormat = PBJOutputFormatSquare;
+    [[PBJVision sharedInstance] setMaximumCaptureDuration:CMTimeMakeWithSeconds(8, 30)]; // ~ 5 seconds
+    [PBJVision sharedInstance].videoRenderingEnabled = YES;
+    [PBJVision sharedInstance].additionalCompressionProperties = @{AVVideoProfileLevelKey : AVVideoProfileLevelH264Baseline30};
+    
+    
+    
+}
+- (void)_setupForStillImage
+{
+    
+    
+    [PBJVision sharedInstance].delegate = self;
+    [PBJVision sharedInstance].cameraMode = PBJCameraModePhoto; // PHOTO: uncomment to test photo capture
+    [PBJVision sharedInstance].cameraOrientation = PBJCameraOrientationPortrait;
+    [PBJVision sharedInstance].focusMode = PBJFocusModeContinuousAutoFocus;
+    [PBJVision sharedInstance].outputFormat = PBJOutputFormatSquare;
+   // [[PBJVision sharedInstance] setMaximumCaptureDuration:CMTimeMakeWithSeconds(8, 30)]; // ~ 5 seconds
+   // [PBJVision sharedInstance].videoRenderingEnabled = YES;
+  //  [PBJVision sharedInstance].additionalCompressionProperties = @{AVVideoProfileLevelKey : AVVideoProfileLevelH264Baseline30};
+    
+    
+    
+}
+
+
+/* Delegate method */
+
+#pragma mark - PBJVisionDelegate
+
+// session
+
+- (void)visionSessionWillStart:(PBJVision *)vision
+{
+}
+
+- (void)visionSessionDidStart:(PBJVision *)vision
+{
+    if (![viewCameraPreview superview]) {
+        [self.view addSubview:viewCameraPreview];
+        // [self.view bringSubviewToFront:_gestureView];
+    }
+}
+
+- (void)visionSessionDidStop:(PBJVision *)vision
+{
+    // // [viewCameraPreview removeFromSuperview];
+}
+
+// preview
+
+- (void)visionSessionDidStartPreview:(PBJVision *)vision
+{
+    NSLog(@"Camera preview did start");
+    
+}
+
+- (void)visionSessionDidStopPreview:(PBJVision *)vision
+{
+    NSLog(@"Camera preview did stop");
+}
+
+// device
+
+- (void)visionCameraDeviceWillChange:(PBJVision *)vision
+{
+    NSLog(@"Camera device will change");
+}
+
+- (void)visionCameraDeviceDidChange:(PBJVision *)vision
+{
+    NSLog(@"Camera device did change");
+}
+
+// mode
+
+- (void)visionCameraModeWillChange:(PBJVision *)vision
+{
+    NSLog(@"Camera mode will change");
+}
+
+- (void)visionCameraModeDidChange:(PBJVision *)vision
+{
+    NSLog(@"Camera mode did change");
+}
+
+// format
+
+- (void)visionOutputFormatWillChange:(PBJVision *)vision
+{
+    NSLog(@"Output format will change");
+}
+
+- (void)visionOutputFormatDidChange:(PBJVision *)vision
+{
+    NSLog(@"Output format did change");
+}
+
+- (void)vision:(PBJVision *)vision didChangeCleanAperture:(CGRect)cleanAperture
+{
+}
+
+// focus / exposure
+
+- (void)visionWillStartFocus:(PBJVision *)vision
+{
+}
+
+- (void)visionDidStopFocus:(PBJVision *)vision
+{
+    //    if (_focusView && [_focusView superview]) {
+    //        [_focusView stopAnimation];
+    //    }
+}
+
+- (void)visionWillChangeExposure:(PBJVision *)vision
+{
+}
+
+- (void)visionDidChangeExposure:(PBJVision *)vision
+{
+    //    if (_focusView && [_focusView superview]) {
+    //        [_focusView stopAnimation];
+    //    }
+}
+
+// flash
+
+- (void)visionDidChangeFlashMode:(PBJVision *)vision
+{
+    NSLog(@"Flash mode did change");
+}
+
+// photo
+
+- (void)visionWillCapturePhoto:(PBJVision *)vision
+{
+}
+
+- (void)visionDidCapturePhoto:(PBJVision *)vision
+{
+}
+
+
+- (void)visionDidStartVideoCapture:(PBJVision *)vision
+{
+    
+}
+
+- (void)visionDidPauseVideoCapture:(PBJVision *)vision
+{
+    // [_strobeView stop];
+}
+
+- (void)visionDidResumeVideoCapture:(PBJVision *)vision
+{
+    // [_strobeView start];
+}
+
+
+// progress
+
+- (void)vision:(PBJVision *)vision didCaptureVideoSampleBuffer:(CMSampleBufferRef)sampleBuffer
+{
+    //    NSLog(@"captured audio (%f) seconds", vision.capturedAudioSeconds);
+}
+
+- (void)vision:(PBJVision *)vision didCaptureAudioSample:(CMSampleBufferRef)sampleBuffer
+{
+    //    NSLog(@"captured video (%f) seconds", vision.capturedVideoSeconds);
+}
+
+/////////////////////////
+
+
+- (void)vision:(PBJVision *)vision capturedVideo:(NSDictionary *)videoDict error:(NSError *)error
+{
+    if (error && [error.domain isEqual:PBJVisionErrorDomain] && error.code == PBJVisionErrorCancelled) {
+        NSLog(@"recording session cancelled");
+        return;
+    } else if (error) {
+        NSLog(@"encounted an error in video capture (%@)", error);
+        return;
+    }
+    
+    NSDictionary *_currentVideo = videoDict;
+    self.startRecordingFlag=NO;
+    NSString *videoPath = [_currentVideo  objectForKey:PBJVisionVideoPathKey];
+    self.outputVideoURL = [NSURL fileURLWithPath:videoPath];
+    
+    
+    [[PBJVision sharedInstance] endVideoCapture];
+    [self.stillPicImg setHidden:NO];
+    self.vertSlider.slideDownFlag=YES;
+    [self.vertSlider setValue:0.0 withAnimation:NO completion:nil];
+    
+}
+
+
+- (void)vision:(PBJVision *)vision capturedPhoto:(NSDictionary *)photoDict error:(NSError *)error
+{
+    if (error) {
+        // handle error properly
+        return;
+    }
+    NSDictionary *_currentPhoto = photoDict;
+    
+    // pointers for the appropriate photo information
+    NSData *photoData = _currentPhoto[PBJVisionPhotoJPEGKey];
+    NSDictionary *metadata = _currentPhoto[PBJVisionPhotoMetadataKey];
+    
+    // create an album
+    __block PHObjectPlaceholder *album;
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        PHAssetCollectionChangeRequest *changeRequest = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:PBJViewControllerPhotoAlbum];
+        album = changeRequest.placeholderForCreatedAssetCollection;
+    } completionHandler:^(BOOL success1, NSError *error1) {
+        if (success1) {
+            PHFetchResult *fetchResult = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[album.localIdentifier] options:nil];
+            PHAssetCollection *assetCollection = fetchResult.firstObject;
+            
+            // add image with metadata to the album
+            [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+                UIImage *photoImage = [UIImage imageWithData:[UIImage writeMetadataIntoImageData:photoData metadata:metadata]] ;
+                PHAssetChangeRequest *assetChangeRequest = [PHAssetChangeRequest creationRequestForAssetFromImage:photoImage];
+                PHAssetCollectionChangeRequest *assetCollectionChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:assetCollection];
+                [assetCollectionChangeRequest addAssets:@[[assetChangeRequest placeholderForCreatedAsset]]];
+            } completionHandler:^(BOOL success2, NSError *error2) {
+                if (success2) {
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Photo Saved!" message:@"Saved to the camera roll." preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+                    [alertController addAction:ok];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                }
+            }];
+        } else if (error1) {
+            NSLog(@"error: %@", error1);
+        }
+    }];
+    
+    _currentPhoto = nil;
+}
+
+
+
+- (void)visionDidEndVideoCapture:(PBJVision *)vision {
+    
+    NSLog(@"vision------>%@",vision);
+    
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self addNotificationCenter];
+    //[self _setup];
+    [[PBJVision sharedInstance] startPreview];
+    //  [self addNotificationCenter];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-//    AppHelper* apHelper = [[AppHelper alloc] init];
-//    [apHelper AddToMainView:self];
-//    [AppHelper addSwipeDownGesture:self];
+    //    AppHelper* apHelper = [[AppHelper alloc] init];
+    //    [apHelper AddToMainView:self];
+    //    [AppHelper addSwipeDownGesture:self];
     
     //Reseting Print Screen
     viewCameraPreview.hidden = NO;
-
+    
     [self doAutoSave:nil];
     [super viewDidAppear:animated];
 }
@@ -335,15 +920,15 @@ static RowButtonCallBack _completionHandler ;
 
 -(UIView *)viewForZoomTransition:(BOOL)isSource
 {
-//    return imgvComic;
-//    return  imgvComic;
+    //    return imgvComic;
+    //    return  imgvComic;
     UIView *newView = (isSlideShrink ? self.ImgvComic2: imgvComic);
     /*if (haveAnimationOnPage)
-    {
-        [newView addSubview:refAnimatedSticker];
-        [newView bringSubviewToFront:refAnimatedSticker];
-        
-    }*/
+     {
+     [newView addSubview:refAnimatedSticker];
+     [newView bringSubviewToFront:refAnimatedSticker];
+     
+     }*/
     return newView;
 }
 
@@ -354,12 +939,12 @@ static RowButtonCallBack _completionHandler ;
     {
         [comicCropView removeFromSuperview];
     }
-
+    
     comicCropView  = [[ComicCropView alloc] initWithFrame:self.view.frame];
     if (image != nil)
     {
         comicCropView.image = image;
-
+        
     }
     comicCropView.delegate = self;
     [self.view insertSubview:comicCropView belowSubview:viewRowButtons];
@@ -386,7 +971,7 @@ static RowButtonCallBack _completionHandler ;
         imgvComic.image = cropimage;
         
         [self doAutoSave:nil];
-
+        
         
         [self removeComicCropView];
         
@@ -418,9 +1003,10 @@ static RowButtonCallBack _completionHandler ;
     dispatch_queue_t sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
     [self setSessionQueue:sessionQueue];
     
-    #if !TARGET_OS_SIMULATOR
-        [self prepareCameraView];
-    #endif
+#if !TARGET_OS_SIMULATOR
+    //[self prepareCameraView];
+    //[self performSelector:@selector(prepareCameraView) withObject:nil afterDelay:5.0];
+#endif
     [self prepareForSlide];
     
     [UIView animateWithDuration:0.4 animations:^{
@@ -449,9 +1035,9 @@ static RowButtonCallBack _completionHandler ;
     
     //Assiginig the frame to temp
     temImagFrame = imgvComic.frame;
-//    temButtonFrame = viewRowButtons.frame;
-//    temChatButtonFrame = self.chatIcon.frame;
-//    temUploadButtonFrame = self.uploadIcon.frame;
+    //    temButtonFrame = viewRowButtons.frame;
+    //    temChatButtonFrame = self.chatIcon.frame;
+    //    temUploadButtonFrame = self.uploadIcon.frame;
     
     shrinkHeight = viewFrame.size.height - ( viewFrame.size.height / 12);
     
@@ -478,13 +1064,13 @@ static RowButtonCallBack _completionHandler ;
     viewDrawing.frame = frame;
     viewDrawing.alpha = 0;
     [viewDrawing setBackgroundColor:[UIColor clearColor]];
-//    RowButtonsViewController *rowButton;
-
+    //    RowButtonsViewController *rowButton;
+    
     CGRect frameViewBlackboard = viewBlackBoard.frame;
     frameViewBlackboard.origin.x = CGRectGetMaxX(self.view.frame);
     viewBlackBoard.frame = frameViewBlackboard;
     viewBlackBoard.alpha = 0;
-
+    
     
     
     for (UIViewController *controller in self.childViewControllers)
@@ -492,6 +1078,7 @@ static RowButtonCallBack _completionHandler ;
         if ([controller isKindOfClass:[RowButtonsViewController class]])
         {
             self.rowButton = (RowButtonsViewController *)controller;
+            
         }
     }
     
@@ -512,14 +1099,14 @@ static RowButtonCallBack _completionHandler ;
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 NSLog(@"Do some work");
                 
-                 if ([InstructionView getBoolValueForSlide:kInstructionSlide15] == NO)
+                if ([InstructionView getBoolValueForSlide:kInstructionSlide15] == NO)
                 {
-                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-                instView.delegate = self;
-                [instView showInstructionWithSlideNumber:SlideNumber15 withType:InstructionBubbleType];
-                [instView setTrueForSlide:kInstructionSlide15];
-                
-                [self.view addSubview:instView];
+                    InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                    instView.delegate = self;
+                    [instView showInstructionWithSlideNumber:SlideNumber15 withType:InstructionBubbleType];
+                    [instView setTrueForSlide:kInstructionSlide15];
+                    
+                    [self.view addSubview:instView];
                 }
             });
             
@@ -537,10 +1124,10 @@ static RowButtonCallBack _completionHandler ;
         self.rowButton.isNewSlide = NO;
         
         imgvComic.image = [AppHelper getImageFile:comicPage.containerImagePath]; //[UIImage imageWithData:comicPage.containerImage];
-
-//        NSLog(@"************* SUBVIEW ***************");
-//        NSLog(@"%@",comicPage.subviews);
-//        NSLog(@"************* SUBVIEW ***************");
+        
+        //        NSLog(@"************* SUBVIEW ***************");
+        //        NSLog(@"%@",comicPage.subviews);
+        //        NSLog(@"************* SUBVIEW ***************");
         
         if ([comicPage.slideType isEqualToString:slideTypeWide])
         {
@@ -580,9 +1167,9 @@ static RowButtonCallBack _completionHandler ;
         }];
         
         [view setDraggingEndedBlock:^
-        {
-            [self changeBubbleTail:view imageName:@""];
-        }];
+         {
+             [self changeBubbleTail:view imageName:@""];
+         }];
         
         //Adding Long Press event
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressBubbleGestures:)];
@@ -629,12 +1216,12 @@ static RowButtonCallBack _completionHandler ;
     }
     
     isNewSlide = isAddnew;
-//    [self prepareForSlide];
+    //    [self prepareForSlide];
     
     //Just Reseting the Row buttons
     if (isNewSlide) {
         self.rowButton.btnCamera.selected = NO;
-//        [self.rowButton viewDidLoad];
+        //        [self.rowButton viewDidLoad];
         [self.rowButton allButtonsFadeOut:self.rowButton.btnCamera];
     }
     
@@ -649,23 +1236,23 @@ static RowButtonCallBack _completionHandler ;
     [self prepareForSlide];
     [self addNotificationCenter];
     
-//    if (isNewSlide) {
-//        [UIView animateWithDuration:0.4 animations:^{
-//            viewRowButtons.alpha = 1;
-//        }];
+    //    if (isNewSlide) {
+    //        [UIView animateWithDuration:0.4 animations:^{
+    //            viewRowButtons.alpha = 1;
+    //        }];
     
-//
-//    }
+    //
+    //    }
 }
 -(void)prepareGlideView{
     
-//    GlideScrollViewController *glideScrollView;
+    //    GlideScrollViewController *glideScrollView;
     
     for (UIViewController *controller in self.childViewControllers)
     {
         if ([controller isKindOfClass:[GlideScrollViewController class]])
         {
-           self.glideScrollView = (GlideScrollViewController *)controller;
+            self.glideScrollView = (GlideScrollViewController *)controller;
         }
     }
     
@@ -678,23 +1265,37 @@ static RowButtonCallBack _completionHandler ;
     [self addPinchGesture];
     
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
+    //  AVCaptureSession *session =[PBJVision sharedInstance]._captureSession;
+    
+    
+    
     [self setSession:session];
     
+    
+    
+    //[self addNotificationCenter];
     // Setup the preview view
-    [viewCameraPreview setSession:session];
+    // [viewCameraPreview setSession:session];//[PBJVision sharedInstance]._captureSession];
+    
+    
+    
+    //[viewCameraPreview setSession:session];
+    // [[PBJVision sharedInstance] startPreview];
+    
+    
     
     // Check for device authorization
     [self checkDeviceAuthorizationStatus];
     
     dispatch_async([self sessionQueue], ^{
-
+        
         
         [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
         
         NSError *error = nil;
         
         AVCaptureDevice *videoDevice = [ComicMakingViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionBack];
-
+        
         if ([videoDevice respondsToSelector:@selector(setVideoZoomFactor:)]) {
             if ([ videoDevice lockForConfiguration:nil]) {
                 float zoomFactor = videoDevice.activeFormat.videoZoomFactorUpscaleThreshold;
@@ -703,8 +1304,8 @@ static RowButtonCallBack _completionHandler ;
             }
         }
         
-//        [videoDevice setVideoZoomFactor:[DefaultZoomFactor floatValue]];
-//        videoDevice.videoZoomFactor = 2.0f;
+        //        [videoDevice setVideoZoomFactor:[DefaultZoomFactor floatValue]];
+        //        videoDevice.videoZoomFactor = 2.0f;
         AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
         
         if (error)
@@ -740,17 +1341,17 @@ static RowButtonCallBack _completionHandler ;
         }
         
         /*AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
-        
-        if ([session canAddOutput:movieFileOutput])
-        {
-            [session addOutput:movieFileOutput];
-            
-            AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
-            if ([connection isVideoStabilizationSupported])
-                [connection setEnablesVideoStabilizationWhenAvailable:YES];
-            
-            [self setMovieFileOutput:movieFileOutput];
-        }*/
+         
+         if ([session canAddOutput:movieFileOutput])
+         {
+         [session addOutput:movieFileOutput];
+         
+         AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+         if ([connection isVideoStabilizationSupported])
+         [connection setEnablesVideoStabilizationWhenAvailable:YES];
+         
+         [self setMovieFileOutput:movieFileOutput];
+         }*/
         
         AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
         if ([session canAddOutput:stillImageOutput])
@@ -762,7 +1363,7 @@ static RowButtonCallBack _completionHandler ;
             [self setStillImageOutput:stillImageOutput];
         }
     });
-
+    
 }
 
 #pragma mark - NotificationCenter
@@ -774,7 +1375,7 @@ static RowButtonCallBack _completionHandler ;
                        [self addObserver:self forKeyPath:@"sessionRunningAndDeviceAuthorized" options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew) context:SessionRunningAndDeviceAuthorizedContext];
                        [self addObserver:self forKeyPath:@"stillImageOutput.capturingStillImage" options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew) context:CapturingStillImageContext];
                        [self addObserver:self forKeyPath:@"movieFileOutput.recording" options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew) context:RecordingContext];
-                       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
+                       //   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
                        
                        __weak ComicMakingViewController *weakSelf = self;
                        
@@ -788,6 +1389,17 @@ static RowButtonCallBack _completionHandler ;
                        }]];
                        
                        [[self session] startRunning];
+                       //                       if([[PBJVision sharedInstance]._captureSession isRunning]) {
+                       //
+                       //                           [[PBJVision sharedInstance]._captureSession commitConfiguration];
+                       //                           [[PBJVision sharedInstance]._captureSession stopRunning];
+                       //                           [[PBJVision sharedInstance]._captureSession startRunning];
+                       //                       }
+                       //                       else {
+                       //                           [[PBJVision sharedInstance]._captureSession commitConfiguration];
+                       //                           [[PBJVision sharedInstance]._captureSession startRunning];
+                       //                       }
+                       
                    });
     
 }
@@ -800,9 +1412,9 @@ static RowButtonCallBack _completionHandler ;
         [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
         [[NSNotificationCenter defaultCenter] removeObserver:[self runtimeErrorHandlingObserver]];
         
-        [self removeObserver:self forKeyPath:@"sessionRunningAndDeviceAuthorized" context:SessionRunningAndDeviceAuthorizedContext];
-        [self removeObserver:self forKeyPath:@"stillImageOutput.capturingStillImage" context:CapturingStillImageContext];
-        [self removeObserver:self forKeyPath:@"movieFileOutput.recording" context:RecordingContext];
+        //        [self removeObserver:self forKeyPath:@"sessionRunningAndDeviceAuthorized" context:SessionRunningAndDeviceAuthorizedContext];
+        //        [self removeObserver:self forKeyPath:@"stillImageOutput.capturingStillImage" context:CapturingStillImageContext];
+        //        [self removeObserver:self forKeyPath:@"movieFileOutput.recording" context:RecordingContext];
     });
 }
 
@@ -842,10 +1454,10 @@ static RowButtonCallBack _completionHandler ;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     
-//    UITextView *tv = object;
-//    CGFloat topCorrect = ([tv bounds].size.height - [tv contentSize].height * [tv zoomScale])/2.0;
-//    topCorrect = ( topCorrect < 0.0 ? 0.0 : topCorrect );
-//    tv.contentOffset = (CGPoint){.x = 0, .y = -topCorrect};
+    //    UITextView *tv = object;
+    //    CGFloat topCorrect = ([tv bounds].size.height - [tv contentSize].height * [tv zoomScale])/2.0;
+    //    topCorrect = ( topCorrect < 0.0 ? 0.0 : topCorrect );
+    //    tv.contentOffset = (CGPoint){.x = 0, .y = -topCorrect};
     
     if (context == CapturingStillImageContext)
     {
@@ -869,6 +1481,7 @@ static RowButtonCallBack _completionHandler ;
     }
     else
     {
+        
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
@@ -892,15 +1505,15 @@ static RowButtonCallBack _completionHandler ;
     [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
     
     [[[ALAssetsLibrary alloc] init] writeVideoAtPathToSavedPhotosAlbum:outputFileURL completionBlock:^(NSURL *assetURL, NSError *error)
-    {
-        if (error)
-            NSLog(@"%@", error);
-        
-        [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
-        
-        if (backgroundRecordingID != UIBackgroundTaskInvalid)
-            [[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
-    }];
+     {
+         if (error)
+             NSLog(@"%@", error);
+         
+         [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
+         
+         if (backgroundRecordingID != UIBackgroundTaskInvalid)
+             [[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
+     }];
 }
 
 #pragma mark - Camera Device Configuration
@@ -1004,13 +1617,13 @@ static RowButtonCallBack _completionHandler ;
 - (void)runStillImageCaptureAnimation
 {
     dispatch_async(dispatch_get_main_queue(), ^
-    {
-        [[viewCameraPreview layer] setOpacity:0.0];
-    
-        [UIView animateWithDuration:.25 animations:^{
-            [[viewCameraPreview layer] setOpacity:1.0];
-        }];
-    });
+                   {
+                       [[viewCameraPreview layer] setOpacity:0.0];
+                       
+                       [UIView animateWithDuration:.25 animations:^{
+                           [[viewCameraPreview layer] setOpacity:1.0];
+                       }];
+                   });
 }
 
 - (void)checkDeviceAuthorizationStatus
@@ -1133,10 +1746,10 @@ static RowButtonCallBack _completionHandler ;
              //                                 }
              //
              //                                 rowButtonsController.btnCamera.selected = NO;
-             //                                 
+             //
              //                                 [rowButtonsController allButtonsFadeOut:rowButtonsController.btnCamera];
-             //                                 
-             //                                 
+             //
+             //
              //                                 [self doRemoveAllItem:nil];
              //                             }];
              
@@ -1172,7 +1785,7 @@ static RowButtonCallBack _completionHandler ;
     if (isWideSlide)
     {
         [self addComicCropViewWithImage:nil];
-
+        
     }
     
 }
@@ -1190,9 +1803,9 @@ static RowButtonCallBack _completionHandler ;
     for (UIView* subview in [imgvComic subviews]) {
         subview.autoresizingMask = UIViewAutoresizingNone;
     }
-
+    
     self.ImgvComic2.image = printScreen;
-   
+    
     isSlideShrink = YES;
     
     //Ramesh ****** Start ****
@@ -1223,39 +1836,39 @@ static RowButtonCallBack _completionHandler ;
     
     //Ramesh ****** End ****
     //Ramesh commented Adnan's Code
-//    [UIView animateWithDuration:0.5 animations:^{
-//    
-//        self.ImgvComic2.frame = CGRectMake(x, y, width, height);
-//        imgvComic.frame = self.ImgvComic2.frame;
-//        
-//    }completion:^(BOOL finished) {
-//        
-//        
-//        if (isWideSlide == YES)
-//        {
-//            UIImageView *cropImageView = [[UIImageView alloc] initWithFrame:temImagFrame];
-//            cropImageView.image = printScreen;
-//            cropImageView.contentMode = UIViewContentModeScaleAspectFit;
-//            
-//            //CGPoint center  = [self.view convertPoint:self.view.center fromView:parent.superview];
-//            
-//            CGFloat y = (CGRectGetMaxY(temImagFrame) - CGRectGetMinY(temImagFrame)) / 2;
-//            
-//            CGRect cropframe = CGRectMake(0, y - (wideBoxHeight / 2), temImagFrame.size.width, wideBoxHeight);
-//            
-//            UIImage *image = [self croppedImage:printScreen withImageView:cropImageView WithFrame:cropframe];
-//            
-//            printScreen = image;
-//            
-//            NSLog(@"cropped");
-//        }
-//        
-//        [self.delegate comicMakingViewControllerWithEditingDone:self
-//                                                  withImageView:imgvComic
-//                                                withPrintScreen:printScreen
-//                                                   withNewSlide:isNewSlide
-//                                                    withPopView:YES withIsWideSlide:isWideSlide];
-//    }];
+    //    [UIView animateWithDuration:0.5 animations:^{
+    //
+    //        self.ImgvComic2.frame = CGRectMake(x, y, width, height);
+    //        imgvComic.frame = self.ImgvComic2.frame;
+    //
+    //    }completion:^(BOOL finished) {
+    //
+    //
+    //        if (isWideSlide == YES)
+    //        {
+    //            UIImageView *cropImageView = [[UIImageView alloc] initWithFrame:temImagFrame];
+    //            cropImageView.image = printScreen;
+    //            cropImageView.contentMode = UIViewContentModeScaleAspectFit;
+    //
+    //            //CGPoint center  = [self.view convertPoint:self.view.center fromView:parent.superview];
+    //
+    //            CGFloat y = (CGRectGetMaxY(temImagFrame) - CGRectGetMinY(temImagFrame)) / 2;
+    //
+    //            CGRect cropframe = CGRectMake(0, y - (wideBoxHeight / 2), temImagFrame.size.width, wideBoxHeight);
+    //
+    //            UIImage *image = [self croppedImage:printScreen withImageView:cropImageView WithFrame:cropframe];
+    //
+    //            printScreen = image;
+    //
+    //            NSLog(@"cropped");
+    //        }
+    //
+    //        [self.delegate comicMakingViewControllerWithEditingDone:self
+    //                                                  withImageView:imgvComic
+    //                                                withPrintScreen:printScreen
+    //                                                   withNewSlide:isNewSlide
+    //                                                    withPopView:YES withIsWideSlide:isWideSlide];
+    //    }];
     
 }
 
@@ -1319,7 +1932,7 @@ static RowButtonCallBack _completionHandler ;
 
 - (void)btnCameraTap:(UIButton *)sender
 {
- 
+    
     [self.btnSend setEnabled:YES];
 #if TARGET_OS_SIMULATOR
     NSLog(@"camera tap");
@@ -1354,113 +1967,113 @@ static RowButtonCallBack _completionHandler ;
         
         // Capture a still image.
         [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
-        {
-            
-            if (imageDataSampleBuffer)
-            {
-                viewCamera.hidden = YES;
-                [self.mSendComicButton setHidden:NO];//dinesh
-                
-                NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-                
-                UIImage *image = [[UIImage alloc] initWithData:imageData];
-                
-                CGRect cropRects = [imgvComic convertRect:imgvComic.frame toView:viewCameraPreview];
-                
-                CGFloat factor = (image.size.width * image.scale) / CGRectGetWidth(self.view.frame);
-                
-                cropRects.origin.x *= factor;
-                cropRects.origin.y *= factor;
-                
-                cropRects.size.width  *= factor;
-                cropRects.size.height *= factor;
-                
-                UIImage *cropedImage = [image cropedImagewithCropRect:cropRects];
-                
-                imgvComic.image = cropedImage;
-                
-                
-                if (isWideSlide)
-                {
-                    // ComicCropView code
-                    comicCropView.imageView = self.imgvComic;
-                    UIImage *cropimage = [comicCropView outputImage];
-                    
-                    imgvComic.image = cropimage ;
-                    [self removeComicCropView];
-
-                }
-              
-                
-                imgvComic.hidden = NO;
-                
-                GlobalObject.isTakePhoto = YES;
-                
-                //remove Cropview
-                
-                btnClose.hidden = NO;
-                btnCloseComic.hidden = NO;
-                [self setComicImageViewSize];
-                [self doAutoSave:nil];
-                
-                // open slide 2 Instruction
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
-                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    NSLog(@"Do some work");
-                    
-                    if ([InstructionView getBoolValueForSlide:kInstructionSlide3] == NO)
-                    {
-                    InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-                    instView.delegate = self;
-                    [instView showInstructionWithSlideNumber:SlideNumber3 withType:InstructionBubbleType];
-                    [instView setTrueForSlide:kInstructionSlide3];
-                    
-                    [self.view addSubview:instView];
-                    }
-                });
-                
-                
-                if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES)
-                {
-                    
-                    // open slide 12 Instruction
-                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
-                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                        NSLog(@"Do some work");
-                        
-                        if ([InstructionView getBoolValueForSlide:kInstructionSlide12repeat] == NO)
-                        {
-                            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-                            instView.delegate = self;
-                            [instView showInstructionWithSlideNumber:SlideNumber12 withType:InstructionGIFType];
-                            [instView setTrueForSlide:kInstructionSlide12repeat];
-                            
-                            [self.view addSubview:instView];
-                        }
-                    });
-                }
-        }
-        }];
+         {
+             
+             if (imageDataSampleBuffer)
+             {
+                 viewCamera.hidden = YES;
+                 [self.mSendComicButton setHidden:NO];//dinesh
+                 
+                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+                 
+                 UIImage *image = [[UIImage alloc] initWithData:imageData];
+                 
+                 CGRect cropRects = [imgvComic convertRect:imgvComic.frame toView:viewCameraPreview];
+                 
+                 CGFloat factor = (image.size.width * image.scale) / CGRectGetWidth(self.view.frame);
+                 
+                 cropRects.origin.x *= factor;
+                 cropRects.origin.y *= factor;
+                 
+                 cropRects.size.width  *= factor;
+                 cropRects.size.height *= factor;
+                 
+                 UIImage *cropedImage = [image cropedImagewithCropRect:cropRects];
+                 
+                 imgvComic.image = cropedImage;
+                 
+                 
+                 if (isWideSlide)
+                 {
+                     // ComicCropView code
+                     comicCropView.imageView = self.imgvComic;
+                     UIImage *cropimage = [comicCropView outputImage];
+                     
+                     imgvComic.image = cropimage ;
+                     [self removeComicCropView];
+                     
+                 }
+                 
+                 
+                 imgvComic.hidden = NO;
+                 
+                 GlobalObject.isTakePhoto = YES;
+                 
+                 //remove Cropview
+                 
+                 btnClose.hidden = NO;
+                 btnCloseComic.hidden = NO;
+                 [self setComicImageViewSize];
+                 [self doAutoSave:nil];
+                 
+                 // open slide 2 Instruction
+                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                     NSLog(@"Do some work");
+                     
+                     if ([InstructionView getBoolValueForSlide:kInstructionSlide3] == NO)
+                     {
+                         InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                         instView.delegate = self;
+                         [instView showInstructionWithSlideNumber:SlideNumber3 withType:InstructionBubbleType];
+                         [instView setTrueForSlide:kInstructionSlide3];
+                         
+                         [self.view addSubview:instView];
+                     }
+                 });
+                 
+                 
+                 if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES)
+                 {
+                     
+                     // open slide 12 Instruction
+                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+                     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                         NSLog(@"Do some work");
+                         
+                         if ([InstructionView getBoolValueForSlide:kInstructionSlide12repeat] == NO)
+                         {
+                             InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                             instView.delegate = self;
+                             [instView showInstructionWithSlideNumber:SlideNumber12 withType:InstructionGIFType];
+                             [instView setTrueForSlide:kInstructionSlide12repeat];
+                             
+                             [self.view addSubview:instView];
+                         }
+                     });
+                 }
+             }
+         }];
     });
 #endif
 }
 
 - (void)setComicImageViewSize
 {
-    float widthRatio = imgvComic.bounds.size.width / imgvComic.image.size.width;
-    float heightRatio = imgvComic.bounds.size.height / imgvComic.image.size.height;
-    float scale = MIN(widthRatio, heightRatio);
-    float imageWidth = scale * imgvComic.image.size.width;
-    float imageHeight = scale * imgvComic.image.size.height;
-    
-    imgvComic.frame = CGRectMake(0, 0, imageWidth, imageHeight);
-    
-    imgvComic.center = centerImgvComic;
-   
-  //  [self updateComicCropFrame:imgvComic.frame];
-
-    imgvComic.layer.masksToBounds = YES;
-//    temImagFrame = imgvComic.frame;
+    //    float widthRatio = imgvComic.bounds.size.width / imgvComic.image.size.width;
+    //    float heightRatio = imgvComic.bounds.size.height / imgvComic.image.size.height;
+    //    float scale = MIN(widthRatio, heightRatio);
+    //    float imageWidth = scale * imgvComic.image.size.width;
+    //    float imageHeight = scale * imgvComic.image.size.height;
+    //
+    //    imgvComic.frame = CGRectMake(0, 0, imageWidth, imageHeight);
+    //
+    //    imgvComic.center = centerImgvComic;
+    //
+    //  //  [self updateComicCropFrame:imgvComic.frame];
+    //
+    //    imgvComic.layer.masksToBounds = YES;
+    ////    temImagFrame = imgvComic.frame;
 }
 
 #pragma mark - Upload Picture Methods
@@ -1500,7 +2113,7 @@ static RowButtonCallBack _completionHandler ;
          }
          
          rowButtonsController.btnCamera.selected = YES;
-
+         
          if (isWideSlide)
          {
              [self addComicCropViewWithImage:selectedImage];
@@ -1516,10 +2129,26 @@ static RowButtonCallBack _completionHandler ;
              //dinesh
              [self.mSendComicButton setHidden:NO];
          }
-        
+         
          // add crop view
          isCameraOn = NO;
      }];
+    
+    if(self.startRecordingFlag) {
+        
+        self.startRecordingFlag=NO;
+        NSLog(@"UIImagePickerControllerMediaURL----->%@",[info objectForKey:@"UIImagePickerControllerMediaURL"]);
+        // [self makeAnimatedGifForVideo:[info objectForKey:@"UIImagePickerControllerMediaURL"]];
+        //        [NSGIF optimalGIFfromURL:[info objectForKey:@"UIImagePickerControllerMediaURL"] loopCount:0 completion:^(NSURL *GifURL) {
+        //
+        //            NSLog(@"Finished generating GIF: %@", GifURL);
+        //
+        //        }];
+        
+        //        [NSGIF createGIFfromURL:[info objectForKey:@"UIImagePickerControllerMediaURL"] withFrameCount:30 delayTime:.010 loopCount:0 completion:^(NSURL *GifURL) {
+        //            NSLog(@"Finished generating GIF: %@", GifURL);
+        //        }];
+    }
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -1557,9 +2186,9 @@ static RowButtonCallBack _completionHandler ;
         viewRowButtons.center = CGPointMake(backupToolCenter.x-100, backupToolCenter.y );
         viewRowButtons.alpha = 0;
     } completion:^(BOOL finished)
-    {
-        
-    }];
+     {
+         
+     }];
     
     viewStickerList.alpha = 0;
     
@@ -1568,47 +2197,47 @@ static RowButtonCallBack _completionHandler ;
         viewStickerList.center = CGPointMake(backupOtherViewCenter.x -viewStickerList.bounds.size.width, backupOtherViewCenter.y );
         viewStickerList.alpha = 1;
     } completion:^(BOOL finished)
-    {
-        
-        // open slide 4 Instruction
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            NSLog(@"Do some work");
-            
-            if ([InstructionView getBoolValueForSlide:kInstructionSlide4] == NO)
-            {
-            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-            instView.delegate = self;
-            [instView showInstructionWithSlideNumber:SlideNumber4 withType:InstructionBubbleType];
-            [instView setTrueForSlide:kInstructionSlide4];
-            
-            [self.view addSubview:instView];
-            }
-        });
-        
-        
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES)
-        {
-            // open slide 11 Instruction
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                NSLog(@"Do some work");
-                
+     {
+         
+         // open slide 4 Instruction
+         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+             NSLog(@"Do some work");
+             
+             if ([InstructionView getBoolValueForSlide:kInstructionSlide4] == NO)
+             {
+                 InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                 instView.delegate = self;
+                 [instView showInstructionWithSlideNumber:SlideNumber4 withType:InstructionBubbleType];
+                 [instView setTrueForSlide:kInstructionSlide4];
+                 
+                 [self.view addSubview:instView];
+             }
+         });
+         
+         
+         if ([[NSUserDefaults standardUserDefaults] boolForKey:kIsUserEnterFirstTimeComicMaking] == YES)
+         {
+             // open slide 11 Instruction
+             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC));
+             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                 NSLog(@"Do some work");
+                 
                  if ([InstructionView getBoolValueForSlide:kInstructionSlide11] == NO)
-                {
-                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-                instView.delegate = self;
-                [instView showInstructionWithSlideNumber:SlideNumber11 withType:InstructionBubbleType];
-                [instView setTrueForSlide:kInstructionSlide11];
-                
-                [self.view addSubview:instView];
+                 {
+                     InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                     instView.delegate = self;
+                     [instView showInstructionWithSlideNumber:SlideNumber11 withType:InstructionBubbleType];
+                     [instView setTrueForSlide:kInstructionSlide11];
+                     
+                     [self.view addSubview:instView];
                  }
-            });
-
-        }
-        
-        
-    }];
+             });
+             
+         }
+         
+         
+     }];
     
     chatIconCenter = _chatIcon.center;
     uploadIconCenter = uploadIcon.center;
@@ -1697,7 +2326,7 @@ static RowButtonCallBack _completionHandler ;
     } completion:^(BOOL finished) {
         
     }];
-   
+    
     [UIView animateWithDuration:.3 delay:0 usingSpringWithDamping:10 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         self.chatIcon.center = CGPointMake(chatIconCenter.x, chatIconCenter.y );
@@ -1733,13 +2362,13 @@ static RowButtonCallBack _completionHandler ;
         
         if ([InstructionView getBoolValueForSlide:kInstructionSlide10] == NO)
         {
-        InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-        instView.delegate = self;
-        [instView showInstructionWithSlideNumber:SlideNumber10 withType:InstructionGIFType];
-        [instView setTrueForSlide:kInstructionSlide10];
-        
-        [self.view addSubview:instView];
-         }
+            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+            instView.delegate = self;
+            [instView showInstructionWithSlideNumber:SlideNumber10 withType:InstructionGIFType];
+            [instView setTrueForSlide:kInstructionSlide10];
+            
+            [self.view addSubview:instView];
+        }
     });
     
     ComicItemSticker* imageView = [self getComicItems:ComicSticker];
@@ -1766,7 +2395,7 @@ static RowButtonCallBack _completionHandler ;
     
     
     
-
+    
 }
 
 #pragma mark Exclamation
@@ -1784,8 +2413,8 @@ static RowButtonCallBack _completionHandler ;
         btnClose.alpha = 0;
         btnCloseComic.alpha = 0;
         
-//        viewRowButtons.center = CGPointMake(backupToolCenter.x-100, backupToolCenter.y );
-//        viewRowButtons.alpha = 0;
+        //        viewRowButtons.center = CGPointMake(backupToolCenter.x-100, backupToolCenter.y );
+        //        viewRowButtons.alpha = 0;
     } completion:^(BOOL finished) {
         _completionHandler(YES);
     }];
@@ -1953,7 +2582,7 @@ static RowButtonCallBack _completionHandler ;
     animatedComponent.startDelay = [[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"timeInterval"] floatValue];
     animatedComponent.endDelay = [[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"endInterval"] floatValue];
     
-//    mainAnimationGifView = [[ComicItemAnimatedSticker alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    //    mainAnimationGifView = [[ComicItemAnimatedSticker alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapAnimation:)];
     tapGesture.numberOfTapsRequired = 1;
@@ -1979,29 +2608,29 @@ static RowButtonCallBack _completionHandler ;
     //Checking if ComicItemAnimatedSticker already exiting, if that so no need to create
     // Just add the gif component to ComicItemAnimatedSticker.
     
-//    if (imageView == nil) {
-//        imageView = [self getComicItems:ComicAnimatedSticker];
-//        imageView.animatedComponentArray = [[NSMutableArray alloc] init];
-//        imageView.frame = CGRectMake(0, 0, imgvComic.frame.size.width, imgvComic.frame.size.height);
-//    }
+    //    if (imageView == nil) {
+    //        imageView = [self getComicItems:ComicAnimatedSticker];
+    //        imageView.animatedComponentArray = [[NSMutableArray alloc] init];
+    //        imageView.frame = CGRectMake(0, 0, imgvComic.frame.size.width, imgvComic.frame.size.height);
+    //    }
     
     
-//    ComicItemAnimatedComponent* animatedComponent = [self getComicItems:ComicAnimatedComponent];
-//    
-//    animatedComponent.frame = rect;
-//    animatedComponent.animatedStickerName = exclamationImageString;
+    //    ComicItemAnimatedComponent* animatedComponent = [self getComicItems:ComicAnimatedComponent];
+    //
+    //    animatedComponent.frame = rect;
+    //    animatedComponent.animatedStickerName = exclamationImageString;
     
     imageView.combineAnimationFileName = [gifImageName stringByAppendingString:@".gif"];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapAnimation:)];
     tapGesture.numberOfTapsRequired = 1;
     [imageView addGestureRecognizer:tapGesture];
     
-//    [imageView.animatedComponentArray addObject:animatedComponent];
+    //    [imageView.animatedComponentArray addObject:animatedComponent];
     
-//    if([self getAnimatesStickerFromComic] == nil){
-//        [imgvComic addSubview:imageView];
-//        [imgvComic bringSubviewToFront:imageView];
-//    }
+    //    if([self getAnimatesStickerFromComic] == nil){
+    //        [imgvComic addSubview:imageView];
+    //        [imgvComic bringSubviewToFront:imageView];
+    //    }
     imageView.frame = CGRectMake(0, 0, 150, 150);
     [self addComicItem:imageView ItemImage:nil];
     
@@ -2020,15 +2649,15 @@ static RowButtonCallBack _completionHandler ;
     [animationCollection showInstructionAndGarbageBinForSomeMoment];
     currentWorkingAnimation = animationObj;
     [self addAnimatedStickerFromStartAtIndex:0];
-//    mainAnimationGifView = [[ComicItemAnimatedSticker alloc]initWithFrame:[UIScreen mainScreen].bounds];
-//    
-//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapAnimation:)];
-//    tapGesture.numberOfTapsRequired = 1;
-//    [mainAnimationGifView addGestureRecognizer:tapGesture];
-//    
-////    [self.view insertSubview:mainAnimationGifView atIndex:2];
-//    [imgvComic addSubview:mainAnimationGifView];
-//    [imgvComic bringSubviewToFront:mainAnimationGifView];
+    //    mainAnimationGifView = [[ComicItemAnimatedSticker alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    //
+    //    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapAnimation:)];
+    //    tapGesture.numberOfTapsRequired = 1;
+    //    [mainAnimationGifView addGestureRecognizer:tapGesture];
+    //
+    ////    [self.view insertSubview:mainAnimationGifView atIndex:2];
+    //    [imgvComic addSubview:mainAnimationGifView];
+    //    [imgvComic bringSubviewToFront:mainAnimationGifView];
     /*
      {
      "animationId": "1",
@@ -2149,11 +2778,11 @@ static RowButtonCallBack _completionHandler ;
 }
 -(void)addBeizerSquarewithIndex:(NSInteger)index
 {
-        hasStartedBezierForAnimation = YES;
-        currentTapIndex = index;
-        self.croppingPath = [[UIBezierPath alloc] init];
-        [self.croppingPath setLineJoinStyle:kCGLineJoinBevel];
-        
+    hasStartedBezierForAnimation = YES;
+    currentTapIndex = index;
+    self.croppingPath = [[UIBezierPath alloc] init];
+    [self.croppingPath setLineJoinStyle:kCGLineJoinBevel];
+    
 }
 -(void)addTouchEventwithIndex:(NSInteger)index
 {
@@ -2674,7 +3303,7 @@ static RowButtonCallBack _completionHandler ;
                          }];
         
     }
-
+    
     if (sender.state == UIGestureRecognizerStateEnded)
     {
         [self doAutoSave:sender.view];
@@ -2802,14 +3431,14 @@ static RowButtonCallBack _completionHandler ;
     }
     
     //Handle remove items
-   /* [self isEndOfPan:recognizer.view success:^(bool isOutOfFrame) {
-        if (isOutOfFrame) {
-            [recognizer.view setUserInteractionEnabled:NO];
-            [recognizer.view removeFromSuperview];
-            
-            [self doRemoveItem:recognizer.view];
-        }
-    }];*/
+    /* [self isEndOfPan:recognizer.view success:^(bool isOutOfFrame) {
+     if (isOutOfFrame) {
+     [recognizer.view setUserInteractionEnabled:NO];
+     [recognizer.view removeFromSuperview];
+     
+     [self doRemoveItem:recognizer.view];
+     }
+     }];*/
     if (state == UIGestureRecognizerStateEnded) {
         [self doAutoSave:recognizer.view];
     }
@@ -2832,10 +3461,10 @@ static RowButtonCallBack _completionHandler ;
             for (UITextView* tempView in [recognizer.view subviews]) {
                 if ([tempView isKindOfClass:[UITextView class]]) {
                     tempView.delegate = nil;
-//                    [tempView removeObserver:self forKeyPath:@"contentSize"];
+                    //                    [tempView removeObserver:self forKeyPath:@"contentSize"];
                     [tempView resignFirstResponder];
                     [tempView removeFromSuperview];
-//                    return;
+                    //                    return;
                 }
             }
             [recognizer.view removeFromSuperview];
@@ -2857,7 +3486,7 @@ static RowButtonCallBack _completionHandler ;
     if([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
         // Reset the last scale, necessary if there are multiple objects with different scales
         lastScale = [gestureRecognizer scale];
-//        NSLog(@"RAMESH :: lastScale %f ",lastScale);
+        //        NSLog(@"RAMESH :: lastScale %f ",lastScale);
     }
     
     if ([gestureRecognizer state] == UIGestureRecognizerStateBegan ||
@@ -2874,7 +3503,7 @@ static RowButtonCallBack _completionHandler ;
         newScale = MAX(newScale, kMinScale / currentScale);
         CGAffineTransform transform = CGAffineTransformScale([[gestureRecognizer view] transform], newScale, newScale);
         [gestureRecognizer view].transform = transform;
-//        NSLog(@"RAMESH :: scalePiece scale value X %f Y %f",transform.a , transform.b);
+        //        NSLog(@"RAMESH :: scalePiece scale value X %f Y %f",transform.a , transform.b);
         lastScale = [gestureRecognizer scale];  // Store the previous scale factor for the next pinch gesture call
     }
     
@@ -2913,22 +3542,22 @@ static RowButtonCallBack _completionHandler ;
 
 - (void)singleTapAnimation:(UIGestureRecognizer *)gestureRecognizer
 {        ComicItemAnimatedSticker* imgAnimation = (ComicItemAnimatedSticker*)gestureRecognizer.view;
-        if ([imgAnimation isAnimating]) {
-            [imgAnimation stopAnimating];
+    if ([imgAnimation isAnimating]) {
+        [imgAnimation stopAnimating];
+        pauseAnimation = YES;
+    }else{
+        [imgAnimation startAnimating];
+        pauseAnimation = NO;
+    }
+    for (ComicItemAnimatedComponent* objColl in imgAnimation.animatedComponentArray) {
+        if ([objColl isAnimating]) {
+            [objColl stopAnimating];
             pauseAnimation = YES;
         }else{
-            [imgAnimation startAnimating];
+            [objColl startAnimating];
             pauseAnimation = NO;
         }
-        for (ComicItemAnimatedComponent* objColl in imgAnimation.animatedComponentArray) {
-            if ([objColl isAnimating]) {
-                [objColl stopAnimating];
-                pauseAnimation = YES;
-            }else{
-                [objColl startAnimating];
-                pauseAnimation = NO;
-            }
-        }
+    }
 }
 
 #pragma mark - Tocuh Events
@@ -2985,20 +3614,20 @@ static RowButtonCallBack _completionHandler ;
     return 2;
 }
 -(NSInteger)getSpeedCount{
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSString* strValue = [defaults objectForKey:@"shrink_values"];
-//    if (strValue == nil) {
-        return 1;
-//    }else
-//        return [strValue intValue];
+    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //    NSString* strValue = [defaults objectForKey:@"shrink_values"];
+    //    if (strValue == nil) {
+    return 1;
+    //    }else
+    //        return [strValue intValue];
 }
 -(NSInteger)getSpeedLength{
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSString* strValue = [defaults objectForKey:@"shrink_length"];
-//    if (strValue == nil) {
-        return 100;
-//    }else
-//        return [strValue intValue];
+    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //    NSString* strValue = [defaults objectForKey:@"shrink_length"];
+    //    if (strValue == nil) {
+    return 100;
+    //    }else
+    //        return [strValue intValue];
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -3037,18 +3666,18 @@ static RowButtonCallBack _completionHandler ;
     }
     else
     {
-    if (touch.view == self.view || touch.view == imgvComic)
-    {
-        isSlideShrink = NO;
-        
-        [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
-//        imgvComic.autoresizesSubviews = YES;
-        for (UIView* subview in [imgvComic subviews]) {
-            subview.autoresizingMask = UIViewAutoresizingNone;
+        if (touch.view == self.view || touch.view == imgvComic)
+        {
+            isSlideShrink = NO;
+            
+            [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
+            //        imgvComic.autoresizesSubviews = YES;
+            for (UIView* subview in [imgvComic subviews]) {
+                subview.autoresizingMask = UIViewAutoresizingNone;
+            }
+            self.previousTimestamp = event.timestamp;
+            shinkLimit = [touch locationInView:self.view];
         }
-        self.previousTimestamp = event.timestamp;
-        shinkLimit = [touch locationInView:self.view];
-    }
     }
 }
 
@@ -3070,11 +3699,11 @@ CGFloat diffX,diffY;
                 CGPoint touchLocation = [mytouch locationInView:self.view];
                 
                 // move the image view
-               // animationView.center = touchLocation;
+                // animationView.center = touchLocation;
                 
                 [self.croppingPath addLineToPoint:[mytouch locationInView:self.view]];
                 [allPointsForRedFace addObject:[NSValue valueWithCGPoint:[mytouch locationInView:self.view]]];
-               // [self setNeedsDisplay];
+                // [self setNeedsDisplay];
             }
         }
         else
@@ -3087,103 +3716,103 @@ CGFloat diffX,diffY;
             //animationView.center = touchLocation;
             [self.croppingPath addLineToPoint:[mytouch locationInView:self.view]];
             [allPointsForRedFace addObject:[NSValue valueWithCGPoint:[mytouch locationInView:self.view]]];
-
+            
             //[self setNeedsDisplay];
         }
     }
     else
     {
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInView:self.view];
-    
-    if ((touch.view == self.view || touch.view == imgvComic || [touch.view isKindOfClass:[ComicItemAnimatedSticker class]]) &&
-        (fabs(location.y - shinkLimit.y) > [self getShrinkValue] ||
-         fabs(location.x - shinkLimit.x) > [self getShrinkValue]) &&
-        self.ImgvComic2.frame.size.height > [self getGlideItemHight]
-        )
-    {
-        CGPoint prevLocation = [touch previousLocationInView:self.view];
-        CGFloat xDist = (location.x - prevLocation.x); //[2]
-        CGFloat yDist = (location.y - prevLocation.y); //[3]
+        UITouch *touch = [touches anyObject];
+        CGPoint location = [touch locationInView:self.view];
         
-        distanceFromPrevious = sqrt((xDist * xDist) + (yDist * yDist)); //[4]
-        
-        NSTimeInterval timeSincePrevious = event.timestamp - self.previousTimestamp;
-        
-        speed = distanceFromPrevious/timeSincePrevious;
-        self.previousTimestamp = event.timestamp;
-        speed = speed /300;
-        CGFloat speedX = speed * 1.2;
-        CGFloat speedY = speed * 2.0;
-        
-        CGFloat speedWidth = speed * 2.4;
-        CGFloat speedHeight = speed * 4.0;
-        
-        NSLog(@"speed :  %f",speed);
-        
-        CGRect comicFrame = CGRectMake(CGRectGetMinX(self.ImgvComic2.frame) + speedX,
-                                       CGRectGetMinY(self.ImgvComic2.frame) + speedY ,
-                                       CGRectGetWidth(self.ImgvComic2.frame) - speedWidth,
-                                       CGRectGetHeight(self.ImgvComic2.frame) - speedHeight);
-        
-        comicImageFrame = self.imgvComic.frame;
-        
-        if (comicFrame.size.height > [self getGlideItemHight])
+        if ((touch.view == self.view || touch.view == imgvComic || [touch.view isKindOfClass:[ComicItemAnimatedSticker class]]) &&
+            (fabs(location.y - shinkLimit.y) > [self getShrinkValue] ||
+             fabs(location.x - shinkLimit.x) > [self getShrinkValue]) &&
+            self.ImgvComic2.frame.size.height > [self getGlideItemHight]
+            )
         {
-            self.ImgvComic2.frame = CGRectMake(CGRectGetMinX(self.ImgvComic2.frame) + speedX,
-                                               CGRectGetMinY(self.ImgvComic2.frame) + speedY ,
-                                               CGRectGetWidth(self.ImgvComic2.frame) - speedWidth,
-                                               CGRectGetHeight(self.ImgvComic2.frame) - speedHeight);
+            CGPoint prevLocation = [touch previousLocationInView:self.view];
+            CGFloat xDist = (location.x - prevLocation.x); //[2]
+            CGFloat yDist = (location.y - prevLocation.y); //[3]
             
-            self.ImgvComic2.image = printScreen;
-            imgvComic.frame = self.ImgvComic2.frame;
-           
+            distanceFromPrevious = sqrt((xDist * xDist) + (yDist * yDist)); //[4]
             
-//            diffX = imgvComic.frame.origin.x - comicImageFrame.origin.x;
-//            diffY = imgvComic.frame.origin.y - comicImageFrame.origin.y;
+            NSTimeInterval timeSincePrevious = event.timestamp - self.previousTimestamp;
             
-            [self shrinkAnimatedImages:speedX speedY:speedY speedWidth:speedWidth speedHeight:speedHeight];
-//            CGFloat diffX,diffY;
-//            if (IS_IPHONE_5)
-//            {
-//                diffX = 3.3f;
-//                diffY = 1.08f;
-//            }
-//            else if (IS_IPHONE_6)
-//            {
-//                diffX = 3.1f;
-//                diffY = 1.05f;
-//            }
-//            else if (IS_IPHONE_6P)
-//            {
-//                diffX = 3.3f;
-//                diffY = 1.15f;
-//            }
+            speed = distanceFromPrevious/timeSincePrevious;
+            self.previousTimestamp = event.timestamp;
+            speed = speed /300;
+            CGFloat speedX = speed * 1.2;
+            CGFloat speedY = speed * 2.0;
             
-           // [self shrinkAnimatedImages:(speedX/diffX) speedY:(speedY*diffY) speedWidth:(speedWidth/3) speedHeight:(speedHeight/3)];
+            CGFloat speedWidth = speed * 2.4;
+            CGFloat speedHeight = speed * 4.0;
+            
+            NSLog(@"speed :  %f",speed);
+            
+            CGRect comicFrame = CGRectMake(CGRectGetMinX(self.ImgvComic2.frame) + speedX,
+                                           CGRectGetMinY(self.ImgvComic2.frame) + speedY ,
+                                           CGRectGetWidth(self.ImgvComic2.frame) - speedWidth,
+                                           CGRectGetHeight(self.ImgvComic2.frame) - speedHeight);
+            
+            comicImageFrame = self.imgvComic.frame;
+            
+            if (comicFrame.size.height > [self getGlideItemHight])
+            {
+                self.ImgvComic2.frame = CGRectMake(CGRectGetMinX(self.ImgvComic2.frame) + speedX,
+                                                   CGRectGetMinY(self.ImgvComic2.frame) + speedY ,
+                                                   CGRectGetWidth(self.ImgvComic2.frame) - speedWidth,
+                                                   CGRectGetHeight(self.ImgvComic2.frame) - speedHeight);
+                
+                self.ImgvComic2.image = printScreen;
+                imgvComic.frame = self.ImgvComic2.frame;
+                
+                
+                //            diffX = imgvComic.frame.origin.x - comicImageFrame.origin.x;
+                //            diffY = imgvComic.frame.origin.y - comicImageFrame.origin.y;
+                
+                [self shrinkAnimatedImages:speedX speedY:speedY speedWidth:speedWidth speedHeight:speedHeight];
+                //            CGFloat diffX,diffY;
+                //            if (IS_IPHONE_5)
+                //            {
+                //                diffX = 3.3f;
+                //                diffY = 1.08f;
+                //            }
+                //            else if (IS_IPHONE_6)
+                //            {
+                //                diffX = 3.1f;
+                //                diffY = 1.05f;
+                //            }
+                //            else if (IS_IPHONE_6P)
+                //            {
+                //                diffX = 3.3f;
+                //                diffY = 1.15f;
+                //            }
+                
+                // [self shrinkAnimatedImages:(speedX/diffX) speedY:(speedY*diffY) speedWidth:(speedWidth/3) speedHeight:(speedHeight/3)];
+            }
         }
-    }
     }
 }
 
 - (void)shrinkAnimatedImages:(CGFloat)speedX
-                     speedY:(CGFloat)speedY
-                 speedWidth:(CGFloat)speedWidth
-                speedHeight:(CGFloat)speedHeight
+                      speedY:(CGFloat)speedY
+                  speedWidth:(CGFloat)speedWidth
+                 speedHeight:(CGFloat)speedHeight
 {
     
     
-//    CGFloat ff = 1;
+    //    CGFloat ff = 1;
     for (UIView* subview in [self.view subviews]) {
         if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
             
             float ratioX = comicImageFrame.size.width / imgvComic.frame.size.width;
             float ratioY = comicImageFrame.size.height / imgvComic.frame.size.height;
             
-//            ratioX = 1.000178;
-//            ratioY = 1.000167;
+            //            ratioX = 1.000178;
+            //            ratioY = 1.000167;
             
-//            NSLog(@"comicImageFrame %@",NSStringFromCGRect(imgvComic.frame));
+            //            NSLog(@"comicImageFrame %@",NSStringFromCGRect(imgvComic.frame));
             
             float newX = subview.frame.origin.x + ratioX;
             float newY = subview.frame.origin.y + ratioY;
@@ -3191,70 +3820,70 @@ CGFloat diffX,diffY;
             float newWidth = subview.frame.size.width / ratioX;
             float newHeight = subview.frame.size.height / ratioY;
             
-//            subview.frame = CGRectMake(newX, newY, newWidth, newHeight);
+            //            subview.frame = CGRectMake(newX, newY, newWidth, newHeight);
             
             
-//            CGFloat multiplerX,multiplery;
+            //            CGFloat multiplerX,multiplery;
             speedWidth = (subview.frame.size.width*speedWidth)/imgvComic.frame.size.width;
             speedHeight = (subview.frame.size.height*speedHeight)/imgvComic.frame.size.height;
             
             /*
-//            speedX = (speedX * subview.frame.origin.x)/imgvComic.frame.origin.x;
-//            speedY = (speedY * subview.frame.origin.y)/imgvComic.frame.origin.y;
-            `
-//            speedX =  self.view.frame.origin.x - imgvComic.frame.origin.x;
-//            speedY =  self.view.frame.origin.y - imgvComic.frame.origin.y;
-            
-            multiplerX = (self.view.center.x-subview.center.x);
-            multiplery = (self.view.center.y-subview.center.y);
-            
-            int xx = self.view.frame.size.width /imgvComic.frame.size.width;
-            int yy = self.view.frame.size.height /imgvComic.frame.size.height;
-            
-            
-            xx = subview.frame.origin.x / xx;
-            yy = subview.frame.origin.x / yy;
-            
-            if (multiplerX>0) {
-                multiplerX = multiplerX/(0.26*self.ImgvComic2.frame.size.width);
-            }
-            else
-            {
-                multiplerX = multiplerX/(0.9*self.ImgvComic2.frame.size.width);
-            }
-            if (multiplery>0)
-            {
-                multiplery = multiplery/(0.175*self.ImgvComic2.frame.size.height);
-            }
-            else
-            {
-                multiplery = multiplery/(0.4*self.ImgvComic2.frame.size.height);
-            }
-            
-            NSLog(@"multiplerX %f multiplery %f",multiplerX,multiplery);
-
-//            subview.frame = CGRectMake((CGRectGetMinX(subview.frame) + speedX) -  (CGRectGetWidth(subview.frame) -  speedWidth),
-//                                       (CGRectGetMinY(subview.frame) - speedY) - (CGRectGetHeight(subview.frame) - speedHeight),
-//                                       CGRectGetWidth(subview.frame) -  speedWidth,
-//                                       CGRectGetHeight(subview.frame) - speedHeight);
-            
-//            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + speedX*multiplerX ,
-//                                       CGRectGetMinY(subview.frame) + speedY*multiplery ,
-//                                       CGRectGetWidth(subview.frame) -  speedWidth,
-//                                       CGRectGetHeight(subview.frame) - speedHeight);
-            
-//            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + speedX ,
-//                                       CGRectGetMinY(subview.frame) - speedY,
-//                                       CGRectGetWidth(subview.frame) -  speedWidth,
-//                                       CGRectGetHeight(subview.frame) - speedHeight);
-
-            subview.frame = CGRectMake(xx,
-                                       yy ,
-                                       CGRectGetWidth(subview.frame) -  speedWidth,
-                                       CGRectGetHeight(subview.frame) - speedHeight);
-            
-            NSLog(@"X value :%d  Y Value %d", xx,yy);
-            */
+             //            speedX = (speedX * subview.frame.origin.x)/imgvComic.frame.origin.x;
+             //            speedY = (speedY * subview.frame.origin.y)/imgvComic.frame.origin.y;
+             `
+             //            speedX =  self.view.frame.origin.x - imgvComic.frame.origin.x;
+             //            speedY =  self.view.frame.origin.y - imgvComic.frame.origin.y;
+             
+             multiplerX = (self.view.center.x-subview.center.x);
+             multiplery = (self.view.center.y-subview.center.y);
+             
+             int xx = self.view.frame.size.width /imgvComic.frame.size.width;
+             int yy = self.view.frame.size.height /imgvComic.frame.size.height;
+             
+             
+             xx = subview.frame.origin.x / xx;
+             yy = subview.frame.origin.x / yy;
+             
+             if (multiplerX>0) {
+             multiplerX = multiplerX/(0.26*self.ImgvComic2.frame.size.width);
+             }
+             else
+             {
+             multiplerX = multiplerX/(0.9*self.ImgvComic2.frame.size.width);
+             }
+             if (multiplery>0)
+             {
+             multiplery = multiplery/(0.175*self.ImgvComic2.frame.size.height);
+             }
+             else
+             {
+             multiplery = multiplery/(0.4*self.ImgvComic2.frame.size.height);
+             }
+             
+             NSLog(@"multiplerX %f multiplery %f",multiplerX,multiplery);
+             
+             //            subview.frame = CGRectMake((CGRectGetMinX(subview.frame) + speedX) -  (CGRectGetWidth(subview.frame) -  speedWidth),
+             //                                       (CGRectGetMinY(subview.frame) - speedY) - (CGRectGetHeight(subview.frame) - speedHeight),
+             //                                       CGRectGetWidth(subview.frame) -  speedWidth,
+             //                                       CGRectGetHeight(subview.frame) - speedHeight);
+             
+             //            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + speedX*multiplerX ,
+             //                                       CGRectGetMinY(subview.frame) + speedY*multiplery ,
+             //                                       CGRectGetWidth(subview.frame) -  speedWidth,
+             //                                       CGRectGetHeight(subview.frame) - speedHeight);
+             
+             //            subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + speedX ,
+             //                                       CGRectGetMinY(subview.frame) - speedY,
+             //                                       CGRectGetWidth(subview.frame) -  speedWidth,
+             //                                       CGRectGetHeight(subview.frame) - speedHeight);
+             
+             subview.frame = CGRectMake(xx,
+             yy ,
+             CGRectGetWidth(subview.frame) -  speedWidth,
+             CGRectGetHeight(subview.frame) - speedHeight);
+             
+             NSLog(@"X value :%d  Y Value %d", xx,yy);
+             */
             
             subview.frame = CGRectMake(CGRectGetMinX(subview.frame) + (speedX - 0.2),
                                        CGRectGetMinY(subview.frame) + speedY,
@@ -3271,19 +3900,19 @@ CGFloat diffX,diffY;
     
     if (hasStartedBezierForAnimation)
     {
-       // animationView.hidden = true;
+        // animationView.hidden = true;
         [[NSUserDefaults standardUserDefaults]setObject:@"not" forKey:@"tappEnder"];
         [[NSUserDefaults standardUserDefaults]synchronize];
         
-       /* [[NSNotificationCenter defaultCenter] postNotificationName:@"cropFinished"
-                                                            object:self];*/
+        /* [[NSNotificationCenter defaultCenter] postNotificationName:@"cropFinished"
+         object:self];*/
         NSLog(@"%@",self.croppingPath);
         
         hasStartedBezierForAnimation = NO;
         [currentAnimInstSubView removeFromSuperview];
         
         [self addAnimatedSticker:[[[[[currentWorkingAnimation valueForKey:@"resources"] objectAtIndex:currentTapIndex] valueForKey:@"animation"] valueForKey:@"face"] valueForKey:@"imageA"] AtRect:self.croppingPath.bounds];
-         currentAnimationTouchPoint = self.croppingPath.bounds.origin;
+        currentAnimationTouchPoint = self.croppingPath.bounds.origin;
         currentTapIndex++;
         [self addAnimatedStickerFromStartAtIndex:currentTapIndex];
         
@@ -3292,65 +3921,65 @@ CGFloat diffX,diffY;
     }
     else
     {
-    UITouch *touch = [touches anyObject];
-    
-    if (touch.view == self.view || touch.view == imgvComic || [touch.view isKindOfClass:[ComicItemAnimatedSticker class]])
-    {
-        if (self.ImgvComic2.frame.size.height < shrinkHeight && isSlideShrink == NO)
+        UITouch *touch = [touches anyObject];
+        
+        if (touch.view == self.view || touch.view == imgvComic || [touch.view isKindOfClass:[ComicItemAnimatedSticker class]])
         {
-            isSlideShrink = YES;
-            
-            if (isWideSlide == YES)
+            if (self.ImgvComic2.frame.size.height < shrinkHeight && isSlideShrink == NO)
             {
-                UIImageView *cropImageView = [[UIImageView alloc] initWithFrame:temImagFrame];
-                cropImageView.image = printScreen;
-                cropImageView.contentMode = UIViewContentModeScaleAspectFit;
+                isSlideShrink = YES;
                 
-                //CGPoint center  = [self.view convertPoint:self.view.center fromView:parent.superview];
-
-                CGFloat y = (CGRectGetMaxY(temImagFrame) - CGRectGetMinY(temImagFrame)) / 2;
+                if (isWideSlide == YES)
+                {
+                    UIImageView *cropImageView = [[UIImageView alloc] initWithFrame:temImagFrame];
+                    cropImageView.image = printScreen;
+                    cropImageView.contentMode = UIViewContentModeScaleAspectFit;
+                    
+                    //CGPoint center  = [self.view convertPoint:self.view.center fromView:parent.superview];
+                    
+                    CGFloat y = (CGRectGetMaxY(temImagFrame) - CGRectGetMinY(temImagFrame)) / 2;
+                    
+                    CGRect cropframe = CGRectMake(0, y - (wideBoxHeight / 2), temImagFrame.size.width, wideBoxHeight);
+                    
+                    UIImage *image = [self croppedImage:printScreen withImageView:cropImageView WithFrame:cropframe];
+                    
+                    printScreen = image;
+                    
+                    NSLog(@"cropped");
+                    
+                }
                 
-                CGRect cropframe = CGRectMake(0, y - (wideBoxHeight / 2), temImagFrame.size.width, wideBoxHeight);
+                /*for (UIView* subview in [self.view subviews]) {
+                 if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
+                 
+                 float scaleFactor = self.ImgvComic2.image.size.width / printScreen.size.width;
+                 
+                 CGRect rectValue = subview.frame;
+                 rectValue.origin.x = rectValue.origin.x * scaleFactor;
+                 rectValue.origin.y = rectValue.origin.y * scaleFactor;
+                 rectValue.size.width = rectValue.size.width * scaleFactor;
+                 rectValue.size.height = rectValue.size.height * scaleFactor;
+                 subview.frame = rectValue;
+                 
+                 [self.ImgvComic2 addSubview:subview];
+                 }
+                 }*/
                 
-                UIImage *image = [self croppedImage:printScreen withImageView:cropImageView WithFrame:cropframe];
-                
-                printScreen = image;
-                
-                NSLog(@"cropped");
+                [self.delegate comicMakingViewControllerWithEditingDone:self
+                                                          withImageView:imgvComic
+                                                        withPrintScreen:printScreen
+                                                           withNewSlide:isNewSlide
+                                                            withPopView:YES withIsWideSlide:isWideSlide];
                 
             }
-            
-            /*for (UIView* subview in [self.view subviews]) {
-                if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
-                    
-                    float scaleFactor = self.ImgvComic2.image.size.width / printScreen.size.width;
-                    
-                    CGRect rectValue = subview.frame;
-                    rectValue.origin.x = rectValue.origin.x * scaleFactor;
-                    rectValue.origin.y = rectValue.origin.y * scaleFactor;
-                    rectValue.size.width = rectValue.size.width * scaleFactor;
-                    rectValue.size.height = rectValue.size.height * scaleFactor;
-                    subview.frame = rectValue;
-                    
-                    [self.ImgvComic2 addSubview:subview];
-                }
-            }*/
-            
-            [self.delegate comicMakingViewControllerWithEditingDone:self
-                                                      withImageView:imgvComic
-                                                    withPrintScreen:printScreen
-                                                       withNewSlide:isNewSlide
-                                                        withPopView:YES withIsWideSlide:isWideSlide];
-            
+            else
+            {
+                [self.view exchangeSubviewAtIndex:1 withSubviewAtIndex:0];
+                imgvComic.frame = viewFrame;
+                self.ImgvComic2.frame = imgvComic.frame;
+                self.ImgvComic2.image = nil;
+            }
         }
-        else
-        {
-            [self.view exchangeSubviewAtIndex:1 withSubviewAtIndex:0];
-            imgvComic.frame = viewFrame;
-            self.ImgvComic2.frame = imgvComic.frame;
-            self.ImgvComic2.image = nil;
-        }
-    }
     }
 }
 -(CGRect)originalRectFromRectGot:(CGRect)rectGot
@@ -3381,7 +4010,7 @@ CGFloat diffX,diffY;
                 stickerController = (StickerList *)controller;
             }
         }
-         
+        
         stickerController.addingSticker = YES;
         
         [stickerController.collectionView performBatchUpdates:^
@@ -3423,17 +4052,17 @@ CGFloat diffX,diffY;
              dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                  NSLog(@"Do some work");
                  
-                if ([InstructionView getBoolValueForSlide:kInstructionSlide9] == NO)
-                {
-                 InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-                 instView.delegate = self;
-                 [instView showInstructionWithSlideNumber:SlideNumber9 withType:InstructionBubbleType];
-                 [instView setTrueForSlide:kInstructionSlide9];
-                 
-                 [self.view addSubview:instView];
-                }
+                 if ([InstructionView getBoolValueForSlide:kInstructionSlide9] == NO)
+                 {
+                     InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                     instView.delegate = self;
+                     [instView showInstructionWithSlideNumber:SlideNumber9 withType:InstructionBubbleType];
+                     [instView setTrueForSlide:kInstructionSlide9];
+                     
+                     [self.view addSubview:instView];
+                 }
              });
-
+             
              
          }];
     }];
@@ -3602,17 +4231,17 @@ CGFloat diffX,diffY;
          dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
              NSLog(@"Do some work");
              
-            if ([InstructionView getBoolValueForSlide:kInstructionSlideC] == NO)
-            {
-             InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-             instView.delegate = self;
-             [instView showInstructionWithSlideNumber:SlideNumberC withType:InstructionBubbleType];
-             [instView setTrueForSlide:kInstructionSlideC];
-             
-             [self.view addSubview:instView];
-              }
+             if ([InstructionView getBoolValueForSlide:kInstructionSlideC] == NO)
+             {
+                 InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                 instView.delegate = self;
+                 [instView showInstructionWithSlideNumber:SlideNumberC withType:InstructionBubbleType];
+                 [instView setTrueForSlide:kInstructionSlideC];
+                 
+                 [self.view addSubview:instView];
+             }
          });
-
+         
      }];
     
 }
@@ -3650,7 +4279,7 @@ CGFloat diffX,diffY;
     [UIView beginAnimations:@"ScaleButton" context:NULL];
     [UIView setAnimationDuration: 0.0f];
     [drawingController allScaleToNormal];
-     [UIView commitAnimations];
+    [UIView commitAnimations];
     [UIView beginAnimations:@"ScaleButton" context:NULL];
     [UIView setAnimationDuration: 0.2f];
     [drawingController allScaleToNormal];
@@ -3682,7 +4311,7 @@ CGFloat diffX,diffY;
         }
     }
     
-//    CGSize size = CGSizeMake(CGRectGetWidth(drawView.frame), CGRectGetHeight(drawView.frame));
+    //    CGSize size = CGSizeMake(CGRectGetWidth(drawView.frame), CGRectGetHeight(drawView.frame));
     CGSize size = CGSizeMake(CGRectGetWidth(temImagFrame), CGRectGetHeight(temImagFrame));
     imgvComic.frame = temImagFrame;
     
@@ -3694,10 +4323,10 @@ CGFloat diffX,diffY;
     UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
-//    finalImage = [UIImage fixrotation:finalImage];
+    //    finalImage = [UIImage fixrotation:finalImage];
     
     imgvComic.image = finalImage;
-//    temImagFrame = imgvComic.frame;
+    //    temImagFrame = imgvComic.frame;
     
     viewDrawing.alpha = 1;
     
@@ -3718,7 +4347,7 @@ CGFloat diffX,diffY;
         viewDrawing.alpha = 0;
         btnClose.hidden = NO;
         btnCloseComic.hidden = NO;
-//        [drawView setHidden:YES];
+        //        [drawView setHidden:YES];
         [drawView removeFromSuperview];
         
     } completion:^(BOOL finished) {
@@ -4084,22 +4713,22 @@ CGFloat diffX,diffY;
         [UIView animateWithDuration:0.5 delay:0.5
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
-        {
-                             [vw viewWithTag:1234].frame = txtRect_Image;
-        
-        } completion:^(BOOL finished)
-        {
-                             if ([vw viewWithTag:1236]) {
-                                 CGRect rect_dots = [vw viewWithTag:1236].frame;
-                                 rect_dots.origin.y = isDouble? rect_dots.origin.y *2:rect_dots.origin.y /2 ;
-                                 [vw viewWithTag:1236].frame = rect_dots;
-                             }
-                             if ([vw viewWithTag:1232]) {
-                                 CGRect rect_Holder = [vw viewWithTag:1232].frame;
-                                 rect_Holder.size.height = isDouble?rect_Holder.size.height*2:rect_Holder.size.height/2;
-                                 [vw viewWithTag:1232].frame = rect_Holder;
-                             }
-                         }];
+         {
+             [vw viewWithTag:1234].frame = txtRect_Image;
+             
+         } completion:^(BOOL finished)
+         {
+             if ([vw viewWithTag:1236]) {
+                 CGRect rect_dots = [vw viewWithTag:1236].frame;
+                 rect_dots.origin.y = isDouble? rect_dots.origin.y *2:rect_dots.origin.y /2 ;
+                 [vw viewWithTag:1236].frame = rect_dots;
+             }
+             if ([vw viewWithTag:1232]) {
+                 CGRect rect_Holder = [vw viewWithTag:1232].frame;
+                 rect_Holder.size.height = isDouble?rect_Holder.size.height*2:rect_Holder.size.height/2;
+                 [vw viewWithTag:1232].frame = rect_Holder;
+             }
+         }];
     }
 }
 
@@ -4108,7 +4737,7 @@ CGFloat diffX,diffY;
 {
     textView.textContainerInset = UIEdgeInsetsZero;
     textView.textContainer.lineFragmentPadding = 0;
-
+    
 }
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
@@ -4135,7 +4764,7 @@ CGFloat diffX,diffY;
                 [self.view addSubview:instView];
             }
         });
-
+        
     }
     
     [self handleBubbleText:textView];
@@ -4162,17 +4791,17 @@ CGFloat diffX,diffY;
                 _captionHeightSmall = NO;
                 [self handleCaptionHeight:textView];
             }
-//            else
-//            {
-//                _captionHeightSmall = YES;
-//            }
+            //            else
+            //            {
+            //                _captionHeightSmall = YES;
+            //            }
         }
         else if (textView.text.length > 0 || textView.text.length <= 28)
         {
             if (_captionHeightSmall == NO)
             {
                 [self handleCaptionHeight:textView];
-
+                
                 _captionHeightSmall = YES;
             }
         }
@@ -4274,7 +4903,7 @@ CGFloat diffX,diffY;
                              }
                          }
                      } completion:^(BOOL finished) {
-//                         [self doAutoSave:[imgvComic viewWithTag:1232]];
+                         //                         [self doAutoSave:[imgvComic viewWithTag:1232]];
                      }];
 }
 
@@ -4293,7 +4922,7 @@ CGFloat diffX,diffY;
                          }
                          
                      } completion:^(BOOL finished) {
-//                         [self doAutoSave:[imgvComic viewWithTag:1232]];
+                         //                         [self doAutoSave:[imgvComic viewWithTag:1232]];
                      }];
 }
 #pragma Caption Events
@@ -4339,39 +4968,39 @@ CGFloat diffX,diffY;
 
 //- (void)addStickerWithImageView:(UIImageView *)imageView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect
 //{
-//    
+//
 //    if (!CGRectEqualToRect(rect,CGRectZero)) {
 //        imageView.frame = rect;
 //    }
 //    imageView.image = imageView.image;
 //    imageView.userInteractionEnabled = YES;
-//    
+//
 //    imageView.contentMode = UIViewContentModeScaleAspectFit;
 //    imageView.userInteractionEnabled = YES;
 //    imageView.clipsToBounds = NO;
 //    [imageView setBackgroundColor:[UIColor clearColor]];
-//    
+//
 //    UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotatePiece:)];
 //    [imageView addGestureRecognizer:rotationGesture];
-//    
+//
 //    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scalePiece:)];
 //    [pinchGesture setDelegate:self];
 //    [imageView addGestureRecognizer:pinchGesture];
-//    
+//
 //    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureDetected:)];
 //    [panGestureRecognizer setDelegate:self];
 //    [imageView addGestureRecognizer:panGestureRecognizer];
-//    
-//    
+//
+//
 //    UITapGestureRecognizer *tapImgvEdit = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleImgvEditTap:)];
 //    tapImgvEdit.cancelsTouchesInView = YES;
 //    tapImgvEdit.numberOfTapsRequired = 1;
 //    tapImgvEdit.delegate = self;
 //    [imageView addGestureRecognizer:tapImgvEdit];
-//    
+//
 //    imgvComic.userInteractionEnabled = YES;
 //    imgvComic.clipsToBounds = YES;
-//    
+//
 //    [imgvComic addSubview:imageView];
 //}
 
@@ -4452,33 +5081,33 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                    rectValue:(CGRect)rect
                     Tranform:(CGAffineTransform)tranformData
 {
-   /* CGAffineTransform transform ;
-    if (!CGRectEqualToRect(rect,CGRectZero)) {
-        if ([imageView isKindOfClass:[ComicItemAnimatedSticker class]])
-        {
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            CGFloat angle = ((ComicItemAnimatedSticker*)imageView).angle;
-            CGFloat scaleValueX = ((ComicItemAnimatedSticker*)imageView).scaleValueX;
-            CGFloat scaleValueY = ((ComicItemAnimatedSticker*)imageView).scaleValueY;
-            CGFloat tX = ((ComicItemAnimatedSticker*)imageView).tX;
-            CGFloat tY = ((ComicItemAnimatedSticker*)imageView).tY;
-            transform = makeTransform(scaleValueX,scaleValueY,angle,tX,tY);
-            imageView.transform =transform;
-        }
-    }else{*/
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+    /* CGAffineTransform transform ;
+     if (!CGRectEqualToRect(rect,CGRectZero)) {
+     if ([imageView isKindOfClass:[ComicItemAnimatedSticker class]])
+     {
+     imageView.contentMode = UIViewContentModeScaleAspectFit;
+     CGFloat angle = ((ComicItemAnimatedSticker*)imageView).angle;
+     CGFloat scaleValueX = ((ComicItemAnimatedSticker*)imageView).scaleValueX;
+     CGFloat scaleValueY = ((ComicItemAnimatedSticker*)imageView).scaleValueY;
+     CGFloat tX = ((ComicItemAnimatedSticker*)imageView).tX;
+     CGFloat tY = ((ComicItemAnimatedSticker*)imageView).tY;
+     transform = makeTransform(scaleValueX,scaleValueY,angle,tX,tY);
+     imageView.transform =transform;
+     }
+     }else{*/
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
     //}
     
     //[imageView performSelector:@selector(setImage:) withObject:[UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName] afterDelay:((ComicItemAnimatedSticker*)imageView).startDelay];
     
     
-   // imageView.image = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+    // imageView.image = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
     imageView.userInteractionEnabled = YES;
     imageView.clipsToBounds = NO;
     [imageView setBackgroundColor:[UIColor clearColor]];
     
-  /*  UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotatePiece:)];
-    [imageView addGestureRecognizer:rotationGesture];*/
+    /*  UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotatePiece:)];
+     [imageView addGestureRecognizer:rotationGesture];*/
     
     if (!CGRectEqualToRect(imageView.objFrame,CGRectZero)) {
         imageView.frame = imageView.objFrame;
@@ -4507,59 +5136,64 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     ((ComicItemAnimatedSticker*)imageView).image = [YYImage imageNamed:imageView.combineAnimationFileName];
     
-//    if (imageView.combineAnimationFileName) {
-//        //it had image,
-//        NSString *animationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//        animationPath = [[animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName] stringByAppendingString:@".gif"];
-//
-////        animationPath = [animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName];
-//        
-////        YYImage *image = [YYImage imageNamed:@"Animation_Curious_CC_02"];
-//        ((ComicItemAnimatedSticker*)imageView).image = [YYImage imageWithContentsOfFile:animationPath];
-////        imageView.image = [YYImage imageWithContentsOfFile:animationPath];;
-////        [imageView startAnimating];
-//        
-////        NSData *imgData = [[NSData alloc] initWithContentsOfURL:[NSURL fileURLWithPath:animationPath]];
-////        imageView.image = [[UIImage alloc] initWithData:imgData];
-////        imageView.image = [YYImage imageWithData:imgData];
-//        
-//        refAnimatedSticker = (ComicItemAnimatedComponent*)[imageView.animatedComponentArray lastObject];
-//    }else{
-////        refAnimatedSticker = (ComicItemAnimatedSticker *)imageView;
-//        if (currentTapIndex==0)
-//        {
-////            arrOfActiveAnimations = [[NSMutableArray alloc]init];
-//        }
-////        [arrOfActiveAnimations addObject:((ComicItemAnimatedSticker*)imageView)];
-//        if (currentTapIndex==[[currentWorkingAnimation valueForKey:@"resources"] count]-1)
-//        {
-//            if ([currentWorkingAnimation valueForKey:@"isMovable"])
-//            {
-//                [self addPanEventWithIndexFor:imageView];
-//            }
-//            [self createOneGifInBackgroundFromCurrentArray:((ComicItemAnimatedSticker*)imageView).animatedComponentArray
-//                                  ComicItemAnimatedSticker:((ComicItemAnimatedSticker*)imageView)];
-//            [self startAnimatingAfterDelay];
-//        }
-//    }
-
-//    [self.view insertSubview:imageView atIndex:currentTapIndex+0];
-//    [self.view bringSubviewToFront:imageView];
-    /*imgvComic.userInteractionEnabled = YES;
-    imgvComic.clipsToBounds = YES;
+    //    if (imageView.combineAnimationFileName) {
+    //        //it had image,
+    //        NSString *animationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    //        animationPath = [[animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName] stringByAppendingString:@".gif"];
+    //
+    ////        animationPath = [animationPath stringByAppendingPathComponent:((ComicItemAnimatedSticker*)imageView).combineAnimationFileName];
+    //
+    ////        YYImage *image = [YYImage imageNamed:@"Animation_Curious_CC_02"];
+    //        ((ComicItemAnimatedSticker*)imageView).image = [YYImage imageWithContentsOfFile:animationPath];
+    ////        imageView.image = [YYImage imageWithContentsOfFile:animationPath];;
+    ////        [imageView startAnimating];
+    //
+    ////        NSData *imgData = [[NSData alloc] initWithContentsOfURL:[NSURL fileURLWithPath:animationPath]];
+    ////        imageView.image = [[UIImage alloc] initWithData:imgData];
+    ////        imageView.image = [YYImage imageWithData:imgData];
+    //
+    //        refAnimatedSticker = (ComicItemAnimatedComponent*)[imageView.animatedComponentArray lastObject];
+    //    }else{
+    ////        refAnimatedSticker = (ComicItemAnimatedSticker *)imageView;
+    //        if (currentTapIndex==0)
+    //        {
+    ////            arrOfActiveAnimations = [[NSMutableArray alloc]init];
+    //        }
+    ////        [arrOfActiveAnimations addObject:((ComicItemAnimatedSticker*)imageView)];
+    //        if (currentTapIndex==[[currentWorkingAnimation valueForKey:@"resources"] count]-1)
+    //        {
+    //            if ([currentWorkingAnimation valueForKey:@"isMovable"])
+    //            {
+    //                [self addPanEventWithIndexFor:imageView];
+    //            }
+    //            [self createOneGifInBackgroundFromCurrentArray:((ComicItemAnimatedSticker*)imageView).animatedComponentArray
+    //                                  ComicItemAnimatedSticker:((ComicItemAnimatedSticker*)imageView)];
+    //            [self startAnimatingAfterDelay];
+    //        }
+    //    }
     
+    //    [self.view insertSubview:imageView atIndex:currentTapIndex+0];
+    //    [self.view bringSubviewToFront:imageView];
+    /*imgvComic.userInteractionEnabled = YES;
+     imgvComic.clipsToBounds = YES;
+     
+     [imgvComic addSubview:imageView];
+     [imgvComic bringSubviewToFront:imageView];*/
+    //    if([self getAnimatesStickerFromComic] == nil){
     [imgvComic addSubview:imageView];
-    [imgvComic bringSubviewToFront:imageView];*/
+    [imgvComic bringSubviewToFront:imageView];
 //    if([self getAnimatesStickerFromComic] == nil){
 //        [imgvComic addSubview:imageView];
 //        [imgvComic bringSubviewToFront:imageView];
 //    }
     [self.view addSubview:imageView];
     [self.view bringSubviewToFront:imageView];
+   // // [imgvComic bringSubviewToFront:imageView];
+    //    }
 }
 
 - (void)addBubbleWithImage:(ComicItemBubble *)bubbleHolderView ComicItemImage:(UIImage*)itemImage rectValue:(CGRect)rect
-{    
+{
     CGAffineTransform transform ;
     if (!CGRectEqualToRect(rect,CGRectZero)) {
         bubbleHolderView.frame = rect;
@@ -4599,7 +5233,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     bubbleHolderView.imageView.tag = 2020;
     
     bubbleHolderView.txtBuble.delegate = self;
-//    [bubbleHolderView.txtBuble setBackgroundColor:[UIColor clearColor]];
+    //    [bubbleHolderView.txtBuble setBackgroundColor:[UIColor clearColor]];
     bubbleHolderView.txtBuble.font = [UIFont fontWithName:@"ARLRDBD" size:20];
     bubbleHolderView.txtBuble.textColor = [UIColor blackColor];
     bubbleHolderView.txtBuble.returnKeyType = UIReturnKeyDone;
@@ -4625,9 +5259,9 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     bubbleHolderView.audioImageButton.contentMode = UIViewContentModeScaleAspectFit;
     [bubbleHolderView.audioImageButton setImage:[UIImage imageNamed:@"bubbleAudioPlay"] forState:UIControlStateNormal];
     if ([bubbleHolderView isPlayVoice]) {
-            [bubbleHolderView.audioImageButton setAlpha:1];
+        [bubbleHolderView.audioImageButton setAlpha:1];
     }else{
-            [bubbleHolderView.audioImageButton setAlpha:0];
+        [bubbleHolderView.audioImageButton setAlpha:0];
     }
     
     //Adding Long Press event
@@ -4655,7 +5289,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 
 - (void)addCaptionView:(ComicItemCaption *)captionHolder rectValue:(CGRect)rect
 {
-  
+    
     if (!CGRectEqualToRect(rect,CGRectZero)) {
         captionHolder.frame = rect;
     }
@@ -4669,9 +5303,9 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     [captionHolder setBackgroundColor:[UIColor clearColor]];
     captionHolder.bgImageView.tag = 1234;
     if (captionHolder.tintColourString && ![captionHolder.tintColourString isEqualToString:@""]) {
-//        captionHolder.bgImageView = nil;
-//            captionHolder.bgImageView = [[UIImageView alloc] initWithFrame:IS_IPHONE_5?CGRectMake(0, 0, 280, 33):CGRectMake(0, 0, 345, 40)];
-//        captionHolder.bgImageView = [[UIImageView alloc] initWithFrame:IS_IPHONE_5?CGRectMake(0, 0, 280, 33):CGRectMake(0, 0, 345, 40)];
+        //        captionHolder.bgImageView = nil;
+        //            captionHolder.bgImageView = [[UIImageView alloc] initWithFrame:IS_IPHONE_5?CGRectMake(0, 0, 280, 33):CGRectMake(0, 0, 345, 40)];
+        //        captionHolder.bgImageView = [[UIImageView alloc] initWithFrame:IS_IPHONE_5?CGRectMake(0, 0, 280, 33):CGRectMake(0, 0, 345, 40)];
         captionHolder.bgImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth;
         [captionHolder setBackgroundColor:[UIColor clearColor]];
         [captionHolder.bgImageView setImage:[UIImage imageNamed:@"CaptionBgImage"]];
@@ -4683,7 +5317,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     }
     
     [captionHolder addSubview:captionHolder.bgImageView];
-
+    
     
     CGRect frameCaptionHolder;
     CGRect frameBGImageView;
@@ -4732,14 +5366,14 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     captionHolder.txtCaption.font = [UIFont fontWithName:@"MYRIADPRO-REGULAR" size:fontsize];
     
     captionHolder.txtCaption.delegate = self;
-//    captionHolder.txtCaption.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth;
+    //    captionHolder.txtCaption.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth;
     [captionHolder.txtCaption setBackgroundColor:[UIColor clearColor]];
     captionHolder.txtCaption.textAlignment = NSTextAlignmentCenter;
     captionHolder.txtCaption.textColor = [UIColor whiteColor];
-//    captionHolder.txtCaption.center = CGPointMake(captionHolder.bgImageView.frame.size.width  / 2,
-//                                     captionHolder.bgImageView.frame.size.height / 2);
-//    captionHolder.txtCaption
-
+    //    captionHolder.txtCaption.center = CGPointMake(captionHolder.bgImageView.frame.size.width  / 2,
+    //                                     captionHolder.bgImageView.frame.size.height / 2);
+    //    captionHolder.txtCaption
+    
     captionHolder.txtCaption.textContainer.maximumNumberOfLines = 2;
     captionHolder.txtCaption.textContainer.lineBreakMode = NSLineBreakByTruncatingTail;
     captionHolder.txtCaption.scrollEnabled = NO;
@@ -4794,9 +5428,9 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                 break;
             }
         }
-//        if (isAdded == NO) {
-            [captionHolder.dotHolder addSubview:btn];
-//        }
+        //        if (isAdded == NO) {
+        [captionHolder.dotHolder addSubview:btn];
+        //        }
     }
     
     [captionHolder addSubview:captionHolder.dotHolder];
@@ -4809,7 +5443,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     }
     
     captionHolderViewFrame = captionHolder.frame;
-
+    
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureDetected:)];
     [panGestureRecognizer setDelegate:self];
     [captionHolder addGestureRecognizer:panGestureRecognizer];
@@ -4821,7 +5455,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     imgvComic.userInteractionEnabled = YES;
     imgvComic.clipsToBounds = YES;
-//    [captionHolder setBackgroundColor:[UIColor redColor]];
+    //    [captionHolder setBackgroundColor:[UIColor redColor]];
 }
 
 #pragma mark Button Events
@@ -4873,7 +5507,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                                                withNewSlide:isNewSlide
                                                 withPopView:NO withIsWideSlide:isWideSlide];
     
-   
+    
     
     //Desable the image view intactin
     [self.view setUserInteractionEnabled:NO];
@@ -4905,9 +5539,9 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         
         [cmNetWorking postComicCreation:[self createSendParams:[json objectForKey:@"slides"] comicSlides:comicSlides]
                                      Id:nil completion:^(id json,id jsonResposeHeader) {
-            
-            [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
-                                          [self.view setUserInteractionEnabled:YES];
+                                         
+                                         [AppHelper setCurrentcomicId:[json objectForKey:@"data"]];
+                                         [self.view setUserInteractionEnabled:YES];
                                          if(self.comicType != ReplyComic) {
                                              isNewSlide = NO;
                                              UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
@@ -4920,7 +5554,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                                                                                  ReplyTypeValue:self.replyType
                                                                                    ComicShareId:[json objectForKey:@"data"]]
                                                                         Id:[json objectForKey:@"data"] completion:^(id json, id jsonResponse) {
-                                                                        
+                                                                            
                                                                             if (json) {
                                                                                 if(self.replyType == FriendReply) {
                                                                                     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateFriendComics" object:nil];
@@ -4935,25 +5569,25 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                                                                                     [AppHelper deleteSlideFile:self.fileNameToSave];
                                                                                 }
                                                                             }else{
-                                                                                 [AppHelper showErrorDropDownMessage:@"something went wrong !" mesage:@""];
+                                                                                [AppHelper showErrorDropDownMessage:@"something went wrong !" mesage:@""];
                                                                             }
-                                                 
-                                             } ErrorBlock:^(JSONModelError *error) {
-                                                 
-                                             }];
+                                                                            
+                                                                        } ErrorBlock:^(JSONModelError *error) {
+                                                                            
+                                                                        }];
                                          }
-            
-        } ErrorBlock:^(JSONModelError *error) {
-            NSLog(@"completion %@",error);
-            [self.view setUserInteractionEnabled:YES];
-            if(self.replyType == FriendReply) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
-                [self dismissViewControllerAnimated:YES completion:^{}];
-            } else if(self.replyType == GroupReply) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
-                [self dismissViewControllerAnimated:YES completion:^{}];
-            }
-        }];
+                                         
+                                     } ErrorBlock:^(JSONModelError *error) {
+                                         NSLog(@"completion %@",error);
+                                         [self.view setUserInteractionEnabled:YES];
+                                         if(self.replyType == FriendReply) {
+                                             [[NSNotificationCenter defaultCenter] postNotificationName:@"StopFriendReplyComicAnimation" object:nil];
+                                             [self dismissViewControllerAnimated:YES completion:^{}];
+                                         } else if(self.replyType == GroupReply) {
+                                             [[NSNotificationCenter defaultCenter] postNotificationName:@"StopGroupReplyComicAnimation" object:nil];
+                                             [self dismissViewControllerAnimated:YES completion:^{}];
+                                         }
+                                     }];
         
     } ErrorBlock:^(JSONModelError *error) {
         [self.view setUserInteractionEnabled:YES];
@@ -4967,7 +5601,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     }];
     
     
-//    [AppHelper showWarningDropDownMessage:@"" mesage:@"Please wait .. Creating your comic"];
+    //    [AppHelper showWarningDropDownMessage:@"" mesage:@"Please wait .. Creating your comic"];
     
 }
 
@@ -5006,7 +5640,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         
         //ComicSlides Object
         NSMutableDictionary* cmSlide = [[NSMutableDictionary alloc] init];
-
+        
         //Comic Slide image url obj
         NSDictionary* urlSlides = [slideArray objectAtIndex:i];
         
@@ -5053,19 +5687,19 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
             }
             if([imageView isKindOfClass:[ComicItemAnimatedSticker class]])
             {
-//                if ([((ComicItemBubble*)imageView) isPlayVoice]) {
-                    //Yes there is a Audio
-                    //ComicSlides Object
-                    NSMutableDictionary* cmEng = [[NSMutableDictionary alloc] init];
-                    [cmEng setObject:@"GIF" forKey:@"enhancement_type"];
-                    [cmEng setObject:@"1" forKey:@"enhancement_type_id"];
-                    [cmEng setObject:@"1" forKey:@"is_custom"];
-                    [cmEng setObject:@"" forKey:@"enhancement_text"];
+                //                if ([((ComicItemBubble*)imageView) isPlayVoice]) {
+                //Yes there is a Audio
+                //ComicSlides Object
+                NSMutableDictionary* cmEng = [[NSMutableDictionary alloc] init];
+                [cmEng setObject:@"GIF" forKey:@"enhancement_type"];
+                [cmEng setObject:@"1" forKey:@"enhancement_type_id"];
+                [cmEng setObject:@"1" forKey:@"is_custom"];
+                [cmEng setObject:@"" forKey:@"enhancement_text"];
                 
-                   // UIImage* imgGif = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
+                // UIImage* imgGif = [UIImage sd_animatedGIFNamed:((ComicItemAnimatedSticker*)imageView).animatedStickerName];
                 
-                    //CGDataProviderRef provider = CGImageGetDataProvider(imgGif.CGImage);
-                    //NSData* gifData = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+                //CGDataProviderRef provider = CGImageGetDataProvider(imgGif.CGImage);
+                //NSData* gifData = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
                 
                 if (((ComicItemAnimatedSticker*)imageView).combineAnimationFileName) {
                     //it had image,
@@ -5080,18 +5714,18 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                     
                 }
                 
-                    
+                
                 CGFloat midPointX = myRect.origin.x;
                 CGFloat midPointY = myRect.origin.y;
-                    
-                    [cmEng setObject:[NSString stringWithFormat:@"%f",midPointY] forKey:@"position_top"];
-                    [cmEng setObject:[NSString stringWithFormat:@"%f",midPointX] forKey:@"position_left"];
-                    [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.width] forKey:@"width"];
-                    [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.height] forKey:@"height"];
-                    [cmEng setObject:@"1" forKey:@"z_index"];
-                    
-                    [enhancements addObject:cmEng];
-//                }
+                
+                [cmEng setObject:[NSString stringWithFormat:@"%f",midPointY] forKey:@"position_top"];
+                [cmEng setObject:[NSString stringWithFormat:@"%f",midPointX] forKey:@"position_left"];
+                [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.width] forKey:@"width"];
+                [cmEng setObject:[NSString stringWithFormat:@"%.02f",myRect.size.height] forKey:@"height"];
+                [cmEng setObject:@"1" forKey:@"z_index"];
+                
+                [enhancements addObject:cmEng];
+                //                }
             }
             if (enhancements && [enhancements count] > 0) {
                 [cmSlide setObject:enhancements forKey:@"enhancements"];
@@ -5101,15 +5735,15 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         if ([cmPage.slideType isEqualToString:slideTypeWide])
         {
             [cmSlide setObject:@"1" forKey:@"slide_type"];
-
+            
         }
         else
         {
             [cmSlide setObject:@"0" forKey:@"slide_type"];
-
+            
         }
         
-
+        
         
         [slides addObject:cmSlide];
         cmPage = nil;
@@ -5133,25 +5767,25 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
         [self doPrintScreen:^(bool isOutOfFrame)
-        {
-            if (comicItemObj != nil)
-            {
-                if (isNewSlide)
-                {
-                    isNewSlide = NO;
-                }
-                
-                
-                
-                
-                [self.delegate comicMakingItemSave:comicPage
-                                     withImageView:comicItemObj
-                                   withPrintScreen:printScreen
-                                        withRemove:NO
-                                     withImageView:imgvComic];
-            }
-            
-        }];
+         {
+             if (comicItemObj != nil)
+             {
+                 if (isNewSlide)
+                 {
+                     isNewSlide = NO;
+                 }
+                 
+                 
+                 
+                 
+                 [self.delegate comicMakingItemSave:comicPage
+                                      withImageView:comicItemObj
+                                    withPrintScreen:printScreen
+                                         withRemove:NO
+                                      withImageView:imgvComic];
+             }
+             
+         }];
     });
 }
 
@@ -5169,12 +5803,12 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     dispatch_group_async(group, queue, ^{
         @try {
-//            UIImageView * viewCopy = [imgvComic copy];
-//            for (id subview in [viewCopy subviews]) {
-//                if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
-//                    [subview removeFromSuperview];
-//                }
-//            }
+            //            UIImageView * viewCopy = [imgvComic copy];
+            //            for (id subview in [viewCopy subviews]) {
+            //                if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
+            //                    [subview removeFromSuperview];
+            //                }
+            //            }
             
             printScreen = [UIImage imageWithView:imgvComic paque:YES];
             handler(YES);
@@ -5206,8 +5840,8 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 
 
 -(void)doRemoveAllItem :(id)comicItemObj{
-//    if (comicItemObj == nil)
-//        return;
+    //    if (comicItemObj == nil)
+    //        return;
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
@@ -5215,7 +5849,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     // Add a task to the group
     dispatch_group_async(group, queue, ^{
         [self.delegate  comicMakingItemRemoveAll:comicPage removeAll:YES];
-//        [self.delegate comicMakingItemSave:comicPage withImageView:comicItemObj withPrintScreen:printScreen withRemove:YES];
+        //        [self.delegate comicMakingItemSave:comicPage withImageView:comicItemObj withPrintScreen:printScreen withRemove:YES];
     });
 }
 
@@ -5230,7 +5864,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     dispatch_group_async(group, queue, ^{
         
         [self.delegate comicMakingItemSave:comicPage withImageView:comicItemObj withPrintScreen:printScreen withRemove:YES withImageView:imgvComic];
-       
+        
     });
     [self doPrintScreen];
 }
@@ -5291,16 +5925,16 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 }
 
 - (void)isEndOfPan:(UIView*)currectView
-          success:(void (^)(bool isOutOfFrame))handler{
+           success:(void (^)(bool isOutOfFrame))handler{
     
-//    UIImageView *imageView = nil;
+    //    UIImageView *imageView = nil;
     
     BOOL moved = NO;
     CGRect newPoint = currectView.frame;
     
     // If off screen left
     if (newPoint.origin.x < - (currectView.frame.size.width/2)){
-//    if (newPoint.origin.x < 0.0f){
+        //    if (newPoint.origin.x < 0.0f){
         newPoint.origin.x *= -1.0;
         moved = YES;
     }
@@ -5359,7 +5993,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
 #pragma mark mainpageAction
 
 - (IBAction)btnComicBoyClick:(id)sender {
-
+    
     [AppHelper openMainPageviewController:self];
     
 }
@@ -5376,17 +6010,17 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             NSLog(@"Do some work");
             
-             if ([InstructionView getBoolValueForSlide:kInstructionSlide2] == NO)
-             {
-            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-            instView.delegate = self;
-            [instView showInstructionWithSlideNumber:SlideNumber2 withType:InstructionBubbleType];
-            [instView setTrueForSlide:kInstructionSlide2];
-            
-            [self.view addSubview:instView];
-             }
+            if ([InstructionView getBoolValueForSlide:kInstructionSlide2] == NO)
+            {
+                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                instView.delegate = self;
+                [instView showInstructionWithSlideNumber:SlideNumber2 withType:InstructionBubbleType];
+                [instView setTrueForSlide:kInstructionSlide2];
+                
+                [self.view addSubview:instView];
+            }
         });
-
+        
     }
     else if (number == SlideNumber10)
     {
@@ -5396,20 +6030,20 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
             NSLog(@"Do some work");
             
             if ([InstructionView getBoolValueForSlide:kInstructionSlide12] == NO)
-             {
-            InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
-            instView.delegate = self;
-            [instView showInstructionWithSlideNumber:SlideNumber12 withType:InstructionGIFType];
-            [instView setTrueForSlide:kInstructionSlide12];
-            
-            [self.view addSubview:instView];
-             }
+            {
+                InstructionView *instView = [[InstructionView alloc] initWithFrame:self.view.bounds];
+                instView.delegate = self;
+                [instView showInstructionWithSlideNumber:SlideNumber12 withType:InstructionGIFType];
+                [instView setTrueForSlide:kInstructionSlide12];
+                
+                [self.view addSubview:instView];
+            }
         });
     }
     else if (number == SlideNumber15)
     {
-    
-       
+        
+        
     }
 }
 
@@ -5421,7 +6055,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     CGFloat widthFactor = scaledImageSize.width / imageSize.width;
     CGFloat heightFactor = scaledImageSize.height / imageSize.height;
     
-   // CGRect currentCropRect = rect;
+    // CGRect currentCropRect = rect;
     CGRect actualCropRect = CGRectMake(
                                        roundf(currentCropRect.origin.x / widthFactor),
                                        roundf(currentCropRect.origin.y / heightFactor),
@@ -5725,26 +6359,26 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
         // The code runs in background, not strangling
         // the main run loop.
         CombineGifImages* cg = [[CombineGifImages alloc] init];
-//        dispatch_sync(dispatch_get_main_queue(), ^{
-            // This will be called on the main thread, so that
-            // you can update the UI, for example.
-            NSString* gifFileName = [[NSUUID UUID] UUIDString];
-            if (animatedSticker.combineAnimationFileName) {
-                gifFileName = animatedSticker.combineAnimationFileName;
+        //        dispatch_sync(dispatch_get_main_queue(), ^{
+        // This will be called on the main thread, so that
+        // you can update the UI, for example.
+        NSString* gifFileName = [[NSUUID UUID] UUIDString];
+        if (animatedSticker.combineAnimationFileName) {
+            gifFileName = animatedSticker.combineAnimationFileName;
+        }
+        [cg doImageCombine:passingArray SavedFileName:gifFileName completion:^(BOOL finished, UIImage *outImage, NSString *outSavedPath) {
+            if (finished)
+            {
+                animatedSticker.combineAnimationFileName = gifFileName;
+                haveCreateMainGif = YES;
+                //                    mainAnimationGifView.hidden = YES;
+                //                    mainAnimationGifView.image = outImage;
+                refToCombineAnimatedSticker = animatedSticker;
+                [self doAutoSave:nil];
             }
-            [cg doImageCombine:passingArray SavedFileName:gifFileName completion:^(BOOL finished, UIImage *outImage, NSString *outSavedPath) {
-                if (finished)
-                {
-                    animatedSticker.combineAnimationFileName = gifFileName;
-                    haveCreateMainGif = YES;
-//                    mainAnimationGifView.hidden = YES;
-//                    mainAnimationGifView.image = outImage;
-                    refToCombineAnimatedSticker = animatedSticker;
-                    [self doAutoSave:nil];
-                }
-            }];
-            
-//        });
+        }];
+        
+        //        });
     });
 }
 -(void)stopArrayOfGifInLoopAndRemoveExtraGifs
@@ -5780,7 +6414,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     int ind = [index intValue] + 1;
     if (ind==indexMaxRun && haveAnimationOnPage && pauseAnimation == NO)
     {
-//        mainAnimationGifView.hidden = NO;
+        //        mainAnimationGifView.hidden = NO;
         [self stopArrayOfGifInLoopAndRemoveExtraGifs];
         [self startAnimatingAfterDelay];
     }
@@ -5791,4 +6425,6 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     //NSLog(@"started %@ gifName",imageview.animatedStickerName);
     [imageview startAnimating];
 }
+
+
 @end

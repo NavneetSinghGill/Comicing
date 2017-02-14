@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnCamera;
 @property (weak, nonatomic) IBOutlet UIButton *btnBubble;
 @property (weak, nonatomic) IBOutlet UIButton *btnSticker;
+@property (weak, nonatomic) IBOutlet UIView *btnCameraViewContainer;
 
 - (void)allButtonsFadeOut:(UIButton *)sender;
 - (void)allButtonsFadeIn:(UIButton *)sender;

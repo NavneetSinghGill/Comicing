@@ -20,7 +20,7 @@
 - (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll withComicPage:(ComicPage *)comicPage withNewSlide:(BOOL)newSlide withAnimationSpeed:(CGFloat)speed;
 
 - (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll withImageView:(UIImageView *)imageView withPrintScreen:(UIImage *)printScreen withNewSlide:(BOOL)newslide
- withPopView:(BOOL)isPopView withIsWideSlide:(BOOL)isWideSlide;
+                                     withPopView:(BOOL)isPopView withIsWideSlide:(BOOL)isWideSlide;
 
 
 //- (void)comicMakingItemSave:(ComicPage *)comicPage
@@ -49,6 +49,8 @@ typedef void (^RowButtonCallBack)(BOOL success);
 {
     
 }
+@property (strong,nonatomic) IBOutlet UISlider *switchToToggle;
+-(IBAction)switchToToggleButtonClicked:(id)sender;
 - (void)btnCameraTap:(UIButton *)sender;
 - (void)closeStickerList;
 - (void)openStickerList;
