@@ -48,6 +48,7 @@ typedef void (^RowButtonCallBack)(BOOL success);
 @interface ComicMakingViewController : UIViewController
 {
     
+    __weak IBOutlet NSLayoutConstraint *exclamationLeftConstaint;
 }
 @property (strong,nonatomic) IBOutlet UISlider *switchToToggle;
 -(IBAction)switchToToggleButtonClicked:(id)sender;

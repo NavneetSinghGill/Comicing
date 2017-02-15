@@ -125,7 +125,7 @@
             <objects>
                 <navigationController storyboardIdentifier="glidenavigation" navigationBarHidden="YES" id="Gtw-pU-Kh0" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="erw-YJ-ZwX"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l5V-dE-erB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="l5V-dE-erB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -408,6 +408,16 @@
                                     <action selector="btnComicBoyClick:" destination="aEe-Ef-L5w" eventType="touchUpInside" id="aP2-Ux-biR"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6U7-NS-NT1">
+                                <rect key="frame" x="150" y="37" width="75" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="Sticker_pause">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnPlayPauseAnimationClick:" destination="aEe-Ef-L5w" eventType="touchUpInside" id="KLr-pm-Kcc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -432,14 +442,17 @@
                             <constraint firstAttribute="trailing" secondItem="bYw-6L-5gW" secondAttribute="trailing" id="Vx2-tS-aJb"/>
                             <constraint firstItem="1cE-LZ-1bH" firstAttribute="top" secondItem="4mh-aF-fCo" secondAttribute="top" constant="9" id="X7q-F4-nVZ"/>
                             <constraint firstItem="bYw-6L-5gW" firstAttribute="top" secondItem="4mh-aF-fCo" secondAttribute="top" id="XNH-Ow-727"/>
+                            <constraint firstItem="6U7-NS-NT1" firstAttribute="top" secondItem="8qL-ah-yIf" secondAttribute="bottom" constant="17" id="YDb-He-cWa"/>
                             <constraint firstAttribute="trailing" secondItem="cb1-aT-3H3" secondAttribute="trailing" id="bBo-Ti-JUf"/>
                             <constraint firstItem="cb1-aT-3H3" firstAttribute="leading" secondItem="4mh-aF-fCo" secondAttribute="leading" id="bRR-rp-eS6"/>
                             <constraint firstItem="VJ3-52-k7o" firstAttribute="top" secondItem="w4A-kj-dhW" secondAttribute="bottom" constant="2" id="d6j-iY-xJi"/>
+                            <constraint firstItem="6U7-NS-NT1" firstAttribute="width" secondItem="4mh-aF-fCo" secondAttribute="width" multiplier="0.2" id="dDJ-pv-mbU"/>
                             <constraint firstAttribute="trailing" secondItem="j7T-l0-CdH" secondAttribute="trailing" id="fGl-HL-uKf"/>
                             <constraint firstAttribute="trailing" secondItem="w4A-kj-dhW" secondAttribute="trailing" id="gNt-NE-p3J"/>
                             <constraint firstItem="2oG-jX-y4B" firstAttribute="top" secondItem="4mh-aF-fCo" secondAttribute="top" constant="17" id="hdr-dd-m3v"/>
                             <constraint firstItem="Nfd-2m-Bpw" firstAttribute="top" secondItem="y2i-qr-Hr2" secondAttribute="bottom" id="kaN-PN-9Pk"/>
                             <constraint firstItem="Dj9-uN-iwq" firstAttribute="leading" secondItem="4mh-aF-fCo" secondAttribute="leading" id="kbn-8A-rtr"/>
+                            <constraint firstItem="6U7-NS-NT1" firstAttribute="centerX" secondItem="4mh-aF-fCo" secondAttribute="centerX" id="oJq-FM-QFA"/>
                             <constraint firstItem="bum-CF-q3f" firstAttribute="top" secondItem="Dj9-uN-iwq" secondAttribute="bottom" constant="12" id="slI-X5-ikz"/>
                             <constraint firstItem="n6h-10-xPa" firstAttribute="leading" secondItem="4mh-aF-fCo" secondAttribute="leading" id="ssM-69-wbx"/>
                             <constraint firstItem="j7T-l0-CdH" firstAttribute="top" secondItem="4mh-aF-fCo" secondAttribute="top" constant="10" id="t6L-cH-vhI"/>
@@ -457,11 +470,13 @@
                         <outlet property="animationContainerView" destination="Jz7-3n-2Yi" id="6yT-1u-bIX"/>
                         <outlet property="btnClose" destination="1cE-LZ-1bH" id="VZ5-i8-fFl"/>
                         <outlet property="btnCloseComic" destination="2oG-jX-y4B" id="Q6W-tO-xJe"/>
+                        <outlet property="btnPlayAnimation" destination="6U7-NS-NT1" id="g1J-vF-fl1"/>
                         <outlet property="btnRecord" destination="MG4-QG-nxH" id="3DJ-tY-T44"/>
                         <outlet property="btnSend" destination="VJ3-52-k7o" id="az1-n9-2GJ"/>
                         <outlet property="bubbleContainerView" destination="2yX-Va-hQT" id="P2h-SS-H7K"/>
                         <outlet property="bubbleListView" destination="kub-pR-LyG" id="F8b-Ug-cyY"/>
                         <outlet property="chatIcon" destination="bum-CF-q3f" id="nVx-Nw-OqJ"/>
+                        <outlet property="exclamationLeftConstaint" destination="kbn-8A-rtr" id="TR0-mm-dET"/>
                         <outlet property="exclamationListView" destination="Dj9-uN-iwq" id="unU-cd-Xzh"/>
                         <outlet property="imgvComic" destination="cb1-aT-3H3" id="jp7-9w-hGH"/>
                         <outlet property="mSendComicButton" destination="VJ3-52-k7o" id="gsV-DA-VFC"/>
@@ -478,7 +493,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeJ-n6-zo1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-191" y="399"/>
+            <point key="canvasLocation" x="-191.5" y="398.5"/>
         </scene>
         <!--Comic Bubble List-->
         <scene sceneID="2P3-ix-rD6">
@@ -515,7 +530,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="DYK-Qv-QGQ">
-                                <rect key="frame" x="0.0" y="67.5" width="60" height="60"/>
+                                <rect key="frame" x="0.0" y="67" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -1371,7 +1386,7 @@
         <scene sceneID="3fu-be-5b5">
             <objects>
                 <navigationController navigationBarHidden="YES" id="uIc-v5-cRz" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kF0-5W-zSM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kF0-5W-zSM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1800,7 +1815,7 @@ Comicing </string>
                                 <size key="customSize" width="60" height="67.5"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="ZYm-jK-fPc" customClass="stickerCell">
-                                <rect key="frame" x="0.0" y="75.5" width="60" height="60"/>
+                                <rect key="frame" x="0.0" y="76" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -3149,24 +3164,24 @@ Comicing </string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2L6-m3-B3F">
-                                <rect key="frame" x="0.0" y="20" width="375" height="593.5"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="594"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L8h-9U-EuO">
-                                <rect key="frame" x="0.0" y="613.5" width="375" height="53.5"/>
+                                <rect key="frame" x="0.0" y="614" width="375" height="53"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppg-r8-zXW">
-                                        <rect key="frame" x="161" y="0.0" width="53" height="53.5"/>
+                                        <rect key="frame" x="161" y="0.0" width="53" height="53"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WgQ-Pj-ph0">
-                                                <rect key="frame" x="8" y="8" width="37" height="37.5"/>
+                                                <rect key="frame" x="8" y="8" width="37" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="WgQ-Pj-ph0" secondAttribute="height" multiplier="1:1" id="vgw-5B-Dtd"/>
                                                 </constraints>
                                                 <state key="normal" backgroundImage="baby"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIJ-lg-OAD">
-                                                <rect key="frame" x="0.0" y="0.0" width="53" height="53.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="53" height="53"/>
                                                 <connections>
                                                     <action selector="openMainScreen" destination="hfM-XR-QtF" eventType="touchUpInside" id="tw2-fS-j0j"/>
                                                 </connections>
@@ -3185,17 +3200,17 @@ Comicing </string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jcb-iV-vGV">
-                                        <rect key="frame" x="321.5" y="0.0" width="53.5" height="53.5"/>
+                                        <rect key="frame" x="322" y="0.0" width="53" height="53"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTg-ZH-faS">
-                                                <rect key="frame" x="16" y="10" width="21.5" height="33.5"/>
+                                                <rect key="frame" x="16" y="10" width="21" height="33"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="kTg-ZH-faS" secondAttribute="height" multiplier="9:14" id="4dp-TL-JWv"/>
                                                 </constraints>
                                                 <state key="normal" backgroundImage="ComicPageArrow"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Jj-bR-B67">
-                                                <rect key="frame" x="0.0" y="0.0" width="53.5" height="53.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="53" height="53"/>
                                                 <connections>
                                                     <action selector="arrowButtonTapped:" destination="hfM-XR-QtF" eventType="touchUpInside" id="Vex-tQ-TDV"/>
                                                 </connections>
@@ -3239,7 +3254,7 @@ Comicing </string>
                                                 <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUe-ZB-TKe">
-                                                        <rect key="frame" x="7" y="7" width="31.5" height="31.5"/>
+                                                        <rect key="frame" x="7" y="7" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="XUe-ZB-TKe" secondAttribute="height" multiplier="1:1" id="veF-lR-pTo"/>
                                                         </constraints>
@@ -3267,7 +3282,7 @@ Comicing </string>
                                                 <rect key="frame" x="0.0" y="45" width="45" height="45"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RlT-bE-7qe">
-                                                        <rect key="frame" x="7" y="7" width="31.5" height="31.5"/>
+                                                        <rect key="frame" x="7" y="7" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="RlT-bE-7qe" secondAttribute="height" multiplier="1:1" id="WIP-58-jNm"/>
                                                         </constraints>
@@ -3295,7 +3310,7 @@ Comicing </string>
                                                 <rect key="frame" x="0.0" y="90" width="45" height="45"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZg-Kz-8L2">
-                                                        <rect key="frame" x="4.5" y="4.5" width="36" height="36"/>
+                                                        <rect key="frame" x="5" y="5" width="36" height="36"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="CZg-Kz-8L2" secondAttribute="height" multiplier="1:1" id="Bhe-sR-aaK"/>
                                                         </constraints>
@@ -3323,7 +3338,7 @@ Comicing </string>
                                                 <rect key="frame" x="0.0" y="135" width="45" height="45"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0e-X9-M90">
-                                                        <rect key="frame" x="7" y="7" width="31.5" height="31.5"/>
+                                                        <rect key="frame" x="7" y="7" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="j0e-X9-M90" secondAttribute="height" multiplier="1:1" id="w35-2B-4sg"/>
                                                         </constraints>
@@ -3424,6 +3439,7 @@ Comicing </string>
         <image name="Scissor.png" width="40" height="48"/>
         <image name="SignUpButton_Off" width="299" height="75"/>
         <image name="StickerSelectionBg" width="60" height="86"/>
+        <image name="Sticker_pause" width="33" height="40"/>
         <image name="T-icon" width="19" height="40"/>
         <image name="baby" width="26" height="26"/>
         <image name="backButton" width="42" height="66"/>

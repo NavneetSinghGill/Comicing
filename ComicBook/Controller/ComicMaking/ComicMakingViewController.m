@@ -259,6 +259,7 @@ static RowButtonCallBack _completionHandler ;
 @property (strong,nonatomic) UIImageView *stillPicImg;
 @property (strong,nonatomic) IBOutlet RSSliderView *vertSlider;
 @property (strong,nonatomic) UIButton *crossSegmentBtn;
+@property (weak, nonatomic) IBOutlet UIButton *btnPlayAnimation;
 
 @end
 
@@ -1058,6 +1059,8 @@ int sliderViewWidthDeltaChange;
     CGRect rect_exclamation =   exclamationListView.frame;
     rect_exclamation.origin.x   =   exclamationListView.frame.size.width;
     exclamationListView.frame   =   rect_exclamation;
+    exclamationLeftConstaint.constant = exclamationListView.frame.size.width;
+
     
     CGRect frame = viewDrawing.frame;
     frame.origin.x = CGRectGetMaxX(self.view.frame);
@@ -2408,6 +2411,7 @@ int sliderViewWidthDeltaChange;
     
     backupToolCenter = viewRowButtons.center;
     backupOtherViewCenter = exclamationListView.center;
+    [exclamationListView setHidden:NO];
     
     [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         btnClose.alpha = 0;
@@ -2424,7 +2428,10 @@ int sliderViewWidthDeltaChange;
     [UIView animateWithDuration:.8 delay:.2 usingSpringWithDamping:80 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         exclamationListView.center = CGPointMake(backupOtherViewCenter.x -viewStickerList.bounds.size.width, backupOtherViewCenter.y );
+        
+        exclamationLeftConstaint.constant = 0;
         exclamationListView.alpha = 1;
+        
     } completion:^(BOOL finished) {
         
     }];
@@ -2484,6 +2491,7 @@ int sliderViewWidthDeltaChange;
         
         btnClose.alpha = 1;
         btnCloseComic.alpha = 1;
+        exclamationLeftConstaint.constant = exclamationListView.frame.size.width;
     } completion:^(BOOL finished) {
         
     }];
@@ -2584,9 +2592,9 @@ int sliderViewWidthDeltaChange;
     
     //    mainAnimationGifView = [[ComicItemAnimatedSticker alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapAnimation:)];
-    tapGesture.numberOfTapsRequired = 1;
-    [animatedComponent addGestureRecognizer:tapGesture];
+//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapAnimation:)];
+//    tapGesture.numberOfTapsRequired = 1;
+//    [animatedComponent addGestureRecognizer:tapGesture];
     
     [imageView.animatedComponentArray addObject:animatedComponent];
     
@@ -2631,7 +2639,7 @@ int sliderViewWidthDeltaChange;
     //        [imgvComic addSubview:imageView];
     //        [imgvComic bringSubviewToFront:imageView];
     //    }
-    imageView.frame = CGRectMake(0, 0, 150, 150);
+    imageView.frame = CGRectMake(100, 100, 150, 150);
     [self addComicItem:imageView ItemImage:nil];
     
     imgvComic.clipsToBounds = YES;
@@ -3541,7 +3549,8 @@ int sliderViewWidthDeltaChange;
 }
 
 - (void)singleTapAnimation:(UIGestureRecognizer *)gestureRecognizer
-{        ComicItemAnimatedSticker* imgAnimation = (ComicItemAnimatedSticker*)gestureRecognizer.view;
+{
+    ComicItemAnimatedSticker* imgAnimation = (ComicItemAnimatedSticker*)gestureRecognizer.view;
     if ([imgAnimation isAnimating]) {
         [imgAnimation stopAnimating];
         pauseAnimation = YES;
@@ -3549,6 +3558,16 @@ int sliderViewWidthDeltaChange;
         [imgAnimation startAnimating];
         pauseAnimation = NO;
     }
+//    for(id ObjAnimationCell in [self.ImgvComic2 subviews])
+//    {
+//        if([ObjAnimationCell isKindOfClass:[ComicItemAnimatedSticker class]]){
+//            if ([((ComicItemAnimatedComponent*)ObjAnimationCell) isAnimating]) {
+//                [((ComicItemAnimatedComponent*)ObjAnimationCell) stopAnimating];
+//            }else{
+//                [((ComicItemAnimatedComponent*)ObjAnimationCell) startAnimating];
+//            }
+//        }
+//    }
     for (ComicItemAnimatedComponent* objColl in imgAnimation.animatedComponentArray) {
         if ([objColl isAnimating]) {
             [objColl stopAnimating];
@@ -3556,6 +3575,21 @@ int sliderViewWidthDeltaChange;
         }else{
             [objColl startAnimating];
             pauseAnimation = NO;
+        }
+    }
+}
+- (void)payPauseAnimation
+{
+    for(id ObjAnimationCell in [self.view subviews])
+    {
+        if([ObjAnimationCell isKindOfClass:[ComicItemAnimatedSticker class]]){
+            if ([((ComicItemAnimatedComponent*)ObjAnimationCell) isAnimating]) {
+                [((ComicItemAnimatedComponent*)ObjAnimationCell) stopAnimating];
+                [self.btnPlayAnimation setImage:[UIImage imageNamed:@"Sticker_play"] forState:UIControlStateNormal];
+            }else{
+                [((ComicItemAnimatedComponent*)ObjAnimationCell) startAnimating];
+                [self.btnPlayAnimation setImage:[UIImage imageNamed:@"Sticker_pause"] forState:UIControlStateNormal];
+            }
         }
     }
 }
@@ -5112,9 +5146,9 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     if (!CGRectEqualToRect(imageView.objFrame,CGRectZero)) {
         imageView.frame = imageView.objFrame;
     }
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapAnimation:)];
-    tapGesture.numberOfTapsRequired = 1;
-    [imageView addGestureRecognizer:tapGesture];
+//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapAnimation:)];
+//    tapGesture.numberOfTapsRequired = 1;
+//    [imageView addGestureRecognizer:tapGesture];
     
     UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotatePiece:)];
     [imageView addGestureRecognizer:rotationGesture];
@@ -5182,10 +5216,9 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     //    if([self getAnimatesStickerFromComic] == nil){
     [imgvComic addSubview:imageView];
     [imgvComic bringSubviewToFront:imageView];
-//    if([self getAnimatesStickerFromComic] == nil){
-//        [imgvComic addSubview:imageView];
-//        [imgvComic bringSubviewToFront:imageView];
-//    }
+    
+    [self.btnPlayAnimation setHidden:NO];
+    
     [self.view addSubview:imageView];
     [self.view bringSubviewToFront:imageView];
    // // [imgvComic bringSubviewToFront:imageView];
@@ -6426,5 +6459,8 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     [imageview startAnimating];
 }
 
+- (IBAction)btnPlayPauseAnimationClick:(id)sender {
+    [self payPauseAnimation];
+}
 
 @end
