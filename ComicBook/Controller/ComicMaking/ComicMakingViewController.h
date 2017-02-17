@@ -117,6 +117,7 @@ typedef void (^RowButtonCallBack)(BOOL success);
 @property (nonatomic, weak) id<ComicMakingViewControllerDelegate> delegate;
 @property (strong,nonatomic) GlideScrollViewController *glideScrollView;
 @property (strong, nonatomic) IBOutlet UIButton *mSendComicButton;
+@property (weak, nonatomic) IBOutlet YYAnimatedImageView *imgGifLayer;
 
 
 @property (nonatomic) ComicType comicType;

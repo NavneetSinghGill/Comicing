@@ -335,7 +335,7 @@ int sliderViewWidthDeltaChange;
         });
     }
     
-//    [self setUpCameraPreview];
+    [self setUpCameraPreview];
     
     [self prepareGlideView];
     
@@ -480,15 +480,45 @@ int sliderViewWidthDeltaChange;
 
 -(void)doneVideoBtnClicked {
     
-    [NSGIF createGIFfromURL:self.outputVideoURL withFrameCount:30 delayTime:.010 loopCount:0 completion:^(NSURL *GifURL) {
-        NSLog(@"Finished generating GIF: %@", GifURL);
+    [NSGIF createGIFfromURL:self.outputVideoURL
+             withFrameCount:30
+                  delayTime:.010
+                  loopCount:0
+                 completion:^(NSURL *GifURL) {
+                     NSLog(@"Finished generating GIF: %@", GifURL);
+                     if (GifURL) {
+                         viewCamera.hidden = YES;
+                         [viewCameraPreview setHidden:YES];
+                         [self.imgGifLayer setHidden:NO];
+                         NSString* sContentsPath = [[GifURL absoluteString] stringByReplacingOccurrencesOfString:@"file:///" withString:@"//"];
+                         UIImage* imgObj = [UIImage imageWithContentsOfFile:sContentsPath];
+                         self.imgGifLayer.image = imgObj;
+                         
+                         //Visible middle layer
+                         [self handleMiddleLayer];
+                     }
     }];
-    
     // [viewCameraPreview removeFromSuperview];
+}
+
+-(void)handleMiddleLayer{
+    [self.imgvComic setHidden:NO];
     
+    RowButtonsViewController *rowButtonsController;
+    for (UIViewController *controller in self.childViewControllers)
+    {
+        if ([controller isKindOfClass:[RowButtonsViewController class]])
+        {
+            rowButtonsController = (RowButtonsViewController *)controller;
+        }
+    }
+    rowButtonsController.btnCamera.selected = YES;
+    
+    [rowButtonsController allButtonsFadeIn:rowButtonsController.btnCamera];
 }
 
 #pragma mark- cross button clicked
+
 -(void)crossButtonClicked {
     
     [self.crossSegmentBtn setHidden:NO];
@@ -2485,7 +2515,7 @@ int sliderViewWidthDeltaChange;
     pauseAnimation = YES;
     [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
-        exclamationListView.center = CGPointMake(backupOtherViewCenter.x, backupOtherViewCenter.y );
+//        exclamationListView.center = CGPointMake(backupOtherViewCenter.x, backupOtherViewCenter.y );
         
         exclamationListView.alpha = 0;
         
