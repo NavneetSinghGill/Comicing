@@ -7,7 +7,6 @@
 //
 
 #import "CropRegisterViewController.h"
-//#import "CropStickerViewController.h"
 #import "TermsServiceViewController.h"
 
 //NSString *const SKeySticker = @"Sticker";
