@@ -428,55 +428,55 @@ int sliderViewWidthDeltaChange;
 
 #pragma mark- method for slider view
 
--(void)setUpSliderView {
-    
-    // top slider
-    self.sliderView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 50)];
-    [viewCameraPreview addSubview:self.sliderView];
-    [self.sliderView setBackgroundColor:[UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:239.0/255.0 alpha:1.0]];
-    
-    
-    // toggel Slider for video and image
-    
-    self.vertSlider = [[RSSliderView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-35, viewCameraPreview.frame.size.height-190, 70, 170) andOrientation:Vertical];
-    self.vertSlider.delegate = self;
-    
-    [self.vertSlider setColorsForBackground:[UIColor clearColor]
-                                 foreground:[UIColor clearColor]
-                                     handle:[UIColor clearColor]
-                                     border:[UIColor colorWithRed:159.0/255.0 green:220.0/255.0 blue:249.0/255.0 alpha:1.0]];
-    
-    [viewCameraPreview addSubview:self.vertSlider];
-    
-    // image for video and still picture  video-tape-icon.png
-    
-    self.videoImg=[[UIImageView alloc] initWithFrame:CGRectMake(self.vertSlider.frame.origin.x+self.vertSlider.frame.size.width+20, self.vertSlider.frame.origin.y+20, 30, 30)];
-    [self.videoImg setImage:[UIImage imageNamed:@"video-tape-icon.png"]];
-    [viewCameraPreview addSubview:self.videoImg];
-    
-    self.stillPicImg=[[UIImageView alloc] initWithFrame:CGRectMake(self.vertSlider.frame.origin.x+self.vertSlider.frame.size.width+20, self.vertSlider.frame.origin.y+self.vertSlider.frame.size.height-50, 30, 30)];
-    [self.stillPicImg setImage:[UIImage imageNamed:@"camera-icon.png"]];
-    [viewCameraPreview addSubview:self.stillPicImg];
-    
-    
-    // done button created
-    UIButton *doneVideoBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [doneVideoBtn setImage:[UIImage imageNamed:@"tick-button.png"] forState:UIControlStateNormal];
-    [doneVideoBtn setFrame:CGRectMake(viewCameraPreview.frame.origin.x+viewCameraPreview.frame.size.width-50, viewCameraPreview.frame.size.height+viewCameraPreview.frame.origin.y-130, 40, 40)];
-    [viewCameraPreview addSubview:doneVideoBtn];
-    [doneVideoBtn addTarget:self action:@selector(doneVideoBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    
-    // cross button
-    
-    self.crossSegmentBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [self.crossSegmentBtn setImage:[UIImage imageNamed:@"profilePicClose.png"] forState:UIControlStateNormal];
-    [self.crossSegmentBtn setFrame:CGRectMake(viewCameraPreview.frame.origin.x+20, self.sliderView.frame.origin.y+self.sliderView.frame.size.height+30, 21, 19)];
-    [viewCameraPreview addSubview:self.crossSegmentBtn];
-    [self.crossSegmentBtn addTarget:self action:@selector(crossButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.crossSegmentBtn setHidden:YES];
-    
-    
-}
+//-(void)setUpSliderView {
+//    
+//    // top slider
+//    self.sliderView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 50)];
+//    [viewCameraPreview addSubview:self.sliderView];
+//    [self.sliderView setBackgroundColor:[UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:239.0/255.0 alpha:1.0]];
+//    
+//    
+//    // toggel Slider for video and image
+//    
+//    self.vertSlider = [[RSSliderView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-35, viewCameraPreview.frame.size.height-190, 70, 170) andOrientation:Vertical];
+//    self.vertSlider.delegate = self;
+//    
+//    [self.vertSlider setColorsForBackground:[UIColor clearColor]
+//                                 foreground:[UIColor clearColor]
+//                                     handle:[UIColor clearColor]
+//                                     border:[UIColor colorWithRed:159.0/255.0 green:220.0/255.0 blue:249.0/255.0 alpha:1.0]];
+//    
+//    [viewCameraPreview addSubview:self.vertSlider];
+//    
+//    // image for video and still picture  video-tape-icon.png
+//    
+//    self.videoImg=[[UIImageView alloc] initWithFrame:CGRectMake(self.vertSlider.frame.origin.x+self.vertSlider.frame.size.width+20, self.vertSlider.frame.origin.y+20, 30, 30)];
+//    [self.videoImg setImage:[UIImage imageNamed:@"video-tape-icon.png"]];
+//    [viewCameraPreview addSubview:self.videoImg];
+//    
+//    self.stillPicImg=[[UIImageView alloc] initWithFrame:CGRectMake(self.vertSlider.frame.origin.x+self.vertSlider.frame.size.width+20, self.vertSlider.frame.origin.y+self.vertSlider.frame.size.height-50, 30, 30)];
+//    [self.stillPicImg setImage:[UIImage imageNamed:@"camera-icon.png"]];
+//    [viewCameraPreview addSubview:self.stillPicImg];
+//    
+//    
+//    // done button created
+//    UIButton *doneVideoBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+//    [doneVideoBtn setImage:[UIImage imageNamed:@"tick-button.png"] forState:UIControlStateNormal];
+//    [doneVideoBtn setFrame:CGRectMake(viewCameraPreview.frame.origin.x+viewCameraPreview.frame.size.width-50, viewCameraPreview.frame.size.height+viewCameraPreview.frame.origin.y-130, 40, 40)];
+//    [viewCameraPreview addSubview:doneVideoBtn];
+//    [doneVideoBtn addTarget:self action:@selector(doneVideoBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    // cross button
+//    
+//    self.crossSegmentBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.crossSegmentBtn setImage:[UIImage imageNamed:@"profilePicClose.png"] forState:UIControlStateNormal];
+//    [self.crossSegmentBtn setFrame:CGRectMake(viewCameraPreview.frame.origin.x+20, self.sliderView.frame.origin.y+self.sliderView.frame.size.height+30, 21, 19)];
+//    [viewCameraPreview addSubview:self.crossSegmentBtn];
+//    [self.crossSegmentBtn addTarget:self action:@selector(crossButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+//    [self.crossSegmentBtn setHidden:YES];
+//    
+//    
+//}
 
 #pragma mark- done video button method
 
@@ -607,11 +607,6 @@ int sliderViewWidthDeltaChange;
 }
 
 
--(void) methodForProgressBar {
-    
-    self.videoDuration+=1;
-    [self performSelector:@selector(progressBarValueChanged) withObject:nil afterDelay:1.0];
-}
 -(void)progressBarValueChanged {
     
     // if(self.videoDuration<=7) {
@@ -847,64 +842,62 @@ int sliderViewWidthDeltaChange;
     
 }
 
-}
-
 #pragma mark- setting preview for camera
 
--(void) setUpCameraPreview {
-    
-    // preview and AV layer
-    viewCameraPreview = [[UIView alloc] initWithFrame:CGRectZero];
-    viewCameraPreview.backgroundColor = [UIColor blackColor];//CGRectGetHeight
-    CGRect previewFrame = CGRectMake(0, 60.0f, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds)-100);
-    viewCameraPreview.frame = previewFrame;
-    cameraPreviewLayer = [[PBJVision sharedInstance] previewLayer];
-    cameraPreviewLayer.frame = viewCameraPreview.bounds;
-    cameraPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    [viewCameraPreview.layer addSublayer:cameraPreviewLayer];
-    
-    // onion skin
-    _effectsViewController = [[GLKViewController alloc] init];
-    _effectsViewController.preferredFramesPerSecond = 60;
-    
-    GLKView *view = (GLKView *)_effectsViewController.view;
-    CGRect viewFrame1 = viewCameraPreview.bounds;
-    view.frame = viewFrame1;
-    view.context = [[PBJVision sharedInstance] context];
-    view.contentScaleFactor = [[UIScreen mainScreen] scale];
-    view.alpha = 0.5f;
-    view.hidden = YES;
-    [[PBJVision sharedInstance] setPresentationFrame:viewCameraPreview.frame];
-    [viewCameraPreview addSubview:_effectsViewController.view];
-    [self setUpSliderView];
-}
+//-(void) setUpCameraPreview {
+//    
+//    // preview and AV layer
+//    viewCameraPreview = [[UIView alloc] initWithFrame:CGRectZero];
+//    viewCameraPreview.backgroundColor = [UIColor blackColor];//CGRectGetHeight
+//    CGRect previewFrame = CGRectMake(0, 60.0f, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds)-100);
+//    viewCameraPreview.frame = previewFrame;
+//    cameraPreviewLayer = [[PBJVision sharedInstance] previewLayer];
+//    cameraPreviewLayer.frame = viewCameraPreview.bounds;
+//    cameraPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+//    [viewCameraPreview.layer addSublayer:cameraPreviewLayer];
+//    
+//    // onion skin
+//    _effectsViewController = [[GLKViewController alloc] init];
+//    _effectsViewController.preferredFramesPerSecond = 60;
+//    
+//    GLKView *view = (GLKView *)_effectsViewController.view;
+//    CGRect viewFrame1 = viewCameraPreview.bounds;
+//    view.frame = viewFrame1;
+//    view.context = [[PBJVision sharedInstance] context];
+//    view.contentScaleFactor = [[UIScreen mainScreen] scale];
+//    view.alpha = 0.5f;
+//    view.hidden = YES;
+//    [[PBJVision sharedInstance] setPresentationFrame:viewCameraPreview.frame];
+//    [viewCameraPreview addSubview:_effectsViewController.view];
+//    [self setUpSliderView];
+//}
 
--(void) setUpCameraPreviewForPhoto {
-    
-    // preview and AV layer
-    viewCameraPreview = [[UIView alloc] initWithFrame:CGRectZero];
-    viewCameraPreview.backgroundColor = [UIColor blackColor];//CGRectGetHeight
-    CGRect previewFrame = CGRectMake(0, 60.0f, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds)-100);
-    viewCameraPreview.frame = previewFrame;
-    cameraPreviewLayer = [[PBJVision sharedInstance] previewLayer];
-    cameraPreviewLayer.frame = viewCameraPreview.bounds;
-    [viewCameraPreview.layer addSublayer:cameraPreviewLayer];
-    
-    // onion skin
-    _effectsViewController = [[GLKViewController alloc] init];
-    _effectsViewController.preferredFramesPerSecond = 60;
-    
-    GLKView *view = (GLKView *)_effectsViewController.view;
-    CGRect viewFrame1 = viewCameraPreview.bounds;
-    view.frame = viewFrame1;
-    view.context = [[PBJVision sharedInstance] context];
-    view.contentScaleFactor = [[UIScreen mainScreen] scale];
-    view.alpha = 0.5f;
-    view.hidden = YES;
-    [[PBJVision sharedInstance] setPresentationFrame:viewCameraPreview.frame];
-    [viewCameraPreview addSubview:_effectsViewController.view];
-    [self setUpSliderView];
-}
+//-(void) setUpCameraPreviewForPhoto {
+//    
+//    // preview and AV layer
+//    viewCameraPreview = [[UIView alloc] initWithFrame:CGRectZero];
+//    viewCameraPreview.backgroundColor = [UIColor blackColor];//CGRectGetHeight
+//    CGRect previewFrame = CGRectMake(0, 60.0f, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds)-100);
+//    viewCameraPreview.frame = previewFrame;
+//    cameraPreviewLayer = [[PBJVision sharedInstance] previewLayer];
+//    cameraPreviewLayer.frame = viewCameraPreview.bounds;
+//    [viewCameraPreview.layer addSublayer:cameraPreviewLayer];
+//    
+//    // onion skin
+//    _effectsViewController = [[GLKViewController alloc] init];
+//    _effectsViewController.preferredFramesPerSecond = 60;
+//    
+//    GLKView *view = (GLKView *)_effectsViewController.view;
+//    CGRect viewFrame1 = viewCameraPreview.bounds;
+//    view.frame = viewFrame1;
+//    view.context = [[PBJVision sharedInstance] context];
+//    view.contentScaleFactor = [[UIScreen mainScreen] scale];
+//    view.alpha = 0.5f;
+//    view.hidden = YES;
+//    [[PBJVision sharedInstance] setPresentationFrame:viewCameraPreview.frame];
+//    [viewCameraPreview addSubview:_effectsViewController.view];
+//    [self setUpSliderView];
+//}
 
 
 #pragma mark- method for slider view
@@ -967,17 +960,6 @@ int sliderViewWidthDeltaChange;
 
 #pragma mark- done video button method
 
--(void)doneVideoBtnClicked {
-    
-    [NSGIF createGIFfromURL:self.outputVideoURL withFrameCount:30 delayTime:.010 loopCount:0 completion:^(NSURL *GifURL) {
-        NSLog(@"Finished generating GIF: %@", GifURL);
-        [self performSelectorOnMainThread:@selector(animatedGIFFIle:) withObject:GifURL waitUntilDone:NO];
-    }];
-    
-    // [viewCameraPreview removeFromSuperview];
-    
-}
-
 -(void)animatedGIFFIle:(NSURL *)gifURL {
     
     //NSURL *url = [[NSBundle mainBundle] URLForResource:@"Logo_Spinner" withExtension:@"gif"];
@@ -988,59 +970,7 @@ int sliderViewWidthDeltaChange;
     animatingImageView.image  = [UIImage animatedImageWithAnimatedGIFURL:gifURL];
 }
 
-#pragma mark- cross button clicked
--(void)crossButtonClicked {
-    
-    [self.crossSegmentBtn setHidden:NO];
-    CGRect frame=self.sliderView.frame;
-    frame.size.width=0.0;
-    self.sliderView.frame=frame;
-    self.videoDuration=0;
-    NSError *error;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@",self.outputVideoURL] error:&error];
-    
-}
-
 #pragma mark- delegate method for RSSlider View
-
--(void)sliderValueChanged:(RSSliderView *)sender {
-    
-    [self methodForProgressBar];
-    if(!self.startRecordingFlag) {
-        if(!self.vertSlider.slideDownFlag) {
-            [self.crossSegmentBtn setHidden:NO];
-            [self.stillPicImg setHidden:YES];
-            [self startVideoRecording];
-            self.startRecordingFlag=YES;
-            
-        }
-        
-    }
-    else {
-        
-        if(self.pauseRecordingFlag) {
-            self.pauseRecordingFlag=NO;
-            [[PBJVision sharedInstance] resumeVideoCapture];
-        }
-    }
-    
-}
-
--(void)sliderValueChangeEnded:(RSSliderView *)sender {
-    
-    if(self.videoDuration<7)
-        [[PBJVision sharedInstance] pauseVideoCapture];
-    else {
-        [[PBJVision sharedInstance] endVideoCapture];
-        [self.stillPicImg setHidden:NO];
-        self.vertSlider.slideDownFlag=YES;
-        [self.vertSlider setValue:0.0 withAnimation:NO completion:nil];
-        
-    }
-    
-    self.pauseRecordingFlag=YES;
-}
 
 -(void)tapToStillPictureGesture {//:(UITapGestureRecognizer*)sender {
     
@@ -1069,251 +999,18 @@ int sliderViewWidthDeltaChange;
 
 #pragma mark- method for playing video for 7 sec
 
--(void)startVideoRecording {
-    
-    [[PBJVision sharedInstance] startVideoCapture];
-}
-
 
 -(void) methodForProgressBar {
     
     self.videoDuration+=1;
     [self performSelector:@selector(progressBarValueChanged) withObject:nil afterDelay:1.0];
 }
--(void)progressBarValueChanged {
-    
-    // if(self.videoDuration<=7) {
-    
-    [UIView animateWithDuration:1.0
-                          delay:0
-                        options:UIViewAnimationCurveEaseInOut
-                     animations:^ {
-                         self.sliderView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.sliderView.frame.size.width+2.0, 50);
-                         
-                     }completion:^(BOOL finished) {
-                         
-                     }];
-    
-    
-    if(!self.pauseRecordingFlag)
-        [self methodForProgressBar];
-    else
-        self.videoDuration=0;
-    //    }
-    //    else {
-    //
-    //        self.videoDuration=0;
-    //
-    //    }
-    
-}
-
-- (void)_setup
-{
-    
-    
-    [PBJVision sharedInstance].delegate = self;
-    [PBJVision sharedInstance].cameraMode = PBJCameraModeVideo;
-    // [PBJVision sharedInstance].cameraMode = PBJCameraModePhoto; // PHOTO: uncomment to test photo capture
-    [PBJVision sharedInstance].cameraOrientation = PBJCameraOrientationPortrait;
-    [PBJVision sharedInstance].focusMode = PBJFocusModeContinuousAutoFocus;
-    [PBJVision sharedInstance].outputFormat = PBJOutputFormatSquare;
-    [[PBJVision sharedInstance] setMaximumCaptureDuration:CMTimeMakeWithSeconds(8, 30)]; // ~ 5 seconds
-    [PBJVision sharedInstance].videoRenderingEnabled = YES;
-    [PBJVision sharedInstance].additionalCompressionProperties = @{AVVideoProfileLevelKey : AVVideoProfileLevelH264Baseline30};
-    
-    
-    
-}
-- (void)_setupForStillImage
-{
-    
-    
-    [PBJVision sharedInstance].delegate = self;
-    [PBJVision sharedInstance].cameraMode = PBJCameraModePhoto; // PHOTO: uncomment to test photo capture
-    [PBJVision sharedInstance].cameraOrientation = PBJCameraOrientationPortrait;
-    [PBJVision sharedInstance].focusMode = PBJFocusModeContinuousAutoFocus;
-    [PBJVision sharedInstance].outputFormat = PBJOutputFormatSquare;
-   // [[PBJVision sharedInstance] setMaximumCaptureDuration:CMTimeMakeWithSeconds(8, 30)]; // ~ 5 seconds
-   // [PBJVision sharedInstance].videoRenderingEnabled = YES;
-  //  [PBJVision sharedInstance].additionalCompressionProperties = @{AVVideoProfileLevelKey : AVVideoProfileLevelH264Baseline30};
-    
-    
-    
-}
-
 
 /* Delegate method */
 
 #pragma mark - PBJVisionDelegate
 
-// session
-
-- (void)visionSessionWillStart:(PBJVision *)vision
-{
-}
-
-- (void)visionSessionDidStart:(PBJVision *)vision
-{
-    if (![viewCameraPreview superview]) {
-        [self.view addSubview:viewCameraPreview];
-        // [self.view bringSubviewToFront:_gestureView];
-    }
-}
-
-- (void)visionSessionDidStop:(PBJVision *)vision
-{
-    // // [viewCameraPreview removeFromSuperview];
-}
-
-// preview
-
-- (void)visionSessionDidStartPreview:(PBJVision *)vision
-{
-    NSLog(@"Camera preview did start");
-    
-}
-
-- (void)visionSessionDidStopPreview:(PBJVision *)vision
-{
-    NSLog(@"Camera preview did stop");
-}
-
-// device
-
-- (void)visionCameraDeviceWillChange:(PBJVision *)vision
-{
-    NSLog(@"Camera device will change");
-}
-
-- (void)visionCameraDeviceDidChange:(PBJVision *)vision
-{
-    NSLog(@"Camera device did change");
-}
-
-// mode
-
-- (void)visionCameraModeWillChange:(PBJVision *)vision
-{
-    NSLog(@"Camera mode will change");
-}
-
-- (void)visionCameraModeDidChange:(PBJVision *)vision
-{
-    NSLog(@"Camera mode did change");
-}
-
-// format
-
-- (void)visionOutputFormatWillChange:(PBJVision *)vision
-{
-    NSLog(@"Output format will change");
-}
-
-- (void)visionOutputFormatDidChange:(PBJVision *)vision
-{
-    NSLog(@"Output format did change");
-}
-
-- (void)vision:(PBJVision *)vision didChangeCleanAperture:(CGRect)cleanAperture
-{
-}
-
-// focus / exposure
-
-- (void)visionWillStartFocus:(PBJVision *)vision
-{
-}
-
-- (void)visionDidStopFocus:(PBJVision *)vision
-{
-    //    if (_focusView && [_focusView superview]) {
-    //        [_focusView stopAnimation];
-    //    }
-}
-
-- (void)visionWillChangeExposure:(PBJVision *)vision
-{
-}
-
-- (void)visionDidChangeExposure:(PBJVision *)vision
-{
-    //    if (_focusView && [_focusView superview]) {
-    //        [_focusView stopAnimation];
-    //    }
-}
-
-// flash
-
-- (void)visionDidChangeFlashMode:(PBJVision *)vision
-{
-    NSLog(@"Flash mode did change");
-}
-
-// photo
-
-- (void)visionWillCapturePhoto:(PBJVision *)vision
-{
-}
-
-- (void)visionDidCapturePhoto:(PBJVision *)vision
-{
-}
-
-
-- (void)visionDidStartVideoCapture:(PBJVision *)vision
-{
-    
-}
-
-- (void)visionDidPauseVideoCapture:(PBJVision *)vision
-{
-    // [_strobeView stop];
-}
-
-- (void)visionDidResumeVideoCapture:(PBJVision *)vision
-{
-    // [_strobeView start];
-}
-
-
-// progress
-
-- (void)vision:(PBJVision *)vision didCaptureVideoSampleBuffer:(CMSampleBufferRef)sampleBuffer
-{
-    //    NSLog(@"captured audio (%f) seconds", vision.capturedAudioSeconds);
-}
-
-- (void)vision:(PBJVision *)vision didCaptureAudioSample:(CMSampleBufferRef)sampleBuffer
-{
-    //    NSLog(@"captured video (%f) seconds", vision.capturedVideoSeconds);
-}
-
 /////////////////////////
-
-
-- (void)vision:(PBJVision *)vision capturedVideo:(NSDictionary *)videoDict error:(NSError *)error
-{
-    if (error && [error.domain isEqual:PBJVisionErrorDomain] && error.code == PBJVisionErrorCancelled) {
-        NSLog(@"recording session cancelled");
-        return;
-    } else if (error) {
-        NSLog(@"encounted an error in video capture (%@)", error);
-        return;
-    }
-    
-    NSDictionary *_currentVideo = videoDict;
-    self.startRecordingFlag=NO;
-    NSString *videoPath = [_currentVideo  objectForKey:PBJVisionVideoPathKey];
-    self.outputVideoURL = [NSURL fileURLWithPath:videoPath];
-    
-    
-    [[PBJVision sharedInstance] endVideoCapture];
-    [self.stillPicImg setHidden:NO];
-    self.vertSlider.slideDownFlag=YES;
-    [self.vertSlider setValue:0.0 withAnimation:NO completion:nil];
-    
-}
 
 
 - (void)vision:(PBJVision *)vision capturedPhoto:(NSDictionary *)photoDict error:(NSError *)error
