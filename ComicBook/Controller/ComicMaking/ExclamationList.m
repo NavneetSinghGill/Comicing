@@ -96,7 +96,8 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return animationListArray.count + 1;
+//    return animationListArray.count + 1;
+    return animationListArray.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -104,21 +105,21 @@ static NSString * const reuseIdentifier1 = @"Cell1";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.item == 0 && indexPath.section == 0)
-    {
-        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier1 forIndexPath:indexPath];
-        return cell;
-    }
-    else
-    {
+//    if(indexPath.item == 0 && indexPath.section == 0)
+//    {
+//        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier1 forIndexPath:indexPath];
+//        return cell;
+//    }
+//    else
+//    {
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
         
         // Configure the cell
         UIImageView *img = (UIImageView*)[cell viewWithTag:1];
-        img.image = [UIImage imageNamed:animationListArray[indexPath.section -1]];
+        img.image = [UIImage imageNamed:animationListArray[indexPath.section]];
         
         return cell;
-    }
+//    }
 }
 
 #pragma mark <UICollectionViewDelegate>
@@ -133,6 +134,11 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     {
 //        [parentViewController addExclamationListImage:exclamationLargeListArray[indexPath.row - 1]];
         [parentViewController addAnimation:animationListArray[indexPath.section - 1]];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC),
+                       dispatch_get_main_queue(), ^{
+            [self closeAction:nil];
+        });
     }
 }
 

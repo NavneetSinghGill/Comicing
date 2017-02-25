@@ -2813,6 +2813,14 @@ int sliderViewWidthDeltaChange;
     [[GoogleAnalytics sharedGoogleAnalytics] logUserEvent:@"AnimatedSticker" Action:@"AddAnimatedSticker" Label:@""];
     
     ComicItemAnimatedSticker* imageView = [self getComicItems:ComicAnimatedSticker];
+    //Remove, AnimatedSticker.
+    for (id imgSticker in [imgvComic subviews] ) {
+        if([imgSticker isKindOfClass:[ComicItemAnimatedSticker class]]){
+            [imgSticker removeFromSuperview];
+        }
+    }
+    
+    
     //Checking if ComicItemAnimatedSticker already exiting, if that so no need to create
     // Just add the gif component to ComicItemAnimatedSticker.
     
@@ -2840,9 +2848,7 @@ int sliderViewWidthDeltaChange;
     //        [imgvComic bringSubviewToFront:imageView];
     //    }
     imageView.frame = CGRectMake(100, 100, 150, 150);
-//=======
 //    imageView.frame = CGRectMake(0, 0, 150, 150);
-//>>>>>>> origin/Registration_page
     [self addComicItem:imageView ItemImage:nil];
     
     imgvComic.clipsToBounds = YES;
@@ -5457,9 +5463,8 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     [self.btnPlayAnimation setHidden:NO];
     
-
-    [self.view addSubview:imageView];
-    [self.view bringSubviewToFront:imageView];
+//    [self.view addSubview:imageView];
+//    [self.view bringSubviewToFront:imageView];
    // // [imgvComic bringSubviewToFront:imageView];
     //    }
 }
