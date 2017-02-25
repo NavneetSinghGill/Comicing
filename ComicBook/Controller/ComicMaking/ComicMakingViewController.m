@@ -337,10 +337,12 @@ int sliderViewWidthDeltaChange;
         });
     }
     
+#if !TARGET_OS_SIMULATOR
+    
     [self setUpCameraPreview];
     
+#endif
     [self prepareGlideView];
-    
     [self prepareCaptionView];
     [self prepareView];
     [self prepareVoiceView];
@@ -2158,6 +2160,7 @@ int sliderViewWidthDeltaChange;
     [self doAutoSave:nil];
     
 #else
+    
     dispatch_async([self sessionQueue], ^{
         // Update the orientation on the still image output video connection before capturing.
         [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[viewCameraPreview layer] connection] videoOrientation]];
@@ -2844,7 +2847,7 @@ int sliderViewWidthDeltaChange;
     
     imgvComic.clipsToBounds = YES;
     imageView.center = imageView.center;
-    [self doAutoSave:imageView];
+//    [self doAutoSave:imageView];
 }
 -(void)addAnimationWithInstructionForObj:(NSDictionary *)animationObj
 {
@@ -5396,7 +5399,14 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     haveAnimationOnPage = YES;
     imageView.objFrame = imageView.frame;
     
-    ((ComicItemAnimatedSticker*)imageView).image = [YYImage imageNamed:imageView.combineAnimationFileName];
+//    NSURL *MyURL = [[NSBundle mainBundle] URLForResource:@"" withExtension:@"gif"];
+//    
+//    [imageView initWithAnimationAtURL:MyURL startImmediately:YES];
+    
+//    ((ComicItemAnimatedSticker*)imageView).image = [YYImage imageNamed:imageView.combineAnimationFileName];
+//    NSString *animationPath = [[NSBundle mainBundle] pathForResource:@"OMG" ofType:@"gif"];
+    imageView.image =  [UIImage sd_animatedGIFNamed:imageView.combineAnimationFileName];//  [YYImage imageWithContentsOfFile:animationPath];
+//    ((ComicItemAnimatedSticker*)imageView).image = [YYImage imageWithContentsOfFile:animationPath];
     
     //    if (imageView.combineAnimationFileName) {
     //        //it had image,
