@@ -344,6 +344,11 @@ static AppHelper *_appHelper = nil;
         self.cUser.profile_pic = [dUser objectForKey:@"profile_pic"];
         self.cUser.user_id = [dUser objectForKey:@"user_id"];
         self.cUser.login_id = [dUser objectForKey:@"login_id"];
+        self.cUser.fb_id = [dUser objectForKey:@"fb_id"];
+        self.cUser.insta_id = [dUser objectForKey:@"insta_id"];
+        if ([dUser valueForKey:@"description"] != nil) {
+            self.cUser.desc = [dUser objectForKey:@"description"];
+        }
         return self.cUser;
     }
     return nil;

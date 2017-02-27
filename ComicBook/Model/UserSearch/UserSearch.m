@@ -25,7 +25,11 @@
              @"dob": @"dob",
              @"country": @"country",
              @"mobile": @"mobile",
-             @"createdDate":@"created_date"
+             @"createdDate":@"created_date",
+             @"fb_id": @"fb_id",
+             @"insta_id": @"insta_id",
+             @"desc": @"description",
+             @"friendCount": @"friends_count"
              };
 }
 

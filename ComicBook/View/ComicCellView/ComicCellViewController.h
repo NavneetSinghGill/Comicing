@@ -24,6 +24,7 @@
 
 @property (nonatomic, assign) id<ComicCellViewControllerwDelegate> delegate;
 @property (nonatomic, strong) UIView *viewWhiteBorder;
+@property (assign, nonatomic) ComicBookColorCode comicBookColorCode;
 
 -(id)initWithFrame:(CGRect)frame;
 - (void)setupComicSlidePreview:(NSArray *)slides;

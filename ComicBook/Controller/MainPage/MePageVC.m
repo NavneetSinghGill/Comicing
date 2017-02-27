@@ -30,6 +30,7 @@
 #import "CommentModel.h"
 #import "AppConstants.h"
 #import "ComicPageViewController.h"
+#import "FriendsAPIManager.h"
 
 //#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 //#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -41,7 +42,7 @@
 //#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 #define arielBlackFont @"Arial-Black"
 
-@interface MePageVC ()<commentersDelegate> {
+@interface MePageVC ()<commentersDelegate, UITextFieldDelegate, UITextViewDelegate> {
     int TagRecord;
     NSMutableArray *comicsArray;
     NSUInteger selectedRow;
@@ -69,6 +70,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *meUserPicImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lblFirstName;
 @property (weak, nonatomic) IBOutlet UILabel *lblComicCount;
+@property (weak, nonatomic) IBOutlet UILabel *lblFriendCount;
 
 //dinesh
 @property (weak, nonatomic) IBOutlet UILabel *mLineJoiningCentres;
@@ -85,6 +87,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *mFourthDisplaylabel;
 @property (weak, nonatomic) IBOutlet UILabel *mFourthHollowlabel;
 @property (strong, nonatomic) NSMutableArray *allCellFrameHeight;
+
+//New layout
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *comicCountVerticalBorderViewLeading;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *comicCountContainerViewLeading;
+@property(weak, nonatomic) IBOutlet UIView *comicCountContainerView;
+
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *friendCountVerticalBorderViewLeading;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *friendCountContainerViewLeading;
+@property(weak, nonatomic) IBOutlet UIView *friendCountContainerView;
+
+@property(weak, nonatomic) IBOutlet UITextField *fbTextField;
+@property(weak, nonatomic) IBOutlet UITextField *igTextField;
+@property(weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 
 @end
 
@@ -127,30 +142,30 @@
 
         
         //2
-        [self.mSecondHollowlabel setBackgroundColor:self.mSecondDisplaylabel.textColor];
-        [UIView beginAnimations:@"ScaleButton" context:NULL];
-        [UIView setAnimationDuration: 0];
-        self.mSecondHollowlabel.transform = CGAffineTransformMakeScale(0.2,0.2);
-        [UIView commitAnimations];
-        self.mSecondHollowlabel.backgroundColor = self.mSecondHollowlabel.textColor;
+//        [self.mSecondHollowlabel setBackgroundColor:self.mSecondDisplaylabel.textColor];
+//        [UIView beginAnimations:@"ScaleButton" context:NULL];
+//        [UIView setAnimationDuration: 0];
+        self.mSecondHollowlabel.transform = CGAffineTransformMakeScale(0.81,0.81);
+//        [UIView commitAnimations];
+//        self.mSecondHollowlabel.backgroundColor = self.mSecondHollowlabel.textColor;
         
         
         //3
-        [self.mThirdHollowlabel setBackgroundColor:self.mThirdDisplaylabel.textColor];
-        [UIView beginAnimations:@"ScaleButton" context:NULL];
-        [UIView setAnimationDuration: 0];
-        self.mThirdHollowlabel.transform = CGAffineTransformMakeScale(0.2,0.2);
-        [UIView commitAnimations];
-        self.mThirdHollowlabel.backgroundColor = self.mThirdHollowlabel.textColor;
+//        [self.mThirdHollowlabel setBackgroundColor:self.mThirdDisplaylabel.textColor];
+//        [UIView beginAnimations:@"ScaleButton" context:NULL];
+//        [UIView setAnimationDuration: 0];
+        self.mThirdHollowlabel.transform = CGAffineTransformMakeScale(0.81,0.81);
+//        [UIView commitAnimations];
+//        self.mThirdHollowlabel.backgroundColor = self.mThirdHollowlabel.textColor;
         
         
         //3
-        [self.mFourthHollowlabel setBackgroundColor:self.mFourthDisplaylabel.textColor];
-        [UIView beginAnimations:@"ScaleButton" context:NULL];
-        [UIView setAnimationDuration: 0];
-        self.mFourthHollowlabel.transform = CGAffineTransformMakeScale(0.2,0.2);
-        [UIView commitAnimations];
-        self.mFourthHollowlabel.backgroundColor = self.mFourthHollowlabel.textColor;
+//        [self.mFourthHollowlabel setBackgroundColor:self.mFourthDisplaylabel.textColor];
+//        [UIView beginAnimations:@"ScaleButton" context:NULL];
+//        [UIView setAnimationDuration: 0];
+        self.mFourthHollowlabel.transform = CGAffineTransformMakeScale(0.81,0.81);
+//        [UIView commitAnimations];
+//        self.mFourthHollowlabel.backgroundColor = self.mFourthHollowlabel.textColor;
 
         
         //Now
@@ -194,8 +209,15 @@
     [self callAPIToGetTheComicsWithPageNumber:currentPageDownScroll + 1  andTimelinePeriod:@"" andDirection:@"" shouldClearAllData:YES];
     
     //Set Current User Pic
-    [self.meUserPicImageView sd_setImageWithURL:[NSURL URLWithString:[[AppHelper initAppHelper] getCurrentUser].profile_pic]];
-    self.lblFirstName.text = [[AppHelper initAppHelper] getCurrentUser].first_name;
+    CurrentUser *user = [[AppHelper initAppHelper] getCurrentUser];
+    [self.meUserPicImageView sd_setImageWithURL:[NSURL URLWithString:user.profile_pic]];
+    self.lblFirstName.text = user.first_name;
+    
+    UIColor *color = [UIColor colorWithRed:79/255.f green:193/255.f blue:242/255.f alpha:1.f];
+    _fbTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"tap to add" attributes:@{NSForegroundColorAttributeName: color}];
+    _igTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"tap to add" attributes:@{NSForegroundColorAttributeName: color}];
+    
+    [self setUserFieldsInUIForUser:user];
     
     //dinesh-----------------------------------------------------------
     self.mNowHollowlabel.layer.cornerRadius = self.mNowHollowlabel.bounds.size.width/2;
@@ -235,23 +257,96 @@
     if (IS_IPHONE_5)
     {
         self.lblFirstName.font = [UIFont fontWithName:arielBlackFont size:13.f];
-        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:13.f];
+        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:10.f];
+        self.lblFriendCount.font = [self.lblFriendCount.font fontWithSize:10.f];
+        _descriptionTextView.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:11.f];
     }
     else if (IS_IPHONE_6)
     {
         
         self.lblFirstName.font = [UIFont fontWithName:arielBlackFont size:14.f];
-        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:14.f];
-        
+        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:11.f];
+        self.lblFriendCount.font = [self.lblFriendCount.font fontWithSize:11.f];
+        _descriptionTextView.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:12.f];
     }
     else if(IS_IPHONE_6P)
     {
         self.lblFirstName.font = [UIFont fontWithName:arielBlackFont size:15.f];
-        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:15.f];
+        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:12.f];
+        self.lblFriendCount.font = [self.lblFriendCount.font fontWithSize:12.f];
+        _descriptionTextView.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:13.f];
+    }
+    
+    if (IS_IPHONE_5)
+    {
+        self.lblFriendCount.font = [UIFont fontWithName:arielBlackFont size:10.f];
+//        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:13.f];
+    }
+    else if (IS_IPHONE_6)
+    {
+        
+        self.lblFriendCount.font = [UIFont fontWithName:arielBlackFont size:11.f];
+//        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:14.f];
+        
+    }
+    else if(IS_IPHONE_6P)
+    {
+        self.lblFriendCount.font = [UIFont fontWithName:arielBlackFont size:12.f];
+//        self.lblComicCount.font = [self.lblComicCount.font fontWithSize:15.f];
     }
 
     [self setBubbleLabels];
     
+    
+    
+    [self getLoginUserAndSetValues];
+}
+
+- (void)setUserFieldsInUIForUser:(CurrentUser *)user {
+    _fbTextField.text = user.fb_id;
+    _igTextField.text = user.insta_id;
+    _descriptionTextView.text = user.desc;
+    
+    [FriendsAPIManager getUserProfileByID:user.user_id
+                         withSuccessBlock:^(id object) {
+                             UserSearch *user = [MTLJSONAdapter modelOfClass:[UserSearch class] fromJSONDictionary:[object valueForKey:@"data"] error:nil];
+                             
+                             if (user.friendCount.length != 0) {
+                                 if ([user.friendCount integerValue] <= 1) {
+                                     self.lblFriendCount.text = [NSString stringWithFormat:@"%ld friend", (long)[user.friendCount integerValue]];
+                                 } else {
+                                     self.lblFriendCount.text = [NSString stringWithFormat:@"%ld friends", (long)[user.friendCount integerValue]];
+                                 }
+                                 self.friendCountContainerView.hidden = NO;
+                             }
+                             
+                         } andFail:^(NSError *errorMessage) {
+                             
+                         }];
+}
+
+- (void)getLoginUserAndSetValues {
+    ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
+    NSString *loginID = [[AppHelper initAppHelper] getCurrentUser].login_id;
+    [cmNetWorking searchById:loginID completion:^(id json,id jsonResposeHeader) {
+        if (json) {
+            
+            //Search for current user in search results
+            NSDictionary *currentuserDict;
+            for (NSDictionary *userDict in [json objectForKey:@"data"]) {
+                if ([[userDict valueForKey:@"login_id"] isEqualToString:loginID]) {
+                    currentuserDict = userDict;
+                    break;
+                }
+            }
+            if (currentuserDict) {
+                [AppHelper setCurrentUser:currentuserDict];
+                [self setUserFieldsInUIForUser:[AppHelper initAppHelper].getCurrentUser];
+            }
+        }
+    } ErrorBlock:^(JSONModelError *error) {
+        
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -270,7 +365,15 @@
     self.tableview.tableHeaderView = headerblank;
     self.meUserPicImageView.layer.cornerRadius = self.meUserPicImageView.bounds.size.height/2;
     self.meUserPicImageView.layer.masksToBounds = YES;
+    
+    
+    _comicCountContainerView.layer.cornerRadius = _comicCountVerticalBorderViewLeading.constant =_comicCountContainerView.frame.size.height / 2;
+    _comicCountContainerViewLeading.constant = -_comicCountContainerView.frame.size.height / 2;
+    
+    _friendCountContainerView.layer.cornerRadius = _friendCountVerticalBorderViewLeading.constant =_friendCountContainerView.frame.size.height / 2;
+    _friendCountContainerViewLeading.constant = -_friendCountContainerView.frame.size.height / 2;
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -1208,39 +1311,39 @@
      */
     
     //dinesh
-    UILabel *display1 = self.currentDisplayLable;
-    UILabel *hollow1 = self.currentHollowLable;
+//    UILabel *display1 = self.currentDisplayLable;
+//    UILabel *hollow1 = self.currentHollowLable;
     
     
-    [UIView beginAnimations:@"ScaleButton" context:NULL];
-    [UIView setAnimationDuration: 1];
-    hollow1.transform = CGAffineTransformMakeScale(0.2,0.2);
-    [UIView commitAnimations];
-    
-    
-    [display1 setHidden:NO];
-    [display1 setAlpha:0];
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        
-    } completion:^(BOOL finished) {
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            
-            [display1 setAlpha:0.3];
-            
-        } completion:^(BOOL finished) {
-            
-            [UIView animateWithDuration:0.5 animations:^{
-                [hollow1 setBackgroundColor:display1.textColor];
-
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    [display1 setAlpha:1.0];
-                }];
-            }];
-        }];
-    }];
+//    [UIView beginAnimations:@"ScaleButton" context:NULL];
+//    [UIView setAnimationDuration: 1];
+//    hollow1.transform = CGAffineTransformMakeScale(0.2,0.2);
+//    [UIView commitAnimations];
+//    
+//    
+//    [display1 setHidden:NO];
+//    [display1 setAlpha:0];
+//    
+//    [UIView animateWithDuration:0.5 animations:^{
+//        
+//    } completion:^(BOOL finished) {
+//        
+//        [UIView animateWithDuration:0.5 animations:^{
+//            
+//            [display1 setAlpha:0.3];
+//            
+//        } completion:^(BOOL finished) {
+//            
+//            [UIView animateWithDuration:0.5 animations:^{
+//                [hollow1 setBackgroundColor:display1.textColor];
+//
+//            } completion:^(BOOL finished) {
+//                [UIView animateWithDuration:0.5 animations:^{
+//                    [display1 setAlpha:1.0];
+//                }];
+//            }];
+//        }];
+//    }];
     
     UILabel *display2 = [self getDisplayabel:sender];
     UILabel *hollow2 = [self getHallowLabel:sender];
@@ -1250,16 +1353,16 @@
     [display2 setHidden:NO];
     [hollow2 setBackgroundColor:[UIColor blackColor]];
 
-    [UIView beginAnimations:@"ScaleButton" context:NULL];
-    [UIView setAnimationDuration: 1];
+//    [UIView beginAnimations:@"ScaleButton" context:NULL];
+//    [UIView setAnimationDuration: 1];
     hollow2.transform = CGAffineTransformMakeScale(0.81,0.81);
-    [UIView commitAnimations];
+//    [UIView commitAnimations];
     
-    [UIView animateWithDuration:0.1 animations:^{
+//    [UIView animateWithDuration:0.1 animations:^{
         [display2 setAlpha:0];
-    } completion:^(BOOL finished) {
-        
-    }];
+//    } completion:^(BOOL finished) {
+//        
+//    }];
     //--------------------------
     
     
@@ -1377,6 +1480,8 @@
                                    
                                    
                                    self.lblComicCount.text =  @"0 Comic";
+                                   self.comicCountContainerView.hidden = NO;
+                                   self.friendCountContainerView.hidden = NO;
                                    if(clearData)
                                    {
                                        [comicsArray removeAllObjects];
@@ -1387,7 +1492,13 @@
                                        NSString *period = [self getTheDefaultPeriod:comicsModelObj];
                                        currentlyShowingTimelinePeriodUpScroll = period;
                                        currentlyShowingTimelinePeriodDownScroll = period;
-                                       self.lblComicCount.text = [NSString stringWithFormat:@"%lu Comics",(unsigned long)[comicsArray count]];
+                                       
+                                       NSInteger comicCount = [comicsArray count];
+                                       if (comicCount <= 1) {
+                                           self.lblComicCount.text = [NSString stringWithFormat:@"%lu Comic",(unsigned long)comicCount];
+                                       } else {
+                                           self.lblComicCount.text = [NSString stringWithFormat:@"%lu Comics",(unsigned long)comicCount];
+                                       }
                                    } else if([direction isEqualToString:DIRECTION_UP]) {
                                        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
                                        [tempArray addObjectsFromArray:comicsModelObj.books];
@@ -1412,7 +1523,12 @@
                                        
                                        [comicsArray addObjectsFromArray:comicsModelObj.books];
                                    }
-                                   self.lblComicCount.text = [NSString stringWithFormat:@"%@ Comics", comicsModelObj.totalCount];
+                                   NSInteger comicCount = [comicsModelObj.totalCount integerValue];
+                                   if (comicCount <= 1) {
+                                       self.lblComicCount.text = [NSString stringWithFormat:@"%ld Comic", (long)comicCount];
+                                   } else {
+                                       self.lblComicCount.text = [NSString stringWithFormat:@"%ld Comics", (long)comicCount];
+                                   }
                                    [self.tableview reloadData];
                                    
                                    //Dinesh
@@ -1446,15 +1562,15 @@
                                    [self.lblFirstName setText:[NSString stringWithFormat:@"%@",[[AppHelper initAppHelper] getCurrentUser].first_name]];
                                    
                                    
-                                   NSMutableAttributedString *strName = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@", [[AppHelper initAppHelper] getCurrentUser].first_name] attributes:@{NSFontAttributeName:self.lblFirstName.font}];
-                                   
-                                   //[self.nameLabel.attributedText mutableCopy];
-                                   [strName appendAttributedString:[[NSAttributedString alloc] initWithString:@"       "]];
-                                   
-                                   NSMutableAttributedString *strName2 = [[NSMutableAttributedString alloc]initWithString:self.lblComicCount.text attributes:@{NSFontAttributeName:self.lblComicCount.font}];
-                                   
-                                   [strName appendAttributedString:strName2];
-                                   self.lblFirstName.attributedText = strName;
+//                                   NSMutableAttributedString *strName = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@", [[AppHelper initAppHelper] getCurrentUser].first_name] attributes:@{NSFontAttributeName:self.lblFirstName.font}];
+//                                   
+//                                   //[self.nameLabel.attributedText mutableCopy];
+//                                   [strName appendAttributedString:[[NSAttributedString alloc] initWithString:@"       "]];
+//                                   
+//                                   NSMutableAttributedString *strName2 = [[NSMutableAttributedString alloc]initWithString:self.lblComicCount.text attributes:@{NSFontAttributeName:self.lblComicCount.font}];
+//                                   
+//                                   [strName appendAttributedString:strName2];
+//                                   self.lblFirstName.attributedText = strName;
                                    //--------------
                                    
                                } andFail:^(NSError *errorMessage) {
@@ -1757,6 +1873,70 @@
     //                   completion:^{
     //                   }];
 }
+
+#pragma mark - TextField and TextView Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == _fbTextField || textField == _igTextField) {
+        [self postUserData];
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if (textView == _descriptionTextView) {
+        
+        if ([text isEqualToString:@"\n"]) {
+            [self postUserData];
+            [textView resignFirstResponder];
+        }
+        
+        if ([textView.text stringByReplacingCharactersInRange:range withString:text].length > 50) {
+            return NO;
+        }
+    }
+    return YES;
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [textField sizeToFit];
+}
+
+-(void)postUserData {
+    
+    //    [self keyboardWillHide];
+    //    if (isProcessing) {
+    //        return;
+    //    }
+    //Do Validate
+    //    if([self validateFileds:YES])
+    //    {
+    //        isProcessing = YES;
+    
+    [AppHelper showWarningDropDownMessage:@"Please wait !" mesage:@""];
+    NSMutableDictionary* dataDic = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* userDic = [[NSMutableDictionary alloc] init];
+
+    [userDic setObject:_fbTextField.text forKey:@"fb_id"];
+    [userDic setObject:_igTextField.text forKey:@"insta_id"];
+    [userDic setObject:_descriptionTextView.text forKey:@"description"];
+    
+    [dataDic setObject:userDic forKey:@"data"];
+    
+    ComicNetworking* cmNetWorking = [ComicNetworking sharedComicNetworking];
+    [cmNetWorking updateUserInfo:dataDic Id:[AppHelper getCurrentLoginId] completion:^(id json,id jsonResposeHeader) {
+        
+            if ([json objectForKey:@"data"]) {
+                [AppHelper setCurrentUser:[json objectForKey:@"data"]];
+                [self setUserFieldsInUIForUser:[AppHelper initAppHelper].getCurrentUser];
+            }
+    } ErrorBlock:^(JSONModelError *error) {
+        NSLog(@"Error %@",error);
+        [AppHelper showSuccessDropDownMessage:ERROR_MESSAGE mesage:@""];
+//        isProcessing = NO;
+    }];
+}
+
 #pragma mark - statusbar
 
 - (UIStatusBarStyle) preferredStatusBarStyle {

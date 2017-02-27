@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 typedef void (^ ConnectAction) (void);
+
+typedef NS_ENUM(NSInteger, MenuState){
+    Close,
+    Open
+};
+
 @interface BottomBarViewController : UIViewController <UIGestureRecognizerDelegate> {
     CGRect rectContainer;
     CGAffineTransform referTransform;
@@ -22,6 +28,9 @@ typedef void (^ ConnectAction) (void);
 @property (nonatomic,assign) CGRect openFrame;
 @property (nonatomic,assign) CGRect closeFrame;
 @property (nonatomic, strong) ConnectAction connectAction;
+
+@property (assign, nonatomic) MenuState menuState;
+
 -(void)closeMenu;
 - (void)setBottombuttonToYellow;
 

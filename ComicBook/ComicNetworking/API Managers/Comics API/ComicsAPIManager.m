@@ -12,10 +12,15 @@
 
 @implementation ComicsAPIManager
 
-+ (void)getTheComicsWithPage:(NSUInteger)page SuccessBlock:(void(^)(id object))successBlock
++ (void)getTheComicsWithPage:(NSUInteger)page andCategory:(NSString *)category SuccessBlock:(void(^)(id object))successBlock
                      andFail:(void(^)(NSError *errorMessage))failBlock
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@comics/page/%lu/itemCount/10", BASE_URL, (unsigned long)page];
+    NSString *urlString;
+    if (category.length == 0) {
+        urlString = [NSString stringWithFormat:@"%@comics/page/%lu/itemCount/10/", BASE_URL, (unsigned long)page];
+    } else {
+        urlString = [NSString stringWithFormat:@"%@comics/page/%lu/itemCount/10/tag/%@", BASE_URL, (unsigned long)page, category];
+    }
     
     [BaseAPIManager getRequestWithURLString:urlString
                               withParameter:nil

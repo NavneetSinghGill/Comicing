@@ -112,6 +112,7 @@
 }
 -(void)openMenuForPan
 {
+    _menuState = Open;
     [self.bottomButton setImage:[UIImage imageNamed:@"BubbleWhite"] forState:UIControlStateNormal];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenMenu" object:nil];
@@ -132,6 +133,7 @@
 }
 -(void)openMenu
 {
+    _menuState = Open;
     [self.bottomButton setImage:[UIImage imageNamed:@"BubbleWhite"] forState:UIControlStateNormal];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenMenu" object:nil];
@@ -158,6 +160,7 @@
 
 -(void)closeMenuForPan
 {
+    _menuState = Close;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"CloseMenu" object:nil];
     
     [UIView animateWithDuration:0.3f animations:^{
@@ -177,6 +180,7 @@
 
 -(void)closeMenu
 {
+    _menuState = Close;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"CloseMenu" object:nil];
     
     [UIView animateWithDuration:0.3f animations:^{

@@ -19,7 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *mUserName;
 @property (weak, nonatomic) IBOutlet UILabel *lblComicTitle;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicTitle;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicTitle;
+@property(strong, nonatomic) NSString *fontName;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintCointainerView;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpacingComicView;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintComicView;
@@ -32,4 +33,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnBubble;
 @property (weak, nonatomic) IBOutlet UIButton *btnFacebook;
 @property (weak, nonatomic) IBOutlet UIButton *btnTwitter;
+
+@property (weak, nonatomic) IBOutlet UIImageView *topImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *leftImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *bottomImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *rightImageView;
+
+
 @end

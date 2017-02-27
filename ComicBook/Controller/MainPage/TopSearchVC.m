@@ -210,7 +210,7 @@ const int blurViewTag = 1010;
 }
 
 
-#pragma mark api
+#pragma mark .
 
 -(void)doSearchUser:(NSString*)txtSearch{
     
@@ -339,6 +339,10 @@ const int blurViewTag = 1010;
     friend.userId = self.friendSearchObject.userId;
     friend.userType = self.friendSearchObject.userTypeId;
     friend.loginId = self.friendSearchObject.loginId;
+    friend.fb_id = self.friendSearchObject.fb_id;
+    friend.insta_id = self.friendSearchObject.insta_id;
+    friend.desc = self.friendSearchObject.desc;
+    
     [AppDelegate application].dataManager.friendObject = friend;
     
     //[self performSegueWithIdentifier:@"FriendPageSegue" sender:indexPath];

@@ -4,8 +4,8 @@
 //
 
 /* API Calles */
-#define SERVER_PREFERENCE @"production"
-//#define SERVER_PREFERENCE @"dev"
+//#define SERVER_PREFERENCE @"production"
+#define SERVER_PREFERENCE @"dev"
 
 
 #define SERVER_URL ([SERVER_PREFERENCE isEqualToString:@"production"] ? @"http://162.244.67.15/" : @"http://staging.comicing.cc/")
@@ -108,8 +108,8 @@
 // below height for cell
 
 #define WIDE_SLIDE_HEIGHT_CELL (IS_IPHONE_6P?110:IS_IPHONE_6?98:88)
-#define TALL_SMALL_SLIDE_HEIGHT_CELL (IS_IPHONE_6P?220:IS_IPHONE_6?207:195)
-#define TALL_BIG_SLIDE_HEIGHT_CELL (IS_IPHONE_6P?450:IS_IPHONE_6?428:408)
+#define TALL_SMALL_SLIDE_HEIGHT_CELL (IS_IPHONE_6P?284:IS_IPHONE_6?257:210)
+#define TALL_BIG_SLIDE_HEIGHT_CELL (IS_IPHONE_6P?580:IS_IPHONE_6?520:435)
 
 #define ComicWidthIPhone5 330
 #define ComicWidthIPhone6 385
@@ -127,7 +127,16 @@ typedef enum {
 } ComicSlideLayerType;
 
 
-
+typedef enum {
+    Purple = 1,
+    Green,
+    Yellow,
+    Orange,
+    NavyBlue,
+    LightBlue,
+    White,
+    Pink
+} ComicBookColorCode;
 
 
 

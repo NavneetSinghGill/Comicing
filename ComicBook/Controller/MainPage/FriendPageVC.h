@@ -68,4 +68,18 @@
 @property (weak, nonatomic) IBOutlet UILabel *mFourthDisplaylabel;
 @property (weak, nonatomic) IBOutlet UILabel *mFourthHollowlabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblFriendCount;
+//New layout
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *comicCountVerticalBorderViewLeading;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *comicCountContainerViewLeading;
+@property(weak, nonatomic) IBOutlet UIView *comicCountContainerView;
+
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *friendCountVerticalBorderViewLeading;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *friendCountContainerViewLeading;
+@property(weak, nonatomic) IBOutlet UIView *friendCountContainerView;
+
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *followCountVerticalBorderViewTrailing;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *followCountContainerViewTrailing;
+@property(weak, nonatomic) IBOutlet UIView *followCountContainerView;
+
 @end

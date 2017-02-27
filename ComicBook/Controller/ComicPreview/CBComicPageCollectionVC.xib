@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,11 +26,20 @@
             <rect key="frame" x="0.0" y="0.0" width="346" height="460"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteTop" translatesAutoresizingMaskIntoConstraints="NO" id="y4Q-kq-wJA" userLabel="TopImageView"/>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteLeft" translatesAutoresizingMaskIntoConstraints="NO" id="eHk-yI-A96" userLabel="LeftImageView"/>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteRight" translatesAutoresizingMaskIntoConstraints="NO" id="USo-PP-7v7"/>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteBottom" translatesAutoresizingMaskIntoConstraints="NO" id="7IN-eD-Kyw" userLabel="BottomImageView"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteTop" translatesAutoresizingMaskIntoConstraints="NO" id="y4Q-kq-wJA" userLabel="TopImageView">
+                    <rect key="frame" x="10" y="0.0" width="326" height="15"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteLeft" translatesAutoresizingMaskIntoConstraints="NO" id="eHk-yI-A96" userLabel="LeftImageView">
+                    <rect key="frame" x="10" y="15" width="17" height="415"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteRight" translatesAutoresizingMaskIntoConstraints="NO" id="USo-PP-7v7">
+                    <rect key="frame" x="296" y="15" width="40" height="415"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteBottom" translatesAutoresizingMaskIntoConstraints="NO" id="7IN-eD-Kyw" userLabel="BottomImageView">
+                    <rect key="frame" x="10" y="430" width="326" height="30"/>
+                </imageView>
                 <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="rBf-Kd-2ev">
+                    <rect key="frame" x="16" y="15" width="298" height="415"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cZx-cX-RJa">
                         <size key="itemSize" width="50" height="50"/>
@@ -38,12 +49,14 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Za5-5C-u2L" userLabel="OnlyImageButton">
+                    <rect key="frame" x="299" y="-1" width="21" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Za5-5C-u2L" secondAttribute="height" multiplier="1:1" id="hDd-qu-f8b"/>
                     </constraints>
                     <state key="normal" backgroundImage="colorCircle"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcS-Y8-jac">
+                    <rect key="frame" x="289" y="-10" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="VAw-fY-Lhb"/>
                         <constraint firstAttribute="width" constant="40" id="rhw-Kb-XVm"/>
@@ -84,7 +97,6 @@
         </view>
     </objects>
     <resources>
-        <image name="comicBookBackground" width="291" height="344"/>
         <image name="WhiteBottom" width="1220" height="81"/>
         <image name="WhiteLeft" width="40" height="1768"/>
         <image name="WhiteRight" width="150" height="1768"/>

@@ -9,6 +9,7 @@
 #import "ComicsModel.h"
 #import "ComicBook.h"
 #import "DateLabel.h"
+#import "ComicProperties.h"
 
 @implementation ComicsModel
 

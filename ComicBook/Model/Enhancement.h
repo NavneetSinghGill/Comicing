@@ -19,5 +19,6 @@
 @property (nonatomic, strong) NSString *yPos;
 @property (nonatomic, strong) NSString *width;
 @property (nonatomic, strong) NSString *height;
+@property (nonatomic, assign) NSInteger zIndex;
 
 @end
