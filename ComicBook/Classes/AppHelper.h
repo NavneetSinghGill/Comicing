@@ -57,6 +57,7 @@
 + (BOOL)IsNetworkAvailable;
 +(BOOL)isValidEmail:(NSString*)emailText;
 +(UIImage*)getImageFile:(NSString*)fileName;
++(YYImage *)getGifFile:(NSString*)fileName;
 +(void)setDeviceToken:(NSString*)deviceToken;
 +(void)setCurrentLoginId:(NSString*)userId;
 +(void)setCurrentUserEmail:(NSString*)userId;

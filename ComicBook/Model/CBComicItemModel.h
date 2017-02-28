@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "ComicPage.h"
 
 typedef enum {
     COMIC_ITEM_ORIENTATION_PORTRAIT,
@@ -15,18 +16,23 @@ typedef enum {
 }ComicItemOrientation;
 
 typedef enum {
-    COMIC_IMAGE_ORIENTATION_UNKNOWN,
+    COMIC_IMAGE_ORIENTATION_UNKNOWN = 101,
     COMIC_IMAGE_ORIENTATION_PORTRAIT_HALF,
     COMIC_IMAGE_ORIENTATION_PORTRAIT_FULL,
     COMIC_IMAGE_ORIENTATION_LANDSCAPE
 }ComicImageOrientation;
 
 @interface CBComicItemModel : NSObject
-- (instancetype)initWithTimestamp:(NSNumber*)timestamp baseLayer:(ComicSlideLayerType)comicSlideLayerType staticImage:(UIImage*)image animatedImage:(UIImage*)animatedImage orientation:(ComicItemOrientation)orientation;
+//- (instancetype)initWithTimestamp:(NSNumber*)timestamp baseLayer:(ComicSlideLayerType)comicSlideLayerType staticImage:(UIImage*)image animatedImage:(UIImage*)animatedImage orientation:(ComicItemOrientation)orientation;
+- (instancetype)initWithTimestamp:(NSNumber*)timestamp comicPage:(ComicPage *)comicPage;
+
 @property (nonatomic, strong) NSNumber* timestamp;
-@property (nonatomic, strong) UIImage* staticImage;
-@property (nonatomic, strong) UIImage* animatedImage;
-@property (nonatomic, assign) ComicSlideLayerType comicSlideLayerType;
+@property (nonatomic, strong) UIImage* baseLayerImage;
+@property (nonatomic, strong) UIImage* baseLayerGif;
+@property (nonatomic, assign) ComicSlideBaseLayer comicSlideBaseLayer;
 @property (nonatomic, assign) ComicItemOrientation itemOrientation;
 @property (nonatomic, assign) ComicImageOrientation imageOrientation;
+@property (nonatomic, assign) BOOL isBaseLayerGif;
+
+@property(nonatomic, assign) ComicPage *comicPage;
 @end

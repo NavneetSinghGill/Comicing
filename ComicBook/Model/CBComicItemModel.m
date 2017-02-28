@@ -10,14 +10,30 @@
 
 @implementation CBComicItemModel
 
-- (instancetype)initWithTimestamp:(NSNumber *)timestamp baseLayer:(ComicSlideLayerType)comicSlideLayerType staticImage:(UIImage *)image animatedImage:(UIImage *)animatedImage orientation:(ComicItemOrientation)orientation {
+//- (instancetype)initWithTimestamp:(NSNumber *)timestamp baseLayer:(ComicSlideLayerType)comicSlideLayerType staticImage:(UIImage *)image animatedImage:(UIImage *)animatedImage orientation:(ComicItemOrientation)orientation {
+//    self = [super init];
+//    if (self) {
+//        _timestamp= timestamp;
+//        _staticImage = image;
+//        _animatedImage = animatedImage;
+//        _comicSlideLayerType = comicSlideLayerType;
+//        _itemOrientation= orientation;
+//    }
+//    return self;
+//}
+
+- (instancetype)initWithTimestamp:(NSNumber *)timestamp comicPage:(ComicPage *)comicPage {
     self = [super init];
     if (self) {
+        _comicPage = comicPage;
+        _isBaseLayerGif = [[comicPage.printScreenPath lowercaseString] hasSuffix:@".gif"];
+        
         _timestamp= timestamp;
-        _staticImage = image;
-        _animatedImage = animatedImage;
-        _comicSlideLayerType = comicSlideLayerType;
-        _itemOrientation= orientation;
+        _itemOrientation = [comicPage.slideType isEqualToString:slideTypeTall]? COMIC_ITEM_ORIENTATION_PORTRAIT: COMIC_ITEM_ORIENTATION_LANDSCAPE;
+        
+        
+        _comicSlideBaseLayer = _isBaseLayerGif? Gif: StaticImage;
+        
     }
     return self;
 }

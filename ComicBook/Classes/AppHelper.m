@@ -298,6 +298,17 @@ static AppHelper *_appHelper = nil;
     
     return imgFinal;
 }
+
++(YYImage *)getGifFile:(NSString*)fileName {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    YYImage* imgFinal = [YYImage imageWithContentsOfFile:filePath];
+    
+    return imgFinal;
+}
+
 ///Just harded value
 + (BOOL)IsNetworkAvailable{
     Reachability* reachability = [Reachability  reachabilityForInternetConnection];

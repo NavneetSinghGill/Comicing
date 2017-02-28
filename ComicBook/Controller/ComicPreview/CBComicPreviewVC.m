@@ -72,12 +72,36 @@
     //End
     
     [self setupSections];
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
 }
 
-- (void)prepareView
+- (void)prepareView 
 {
-    self.dataArray = [self getDataFromFile];
+    self.comicSlides = [self getDataFromFile];
+//    [self.dataArray removeAllObjects];
+    
+    
+//    self.previewVC.dataArray = [NSMutableArray array];
+//    [self.tableView reloadData];
+}
+
+- (void)addComicPage:(ComicPage *)comicPage {
+    CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] comicPage:comicPage];
+    [self.dataArray addObject:model];
+    
+    __block CBComicPreviewVC* weekSelf= self;
+    [self.previewVC addComicItem:model completion:^(BOOL finished) {
+        if(finished){
+            [weekSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+//            [weekSelf.tableView reloadData];
+        }
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self prepareView];
 }
 
 #pragma mark - ZoomTransitionProtocol
@@ -231,7 +255,8 @@
 #pragma mark- CBComicPageViewControllerDelegate method
 - (void)didDeleteComicItem:(CBComicItemModel *)comicItem inPage:(CBComicPageCollectionVC *)pageVC{
     [self.dataArray removeObject:comicItem];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+//    [self.tableView reloadData];
 //    if (self.previewVC.dataArray.count == 0 && [self.previewVC viewControllers].count == 1) {
 //        self.previewVC.view.hidden = YES;
 //    }
@@ -577,7 +602,9 @@
                         self.comicPageComicItems.slideType = slideTypeTall;
                     }
                     
-                    
+                    if (!self.comicSlides) {
+                        self.comicSlides = [NSMutableArray array];
+                    }
                     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.comicPageComicItems];
                     if (newslide)
                     {
@@ -612,6 +639,13 @@
                                         
                                         [self.view addSubview:instView];
                                     }
+
+//                                    for (NSData *data in self.comicSlides) {
+//                                        ComicPage *comicPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//                                        
+//                                        [self.dataArray addObject:comicPage];
+//                                    }
+                                    [self addComicPage:_comicPageComicItems];
                                 });
                             }
                         }
@@ -678,7 +712,7 @@
     else
     {
         //Doing main thread
-//        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen withComicSlide:comicSlides];
+//        [scrvComicSlide reloadComicImageAtIndex:newSlideIndex withComicSlide:printScreen withComicSlide:dataArray];
         @try {
 //            self.scrvComicSlide.isStillSaving = YES;
             @autoreleasepool {
@@ -723,7 +757,7 @@
                 }
                 
                 //                NSLog(@"************* editSlideIndex ***************");
-                //                ComicPage * sample = [NSKeyedUnarchiver unarchiveObjectWithData:comicSlides[editSlideIndex]];
+                //                ComicPage * sample = [NSKeyedUnarchiver unarchiveObjectWithData:dataArray[editSlideIndex]];
                 //                NSLog(@"%@",sample.subviews);
                 //                NSLog(@"************* editSlideIndex ***************");
                 
