@@ -13,7 +13,7 @@
 //+ (void)getTheComicsWithSuccessBlock:(void(^)(id object))successBlock
 //                             andFail:(void(^)(NSError *errorMessage))failBlock;
 
-+ (void)getTheComicsWithPage:(NSUInteger)page SuccessBlock:(void(^)(id object))successBlock
++ (void)getTheComicsWithPage:(NSUInteger)page andCategory:(NSString *)category SuccessBlock:(void(^)(id object))successBlock
                      andFail:(void(^)(NSError *errorMessage))failBlock;
 
 + (void)setFlagForComic:(NSDictionary *)comic withSuccessBlock:(void(^)(id object))successBlock

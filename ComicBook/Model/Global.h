@@ -20,12 +20,22 @@ typedef NS_ENUM(NSInteger, ScreenSizeType)
     ScreenSizeTypeIPhone6p = 4
 };
 
+typedef enum {
+    Top,
+    Left,
+    Bottom,
+    Right
+} Direction;
+
 @interface Global : NSObject
 
 @property (nonatomic) BOOL isTakePhoto;
 @property (nonatomic) BOOL isBlackBoardOpen;
 
 + (Global *)global;
++ (UIColor *)getColorForComicBookColorCode:(ComicBookColorCode)comicBookColorCode;
++ (UIImage *)getImageForColorCode:(ComicBookColorCode)comicBookColorCode andDirection:(Direction)direction;
+
 @property ScreenSizeType deviceType;
 
 @property (strong, nonatomic) NSMutableArray *slides;

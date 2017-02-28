@@ -133,7 +133,7 @@ static NSString * const reuseIdentifier1 = @"Cell1";
     else
     {
 //        [parentViewController addExclamationListImage:exclamationLargeListArray[indexPath.row - 1]];
-        [parentViewController addAnimation:animationListArray[indexPath.section - 1]];
+        [parentViewController addAnimation:animationListArray[indexPath.section]];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC),
                        dispatch_get_main_queue(), ^{

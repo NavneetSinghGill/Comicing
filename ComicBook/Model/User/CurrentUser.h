@@ -19,4 +19,7 @@
 @property (strong, nonatomic) NSString *profile_pic;
 @property (strong, nonatomic) NSString *user_id;
 @property (strong, nonatomic) NSString *login_id;
+@property (strong, nonatomic) NSString *fb_id;
+@property (strong, nonatomic) NSString *insta_id;
+@property (strong, nonatomic) NSString *desc;
 @end

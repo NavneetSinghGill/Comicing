@@ -25,6 +25,9 @@
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *loginId;
 @property (nonatomic, strong) NSString *userType;
+@property (nonatomic, strong) NSString *fb_id;
+@property (nonatomic, strong) NSString *insta_id;
+@property (nonatomic, strong) NSString *desc;
 
 @property (nonatomic) BOOL isSelected;
 

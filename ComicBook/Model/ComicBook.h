@@ -29,5 +29,7 @@
 @property (nonatomic, strong) NSArray *comments;
 @property (nonatomic, strong) UserDetail *userDetail;
 @property (nonatomic, strong) NSString *periodCode;
+@property (nonatomic, strong) NSArray *enhancements;
+@property (nonatomic, strong) NSDictionary *comicProperties;
 
 @end

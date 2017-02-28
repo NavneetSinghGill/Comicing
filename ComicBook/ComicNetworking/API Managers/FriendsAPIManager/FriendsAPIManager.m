@@ -64,4 +64,20 @@
                                     failBlock(errorObj);
                                 } showIndicator:YES];
 }
+
++ (void)getUserProfileByID:(NSString *)loginID
+          withSuccessBlock:(void (^)(id))successBlock
+                   andFail:(void (^)(NSError *))failBlock {
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@", BASE_URL, @"users/", loginID];
+    [BaseAPIManager getRequestWithURLString:urlString
+                              withParameter:nil
+                                withSuccess:^(id object) {
+                                    successBlock(object);
+                                } andFail:^(id errorObj) {
+                                    failBlock(errorObj);
+                                } showIndicator:YES];
+}
+
+
 @end

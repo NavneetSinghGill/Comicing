@@ -20,7 +20,8 @@
              @"xPos": @"position_left",
              @"yPos": @"position_top",
              @"width": @"width",
-             @"height": @"height"
+             @"height": @"height",
+             @"zIndex": @"z_index"
              };
 }
 

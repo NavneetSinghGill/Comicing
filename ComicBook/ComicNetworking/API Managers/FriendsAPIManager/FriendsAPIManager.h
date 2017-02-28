@@ -24,4 +24,8 @@
                withSuccessBlock:(void(^)(id object))successBlock
                         andFail:(void(^)(NSError *errorMessage))failBlock;
 
++ (void)getUserProfileByID:(NSString *)loginID
+               withSuccessBlock:(void(^)(id object))successBlock
+                        andFail:(void(^)(NSError *errorMessage))failBlock;
+
 @end

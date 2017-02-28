@@ -24,4 +24,8 @@
 @property (nonatomic, strong) NSString *dob;
 @property (nonatomic, strong) NSString *country;
 @property (nonatomic, strong) NSString *mobile;
+@property (nonatomic, strong) NSString *fb_id;
+@property (nonatomic, strong) NSString *insta_id;
+@property (nonatomic, strong) NSString *desc;
+@property (nonatomic, strong) NSString *friendCount;
 @end

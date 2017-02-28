@@ -27,6 +27,11 @@
 @property (strong, nonatomic) NSArray *allSlideImages;
 @property (nonatomic) BOOL isDelegateCalled;
 
+@property(assign, nonatomic) CGFloat bookWidth;
+@property(strong, nonatomic) UIViewController *parentController;
+
+@property (assign, nonatomic) ComicBookColorCode comicBookColorCode;
+
 - (void)ResetBook;
 
 @end

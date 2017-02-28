@@ -37,6 +37,14 @@
 //#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 //#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
+@interface FriendPageVC ()
+
+@property(weak, nonatomic) IBOutlet UILabel *fbLabel;
+@property(weak, nonatomic) IBOutlet UILabel *instaLabel;
+@property(weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+
+@end
+
 
 @implementation FriendPageVC
 
@@ -57,30 +65,30 @@
         
         
         //2
-        [self.mSecondHollowlabel setBackgroundColor:self.mSecondDisplaylabel.textColor];
-        [UIView beginAnimations:@"ScaleButton" context:NULL];
-        [UIView setAnimationDuration: 0];
-        self.mSecondHollowlabel.transform = CGAffineTransformMakeScale(0.2,0.2);
-        [UIView commitAnimations];
-        self.mSecondHollowlabel.backgroundColor = self.mSecondHollowlabel.textColor;
+//        [self.mSecondHollowlabel setBackgroundColor:self.mSecondDisplaylabel.textColor];
+//        [UIView beginAnimations:@"ScaleButton" context:NULL];
+//        [UIView setAnimationDuration: 0];
+        self.mSecondHollowlabel.transform = CGAffineTransformMakeScale(0.81,0.81);
+//        [UIView commitAnimations];
+//        self.mSecondHollowlabel.backgroundColor = self.mSecondHollowlabel.textColor;
         
         
         //3
-        [self.mThirdHollowlabel setBackgroundColor:self.mThirdDisplaylabel.textColor];
-        [UIView beginAnimations:@"ScaleButton" context:NULL];
-        [UIView setAnimationDuration: 0];
-        self.mThirdHollowlabel.transform = CGAffineTransformMakeScale(0.2,0.2);
-        [UIView commitAnimations];
-        self.mThirdHollowlabel.backgroundColor = self.mThirdHollowlabel.textColor;
+//        [self.mThirdHollowlabel setBackgroundColor:self.mThirdDisplaylabel.textColor];
+//        [UIView beginAnimations:@"ScaleButton" context:NULL];
+//        [UIView setAnimationDuration: 0];
+        self.mThirdHollowlabel.transform = CGAffineTransformMakeScale(0.81,0.81);
+//        [UIView commitAnimations];
+//        self.mThirdHollowlabel.backgroundColor = self.mThirdHollowlabel.textColor;
         
         
         //3
-        [self.mFourthHollowlabel setBackgroundColor:self.mFourthDisplaylabel.textColor];
-        [UIView beginAnimations:@"ScaleButton" context:NULL];
-        [UIView setAnimationDuration: 0];
-        self.mFourthHollowlabel.transform = CGAffineTransformMakeScale(0.2,0.2);
-        [UIView commitAnimations];
-        self.mFourthHollowlabel.backgroundColor = self.mFourthHollowlabel.textColor;
+//        [self.mFourthHollowlabel setBackgroundColor:self.mFourthDisplaylabel.textColor];
+//        [UIView beginAnimations:@"ScaleButton" context:NULL];
+//        [UIView setAnimationDuration: 0];
+        self.mFourthHollowlabel.transform = CGAffineTransformMakeScale(0.81,0.81);
+//        [UIView commitAnimations];
+//        self.mFourthHollowlabel.backgroundColor = self.mFourthHollowlabel.textColor;
         
         
         //Now
@@ -130,19 +138,24 @@
     if (IS_IPHONE_5)
     {
         self.nameLabel.font = [UIFont fontWithName:arielBlackFont size:13.f];
-        self.totalComicCountLabel.font = [self.totalComicCountLabel.font fontWithSize:13.f];
+        self.totalComicCountLabel.font = [self.totalComicCountLabel.font fontWithSize:10.f];
+        self.lblFriendCount.font = [self.lblFriendCount.font fontWithSize:10.f];
+        _descriptionLabel.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:11.f];
     }
     else if (IS_IPHONE_6)
     {
         
         self.nameLabel.font = [UIFont fontWithName:arielBlackFont size:14.f];
-        self.totalComicCountLabel.font = [self.totalComicCountLabel.font fontWithSize:14.f];
-
+        self.totalComicCountLabel.font = [self.totalComicCountLabel.font fontWithSize:11.f];
+        self.lblFriendCount.font = [self.lblFriendCount.font fontWithSize:11.f];
+        _descriptionLabel.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:12.f];
     }
     else if(IS_IPHONE_6P)
     {
         self.nameLabel.font = [UIFont fontWithName:arielBlackFont size:15.f];
-        self.totalComicCountLabel.font = [self.totalComicCountLabel.font fontWithSize:15.f];
+        self.totalComicCountLabel.font = [self.totalComicCountLabel.font fontWithSize:12.f];
+        self.lblFriendCount.font = [self.lblFriendCount.font fontWithSize:12.f];
+        _descriptionLabel.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:13.f];
     }
     
     [self addUIRefreshControl];
@@ -187,7 +200,32 @@
     [self.mNowHollowlabel setHidden:YES];
     
     [self setBubbleLabels];
-    [self callApiForIsFriendStatus];
+    
+    [self fillDataInUI];
+}
+
+- (void)fillDataInUI {
+    Friend *friend = [AppDelegate application].dataManager.friendObject;
+    self.fbLabel.text = friend.fb_id.length > 0? friend.fb_id: @"-";
+    self.instaLabel.text = friend.insta_id.length > 0? friend.insta_id: @"-";
+    self.descriptionLabel.text = friend.desc.length > 0? friend.desc: @"";
+    
+    [FriendsAPIManager getUserProfileByID:friend.userId
+                         withSuccessBlock:^(id object) {
+                             UserSearch *user = [MTLJSONAdapter modelOfClass:[UserSearch class] fromJSONDictionary:[object valueForKey:@"data"] error:nil];
+                             
+                             if (user.friendCount.length != 0) {
+                                 if ([user.friendCount integerValue] <= 1) {
+                                     self.lblFriendCount.text = [NSString stringWithFormat:@"%ld friend", (long)[user.friendCount integerValue]];
+                                 } else {
+                                     self.lblFriendCount.text = [NSString stringWithFormat:@"%ld friends", (long)[user.friendCount integerValue]];
+                                 }
+                                 self.friendCountContainerView.hidden = NO;
+                             }
+                             
+                         } andFail:^(NSError *errorMessage) {
+                             
+                         }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -196,8 +234,7 @@
     [super viewWillAppear:YES];
     
     
-    
-    
+    [self callApiForIsFriendStatus];
 }
 -(void)viewDidLayoutSubviews
 {
@@ -207,6 +244,17 @@
     UIView *headerblank = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, 5)];
     headerblank.backgroundColor = [UIColor clearColor];
     self.tableview.tableHeaderView = headerblank;
+    
+    _comicCountContainerView.layer.cornerRadius = _comicCountVerticalBorderViewLeading.constant =_comicCountContainerView.frame.size.height / 2;
+    _comicCountContainerViewLeading.constant = -_comicCountContainerView.frame.size.height / 2;
+    
+    _friendCountContainerView.layer.cornerRadius = _friendCountVerticalBorderViewLeading.constant =_friendCountContainerView.frame.size.height / 2;
+    _friendCountContainerViewLeading.constant = -_friendCountContainerView.frame.size.height / 2;
+    
+    _followCountContainerView.layer.cornerRadius = _followCountVerticalBorderViewTrailing.constant =_followCountContainerView.frame.size.height / 2;
+    _followCountContainerViewTrailing.constant = -_followCountContainerView.frame.size.height / 2;
+    
+//    [self setFollowButtonFont];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -679,39 +727,39 @@
      */
     
     //dinesh
-    UILabel *display1 = self.currentDisplayLable;
-    UILabel *hollow1 = self.currentHollowLable;
-    
-    
-    [UIView beginAnimations:@"ScaleButton" context:NULL];
-    [UIView setAnimationDuration: 1];
-    hollow1.transform = CGAffineTransformMakeScale(0.2,0.2);
-    [UIView commitAnimations];
-    
-    
-    [display1 setHidden:NO];
-    [display1 setAlpha:0];
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        
-    } completion:^(BOOL finished) {
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            
-            [display1 setAlpha:0.3];
-            
-        } completion:^(BOOL finished) {
-            
-            [UIView animateWithDuration:0.5 animations:^{
-                [hollow1 setBackgroundColor:display1.textColor];
-                
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    [display1 setAlpha:1.0];
-                }];
-            }];
-        }];
-    }];
+//    UILabel *display1 = self.currentDisplayLable;
+//    UILabel *hollow1 = self.currentHollowLable;
+//    
+//    
+//    [UIView beginAnimations:@"ScaleButton" context:NULL];
+//    [UIView setAnimationDuration: 1];
+//    hollow1.transform = CGAffineTransformMakeScale(0.2,0.2);
+//    [UIView commitAnimations];
+//    
+//    
+//    [display1 setHidden:NO];
+//    [display1 setAlpha:0];
+//    
+//    [UIView animateWithDuration:0.5 animations:^{
+//        
+//    } completion:^(BOOL finished) {
+//        
+//        [UIView animateWithDuration:0.5 animations:^{
+//            
+//            [display1 setAlpha:0.3];
+//            
+//        } completion:^(BOOL finished) {
+//            
+//            [UIView animateWithDuration:0.5 animations:^{
+//                [hollow1 setBackgroundColor:display1.textColor];
+//                
+//            } completion:^(BOOL finished) {
+//                [UIView animateWithDuration:0.5 animations:^{
+//                    [display1 setAlpha:1.0];
+//                }];
+//            }];
+//        }];
+//    }];
     
     UILabel *display2 = [self getDisplayabel:sender];
     UILabel *hollow2 = [self getHallowLabel:sender];
@@ -721,16 +769,16 @@
     [display2 setHidden:NO];
     [hollow2 setBackgroundColor:[UIColor blackColor]];
     
-    [UIView beginAnimations:@"ScaleButton" context:NULL];
-    [UIView setAnimationDuration: 1];
+//    [UIView beginAnimations:@"ScaleButton" context:NULL];
+//    [UIView setAnimationDuration: 1];
     hollow2.transform = CGAffineTransformMakeScale(0.81,0.81);
-    [UIView commitAnimations];
+//    [UIView commitAnimations];
     
-    [UIView animateWithDuration:0.1 animations:^{
+//    [UIView animateWithDuration:0.1 animations:^{
         [display2 setAlpha:0];
-    } completion:^(BOOL finished) {
-        
-    }];
+//    } completion:^(BOOL finished) {
+//        
+//    }];
     //--------------------------
     
     
@@ -783,7 +831,8 @@
     [self getFriendsList:^(id object) {
         
         BOOL isAlreadyFriend = NO;
-        if(![object isKindOfClass:[NSString class]])
+        self.btn_follow.selected = NO;
+        if(![object isKindOfClass:[NSString class]]) {
             for (Friend *frd in object)
             {
                 if ([frd.friendId isEqualToString:[AppDelegate application].dataManager.friendObject.userId])
@@ -793,6 +842,8 @@
                     break;
                 }
             }
+        }
+        [self setStateForFollowButton];
     }];
 }
 - (UILabel *)getDisplayabel: (UIButton *)sender
@@ -820,19 +871,33 @@
      }];
 }
 
-- (IBAction)tappedFollow:(id)sender {
-    
-    
+- (void)setStateForFollowButton {
     if (self.btn_follow.selected)
     {
         self.btn_follow.selected = NO;
-        [self callFriendUnfriendAPIWithStatus:@"0"];
+        [self.btn_follow setTitle:@"follow" forState:UIControlStateNormal];
+        [self.btn_follow setBackgroundColor:[UIColor blackColor]];
+        [self.btn_follow setTitleColor:[UIColor colorWithRed:114/255.f green:201/255.f blue:222/255.f alpha:1.f] forState:UIControlStateNormal];
     }
     else
     {
         self.btn_follow.selected = YES;
+        [self.btn_follow setTitle:@"following" forState:UIControlStateSelected];
+        [self.btn_follow setBackgroundColor:[UIColor colorWithRed:114/255.f green:201/255.f blue:222/255.f alpha:1.f]];
+        [self.btn_follow setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+    }
+    [self setFollowButtonFont];
+}
+
+- (IBAction)tappedFollow:(id)sender {
+    
+    [self setStateForFollowButton];
+    if (_btn_follow.selected) {
+        [self callFriendUnfriendAPIWithStatus:@"0"];
+    } else {
         [self callFriendUnfriendAPIWithStatus:@"1"];
     }
+    
   /*  [self getFriendsList:^(id object) {
        
         BOOL isAlreadyFriend = NO;
@@ -912,6 +977,23 @@
     }];*/
 }
 
+- (void)setFollowButtonFont {
+    NSInteger fontSize;
+    
+    if (IS_IPHONE_5) {
+        fontSize = 11;
+    } else if (IS_IPHONE_6) {
+        fontSize = 12;
+    } else if (IS_IPHONE_6P) {
+        fontSize = 13;
+    }
+    fontSize += self.btn_follow.selected? 0:3;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_btn_follow.titleLabel setFont:[UIFont fontWithName:@"Arial-Black" size:fontSize]];
+    });
+}
+
 - (IBAction)tappedBackButton:(id)sender {
 //    [self dismissViewControllerAnimated:YES completion:nil];
     
@@ -939,6 +1021,9 @@
                                    }
                                    
                                    self.totalComicCountLabel.text =  @"0 Comic";
+                                   self.comicCountContainerView.hidden = NO;
+                                   self.friendCountContainerView.hidden = NO;
+                                   self.followCountContainerView.hidden = NO;
                                    if(clearData) {
                                        [comicsArray removeAllObjects];
                                        lastPageDownScroll = [comicsModelObj.pagination.last integerValue];
@@ -948,7 +1033,13 @@
                                        NSString *period = [self getTheDefaultPeriod:comicsModelObj];
                                        currentlyShowingTimelinePeriodUpScroll = period;
                                        currentlyShowingTimelinePeriodDownScroll = period;
-                                       self.totalComicCountLabel.text = [NSString stringWithFormat:@"%lu Comics",(unsigned long)[comicsArray count]];
+                                       
+                                       NSInteger comicCount = [comicsArray count];
+                                       if (comicCount <= 1) {
+                                           self.totalComicCountLabel.text = [NSString stringWithFormat:@"%lu Comic",(unsigned long)comicCount];
+                                       } else {
+                                           self.totalComicCountLabel.text = [NSString stringWithFormat:@"%lu Comics",(unsigned long)comicCount];
+                                       }
                                    } else if([direction isEqualToString:DIRECTION_UP]) {
                                        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
                                        [tempArray addObjectsFromArray:comicsModelObj.books];
@@ -973,7 +1064,14 @@
                                        
                                        [comicsArray addObjectsFromArray:comicsModelObj.books];
                                    }
-                                   self.totalComicCountLabel.text = [NSString stringWithFormat:@"%@ Comics", comicsModelObj.totalCount];
+                                   
+                                   NSInteger comicCount = [comicsModelObj.totalCount integerValue];
+                                   if (comicCount <= 1) {
+                                       self.totalComicCountLabel.text = [NSString stringWithFormat:@"%lu Comic",(unsigned long)comicCount];
+                                   } else {
+                                       self.totalComicCountLabel.text = [NSString stringWithFormat:@"%lu Comics",(unsigned long)comicCount];
+                                   }
+                                   
                                    [self.tableview reloadData];
                                    
                                    
@@ -982,12 +1080,12 @@
                                    
                                    NSMutableAttributedString *strName = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@ %@", [AppDelegate application].dataManager.friendObject.firstName, [AppDelegate application].dataManager.friendObject.lastName] attributes:@{NSFontAttributeName:self.nameLabel.font}];
                                    
-                                   //[self.nameLabel.attributedText mutableCopy];
-                                   [strName appendAttributedString:[[NSAttributedString alloc] initWithString:@"       "]];
-                                   
-                                     NSMutableAttributedString *strName2 = [[NSMutableAttributedString alloc]initWithString:self.totalComicCountLabel.text attributes:@{NSFontAttributeName:self.totalComicCountLabel.font}];
-                                   
-                                   [strName appendAttributedString:strName2];
+//                                   //[self.nameLabel.attributedText mutableCopy];
+//                                   [strName appendAttributedString:[[NSAttributedString alloc] initWithString:@"       "]];
+//                                   
+//                                     NSMutableAttributedString *strName2 = [[NSMutableAttributedString alloc]initWithString:self.totalComicCountLabel.text attributes:@{NSFontAttributeName:self.totalComicCountLabel.font}];
+//                                   
+//                                   [strName appendAttributedString:strName2];
                                    self.nameLabel.attributedText = strName;
                                    //Dinesh
                                    /*CGSize size = [self.nameLabel.text sizeWithAttributes:

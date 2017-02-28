@@ -483,7 +483,18 @@ int sliderViewWidthDeltaChange;
 #pragma mark- done video button method
 
 -(void)doneVideoBtnClicked {
+#if TARGET_OS_SIMULATOR
+    viewCamera.hidden = YES;
+    [viewCameraPreview setHidden:YES];
+    [self.imgGifLayer setHidden:NO];
+//    NSString* sContentsPath = [[GifURL absoluteString] stringByReplacingOccurrencesOfString:@"file:///" withString:@"//"];
+//    UIImage* imgObj = [UIImage imageWithContentsOfFile:sContentsPath];
+//    self.imgGifLayer.image = imgObj;
+    self.imgGifLayer.image =  [UIImage sd_animatedGIFNamed:@"Slide-2B.gif"];//  [YYImage imageWithContentsOfFile:animationPath];
     
+    //Visible middle layer
+    [self handleMiddleLayer];
+#else
     [NSGIF createGIFfromURL:self.outputVideoURL
              withFrameCount:30
                   delayTime:.010
@@ -495,13 +506,16 @@ int sliderViewWidthDeltaChange;
                          [viewCameraPreview setHidden:YES];
                          [self.imgGifLayer setHidden:NO];
                          NSString* sContentsPath = [[GifURL absoluteString] stringByReplacingOccurrencesOfString:@"file:///" withString:@"//"];
-                         UIImage* imgObj = [UIImage imageWithContentsOfFile:sContentsPath];
-                         self.imgGifLayer.image = imgObj;
+                         NSData *gifData = [NSData dataWithContentsOfFile: sContentsPath];
+                         self.imgGifLayer.image =  [UIImage sd_animatedGIFWithData:gifData];
+//                         UIImage* imgObj = [UIImage imageWithContentsOfFile:sContentsPath];
+//                         self.imgGifLayer.image = imgObj;
                          
                          //Visible middle layer
                          [self handleMiddleLayer];
                      }
     }];
+#endif
     // [viewCameraPreview removeFromSuperview];
 }
 
@@ -2139,9 +2153,11 @@ int sliderViewWidthDeltaChange;
 #if TARGET_OS_SIMULATOR
     NSLog(@"camera tap");
     viewCamera.hidden = YES;
-    [self.mSendComicButton setHidden:NO];//dinesh
-    [imgvComic setImage:[UIImage imageNamed:@"cat-demo"]];
-    imgvComic.hidden = NO;
+    [self.mSendComicButton setHidden:NO];
+
+    [self doneVideoBtnClicked];
+//    [imgvComic setImage:[UIImage imageNamed:@"cat-demo"]];
+//    imgvComic.hidden = NO;
     
     if (isWideSlide)
     {
@@ -3793,14 +3809,14 @@ int sliderViewWidthDeltaChange;
 }
 - (void)payPauseAnimation
 {
-    for(id ObjAnimationCell in [self.view subviews])
+    for(id ObjAnimationCell in [self.imgvComic subviews])
     {
         if([ObjAnimationCell isKindOfClass:[ComicItemAnimatedSticker class]]){
-            if ([((ComicItemAnimatedComponent*)ObjAnimationCell) isAnimating]) {
-                [((ComicItemAnimatedComponent*)ObjAnimationCell) stopAnimating];
+            if ([((ComicItemAnimatedSticker*)ObjAnimationCell) isAnimating]) {
+                [((ComicItemAnimatedSticker*)ObjAnimationCell) stopAnimating];
                 [self.btnPlayAnimation setImage:[UIImage imageNamed:@"Sticker_play"] forState:UIControlStateNormal];
             }else{
-                [((ComicItemAnimatedComponent*)ObjAnimationCell) startAnimating];
+                [((ComicItemAnimatedSticker*)ObjAnimationCell) startAnimating];
                 [self.btnPlayAnimation setImage:[UIImage imageNamed:@"Sticker_pause"] forState:UIControlStateNormal];
             }
         }
@@ -6080,14 +6096,14 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     dispatch_group_async(group, queue, ^{
         @try {
-            //            UIImageView * viewCopy = [imgvComic copy];
-            //            for (id subview in [viewCopy subviews]) {
-            //                if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
-            //                    [subview removeFromSuperview];
-            //                }
-            //            }
+            UIImageView * viewCopy = [imgvComic copy];
+            for (id subview in [viewCopy subviews]) {
+                if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
+                    [subview removeFromSuperview];
+                }
+            }
             
-            printScreen = [UIImage imageWithView:imgvComic paque:YES];
+            printScreen = [UIImage imageWithView:viewCopy paque:YES];
             handler(YES);
         } @catch (NSException *exception) {
             

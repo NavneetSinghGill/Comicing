@@ -51,8 +51,7 @@ typedef enum {
 
 #pragma mark - ComicItem Animated Sticker
 
-@interface ComicItemAnimatedSticker : UIImageView
-<ComicItem> {}
+@interface ComicItemAnimatedSticker : UIImageView<ComicItem> {}
 //@interface ComicItemAnimatedSticker : YYAnimatedImageView<ComicItem> {}
 
 //@property (strong, nonatomic) NSString* animatedStickerName;

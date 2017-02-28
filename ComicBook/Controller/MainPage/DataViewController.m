@@ -267,7 +267,7 @@
         [self.downloadedAudioDataArray addObject:[NSNull null]];
     }
     for(Enhancement *enhancement in slide.enhancements) {
-        if (![enhancement.enhancementType isEqualToString:@"GIF"])
+        if ([enhancement.enhancementType isEqualToString:@"AUD"])
         {
        
         [self.audioUrlArray addObject:[NSURL URLWithString:enhancement.enhancementFile]];
@@ -308,37 +308,60 @@
         };
         [self.scrollView addSubview:audioButton];
         }
+        else if ([enhancement.enhancementType isEqualToString:@"GIF"]) {
+            YLImageView *animationImage = [[YLImageView alloc] init];
+            //animationImage.tag = [arrOfEnhancements indexOfObject:enhancement];
+            //        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
+            CGFloat myWidth = self.view.frame.size.width;
+            CGFloat myHeight = self.view.frame.size.height;
+            float xfactor = myWidth/[AppDelegate application].dataManager.viewWidth;
+            float yfactor = myHeight/[AppDelegate application].dataManager.viewHeight;
+            
+            float originX = xfactor * [enhancement.xPos floatValue];
+            float originY = yfactor * [enhancement.yPos floatValue];
+            float sizeX = xfactor * [enhancement.width floatValue];
+            float sizeY = yfactor * [enhancement.height floatValue];
+            
+            
+            
+            NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
+            NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
+            [animationImage setFrame:CGRectMake(originX, originY, sizeX , sizeY )];
+            [animationImage sd_setImageWithURL:[NSURL URLWithString:enhancement.enhancementFile]];
+            NSDictionary *objOn = @{
+                                    @"Enhance":enhancement,
+                                    @"subView":animationImage
+                                    };
+            [self.objOfSubviews addObject:objOn];
+            animationImage.tag = 1001;
+            [self.scrollView addSubview:animationImage];
+        }
         else
         {
+            UIImageView *staticImage = [[UIImageView alloc] init];
+            CGFloat myWidth = self.view.frame.size.width;
+            CGFloat myHeight = self.view.frame.size.height;
+//            float xfactor = myWidth/[AppDelegate application].dataManager.viewWidth;
+//            float yfactor = myHeight/[AppDelegate application].dataManager.viewHeight;
+//            
+//            float originX = xfactor * [enhancement.xPos floatValue];
+//            float originY = yfactor * [enhancement.yPos floatValue];
+//            float sizeX = xfactor * [enhancement.width floatValue];
+//            float sizeY = yfactor * [enhancement.height floatValue];
             
-                
-                YLImageView *animationImage = [[YLImageView alloc] init];
-                //animationImage.tag = [arrOfEnhancements indexOfObject:enhancement];
-                //        [audioButton setFrame:CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], 32, 25)];
-                CGFloat myWidth = self.view.frame.size.width;
-                CGFloat myHeight = self.view.frame.size.height;
-                float xfactor = myWidth/[AppDelegate application].dataManager.viewWidth;
-                float yfactor = myHeight/[AppDelegate application].dataManager.viewHeight;
-                
-                float originX = xfactor * [enhancement.xPos floatValue];
-                float originY = yfactor * [enhancement.yPos floatValue];
-                float sizeX = xfactor * [enhancement.width floatValue];
-                float sizeY = yfactor * [enhancement.height floatValue];
-                
-                
-                
-                NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
-                NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
-                [animationImage setFrame:CGRectMake(originX, originY, sizeX , sizeY )];
-                [animationImage sd_setImageWithURL:[NSURL URLWithString:enhancement.enhancementFile]];
-                NSDictionary *objOn = @{
-                                        @"Enhance":enhancement,
-                                        @"subView":animationImage
-                                        };
-                [self.objOfSubviews addObject:objOn];
-                animationImage.tag = 1001;
-                [self.scrollView addSubview:animationImage];
             
+            
+//            NSLog(@"%@", NSStringFromCGRect(CGRectMake(originX, originY, sizeX, sizeY)));
+//            NSLog(@"%@", NSStringFromCGRect(CGRectMake([enhancement.xPos floatValue], [enhancement.yPos floatValue], [enhancement.width floatValue], [enhancement.height floatValue])));
+            [staticImage setFrame:CGRectMake(0, 0, myWidth , myHeight)];
+            [staticImage sd_setImageWithURL:[NSURL URLWithString:enhancement.enhancementFile]];
+            NSDictionary *objOn = @{
+                                    @"Enhance":enhancement,
+                                    @"subView":staticImage
+                                    };
+            [self.objOfSubviews addObject:objOn];
+            staticImage.tag = 1005;
+            [self.scrollView addSubview:staticImage];
         }
     }
 }

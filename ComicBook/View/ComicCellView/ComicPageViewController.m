@@ -30,7 +30,7 @@
 
 -(NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
-    return ceil(self.allSlideImages.count / 4);
+    return 1;
 }
 
 -(NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
@@ -64,18 +64,18 @@
         [viewControllers removeAllObjects];
     }
     
-    if ([slides count] >4)
-    {
-        NSArray* firstArray = [slides subarrayWithRange:NSMakeRange(0, 4)];
-        NSArray* secondArray = [slides subarrayWithRange:NSMakeRange(4, [slides count]-4)];
-        
-        [viewControllers addObject:[self addPreviewView:firstArray]];
-        [viewControllers addObject:[self addPreviewView:secondArray]];
-    }
-    else
-    {
+//    if ([slides count] >4)
+//    {
+//        NSArray* firstArray = [slides subarrayWithRange:NSMakeRange(0, 4)];
+//        NSArray* secondArray = [slides subarrayWithRange:NSMakeRange(4, [slides count]-4)];
+//        
+//        [viewControllers addObject:[self addPreviewView:firstArray]];
+//        [viewControllers addObject:[self addPreviewView:secondArray]];
+//    }
+//    else
+//    {
         [viewControllers addObject:[self addPreviewView:slides]];
-    }
+//    }
     
     [self setPageViewControllerFrame];
     [self centreWhiteView];
@@ -169,36 +169,36 @@
     self.view.backgroundColor = [UIColor redColor];
     
     
-    if(allSlideImages.count > 4)
-    {
-        if (frame.size.height > self.view.frame.size.height)
-        {
-            
-        }
-        else
-        {
-            if (isDelegateCalled)
-            {
-                isDelegateCalled = NO;
-                
-                
-                CGFloat y = (self.view.frame.size.height - view.view.frame.size.height) / 2;
-                
-                CGRect frame = view.view.frame;
-                
-                frame.origin.y = y;
-                view.viewWhiteBorder.frame = frame;
-                return;
-            }
-            else
-            {
-                if (allSlideImages.count > 4)
-                {
-                    isDelegateCalled = YES;
-                }
-            }
-        }
-    }
+//    if(allSlideImages.count > 4)
+//    {
+//        if (frame.size.height > self.view.frame.size.height)
+//        {
+//            
+//        }
+//        else
+//        {
+//            if (isDelegateCalled)
+//            {
+//                isDelegateCalled = NO;
+//                
+//                
+//                CGFloat y = (self.view.frame.size.height - view.view.frame.size.height) / 2;
+//                
+//                CGRect frame = view.view.frame;
+//                
+//                frame.origin.y = y;
+//                view.viewWhiteBorder.frame = frame;
+//                return;
+//            }
+//            else
+//            {
+//                if (allSlideImages.count > 4)
+//                {
+//                    isDelegateCalled = YES;
+//                }
+//            }
+//        }
+//    }
     
     isDelegateCalled = YES;
     

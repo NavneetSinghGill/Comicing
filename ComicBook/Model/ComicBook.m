@@ -10,6 +10,8 @@
 #import "TOC.h"
 #import "Slides.h"
 #import "CommentModel.h"
+#import "Enhancement.h"
+#import "ComicProperties.h"
 
 @implementation ComicBook
 
@@ -31,7 +33,9 @@
              @"userDetail": @"userDetail",
              @"comments": @"comments",
              @"friendShareCount": @"friend_share_count",
-             @"groupShareCount": @"group_share_count"
+             @"groupShareCount": @"group_share_count",
+             @"enhancements" : @"enhancements",
+             @"comicProperties": @"comic_properties"
              };
 }
 
@@ -49,6 +53,14 @@
 
 + (NSValueTransformer *)userDetailJSONTransformer {
     return [MTLJSONAdapter dictionaryTransformerWithModelClass:UserDetail.class];
+}
+
++ (NSValueTransformer *)enhancementsJSONTransformer {
+    return [MTLJSONAdapter dictionaryTransformerWithModelClass:Enhancement.class];
+}
+
++ (NSValueTransformer *)comicPropertiesJSONTransformer {
+    return [MTLJSONAdapter dictionaryTransformerWithModelClass:[ComicProperties class]];
 }
 
 @end

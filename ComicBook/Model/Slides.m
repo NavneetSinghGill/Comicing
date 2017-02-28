@@ -7,7 +7,6 @@
 //
 
 #import "Slides.h"
-#import "Enhancement.h"
 
 @implementation Slides
 
@@ -17,7 +16,8 @@
              @"comicSlideId": @"comic_slide_id",
              @"slideImage": @"slide_image",
              @"slideStatus": @"slide_status",
-             @"enhancements": @"enhancements"
+             @"enhancements": @"enhancements",
+             @"slideType": @"slide_type"
              };
 }
 

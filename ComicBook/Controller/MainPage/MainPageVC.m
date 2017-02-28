@@ -37,6 +37,9 @@
 #import "ComicCellViewController.h"
 #import "ComicPageViewController.h"
 
+#import "CategoryCollectionViewCell.h"
+#import "ComicProperties.h"
+
 #define FB 10
 #define IM 11
 #define TW 12
@@ -47,7 +50,7 @@ NSString * const BottomBarView = @"BottomBarView";
 
 #define kScreenWidth [[UIScreen mainScreen] bounds].size.width
 
-@interface MainPageVC () <pagechangeDelegate,CustomTextViewDelegate, UIActionSheetDelegate, STTwitterAPIOSProtocol, UIGestureRecognizerDelegate,BookChangeDelegate, UITextViewDelegate, InstructionViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface MainPageVC () <pagechangeDelegate,CustomTextViewDelegate, UIActionSheetDelegate, STTwitterAPIOSProtocol, UIGestureRecognizerDelegate,BookChangeDelegate, UITextViewDelegate, InstructionViewDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
     // used by comment
     UIView *commentContainerView;
     CustomTextView *textView;
@@ -100,6 +103,30 @@ NSString * const BottomBarView = @"BottomBarView";
 
 @property BOOL isAPICalling;
 
+//Category
+@property(strong, nonatomic) NSArray *categoriesNames;
+@property(strong, nonatomic) NSArray *categoriesImageNames;
+@property(weak, nonatomic) IBOutlet UICollectionView *categoryCollectionView;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *categoryCollectionViewHeightConstraint;
+@property(assign, nonatomic) NSInteger selectedCategotyIndex;
+@property(assign, nonatomic) NSInteger categoryCollectionViewHeightDefault;
+@property(strong, nonatomic) NSString *selectedCategory;
+
+//Detect Line
+@property(weak, nonatomic) IBOutlet UIView *detectLine1;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *detectLineTopConstraint;
+
+//Bottom buttons
+@property(weak, nonatomic) IBOutlet UIButton *profilePicButton;
+@property(weak, nonatomic) IBOutlet UIButton *likeButton;
+@property(weak, nonatomic) IBOutlet UIButton *facebookButton;
+@property(weak, nonatomic) IBOutlet UIButton *flagButton;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *gradientViewTopConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *bottomButtonsContainerViewTrailingConstraint;
+@property(weak, nonatomic) IBOutlet UIView *bottomButtonsContainerView;
+
+@property(strong, nonatomic) ComicBook *currentlyShowingComicBook;
+
 @end
 
 @implementation MainPageVC
@@ -121,6 +148,13 @@ NSString * const BottomBarView = @"BottomBarView";
     [self.tblvComics registerNib:cellNib forCellReuseIdentifier:@"comicCell"];
     
     
+    _categoriesNames = @[@"", @"food", @"failed", @"pets", @"funny", @"beauty", @"travel"];
+    _categoriesImageNames = @[@"CategoryMyFeed", @"CategoryFood", @"CategoryFailed", @"CategoryPets", @"CategoryFunny", @"CategoryBeauty", @"CategoryTravel"];
+    UINib *categoryNib = [UINib nibWithNibName:@"CategoryCollectionViewCell" bundle:nil];
+    [self.categoryCollectionView registerNib:categoryNib forCellWithReuseIdentifier:@"CategoryCollectionViewCell"];
+    
+    _categoryCollectionViewHeightDefault = self.view.frame.size.width / 7 + 10;
+    _categoryCollectionViewHeightConstraint.constant = _categoryCollectionViewHeightDefault;
     
     comicsArray = [[NSMutableArray alloc] init];
     
@@ -177,6 +211,7 @@ NSString * const BottomBarView = @"BottomBarView";
         [self handleScocialButtons];
     });
     
+//    _selectedCategory = @"others";
     [self callAPIToGetTheComics];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swipeLeft:) name:@"ChangeNextPage" object:nil];
     [[GoogleAnalytics sharedGoogleAnalytics] logScreenEvent:@"MainPage" Attributes:nil];
@@ -218,7 +253,18 @@ NSString * const BottomBarView = @"BottomBarView";
     
     [self addNotifications];
     [super viewWillAppear:animated];
+    
 }
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    [self.categoryCollectionView reloadData];
+    
+    _profilePicButton.layer.cornerRadius = _profilePicButton.frame.size.width / 2;
+    _gradientViewTopConstraint.constant = _facebookButton.frame.size.height / 2;
+}
+
 - (void)addNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pageChanged:) name:@"PageChange" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openInbox) name:@"OpenMenu" object:nil];
@@ -452,19 +498,19 @@ NSString * const BottomBarView = @"BottomBarView";
     NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
     [slidesArray addObjectsFromArray:comicBook.slides];
     
-    // To repeat the cover image again on index page as the first slide.
-    if(slidesArray.count > 1) {
-        [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
-        
-        // Adding a sample slide to array to maintain the logic
-        Slides *slides = [Slides new];
-        [slidesArray insertObject:slides atIndex:1];
-        
-        // vishnuvardhan logic for the second page
-        if(6<slidesArray.count) {
-            [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
-        }
-    }
+//    // To repeat the cover image again on index page as the first slide.
+//    if(slidesArray.count > 1) {
+//        [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+//        
+//        // Adding a sample slide to array to maintain the logic
+//        Slides *slides = [Slides new];
+//        [slidesArray insertObject:slides atIndex:1];
+//        
+//        // vishnuvardhan logic for the second page
+//        if(6<slidesArray.count) {
+//            [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+//        }
+//    }
     
     [AppDelegate application].dataManager.viewWidth = self.view.frame.size.width;
     [AppDelegate application].dataManager.viewHeight = self.view.frame.size.height;
@@ -873,7 +919,7 @@ NSString * const BottomBarView = @"BottomBarView";
     ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
     if (comicBook.slides && [comicBook.slides count] >0)
     {
-        NSUInteger imageCount = [comicBook.slides count] >= 4 ? 4 : [comicBook.slides count];
+        NSUInteger imageCount = [comicBook.slides count];// >= 4 ? 4 : [comicBook.slides count];
         NSMutableArray* imageArray = [[NSMutableArray alloc] init];
         for (int i=0; i < imageCount; i++) {
             
@@ -1089,7 +1135,7 @@ NSString * const BottomBarView = @"BottomBarView";
 #pragma mark - API for Flagging
 - (void)callAPIForFlaggingWithText:(NSString *)text withFlagID:(NSString *)flagID
 {
-    ComicBook *comicBook = [comicsArray objectAtIndex:comicBookIndex];
+    ComicBook *comicBook = _currentlyShowingComicBook;//[comicsArray objectAtIndex:comicBookIndex];
     
     NSDictionary *flagRequest = @{@"flag_type_id":flagID,
                                   @"user_id":comicBook.userDetail.userId,
@@ -1500,7 +1546,7 @@ NSString * const BottomBarView = @"BottomBarView";
     
     [mainLoader startAnimating];
     
-    [ComicsAPIManager getTheComicsWithPage:1 SuccessBlock:^(id object)
+    [ComicsAPIManager getTheComicsWithPage:1 andCategory:_selectedCategory SuccessBlock:^(id object)
     {
         [mainLoader stopAnimating];
 
@@ -1524,7 +1570,9 @@ NSString * const BottomBarView = @"BottomBarView";
         
         
         [_tblvComics reloadData];
-        
+        if (comicsModel.books.count != 0) {
+            [self updateButtonInfoWithComicBook:comicsModel.books[0] withIndexPath:[NSIndexPath indexPathWithIndex:0]];
+        }
         
     } andFail:^(NSError *errorMessage)
     {
@@ -1537,7 +1585,7 @@ NSString * const BottomBarView = @"BottomBarView";
 
 - (void)callAPIToGetTheComicsWithPage:(NSUInteger)page
 {
-    [ComicsAPIManager getTheComicsWithPage:page SuccessBlock:^(id object)
+    [ComicsAPIManager getTheComicsWithPage:page andCategory:_selectedCategory SuccessBlock:^(id object)
      {
          _containerView.hidden = NO;
          NSError *error;
@@ -1595,24 +1643,24 @@ NSString * const BottomBarView = @"BottomBarView";
 {
     ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
     
-    static NSString *simpleTableIdentifier = @"comicCell";
+    static NSString *simpleTableIdentifier = @"mainPageCell";
     
-    __block ComicCell* cell= (ComicCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    __block MainPageCell* cell= (MainPageCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     cell = nil;
     if (cell == nil)
     {
-        cell = (ComicCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        cell = (MainPageCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         
         if (nil!=[ComicBookDict objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
         {
             [ComicBookDict removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         }
         
-        [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
+//        [cell.profileImageView sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic]];
         
         [cell layoutIfNeeded];
-        
+
         if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
         {
             cell.lblComicTitle.hidden = YES;
@@ -1626,6 +1674,30 @@ NSString * const BottomBarView = @"BottomBarView";
             
             cell.heightConstraintComicTitle.constant = 60;
         }
+        ComicBookColorCode colorCode = (ComicBookColorCode)[((ComicProperties *)comicBook.comicProperties).fontColor integerValue];
+        cell.topImageView.image = [Global getImageForColorCode:colorCode andDirection:Top];
+        cell.leftImageView.image = [Global getImageForColorCode:colorCode andDirection:Left];
+        cell.bottomImageView.image = [Global getImageForColorCode:colorCode andDirection:Bottom];
+        cell.rightImageView.image = [Global getImageForColorCode:colorCode andDirection:Right];
+                
+        cell.fontName = ((ComicProperties *)comicBook.comicProperties).fontName;
+        
+        if (cell.fontName.length == 0) {
+            cell.fontName = @"Comic Sans MS";
+        }
+        
+        float fontSize;
+        if (IS_IPHONE_5) {
+            fontSize = cell.lblComicTitle.text.length <= 8? 43: 20;
+        } else if (IS_IPHONE_6) {
+            fontSize = cell.lblComicTitle.text.length <= 8? 44: 25;
+        } else if (IS_IPHONE_6P) {
+            fontSize = cell.lblComicTitle.text.length <= 8? 48: 28;
+        } else {
+            fontSize = cell.lblComicTitle.text.length <= 8? 50: 30;
+        }
+        UIFont *font = [UIFont fontWithName:cell.fontName size:fontSize];
+        [cell.lblComicTitle setFont:font];
    
         //dinesh
         cell.mUserName.text = comicBook.userDetail.firstName;
@@ -1644,24 +1716,29 @@ NSString * const BottomBarView = @"BottomBarView";
         
         ComicBookVC *comic = [self.storyboard instantiateViewControllerWithIdentifier:@"ComicBookVC"];
         
+        comic.parentController = self;
+        comic.bookWidth = cell.viewComicBook.frame.size.width;
         comic.delegate=self;
         comic.Tag=(int)indexPath.row;
         
-        CGFloat width = ComicWidthIPhone5;
+        NSLog(@"............................... %@ ............ \n%f",cell, comic.bookWidth);
         
-        if (IS_IPHONE_5)
-        {
-            width = ComicWidthIPhone5;
-        }
-        else if (IS_IPHONE_6)
-        {
-            width = ComicWidthIPhone6;
-            
-        }
-        else if (IS_IPHONE_6P)
-        {
-            width = ComicWidthIPhone6plus;
-        }
+//        CGFloat width = ComicWidthIPhone5;
+//        
+//        if (IS_IPHONE_5)
+//        {
+//            width = ComicWidthIPhone5;
+//        }
+//        else if (IS_IPHONE_6)
+//        {
+//            width = ComicWidthIPhone6;
+//            
+//        }
+//        else if (IS_IPHONE_6P)
+//        {
+//            width = ComicWidthIPhone6plus;
+//        }
+        CGFloat width = cell.viewComicBook.frame.size.width;
         
          comic.view.frame = CGRectMake(0, 0, width, CGRectGetHeight(cell.viewComicBook.frame));
         
@@ -1675,18 +1752,74 @@ NSString * const BottomBarView = @"BottomBarView";
         [slidesArray addObjectsFromArray:comicBook.slides];
         
         // To repeat the cover image again on index page as the first slide.
-        if(slidesArray.count > 1) {
-            [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
-            
-            // Adding a sample slide to array to maintain the logic
-            Slides *slides = [Slides new];
-            [slidesArray insertObject:slides atIndex:1];
-            
-            // vishnuvardhan logic for the second page
-            if(6<slidesArray.count) {
-                [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
-            }
-        }
+//        if(slidesArray.count > 1) {
+//            [slidesArray insertObject:[slidesArray firstObject] atIndex:1];
+//            
+//            // Adding a sample slide to array to maintain the logic
+//            Slides *slides = [Slides new];
+//            [slidesArray insertObject:slides atIndex:1];
+//            
+//            // vishnuvardhan logic for the second page
+//            if(6<slidesArray.count) {
+//                [slidesArray insertObject:[slidesArray firstObject] atIndex:0];
+//            }
+//        }
+        
+        //HARDCODED DATA FOR TESTING COMIC BOOK LAYERING====================================================
+        
+//        for (NSInteger slideCount = 0; slideCount < slidesArray.count; slideCount++) {
+//            Slides *slide = (Slides *)slidesArray[slideCount];
+//            
+//            if (slideCount%2 == 0) {
+//                slide.slideType = @"1";
+//                slide.slideImage = @"http://assets.barcroftmedia.com.s3-website-eu-west-1.amazonaws.com/assets/images/recent-images-11.jpg";
+//                
+//                Enhancement *enh = [Enhancement new];
+//                enh.enhancementType = @"GIF";
+//                enh.enhancementFile = @"https://media.giphy.com/media/3o6Yg9tdaoA4klW0Fi/source.gif";
+//                enh.xPos = @"0";
+//                enh.yPos = @"0";
+//                enh.zIndex = 1;
+//                enh.height = @"150";
+//                enh.width = @"170";
+//                
+//                Enhancement *enh1 = [Enhancement new];
+//                enh1.enhancementType = @"IMAGE";
+//                enh1.enhancementFile = @"http://www.scri8e.com/stars/PNG_Clouds/zc06.png?filename=./zc06.png&w0=800&h0=289&imgType=3&h1=50&w1=140";
+//                enh1.xPos = @"35";
+//                enh1.yPos = @"30";
+//                enh1.zIndex = 3;
+//                enh1.height = @"80";
+//                enh1.width = @"80";
+//                
+//                Enhancement *enh2 = [Enhancement new];
+//                enh2.enhancementType = @"GIF";
+//                enh2.enhancementFile = @"https://giant.gfycat.com/ClutteredSevereCur.gif";
+//                enh2.xPos = @"220";
+//                enh2.yPos = @"140";
+//                enh2.zIndex = 2;
+//                enh2.height = @"250";
+//                enh2.width = @"270";
+//                
+//                slide.enhancements = [NSArray arrayWithObjects:enh, enh1, enh2, nil];
+//            } else {
+//                slide.slideType = @"0";
+//                slide.slideImage = @"https://giant.gfycat.com/ClutteredSevereCur.gif";
+//                
+//                Enhancement *enh = [Enhancement new];
+//                enh.enhancementType = @"STATICIMAGE";
+//                enh.enhancementFile = @"http://staging.comicing.cc/images/comics/slides/579a66714877a";
+//                enh.xPos = @"0";
+//                enh.yPos = @"0";
+//                enh.zIndex = 2;
+//                enh.height = @"50";
+//                enh.width = @"50";
+//                
+//                slide.enhancements = [NSArray arrayWithObjects:enh, nil];
+//            }
+//            
+//        }
+        
         [comic setSlidesArray:slidesArray];
         [comic setAllSlideImages:slidesArray];
         [comic setupBook];
@@ -1704,7 +1837,7 @@ NSString * const BottomBarView = @"BottomBarView";
         comic.view.frame = frame;
 
        // comic.pageViewController.view.frame = CGRectMake(0, 0, 0, 0);
-        
+//        comic.view.clipsToBounds = YES;
         [cell.viewComicBook addSubview:comic.view];
         
         //buttons events
@@ -1722,57 +1855,87 @@ NSString * const BottomBarView = @"BottomBarView";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
-//    
-//    NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
-//    [slidesArray addObjectsFromArray:comicBook.slides];
-//    
-//    ComicPageViewController *viewPreviewScrollSlide = [[ComicPageViewController alloc] init];
-//    viewPreviewScrollSlide.view.frame = CGRectMake(0, 0, 0, 0);
-//    
-//    viewPreviewScrollSlide.allSlideImages = slidesArray;
-//    [viewPreviewScrollSlide setupBook];
-//    
-//    viewPreviewScrollSlide.view.backgroundColor = [UIColor blueColor];
-// 
-//    if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
-//    {
-//        return viewPreviewScrollSlide.view.bounds.size.height + 20;
+    ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+    
+    NSMutableArray *slidesArray = [[NSMutableArray alloc] init];
+    
+//    for (NSInteger slideCount = 0; slideCount <= comicBook.slides.count; slideCount++) {
+//        Slides *slide = (Slides *)comicBook.slides[slideCount];
+//        if (slideCount%2 == 0) {
+//            slide.slideType = @"0";
+//            Enhancement *enh = [Enhancement new];
+//            enh.enhancementType = @"GIF";
+//            enh.enhancementFile = @"https://giant.gfycat.com/ClutteredSevereCur.gif";
+//            enh.xPos = @"0";
+//            enh.yPos = @"0";
+//            enh.zIndex = 1;
+//            enh.height = @"50";
+//            enh.width = @"50";
+//            
+//            slide.enhancements = [NSArray arrayWithObjects:enh, nil];
+//        } else {
+//            slide.slideType = @"1";
+//            Enhancement *enh = [Enhancement new];
+//            enh.enhancementType = @"STATICIMAGE";
+//            enh.enhancementFile = @"http://staging.comicing.cc/images/comics/slides/579a66714877a";
+//            enh.xPos = @"0";
+//            enh.yPos = @"0";
+//            enh.zIndex = 1;
+//            enh.height = @"50";
+//            enh.width = @"50";
+//            
+//            slide.enhancements = [NSArray arrayWithObjects:enh, nil];
+//        }
+//        
 //    }
-//    else
-//    {
-//        return viewPreviewScrollSlide.view.bounds.size.height + 60 + 20;
-//    }
-//    
+    
+    [slidesArray addObjectsFromArray:comicBook.slides];
+    ComicPageViewController *viewPreviewScrollSlide = [[ComicPageViewController alloc] init];
+    viewPreviewScrollSlide.view.frame = CGRectMake(0, 0, 0, 0);
+    
+    viewPreviewScrollSlide.allSlideImages = slidesArray;
+    [viewPreviewScrollSlide setupBook];
+    
+    viewPreviewScrollSlide.view.backgroundColor = [UIColor blueColor];
+
+    if ([comicBook.comicTitle isEqualToString:@""] || comicBook.comicTitle == nil)
+    {
+        return viewPreviewScrollSlide.view.bounds.size.height + 20 + 45;
+    }
+    else
+    {
+        return viewPreviewScrollSlide.view.bounds.size.height + 60 + 20 + 45;
+    }
+    
     
     
     
     
     // ****************************
     
-    if (allCellFrameHeight.count == 0 || allCellFrameHeight == nil)
-    {
-        return [self getHeightForCell:indexPath];
-    }
-    else if (allCellFrameHeight.count > 0)
-    {
-       // id height =  allCellFrameHeight[indexPath.row];
-        
-        if (allCellFrameHeight.count > indexPath.row + 1)
-        {
-            id height =  allCellFrameHeight[indexPath.row];
-            
-            return [height floatValue];
-        }
-        else
-        {
-            return [self getHeightForCell:indexPath];
-        }
-    }
-    else
-    {
-        return [self getHeightForCell:indexPath];
-    }
+//    if (allCellFrameHeight.count == 0 || allCellFrameHeight == nil)
+//    {
+//        return [self getHeightForCell:indexPath];
+//    }
+//    else if (allCellFrameHeight.count > 0)
+//    {
+//       // id height =  allCellFrameHeight[indexPath.row];
+//        
+//        if (allCellFrameHeight.count > indexPath.row + 1)
+//        {
+//            id height =  allCellFrameHeight[indexPath.row];
+//            
+//            return [height floatValue];
+//        }
+//        else
+//        {
+//            return [self getHeightForCell:indexPath];
+//        }
+//    }
+//    else
+//    {
+//        return [self getHeightForCell:indexPath];
+//    }
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1823,6 +1986,40 @@ NSString * const BottomBarView = @"BottomBarView";
 //    }
 //}
 
+#pragma mark - UICollectionView methods
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return _categoriesNames.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CategoryCollectionViewCell *categoryCollectionViewCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CategoryCollectionViewCell" forIndexPath:indexPath];
+    
+    categoryCollectionViewCell.categoryName.text = _categoriesNames[indexPath.item];
+    categoryCollectionViewCell.imageNamePrefix = _categoriesImageNames[indexPath.item];
+    
+    [categoryCollectionViewCell shouldSelectCell:_selectedCategotyIndex == indexPath.item];
+    if (indexPath.item == 0) {
+        categoryCollectionViewCell.categoryNameLabelHeightConstraint.constant = 0;
+    } else {
+        categoryCollectionViewCell.categoryNameLabelHeightConstraint.constant = categoryCollectionViewCell.contentView.frame.size.height *0.25;
+    }
+    
+    return categoryCollectionViewCell;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    _selectedCategotyIndex = indexPath.item;
+    [collectionView reloadData];
+    
+    _selectedCategory = _categoriesNames[indexPath.item];
+    [self callAPIToGetTheComics];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGFloat widthHeight = collectionView.frame.size.width / 7;
+    return CGSizeMake(widthHeight, widthHeight);
+}
 
 #pragma mark - HELPER Methods
 
@@ -1907,11 +2104,11 @@ NSString * const BottomBarView = @"BottomBarView";
 #pragma mark - share button events
 - (void)btnFacebookTap:(UIButton *)sender
 {
-    ComicBook *comicBook = [comicsArray objectAtIndex:sender.tag];
+    ComicBook *comicBook = _currentlyShowingComicBook;//[comicsArray objectAtIndex:sender.tag];
     
     if (comicBook.slides && [comicBook.slides count] >0)
     {
-        NSUInteger imageCount = [comicBook.slides count] >= 4 ? 4 : [comicBook.slides count];
+        NSUInteger imageCount = [comicBook.slides count];// >= 4 ? 4 : [comicBook.slides count];
         NSMutableArray* imageArray = [[NSMutableArray alloc] init];
         for (int i=0; i < imageCount; i++) {
             
@@ -1936,7 +2133,7 @@ NSString * const BottomBarView = @"BottomBarView";
     
     if (comicBook.slides && [comicBook.slides count] >0)
     {
-        NSUInteger imageCount = [comicBook.slides count] >= 4 ? 4 : [comicBook.slides count];
+        NSUInteger imageCount = [comicBook.slides count];// >= 4 ? 4 : [comicBook.slides count];
         NSMutableArray* imageArray = [[NSMutableArray alloc] init];
         for (int i=0; i < imageCount; i++)
         {
@@ -1961,6 +2158,98 @@ NSString * const BottomBarView = @"BottomBarView";
     ComicBook *comicBook = [comicsArray objectAtIndex:currentComicIndex];
     
     textView.placeholder = [NSString stringWithFormat:@"Say something to %@", comicBook.userDetail.firstName];
+}
+
+#pragma  mark - Scroll view delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == _tblvComics) {
+        
+        if ([_tblvComics numberOfRowsInSection:0] <= 1) {
+            return;
+        }
+        if (_categoryCollectionViewHeightConstraint.constant != 0) {
+            [self changeCategoryCollectionViewHeightTo:0];
+        }
+        //0.5 was added just to make the condition satisfy... It can be removed once the issue is found
+        if (_bottomButtonsContainerViewTrailingConstraint.constant != - (_bottomButtonsContainerView.frame.size.width - 0.5)) {
+            [self changeButtomButtonViewTrailingTo:-_bottomButtonsContainerView.frame.size.width];
+        }
+        
+        CGRect newDetectLine1Frame;
+        CGFloat variableHeight;
+        
+        CGFloat percentOfAreaDetectLineShouldCoverOutOf1 = 0.65;
+        CGFloat startingPercentOfDetectLineOutOf1 = 0.15;
+        
+        variableHeight = (_tblvComics.frame.size.height * percentOfAreaDetectLineShouldCoverOutOf1) * (_tblvComics.contentOffset.y / (_tblvComics.contentSize.height - _tblvComics.frame.size.height));
+        newDetectLine1Frame.origin.y = _tblvComics.frame.size.height * startingPercentOfDetectLineOutOf1 + _tblvComics.contentOffset.y + variableHeight;
+ 
+        NSIndexPath *indexPath = [_tblvComics indexPathForRowAtPoint:newDetectLine1Frame.origin];
+        
+        ComicBook *comicBook = [comicsArray objectAtIndex:indexPath.row];
+        [self updateButtonInfoWithComicBook:comicBook withIndexPath:indexPath];
+        
+        //For testing purpose
+        _detectLineTopConstraint.constant = _tblvComics.frame.size.height * startingPercentOfDetectLineOutOf1 + variableHeight;
+        _detectLine1.hidden = YES;
+        
+        if (bottomBarView.menuState == Open) {
+            [bottomBarView closeMenu];
+        }
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == _tblvComics) {
+        [self changeCategoryCollectionViewHeightTo:_categoryCollectionViewHeightDefault];
+        [self changeButtomButtonViewTrailingTo:-5];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (scrollView == _tblvComics && !decelerate) {
+        [self changeCategoryCollectionViewHeightTo:_categoryCollectionViewHeightDefault];
+        [self changeButtomButtonViewTrailingTo:-5];
+    }
+}
+
+- (void)changeCategoryCollectionViewHeightTo:(NSInteger)height {
+    _categoryCollectionViewHeightConstraint.constant = height;
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)changeButtomButtonViewTrailingTo:(NSInteger)trailing {
+    _bottomButtonsContainerViewTrailingConstraint.constant = trailing;
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+#pragma mark - Bottom buttons method
+
+- (IBAction)facebookButtonTapped:(id)sender {
+    [self btnFacebookTap:sender];
+}
+
+- (IBAction)likeButtonTapped:(id)sender {
+    
+}
+
+- (IBAction)flagButtonTapped:(id)sender {
+    [self openFlahSheet];
+}
+
+- (void)updateButtonInfoWithComicBook:(ComicBook *)comicBook withIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath == nil) {
+        return;
+    }
+    _currentlyShowingComicBook = comicBook;
+    [_profilePicButton sd_setImageWithURL:[NSURL URLWithString:comicBook.userDetail.profilePic] forState:UIControlStateNormal];
 }
 
 #pragma mark - BookChangeDelegate Methods
