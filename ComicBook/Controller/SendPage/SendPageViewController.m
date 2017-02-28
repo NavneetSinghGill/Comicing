@@ -435,7 +435,7 @@ SendPageViewController ()<UITextFieldDelegate>
     //    [imageArray addObject:@"03.png"];
     //    [imageArray addObject:@"04.png"];
     
-    [self.comicImageList refeshList:imageArray];
+//    [self.comicImageList refeshList:imageArray];
     comicSlides = nil;
     //    imageArray = nil;
 }
@@ -526,23 +526,22 @@ SendPageViewController ()<UITextFieldDelegate>
                 // _viewSearch
                 
                 isInvitefriendListOpen = YES;
-                [UIView animateWithDuration:0.6 animations:^
-                 {
+                [UIView animateWithDuration:0.6 animations:^{
                      CGRect frame = _friendsListView.frame;
                      
-                     frame = _viewSearch.frame;
-                     frame.origin.y = _comicImageList.frame.size.height;
-                     _viewSearch.frame = frame;
-                     
+//                     frame = _viewSearch.frame;
+//                     frame.origin.y = _comicImageList.frame.size.height;
+//                     _viewSearch.frame = frame;
+                    
                      frame = _viewShare.frame;
                      frame.origin.y = frame.origin.y - _viewShare.frame.size.height;
                      _viewShare.frame = frame;
                      
-                     frame = viewPrivate.frame;
-                     frame.origin.y = _comicImageList.frame.size.height + _viewSearch.frame.size.height;
-                     frame.size.height = heightOfViewPrivate;
-                     viewPrivate.frame = frame;
-                     
+//                     frame = viewPrivate.frame;
+//                     frame.origin.y = _comicImageList.frame.size.height + _viewSearch.frame.size.height;
+//                     frame.size.height = heightOfViewPrivate;
+//                     viewPrivate.frame = frame;
+                    
                      frame = _lblFriends.frame;
                      frame.origin.y = positionYoflblFriends;
                      _lblFriends.frame = frame;
@@ -689,18 +688,18 @@ SendPageViewController ()<UITextFieldDelegate>
      {
          CGRect frame = _friendsListView.frame;
          
-         frame = _viewSearch.frame;
-         frame.origin.y = _comicImageList.frame.size.height + 5;
-         _viewSearch.frame = frame;
+//         frame = _viewSearch.frame;
+//         frame.origin.y = _comicImageList.frame.size.height + 5;
+//         _viewSearch.frame = frame;
          
          frame = _viewShare.frame;
          frame.origin.y = frame.origin.y - _viewShare.frame.size.height;
          _viewShare.frame = frame;
          
-         frame = viewPrivate.frame;
-         frame.origin.y = _comicImageList.frame.size.height + _viewSearch.frame.size.height;
-         frame.size.height = heightOfViewPrivate;
-         viewPrivate.frame = frame;
+//         frame = viewPrivate.frame;
+//         frame.origin.y = _comicImageList.frame.size.height + _viewSearch.frame.size.height;
+//         frame.size.height = heightOfViewPrivate;
+//         viewPrivate.frame = frame;
          
          frame = _lblFriends.frame;
          frame.origin.y = positionYoflblFriends;

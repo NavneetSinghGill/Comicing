@@ -16,4 +16,10 @@
 
 - (UIImage *)sd_animatedImageByScalingAndCroppingToSize:(CGSize)size;
 
++ (BOOL)isAnimating;
+
++ (void)stopAnimating;
+
++ (void)startAnimating;
+    
 @end

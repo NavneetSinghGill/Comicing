@@ -154,5 +154,15 @@
 
     return [UIImage animatedImageWithImages:scaledImages duration:self.duration];
 }
++ (BOOL)isAnimating {
+    return [self isAnimating];
+}
 
++ (void)stopAnimating {
+    [self stopAnimating];
+}
+
++ (void)startAnimating{
+    [self startAnimating];
+}
 @end

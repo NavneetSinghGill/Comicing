@@ -25,7 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet HeaderView *headerView;
 @property (weak, nonatomic) IBOutlet FriendsListView *friendsListView;
-@property (weak, nonatomic) IBOutlet ComicImageListView *comicImageList;
+//@property (weak, nonatomic) IBOutlet ComicImageListView *comicImageList;
 @property (weak, nonatomic) IBOutlet UILabel *lblGroup;
 @property (weak, nonatomic) IBOutlet GroupsSection *groupsView;
 @property (weak, nonatomic) IBOutlet UILabel *lblFriends;
