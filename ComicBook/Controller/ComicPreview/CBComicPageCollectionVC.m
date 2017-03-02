@@ -97,7 +97,8 @@
         CBComicItemModel* deletedItem= [self.dataArray objectAtIndex:indexPath.row];
         [self.dataArray removeObjectAtIndex:indexPath.row];
         [self refreshImageOrientation];
-        [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+//        [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+        [self.collectionView reloadData];
         if(self.delegate && [self.delegate conformsToProtocol:@protocol(CBComicPageCollectionDelegate)]){
             if([self.delegate respondsToSelector:@selector(didDeleteComicItem:inComicPage:)]){
                 [self.delegate didDeleteComicItem:deletedItem inComicPage:self];
@@ -141,7 +142,8 @@
     [self.dataArray addObject:comicItem];
 //    [[[self.sectionArray objectAtIndex:0] dataArray] addObject:comicItem];
     [self refreshImageOrientation];
-    [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataArray indexOfObject:comicItem] inSection:0]]];
+//    [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataArray indexOfObject:comicItem] inSection:0]]];
+    [self.collectionView reloadData];
 //    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.dataArray indexOfObject:comicItem] inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
 }
 
@@ -151,6 +153,7 @@
     UICollectionViewCell* cell= [super ta_collectionView:collectionView cellForItemAtIndexPath:indexPath];
     if([section isKindOfClass:[CBComicImageSection class]]){
         // Do something
+        [(CBComicImageSection *)section createUIForCell:(CBComicImageCell *)cell];
     }
     return cell;
 }
@@ -159,11 +162,11 @@
 - (UIView*)viewForZoomTransition:(BOOL)isSource{
     if(self.selectedIndexPath){
         CBComicImageCell * cell = (CBComicImageCell*)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPath];
-        if (cell.comicSlideLayerType == Gif) {
-            return cell.staticImageView;
-        } else {
-            return cell.animatedImageView;
-        }
+//        if (cell.comicSlideLayerType == Gif) {
+//            return cell.staticImageView;
+//        } else {
+//            return cell.animatedImageView;
+//        }
     }
     return nil;
 }

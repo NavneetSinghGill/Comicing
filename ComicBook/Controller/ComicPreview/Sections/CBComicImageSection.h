@@ -8,6 +8,13 @@
 
 #import "CBBaseCollectionViewSection.h"
 
+@class CBComicItemModel;
+@class CBComicImageCell;
+
 @interface CBComicImageSection : CBBaseCollectionViewSection
+
+@property (strong, nonatomic) CBComicItemModel *comicItemModel;
+
+- (void)createUIForCell:(CBComicImageCell *)cell;
 
 @end

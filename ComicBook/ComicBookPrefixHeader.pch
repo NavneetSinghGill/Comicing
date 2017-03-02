@@ -15,5 +15,6 @@
 #import "AppConstants.h"
 #import "YYImage.h"
 #import "UIButton+WebCache.h"
+#import "AppHelper.h"
 
 #endif /* ComicBookPrefixHeader_pch */

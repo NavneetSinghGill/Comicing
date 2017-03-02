@@ -124,7 +124,7 @@
 typedef enum {
     Gif = 101,
     StaticImage = 102
-} ComicSlideLayerType;
+} ComicSlideBaseLayer;
 
 
 typedef enum {

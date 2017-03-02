@@ -10,9 +10,11 @@
 #import "ComicItem.h"
 
 @interface CBComicImageCell : CBBaseCollectionViewCell
-@property (weak, nonatomic) IBOutlet ComicItemAnimatedSticker *animatedImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *staticImageView;
 
-@property(assign, nonatomic) ComicSlideLayerType comicSlideLayerType;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *baseLayerImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *staticImageView;
+@property (weak, nonatomic) IBOutlet UIView *topLayerView;
 
 @end
