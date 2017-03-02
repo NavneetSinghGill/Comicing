@@ -520,7 +520,9 @@ int sliderViewWidthDeltaChange;
 }
 
 -(void)handleMiddleLayer{
+    
     [self.imgvComic setHidden:NO];
+    [imgvComic setImage:[UIImage imageNamed:@"middleLayer_Transparent"]];
     
     RowButtonsViewController *rowButtonsController;
     for (UIViewController *controller in self.childViewControllers)
@@ -6096,14 +6098,14 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     
     dispatch_group_async(group, queue, ^{
         @try {
-            UIImageView * viewCopy = [imgvComic copy];
-            for (id subview in [viewCopy subviews]) {
-                if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
-                    [subview removeFromSuperview];
-                }
-            }
+//            UIImageView * viewCopy = [imgvComic copy];
+//            for (id subview in [viewCopy subviews]) {
+//                if ([subview isKindOfClass:[ComicItemAnimatedSticker class]]) {
+//                    [subview removeFromSuperview];
+//                }
+//            }
             
-            printScreen = [UIImage imageWithView:viewCopy paque:YES];
+            printScreen = [UIImage imageWithView:imgvComic paque:NO];
             handler(YES);
         } @catch (NSException *exception) {
             
