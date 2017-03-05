@@ -5,6 +5,7 @@
 //
 
 #import "NSGIF.h"
+#import "AppHelper.h"
 
 @implementation NSGIF
 
@@ -81,7 +82,7 @@ typedef NS_ENUM(NSInteger, GIFSize) {
 
 }
 
-+ (void)createGIFfromURL:(NSURL*)videoURL withFrameCount:(int)frameCount delayTime:(float)delayTime loopCount:(int)loopCount completion:(void(^)(NSURL *GifURL))completionBlock {
++ (void)createGIFfromURL:(NSURL*)videoURL withFrameCount:(int)frameCount delayTime:(float)delayTime loopCount:(int)loopCount completion:(void(^)(NSURL *GifURL,NSString* GifFileName))completionBlock {
     
     // Convert the video at the given URL to a GIF, and return the GIF's URL if it was created.
     // The frames are spaced evenly over the video, and each has the same duration.
@@ -113,16 +114,20 @@ typedef NS_ENUM(NSInteger, GIFSize) {
     dispatch_group_enter(gifQueue);
     
     __block NSURL *gifURL;
+    __block NSString *gifFileName;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        gifURL = [self createGIFforTimePoints:timePoints fromURL:videoURL fileProperties:fileProperties frameProperties:frameProperties frameCount:frameCount gifSize:GIFSizeMedium];
+        NSString *timeEncodedFileName = [NSString stringWithFormat:@"%@-%lu.gif", fileName, (unsigned long)([[NSDate date] timeIntervalSince1970]*10.0)];
+        gifFileName = timeEncodedFileName;
+        
+        gifURL = [self createGIFforTimePoints:timePoints fromURL:videoURL fileProperties:fileProperties frameProperties:frameProperties frameCount:frameCount gifSize:GIFSizeMedium GifFileName:gifFileName];
 
         dispatch_group_leave(gifQueue);
     });
     
     dispatch_group_notify(gifQueue, dispatch_get_main_queue(), ^{
         // Return GIF URL
-        completionBlock(gifURL);
+        completionBlock(gifURL,gifFileName);
     });
     
 }
@@ -130,9 +135,13 @@ typedef NS_ENUM(NSInteger, GIFSize) {
 #pragma mark - Base methods
 
 + (NSURL *)createGIFforTimePoints:(NSArray *)timePoints fromURL:(NSURL *)url fileProperties:(NSDictionary *)fileProperties frameProperties:(NSDictionary *)frameProperties frameCount:(int)frameCount gifSize:(GIFSize)gifSize{
-	
-	NSString *timeEncodedFileName = [NSString stringWithFormat:@"%@-%lu.gif", fileName, (unsigned long)([[NSDate date] timeIntervalSince1970]*10.0)];
-    NSString *temporaryFile = [NSTemporaryDirectory() stringByAppendingString:timeEncodedFileName];
+    
+    NSString *timeEncodedFileName = [NSString stringWithFormat:@"%@-%lu.gif", fileName, (unsigned long)([[NSDate date] timeIntervalSince1970]*10.0)];
+    return [self createGIFforTimePoints:timePoints fromURL:url fileProperties:fileProperties frameProperties:frameProperties frameCount:frameCount gifSize:gifSize GifFileName:timeEncodedFileName];
+}
++ (NSURL *)createGIFforTimePoints:(NSArray *)timePoints fromURL:(NSURL *)url fileProperties:(NSDictionary *)fileProperties frameProperties:(NSDictionary *)frameProperties frameCount:(int)frameCount gifSize:(GIFSize)gifSize GifFileName:(NSString*)gifFileName{
+
+    NSString *temporaryFile = [[AppHelper getGifLayerFilePath] stringByAppendingString:gifFileName];
     NSURL *fileURL = [NSURL fileURLWithPath:temporaryFile];
     if (fileURL == nil)
         return nil;

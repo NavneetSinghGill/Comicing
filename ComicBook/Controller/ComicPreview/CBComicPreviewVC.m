@@ -72,17 +72,22 @@
     //End
     
     [self setupSections];
-//    [self.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)prepareView 
 {
     self.comicSlides = [self getDataFromFile];
-//    [self.dataArray removeAllObjects];
-    
-    
-//    self.previewVC.dataArray = [NSMutableArray array];
-//    [self.tableView reloadData];
+    for (NSData *data in self.comicSlides)
+    {
+        ComicPage *comicPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] comicPage:comicPage];
+        [self.dataArray addObject:model];
+//        [self.previewVC addComicItem:model completion:^(BOOL finished) {
+//            if(finished){
+//            }
+//        }];
+    }
 }
 
 - (void)addComicPage:(ComicPage *)comicPage {
@@ -101,7 +106,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self prepareView];
+//    [self prepareView];
 }
 
 #pragma mark - ZoomTransitionProtocol
@@ -149,16 +154,13 @@
             [cell.contentView constrainSubviewToAllEdges:self.previewVC.view withMargin:0.0f];
             
             [((CBComicPageCollectionVC *)[self.previewVC.viewControllers lastObject]).rainbowColorCircleButton addTarget:self action:@selector(rainbowCircleTapped:) forControlEvents:UIControlEventTouchUpInside];
-            
-//            [cell.contentView constrainSubviewToLeftEdge:self.previewVC.view withMargin:8.0f];
-//            [cell.contentView constrainSubviewToRightEdge:self.previewVC.view withMargin:20.0f];
-//            [cell.contentView constrainSubviewToTopEdge:self.previewVC.view withMargin:8.0f];
-//            [cell.contentView constrainSubviewToBottomEdge:self.previewVC.view withMargin:20.0f];
         }
     }
     return cell;
 }
-
+- (void)ta_tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
 - (CGFloat)ta_tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height= [super ta_tableView:tableView heightForRowAtIndexPath:indexPath];
     UITableViewCell* cell= [super ta_tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -431,6 +433,8 @@
 
 - (void)pushAddSlideTap:(BOOL)isWideSlide
 {
+    CBComicPageCollectionVC *comicPage = ((CBComicPageCollectionVC *)[[self.previewVC viewControllers] lastObject]);
+    _transitionView = [comicPage getZoomTransitionView];
     
     ComicMakingViewController *cmv = [self.storyboard instantiateViewControllerWithIdentifier:@"ComicMakingViewController"];
     
@@ -561,6 +565,7 @@
 - (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll
                                    withImageView:(UIImageView *)imageView
                                  withPrintScreen:(UIImage *)printScreen
+                                 gifLayerPath:(NSString *)gifLayerPath
                                     withNewSlide:(BOOL)newslide withPopView:(BOOL)isPopView withIsWideSlide:(BOOL)isWideSlide
 {
     if (isPopView)
@@ -584,7 +589,7 @@
                     
                     self.comicPageComicItems.containerImagePath =  [AppHelper SaveImageFile:UIImagePNGRepresentation(imageView.image) type:@"png"];
                     self.comicPageComicItems.printScreenPath = [AppHelper SaveImageFile:UIImagePNGRepresentation(printScreen) type:@"png"];
-                    
+                    self.comicPageComicItems.gifLayerPath = gifLayerPath;
                     //Add time line
                     NSDate *now = [NSDate date];
                     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

@@ -69,6 +69,7 @@
 +(NSString*)getCountryImageByisoCode:(NSString*)isoCode;
 +(void)setFirstTimeSignUp:(NSString*)stringValue;
 +(NSString*)getFirstTimeSignUp;
++(NSString*)getGifLayerFilePath;
 #pragma mark Swipeevents
 //+(void)addSwipeDownGesture:(UIViewController*)vc;
 //-(void)AddToMainView: (UIViewController*) parentViewContent;

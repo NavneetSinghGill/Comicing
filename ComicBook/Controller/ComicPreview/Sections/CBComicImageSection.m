@@ -38,10 +38,10 @@
     
     _comicItemModel = [self.dataArray objectAtIndex:indexPath.row];
     
-    ComicItemAnimatedSticker *st = [ComicItemAnimatedSticker new];
-    st.objFrame = CGRectMake(50, 80, 100, 100);
-    [st addItemWithImage:[YYImage imageNamed:@"WTF"]];
-    _comicItemModel.comicPage.subviews = [NSMutableArray arrayWithObject:st];
+//    ComicItemAnimatedSticker *st = [ComicItemAnimatedSticker new];
+//    st.objFrame = CGRectMake(50, 80, 100, 100);
+//    [st addItemWithImage:[YYImage imageNamed:@"WTF"]];
+//    _comicItemModel.comicPage.subviews = [NSMutableArray arrayWithObject:st];
 //    cell.staticImageView.image = _comicItemModel.baseLayerImage;
 //    cell.animatedImageView.image = _comicItemModel.baseLayerGif;
     
@@ -55,8 +55,8 @@
     if (_comicItemModel.isBaseLayerGif)
     {
         // NEED to handle 3 layer
-        cell.baseLayerImageView.image = [AppHelper getGifFile:_comicItemModel.comicPage.printScreenPath];
-        
+        cell.baseLayerImageView.image = [AppHelper getGifFile:_comicItemModel.comicPage.gifLayerPath];
+        cell.staticImageView.image = [AppHelper getImageFile:_comicItemModel.comicPage.printScreenPath];
         //-> Loop subviews and get animation sticker and static image.
         //animation sticker you can check like …
         for (id subview in _comicItemModel.comicPage.subviews) {
@@ -71,7 +71,6 @@
                 }
                 [cell.topLayerView addSubview:sticker];
             }
-            
         }
         
         //Handle static Image… here we have to create an abstract class in ComicItem called class name as ComicItemStaticImage

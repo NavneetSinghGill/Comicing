@@ -17,7 +17,7 @@
 @interface CBComicPageCollectionVC () <UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *verticalShadowImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *horizontalShadowImageView;
-@property (nonatomic, strong) ZoomInteractiveTransition * transition;
+//@property (nonatomic, strong) ZoomInteractiveTransition * transition;
 @property (nonatomic, strong) NSIndexPath * selectedIndexPath;
 @property (nonatomic, strong) UILongPressGestureRecognizer* longPressRecognizer;
 @end
@@ -148,6 +148,7 @@
 }
 
 #pragma mark- UICollectionViewDataSource helper methods
+
 - (UICollectionViewCell*)ta_collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     CBBaseCollectionViewSection* section= [self.sectionArray objectAtIndex:indexPath.section];
     UICollectionViewCell* cell= [super ta_collectionView:collectionView cellForItemAtIndexPath:indexPath];
@@ -159,9 +160,10 @@
 }
 
 #pragma mark- ZoomTransitionProtocol method
-- (UIView*)viewForZoomTransition:(BOOL)isSource{
+- (UIView*)getZoomTransitionView{
     if(self.selectedIndexPath){
         CBComicImageCell * cell = (CBComicImageCell*)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPath];
+        return cell;
 //        if (cell.comicSlideLayerType == Gif) {
 //            return cell.staticImageView;
 //        } else {

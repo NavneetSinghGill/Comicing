@@ -14,11 +14,9 @@ extern NSString* const slideTypeTall;
 
 @interface ComicPage : NSObject <NSCoding>
 
-
 @property (strong, nonatomic) NSString *printScreenPath;
 @property (strong, nonatomic) NSString *containerImagePath;
-//@property (strong, nonatomic) NSData *printScreen;
-//@property (strong, nonatomic) NSData *containerImage;
+@property (strong, nonatomic) NSString *gifLayerPath;
 @property (strong, nonatomic) NSMutableArray *subviews;
 @property (strong, nonatomic) NSMutableArray *subviewData;
 @property (strong, nonatomic) NSMutableArray *subviewTranformData;

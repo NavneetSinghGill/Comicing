@@ -24,4 +24,5 @@
 - (void)addComicItem:(CBComicItemModel*)comicItem;
 - (CGFloat)contentHeight;
 - (void)refreshDataArray:(NSMutableArray*)dataArray;
+- (UIView*)getZoomTransitionView;
 @end

@@ -26,12 +26,9 @@
     self = [super init];
     if (self) {
         _comicPage = comicPage;
-        _isBaseLayerGif = [[comicPage.printScreenPath lowercaseString] hasSuffix:@".gif"];
-        
+        _isBaseLayerGif = [[comicPage.gifLayerPath lowercaseString] hasSuffix:@".gif"];
         _timestamp= timestamp;
         _itemOrientation = [comicPage.slideType isEqualToString:slideTypeTall]? COMIC_ITEM_ORIENTATION_PORTRAIT: COMIC_ITEM_ORIENTATION_LANDSCAPE;
-        
-        
         _comicSlideBaseLayer = _isBaseLayerGif? Gif: StaticImage;
         
     }

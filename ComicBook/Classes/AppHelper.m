@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
 #import "InviteScore.h"
+#import "UIImage+GIF.h"
 
 @implementation AppHelper
 
@@ -299,14 +300,17 @@ static AppHelper *_appHelper = nil;
     return imgFinal;
 }
 
-+(YYImage *)getGifFile:(NSString*)fileName {
++(UIImage *)getGifFile:(NSString*)fileName {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
-    YYImage* imgFinal = [YYImage imageWithContentsOfFile:filePath];
     
-    return imgFinal;
+//    YYImage* imgFinal = [YYImage imageWithContentsOfFile:filePath];
+
+    NSData *gifData = [NSData dataWithContentsOfFile: filePath];
+    
+    return [UIImage sd_animatedGIFWithData:gifData];
 }
 
 ///Just harded value
@@ -440,7 +444,10 @@ static AppHelper *_appHelper = nil;
     }
     return flag;
 }
-
++(NSString*)getGifLayerFilePath{    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return [[paths objectAtIndex:0] stringByAppendingString:@"/"];
+}
 #pragma mark Handle Main Page
 
 +(void)openMainPageviewController:(UIViewController*)vc{

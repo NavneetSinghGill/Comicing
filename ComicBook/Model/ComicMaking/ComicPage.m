@@ -14,7 +14,7 @@ NSString* const slideTypeTall = @"tall";
 @implementation ComicPage
 
 //@synthesize containerImage, subviews, subviewData, printScreen,timelineString;
-@synthesize containerImagePath, subviews, subviewData,timelineString,printScreenPath,subviewTranformData,titleString, slideType;
+@synthesize containerImagePath, subviews, subviewData,timelineString,printScreenPath,subviewTranformData,titleString, slideType,gifLayerPath;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -23,6 +23,7 @@ NSString* const slideTypeTall = @"tall";
     {
         containerImagePath = [aDecoder decodeObjectForKey:@"containerImagePath"];
         printScreenPath = [aDecoder decodeObjectForKey:@"printScreenImagePath"];
+        gifLayerPath = [aDecoder decodeObjectForKey:@"gifLayerPath"];
         subviews = [aDecoder decodeObjectForKey:@"subviews"];
         subviewData = [aDecoder decodeObjectForKey:@"subviewData"];
         subviewTranformData = [aDecoder decodeObjectForKey:@"subviewTranformData"];
@@ -37,6 +38,7 @@ NSString* const slideTypeTall = @"tall";
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:printScreenPath forKey:@"printScreenImagePath"];
+    [aCoder encodeObject:gifLayerPath forKey:@"gifLayerPath"];
     [aCoder encodeObject:containerImagePath forKey:@"containerImagePath"];
     [aCoder encodeObject:subviews forKey:@"subviews"];
     [aCoder encodeObject:subviewData forKey:@"subviewData"];

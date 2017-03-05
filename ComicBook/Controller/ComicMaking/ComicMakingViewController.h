@@ -19,8 +19,13 @@
 
 - (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll withComicPage:(ComicPage *)comicPage withNewSlide:(BOOL)newSlide withAnimationSpeed:(CGFloat)speed;
 
-- (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll withImageView:(UIImageView *)imageView withPrintScreen:(UIImage *)printScreen withNewSlide:(BOOL)newslide
-                                     withPopView:(BOOL)isPopView withIsWideSlide:(BOOL)isWideSlide;
+- (void)comicMakingViewControllerWithEditingDone:(ComicMakingViewController *)controll
+                                   withImageView:(UIImageView *)imageView
+                                 withPrintScreen:(UIImage *)printScreen
+                                    gifLayerPath:(NSString *)gifLayerPath
+                                    withNewSlide:(BOOL)newslide
+                                     withPopView:(BOOL)isPopView
+                                 withIsWideSlide:(BOOL)isWideSlide;
 
 
 //- (void)comicMakingItemSave:(ComicPage *)comicPage

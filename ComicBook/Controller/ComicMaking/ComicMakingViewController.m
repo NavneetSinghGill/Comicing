@@ -263,6 +263,8 @@ static RowButtonCallBack _completionHandler ;
 @property (strong,nonatomic) UIButton *crossSegmentBtn;
 @property (weak, nonatomic) IBOutlet UIButton *btnPlayAnimation;
 
+@property (strong, nonatomic) NSString *gifLayerPath;
+
 @end
 
 int sliderViewWidthDeltaChange;
@@ -490,7 +492,14 @@ int sliderViewWidthDeltaChange;
 //    NSString* sContentsPath = [[GifURL absoluteString] stringByReplacingOccurrencesOfString:@"file:///" withString:@"//"];
 //    UIImage* imgObj = [UIImage imageWithContentsOfFile:sContentsPath];
 //    self.imgGifLayer.image = imgObj;
-    self.imgGifLayer.image =  [UIImage sd_animatedGIFNamed:@"Slide-2B.gif"];//  [YYImage imageWithContentsOfFile:animationPath];
+    [self copytoDocument:@"Slide-2B" type:@"gif"];
+    self.gifLayerPath = @"Slide-2B.gif";
+    
+    NSString* sContentsPath = [[AppHelper getGifLayerFilePath] stringByAppendingString:self.gifLayerPath];
+    NSData *gifData = [NSData dataWithContentsOfFile: sContentsPath];
+    self.imgGifLayer.image =  [UIImage sd_animatedGIFWithData:gifData];
+    
+//    self.imgGifLayer.image =  [UIImage sd_animatedGIFNamed:@"Slide-2B.gif"];//  [YYImage imageWithContentsOfFile:animationPath];
     
     //Visible middle layer
     [self handleMiddleLayer];
@@ -499,24 +508,41 @@ int sliderViewWidthDeltaChange;
              withFrameCount:30
                   delayTime:.010
                   loopCount:0
-                 completion:^(NSURL *GifURL) {
+                 completion:^(NSURL *GifURL,NSString* GifFileName) {
                      NSLog(@"Finished generating GIF: %@", GifURL);
                      if (GifURL) {
                          viewCamera.hidden = YES;
                          [viewCameraPreview setHidden:YES];
                          [self.imgGifLayer setHidden:NO];
-                         NSString* sContentsPath = [[GifURL absoluteString] stringByReplacingOccurrencesOfString:@"file:///" withString:@"//"];
+                         NSString* sContentsPath = [[AppHelper getGifLayerFilePath] stringByAppendingString:GifFileName];
                          NSData *gifData = [NSData dataWithContentsOfFile: sContentsPath];
                          self.imgGifLayer.image =  [UIImage sd_animatedGIFWithData:gifData];
-//                         UIImage* imgObj = [UIImage imageWithContentsOfFile:sContentsPath];
-//                         self.imgGifLayer.image = imgObj;
-                         
+                         self.gifLayerPath = GifFileName;
                          //Visible middle layer
                          [self handleMiddleLayer];
                      }
-    }];
+    }]; 
 #endif
     // [viewCameraPreview removeFromSuperview];
+}
+
+-(void) copytoDocument:(NSString*)fileName type:(NSString*)type{
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:[fileName stringByAppendingString:[NSString stringWithFormat:@".%@",type]]];
+    
+    if ([fileManager fileExistsAtPath:filePath] == NO)
+    {
+        NSString *resourcePath = [[NSBundle mainBundle] pathForResource:fileName ofType:type];
+        [fileManager copyItemAtPath:resourcePath toPath:filePath error:&error];
+        if (error) {
+            NSLog(@"Error on copying file: %@\nfrom path: %@\ntoPath: %@", error, resourcePath, filePath);
+        }
+    }
 }
 
 -(void)handleMiddleLayer{
@@ -2049,6 +2075,7 @@ int sliderViewWidthDeltaChange;
     [self.delegate comicMakingViewControllerWithEditingDone:self
                                               withImageView:imgvComic
                                             withPrintScreen:printScreen
+                                               gifLayerPath:self.gifLayerPath
                                                withNewSlide:isNewSlide
                                                 withPopView:YES withIsWideSlide:isWideSlide];
     
@@ -2159,7 +2186,7 @@ int sliderViewWidthDeltaChange;
 
     [self doneVideoBtnClicked];
 //    [imgvComic setImage:[UIImage imageNamed:@"cat-demo"]];
-//    imgvComic.hidden = NO;
+    imgvComic.hidden = NO;
     
     if (isWideSlide)
     {
@@ -4021,29 +4048,6 @@ CGFloat diffX,diffY;
                                            CGRectGetWidth(self.ImgvComic2.frame) - speedWidth,
                                            CGRectGetHeight(self.ImgvComic2.frame) - speedHeight);
             
-//=======
-//            
-//            distanceFromPrevious = sqrt((xDist * xDist) + (yDist * yDist)); //[4]
-//            
-//            NSTimeInterval timeSincePrevious = event.timestamp - self.previousTimestamp;
-//            
-//            speed = distanceFromPrevious/timeSincePrevious;
-//            self.previousTimestamp = event.timestamp;
-//            speed = speed /300;
-//            CGFloat speedX = speed * 1.2;
-//            CGFloat speedY = speed * 2.0;
-//            
-//            CGFloat speedWidth = speed * 2.4;
-//            CGFloat speedHeight = speed * 4.0;
-//            
-//            NSLog(@"speed :  %f",speed);
-//            
-//            CGRect comicFrame = CGRectMake(CGRectGetMinX(self.ImgvComic2.frame) + speedX,
-//                                           CGRectGetMinY(self.ImgvComic2.frame) + speedY ,
-//                                           CGRectGetWidth(self.ImgvComic2.frame) - speedWidth,
-//                                           CGRectGetHeight(self.ImgvComic2.frame) - speedHeight);
-//            
-//>>>>>>> origin/Registration_page
             comicImageFrame = self.imgvComic.frame;
             
             if (comicFrame.size.height > [self getGlideItemHight])
@@ -4055,30 +4059,10 @@ CGFloat diffX,diffY;
                 
                 self.ImgvComic2.image = printScreen;
                 imgvComic.frame = self.ImgvComic2.frame;
-                
-                
-                //            diffX = imgvComic.frame.origin.x - comicImageFrame.origin.x;
-                //            diffY = imgvComic.frame.origin.y - comicImageFrame.origin.y;
+                self.imgGifLayer.frame = self.ImgvComic2.frame;
                 
                 [self shrinkAnimatedImages:speedX speedY:speedY speedWidth:speedWidth speedHeight:speedHeight];
-                //            CGFloat diffX,diffY;
-                //            if (IS_IPHONE_5)
-                //            {
-                //                diffX = 3.3f;
-                //                diffY = 1.08f;
-                //            }
-                //            else if (IS_IPHONE_6)
-                //            {
-                //                diffX = 3.1f;
-                //                diffY = 1.05f;
-                //            }
-                //            else if (IS_IPHONE_6P)
-                //            {
-                //                diffX = 3.3f;
-                //                diffY = 1.15f;
-                //            }
                 
-                // [self shrinkAnimatedImages:(speedX/diffX) speedY:(speedY*diffY) speedWidth:(speedWidth/3) speedHeight:(speedHeight/3)];
             }
         }
     }
@@ -4257,6 +4241,7 @@ CGFloat diffX,diffY;
                 [self.delegate comicMakingViewControllerWithEditingDone:self
                                                           withImageView:imgvComic
                                                         withPrintScreen:printScreen
+                                                           gifLayerPath:self.gifLayerPath
                                                            withNewSlide:isNewSlide
                                                             withPopView:YES withIsWideSlide:isWideSlide];
                 
@@ -4266,6 +4251,7 @@ CGFloat diffX,diffY;
                 [self.view exchangeSubviewAtIndex:1 withSubviewAtIndex:0];
                 imgvComic.frame = viewFrame;
                 self.ImgvComic2.frame = imgvComic.frame;
+                self.imgGifLayer.frame = imgvComic.frame;
                 self.ImgvComic2.image = nil;
             }
         }
@@ -4604,7 +4590,7 @@ CGFloat diffX,diffY;
     CGSize size = CGSizeMake(CGRectGetWidth(temImagFrame), CGRectGetHeight(temImagFrame));
     imgvComic.frame = temImagFrame;
     
-    UIGraphicsBeginImageContextWithOptions(size, YES,0);
+    UIGraphicsBeginImageContextWithOptions(size, NO,1);
     
     [imgvComic.layer renderInContext:UIGraphicsGetCurrentContext()];
     [drawView.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -5799,6 +5785,7 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
     [self.delegate comicMakingViewControllerWithEditingDone:self
                                               withImageView:imgvComic
                                             withPrintScreen:printScreen
+                                               gifLayerPath:self.gifLayerPath
                                                withNewSlide:isNewSlide
                                                 withPopView:NO withIsWideSlide:isWideSlide];
     
@@ -6069,10 +6056,6 @@ CGAffineTransform makeTransform(CGFloat xScale, CGFloat yScale,
                  {
                      isNewSlide = NO;
                  }
-                 
-                 
-                 
-                 
                  [self.delegate comicMakingItemSave:comicPage
                                       withImageView:comicItemObj
                                     withPrintScreen:printScreen
