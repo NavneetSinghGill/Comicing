@@ -35,6 +35,13 @@
     return self;
 }
 
+- (void)replaceWithNewModel:(CBComicItemModel *)newModel {
+    _comicPage = newModel.comicPage;
+    _isBaseLayerGif = [[newModel.comicPage.gifLayerPath lowercaseString] hasSuffix:@".gif"];
+    _itemOrientation = [newModel.comicPage.slideType isEqualToString:slideTypeTall]? COMIC_ITEM_ORIENTATION_PORTRAIT: COMIC_ITEM_ORIENTATION_LANDSCAPE;
+    _comicSlideBaseLayer = _isBaseLayerGif? Gif: StaticImage;
+}
+
 //- (instancetype)initWithTimestamp:(NSNumber*)timestamp image:(UIImage*)image orientation:(ComicItemOrientation)orientation{
 //    self = [super init];
 //    if (self) {

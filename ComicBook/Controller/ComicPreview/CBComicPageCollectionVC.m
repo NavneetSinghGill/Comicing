@@ -136,10 +136,10 @@
     if(!self.dataArray){
         self.dataArray= [NSMutableArray new];
     }
+    [self.dataArray addObject:comicItem];
     if(self.sectionArray.count == 0){
         [self setupSections];
     }
-    [self.dataArray addObject:comicItem];
 //    [[[self.sectionArray objectAtIndex:0] dataArray] addObject:comicItem];
     [self refreshImageOrientation];
 //    [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataArray indexOfObject:comicItem] inSection:0]]];
@@ -160,9 +160,9 @@
 }
 
 #pragma mark- ZoomTransitionProtocol method
-- (UIView*)getZoomTransitionView{
-    if(self.selectedIndexPath){
-        CBComicImageCell * cell = (CBComicImageCell*)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPath];
+- (UIView*)getZoomTransitionViewForIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath){
+        CBComicImageCell * cell = (CBComicImageCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
         return cell;
     }
     return nil;

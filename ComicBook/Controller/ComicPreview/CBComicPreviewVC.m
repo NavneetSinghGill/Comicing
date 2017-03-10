@@ -37,6 +37,7 @@
 @property (strong, nonatomic) NSString *fileNameToSave;
 @property (strong, nonatomic) NSMutableArray *dirtySubviews;
 @property (strong, nonatomic) NSMutableArray *dirtysubviewData;
+@property (assign, nonatomic) NSInteger selectedIndexForAddOrEdit;
 @end
 
 @implementation CBComicPreviewVC
@@ -64,6 +65,9 @@
         self.fileNameToSave = @"ComicSlide";
     }
     
+    [self setupSections];
+    [self.tableView reloadData];
+    
     [self prepareView];
     
     if (self.dataArray == nil || self.dataArray.count == 0) {
@@ -71,7 +75,6 @@
     }
     //End
     
-    [self setupSections];
     [self.tableView reloadData];
 }
 
@@ -90,17 +93,26 @@
     }
 }
 
-- (void)addComicPage:(ComicPage *)comicPage {
+- (void)addComicPage:(ComicPage *)comicPage withIndex:(NSInteger)index {
     CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] comicPage:comicPage];
-    [self.dataArray addObject:model];
     
-    __block CBComicPreviewVC* weekSelf= self;
-    [self.previewVC addComicItem:model completion:^(BOOL finished) {
-        if(finished){
-            [weekSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
-//            [weekSelf.tableView reloadData];
-        }
-    }];
+    // -1 indicates new cell will be added
+    if (index == -1) {
+        [self.dataArray addObject:model];
+        __block CBComicPreviewVC* weekSelf= self;
+        _selectedIndexForAddOrEdit = self.dataArray.count - 1;//Index of the empty cell added
+        [self.previewVC addComicItem:model completion:^(BOOL finished) {
+            if(finished){
+                [weekSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+                //            [weekSelf.tableView reloadData];
+            }
+        }];
+    } else {
+        [((CBComicItemModel *)self.dataArray[index]) replaceWithNewModel:model];
+//        self.previewVC.dataArray = self.dataArray;
+        [((CBComicPageCollectionVC *)[[self.previewVC viewControllers] firstObject]) refreshDataArray:self.dataArray];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -186,6 +198,10 @@
     if (self.dataArray.count == 8) {
         return;
     }
+    ComicPage *comicPage = [ComicPage new];
+    comicPage.slideType = slideTypeWide;
+    [self addComicPage:comicPage withIndex:-1];
+    
     [self pushAddSlideTap:YES];
     // Show Comic Making for Horizontal image
 //    NSString *animationPath = [[NSBundle mainBundle] pathForResource:@"OOPPS" ofType:@"gif"];
@@ -203,6 +219,10 @@
     if (self.dataArray.count == 8) {
         return;
     }
+    ComicPage *comicPage = [ComicPage new];
+    comicPage.slideType = slideTypeTall;
+    [self addComicPage:comicPage withIndex:-1];
+    
     [self pushAddSlideTap:NO];
     // Show Comic Making for Vertical image
 //    NSString *animationPath = [[NSBundle mainBundle] pathForResource:@"OMG" ofType:@"gif"];
@@ -435,7 +455,9 @@
 - (void)pushAddSlideTap:(BOOL)isWideSlide
 {
     CBComicPageCollectionVC *comicPage = ((CBComicPageCollectionVC *)[[self.previewVC viewControllers] lastObject]);
-    _transitionView = [comicPage getZoomTransitionView];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.dataArray.count inSection:0];
+    _transitionView = [comicPage getZoomTransitionViewForIndexPath:indexPath];
     
     ComicMakingViewController *cmv = [self.storyboard instantiateViewControllerWithIdentifier:@"ComicMakingViewController"];
     
@@ -651,7 +673,7 @@
 //                                        
 //                                        [self.dataArray addObject:comicPage];
 //                                    }
-                                    [self addComicPage:_comicPageComicItems];
+                                    [self addComicPage:_comicPageComicItems withIndex:_selectedIndexForAddOrEdit];
                                 });
                             }
                         }

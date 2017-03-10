@@ -35,4 +35,7 @@ typedef enum {
 @property (nonatomic, assign) BOOL isBaseLayerGif;
 
 @property(nonatomic, strong) ComicPage *comicPage;
+
+- (void)replaceWithNewModel:(CBComicItemModel *)newModel;
+
 @end
