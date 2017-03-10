@@ -34,5 +34,5 @@ typedef enum {
 @property (nonatomic, assign) ComicImageOrientation imageOrientation;
 @property (nonatomic, assign) BOOL isBaseLayerGif;
 
-@property(nonatomic, assign) ComicPage *comicPage;
+@property(nonatomic, strong) ComicPage *comicPage;
 @end

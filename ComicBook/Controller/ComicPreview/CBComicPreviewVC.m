@@ -83,10 +83,10 @@
         ComicPage *comicPage = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         CBComicItemModel* model= [[CBComicItemModel alloc] initWithTimestamp:[self currentTimestmap] comicPage:comicPage];
         [self.dataArray addObject:model];
-//        [self.previewVC addComicItem:model completion:^(BOOL finished) {
-//            if(finished){
-//            }
-//        }];
+        [self.previewVC addComicItem:model completion:^(BOOL finished) {
+            if(finished){
+            }
+        }];
     }
 }
 
@@ -278,7 +278,8 @@
         comicPage.comicBookBackgroundRight.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@Right",backgroundImageName]];
         comicPage.comicBookBackgroundBottom.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@Bottom",backgroundImageName]];
     }
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
+    [self.previewVC.collectionView reloadData];
 }
 
 #pragma mark - CBPreviewHeaderDelegate methods

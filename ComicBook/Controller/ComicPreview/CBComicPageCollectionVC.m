@@ -164,11 +164,6 @@
     if(self.selectedIndexPath){
         CBComicImageCell * cell = (CBComicImageCell*)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPath];
         return cell;
-//        if (cell.comicSlideLayerType == Gif) {
-//            return cell.staticImageView;
-//        } else {
-//            return cell.animatedImageView;
-//        }
     }
     return nil;
 }
